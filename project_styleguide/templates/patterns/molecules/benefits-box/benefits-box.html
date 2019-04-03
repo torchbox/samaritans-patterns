@@ -1,0 +1,28 @@
+<div class="benefits-box">
+    {% if benefits %}
+        <div class="benefits-box__tile">
+            <h3>Benefits</h3>
+            <ul>
+                {% for benefit in benefits %}
+                    <li class="benefits-box__item">
+                        {% include "patterns/atoms/svg/icons/icon-tick.html" with classes="benefits-box__icon benefits-box__icon--benefit" %}
+                        <span>{{ benefit }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    {% if drawbacks %}
+        <div class="benefits-box__tile">
+            <h3>Maybe not if...</h3>
+            <ul>
+                {% for drawback in drawbacks %}
+                    <li class="benefits-box__item benefits-box__item--drawback">
+                        {% include "patterns/atoms/svg/icons/icon-exclamation-octagon.html" with classes="benefits-box__icon benefits-box__icon--drawback" %}
+                        <span>{{ drawback }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+</div>

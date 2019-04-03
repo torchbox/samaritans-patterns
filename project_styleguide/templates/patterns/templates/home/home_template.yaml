@@ -1,0 +1,15 @@
+# Stub data for the pattern
+context:
+  page:
+    title: "Home page"
+    get_verbose_name: "home-page"
+  feature_blocks:
+    - heading: "Towards a buoyant future"
+      get_cta_url: "#"
+      cta_text: "Learn how research lab Buoyant Ecologies is rocking the boat on aquatic sustainability"
+    - heading: "Nathan Lynch saves the birds"
+      get_cta_url: "#"
+      cta_text: "Discover how CCA ceramics professor shapes life out of clay"
+    - heading: "Going places with Renault"
+      get_cta_url: "#"
+      cta_text: "Explore how design is shifting the urban economy towards greater mobility"

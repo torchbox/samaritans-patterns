@@ -1,0 +1,52 @@
+{% load form_tags i18n wagtailcore_tags util_tags %}
+<form action="{% pageurl page %}" method="post" class="form">
+    <div class="form__container">
+        {% csrf_token %}
+
+        {% if form.errors %}
+            <div class="form__errors">
+                There were some errors with your form. Please amend the fields highlighted below.
+            </div>
+        {% endif %}
+
+        {# Hard-coded fields #}
+        <div class="form-item-wrapper form-item-wrapper--two-col">
+            {% render_form_field form.first_name %}
+            {% render_form_field form.last_name %}
+        </div>
+
+        {% include 'patterns/molecules/forms/form_field.html' with field=form.email tooltip="We'll use this to contact you about your application." %}
+        <h2>{% trans "Your address" %}</h2>
+
+        {% render_form_field form.address_line_1 %}
+        {% render_form_field form.address_line_2 %}
+        {% render_form_field form.town %}
+        {% render_form_field form.post_code %}
+        {% render_form_field form.country %}
+        {% include 'patterns/molecules/forms/form_field.html' with field=form.phone_number tooltip="We'll use this to contact you about your application." %}
+
+        <h2>{% trans "Additional information" %}</h2>
+        <div class="form__gbp-field-wrapper">
+            {% render_form_field form.fundraising_target %}
+        </div>
+
+        {# Custom fields #}
+        {% for field in form %}
+            {% if not field.name in hard_coded_fields and not field.name == 'wagtailcaptcha' %}
+                {% include 'patterns/molecules/forms/form_field.html' with field=field %}
+            {% endif %}
+        {% endfor %}
+
+        {% include "patterns/molecules/gdpr/gdpr_marketing_form_fields.html" %}
+
+        {% render_form_field form.wagtailcaptcha %}
+
+        <button class="form__submit button" type="submit">
+            <div class="button__shadow"></div>
+            <div class="button__inner">
+                {% if page.action_text %}{{ page.action_text|safe }}{% else %}Submit{% endif %}
+                {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="icon button__icon" %}
+            </div>
+        </button>
+    </div>
+</form>

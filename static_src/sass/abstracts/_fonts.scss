@@ -1,0 +1,47 @@
+// Font - Varah in three weights: regular, light & bold
+
+// Regular
+@font-face {
+    font-family: 'Varah';
+    src: url('./../fonts/varah-regular.woff2') format('woff2'), url('./../fonts/varah-regular.woff') format('woff');
+    font-weight: 400;
+}
+
+// Regular Italic
+@font-face {
+    font-family: 'Varah';
+    src: url('./../fonts/varah-regular-italic.woff2') format('woff2'), url('./../fonts/varah-regular-italic.woff') format('woff');
+    font-style: italic;
+    font-weight: 400;
+}
+
+// Light
+@font-face {
+    font-family: 'Varah';
+    src: url('./../fonts/varah-light.woff2') format('woff2'), url('./../fonts/varah-light.woff') format('woff');
+    font-weight: 300;
+}
+
+// Light italic
+@font-face {
+    font-family: 'Varah';
+    src: url('./../fonts/varah-light-italic.woff2') format('woff2'), url('./../fonts/varah-light-italic.woff') format('woff');
+    font-style: italic;
+    font-weight: 300;
+}
+
+// Bold
+@font-face {
+    font-family: 'Varah';
+    src: url('./../fonts/varah-bold.woff2') format('woff2'), url('./../fonts/varah-bold.woff') format('woff');
+    font-style: bold;
+    font-weight: 700;
+}
+
+// Bold italic
+@font-face {
+    font-family: 'Varah';
+    src: url('./../fonts/varah-bold-italic.woff2') format('woff2'), url('./../fonts/varah-bold-italic.woff') format('woff');
+    font-style: italic;
+    font-weight: 700;
+}

@@ -1,0 +1,141 @@
+.feedback {
+    $root: &;
+    background: $white;
+    transition: border $transition;
+
+    &.is-open,
+    &--thanks {
+        border-bottom: $grey-border;
+    }
+
+    &__published-by {
+        @include font-size(s);
+        margin: 0;
+        color: $white;
+        position: absolute;
+        top: -40px;
+        right: $gutter;
+
+        @include media-query(tablet-portrait) {
+            top: -110px;
+        }
+
+        @include media-query(tablet-landscape) {
+            top: -48px;
+            right: 400px;
+        }
+    }
+
+    &__wrapper {
+        position: relative;
+    }
+
+    &__container {
+        padding: $gutter-large 0;
+        max-width: 520px;
+        margin: 0 auto;
+    }
+
+    &__main {
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height $transition;
+
+        .is-open & {
+            max-height: 900px;
+        }
+
+        #{$root}--thanks & {
+            max-height: none;
+
+            #{$root}__main-inner {
+                transform: none;
+            }
+        }
+    }
+
+    &__main-inner {
+        transform: translateY(-100%);
+        transition: transform $transition;
+
+        .is-open & {
+            transform: translateY(0);
+        }
+    }
+
+    // Hide the radio question - it's handle with the js
+    .form-item--radio_select { // sass-lint:disable-line class-name-format
+        display: none;
+    }
+}
+
+.feedback-controls {
+    $root: &;
+    @include font-size(s);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background: $white;
+    padding: $gutter-small 0;
+
+    @include media-query(tablet-portrait) {
+        padding: $gutter-small;
+        position: absolute;
+        right: 0;
+        top: -70px;
+    }
+
+    &__question {
+        margin: 0;
+        margin-right: $gutter;
+    }
+
+    &__answers {
+        display: flex;
+
+        // Fade the buttons when they're disabled
+        &--disabled {
+            opacity: 0.6;
+
+            #{$root}__answer {
+                #{$hover} {
+                    background: $color--link-hover;
+                    cursor: initial;
+                }
+            }
+        }
+    }
+
+    &__answer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 70px;
+        height: 40px;
+        background: $color--link-hover;
+        color: $white;
+        transition: all $transition;
+
+        #{$hover} {
+            background: $color--link;
+        }
+
+        &--yes {
+            border-right: 1px solid rgba($white, 0.3);
+
+            .yes-selected & {
+                background: $sunflower;
+                color: $ink;
+                border: 0;
+            }
+        }
+
+        &--no {
+            .no-selected & {
+                background: $sunflower;
+                color: $ink;
+            }
+        }
+
+    }
+}

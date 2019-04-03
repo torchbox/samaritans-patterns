@@ -1,0 +1,279 @@
+/* ============================================
+    connectors--transparent
+
+    Available sizes (which have different connector proportions from each other)
+    - card
+    - medium
+    - page
+*/
+
+@mixin connectors--transparent($size: card, $location-1: top-left, $location-2: null, $color: $white, $breakpoint: none) {
+
+    $offset: $gutter-medium; // for $size: card
+    @if $size == medium {
+        $offset: $gutter-large + 5px;
+    } @elseif $size == page {
+        $offset: $gutter-xxl;
+    }
+
+    @include media-query($breakpoint) {
+        box-shadow:
+            // sass-lint:disable indentation
+            (-$offset)          0  0  0   $color,
+              $offset           0  0  0   $color,
+                    0   (-$offset) 0  0   $color,
+                    0     $offset  0  0   $color,
+                    0           0  0 20px $color;
+            // sass-lint:enddisable
+    }
+
+    .corner {
+        $root: '.corner';
+
+        display: none;
+
+        @include media-query($breakpoint) {
+            display: block;
+            position: absolute;
+            width: $offset + 10px;
+            height: $offset + 10px;
+            fill: $color;
+
+            &__solid-corner {
+                fill: transparent;
+            }
+
+            &:nth-child(1) {
+                top:    -$offset;
+                left:   -$offset;
+
+                @if $location-1 != top-left and $location-2 != top-left {
+                    #{$root}__solid-corner {
+                        fill: $color;
+                    }
+                }
+            }
+
+            &:nth-child(2) {
+                top:    -$offset;
+                right:  -$offset;
+                transform: rotate(90deg);
+
+                @if $location-1 != top-right and $location-2 != top-right {
+                    #{$root}__solid-corner {
+                        fill: $color;
+                    }
+                }
+            }
+
+            &:nth-child(3) {
+                bottom: -$offset;
+                left:   -$offset;
+                transform: rotate(270deg);
+
+                @if $location-1 != bottom-left and $location-2 != bottom-left {
+                    #{$root}__solid-corner {
+                        fill: $color;
+                    }
+                }
+            }
+
+            &:nth-child(4) {
+                bottom: -$offset;
+                right:  -$offset;
+                transform: rotate(180deg);
+
+                @if $location-1 != bottom-right and $location-2 != bottom-right {
+                    #{$root}__solid-corner {
+                        fill: $color;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* ============================================
+    Connectors
+*/
+@mixin connectors($color, $position-1, $position-2, $size: card) {
+
+    // default values which all get overwritten
+    $length: 0;
+    $width: 0;
+    $offset: 0;
+
+    @if $size == card {
+        $length: 13px;
+        $width: 5px;
+        $offset: $gutter-medium;
+    } @elseif $size == medium {
+        $length: 20px;
+        $width: 7px;
+        $offset: $gutter-large + 5px;
+    } @elseif $size == page {
+        $length: 24px;
+        $width: 8px;
+        $offset: $gutter-xxl;
+    } @else {
+        $length: $size;
+        $width: ceil($length / 3.4);
+        $offset: floor($length * 1.8);
+    }
+
+    $distance: $offset - $width;
+    $radius: 0.5 * $width;
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        background: $color;
+    }
+
+    &::before {
+        width: $length;
+        height: $width;
+        #{$position-1}: $distance;
+        #{$position-2}: 0;
+    }
+
+    &::after {
+        width: $width;
+        height: $length;
+        #{$position-1}: 0;
+        #{$position-2}: $distance;
+    }
+
+    @if $position-1 == top {
+        @if $position-2 == right {
+            &::before {
+                border-radius: $radius 0 0 $radius;
+            }
+
+            &::after {
+                border-radius: 0 0 $radius $radius;
+            }
+        }
+
+        @if $position-2 == left {
+            &::before {
+                border-radius: 0 $radius $radius 0;
+            }
+
+            &::after {
+                border-radius: 0 0 $radius $radius;
+            }
+        }
+    }
+
+    @if $position-1 == bottom {
+        @if $position-2 == right {
+            &::before {
+                border-radius: $radius 0 0 $radius;
+            }
+
+            &::after {
+                border-radius: $radius $radius 0 0;
+            }
+        }
+
+        @if $position-2 == left {
+            &::before {
+                border-radius: 0 $radius $radius 0;
+            }
+
+            &::after {
+                border-radius: $radius $radius 0 0;
+            }
+        }
+    }
+}
+
+
+/* ============================================
+    Corner accent addition to connectors
+*/
+// adds the colour box corner effect. $position vars are set to absolute positioning values (top, right, bottom, left) pseudo can be defined to before or after if more than one corner effect is required on the element.
+@mixin corner($color, $position-1, $position-2, $width: 180px, $height: 120px, $offset: 7px, $selector: '&::before', $z-index: -1) {
+    position: relative;
+
+    #{$selector} {
+        content: '';
+        position: absolute;
+        width: $width;
+        height: $height;
+        max-width: 100%;
+        max-height: 100%;
+        background: $color;
+        #{$position-1}: -$offset;
+        #{$position-2}: -$offset;
+        z-index: $z-index; // Needs to be a fixed negative
+    }
+}
+
+@mixin corner--box-left($color: $teal, $height: 500px, $bottom-offset: 150px, $right-offset: 35%, $selector: '&::before', $z-index: -1) {
+    position: relative;
+
+    #{$selector} {
+        content: '';
+        position: absolute;
+        z-index: $z-index; // Needs to be a fixed negative
+
+        width: 100vw;
+        right: $right-offset;
+        left: auto;
+
+        height: $height;
+        bottom: -$bottom-offset;
+        max-height: calc(100% + #{$bottom-offset - $gutter-medium});
+
+        background: $color;
+    }
+}
+
+/* ============================================
+    Pattern backgrounds
+*/
+// Mixin to define basic pattern properties.
+// Define position values on your component css with the class `.pattern`.
+@mixin pattern($color: $lime, $overflow: hidden, $opacity: 0.3) {
+    position: relative;
+    overflow: $overflow;
+
+    .pattern {
+        max-width: 600px;
+        fill: $color;
+        opacity: $opacity;
+        position: absolute;
+
+        @include media-query(tablet-landscape) {
+            width: 600px;
+        }
+    }
+}
+
+
+/* ============================================
+    Tooltip triangle
+*/
+
+@mixin tooltip-triangle($size: 8px, $position: bottom, $color: $white) {
+    &::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        left: calc(50% - #{$size});
+        border-left: $size solid transparent;
+        border-right: $size solid transparent;
+
+        @if $position == top {
+            bottom: 100%;
+            border-bottom: $size solid $color;
+        } @else {
+            top: 100%;
+            border-top: $size solid $color;
+        }
+    }
+}

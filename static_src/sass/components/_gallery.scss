@@ -1,0 +1,91 @@
+.gallery {
+    $root: &;
+
+    margin-top: $gutter-xxl;
+    margin-bottom: $gutter-medium;
+    margin-right: -$gutter-medium;
+
+    &__grid {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &__thumbnail {
+        position: relative;
+        width: 100%;
+        margin-bottom: $gutter-medium;
+        filter: brightness(100%);
+        transition: filter $transition;
+
+        @include media-query(mob-portrait) {
+            margin-right: $gutter-medium;
+            width: calc(50% - #{$gutter-medium});
+        }
+
+        @include media-query(tablet-landscape) {
+            width: calc(33% - #{$gutter-medium});
+        }
+
+        #{$hover} {
+            filter: brightness(80%);
+
+            #{$root}__icon-wrapper {
+                background-color: $color--link-hover;
+                color: $white;
+            }
+        }
+
+        #{$root}__grid & {
+            display: none;
+        }
+
+        // only show the first six on the grid
+        &:nth-child(-n+6) {
+            #{$root}__grid & {
+                display: block;
+            }
+        }
+    }
+
+    &__icon-wrapper {
+        position: absolute;
+        left: $gutter-small;
+        bottom: $gutter-small;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        background-color: $white;
+        color: $color--link;
+        transition: background-color $transition;
+
+    }
+
+    &__icon {
+        width: 15px;
+        height: 15px;
+        fill: currentColor;
+        transition: fill $transition;
+    }
+
+    &__browse-button {
+        margin-bottom: $gutter;
+        color: $color--link;
+        text-decoration: underline;
+
+        #{$hover} {
+            color: $color--link-hover;
+        }
+    }
+
+    &__nav {
+        width: 30px;
+        height: 40px;
+        fill: $lime;
+
+        &--prev {
+            transform: rotate(180deg);
+        }
+    }
+}

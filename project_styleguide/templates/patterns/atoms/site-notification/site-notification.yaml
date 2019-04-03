@@ -1,0 +1,5 @@
+context:
+  settings:
+    utils:
+      SystemMessagesSettings:
+        notification_text: This is a site notification

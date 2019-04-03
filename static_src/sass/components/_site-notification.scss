@@ -1,0 +1,39 @@
+.site-notification {
+    @include font-size(s);
+    display: flex;
+    align-items: center;
+    background: lighten($lemon, 25%);
+    width: 100%;
+    font-weight: $weight--bold;
+    margin-bottom: $gutter-large;
+    padding: $gutter-small;
+
+    @include media-query(tablet-portrait) {
+        padding: $gutter-small $gutter-medium;
+    }
+
+    &__icon {
+        width: 36px;
+        height: 36px;
+        fill: $ink;
+        margin-right: $gutter-small;
+        flex-shrink: 0;
+
+        @include media-query(tablet-portrait) {
+            margin-right: $gutter-medium;
+        }
+    }
+
+    p {
+        margin: 0;
+    }
+
+    a {
+        @include link;
+        @include underline(transparent, currentColor);
+    }
+
+    &--banner {
+        margin: 0;
+    }
+}

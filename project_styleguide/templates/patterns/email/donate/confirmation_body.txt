@@ -1,0 +1,22 @@
+{% extends "patterns/email/base.txt" %}
+{% load i18n %}
+
+{% block content %}
+{% blocktrans with name=first_name %}Thank you, {{ first_name }}{% endblocktrans %}
+
+{% spaceless %}
+{% if payment_frequency == 'single' %}
+    {% if is_pay_in %}
+        {% blocktrans with amount=amount|floatformat:"-2" %}Thank you for paying in your fundraising of £{{ amount }}.{% endblocktrans %}
+    {% else %}
+        {% blocktrans with amount=amount|floatformat:"-2" %}Thank you for your donation of £{{ amount }}.{% endblocktrans %}
+    {% endif %}
+{% else %}
+    {% blocktrans with amount=amount|floatformat:"-2" %}Thank you for setting up a monthly donation of £{{ amount }}.{% endblocktrans %}
+{% endif %}
+{% endspaceless %}
+
+{{ confirmation_email_content|striptags }}
+
+{% blocktrans with ref=transaction_id %}Your transaction reference is: {{ ref }}{% endblocktrans %}
+{% endblock %}

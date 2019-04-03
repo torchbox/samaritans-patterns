@@ -1,0 +1,11 @@
+context:
+  value:
+    - title: A page title
+      listing_summary: A page listing summary
+    - title: Another page title
+      listing_summary: Another page listing summary
+
+tags:
+  pageurl:
+    "link.value":
+      raw: "#"

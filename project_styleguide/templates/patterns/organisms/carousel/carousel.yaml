@@ -1,0 +1,16 @@
+context:
+  carousel:
+    - slide:
+      block_type: image
+      value:
+        image: fake
+        title: Item 1
+    - slide:
+      block_type: image
+      value:
+        image: fake
+        title: Item 2
+    - slide:
+      block_type: image
+      value:
+        image: fake

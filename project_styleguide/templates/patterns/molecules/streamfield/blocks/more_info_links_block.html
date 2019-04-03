@@ -1,0 +1,15 @@
+{% load wagtailcore_tags %}
+<div class="grid grid--3col grid--no-margin">
+    {% for page in value %}
+        <a href="{% pageurl page.value %}" class="card card--information">
+            <span class="card__connectors"></span>
+            <div class="card__container">
+                <h2 class="card__title">
+                    {% firstof page.value.specific.listing_title page.value.specific.title as card_title %}
+                    {% include "patterns/molecules/chevron-link/chevron-link.html" with title=card_title %}
+                </h2>
+                <p class="card__text">{{ page.value.specific.listing_summary }}</p>
+            </div>
+        </a>
+    {% endfor %}
+</div>

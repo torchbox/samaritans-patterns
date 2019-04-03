@@ -1,0 +1,399 @@
+.donate {
+
+    // Donate bor
+    &__bar {
+        @include font-size(s);
+        background-color: $plum;
+        margin: 0 0 $gutter-small;
+        padding: $gutter;
+        color: $white;
+        display: flex;
+        min-height: 80px;
+        flex-direction: column;
+
+        @include media-query(tablet-portrait) {
+            align-items: center;
+            flex-direction: row;
+            margin: 0 $gutter-medium $gutter-small (-$gutter-xxl);
+            padding: $gutter $gutter-medium $gutter $gutter-xxl;
+        }
+
+        p {
+            margin-bottom: 0;
+        }
+    }
+
+    &__bar-icon {
+        width: 30px;
+        height: 30px;
+        margin-right: $gutter;
+        display: none;
+
+        @include media-query(mob-landscape) {
+            display: inline-block;
+        }
+    }
+
+    &__bar-edit {
+        @include media-query(tablet-portrait) {
+            margin-left: auto;
+        }
+
+        input[type='number'] {
+            width: 60px;
+        }
+    }
+
+    &__bar-info {
+        margin-bottom: $gutter-small;
+
+        @include media-query(tablet-portrait) {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0;
+        }
+
+        p:not([hidden]) {
+            display: inline;
+        }
+    }
+
+    &__bar-text {
+        margin-right: 1em;
+    }
+
+    &__bar-standout {
+        font-weight: $weight--bold;
+    }
+
+    &__amount {
+        @include media-query(tablet-portrait) {
+            margin-left: auto;
+        }
+
+        a {
+            color: $white;
+            text-decoration: underline;
+        }
+    }
+
+    &__amount-display {
+        @include media-query(tablet-portrait) {
+            padding-left: 5px;
+        }
+    }
+
+    &__frequency {
+        @include font-size(s);
+        text-decoration: underline;
+    }
+
+    &__marketing-intro {
+        display: flex;
+        margin-bottom: $gutter-medium;
+
+        > p:first-child {
+            margin-bottom: 0;
+
+            @include media-query(mob-landscape) {
+                margin-right: $gutter-x-large;
+                width: 70%;
+            }
+        }
+
+        svg {
+            width: 77px;
+            height: 85px;
+            display: none;
+
+            @include media-query(mob-landscape) {
+                display: block;
+            }
+        }
+    }
+
+    &__marketing-select-all {
+        @include link($white, $meadow);
+        @include underline;
+        display: inline-block;
+        margin-bottom: $gutter-medium;
+    }
+
+    &__marketing-meta {
+        opacity: 0.8;
+
+        a {
+            @include link($white, $meadow);
+            text-decoration: underline;
+        }
+
+        &--small {
+            margin-top: $gutter-large;
+
+            p {
+                font-size: 15px;
+            }
+        }
+    }
+
+    // Donate form
+    &__form-wrapper {
+        @include media-query(tablet-landscape) {
+            margin-top: $gutter-x-large;
+        }
+    }
+
+    &__form-payment-info {
+        margin-top: $gutter;
+    }
+
+    // Help box
+    &__help-box {
+        background-color: $amethyst;
+        text-align: center;
+        color: $white;
+        padding: $gutter-large $gutter;
+
+        @include media-query(tablet-landscape) {
+            padding-top: 290px;
+            margin-top: -200px;
+            padding-bottom: 110px;
+        }
+
+        h2 {
+            @include font-size(xl);
+
+            @include media-query(tablet-portrait) {
+                @include font-size(xxxl);
+            }
+        }
+
+        svg {
+            width: 55px;
+            height: 100px;
+            display: none;
+            margin-right: $gutter-medium;
+
+            @include media-query(tablet-portrait) {
+                display: block;
+            }
+        }
+    }
+
+    &__help-box-inner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @include media-query(tablet-portrait) {
+            text-align: left;
+        }
+    }
+
+    &__help-box-phone {
+        @include font-size(xxl);
+        margin: 0;
+    }
+
+    &__help-box-meta {
+        @include font-size(xs);
+        margin: 0;
+    }
+
+    &__help-box-link {
+        color: $white;
+        text-decoration: underline;
+        margin-top: $gutter-large;
+        display: inline-block;
+
+        #{$hover} {
+            color: $white; //tbc
+        }
+    }
+
+    // Progress bar
+    $progress-breakpoint: mob-landscape;
+    $progress-circle-small: 21px;
+    $progress-circle-large: 33px;
+
+    &__progress {
+        background-color: $amethyst;
+        padding: $gutter-small;
+    }
+
+    &__progress-inner {
+        position: relative;
+
+        @include media-query($progress-breakpoint) {
+            align-items: center;
+            justify-content: space-between;
+            display: flex;
+            margin: 0 120px;
+        }
+
+        @include media-query(tablet-landscape) {
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            background-color: $white;
+            height: 100%;
+            width: 1px;
+            top: 0;
+            left: 10px;
+
+            @include media-query($progress-breakpoint) {
+                height: 1px;
+                width: 100%;
+                top: auto;
+                left: 0;
+            }
+        }
+    }
+
+    &__progress-step {
+        @include font-size(s);
+        background-color: $amethyst;
+        border-radius: 50%;
+        width: $progress-circle-small;
+        height: $progress-circle-small;
+        border: 2px solid $white;
+        z-index: 1;
+        position: relative;
+        text-align: center;
+        color: transparent;
+
+        @include media-query($progress-breakpoint) {
+            width: $progress-circle-large;
+            height: $progress-circle-large;
+            border: 4px solid $white;
+            color: $white;
+        }
+
+        &:not(:last-child) {
+            margin-bottom: $gutter-small;
+
+            @include media-query($progress-breakpoint) {
+                margin-bottom: 0;
+            }
+        }
+
+        &::after {
+            position: absolute;
+            left: $progress-circle-small + 8px;
+            top: -2px;
+            font-size: 15px;
+            line-height: $progress-circle-small;
+            white-space: nowrap;
+            color: $white;
+
+            @include media-query($progress-breakpoint) {
+                line-height: $progress-circle-large;
+                left: $progress-circle-large + $gutter-small;
+                top: -4px;
+            }
+
+            @include media-query(tablet-landscape) {
+                left: $progress-circle-large + $gutter-medium;
+            }
+        }
+
+        // Step 1
+        &:first-child {
+            background-color: $plum;
+
+            .first-active & {
+                font-weight: $weight--bold;
+            }
+
+            &::after {
+                content: 'Your details';
+
+                @include media-query($progress-breakpoint) {
+                    right: $progress-circle-large + $gutter-small;
+                    left: auto;
+                }
+
+                @include media-query(tablet-landscape) {
+                    right: $progress-circle-large + $gutter-medium;
+                }
+            }
+        }
+
+        // Step 2
+        &:nth-child(2) {
+            .second-active & {
+                font-weight: $weight--bold;
+
+                @include media-query($progress-breakpoint) {
+                    font-weight: $weight--normal;
+                }
+            }
+
+            .second-active &,
+            .third-active & {
+                background-color: $plum;
+            }
+
+            &::after {
+                content: 'Payment info';
+
+                @include media-query($progress-breakpoint) {
+                    content: '';
+                }
+            }
+        }
+
+        // Step 3
+        &:last-child {
+            .third-active & {
+                font-weight: $weight--bold;
+                background-color: $plum;
+            }
+
+            &::after {
+                content: 'Thank you';
+            }
+        }
+
+        @include target-ie11 {
+            &:last-child,
+            &:nth-child(2) {
+                margin-left: auto;
+            }
+        }
+    }
+
+    // Direct debit
+    &__direct-debit {
+        margin: $gutter-medium 0;
+
+        p {
+            @include font-size(xs);
+        }
+
+        svg {
+            width: 160px;
+            height: 50px;
+            margin-bottom: $gutter;
+        }
+    }
+
+    &__direct-debit-fields {
+        @include media-query(tablet-landscape) {
+            width: 50%;
+            margin-bottom: $gutter-medium;
+        }
+    }
+
+    &__user-details {
+        margin-bottom: $gutter;
+
+        h4 {
+            margin-bottom: 0;
+        }
+    }
+}

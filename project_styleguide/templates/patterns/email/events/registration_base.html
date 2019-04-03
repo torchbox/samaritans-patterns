@@ -1,0 +1,8 @@
+{% extends "patterns/email/base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+    <p>Dear {{ first_name }},</p>
+
+    {{ body|richtext }}
+{% endblock %}

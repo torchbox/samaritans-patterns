@@ -1,0 +1,5 @@
+{% load wagtailcore_tags %}
+
+{% firstof value.link_text value.page.title as label %}
+{% pageurl value.page as href %}
+{% include "patterns/atoms/buttons/button.html" with large=True %}

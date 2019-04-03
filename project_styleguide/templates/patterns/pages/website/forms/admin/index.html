@@ -1,0 +1,70 @@
+{% extends "wagtailforms/index.html" %}
+{% load i18n %}
+
+{% block extra_js %}
+    {{ block.super }}
+
+    <script>
+        $(function() {
+            var selectAllCheckbox = document.getElementById('select-all');
+            var downloadZipButton = document.getElementById('download-zip-forms');
+            var selectedforms = {};
+            function updateActions() {
+                var formCheckboxes = $('input[type=checkbox].select-form');
+                var someFormsSelected = formCheckboxes.is(':checked');
+                var everyFormSelected = !formCheckboxes.is(':not(:checked)');
+                // Select all box state
+                if (everyFormSelected) {
+                    // Every form has been selected
+                    selectAllCheckbox.checked = true;
+                    selectAllCheckbox.indeterminate = false;
+                } else if (someFormsSelected) {
+                    // At least one, but not all forms have been selected
+                    selectAllCheckbox.checked = false;
+                    selectAllCheckbox.indeterminate = true;
+                } else {
+                    // No forms have been selected
+                    selectAllCheckbox.checked = false;
+                    selectAllCheckbox.indeterminate = false;
+                }
+                // Download Zip button state
+                if (someFormsSelected) {
+                    downloadZipButton.classList.remove('disabled')
+                    downloadZipButton.style.visibility = "visible";
+                } else {
+                    downloadZipButton.classList.add('disabled')
+                    downloadZipButton.style.visibility = "hidden";
+                }
+            }
+            // Event handlers
+            $(selectAllCheckbox).on('change', function() {
+                let checked = this.checked;
+                // Update checkbox states
+                $('input[type=checkbox].select-form').each(function() {
+                    this.checked = checked;
+                });
+                updateActions();
+            });
+            $('input[type=checkbox].select-form').on('change', function() {
+                updateActions();
+            });
+            // initial call to updateActions to bring download Zip button state in sync with checkboxes
+            // in the case that some checkboxes are pre-checked (which will be the case in some browsers when using the back button)
+            updateActions();
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+    {% trans "Forms" as forms_str %}
+    {% trans "Pages" as select_form_str %}
+    {% include "wagtailadmin/shared/header.html" with title=forms_str subtitle=select_form_str icon="form" %}
+
+    <div class="nice-padding">
+        <div id="form-results" class="forms">
+            <form action="." method="get">
+                {% include "patterns/pages/website/forms/admin/results_forms.html" %}
+            </form>
+        </div>
+    </div>
+{% endblock %}

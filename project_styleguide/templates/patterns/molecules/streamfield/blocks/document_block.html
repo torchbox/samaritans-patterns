@@ -1,0 +1,15 @@
+{% load formatting_tags %}
+<article class="document">
+    {% include "patterns/atoms/svg/colour-icons/icon-color-arrows.html" with classes="document__icon" aria_hide=True %}
+    <div>
+        <h2 class="document__title">
+            <span class="document__link-description">Download document:</span>
+            <a href="{{ value.document.url }}" class="document__link">
+                {{ value.title|default:value.document.title }}
+            </a>
+        </h2>
+        <p class="document__information">
+            {{ value.document.get_file_size|filesizeformat|lower|strip_nbsp }} - {{ value.document.file_extension|upper }}
+        </p>
+    </div>
+</article>

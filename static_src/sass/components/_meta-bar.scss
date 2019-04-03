@@ -1,0 +1,103 @@
+.meta-bar {
+    $root: &;
+
+    background-color: $off-white;
+    display: flex;
+    flex-wrap: wrap;
+    padding: ($gutter-small / 2) $gutter-small;
+    margin-bottom: $gutter-xxl;
+
+    @include media-query(tablet-landscape) {
+        flex-wrap: nowrap;
+        padding: 0;
+        padding-left: $gutter-xxl;
+        margin-left: -$gutter-xxl;
+        min-height: 84px;
+
+        .section > &:first-child {
+            margin-top: $gutter-xxl;
+        }
+    }
+
+    &__item {
+        @include font-size(xs);
+        margin: ($gutter-small / 2) $gutter ($gutter-small / 2) 0;
+        display: flex;
+        align-items: center;
+
+        @include media-query(tablet-landscape) {
+            @include font-size(s);
+            margin: $gutter-small $gutter $gutter-small 0;
+
+            &:last-child {
+                margin-right: $gutter-xxl;
+            }
+
+            &--button-wrapper,
+            &--button-wrapper:last-child {
+                margin: 0;
+            }
+        }
+
+        &--no-shrink {
+            flex-shrink: 0;
+        }
+    }
+
+    &__button {
+        padding: (0.5 * $gutter-small) $gutter-small;
+        display: flex;
+        flex-wrap: no-wrap;
+        align-items: center;
+        background-color: $color--link;
+        color: white;
+        transition: color $transition, background-color $transition;
+
+        #{$hover} {
+            background-color: $color--link-hover;
+            color: $white;
+        }
+
+        @include media-query(tablet-landscape) {
+            padding: $gutter;
+            height: 100%;
+        }
+    }
+
+    &__icon {
+        height: 30px;
+        width: 30px;
+        min-width: 30px;
+        flex-shrink: 0;
+
+        &--chevron {
+            fill: currentColor;
+            opacity: 0.5;
+            transition: fill $transition;
+        }
+    }
+
+    &__text {
+        margin-left: 10px;
+
+        &--button {
+            margin-left: 0;
+            margin-right: 10px;
+        }
+    }
+
+    // Modifiers ----------------------------------------------------------------
+    &--intranet {
+        background-color: $page-bg;
+    }
+
+    &--event {
+        background-color: $sunflower;
+    }
+
+    &--apply-button {
+        @include media-query(tablet-landscape) {
+            justify-content: space-between;
+        }
+    }
+}

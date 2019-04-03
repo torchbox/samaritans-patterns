@@ -1,0 +1,3 @@
+{% load wagtailcore_tags %}
+{% pageurl value.page as href %}
+{% include "patterns/atoms/buttons/button.html" with label=value.title|default:value.page.title href=href %}

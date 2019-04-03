@@ -1,0 +1,92 @@
+.donate-landing-hero {
+    $root: &;
+
+    &__image {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        filter: brightness(70%);
+        background-color: $color--default;
+        background-position: center;
+        background-size: cover;
+    }
+
+    &__title {
+        @include hidden;
+    }
+
+    &__form-input {
+        .form-item__required {
+            display: none;
+        }
+
+        .form-item__wrapper {
+            @include input--currency;
+            padding: 10px 15px;
+
+            #{$input--string} {
+                font-size: 22px;
+            }
+
+            &::before {
+                @include font-size(xl);
+                margin-right: 10px;
+            }
+        }
+
+        &--monthly .form-item__wrapper::after { // sass-lint:disable-line force-element-nesting
+            content: 'per month';
+            display: inline-block;
+            margin-left: 10px;
+        }
+    }
+
+    &__text {
+        @include clear-child-margins;
+        margin: 0 auto 10px;
+        max-width: 360px;
+        color: $grey-on-photo;
+
+        @include media-query(mob-landscape) {
+            margin: 0;
+            max-width: $wrapper--smaller;
+        }
+
+        @include media-query(tablet-landscape) {
+            @include font-size(xl);
+            align-self: flex-end;
+            width: calc(50% - #{$gutter-medium});
+        }
+    }
+
+    &__text-heading {
+        color: $white;
+    }
+
+    &__donate-button {
+        @include media-query(mob-landscape) {
+            margin-top: $gutter-medium;
+        }
+    }
+
+    &__pay-in-link {
+        @include link($white, rgba($white, 0.7));
+        padding: $gutter 0;
+        display: flex;
+        align-items: center;
+
+        @include media-query(tablet-landscape) {
+            padding: 0;
+            height:         80px;
+            margin-bottom: -80px;
+        }
+    }
+
+    &__pay-in-text {
+        @include underline;
+        margin-left: 1em;
+        font-weight: $weight--bold;
+    }
+}

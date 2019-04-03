@@ -1,0 +1,23 @@
+context:
+  value:
+    title: Page title 1
+    introduction: Intro 1
+    listing_image: dummy
+    listing_title: Item title 1
+    listing_summary: Some listing summary 1
+    publication_date: !!timestamp '2018-12-13'
+    country: England
+    news_types:
+      all:
+        - Something
+        - Another
+
+
+tags:
+  pageurl:
+    "value":
+      raw: '#'
+  image:
+    value.listing_image fill-1064x400 class="listing-item-featured__image":
+      raw: |
+        <img src="http://via.placeholder.com/1064x400" width="1064" height="400" alt="Some alt" class="listing-item-featured__image">

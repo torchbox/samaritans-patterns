@@ -1,0 +1,85 @@
+.filters {
+    $root: &;
+    margin-bottom: $gutter-large;
+    font-size: 21px;
+
+    @include media-query (mob-landscape) {
+        border-bottom: $grey-border;
+        padding-bottom: $gutter-large;
+    }
+
+    &__form {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        @include media-query(tablet-portrait) {
+            flex-wrap: nowrap;
+        }
+    }
+
+    &__filter-wrapper {
+        @include dropdown-wrapper($root);
+
+        display: flex;
+        margin-bottom: $gutter-small;
+        flex-basis: 100%;
+
+        @include media-query(mob-landscape) {
+            width: calc(50% - (0.5 * #{$gutter}));
+            flex-basis: auto;
+        }
+
+        @include media-query(tablet-portrait) {
+            width: auto;
+            margin-bottom: 0;
+            margin-right: $gutter-small;
+            flex: 1 1 10em;
+
+            &:nth-child(2) {
+                flex-basis: 11em;
+            }
+
+            &:nth-child(3) {
+                flex-basis: 9em;
+            }
+
+            &:last-child {
+                flex: 0 0 auto;
+                margin-right: 0;
+            }
+        }
+
+        @include media-query(tablet-landscape) {
+            margin-right: $gutter;
+        }
+    }
+
+    &__select {
+        @include dropdown-select;
+        width: 100%;
+
+        // hide select arrow ie11
+        // sass-lint:disable no-vendor-prefixes
+        &::-ms-expand {
+            display: none;
+        }
+        // sass-lint:enddisable
+    }
+
+    &__select-icon-wrapper {
+        @include dropdown-select-icon-wrapper;
+    }
+
+    &__select-icon {
+        @include dropdown-select-icon;
+    }
+
+    &__button {
+        margin-bottom: 15px;
+
+        @include media-query(tablet-portrait) {
+            margin-bottom: 0;
+        }
+    }
+}

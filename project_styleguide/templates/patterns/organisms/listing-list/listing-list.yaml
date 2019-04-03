@@ -1,0 +1,23 @@
+context:
+  listings:
+  - title: Page title 1
+    introduction: Intro 1
+    listing_image: dummy
+    listing_title: Item title 1
+    listing_summary: Some listing summary 1
+    display_date: !!timestamp '2018-12-13'
+    country: England
+  - title: Page title 2
+    introduction: Intro 2
+    listing_image: dummy
+    listing_title: Item title 2
+    listing_summary: Some listing summary 1
+    display_date: !!timestamp '2018-12-13'
+    country: England
+  - title: Page title 3
+    introduction: Intro 3
+    listing_image: dummy
+    listing_title: Item title 2
+    listing_summary: Some listing summary 1
+    display_date: !!timestamp '2018-12-13'
+    country: England

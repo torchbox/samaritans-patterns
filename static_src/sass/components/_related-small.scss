@@ -1,0 +1,71 @@
+.related-small {
+    $root: &;
+
+    @include pattern($color--white, $opacity: 0.2);
+    padding-top: $gutter-large;
+    padding-bottom: 3 * $gutter;
+    background-color: $emerald;
+    color: $color--white;
+
+    .pattern {
+        top: 30%;
+        left: 50%;
+        width: 400px;
+
+        @include media-query(tablet-portrait) {
+            width: auto;
+        }
+
+        @include media-query(tablet-landscape) {
+            right: -15px;
+            left: auto;
+        }
+    }
+
+    &__wrapper {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    &__text-wrapper {
+        padding: 0 $gutter-small;
+
+        @include media-query(desktop) {
+            padding: 0;
+        }
+    }
+
+    &__heading {
+        @include font-size(xxl);
+        font-weight: $weight--normal;
+    }
+
+    &__link {
+        display: flex;
+        padding: $gutter-small;
+        border-bottom: 1px solid $color--white;
+        color: $color--white;
+        justify-content: space-between;
+        align-items: center;
+
+        #{$hover} {
+            color: $ink;
+            border-color: $white;
+
+            #{$root}__link-icon {
+                transform: translateX(100%);
+                fill: $ink;
+
+            }
+        }
+    }
+
+    &__link-icon {
+        width: 16px;
+        height: 16px;
+        fill: $white; // this is overridden by the parent link's hover effect above
+        margin-left: $gutter-small;
+        transition: all $transition;
+        transform: translateX(0);
+    }
+}

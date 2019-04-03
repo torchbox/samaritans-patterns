@@ -1,0 +1,46 @@
+{% extends "patterns/templates/donate-form-page.html" %}
+{% load form_tags i18n wagtailimages_tags %}
+
+{% block title %}{% trans "Payment details | Donate" %}{% endblock %}
+
+{% block progress_bar %}
+    {% include "patterns/pages/donate/partials/progress_bar.html" with classes="second-active" %}
+{% endblock %}
+
+{% block content_inner %}
+
+{% if payment_error %}
+    <h1>{% trans "We were unable to process your instruction" %}</h1>
+    <p>{% trans "Sorry there was an error processing your instructions. Please try again later." %}</p>
+{% else %}
+    <h1>{% trans "Check your details are correct" %}</h1>
+
+    <div class="donate__user-details">
+        <h4>{% trans "Account holder name" %}</h4>
+        <p>{{ account_holder_name }}</p>
+
+        <h4>{% trans "Your sort code" %}</h4>
+        <p>{{ branch_code }}</p>
+
+        <h4>{% trans "Your account number" %}</h4>
+        <p>{{ account_number }}</p>
+
+        <form class="form" method="post">
+            {% csrf_token %}
+
+            <button value="{% trans 'Confirm' %}" class="button button--large button--secondary" type="submit">
+                <div class="button__shadow"></div>
+                <div class="button__inner">
+                    {% trans 'Confirm' %}
+                    {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="icon button__icon" %}
+                </div>
+            </button>
+        </form>
+    </div>
+
+    <p>or <a href="{% url 'donate:payment_monthly' %}">go back</a></p>
+
+    {% include "patterns/molecules/donate/payments-by-gocardless.html" %}
+{% endif %}
+
+{% endblock %}

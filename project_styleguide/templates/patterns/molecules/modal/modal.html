@@ -1,0 +1,31 @@
+{% load wagtailcore_tags %}
+
+<div class="modal" id="{{ slug }}" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <section
+          class="modal__container"
+          role="dialog"
+          aria-modal="true"
+          {% if value.title %}
+            aria-labelledby="{{ slug }}-title"
+          {% endif %}
+          >
+            <div class="modal__content">
+                <button class="modal__close" aria-label="Close modal" data-micromodal-close>
+                    {% include "patterns/atoms/svg/icons/icon-close.html" with classes="modal__close-icon" %}
+                </button>
+                {% if slug == "gallery-modal" %}
+                    {% include "patterns/molecules/gallery/gallery.html" with title=page.gallery_title gallery=page.gallery_items in_modal=True %}
+                {% elif slug == "carousel-modal" %}
+                    {% include "patterns/organisms/carousel/carousel.html" with carousel=page.gallery_items %}
+                {% else %}
+                    <h2 class="modal__title" id="{{ slug }}-title">
+                        {{ value.title }}
+                    </h2>
+                    {{ value.content|richtext }}
+                {% endif %}
+                <div class="modal__connectors"></div>
+            </div>
+        </section>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+.tooltip {
+    $root: &;
+
+    position: relative;
+    width: 30px;
+    height: 30px;
+    margin-left: $gutter-small;
+
+    &--form {
+        display: none;
+
+        @include media-query(tablet-landscape) {
+            display: block;
+        }
+    }
+
+    &--branch {
+        display: inline-block;
+    }
+
+    &__icon {
+        width: 30px;
+        height: 30px;
+    }
+
+    &__content {
+        @include tooltip-triangle(10px, bottom, $teal);
+        opacity: 0;
+        visibility: hidden;
+        position: absolute;
+        transition: opacity $transition, visibility $transition;
+        background-color: $teal;
+        padding: $gutter-small;
+        color: $white;
+        font-size: 15px;
+        width: 260px;
+        bottom: calc(100% + 17px);
+        left: 50%;
+        margin-left: -130px; // width / 2
+        z-index: z($z-elements, tooltip);
+
+        #{$root}--branch & {
+            @include tooltip-triangle(10px, bottom, $off-white);
+            background-color: $off-white;
+            color: $color--default;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        #{$root}:hover & {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    &--pattern-library {
+        width: auto;
+        height: auto;
+        display: block;
+    }
+}

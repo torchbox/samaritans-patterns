@@ -1,0 +1,61 @@
+{% extends "patterns/templates/donate-form-page.html" %}
+{% load form_tags helper_tags i18n wagtailimages_tags %}
+
+{% block title %}{% trans "Payment details | Donate" %}{% endblock %}
+
+{% block progress_bar %}
+    {% include "patterns/pages/donate/partials/progress_bar.html" with classes="second-active" %}
+{% endblock %}
+
+{% block content_inner %}
+
+<h1 class="wrapper--small-width">{% blocktrans with amount=payment_amount|floatformat:"-2" %}You're making a monthly donation of £{{ amount }}{% endblocktrans %}</h1>
+
+{% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}
+    <div class="form__errors">{{ error }}</div>
+    {% endfor %}
+{% elif form.errors %}
+    <div class="form__errors">
+        There were some errors with your form. Please amend the fields highlighted below.
+    </div>
+{% endif %}
+
+<form class="form" id="donate__gocardless-form" method="post">
+    {% csrf_token %}
+
+            {% if gift_aid_allowed %}
+                <h2 class="wrapper--small-width">{% blocktrans with amount=payment_amount|floatformat:"-2" gift_aid_amount=gift_aid_amount|floatformat:"-2" %}Boost your monthly donation of £{{ amount }} by £{{ gift_aid_amount }} at no extra cost with Gift Aid{% endblocktrans %}</h2>
+
+                <p class="wrapper--small-width">{% trans "If you are a UK taxpayer, you can increase the value of your donation by 25% under the Gift Aid Scheme – at no additional cost to you – just by ticking the box below." %}</p>
+
+                {% include "patterns/pages/donate/partials/gift_aid_block.html" %}
+            {% endif %}
+
+    <div class="donate__direct-debit-fields light-bg">
+        {% render_form_field form.debit_date %}
+        {% render_form_field form.account_holder_name %}
+        {% render_form_field form.branch_code %}
+        {% render_form_field form.account_number %}
+        {% render_form_field form.authorisation %}
+    </div>
+
+    <button value="{% blocktrans with amount=payment_amount|floatformat:"-2" %}Donate £{{ amount }}{% endblocktrans %}" class="button button--large" type="submit" id="donate__gocardless-submit">
+        <div class="button__shadow"></div>
+        <div class="button__inner">
+                {% blocktrans with amount=payment_amount|floatformat:"-2" %}Donate £{{ amount }}{% endblocktrans %}
+            {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="icon button__icon" %}
+        </div>
+    </button>
+</form>
+
+{% include "patterns/molecules/donate/direct-debit-guarantee.html" %}
+
+{% include "patterns/molecules/donate/payments-by-gocardless.html" %}
+
+{% endblock %}
+
+
+{% block extra_js %}
+{{ tag_manager_events|json_script:"tag_manager_events" }}
+{% endblock %}

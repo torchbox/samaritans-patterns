@@ -1,0 +1,38 @@
+{% extends "patterns/base_page--website.html" %}
+{% load wagtailcore_tags wagtailimages_tags navigation_tags static %}
+
+{% block content %}
+
+    <article class="wrapper--flex">
+        {% include "patterns/molecules/hero/hero.html" with hero_color="emerald" pattern="egg" hero_short="true" %}
+        <div class="
+            wrapper wrapper--large wrapper--padding-for-page
+            {% if page.related_pages.all|length == 0 %}
+                wrapper--index-pattern
+            {% endif %}
+        ">
+            <section class="section section--overlap section--index-website">
+                {% if page.introduction %}
+                    <p class="intro">{{ page.introduction }}</p>
+                {% endif %}
+                {% if subpages %}
+                    <div class="grid grid--no-margin grid--3col">
+                        {% for card in subpages %}
+                            {% include "patterns/molecules/cards/card-with-image.html" %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% if page.story_cta %}
+                    <div class="index__story-wrapper">
+                        {% include_block page.story_cta %}
+                    </div>
+                {% endif %}
+                {% include "patterns/atoms/corners/corners.html" with size="page" %}
+            </section>
+        </div>
+        {% if page.related_pages.all|length > 0 %}
+            {% include "patterns/molecules/related-pages/related-pages--large.html" with related_pages=page.related_pages.all %}
+        {% endif %}
+    </article>
+
+{% endblock %}

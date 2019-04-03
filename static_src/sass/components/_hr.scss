@@ -1,0 +1,39 @@
+.hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    margin: 1em 0;
+    padding: 0;
+    border-top: 2px solid $grey-light;
+
+    &--listening-services {
+        margin: $gutter 0;
+
+        @include media-query(tablet-portrait) {
+            margin: $gutter-x-large 0;
+        }
+    }
+
+    &--donate-thank-you {
+        border-width: 0;
+        margin-bottom: $gutter-large;
+
+        @include media-query(tablet-portrait) {
+            border-width: 2px;
+            margin: $gutter-x-large 0;
+        }
+    }
+
+    &--dashed {
+        border-top: 1px dashed $grey-light;
+        margin: $gutter 0;
+
+        @include media-query(mob-landscape) {
+            margin: $gutter-medium 0;
+        }
+    }
+
+    &--dark {
+        border-color: $grey-on-photo;
+    }
+}

@@ -1,0 +1,55 @@
+{% extends "patterns/templates/donate-form-page.html" %}
+{% load i18n form_tags helper_tags static wagtailimages_tags %}
+
+{% block title %}{% if is_pay_in %}{% trans "Payment details | Fundraising pay-in" %}{% else %}{% trans "Donate - payment details" %}{% endif %}{% endblock %}
+
+{% block progress_bar %}
+    {% include "patterns/pages/donate/partials/progress_bar.html" with classes="second-active" %}
+{% endblock %}
+
+{% block content_inner %}
+<div id="payments__payment-wrapper">
+
+    {% if is_pay_in %}
+        <h1 class="wrapper--small-width">{% blocktrans with amount=payment_amount|floatformat:"-2" %}You're making a payment of £{{ amount }}{% endblocktrans %}</h1>
+    {% else %}
+        <h1 class="wrapper--small-width">{% blocktrans with amount=payment_amount|floatformat:"-2" %}You're making a single donation of £{{ amount }}{% endblocktrans %}</h1>
+    {% endif %}
+
+    <form class="form" id="payments__braintree-form" method="post" data-token="{{ braintree_tokenization_key }}" data-amount="{{ payment_amount|floatformat }}">
+        {% csrf_token %}
+
+        {% if gift_aid_allowed %}
+            <h2 class="wrapper--small-width">{% blocktrans with amount=payment_amount|floatformat:"-2" gift_aid_amount=gift_aid_amount|floatformat:"-2" %}Boost your donation of £{{ amount }} by £{{ gift_aid_amount }} at no extra cost with Gift Aid{% endblocktrans %}</h2>
+
+            <p class="wrapper--small-width">{% trans "If you are a UK taxpayer, you can increase the value of your donation by 25% under the Gift Aid Scheme – at no additional cost to you – just by ticking the box below." %}</p>
+
+            {% include "patterns/pages/donate/partials/gift_aid_block.html" %}
+        {% endif %}
+
+        {% render_form_field form.braintree_nonce %}
+        {% render_form_field form.payment_mode %}
+    </form>
+
+    {% if is_pay_in %}
+        <h2 class="heading-block">{% trans "Pay with" %}</h2>
+    {% else %}
+        <h2 class="heading-block heading-block--xxl">{% trans "Donate with" %}</h2>
+    {% endif %}
+
+    {% include "patterns/molecules/payments/braintree-payment-widgets.html" %}
+</div>
+
+{% endblock %}
+
+
+{% block extra_js %}
+    {{ tag_manager_events|json_script:"tag_manager_events" }}
+    <script src="{% static 'js/donate.js' %}"></script>
+    <script src="{% static 'js/payments.js' %}"></script>
+    <script src="https://www.paypalobjects.com/api/checkout.js" data-version-4></script>
+    {% comment %}
+    Google pay temporarily disabled
+    <script src="https://pay.google.com/gp/p/js/pay.js"></script>
+    {% endcomment %}
+{% endblock %}

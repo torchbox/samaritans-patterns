@@ -1,0 +1,10 @@
+{% load wagtailcore_tags i18n %}
+
+<div class="streamfield">
+    <h2>{{ value.title }}</h2>
+    <div class="grid grid--2col">
+        {% for card in value.cards %}
+            {% include "patterns/molecules/cards/card-without-image.html" %}
+        {% endfor %}
+    </div>
+</div>

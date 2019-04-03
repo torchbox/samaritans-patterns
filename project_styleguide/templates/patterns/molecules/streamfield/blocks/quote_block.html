@@ -1,0 +1,37 @@
+{% load wagtailimages_tags wagtailcore_tags %}
+
+<blockquote class="
+    quote-block
+    {% if dark_background %}quote-block--dark{% endif %}
+    {% if story_cta %}
+        quote-block--story-call-to-action
+    {% else %}
+        quote-block--quote
+    {% endif %}
+    {% if classes %}{{ classes }}{% endif %}
+    ">
+    <div class="quote-block">
+        <div class="quote-block__quotation-wrapper">
+            {% include "patterns/atoms/svg/icons/icon-quote-open.html" with classes="quote-block__quotation-mark quote-block__quotation-mark--open" %}
+            <p class="quote-block__quotation">
+                {{ value.quote }}
+            </p>
+            {% include "patterns/atoms/svg/icons/icon-quote-close.html" with classes="quote-block__quotation-mark quote-block__quotation-mark--close" %}
+        </div>
+        <div class="quote-block__information-wrapper">
+            {% if value.attribution %}
+                <p class="quote-block__attribution">
+                    {{ value.attribution }}
+                </p>
+            {% endif %}
+            {% if value.button_link %}
+                {% if value.button_link.id %}
+                    {% pageurl value.button_link as page_url %}
+                    {% include "patterns/atoms/buttons/button.html" with label=value.button_text href=page_url %}
+                {% else %}
+                    {% include "patterns/atoms/buttons/button.html" with label=value.button_text href=value.button_link %}
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</blockquote>

@@ -1,0 +1,12 @@
+context:
+  card:
+    title: About the charity
+    text: We can give you advice and information
+    url: /
+    image: true
+
+tags:
+  image:
+    card.listing_image fill-320x175 class="card__image":
+      raw: |
+        <img src="http://via.placeholder.com/320x175" width="320" height="175" alt="Some alt" class="card__image">

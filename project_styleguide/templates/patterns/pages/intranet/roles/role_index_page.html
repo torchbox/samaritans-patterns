@@ -1,0 +1,23 @@
+{% extends "patterns/pages/intranet/standardpages/information_page.html" %}
+{% load wagtailcore_tags wagtailimages_tags navigation_tags static %}
+
+{% block page_content %}
+
+    {% if subpages.paginator.count %}
+        {% if subpages.object_list.exists %}
+            {% for value in subpages.object_list.specific %}
+                {% include "patterns/molecules/listing-item/listing-item.html" %}
+            {% endfor %}
+        {% else %}
+            {# no items on this page #}
+        {% endif %}
+
+        {% include "patterns/molecules/pagination/pagination.html" with paginator_page=subpages %}
+
+    {% else %}
+        {# no items on any page #}
+    {% endif %}
+{% endblock %}
+
+{% block related_content %}{% endblock %}
+{% block feedback_form %}{% endblock %}

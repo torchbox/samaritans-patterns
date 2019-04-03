@@ -1,0 +1,20 @@
+.branch-information {
+    $root: &;
+
+    &--has-body {
+        @include clearfix;
+    }
+
+    &__image {
+        #{$root}--has-body & {
+            margin-bottom: $gutter;
+
+            @include media-query(mob-landscape) {
+                float: right;
+                max-width: calc(50% - #{$gutter});
+                margin-left: $gutter-large;
+                margin-bottom: 10px;
+            }
+        }
+    }
+}

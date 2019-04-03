@@ -1,0 +1,131 @@
+{% load wagtailcore_tags i18n icon_tags %}
+
+<div class="tabccordion tabccordion--apply js-tabccordion">
+    {% if tab_count > 1 %}
+    <nav>
+        <ul class="tabccordion__nav js-tabccordion-nav">
+            {% if page.allow_samaritans_place %}
+            <li><a href="#tab1" class="tabccordion__nav-item is-active">
+                <span class="tabccordion__nav-heading tabccordion__nav-heading-text">Option 1</span>
+                {% trans "Apply for a Samaritans place" %}
+            </a></li>
+            {% endif %}
+            {% if page.allow_own_place %}
+            <li><a href="#tab2" class="tabccordion__nav-item">
+                <span class="tabccordion__nav-heading tabccordion__nav-heading-text">Option {% if page.allow_samaritans_place %}2{% else %}1{% endif %}</span>
+                {% trans "If you have your own place" %}
+            </a></li>
+            {% endif %}
+            {% if page.allow_other %}
+            <li><a href="#tab3" class="tabccordion__nav-item">
+                <span class="tabccordion__nav-heading tabccordion__nav-heading-text">Option {% if page.allow_samaritans_place and page.allow_own_place %}3{% elif page.allow_samaritans_place or page.allow_own_place %}2{% else %}1{% endif %}</span>
+                {{ page.other_tab_title }}
+            </a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+
+    {% if page.allow_samaritans_place %}
+    {% if tab_count == 1 %}
+        <h2>{% trans "Apply for a Samaritans place" %}</h2>
+        <div> {# for apply__info:last-child #}
+            {% if page.samaritans_place_registration_cost %}
+                <p class="apply__info">Registration fee: £{{ page.samaritans_place_registration_cost|floatformat:"-2" }}</p>
+            {% endif %}
+            {% if page.samaritans_place_fundraising_target %}
+                <p class="apply__info">Fundraising target: £{{ page.samaritans_place_fundraising_target|floatformat:"-2" }}</p>
+            {% endif %}
+        </div>
+
+        {% if samaritans_place_form_page %}
+            {% pageurl samaritans_place_form_page as href %}
+            {% include "patterns/atoms/buttons/button-large.html" with label="Apply for your place" href=href classes="apply__button" %}
+        {% endif %}
+    {% else %}
+        <section id="tab1" class="accordion accordion--tabccordion tabccordion__panel js-tabccordion-panel is-active">
+
+            <a class="accordion__heading" href="#tab1">
+                <h3 class="accordion__heading-text">
+                    Apply for a Samaritans place
+                </h3>
+                {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="accordion__icon" aria_hide="true" %}
+            </a>
+
+            <div class="accordion__content tabccordion__content">
+              <div> {# for apply__info:last-child #}
+                  {% if page.samaritans_place_registration_cost %}
+                      <p class="apply__info">Registration fee: £{{ page.samaritans_place_registration_cost|floatformat:"-2" }}</p>
+                  {% endif %}
+                  {% if page.samaritans_place_fundraising_target %}
+                      <p class="apply__info">Fundraising target: £{{ page.samaritans_place_fundraising_target|floatformat:"-2" }}</p>
+                  {% endif %}
+              </div>
+
+              {% if samaritans_place_form_page %}
+                  {% pageurl samaritans_place_form_page as href %}
+                  {% include "patterns/atoms/buttons/button-large.html" with label="Apply for your place" href=href classes="apply__button" %}
+              {% endif %}
+          </div>
+        </section>
+    {% endif %}
+    {% endif %}
+
+    {% if page.allow_own_place %}
+    {% if tab_count == 1 %}
+        <h2>{% trans "If you have your own place" %}</h2>
+        {{ page.own_place_description|richtext }}
+        {% if own_place_form_page %}
+            {% pageurl own_place_form_page as href %}
+            {% include "patterns/atoms/buttons/button-large.html" with label=page.own_place_button_text|default:"Apply for your place" href=href classes="apply__button" %}
+        {% endif %}
+    {% else %}
+        <section id="tab2" class="accordion accordion--tabccordion tabccordion__panel js-tabccordion-panel {% if not page.allow_samaritans_place %}is-active{% endif %}">
+
+            <a class="accordion__heading" href="#tab2">
+                <h3 class="accordion__heading-text">
+                    If you have your own place
+                </h3>
+                {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="accordion__icon" aria_hide="true" %}
+            </a>
+
+            <div class="accordion__content tabccordion__content">
+              {{ page.own_place_description|richtext }}
+              {% if own_place_form_page %}
+                  {% pageurl own_place_form_page as href %}
+                  {% include "patterns/atoms/buttons/button-large.html" with label=page.own_place_button_text|default:"Apply for your place" href=href classes="apply__button" %}
+              {% endif %}
+          </div>
+        </section>
+    {% endif %}
+    {% endif %}
+
+    {% if page.allow_other %}
+    {% if tab_count == 1 %}
+        <h2>{{ page.other_tab_title }}</h2>
+        {{ page.other_description|richtext }}
+
+        {% if page.other_button_url %}
+            {% include "patterns/atoms/buttons/button-large.html" with label=page.other_button_text href=page.other_button_url classes="apply__button" %}
+        {% endif %}
+    {% else %}
+        <section id="tab3" class="accordion accordion--tabccordion tabccordion__panel js-tabccordion-panel {% if not page.allow_samaritans_place and not page.allow_own_place %}is-active{% endif %}">
+
+            <a class="accordion__heading" href="#tab3">
+                <h3 class="accordion__heading-text">
+                    {{ page.other_tab_title }}
+                </h3>
+                {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="accordion__icon" aria_hide="true" %}
+            </a>
+
+            <div class="accordion__content tabccordion__content">
+              {{ page.other_description|richtext }}
+
+              {% if page.other_button_url %}
+                  {% include "patterns/atoms/buttons/button-large.html" with label=page.other_button_text href=page.other_button_url classes="apply__button" %}
+              {% endif %}
+          </div>
+        </section>
+    {% endif %}
+    {% endif %}
+</div>

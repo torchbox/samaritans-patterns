@@ -1,0 +1,132 @@
+/* ============================================
+    Link color
+
+    Passing in an element is for styling a child of a link.
+    Use the mixin on the parent whose hover state controls the color change.
+*/
+
+@mixin link($color--initial: $color--link, $color--hover: $color--link-hover, $element: self) {
+    @if $element == self {
+        color: $color--initial;
+        transition: color $transition, border-color $transition;
+        text-decoration: none;
+
+        #{$hover} {
+            color: $color--hover;
+            cursor: pointer;
+        }
+    } @else {
+        #{$element} {
+            color: $color--initial;
+            transition: color $transition, border-color $transition;
+            text-decoration: none;
+        }
+
+        #{$hover} {
+            #{$element} {
+                color: $color--hover;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+
+// Undo link mixin
+@mixin link--undo($element: self) {
+    @if $element == self {
+        color: inherit;
+
+        #{$hover} {
+            color: inherit;
+            cursor: default;
+        }
+    } @else {
+        #{$element} {
+            color: inherit;
+        }
+
+        #{$hover} {
+            #{$element} {
+                color: inherit;
+                cursor: default;
+            }
+        }
+    }
+}
+
+
+/* ============================================
+    Thick underlines
+
+    - Needs to display inline if there's any chance text will wrap.
+      Watch out for children of elements whose parents are displayed flex, because that overrides inline.
+
+    - Passing in an element is for styling a child of a link.
+      Use the mixin on the parent whose hover state controls the color change.
+
+    - For links that appear online on hover:
+      - Pass (transparent, $color) if the link color decreases in contrast on hover
+      - Pass (transparent, currentColor) otherise
+*/
+@mixin underline($color--initial: currentColor, $color--hover: currentColor, $element: self) {
+    @if $element == self {
+        box-shadow: inset 0 -2px $color--initial;
+        transition: color $transition, box-shadow $transition;
+
+        #{$hover} {
+            box-shadow: inset 0 -2px $color--hover;
+        }
+    } @else {
+        #{$element} {
+            box-shadow: inset 0 -2px $color--initial;
+            transition: color $transition, box-shadow $transition;
+        }
+
+        #{$hover} {
+            #{$element} {
+                box-shadow: inset 0 -2px $color--hover;
+            }
+        }
+    }
+}
+
+/* ============================================
+    Inline chevrons
+
+    Large is for chevron links with underlines
+    Small is for when the chevron comes before the text
+    Normal is for the rest of the time
+*/
+
+@mixin inline-chevron($size: normal, $fill: currentColor) {
+    transform: translateX(0);
+    transition: transform $transition, fill $transition;
+    fill: $fill;
+
+    @if $size == small {
+        height: 0.65em;
+        width: 0.45em;
+        vertical-align: baseline;
+    } @else if $size == large {
+        height: 1em;
+        width: 0.7em;
+        vertical-align: sub;
+    } @else {
+        height: 0.8em;
+        width: 0.55em;
+        vertical-align: baseline;
+    }
+}
+
+/* ============================================
+    Link chevrons
+*/
+
+@mixin link-chevron($size: normal) {
+    @include inline-chevron($size, $fill: $color--link);
+}
+
+@mixin link-chevron--underline-link {
+    @include inline-chevron(large);
+}

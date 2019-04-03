@@ -1,0 +1,4 @@
+<link rel="canonical" href="{{ request.site.root_url }}{{ canonical_url }}">
+{% for lang in languages %}
+    <link rel="alternate" href="{{ request.site.root_url }}{{ lang.url }}" hreflang="{{ lang.code }}" />
+{% endfor %}

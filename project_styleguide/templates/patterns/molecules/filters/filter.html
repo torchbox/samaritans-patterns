@@ -1,0 +1,13 @@
+{% load helper_tags %}
+<div class="filters__filter-wrapper">
+    <select name="{{ name }}" class="filters__select">
+        <option value="">{{ title }}</option>
+        {% for option in options %}
+            {% key_value request.GET name as get_param %}
+            <option value="{{ option.0 }}" {% if get_param|slugify == option.0|slugify %}selected="selected"{% endif %}>{{ option.1 }}</option>
+        {% endfor %}
+    </select>
+    <div class="filters__select-icon-wrapper">
+        {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="filters__select-icon" aria_hide="true" %}
+    </div>
+</div>

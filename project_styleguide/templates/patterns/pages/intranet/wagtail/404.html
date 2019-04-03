@@ -1,0 +1,15 @@
+{% extends "patterns/pages/intranet/standardpages/information_page.html" %}
+
+{% load wagtailcore_tags wagtailsettings_tags %}
+
+{% block title %}{{ settings.utils.SystemMessagesSettings.title_404 }}{% endblock %}
+
+{% block body_class %}{{ block.super }} template-404{% endblock %}
+
+{% block hero %}
+    {% include "patterns/molecules/hero/hero.html" with pattern_bottom=True page_404=True %}
+{% endblock %}
+
+{% block page_content %}
+    {{ settings.utils.SystemMessagesSettings.body_404|richtext }}
+{% endblock %}

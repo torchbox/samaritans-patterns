@@ -1,0 +1,376 @@
+.tabccordion {
+    $root: &;
+
+    margin-bottom: $gutter-large;
+
+    @include media-query(tablet-portrait) {
+        margin-bottom: $gutter-xxl;
+    }
+
+    .streamfield--dark-bg & {
+        margin-bottom: 0;
+    }
+
+    &--streamfield {
+        @include margin-streamfield-block;
+    }
+
+    &__title {
+        @include heading-primary;
+        margin-bottom: $gutter-large;
+
+        @include media-query(tablet-landscape) {
+            margin-top: -$gutter-x-large;
+            margin-bottom: $gutter-x-large;
+        }
+
+        // This is really for the donate-onward-actions but seems like a sensible default for this style.
+        #{$root}--actions & {
+            text-align: center;
+        }
+    }
+
+    &__nav {
+        display: none;
+
+        @include media-query(tablet-portrait) {
+            display: flex;
+            margin-bottom: 20px;
+
+            li:not([hidden]) {
+                display: inline-block;
+
+                &:not(:last-child) {
+                    margin-right: $gutter-small;
+                }
+            }
+
+            #{$root}--apply &,
+            #{$root}--actions & {
+                display: flex;
+                align-items: stretch;
+                justify-content: space-between;
+                margin-bottom: $gutter-large;
+
+                li {
+                    flex-basis: 50%;
+                    flex-grow: 1;
+                    display: flex;
+                }
+            }
+        }
+    }
+
+    &__nav-item {
+        $tabs-on-white-color: darken($off-white, 4);
+        @include tooltip-triangle;
+        color: $white;
+        display: block;
+        background-color: $color--link;
+        border-radius: 5px;
+        padding: 30px 20px 10px;
+        position: relative;
+        transition: background-color $transition, color $transition;
+        font-weight: $weight--bold;
+
+        #{$root}--apply &,
+        #{$root}--actions & {
+            @include tooltip-triangle(17px);
+            flex-grow: 1;
+            font-weight: $weight--bold;
+        }
+
+        #{$hover} {
+            background-color: $color--link-hover;
+            color: $white;
+        }
+
+        &::after {
+            opacity: 0;
+            transition: opacity $transition;
+
+            #{$root}--light-bg & {
+                border-top-color: $tabs-on-white-color;
+            }
+
+            .streamfield--dark-bg & {
+                border-top-color: $white;
+            }
+        }
+
+        &.is-active {
+            background-color: $white;
+            color: $color--link-hover;
+
+            #{$hover} {
+                background-color: $white;
+                color: $color--default;
+                cursor: default;
+
+                #{$root}--light-bg & {
+                    background-color: $tabs-on-white-color;
+                }
+
+                .streamfield--dark-bg & {
+                    background-color: $white;
+                }
+            }
+
+            &::after {
+                opacity: 1;
+            }
+
+            #{$root}--light-bg & {
+                background-color: $tabs-on-white-color;
+            }
+
+            .streamfield--dark-bg & {
+                background-color: $white;
+            }
+        }
+    }
+
+    &__nav-heading {
+        @include heading-text;
+        @include font-size(xxs);
+        text-transform: uppercase;
+        margin-bottom: 0;
+        pointer-events: none;
+        display: flex;
+        align-items: center;
+    }
+
+    &__nav-heading-icon {
+        width: 16px;
+        margin-right: 10px;
+        display: none;
+
+        .is-active & {
+            display: block;
+        }
+    }
+
+    &__nav-heading-text {
+        opacity: 0.5;
+    }
+
+    &__panel {
+        background-color: $white;
+        min-height: 2em;
+        position: relative;
+
+        #{$hover} {
+            color: $color--link-hover;
+
+            #{$root}--actions & {
+                color: rgba($white, 0.7);
+            }
+        }
+
+        &.is-active,
+        &.is-active--mobile {
+            #{$hover} {
+                color: inherit;
+            }
+
+            #{$root}--actions & {
+                color: $white;
+            }
+        }
+
+        @include media-query(tablet-portrait) {
+            border: 0;
+            min-height: 0;
+            padding: 0;
+
+            &::before {
+                display: none;
+            }
+        }
+
+        &:last-child {
+            @include media-query(tablet-portrait) {
+                border: 0;
+            }
+        }
+
+        #{$root}--dark-bg & {
+            padding: 0 $gutter-small;
+
+            @include media-query(tablet-portrait) {
+                padding: 0;
+            }
+
+            &:first-of-type {
+                border-top-width: 0;
+            }
+
+            &:last-child {
+                border-bottom-width: 0;
+            }
+        }
+
+        #{$root}--apply & {
+            background: transparent;
+            border-color: rgba($color--default, 0.4);
+        }
+
+        #{$root}--actions &,
+        .streamfield--dark-bg & {
+            background: transparent;
+            border-color: rgba($white, 0.3);
+            color: $white;
+        }
+    }
+
+    &__intro {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        h2 {
+            margin: 0 0 $gutter;
+
+            @include media-query(tablet-portrait) {
+                margin: 0 $gutter 0 0;
+            }
+        }
+
+        svg {
+            width: 110px;
+            height: 100px;
+            display: none;
+
+            @include media-query(tablet-portrait) {
+                display: block;
+            }
+        }
+    }
+
+    &__content {
+        @include media-query(tablet-portrait) {
+            display: block;
+            opacity: 0;
+            visibility: hidden;
+            height: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        #{$root}--actions & {
+            color: $white;
+
+            @include media-query(tablet-portrait) {
+                text-align: center;
+
+                &--has-image {
+                    text-align: left;
+                }
+            }
+        }
+
+        #{$root}--payments & {
+            display: none;
+        }
+
+        .is-active--mobile & {
+            opacity: 1;
+            visibility: visible;
+            height: auto;
+
+            #{$root}--payments & {
+                display: block;
+            }
+        }
+
+        .is-active & {
+            @include media-query(tablet-portrait) {
+                opacity: 1;
+                visibility: visible;
+                height: auto;
+                padding: $gutter-medium;
+
+                #{$root}--payments & {
+                    display: block;
+                }
+
+                #{$root}--light-bg & {
+                    padding: $gutter-medium 0 0;
+                }
+
+                #{$root}--apply &,
+                #{$root}--actions & {
+                    padding: 0;
+                }
+            }
+
+            @include media-query(tablet-landscape) {
+                padding: $gutter-x-large;
+
+                #{$root}--light-bg & {
+                    padding: $gutter-large 0 0;
+                }
+
+                #{$root}--apply &,
+                #{$root}--actions & {
+                    padding: 0;
+                }
+            }
+        }
+
+        .streamfield--dark-bg & {
+            color: $white;
+        }
+    }
+
+    // for listening page tabccordion
+
+    &__cta {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+
+        .block-chat {
+            margin-right: $gutter-medium;
+        }
+    }
+
+    &__cta-more {
+        text-decoration: underline;
+    }
+
+    // For actions tabccordion
+
+    &__description {
+        margin-bottom: $gutter-medium;
+
+        @include media-query(tablet-portrait) {
+            padding-top: $gutter;
+            margin-bottom: $gutter-x-large;
+        }
+    }
+
+    &__links {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        @include media-query(tablet-portrait) {
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: -$gutter-small;
+
+            #{$root}__content--has-image & {
+                justify-content: flex-start;
+            }
+        }
+
+        > * {
+            margin: 0 0 $gutter-small;
+
+            @include media-query(tablet-portrait) {
+                margin: $gutter-small;
+            }
+        }
+    }
+}

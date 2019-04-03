@@ -1,0 +1,26 @@
+<a class="card-new {% if classes %}{{ classes }}{% else %}card-new--related{% endif %}" href="{{ value.url }}">
+    <span class="card-new__corner"></span>
+    <div class="card-new__inner">
+        <div class="card-new__container">
+            <h2 class="card-new__title">
+                {% firstof value.listing_title value.title as card_title %}
+                {% include "patterns/molecules/chevron-link/chevron-link.html" with title=card_title %}
+            </h2>
+            <p class="card-new__text">
+                {% if type == "news" %}
+                    {{ value.publication_date|date:"jS F Y" }}
+                {% elif value.listing_summary %}
+                    {{ value.listing_summary }}
+                {% elif value.introduction %}
+                    {{ value.introduction }}
+                {% else %}
+                    {% with body=value.body|striptags|truncatechars:'80' %}
+                        {{ body }}
+                    {% endwith %}
+                {% endif %}
+            </p>
+        </div>
+    </div>
+    <span class="card-new__connectors"></span>
+    <span class="card-new__connectors--extra"></span>
+</a>

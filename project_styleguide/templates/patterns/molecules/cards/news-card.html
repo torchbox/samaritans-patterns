@@ -1,0 +1,19 @@
+{% load wagtailimages_tags %}
+
+<a class="card card--news" href="{{ news_page.url }}">
+    <span class="card__connectors"></span>
+    <span class="card__connectors--extra"></span>
+    {% image news_page.listing_image fill-365x210 class="card__image" %}
+    <div class="card__container">
+        <h2 class="card__title">
+            {% firstof news_page.listing_title news_page.title %}
+        </h2>
+        <p class="card__text">{% firstof news_page.listing_summary news_page.introduction %}</p>
+        <span class="card__meta">
+            {% for type in news_page.news_types.all %}
+                <span><b>{{ type }}</b></span>
+            {% endfor %}
+            <span>Published: <b>{{ news_page.publication_date|date:"jS F Y" }}</b></span>
+        </span>
+    </div>
+</a>

@@ -1,0 +1,14 @@
+{% load wagtailcore_tags icon_tags %}
+
+{% with link_item=value.call_to_action_link.0 %}
+    <a class="inline-cta" href="{% if link_item.block_type == 'page' %}{% pageurl link_item.value %}{% else %}{{ link_item.value }}{% endif %}">
+        {% if value.icon %}
+            {% render_icon value.icon "inline-cta__icon" %}
+        {% endif %}
+
+        <div class="inline-cta__text">
+            <p>{{ value.call_text }}</p>
+            <p class="inline-cta__link">{{ value.action_text }}</p>
+        </div>
+    </a>
+{% endwith %}

@@ -1,0 +1,64 @@
+{% extends "patterns/base_page--website.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+
+<section class="section section--main">
+    <div class="intro">
+        <div class="container">
+            <h2>{{ page.first_name }} {{ page.last_name }}</h2>
+
+            {% if page.photo %}
+                {% image page.photo max-200x190 %}
+            {% endif %}
+
+            {% if page.job_title %}
+                <h5>{{ page.job_title }}</h5>
+            {% endif %}
+
+            {% if page.website %}
+                <p><a href="{{ page.website }}">{{ page.website }}</a></p>
+            {% endif %}
+
+            {% if page.email %}
+                <p><a href="mailto:{{ page.email }}">{{ page.email }}</a></p>
+            {% endif %}
+
+            {% for item in page.social_media_profile.all %}
+                <p><a href="{{ item.profile_url }}">{{ item.profile_url }}</a></p>
+            {% endfor %}
+
+            {% with phone_numbers=page.phone_numbers.all %}
+                {% if phone_numbers %}
+                    {% for related_phone_number in phone_numbers %}
+                        <p><a href="tel:{{ related_phone_number.phone_number }}">{{ related_phone_number.phone_number }}</a></p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+
+    <div class="container">
+        {% if page.introduction %}
+            <h4>{{ page.introduction }}</h4>
+        {% endif %}
+        {% include_block page.biography %}
+    </div>
+
+    <hr>
+
+    {% with person_type=page.person_types.all %}
+        {% if person_type %}
+            <div class="container">
+                <h4>Person types</h4>
+                {% for person_type in person_type %}
+                    <p>{{ person_type }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+</section>
+
+{% endblock %}

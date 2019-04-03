@@ -1,0 +1,28 @@
+{% load helper_tags %}
+
+{% spaceless %}
+    <span class="chevron-link {{ chevron_link_classes }}">
+        {% for part in title|split_last_word %}
+            {% if not forloop.last %}
+                <span class="chevron-link__text">
+                    {{ part }}
+                </span>
+            {% else %}
+                <span class="chevron-link__last-word">
+                    <span class="chevron-link__last-word-text-wrapper">
+                        <span class="chevron-link__text">
+                            {{ part }}
+                        </span>
+                    </span>
+                    {% if color_icon %}
+                        {% include "patterns/atoms/svg/colour-icons/"|add:color_icon|add:".html" with classes="chevron-link__chevron chevron-link__chevron--full-size" aria_hide="true" %}
+                    {% elif chevron_classes %}
+                        {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="chevron-link__chevron "|add:chevron_classes aria_hide="true" %}
+                    {% else %}
+                        {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="chevron-link__chevron" aria_hide="true" %}
+                    {% endif %}
+                </span>
+            {% endif %}
+        {% endfor %}
+    </span>
+{% endspaceless %}

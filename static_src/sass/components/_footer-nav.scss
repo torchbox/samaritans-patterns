@@ -1,0 +1,35 @@
+.footer-nav {
+    $root: &;
+
+    margin-bottom: $gutter-xxl;
+
+    &__item {
+        @include font-size(s);
+        margin-bottom: 5px;
+    }
+
+    &__icon {
+        @include inline-chevron(small);
+        margin-right: 10px;
+        transform: translate3d(0);
+
+        #{$root}__link--heading & {
+            @include inline-chevron(normal);
+            margin-right: 0;
+        }
+    }
+
+    &__link {
+        @include link($color--link--on-off-white);
+
+        #{$hover} {
+            #{$root}__icon {
+                transform: translate3d(100%, 0, 0);
+            }
+        }
+
+        &--heading {
+            @include link(inherit, rgba($color--link-hover, 0.8));
+        }
+    }
+}

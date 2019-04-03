@@ -1,0 +1,24 @@
+{% load i18n locale_tags %}
+
+{% if choices %}
+<ul class="language-switcher">
+    {% for name, choice in choices %}
+        {% if choice.is_active %}
+            <li class="language-switcher__item language-switcher__item--active">
+                <span class="language-switcher__active">
+                    {{ name }}
+                </span>
+            </li>
+        {% else %}
+            <li class="language-switcher__item">
+                <a
+                href="{% url 'set_locale' choice.slug %}?next={% get_path_for_locale %}"
+                class="language-switcher__link"
+                >
+                    {{ name }}
+                </a>
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>
+{% endif %}

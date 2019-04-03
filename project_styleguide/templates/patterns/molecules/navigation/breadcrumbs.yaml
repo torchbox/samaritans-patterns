@@ -1,0 +1,18 @@
+context:
+  page:
+    title: Current page title
+    get_ancestors:
+    - is_root: true
+      depth: 2
+      title: Home
+    - is_root: false
+      depth: 3
+      title: Some sub category
+
+tags:
+  pageurl:
+    ancestor_page:
+      raw: "#"
+  slugurl:
+    "'home'":
+      raw: "#"

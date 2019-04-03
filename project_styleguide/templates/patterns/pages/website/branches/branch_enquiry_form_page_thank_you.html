@@ -1,0 +1,6 @@
+{% extends "patterns/pages/website/branches/branch_enquiry_form_page.html" %}
+{% load wagtailcore_tags %}
+
+{% block form_content %}
+    {{ page.thank_you_message|richtext }}
+{% endblock form_content %}

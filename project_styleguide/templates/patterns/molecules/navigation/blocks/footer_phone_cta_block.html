@@ -1,0 +1,17 @@
+{% load icon_tags %}
+
+<div class="footer-cta footer-cta--phone">
+    <span class="footer-cta__corner"></span>
+    <div class="footer-cta__inner">
+        <div class="footer-cta__heading">
+            {% render_icon value.icon "footer-cta__icon" %}
+            <h2 class="footer-cta__heading-text">
+                <a href="tel:{{ value.phone_number|slugify }}" class="footer-cta__link">
+                    {{ value.phone_number }}
+                </a>
+            </h2>
+        </div>
+        <p>{{ value.description }}</p>
+    </div>
+    <span class="footer-cta__connectors"></span>
+</div>

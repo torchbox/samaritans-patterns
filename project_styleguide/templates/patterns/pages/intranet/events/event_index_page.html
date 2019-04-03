@@ -1,0 +1,31 @@
+{% extends "patterns/pages/intranet/standardpages/information_page.html" %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block page_content %}
+
+    {% if events.paginator.count %}
+        {% if events.object_list.exists %}
+            {% for value in events.object_list.specific %}
+                {% include "patterns/molecules/listing-item/listing-item.html" %}
+
+            {% endfor %}
+        {% else %}
+            {# no items on this page #}
+        {% endif %}
+
+        {% include "patterns/molecules/pagination/pagination.html" with paginator_page=events %}
+
+    {% else %}
+        {# no items on any page #}
+    {% endif %}
+
+    {% if show_past and upcoming_events.exists %}
+        <a href="{% pageurl page %}">View upcoming events</a>
+    {% elif past_events.exists %}
+        <a href="{% pageurl page %}?past=True">View past events</a>
+    {% endif %}
+
+{% endblock %}
+
+{% block related_content %}{% endblock %}
+{% block feedback_form %}{% endblock %}

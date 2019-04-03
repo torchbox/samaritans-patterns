@@ -1,0 +1,7 @@
+{% extends "patterns/email/events/registration_base.txt" %}
+
+{% block content %}
+{{ block.super }}
+
+Please make payment for your registration at {{ base_url }}{{ submission.get_payment_url }} .
+{% endblock %}

@@ -1,0 +1,100 @@
+.header-menu {
+    $root: &;
+
+    @include media-query(tablet-portrait) {
+        position: relative;
+    }
+
+    &__list-wrapper {
+        position: absolute;
+        top: 72px;
+        right: 0;
+        left: 0;
+        z-index: z($z-elements, menu);
+        width: 100vw;
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: transform $transition;
+
+        @include media-query(tablet-portrait) {
+            @include corner($lime, bottom, left, 95%);
+            min-width: 300px;
+            width: auto;
+            top: calc(100% + 25px);
+            right: auto;
+            left: 50%;
+            transform: translateX(-50%) scaleY(0);
+            // overwrite corner mixin
+            position: absolute;
+        }
+
+        &::after {
+            @include media-query(tablet-portrait) {
+                content: '';
+                border: 16px solid transparent;
+                border-bottom-color: $ink;
+                position: absolute;
+                bottom: 100%;
+                right: auto;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        .is-open & {
+            transform: scaleY(1);
+
+            @include media-query(tablet-portrait) {
+                transform: translateX(-50%) scaleY(1);
+            }
+        }
+    }
+
+    &__list {
+        background: $ink;
+        padding: $gutter-large;
+
+        @include media-query(tablet-portrait) {
+            @include connectors($lime, bottom, left, medium);
+        }
+    }
+
+    &__item {
+        margin-bottom: $gutter-small;
+        opacity: 0;
+        transition: opacity $transition;
+        transition-delay: 0.2s;
+
+        .is-open & {
+            opacity: 1;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &__link {
+        @include font-size(s);
+        display: inline-block;
+        color: $white;
+
+        #{$hover} {
+            color: $white;
+
+            #{$root}__icon {
+                transform: translateX(100%);
+            }
+        }
+    }
+
+    &__icon {
+        width: 8px;
+        height: 12px;
+        fill: $color--link;
+        margin-right: 10px;
+        vertical-align: middle;
+        transform: translateX(0);
+        transition: transform $transition;
+    }
+}

@@ -1,0 +1,27 @@
+{% if related_pages %}
+
+<section class="related-large {{ classes }}">
+    {% firstof pattern "dots" as pattern %}
+    {% include "../../atoms/svg/patterns/pattern-"|add:pattern|add:".html" with classes="pattern" %}
+
+    {% if related_pages %}
+        <div class="wrapper wrapper--large wrapper--padding-for-page">
+            {% if heading %}
+                <h2 class="related-large__heading">{{ heading }}</h2>
+            {% endif %}
+
+            <div class="grid grid--no-margin grid--3col grid--large-gutters">
+                {% for card in related_pages %}
+                    {% if card.value %}
+                        {% include "patterns/molecules/cards/related-card.html" with value=card.value only %}
+                    {% else %}
+                        {% include "patterns/molecules/cards/related-card.html" with value=card.page.specific only %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+</section>
+
+{% endif %}

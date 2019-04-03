@@ -1,0 +1,11 @@
+{% load icon_tags %}
+
+{% render_icon value.icon "stat-block__icon" %}
+<h3 class="stat-block__heading">
+    {% if value.amount %}
+        £{{ value.amount }}
+    {% else %}
+        {{ value.value }}
+    {% endif %}
+</h3>
+<p>{{ value.description }}</p>

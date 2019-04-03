@@ -1,0 +1,8 @@
+{# size options are "card" "medium" "page" #}
+{% firstof size "card" as size %}
+<div>
+{% include "patterns/atoms/svg/corner/corner--"|add:size|add:".html" %}
+{% include "patterns/atoms/svg/corner/corner--"|add:size|add:".html" %}
+{% include "patterns/atoms/svg/corner/corner--"|add:size|add:".html" %}
+{% include "patterns/atoms/svg/corner/corner--"|add:size|add:".html" %}
+</div>

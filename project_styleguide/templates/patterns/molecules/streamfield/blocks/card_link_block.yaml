@@ -1,0 +1,10 @@
+context:
+  value:
+    title: 'This is a card link'
+    page: 'Page'
+
+tags:
+  pageurl:
+    "value.page as href":
+      target_var: href
+      raw: '#'

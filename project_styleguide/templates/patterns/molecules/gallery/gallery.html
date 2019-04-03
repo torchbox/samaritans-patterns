@@ -1,0 +1,20 @@
+{% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags static %}
+
+<div class="gallery">
+    <h2>{{ title }}</h2>
+    <div class="gallery__grid js-gallery">
+        {% for item in gallery %}
+
+            {% image item.value.image fill-1190x790 as gallery_image %}
+            {% image item.value.image fill-518x292 as gallery_image_thumb %}
+
+            <a href="{{ gallery_image.url }}" class="gallery__thumbnail">
+                <img src="{{ gallery_image_thumb.url }}" alt="{{ gallery_image_thumb.alt }}">
+                <div class="gallery__icon-wrapper">
+                    {% include "patterns/atoms/svg/icons/icon-launch-modal.html" with classes="gallery__icon" %}
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+    <button class="gallery__browse-button js-trigger-gallery">Browse all photos</button>
+</div>

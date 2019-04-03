@@ -1,0 +1,134 @@
+.branch-top {
+
+    @include media-query(tablet-portrait) {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin: 0 -15px;
+    }
+
+    @include media-query($page-connectors-breakpoint) {
+        position: relative;
+        top: -15px;
+    }
+
+    &__link {
+        @include link($meadow, inherit);
+        @include underline(transparent, currentColor);
+    }
+
+    &__chevron-link {
+        @include link($meadow, inherit);
+    }
+
+    &__map-section {
+        position: relative;
+        margin-bottom: $gutter-medium;
+
+        @include media-query(tablet-portrait) {
+            width: 50%;
+            margin-bottom: 0;
+            margin-left: $gutter;
+        }
+
+        @include media-query($page-connectors-breakpoint) {
+            margin-bottom: -$gutter-medium;
+            margin-left: $gutter-medium;
+        }
+    }
+
+    &__map-connectors {
+        @include connectors($teal, bottom, right, medium);
+    }
+
+    &__map {
+        display: none;
+
+        @include media-query(tablet-portrait) {
+            display: block;
+            width: 100%;
+            height: 500px;
+        }
+    }
+
+    &__map-link {
+        @include media-query(tablet-portrait) {
+            display: none;
+        }
+    }
+
+    &__information-section {
+        @include media-query(tablet-portrait) {
+            margin-bottom: -$gutter-medium;
+            flex: 1;
+        }
+    }
+
+    &__activities {
+        margin-bottom: $gutter-large - $gutter-small;
+    }
+
+    &__activity {
+        margin-bottom: $gutter-small;
+        padding: 10px 15px;
+        border: 1px solid rgba($grey-light, 0.2);
+        border-radius: 4px;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    &__contact-method {
+        display: flex;
+        align-items: center;
+        margin-bottom: $gutter-large;
+
+        &__icon {
+            flex: 0 0 40px;
+            width: 40px;
+            height: 60px;
+            margin-right: $gutter;
+        }
+
+        &__text {
+            p {
+                margin-bottom: 0;
+            }
+        }
+
+        &__link {
+            @include link(inherit, $meadow);
+            @include underline(transparent, currentColor);
+            @include font-size(m);
+            font-weight: $weight--bold;
+        }
+    }
+
+    &__phone {
+        @include media-query(tablet-landscape) {
+            margin-right: $gutter-small;
+        }
+    }
+
+    dl {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0;
+    }
+
+    dt {
+        width: 6em;
+    }
+
+    dd {
+        padding-left: 7em;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    dt + dd {
+        padding-left: 0;
+        width: calc(100% - 7em);
+        margin-left: 1em;
+    }
+}

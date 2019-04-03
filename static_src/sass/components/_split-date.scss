@@ -1,0 +1,16 @@
+.split-date {
+    display: flex;
+
+    &__item {
+        width: 5em;
+
+        &:not(:last-child) {
+            margin-right: 10px;
+        }
+    }
+
+    label { // needs this specificity
+        @include font-size(xs);
+        margin-bottom: 5px;
+    }
+}

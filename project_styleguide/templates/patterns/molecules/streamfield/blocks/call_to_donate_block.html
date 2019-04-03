@@ -1,0 +1,4 @@
+{% load wagtailcore_tags %}
+<h2>{{ value.title }}</h2>
+{% pageurl value.button_link as href %}
+{% include "patterns/atoms/buttons/button.html" with label=value.button_text href=href %}

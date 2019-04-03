@@ -1,0 +1,47 @@
+.cookie-banner {
+    position: fixed;
+    bottom: $gutter-small;
+    left:   $gutter;
+    right:  $gutter;
+    padding: $gutter-small;
+    z-index: z($z-elements, cookie-banner);
+    border-radius: 4px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    color: $plum;
+    background-color: $color--white;
+    border: 1px solid rgba($grey-text, 0.5);
+
+    @include media-query(tablet-landscape) {
+        left:   $gutter-medium;
+        right:  $gutter-medium;
+    }
+
+    &__link {
+        @include link($plum, $color--link-hover);
+        font-weight: $weight--bold;
+
+        &--button {
+            display: block;
+
+            @include media-query(mob-landscape) {
+                display: inline;
+                margin-right: $gutter;
+            }
+        }
+    }
+
+    &__icon {
+        height: $gutter-medium;
+        width: $gutter-medium;
+        margin-left: $gutter-small;
+        fill: $lime;
+
+        #{$hover} {
+            fill: $color--link-hover;
+        }
+    }
+}

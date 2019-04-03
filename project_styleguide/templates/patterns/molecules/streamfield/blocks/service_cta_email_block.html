@@ -1,0 +1,60 @@
+{% load i18n wagtailcore_tags icon_tags %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{% if type == 'hero_cta' %}
+
+<a
+href="mailto:{% if 'ireland' in LANGUAGE_CODE %}{{ value.ireland_email_address }}{% else %}{{ value.email_address }}{% endif %}"
+class="listening-cta listening-cta--primary listening-cta--link"
+>
+    <span class="listening-cta__corner"></span>
+    <div class="listening-cta__inner">
+        <div class="listening-cta__container">
+            {% if page.icon %}
+                {% render_icon page.icon "listening-cta__icon" %}
+            {% endif %}
+            <div class="listening-cta__text">
+                <h2 class="listening-cta__heading">
+                    {% if 'ireland' in LANGUAGE_CODE %}
+                        {{ value.ireland_email_address }}
+                    {% else %}
+                        {{ value.email_address }}
+                    {% endif %}
+                </h2>
+                <p>
+                    {% trans "Response time:" %}
+                    {{ value.response_time }}
+                </p>
+            </div>
+        </div>
+        {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="listening-cta__chevron" aria_hide="true" %}
+    </div>
+    <span class="listening-cta__connectors"></span>
+</a>
+
+{% else %}
+
+<div class="service-block">
+    <h2 class="service-block__heading">
+        {% if 'ireland' in LANGUAGE_CODE %}
+            <a href="mailto:{{ value.ireland_email_address }}">{{ value.ireland_email_address }}</a>
+        {% else %}
+            <a href="mailto:{{ value.email_address }}">{{ value.email_address }}</a>
+        {% endif %}
+    </h2>
+    <p>{% trans "Response time:" %} {{ value.response_time }}</p>
+</div>
+
+<div class="service-block service-block--sticky">
+    {% include "patterns/atoms/svg/colour-icons/icon-color-envelope-open.html" with classes="service-block__icon" %}
+    <span class="service-block__link">
+        {% if 'ireland' in LANGUAGE_CODE %}
+            <a href="mailto:{{ value.ireland_email_address }}">{{ value.ireland_email_address }}</a>
+        {% else %}
+            <a href="mailto:{{ value.email_address }}">{{ value.email_address }}</a>
+        {% endif %}
+    </span>
+    <span>{% trans "Response time:" %} {{ value.response_time }}</span>
+</div>
+
+{% endif %}

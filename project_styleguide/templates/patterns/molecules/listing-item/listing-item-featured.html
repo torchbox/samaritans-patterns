@@ -1,0 +1,36 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<a class="listing-item-featured" href="{% pageurl value %}">
+    {% if value.listing_image %}
+        {% image value.listing_image fill-1064x400 class="listing-item-featured__image" %}
+    {% endif %}
+    <div class="listing-item-featured__text">
+        <h2 class="listing-item-featured__title">
+            {{ value.listing_title|default:value.title }}
+            {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="listing-item-featured__chevron" aria_hide="true" %}
+        </h2>
+        <ul class="list-inline-bulleted list-inline-bulleted--featured-listing">
+            {% if value.start_date %}
+                <li class="list-inline-bulleted__item">{{ value.start_date|date:"jS F Y" }}</li>
+            {% elif value.publication_date %}
+                <li class="list-inline-bulleted__item">{{ value.publication_date|date:"jS F Y" }}</li>
+            {% endif %}
+
+            {% for type in value.news_types.all %}
+                <li class="list-inline-bulleted__item">{{ type }}</li>
+            {% endfor %}
+
+            {% if value.event_type %}
+                <li class="list-inline-bulleted__item">{{ value.event_type }}</li>
+            {% endif %}
+
+            {% if value.location or value.country %}
+                <li class="list-inline-bulleted__item">{% firstof value.location value.get_country_display %}</li>
+            {% endif %}
+
+            {% if value.topic %}
+                <li class="list-inline-bulleted__item">{{ value.topic }}</li>
+            {% endif %}
+        </ul>
+    </div>
+</a>

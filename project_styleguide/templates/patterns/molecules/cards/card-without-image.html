@@ -1,0 +1,14 @@
+<div class="card-new card-new--information">
+    <span class="card-new__corner"></span>
+    <div class="card-new__inner">
+        <div class="card-new__container">
+            <h2 class="card-new__title">
+                {% firstof card.listing_title card.title %}
+            </h2>
+            {% if card.listing_summary or card.introduction or card.description %}
+                <p class="card-new__text">{% firstof card.listing_summary card.introduction card.description %}</p>
+            {% endif %}
+        </div>
+    </div>
+    <span class="card-new__connectors"></span>
+</div>

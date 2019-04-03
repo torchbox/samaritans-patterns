@@ -1,0 +1,14 @@
+<div class="js-glide glide" data-slidetotal="{{ carousel|length }}">
+
+    {% include "patterns/molecules/pagination/pagination--carousel.html" %}
+
+    <div data-glide-el="track" class="glide__track">
+        <ul class="glide__slides">
+            {% for slide in carousel %}
+                <li class="glide__slide">
+                    {% include 'patterns/molecules/slide/slide.html' with value=slide.value %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

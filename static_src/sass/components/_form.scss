@@ -1,0 +1,41 @@
+.form {
+    $root: &;
+
+    &--after-body {
+        margin-top: $gutter-xxl;
+    }
+
+    &__container {
+        margin-bottom: $gutter;
+
+        &--flex {
+            @include media-query(tablet-landscape) {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: flex-start;
+            }
+        }
+    }
+
+    &__section {
+        &--main-column {
+            @include media-query(tablet-landscape) {
+                order: -2;
+                flex: 1;
+            }
+
+        }
+
+        &--full-width {
+            flex-basis: 100%;
+        }
+    }
+
+    &__errors {
+        @include font-size(s); // was font-size(epsilon)
+        padding: $gutter;
+        margin-bottom: $gutter;
+        color: $white;
+        background-color: darken($hot-pink, 5%);
+    }
+}

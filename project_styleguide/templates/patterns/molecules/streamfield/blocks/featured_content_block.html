@@ -1,0 +1,11 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% for block in value %}
+    <div>
+        <h3>{{ block.title }}</h3>
+        <p>{{ block.description }}</p>
+        {% image block.image fill-1300x1300 %}
+        {% pageurl block.link as href %}
+        {% include "patterns/atoms/buttons/button.html" with label=block.link_text href=href %}
+    </div>
+{% endfor %}

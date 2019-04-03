@@ -1,0 +1,38 @@
+.document {
+    @include margin-streamfield-block;
+    display: flex;
+    align-items: flex-start;
+    border-bottom: $grey-border;
+
+    &__icon {
+        height: 53px;
+        transform: rotate(90deg);
+        margin-top: 10px;
+        margin-right: $gutter;
+        max-width: 60px;
+    }
+
+    &__title {
+        font-size: 21px;
+        margin-bottom: $gutter-small;
+    }
+
+    &__link-description {
+        @include hidden();
+    }
+
+    &__link {
+        border-bottom: 2px solid $color--link;
+        transition: border-color $transition;
+
+        #{$hover} {
+            border-color: transparent;
+        }
+    }
+
+    &__information {
+        @include font-size(xs);
+        color: $ink;
+        white-space: nowrap;
+    }
+}

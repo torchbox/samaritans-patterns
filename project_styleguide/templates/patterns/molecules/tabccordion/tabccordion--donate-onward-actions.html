@@ -1,0 +1,42 @@
+{% load wagtailcore_tags i18n icon_tags %}
+
+<div class="tabccordion tabccordion--actions js-tabccordion">
+    {% if title %}
+        <h2 class="tabccordion__title">{{ title }}</h2>
+    {% endif %}
+
+    <nav>
+        <ul class="tabccordion__nav js-tabccordion-nav">
+            {% for action in page.onward_actions %}
+                <li><a href="#tab-{{ forloop.counter }}" class="tabccordion__nav-item {% if forloop.first %}is-active{% endif %}">
+                    <span class="tabccordion__nav-heading">
+                        {% render_icon "icon-color-time" "tabccordion__nav-heading-icon" %}
+                        <span class="tabccordion__nav-heading-text">
+                            {{ action.value.time_value }}
+                        </span>
+                    </span>
+                    {{ action.value.title }}
+                </a></li>
+            {% endfor %}
+        </ul>
+    </nav>
+
+    {% for action in page.onward_actions %}
+        <section id="tab-{{ forloop.counter }}" class="accordion accordion--tabccordion tabccordion__panel js-tabccordion-panel{% if forloop.first %} is-active{% endif %}">
+
+            <a class="accordion__heading" href="#tab2">
+                <h3 class="accordion__heading-text">
+                    {{ action.value.time_value }}: {{ action.value.title }}
+                </h3>
+                {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="accordion__icon" aria_hide="true" %}
+            </a>
+
+            <div class="accordion__content tabccordion__content">
+                <p class="tabccordion__description">{{ action.value.description }}</p>
+                <div class="tabccordion__links">
+                    {% include_block action.value.links %}
+                </div>
+            </div>
+        </section>
+    {% endfor %}
+</div>

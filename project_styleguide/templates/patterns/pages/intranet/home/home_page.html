@@ -1,0 +1,21 @@
+{% extends "patterns/base_page--intranet.html" %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block content %}
+    {% include "patterns/molecules/hero/hero-search.html" with home_page=True %}
+
+    <div class="wrapper wrapper--large wrapper--main">
+        <p class="intro intro--margin">{{ page.introduction }}</p>
+
+        <div class="grid grid--4col">
+            {% for card in page.category_pages %}
+                {% include "patterns/molecules/cards/category-card.html" %}
+            {% endfor %}
+        </div>
+
+        {% include "patterns/organisms/grid/news-card-grid.html" with home_page=True %}
+
+        {% include "patterns/molecules/cta/call_to_action.html" with call_to_action=page.call_to_action %}
+    </div>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% if related_pages %}
+    <section class="related-small">
+        {% include "patterns/atoms/svg/patterns/pattern-dots.html" with classes="pattern" %}
+        <div class="wrapper wrapper--large">
+            <div class="related-small__wrapper">
+                <div class="related-small__text-wrapper">
+                    <h2 class="related-small__heading">Related Pages</h2>
+                    <ul class="related-small__list">
+                        {% for related in related_pages %}
+                            <li>
+                                {% if related.page.live %}
+                                    {% with specific_related_page=related.page.specific %}
+                                        <a class="related-small__link" href="{% pageurl specific_related_page %}">
+                                            {% firstof specific_related_page.listing_title specific_related_page.title %}
+                                            {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="related-small__link-icon" %}
+                                        </a>
+                                    {% endwith %}
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endif %}

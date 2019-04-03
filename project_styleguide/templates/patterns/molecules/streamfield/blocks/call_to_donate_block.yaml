@@ -1,0 +1,11 @@
+context:
+  value:
+    title: 'Title'
+    button_text: 'Donate today'
+    button_link: '#'
+
+tags:
+  pageurl:
+    "value.button_link as href":
+      target_var: href
+      raw: '#'

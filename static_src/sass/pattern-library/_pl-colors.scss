@@ -1,0 +1,19 @@
+.pl-colors {
+    padding: 10px;
+
+    &__section {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &__color {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 150px;
+        height: 150px;
+        text-align: center;
+        color: $white;
+        margin: 10px;
+    }
+}

@@ -1,0 +1,39 @@
+// sass-lint:disable-all
+
+.choice_field.field-small .input select ~ span::after{
+    line-height: 0.9em;
+}
+
+header {
+    .col.header-title {
+        margin-bottom: 1em;
+    }
+
+    .left,
+    .col.search-bar {
+        width: 100%;
+
+        @media screen and (min-width: 50em) {
+            width: auto;
+        }
+    }
+
+    .col:not(:first-child) {
+        .col5:first-child,
+        .col6:first-child {
+            @media screen and (min-width: 50em) {
+                margin-left: -1.5%;
+            }
+        }
+    }
+
+    .fields li:last-child {
+        margin-bottom: 1em;
+    }
+
+    .help {
+        color: rgba(white, 0.9);
+    }
+}
+
+// sass-lint:enable-all

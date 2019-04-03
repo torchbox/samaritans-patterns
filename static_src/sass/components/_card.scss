@@ -1,0 +1,328 @@
+.card {
+    $root: &;
+
+    @mixin card-corner($color, $offset: 7px) {
+        @include corner($color, top, left, $offset: $offset);
+
+        #{$root}__connectors {
+            @include connectors($color, top, left);
+            z-index: z($z-elements, card-foreground);
+        }
+    }
+
+    @mixin card-corner-bottom($color) {
+        @include corner($color, bottom, right, $selector: '&::after');
+
+        #{$root}__connectors--extra {
+            @include connectors($color, bottom, right);
+        }
+    }
+
+    @include link($color--default, $color--link, #{$root}__link);
+    @include underline($color--default, $color--default, #{$root}__link);
+
+    position: relative;
+    display: flex;
+    z-index: z($z-elements, card);
+    color: $color--default;
+
+    a#{&} {
+        @include link($color--default, $color--default);
+    }
+
+    #{$hover} {
+
+        #{$root},
+        .chevron-link {
+            &__chevron {
+                transform: translateX(100%);
+            }
+        }
+
+        #{$root}__image {
+            filter: brightness(80%);
+        }
+    }
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        align-items: flex-start;
+        padding: $gutter-medium;
+        background: $white;
+        width: 100%;
+
+        @include target-ie11 {
+            .rich-text {
+                width: 100%;
+            }
+        }
+
+        #{$root}--branch-news & {
+            background-color: $off-white;
+        }
+    }
+
+    &__title {
+        @include font-size(s);
+        transition: color $transition;
+        max-width: 100%;
+
+        @include media-query(tablet-portrait) {
+            @include font-size(m);
+            line-height: 1.3;
+        }
+
+        .template-home-page & {
+            font-size: 21px;
+        }
+    }
+
+    &__text {
+        @include font-size(xs);
+        flex-grow: 1;
+        max-width: 100%;
+        margin-bottom: 0;
+    }
+
+    &__chevron {
+        @include link-chevron;
+    }
+
+    &__meta {
+        @include font-size(xxs);
+        color: $grey-text;
+
+        span {
+            &:not(:last-child) {
+                display: inline-block;
+                border-right: $grey-border;
+                padding-right: 10px;
+                margin-right: 5px;
+                line-height: 1;
+            }
+        }
+    }
+
+    &__image {
+        width: 100%;
+        display: block;
+        position: relative;
+        filter: brightness(100%);
+        transition: filter $transition;
+    }
+
+    &__link {
+        @include font-size(s);
+        margin-top: 20px;
+    }
+
+    // modifiers
+    &--category {
+        #{$root}__connectors {
+            @include connectors($page-bg, bottom, right);
+        }
+
+        #{$hover} {
+            #{$root}__title {
+                color: $color--link;
+            }
+        }
+
+        // First child in grid has top left green connectors
+        &:first-child {
+            @include card-corner($lime);
+        }
+
+        // Last child in grid has bottom right purple connectors
+        // (but not if it's also the first child)
+        &:last-child:not(:first-child) {
+            @include card-corner-bottom($amethyst);
+        }
+
+        #{$root}__container {
+            min-height: 170px;
+        }
+    }
+
+    // Last child has different connector colors on the 3col grid
+    &--3col {
+        // Last child in grid has bottom right teal connectors
+        // (but not if it's also the first child)
+        &:last-child:not(:first-child) {
+            @include card-corner-bottom($teal);
+        }
+    }
+
+    &--related {
+        @include card-corner($emerald);
+        @include card-corner-bottom($sunflower);
+    }
+
+    &--with-image {
+        @include card-corner($lime);
+        // override corner size
+        @include corner($lime, top, left, $width: 60%, $height: 50%);
+        flex-direction: column;
+
+        #{$root}__title {
+            margin-bottom: 10px;
+        }
+
+        #{$root}__text {
+            @include font-size(xxs);
+            margin-bottom: 0;
+        }
+
+        #{$root}__container {
+            background-color: $off-white;
+        }
+    }
+
+    &--news {
+        @include card-corner($lime);
+        @include card-corner-bottom($sunflower);
+        flex-direction: column;
+
+        #{$root} {
+            &__image {
+                width: 100%;
+                display: block;
+            }
+
+            &__title {
+                color: $color--link;
+                transition: color $transition;
+            }
+        }
+
+        #{$hover} {
+            #{$root} {
+                &__title {
+                    color: $color--link-hover;
+                }
+            }
+        }
+    }
+
+    &--information {
+        @include card-corner($lime);
+        max-width: 416px;
+
+        #{$root} {
+            &__container {
+                background-color: $off-white;
+
+                .streamfield--white-bg & {
+                    background-color: $white;
+                }
+            }
+
+            &__text,
+            &__title {
+                @include font-size(s);
+            }
+
+            &__text {
+                margin: 0;
+            }
+        }
+
+        .hero--landing-page & {
+            margin: 20px 0;
+
+            @include media-query(tablet-portrait) {
+                margin-bottom: $gutter-xxl;
+                max-width: 530px;
+            }
+        }
+    }
+
+    &--dark,
+    &--homepage-secondary {
+        color: $white;
+
+        #{$hover} {
+            color: $white;
+
+            #{$root}__title {
+                color: rgba($white, 0.9);
+            }
+        }
+
+        #{$root},
+        .chevron-link {
+            &__chevron {
+                fill: currentColor;
+            }
+        }
+    }
+
+    &--dark {
+        @include card-corner($lime);
+
+        #{$root} {
+            &__container {
+                background-color: $teal;
+            }
+
+        }
+    }
+
+    &--key-info {
+        @include card-corner($lime, 10px);
+        font-size: 22px;
+
+        &:nth-child(2) {
+            @include card-corner($sunflower, 10px);
+        }
+
+        &:nth-child(3) {
+            @include card-corner($amethyst, 10px);
+
+            .streamfield--amethyst-bg & {
+                @include card-corner($emerald, 10px);
+            }
+        }
+
+        b {
+            color: $amethyst;
+        }
+    }
+
+    &--homepage-news,
+    &--nation-news,
+    &--branch-news {
+        @include card-corner($emerald);
+
+        &:nth-child(2) {
+            @include card-corner($lime);
+        }
+
+        &:nth-child(3) {
+            @include card-corner($amethyst);
+        }
+    }
+
+    &--nation-news {
+        z-index: auto;
+
+        #{$root}__connectors {
+            z-index: auto;
+
+            &:nth-child(2),
+            &:nth-child(3) {
+                z-index: auto;
+            }
+        }
+    }
+
+    &--listening-service {
+        @include card-corner($lime);
+
+        #{$root}__title {
+            @include font-size(xxl);
+        }
+    }
+}

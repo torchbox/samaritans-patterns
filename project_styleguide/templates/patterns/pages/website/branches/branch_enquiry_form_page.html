@@ -1,0 +1,49 @@
+{% extends "patterns/base_page--website.html" %}
+{% load form_tags icon_tags %}
+
+{% block content %}
+
+{% include "patterns/molecules/hero/hero.html" with hero_color="emerald" pattern="dots" hero_title=page.title hero_short=True %}
+
+<div class="wrapper wrapper--large wrapper--padding-for-page">
+    <section class="section section--branch-enquiry section--overlap">
+        {% include "patterns/atoms/corners/corners.html" with size="page" %}
+
+        <p class="intro">{{ page.introduction }}</p>
+
+        {% if page.admin_phone_number %}
+            <a class="inline-cta" href="tel:{{ page.admin_phone_number}}">
+                {% render_icon "icon-color-mobile" "inline-cta__icon" %}
+
+                <div class="inline-cta__text">
+                    <p>For administrative enquiries, call us on</p>
+                    <p class="inline-cta__link">{{ page.admin_phone_number.as_national }}</p>
+                </div>
+            </a>
+        {% endif %}
+
+        {% block form_content %}
+        <form method="POST">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                <div class="form__errors">{{ error }}</div>
+                {% endfor %}
+            {% elif form.errors %}
+            <div class="form__errors">
+                There were some errors with your form. Please amend the fields highlighted below.
+            </div>
+            {% endif %}
+
+            {% for field in form %}
+                {% render_form_field field %}
+            {% endfor %}
+
+            {% include "patterns/atoms/buttons/button--button.html" with label="Send" %}
+        </form>
+        {% endblock %}
+    </section>
+</div>
+
+{% endblock content %}

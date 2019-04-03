@@ -1,0 +1,20 @@
+{% extends "patterns/base_page--website.html" %}
+
+
+{% comment %}
+
+IMPORTANT:
+Pages using this template need to have an h1 in their content
+
+{% endcomment %}
+
+
+{% block content %}
+
+<div class="wrapper wrapper--small">
+    <section class="section section--main section--no-hero">
+        {% block content_inner %}{% endblock %}
+    </section>
+</div>
+
+{% endblock %}

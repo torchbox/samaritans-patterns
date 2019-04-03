@@ -1,0 +1,9 @@
+context:
+  page:
+    title: Community
+    header_video:
+      url: https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4
+    header_image_caption: |
+      <p>Some <b>bold</b> and <i>italic</i> caption</p>
+    introduction: Study fine arts, design, architecture, humanities, and sciences at California College of the Arts in San Francisco, where creative practice, material innovation, and formal experimentation meet social engagement and cultural collaboration.
+    overview_subheading: Accumsan interdum lorem ipsum sed lacinia odio vitae est

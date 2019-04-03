@@ -1,0 +1,50 @@
+context:
+  page:
+    title: Test listing page
+    introduction: Test intro for this listing page 123
+    story_cta: true
+    related_pages:
+      all:
+        - page:
+            specific:
+              listing_title: If you're worried about someone else
+              listing_summary: We can give you advice and information
+        - page:
+            specific:
+              listing_title: Understanding emotional health
+              listing_summary: We can give you advice and information
+        - page:
+            specific:
+              listing_title: Chat to a Samaritan
+              listing_summary: We can give you advice and information
+  subpages:
+    - title: Test sub page
+      listing_image: fake
+      listing_summary: Listing summary for the sub page
+    - title: Another test sub page
+      listing_image: fake
+      listing_summary: Listing summary for the sub page
+    - title: Yet another test sub page
+      listing_image: fake
+      listing_summary: Listing summary for the sub page
+    - title: Test sub page
+      listing_image: fake
+      listing_summary: Listing summary for the sub page
+    - title: Another test sub page
+      listing_image: fake
+      listing_summary: Listing summary for the sub page
+    - title: Another test sub page
+      listing_image: fake
+      listing_summary: Listing summary for the sub page
+
+tags:
+  pageurl:
+    subpage:
+      raw: "#"
+  image:
+    subpage.listing_image fill-450x300:
+      raw: |
+        <img src="http://via.placeholder.com/450x300" width="450" height="300" alt="Some alt">
+  include_block:
+    page.story_cta:
+      template_name: "patterns/molecules/streamfield/blocks/story_call_to_action_block.html"

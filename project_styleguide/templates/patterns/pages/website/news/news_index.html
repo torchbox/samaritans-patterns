@@ -1,0 +1,27 @@
+{% extends "patterns/templates/index_page/listing_template_website.html" %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block filters_intro %}
+    Browse our news by:
+{% endblock %}
+
+{% block filters %}
+    {% include "patterns/molecules/filters/filter.html" with title="All countries" name="region" options=countries %}
+    {% include "patterns/molecules/filters/filter.html" with title="All types of news" name="news_type" options=news_types %}
+    {% include "patterns/molecules/filters/filter.html" with title="All topics" name="topic" options=topics %}
+{% endblock filters %}
+
+{% block listings %}
+    {% if news %}
+        {% include "patterns/organisms/listing-list/listing-list.html" with listings=news %}
+    {% else %}
+        No matching news
+    {% endif %}
+{% endblock %}
+
+
+{% comment %} block featured_listing
+    {% if news.0 %}
+        {% include "patterns/molecules/listing-item/listing-item-featured.html" with value=news.0 %}
+    {% endif %}
+{% endcomment %}

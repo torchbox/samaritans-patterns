@@ -1,0 +1,211 @@
+{% extends "patterns/base_page--website.html" %}
+{% load donate_tags form_tags i18n icon_tags static wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+
+<article id="donate__landing">
+
+    <div id="hero" class="hero hero--donate-landing">
+
+        {% image page.hero_image fill-3800x2500 jpegquality-40 as hero_image %}
+        <div class="donate-landing-hero__image" style="background-image: url({{ hero_image.url}});"></div>
+
+        <h1 class="donate-landing-hero__title">{{ page.title }}</h1>
+
+        <div class="hero__inner wrapper wrapper--large wrapper--padding">
+
+            <div class="hero-widget hero-widget--donate-landing">
+                <div class="hero-widget__corner"></div>
+                <div class="hero-widget__inner">
+                    <span class="hero-widget__connectors"></span>
+                    <span class="hero-widget__connectors--extra"></span>
+
+                    <h2 class="hero-widget__heading">{{ page.donate_form_heading }}</h2>
+
+                    {% if page.allow_monthly_donation and page.allow_one_off_donation %}
+                    <div class="hero-widget__button-group button-group button-group--white">
+                        <button class="button-group__button" id="donate__form__toggle-monthly"
+                        {% if page.default_to_monthly %}disabled{% endif %}>
+                        <span class="button-group__button-text">
+                            {% trans "Monthly" %}
+                        </span>
+                    </button>
+                        <button class="button-group__button" id="donate__form__toggle-single"
+                        {% if page.default_to_single %}disabled{% endif %}>
+                        <span class="button-group__button-text">
+                            {% trans "One-off" %}
+                        </span>
+                    </button>
+                    </div>
+                    {% endif %}
+
+                    {% if page.allow_monthly_donation %}
+                    <form method="get" action="{% url 'donate:personal_details' %}" id="donate_form--monthly" {% if page.default_to_single %}hidden{% endif %}>
+                        {% render_form_field monthly_form.campaign_id %}
+                        {% render_form_field monthly_form.frequency %}
+                        <div class="donate-landing-hero__form-input donate-landing-hero__form-input--monthly">
+                            {% render_form_field monthly_form.amount %}
+                        </div>
+                        {% include "patterns/atoms/buttons/button--button.html" with label=page.donate_button_text large=True classes="button--secondary donate-landing-hero__donate-button" %}
+                    </form>
+                    {% endif %}
+
+                    {% if page.allow_one_off_donation %}
+                    <form method="get" action="{% url 'donate:personal_details' %}" id="donate_form--single" {% if page.default_to_monthly %}hidden{% endif %}>
+                        {% render_form_field one_off_form.campaign_id %}
+                        {% render_form_field one_off_form.frequency %}
+                        <div class="donate-landing-hero__form-input">
+                            {% render_form_field one_off_form.amount %}
+                        </div>
+                        {% include "patterns/atoms/buttons/button--button.html" with label=page.donate_button_text large=True classes="button--secondary donate-landing-hero__donate-button" %}
+                    </form>
+                    {% endif %}
+
+                </div> {# /.hero-widget__inner #}
+
+                {% if page.is_default %}
+                <a href="{% url 'donate:pay_in_personal_details' %}" class="donate-landing-hero__pay-in-link">
+                    {% render_icon "icon-color-piggy-bank" "icon icon--large" %}
+                    <span class="donate-landing-hero__pay-in-text">Fundraised? Pay your money in</span>
+                </a>
+                {% endif %}
+            </div> {# /.hero-widget #}
+
+            <div class="donate-landing-hero__text">
+                <h2 class="donate-landing-hero__text-heading heading-secondary">{{ page.hero_heading }}</h2>
+                <p>{{ page.hero_summary }}</p>
+            </div>
+
+        </div>
+
+    </div> {# /.hero--donate-landing #}
+
+    <div class="wrapper wrapper--donate-landing">
+
+        <div class="wrapper wrapper--large wrapper--padding-for-page">
+
+            <section class="section section--donate-landing">
+                {% include "patterns/atoms/corners/corners.html" with size="page" %}
+
+                <div class="donate-landing__examples-heading">
+                    <h2 class="heading-secondary">{{ page.donation_examples_heading }}</h2>
+                </div>
+
+                {% if page.allow_monthly_donation and page.allow_one_off_donation %}
+                <div class="button-group button-group--centered">
+                    <button class="button-group__button" id="donate__examples__toggle-monthly"
+                    {% if page.default_to_monthly %}disabled{% endif %}>
+                        <span class="button-group__button-text">
+                            {% trans "Monthly" %}
+                        </span>
+                    </button>
+                    <button class="button-group__button" id="donate__examples__toggle-single"
+                    {% if page.default_to_single %}disabled{% endif %}>
+                        <span class="button-group__button-text">
+                            {% trans "One-off" %}
+                        </span>
+                    </button>
+                </div>
+                {% endif %}
+
+                {% if page.allow_monthly_donation %}
+                <div class="donate-landing__examples" id="donate__examples--monthly" {% if page.default_to_single %}hidden{% endif %}>
+                    <div class="stat-block stat-block--donate-landing">
+                        {% for example in page.donation_examples_monthly %}
+                            {% include "patterns/molecules/streamfield/blocks/stat_block.html" with value=example.value frequency="monthly" link=True %}
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if page.allow_one_off_donation %}
+                <div class="donate-landing__examples" id="donate__examples--single" {% if page.default_to_monthly %}hidden{% endif %}>
+                    <div class="stat-block stat-block--donate-landing">
+                        {% for example in page.donation_examples_one_off %}
+                            {% include "patterns/molecules/streamfield/blocks/stat_block.html" with value=example.value frequency="single" link=True %}
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <hr class="hr hr--dashed">
+
+                {# Call to donate #}
+                <div class="donate-landing__call-to-donate">
+                    <h2>{{ page.call_to_donate }}</h2>
+                    {% include "patterns/atoms/buttons/button.html" with href="#hero" label="Make a donation" large=True classes="button--plain js-smooth-scroll" %}
+                </div>
+                <aside class="js-sticky-cta">
+                    <a href="#hero" class="donate-landing__call-to-donate--sticky js-smooth-scroll">
+                        <span class="donate-landing__call-to-donate__sticky-text">{{ page.call_to_donate }}</span>
+                        <span class="donate-landing__call-to-donate__sticky-link">Donate today</span>
+                    </a>
+                </aside>
+
+            </section> {# /.section--donate-landing #}
+
+            {# if statement can be removed when back end adds these fields, which are required #}
+            {% if page.where_money_goes_heading %}
+            <div class="donate-landing__key-info-text donate-landing__key-info-text--alt">
+                <div class="section section--page-padding">
+                    <h2 class="heading-secondary">{{ page.where_money_goes_heading }}</h2>
+                    <div class="donate-landing__text-with-icon">
+                        {% render_icon page.where_money_goes_icon "icon icon--x-large" %}
+                        <p>{{ page.where_money_goes_description }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+        </div> {# /.wrapper--large #}
+
+    </div> {# /.wrapper--donate-landing #}
+
+    <div class="donate-landing__key-info-text">
+        <div class="section section--page-padding">
+            <div class="wrapper wrapper--small">
+                <h2 class="heading-secondary">{{ page.key_info_heading }}</h2>
+                {% if page.key_info_heading %}
+                    <p>{{ page.key_info_description }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="donate-landing__key-info-cards">
+        <div class="wrapper wrapper--large wrapper--padding-large">
+            <div class="grid grid--3col grid--no-margin">
+                {% for card in page.key_info_cards %}
+                    <div class="donate-landing__key-info-card">
+                        {{ card.value|richtext }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    {% comment %}
+        For cleaner code, we should be able to make this use a different template.
+        It needs:
+        - .story-call-to-action-block--dark
+        - .button--alt
+        - Not to have the margin that the streamfield block provides.
+    {% endcomment %}
+    <div class="wrapper wrapper--donate-landing-cta">
+        <div class="wrapper--small">
+            {# Story CTA #}
+            <div class="donate-landing__story-cta">
+                {{ page.story_cta }}
+            </div>
+        </div>
+    </div>
+
+    {% include "patterns/molecules/related-pages/related-pages--large.html" with heading=page.more_info_heading related_pages=page.more_info_links pattern="diamonds" classes="related-large--donate-landing" %}
+
+</article>
+
+{% endblock content %}
+
+{% block extra_js %}
+    <script src="{% static 'js/donate.js' %}"></script>
+{% endblock %}

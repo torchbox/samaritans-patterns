@@ -1,0 +1,113 @@
+.accordion {
+    $root: &;
+    border-top: $grey-border;
+
+    &:last-child {
+        border-bottom: $grey-border;
+    }
+
+    .streamfield--dark-bg & {
+        color: $white;
+        border-color: rgba($grey-light, 0.2);
+    }
+
+    &__heading {
+        @include link;
+        padding: $gutter 0;
+        font-size: $base-font-size;
+        transition: color $transition;
+        font-weight: $weight--bold;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        @include media-query(mob-landscape) {
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+        }
+
+        .streamfield--dark-bg & {
+            @include link($white, rgba($white, 0.8));
+        }
+
+        #{$root}--tabccordion & {
+            @include media-query(tablet-portrait) {
+                display: none;
+            }
+        }
+
+        .is-open &,
+        .is-active--mobile & {
+            color: inherit;
+        }
+    }
+
+    &__heading-text {
+        font-size: 21px;
+        margin-bottom: 0;
+        margin-right: $gutter;
+        flex: 1;
+        pointer-events: none;
+
+        @include media-query(mob-landscape) {
+            margin-right: 0;
+            margin-left: $gutter;
+        }
+    }
+
+    &__icon {
+        width: $gutter;
+        height: $gutter;
+        transform: rotate(90deg);
+        transition: transform, fill, 0.2s ease;
+        fill: $color--link;
+        pointer-events: none;
+
+        .streamfield--dark-bg & {
+            fill: $white;
+        }
+    }
+
+    &.is-open,
+    &.is-active--mobile {
+        #{$root}__icon {
+            transform: rotate(-90deg);
+        }
+    }
+
+    &__content {
+        display: none;
+        padding-bottom: $gutter;
+        width: 100%;
+        justify-content: space-between;
+
+        @include media-query(mob-landscape) {
+            padding-left: 2 * $gutter;
+        }
+
+        #{$root}--tabccordion & {
+            @include media-query(tablet-portrait) {
+                padding: 0;
+            }
+        }
+    }
+
+    &.is-open {
+        #{$root}__content {
+            display: flex;
+        }
+    }
+
+    &.is-active--mobile {
+        #{$root}__content {
+            display: block;
+        }
+    }
+
+    &__illustration {
+        width: 30%;
+        max-width: 78px;
+        margin-left: $gutter;
+        flex-shrink: 0;
+    }
+}

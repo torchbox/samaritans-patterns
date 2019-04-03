@@ -1,0 +1,20 @@
+{% extends "patterns/base_page--website.html" %}
+
+{% block header %}
+    {% include "patterns/organisms/header/header--website.html" with show_nav=False %}
+{% endblock header %}
+
+{% block content %}
+
+{% block progress_bar %}{% endblock %}
+
+<div class="wrapper wrapper--large wrapper--padding-for-page" >
+    <section class="section section--donate section--no-hero">
+        {% block content_inner %}{% endblock %}
+        {% include "patterns/atoms/corners/corners.html" with size="page" %}
+    </section>
+</div>
+
+{% include "patterns/pages/donate/partials/help_box.html" %}
+
+{% endblock %}

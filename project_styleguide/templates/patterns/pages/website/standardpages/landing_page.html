@@ -1,0 +1,83 @@
+{% extends "patterns/base_page--website.html" %}
+{% load wagtailcore_tags i18n wagtailimages_tags %}
+
+{% block content %}
+
+<section class="section section--landing-page">
+
+    {% if page.hero_image %}
+    <!-- layout with hero -->
+        {% image page.hero_image fill-3800x2500 jpegquality-40 as hero_image %}
+        <div class="hero hero--landing-page" style="background-image: url('{{ hero_image.url }}')">
+            <div class="hero__inner wrapper wrapper--large wrapper--padding">
+                <div class="card card--information">
+                    <span class="card__connectors"></span>
+                    <div class="card__container">
+                        {% include "patterns/molecules/navigation/breadcrumbs.html" %}
+                        <h1>{{ page.title }}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper wrapper--landing-page-pattern">
+            {% include "patterns/atoms/svg/patterns/pattern-diamonds.html" with classes="pattern" %}
+        </div>
+        {% if page.introduction %}
+            <section class="section section--landing-page-introduction">
+                <div class="wrapper wrapper--large wrapper--padding">
+                    <h2 class="heading-block heading-block--introduction">{{ page.introduction }}</h2>
+                </div>
+            </section>
+        {% endif %}
+    {% else %}
+    <!-- layout without hero -->
+        <section class="section section--landing-page-introduction">
+            <div class="wrapper wrapper--large wrapper--padding">
+                {% include "patterns/molecules/navigation/breadcrumbs.html" %}
+
+                <h1>{{ page.title }}</h1>
+
+                {% if page.introduction %}
+                    <h2 class="heading-block heading-block--introduction">{{ page.introduction }}</h2>
+                {% endif %}
+            </div>
+        </section>
+        <div class="wrapper wrapper--landing-page-pattern">
+            {% include "patterns/atoms/svg/patterns/pattern-diamonds.html" with classes="pattern" %}
+        </div>
+    {% endif %}
+
+    {% for block in page.body %}
+        {% if forloop.first %}
+        <!-- streamfield on the green background -->
+            <section class="section section--landing-page-overlap">
+                <div class="wrapper wrapper--large wrapper--padding">
+                    <div class="streamfield streamfield--dark-bg streamfield--emerald-bg streamfield--landing-page-first">
+                        {% include_block block %}
+                    </div>
+                </div>
+            </section>
+        {% elif forloop.counter == 2 %}
+        <!-- streamfield on a white background with connectors -->
+            <div class="streamfield streamfield--landing-page">
+                <div class="wrapper wrapper--large wrapper--padding-for-page">
+                    <section class="section section--landing-page-light-bg">
+                        {% include_block block %}
+                        {% include "patterns/atoms/corners/corners.html" with size="page" %}
+                    </section>
+                </div>
+            </div>
+        {% else %}
+        <!-- all other streamfields -->
+            <div class="streamfield streamfield--dark-bg streamfield--amethyst-bg streamfield--landing-page">
+                <div class="wrapper wrapper--large wrapper--padding">
+                    {% include_block block %}
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+</section>
+
+{% include "patterns/molecules/related-pages/related-pages--small.html" with related_pages=page.related_pages.all %}
+
+{% endblock %}

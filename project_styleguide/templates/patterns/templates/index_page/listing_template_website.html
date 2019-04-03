@@ -1,0 +1,53 @@
+{% extends "patterns/base_page--website.html" %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block content %}
+<div class="wrapper wrapper--flex">
+    {% block hero %}
+        {% include "patterns/molecules/hero/hero.html" with hero_color="emerald" pattern="alt" hero_short=True %}
+    {% endblock %}
+
+    <div class="
+    wrapper wrapper--large wrapper--padding-for-page
+    {% block wrapper_classes %}
+        wrapper--news-listing-pattern
+    {% endblock %}
+    ">
+        {% block listing_page_pattern %}
+            {% include "patterns/atoms/svg/patterns/pattern-dots.html" with classes="pattern" %}
+        {% endblock %}
+
+        <section class="section section--overlap {% block section_classes %}section--news-listing{% endblock %}">
+
+            {% block featured_listing %}
+            {% endblock %}
+
+            {% block filters_bar %}
+                <div class="filters">
+                    <p>{% block filters_intro %}{% endblock %}</p>
+                    <form method="GET" class="filters__form">
+                        {% block filters %}{% endblock %}
+                        <div class="filters__filter-wrapper">
+                            {% include "patterns/atoms/buttons/button--button.html" with label="Filter" classes="button--filter" %}
+                        </div>
+                    </form>
+                </div>
+            {% endblock %}
+
+            {% block listings %}
+            {% endblock %}
+
+            {% for cta in page.cta %}
+                <div>
+                    {% include_block cta with call_to_action=cta %}
+                </div>
+            {% endfor %}
+
+            {% include "patterns/atoms/corners/corners.html" with size="page" %}
+
+        </section>
+
+    </div>
+
+</div>
+{% endblock %}

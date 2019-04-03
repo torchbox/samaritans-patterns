@@ -1,0 +1,10 @@
+<div class="grid grid--3col">
+    {% for card in value %}
+        <div class="card card--key-info">
+            <span class="card__connectors"></span>
+            <div class="card__container">
+                {{ card }}
+            </div>
+        </div>
+    {% endfor %}
+</div>

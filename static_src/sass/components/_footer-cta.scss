@@ -1,0 +1,81 @@
+.footer-cta {
+    $root: &;
+
+    display: flex;
+    align-items: stretch;
+    max-width: 425px;
+    font-size: 18px;
+    color: $off-white;
+
+    &__inner {
+        position: relative;
+        padding: $gutter-large;
+        background-color: $ink;
+        width: 100%;
+
+        #{$root}--newsletter & {
+            background-color: $plum;
+        }
+
+    }
+
+    &__connectors {
+        @include media-query(mob-portrait) {
+            @include connectors($meadow, top, left);
+        }
+    }
+
+    &__icon {
+        height: 55px;
+        flex-shrink: 0;
+        max-width: 50px;
+    }
+
+    &__heading {
+        display: flex;
+        align-items: center;
+        margin-bottom: $gutter;
+
+        #{$root}--newsletter & {
+            justify-content: space-between;
+        }
+
+        > :first-child {
+            margin-right: $gutter;
+        }
+    }
+
+    &__heading-text {
+        line-height: 1;
+        margin: 0;
+        color: $white;
+
+        #{$root}--phone & {
+            font-size: 42px;
+        }
+    }
+
+    &__link {
+        @include link($white, $color--link);
+    }
+
+    &--link {
+        #{$hover} {
+            color: $off-white;
+
+            .chevron-link__chevron {
+                transform: translateX(100%);
+            }
+        }
+    }
+
+    &--phone {
+        @include media-query(mob-portrait) {
+            @include corner($meadow, top, left, 170px, 170px, 15px, #{$root}__corner, auto);
+
+            #{$root}__corner {
+                left: -100px;
+            }
+        }
+    }
+}

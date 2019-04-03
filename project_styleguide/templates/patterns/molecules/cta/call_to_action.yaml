@@ -1,0 +1,15 @@
+context:
+  call_to_action:
+    title: Page teaser title
+    summary: Page teaser description
+    get_link_text: Page teaser action
+    get_link_url: "#"
+
+tags:
+  image:
+    call_to_action.image fill-768x300 class="page-teaser__image page-teaser__image--mobile":
+      raw: |
+        <img src="http://via.placeholder.com/768x300" width="768" height="300" alt="Some alt" class="page-teaser__image page-teaser__image--mobile">
+    call_to_action.image fill-380x270 class="page-teaser__image page-teaser__image--desktop":
+      raw: |
+        <img src="http://via.placeholder.com/380x270" width="380" height="270" alt="Some alt" class="page-teaser__image page-teaser__image--desktop">

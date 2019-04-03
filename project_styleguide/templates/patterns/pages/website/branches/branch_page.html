@@ -1,0 +1,240 @@
+{% extends "patterns/base_page--website.html" %}
+{% load wagtailcore_tags wagtailimages_tags icon_tags %}
+
+{% block content %}
+
+{% include "patterns/molecules/hero/hero.html" with hero_color="emerald" pattern="dots" hero_title=page.title hero_short=True %}
+
+<div class="wrapper wrapper--large wrapper--padding-for-page">
+    <section class="section section--branch-page-top section--overlap">
+        {% include "patterns/atoms/corners/corners.html" with size="page" %}
+
+        <div class="branch-top">
+                <div class="branch-top__map-section">
+                    <div
+                        id="googleMap-{{ page.lng|slugify }}-{{ page.lat|slugify }}"
+                        class="branch-top__map js-map"
+                        data-longitude="{{ page.lng }}"
+                        data-latitude="{{ page.lat }}"
+                        data-zoom-level="16"
+                        >
+                    </div>
+                    <span class="branch-top__map-connectors"></span>
+                </div>
+
+            <div class="branch-top__information-section">
+                <h2>Contact us</h2>
+
+                <div class="branch-top__contact-method">
+                    {% render_icon "icon-color-mobile" "branch-top__contact-method__icon" %}
+                    <div class="branch-top__contact-method__text">
+                        <p>
+                            <a href="tel:116123" class="branch-top__contact-method__link">116 123</a>
+                            free from any phone
+                        </p>
+                        {% if page.phone_number %}
+                            <p>
+                                <a href="tel:{{ page.phone_number }}" class="branch-top__contact-method__link">{{ page.phone_number.as_national }}</a>
+                                local call charges apply
+                            </p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="branch-top__contact-method">
+                    {% render_icon "icon-color-directions" "branch-top__contact-method__icon" %}
+                    <div class="branch-top__contact-method__text">
+                        <p>
+                            {{ page.street_address_1 }}<br/>
+                            {% if page.street_address_2 %}
+                                {{ page.street_address_2 }}<br/>
+                            {% endif %}
+                            {{ page.city }} {{ page.region }} {{ page.postcode }}
+                        </p>
+                        <p class="branch-top__map-link">
+                            <a href="https://www.google.com/maps/search/?api=1&query={{ page.address_as_query_arg }}" class="branch-top__chevron-link">{% include "patterns/molecules/chevron-link/chevron-link.html" with title="View map" chevron_link_classes="chevron-link--underline-on-hover" %}</a>
+                        </p>
+                    </div>
+                </div>
+
+                {% if page.branch_activities.all %}
+                    <h2>How we can help</h2>
+                    <div class="branch-top__activities">
+                        {% for activity in page.branch_activities.all %}
+                            <div class="branch-top__activity">
+                                {{ activity.activity_type }}
+                                {% if activity.information %}
+                                    {% include "patterns/molecules/tooltip/tooltip.html" with tooltip=activity.information tooltip_classes="tooltip--branch" %}
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="streamfield streamfield--dark-bg" role="tablist" aria-multiselectable="true">
+                    {% if page.branch_opening_hours.all %}
+                    <div class="accordion js-accordion">
+                        <a
+                            href=""
+                            class="accordion__heading js-accordion-question"
+                            role="tab"
+                            aria-controls="answer-1"
+                            aria-expanded="false"
+                            aria-selected="false"
+                            tabindex="0"
+                            id="question-1"
+                        >
+                            <h3 class="accordion__heading-text">Opening hours</h3>
+                            {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="accordion__icon" aria_hide="true" %}
+                        </a>
+                        <div
+                            class="accordion__content js-accordion-answer"
+                            id="answer-1"
+                            role="tabpanel"
+                            aria-labelledby="question-1"
+                            aria-hidden="false"
+                        >
+                            <dl>
+                                {% for day in page.branch_opening_hours.all %}
+                                    {% ifchanged day.get_weekday_display %}
+                                        <dt>
+                                            {{ day.get_weekday_display }}
+                                        </dt>
+                                    {% endifchanged %}
+                                    <dd>
+                                        {{ day.from_hour }} – {{ day.to_hour }}
+                                    </dd>
+                                {% endfor %}
+                            </dl>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if page.accessible_toilets or page.wheelchair_accessible or page.accessibility_notes %}
+                    <div class="accordion js-accordion">
+                        <a
+                            href=""
+                            class="accordion__heading js-accordion-question"
+                            role="tab"
+                            aria-controls="answer-2"
+                            aria-expanded="false"
+                            aria-selected="false"
+                            tabindex="0"
+                            id="question-2"
+                        >
+                            <h3 class="accordion__heading-text">Accessibility information</h3>
+                            {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="accordion__icon" aria_hide="true" %}
+                        </a>
+                        <div
+                            class="accordion__content js-accordion-answer"
+                            id="answer-2"
+                            role="tabpanel"
+                            aria-labelledby="question-2"
+                            aria-hidden="false"
+                        >
+                            <ul>
+                                {% if page.accessible_toilets %}
+                                    <li>Accessible toilets</li>
+                                {% endif %}
+                                {% if page.wheelchair_accessible %}
+                                    <li>Wheelchair accessible</li>
+                                {% endif %}
+                                {% if page.accessibility_notes %}
+                                    <li>{{ page.accessibility_notes }}</li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+    <section class="section section--branch-page-main">
+
+        {% if page.introduction %}
+            <p class="intro">{{ page.introduction }}</p>
+        {% endif %}
+
+        {% if page.branch_image or page.body %}
+            <div class="
+            branch-information
+            {% if page.body %}branch-information--has-body{% endif %}
+            ">
+                {% if page.branch_image %}
+                    {% image page.branch_image fill-1300x700 class="branch-information__image" %}
+                {% endif %}
+                {% if page.body %}
+                    {{ page.body|richtext }}
+                {% endif %}
+            </div>
+        {% endif %}
+
+        <div class="grid grid--3col">
+            {% if page.volunteer_link %}
+                <a class="inline-cta inline-cta--grid" href="{{ page.volunteer_link }}">
+                    {% render_icon "icon-color-people" "inline-cta__icon" %}
+                    <div class="inline-cta__text">
+                        <p>Volunteer at this branch</p>
+                        <p class="inline-cta__link">Find out more</p>
+                    </div>
+                </a>
+            {% endif %}
+            {% if page.donate_link %}
+                <a class="inline-cta inline-cta--grid" href="{{ page.donate_link }}">
+                    {% if page.country == 'ire' %}
+                        {% render_icon "icon-color-coins-euro" "inline-cta__icon" %}
+                    {% else %}
+                        {% render_icon "icon-color-coins" "inline-cta__icon" %}
+                    {% endif %}
+                    <div class="inline-cta__text">
+                        <p>Donate to this branch</p>
+                        <p class="inline-cta__link">Donate</p>
+                    </div>
+                </a>
+            {% endif %}
+            {% if page.enquiry_form_page %}
+                <a class="inline-cta inline-cta--grid" href="{% pageurl page.enquiry_form_page %}">
+                    {% render_icon "icon-color-information" "inline-cta__icon" %}
+                    <div class="inline-cta__text">
+                        <p>Make a general enquiry</p>
+                        <p class="inline-cta__link">Email us</p>
+                    </div>
+                </a>
+            {% endif %}
+        </div>
+
+        {% if branch_news_pages %}
+            <div class="news-cards__heading">
+                <h2 class="heading-secondary news-cards__heading-text">
+                    Branch news
+                </h2>
+                <a href="{{ branch_news_listing_url }}" class="news-cards__heading-link">
+                    <span class="news-cards__heading-link-inner">
+                        View all branch news
+                    </span>
+                </a>
+            </div>
+            <div class="grid grid--3col">
+                {% for card in branch_news_pages %}
+                    {% include "patterns/molecules/cards/related-card.html" with value=card classes="card-new--branch-news" type="news" %}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <small>{{ page.registered_charity_details }}</small>
+
+        {% include "patterns/atoms/corners/corners.html" with size="page" %}
+    </section>
+
+</div>
+
+{% include "patterns/molecules/related-pages/related-pages--large.html" with related_pages=page.related_pages.all %}
+
+{% endblock content %}
+
+{% block extra_js %}
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ maps_api_key }}"></script>
+{% endblock %}

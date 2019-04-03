@@ -1,0 +1,34 @@
+{% extends "patterns/templates/donate-form-page.html" %}
+{% load i18n form_tags static wagtailimages_tags %}
+
+{% block title %}{% trans "Payment details | Event registration payment" %}{% endblock %}
+
+{% block progress_bar %}
+    {% include "patterns/pages/donate/partials/progress_bar.html" with classes="second-active" %}
+{% endblock %}
+
+{% block content_inner %}
+<div id="payments__payment-wrapper">
+    <h1 class="wrapper--small-width">{% blocktrans with amount=payment_amount|floatformat:"-2" %}You're making a payment of £{{ amount }}{% endblocktrans %}</h1>
+
+    <form class="form" id="payments__braintree-form" method="post" data-token="{{ braintree_tokenization_key }}" data-amount="{{ payment_amount|floatformat }}">
+        {% csrf_token %}
+
+        {% render_form_field form.braintree_nonce %}
+        {% render_form_field form.payment_mode %}
+    </form>
+
+    <h2 class="heading-block">{% trans "Pay with" %}</h2>
+
+    {% include "patterns/molecules/payments/braintree-payment-widgets.html" with is_event_payment=True %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/payments.js' %}"></script>
+    <script src="https://www.paypalobjects.com/api/checkout.js" data-version-4></script>
+    {% comment %}
+    Google pay temporarily disabled
+    <script src="https://pay.google.com/gp/p/js/pay.js"></script>
+    {% endcomment %}
+{% endblock %}

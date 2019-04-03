@@ -1,0 +1,4 @@
+context:
+  value:
+    highlight_type: tip
+    content: After a selection event, the selection team should forward the details of the successful volunteers to the training team. They should also highlight where a volunteer has specified that they have additional needs on their application form.

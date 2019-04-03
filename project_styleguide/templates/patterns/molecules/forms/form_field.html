@@ -1,0 +1,34 @@
+{% load form_tags icon_tags %}
+
+{% firstof tooltip field.help_text as tooltip %}
+{% with widget_type=field|widget_type field_type=field|field_type %}
+
+<div class="
+form-item
+{% if field_type %}form-item--{{ field_type }}{% endif %}
+{% if widget_type %}form-item--{{ widget_type }}{% endif %}
+{% if field.errors %}form-item--errors{% endif %}
+">
+
+    {% if field.errors %}
+        <div class="form-item__errors">
+            {{ field.errors }}
+        </div>
+    {% endif %}
+
+    {% if not widget_type == "checkbox_input" and not widget_type == "re_captcha" and not widget_type == "split_date_widget" %}
+        {% include "patterns/molecules/forms/_label.html" %}
+    {% endif %}
+
+    {% if widget_type == "split_date_widget" %}
+        <fieldset class="form-item__fieldset">
+            <legend class="form-item__legend">{{ field.label }}</legend>
+            {% include "patterns/molecules/forms/_field-wrapper.html" %}
+        </fieldset>
+    {% else %}
+        {% include "patterns/molecules/forms/_field-wrapper.html" %}
+    {% endif %}
+
+</div>
+
+{% endwith %}

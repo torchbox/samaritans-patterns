@@ -1,0 +1,47 @@
+.heading-block {
+    .streamfield--dark-bg & {
+        color: $white;
+    }
+
+    .section--landing-page-light-bg & {
+        color: $ink;
+    }
+
+    &--services {
+        @include font-size(xxl);
+
+        @include media-query(tablet-portrait) {
+            @include font-size(xxxl);
+        }
+    }
+
+    &--dark-background {
+        color: $white;
+    }
+
+    &--related {
+        margin-bottom: $gutter-medium;
+
+        @include media-query(tablet-portrait) {
+            margin-bottom: $gutter-x-large;
+        }
+    }
+
+    &--xxl {
+        @include font-size(xxl);
+
+        @include media-query(tablet-portrait) {
+            @include font-size(xxxl);
+        }
+
+        @include media-query(tablet-landscape) {
+            @include font-size(xxxxl);
+        }
+    }
+
+    &--introduction {
+        @include media-query(tablet-portrait) {
+            max-width: 80%;
+        }
+    }
+}

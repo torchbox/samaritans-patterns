@@ -1,0 +1,19 @@
+{% load wagtailcore_tags %}
+<div class="footer-nav__column">
+    <h5 class="footer-nav__heading">
+        {% if value.heading_link %}
+            <a class="footer-nav__link footer-nav__link--heading" href="{% pageurl value.heading_link %}">
+                {% include "patterns/molecules/chevron-link/chevron-link.html" with title=value.heading chevron_classes="footer-nav__icon" %}
+            </a>
+        {% else %}
+            {{ value.heading }}
+        {% endif %}
+        </h5>
+    <ul class="footer-nav__list">
+        {% for item in value.links %}
+            <li class="footer-nav__item" role="presentation">
+                {% include_block item with chevron_before=True classes="footer-nav__link" %}
+            </li>
+        {% endfor %}
+    </ul>
+</div>

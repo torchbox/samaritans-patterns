@@ -1,0 +1,29 @@
+{% load wagtailcore_tags icon_tags %}
+
+<div class="accordion js-accordion">
+    <a
+        href=""
+        class="accordion__heading js-accordion-question"
+        role="tab"
+        aria-controls="answer-{{ index }}"
+        aria-expanded="false"
+        aria-selected="false"
+        tabindex="0"
+        id="question-{{ index }}"
+    >
+        <h3 class="accordion__heading-text">{{ heading }}</h3>
+        {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="accordion__icon" aria_hide="true" %}
+    </a>
+    <div
+        class="accordion__content js-accordion-answer"
+        id="answer-{{ index }}"
+        role="tabpanel"
+        aria-labelledby="question-{{ index }}"
+        aria-hidden="false"
+    >
+        {{ description|richtext }}
+        {% if icon %}
+            {% render_icon icon "accordion__illustration" %}
+        {% endif %}
+    </div>
+</div>

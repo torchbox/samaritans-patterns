@@ -1,0 +1,6 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{{ value.quote }}<br>
+{{ value.citation }}<br>
+{% image value.image fill-1300x1300 %}<br>
+<a href="{% pageurl value.link %}">{{ value.link_text }}</a>

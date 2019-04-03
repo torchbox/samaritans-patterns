@@ -1,0 +1,6 @@
+context:
+  value:
+    publication_date: !!timestamp '2018-11-01'
+    news_type: news
+    country: united kingdom
+    topic: fundraising

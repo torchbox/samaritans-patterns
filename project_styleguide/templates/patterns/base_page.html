@@ -1,0 +1,51 @@
+{% extends "patterns/base.html" %}
+
+{% load locale_tags static wagtailuserbar wagtailcore_tags wagtailimages_tags navigation_tags util_tags %}
+
+{% block meta_tags %}
+    {# Favicons are in base_page--website #}
+
+    {% comment %}
+        Twitter summary card - see https://dev.twitter.com/cards/types/summary
+        and https://dev.twitter.com/cards/getting-started
+        Twitter will fall back to og properties, so no need to duplicate title etc
+    {% endcomment %}
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@{{ settings.utils.SocialMediaSettings.twitter_handle }}" />
+
+    {# facebook opengraph tags #}
+    {% with facebook_app_id=settings.utils.SocialMediaSettings.facebook_app_id %}
+    {% if facebook_app_id %}<meta property="fb:app_id" content="{{ facebook_app_id }}" />{% endif %}
+    {% endwith %}
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ request.site.root_url }}{% get_path_for_locale locale=None %}" />
+    <meta property="og:title" content="{% firstof page.listing_title page.title %}" />
+    {% if page.social_image %}
+        {% image page.social_image min-320x200 as social_img %}
+        <meta
+          property="og:image"
+          content="{% if page.social_image.is_stored_locally %}http://{{ request.site.hostname }}{% endif %}{{ social_img.url }}"
+        />
+    {% else %}
+        {# Add a default image to use for social sharing here in case one is not provided on the page. #}
+    {% endif %}
+    {% firstof page.social_text page.listing_summary as meta_description %}
+    {% if meta_description %}
+        <meta property="og:description" content="{{ meta_description }}" />
+    {% endif %}
+    <meta property="og:site_name" content="{{ settings.utils.SocialMediaSettings.site_name }}" />
+{% endblock meta_tags %}
+
+
+{% block body_top %}
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ GOOGLE_TAG_MANAGER_ID|escapejs }}"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+{% endblock body_top %}
+
+
+{% block header %}
+    {% include 'patterns/organisms/header/header--intranet.html' %}
+{% endblock header %}
+
+{% block footer %}
+{% endblock footer %}

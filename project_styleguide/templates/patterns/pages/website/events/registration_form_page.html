@@ -1,0 +1,18 @@
+{% extends "patterns/templates/narrow-page.html" %}
+{% load loqate_tags %}
+
+{% block content_inner %}
+
+    <h1>{{ page.title }}</h1>
+
+    {% if page.form_fields %}
+        {% include 'patterns/pages/website/events/registration_form.html' %}
+    {% endif %}
+
+{% endblock %}
+
+
+{% block extra_js %}
+    {{ block.super }}
+    {% loqate_script %}
+{% endblock %}

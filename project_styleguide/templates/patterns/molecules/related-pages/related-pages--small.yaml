@@ -1,0 +1,21 @@
+context:
+  related_pages:
+    - page:
+        live: true
+        specific:
+          title: Page title
+    - page:
+        live: true
+        specific:
+          listing_title: Listing title
+    - page:
+        live: true
+        specific:
+          title: Page title (has listing title too)
+          listing_title: Listing title (has page title too)
+
+
+tags:
+  pageurl:
+    specific_related_page:
+      raw: '#'

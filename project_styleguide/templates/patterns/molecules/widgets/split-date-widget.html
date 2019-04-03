@@ -1,0 +1,8 @@
+<div class="split-date">
+    {% for subwidget in widget.subwidgets %}
+        <div class="split-date__item">
+            <label for="{{ subwidget.attrs.id }}">{{ subwidget.attrs.label }}</label>
+            {% include 'django/forms/widgets/number.html' with widget=subwidget %}
+        </div>
+    {% endfor %}
+</div>

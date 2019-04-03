@@ -1,0 +1,14 @@
+{% load wagtailimages_tags wagtailembeds_tags %}
+
+<figure class="carousel__figure">
+  {% if value.image %}
+      {% image value.image max-850x500 %}
+  {% elif value.video %}
+      {% embed value.video.url %}
+  {% endif %}
+  {% if value.title %}
+      <figcaption class="carousel__figcaption" id="{{ slug }}-title">
+          {{ value.title }}
+      </figcaption>
+  {% endif %}
+</figure>

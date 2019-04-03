@@ -1,0 +1,7 @@
+{% load wagtailcore_tags %}
+
+<div class="site-notification site-notification--banner">
+    <div class="wrapper wrapper--large wrapper--padding">
+        {{ settings.utils.SystemMessagesSettings.site_banner_text|richtext }}
+    </div>
+</div>

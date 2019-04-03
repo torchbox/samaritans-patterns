@@ -1,0 +1,15 @@
+<div class="form-item__wrapper">
+
+    {{ field }}
+
+    {% if widget_type == 'checkbox_input' %}
+        {% include "patterns/molecules/forms/_label.html" %}
+    {% endif %}
+
+    {% if widget_type == "select" or widget_type == "lazy_select" %}
+        <div class="form-item__select-icon-wrapper">
+            {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="form-item__select-icon" aria_hide="true" %}
+        </div>
+    {% endif %}
+
+</div>

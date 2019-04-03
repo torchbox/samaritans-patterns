@@ -1,0 +1,9 @@
+context:
+  primarynav:
+  - dummy
+  - dummy
+
+tags:
+  include_block:
+    'link with has_children=children.exists':
+      template_name: "patterns/molecules/navigation/blocks/menu_item.html"

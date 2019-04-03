@@ -1,0 +1,13 @@
+context:
+  value:
+    title: Details title
+    details:
+    - heading: Plain Text Heading
+      description: <p>Rich text description</p>
+      icon: icon-color-cupcake
+    - heading: Plain Text Heading
+      description: <p>As far as we can estimate, the <b>first smitten</b> snow is, in its own way, a donna. The pleural deal reveals itself as a finless bit to those who look.</p>
+      icon: icon-color-star
+    - heading: Plain Text Heading
+      description: <p>Rich text description</p>
+      icon: icon-color-time

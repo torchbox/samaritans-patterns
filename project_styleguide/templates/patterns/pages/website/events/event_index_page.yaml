@@ -1,0 +1,42 @@
+context:
+  page:
+    title: Events Listing Page Test
+    intro: Events Listing Intro
+  event_types:
+  - ['type1', "Type 1"]
+  - ['type2', "Type 2"]
+  events:
+    object_list:
+    - title: Test event
+      listing_image: fake
+      listing_summary: Come to our event and have fun
+      start_date: !!timestamp '2018-12-13'
+      start_time: !!timestamp '2018-12-13 2:00:00'
+      end_date: !!timestamp '2018-12-15'
+      end_time: !!timestamp '2018-12-15 15:00:00'
+      location: London
+    - title: Another event
+      listing_image: fake
+      listing_summary: Another listing summary
+      start_date: !!timestamp '2018-12-13'
+      start_time: !!timestamp '2018-12-13 13:00:00'
+      end_date: !!timestamp '2018-12-13'
+      end_time: !!timestamp '2018-12-13 15:00:00'
+      location: London
+  show_past: true
+  upcoming_events:
+    exists: true
+  cta:
+    - dummy
+    - dummy
+
+tags:
+  pageurl:
+    subpage:
+      raw: "#"
+    page:
+      raw: "#"
+  image:
+    subpage.listing_image fill-450x300:
+      raw: |
+        <img src="http://via.placeholder.com/450x300" width="450" height="300" alt="Some alt">

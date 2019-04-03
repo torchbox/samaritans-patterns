@@ -1,0 +1,167 @@
+.wrapper {
+    &--small {
+        max-width: $wrapper--small;
+        margin: 0 auto;
+    }
+
+    &--small-width {
+        max-width: $wrapper--smaller;
+    }
+
+    &--medium {
+        width: 100%;
+
+        @include media-query(tablet-landscape) {
+            max-width: $wrapper--medium;
+            margin: 0 auto;
+        }
+    }
+
+    &--large {
+        width: 100%;
+
+        @include media-query(tablet-landscape) {
+            max-width: $site-width;
+            margin: 0 auto;
+        }
+    }
+
+    &--padding,
+    &--padding-large,
+    &--main {
+        @include page-padding--horizontal(left);
+        @include page-padding--horizontal(right);
+        padding-left: $gutter-small;
+        padding-right: $gutter-small;
+    }
+
+    // see also styles with &--padding above
+    &--main {
+        background-color: $page-bg;
+
+        @include media-query(desktop) {
+            padding: 0;
+        }
+    }
+
+    &--padding-for-page-tablet-portrait {
+        @include media-query(tablet-portrait) {
+            padding-left:  $page-padding-horizontal-tablet-portrait;
+            padding-right: $page-padding-horizontal-tablet-portrait;
+        }
+    }
+
+    &--padding-for-page-tablet-portrait,
+    &--padding-for-page {
+        @include media-query(tablet-landscape) {
+            padding-left:  $page-padding-horizontal-tablet-landscape;
+            padding-right: $page-padding-horizontal-tablet-landscape;
+        }
+    }
+
+    &--flex {
+        display: flex;
+        flex-direction: column;
+
+        @include media-query(tablet-portrait) {
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+    }
+
+    &--relative {
+        position: relative;
+    }
+
+    &--white-background {
+        background-color: $white;
+    }
+
+    &--teal-background {
+        background-color: $teal;
+    }
+
+    &--donate-landing {
+        @include pattern($color: $white, $overflow: visible, $opacity: 0.1);
+        background-color: $emerald;
+
+        @include media-query(tablet-landscape) {
+            padding-bottom: $gutter-xxl;
+        }
+
+        .pattern {
+            left: 0;
+            bottom: 0;
+
+            @include media-query(tablet-landscape) {
+                left: auto;
+                right: 0;
+                bottom: -$gutter-xxl;
+            }
+        }
+    }
+
+    &--donate-landing-cta {
+        background-color: $teal; // same as .related-pages--large
+        padding-top: $gutter-xxl;
+        padding-bottom: $gutter;
+
+        @include media-query(tablet-landscape) {
+            padding-top: $section-overlap;
+            padding-bottom: 0;
+        }
+    }
+
+    &--website-homepage {
+        .pattern {
+            display: none;
+        }
+
+        @include media-query(tablet-landscape) {
+            @include pattern($lime, visible, 0.2);
+
+            .pattern {
+                display: block;
+                z-index: z($z-elements, card-background);
+                left: 72%;
+                top: calc(100% - 180px);
+            }
+        }
+    }
+
+    &--landing-page-pattern {
+        @include pattern($white, visible, 0.2);
+
+        .pattern {
+            max-width: 580px;
+            top: -90px;
+            z-index: z($z-elements, pattern);
+            right: 0;
+        }
+    }
+
+    &--news-listing-pattern {
+        @include media-query($page-connectors-breakpoint) {
+            @include corner--box-left($height: 610px, $right-offset: 20%);
+            @include pattern($opacity: 0.2, $overflow: visible);
+        }
+
+        .pattern {
+            display: none;
+
+            @include media-query($page-connectors-breakpoint) {
+                display: block;
+                bottom: -180px;
+                right: -180px;
+            }
+        }
+    }
+
+    &--index-pattern {
+
+        @include media-query($page-connectors-breakpoint) {
+            @include corner--box-left();
+            margin-bottom: $gutter-xxl;
+        }
+    }
+}

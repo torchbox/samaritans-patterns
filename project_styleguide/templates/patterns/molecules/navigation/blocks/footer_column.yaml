@@ -1,0 +1,12 @@
+context:
+  value:
+    heading: Column heading
+    links:
+    - link text
+    - link text
+    - link text
+
+tags:
+  include_block:
+    item with chevron_before=True classes="footer-nav__link":
+      template_name: "patterns/molecules/navigation/blocks/menu_item.html"

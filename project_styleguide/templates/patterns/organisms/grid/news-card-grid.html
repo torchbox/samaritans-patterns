@@ -1,0 +1,24 @@
+{% if page.latest_news_pages %}
+    <div class="related-news">
+        <div class="related-news__header">
+            <h2 class="related-news__title">
+                {% if home_page %}
+                    Latest News
+                {% else %}
+                    Related News
+                {% endif %}
+            </h2>
+
+            <a href="/news" class="related-news__more">
+                View all news
+                {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="related-news__more-icon" %}
+            </a>
+        </div>
+
+        <div class="grid grid--3col">
+            {% for news_page in page.latest_news_pages %}
+                {% include "patterns/molecules/cards/news-card.html" %}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

@@ -1,0 +1,32 @@
+/* ============================================
+    Families – one mixin per typeface
+    :: For each font mixin defined here, make sure each property is negated (set
+    :: to its default value, usually `inherit`) in all other font mixins.
+*/
+@mixin heading-text {
+    font-family: $font--primary;
+    font-style: inherit;
+    font-weight: $weight--bold;
+}
+
+@mixin body-text {
+    font-family: $font--primary;
+    font-style: inherit;
+    font-weight: $weight--normal;
+    text-transform: inherit;
+}
+
+/* ============================================
+    Big heading
+
+    Looks similar to an h1
+*/
+
+@mixin heading-primary {
+    @include font-size(xxl);
+
+    @include media-query(tablet-portrait) {
+        font-size: 60px;
+        line-height: 63px;
+    }
+}

@@ -1,0 +1,63 @@
+{% extends "patterns/base_page--website.html" %}
+{% load wagtailcore_tags wagtailimages_tags locale_tags navigation_tags static %}
+
+{% block content %}
+    {% include "patterns/molecules/hero/hero.html" with hero_color="emerald" pattern="egg" hero_short="true" %}
+
+    <div class="wrapper--large wrapper--padding-for-page">
+        <section class="section section--main section--overlap section--website-nation">
+            {% if page.introduction %}
+                <p class="intro">{{ page.introduction }}</p>
+            {% endif %}
+            <div class="grid grid--no-margin grid--3col">
+                {% if child_page %}
+                    {% include "patterns/molecules/cards/card-with-image.html" with card=child_page %}
+                {% endif %}
+                {% for related_page in page.related_pages %}
+                    {% include "patterns/molecules/cards/card-with-image.html"  with card=related_page.value nation_related_page=True %}
+                {% endfor %}
+            </div>
+
+            {% if page.donate_link %}
+                <hr class="hr hr--dashed">
+                <div class="donate-landing__call-to-donate">
+                    <h2>Donate to Samaritans {{ country_name }}</h2>
+                    {% include "patterns/atoms/buttons/button.html" with href=page.donate_link label="Donate" large=True classes="button--plain" %}
+                </div>
+                <aside class="js-sticky-cta">
+                    <a href="#hero" class="donate-landing__call-to-donate--sticky js-smooth-scroll">
+                        <span class="donate-landing__call-to-donate__sticky-text">{{ page.call_to_donate }}</span>
+                        <span class="donate-landing__call-to-donate__sticky-link">Donate today</span>
+                    </a>
+                </aside>
+            {% endif %}
+
+            {% include "patterns/atoms/corners/corners.html" with size="page" %}
+        </section>
+
+        <section class="section section--page-padding">
+            {% if news %}
+                <div class="news-cards__heading">
+                    <h2 class="heading-secondary news-cards__heading-text">
+                        News in {{ country_name }}
+                    </h2>
+                    <a href="{{ news_index.url }}?region={{ page.country }}" class="news-cards__heading-link">
+                        <span class="news-cards__heading-link-inner">
+                            View all news
+                        </span>
+                    </a>
+                </div>
+                <div class="grid grid--3col">
+                    {% for news_item in news %}
+                        {% include "patterns/molecules/cards/related-card.html" with value=news_item classes="card-new--nation-news" type="news" %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% for cta in page.cta %}
+                {% include_block cta with call_to_action=cta %}
+            {% endfor %}
+        </section>
+    </div>
+
+{% endblock %}

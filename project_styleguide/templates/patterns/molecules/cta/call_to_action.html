@@ -1,0 +1,33 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% comment %}
+
+This template can be used in different places. In streamfield block
+or directly in a page template. To use this template pass `call_to_action` into context.
+
+Example:
+    {% include "patterns/molecules/cta/call_to_action.html" with call_to_action=call_to_action %}
+
+{% endcomment %}
+
+{% if call_to_action %}
+    <div class="page-teaser{% if classes %}{{ classes }}{% endif %}">
+        <div class="page-teaser__mobile-image-wrapper">
+            {% image call_to_action.image fill-768x300 class="page-teaser__image page-teaser__image--mobile" %}
+
+            {% include "patterns/atoms/svg/patterns/pattern-dots.html" with classes="pattern" %}
+        </div>
+
+        <div class="page-teaser__content">
+            <div class="page-teaser__content-inner">
+                <h2 class="page-teaser__title">{{ call_to_action.title }}</h2>
+
+                <p class="page-teaser__text">{{ call_to_action.summary|richtext }}</p>
+
+                {% include "patterns/atoms/buttons/button.html" with classes="button--alt page-teaser__button" href=call_to_action.get_link_url label=call_to_action.get_link_text %}
+            </div>
+
+            {% image call_to_action.image fill-380x270 class="page-teaser__image page-teaser__image--desktop" %}
+        </div>
+    </div>
+{% endif %}

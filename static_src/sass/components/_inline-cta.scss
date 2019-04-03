@@ -1,0 +1,97 @@
+.inline-cta {
+    $root: &;
+
+    @include link($element: #{$root}__link);
+    @include underline($element: #{$root}__link);
+
+    display: flex;
+    flex-direction: column;
+    margin: $gutter-xxl 0;
+
+    @include media-query(mob-portrait) {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    &--grid {
+        margin-top: 0;
+
+        @supports (display: grid) {
+            margin: $gutter-small 0;
+        }
+    }
+
+    &__icon {
+        max-width: 130px;
+        height: 95px;
+        margin-bottom: $gutter-medium;
+
+        @include media-query(mob-portrait) {
+            margin-bottom: 0;
+            margin-right: $gutter-medium;
+
+        }
+
+        #{$root}--grid & {
+            flex: 0 0 95px;
+            width: 95px;
+
+            @include media-query(tablet-landscape) {
+                width: auto;
+                flex: auto;
+            }
+        }
+    }
+
+    &__text {
+        @include heading-text;
+        @include font-size(m);
+        line-height: 1;
+        color: $color--default;
+
+        p {
+            margin-bottom: 0;
+        }
+    }
+
+    &__link {
+        display: inline-block;
+        font-size: $base-font-size;
+        line-height: $base-line-height;
+        margin-top: 8px;
+    }
+
+    &--homepage-widget {
+        @include link($color--link, $color--link-hover-subtle, #{$root}__link);
+        @include underline(transparent, transparent, $element: #{$root}__link);
+
+        margin: 0;
+
+        @include media-query(mob-landscape) {
+            margin-top: $gutter-large;
+        }
+
+        #{$hover} {
+            .chevron-link__chevron {
+                transform: translateX(100%);
+            }
+        }
+
+        #{$root} {
+            &__icon {
+                width: 80px;
+                height: 80px;
+            }
+
+            &__text {
+                font-size: 30px;
+            }
+
+            &__link {
+                margin-top: 10px;
+                font-size: $base-font-size;
+                font-weight: $weight--normal;
+            }
+        }
+    }
+}

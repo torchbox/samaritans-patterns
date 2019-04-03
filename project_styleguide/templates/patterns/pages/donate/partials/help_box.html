@@ -1,0 +1,17 @@
+{% load form_tags icon_tags i18n %}
+
+<div class="donate__help-box">
+    {% if is_pay_in %}
+        <h2>{% trans "Need help making your payment?" %}</h2>
+    {% else %}
+        <h2>{% trans "Need help making your donation?" %}</h2>
+    {% endif %}
+    <div class="donate__help-box-inner">
+        {% render_icon "icon-color-mobile" "" %}
+        <div>
+            <p class="donate__help-box-phone">03709 00 00 32</p>
+            <p class="donate__help-box-meta">Our supporter care team are here to help</p>
+        </div>
+    </div>
+    <a href="/about-samaritans/our-organisation/administrative-contact-details/" class="donate__help-box-link">Other ways to get in touch</a>
+</div>

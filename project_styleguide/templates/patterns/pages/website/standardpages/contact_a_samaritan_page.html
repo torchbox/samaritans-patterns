@@ -1,0 +1,77 @@
+{% extends "patterns/base_page--website.html" %}
+{% load wagtailcore_tags i18n wagtailimages_tags %}
+
+{% block content %}
+
+<div class="hero
+    hero--emerald
+    hero--short
+    hero--services
+    {% if page.get_ancestors|length > 1 %}hero--breadcrumb{% endif %}
+    ">
+    <div class="hero__wrapper wrapper wrapper--large wrapper--padding wrapper--relative">
+        <div class="hero__inner">
+            {% if settings.utils.SystemMessagesSettings.show_notification %}
+                {% include "patterns/atoms/site-notification/site-notification.html" %}
+            {% endif %}
+
+            {% include "patterns/molecules/navigation/breadcrumbs.html"%}
+
+            <h1 class="hero__title">{{ page.title }}</h1>
+
+            {% if page.introduction %}
+            <h2 class="hero__subtitle">{% include_block page.introduction %}</h2>
+            {% endif %}
+
+            <div class="listening-cta-grid listening-cta-grid--stretch">
+                {% for block in page.contact_calls_to_action %}
+                    {% if forloop.counter <= 2 %}
+                        {% include_block block %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="grid grid--3col">
+                {% for block in page.contact_calls_to_action %}
+                    {% if forloop.counter > 2 %}
+                        {% include_block block with type='short' %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+        </div> {# /.hero__inner #}
+    </div> {# /.hero__wrapper #}
+</div> {# /.hero #}
+
+<div class="wrapper wrapper--white-background">
+    <div class="wrapper wrapper--small wrapper--padding-for-page">
+        <section class="section section--page-padding">
+            <h2>{{ page.detail_heading }}</h2>
+            <div class="streamfield" role="tablist" aria-multiselectable="true">
+                {% for block in page.details %}
+                    {% include "patterns/molecules/accordion/accordion-item.html" with index=forloop.counter heading=block.value.heading description=block.value.description icon=block.value.icon %}
+                {% endfor %}
+            </div>
+            </details>
+        </section>
+    </div>
+</div>
+
+<div class="wrapper wrapper--teal-background">
+    <div class="wrapper wrapper--large wrapper--padding-for-page">
+        <section class="section section--page-padding">
+            <h2 id="listening-services" class="heading-block heading-block--services heading-block--dark-background">{% trans "Find the service that's right for you..." %}</h2>
+            {% include "patterns/molecules/tabccordion/tabccordion.html" with tabs=listening_service_pages id="listening-services" classes="tabccordion--streamfield tabccordion--dark-bg" %}
+
+            {% if page.related_pages.all|length > 0 %}
+                <h2 class="heading-block heading-block--dark-background heading-block--related">{% trans "You might also be interested in..." %}</h2>
+                <div class="grid grid--no-margin grid--3col grid--large-gutters">
+                    {% for card in page.related_pages.all %}
+                        {% include "patterns/molecules/cards/related-card.html" with value=card.page.specific %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </section>
+    </div>
+</div>
+
+{% endblock %}

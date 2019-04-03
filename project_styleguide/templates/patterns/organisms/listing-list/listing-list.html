@@ -1,0 +1,9 @@
+<ul class="news-list">
+    {% for listing in listings %}
+        <li>
+            {% include "patterns/molecules/listing-item/listing-item.html" with value=listing classes="listing-item--website" %}
+        </li>
+    {% endfor %}
+</ul>
+
+{% include "patterns/molecules/pagination/pagination.html" with paginator_page=listings %}

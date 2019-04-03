@@ -1,0 +1,43 @@
+<div class="feedback js-feedback {% if feedback_submitted %}feedback--thanks{% endif %}">
+    <div class="feedback__wrapper wrapper wrapper--large wrapper--padding">
+        <p class="feedback__published-by">Published by: <b>{{ page.published_by.get_full_name }}</b></p>
+        <div class="feedback-controls">
+            <p class="feedback-controls__question">Was this page useful?</p>
+            <div class="feedback-controls__answers {% if feedback_submitted %}feedback-controls__answers--disabled{% endif %}">
+                <button
+                    class="
+                        feedback-controls__answer
+                        feedback-controls__answer--yes
+                        js-feedback-answer
+                        js-feedback-yes"
+                    {% if feedback_submitted %}disabled{% endif %}>
+                    Yes
+                </button>
+                <button
+                    class="
+                        feedback-controls__answer
+                        feedback-controls__answer--no
+                        js-feedback-answer
+                        js-feedback-no"
+                    {% if feedback_submitted %}disabled{% endif %}>
+                    No
+                </button>
+            </div>
+        </div>
+
+        <div class="feedback__main">
+            <div class="feedback__main-inner">
+                {% if form %}
+                    <div class="feedback__container feedback__container--form">
+                        {% include 'patterns/organisms/form/form.html' %}
+                    </div>
+                {% elif feedback_submitted %}
+                    <div class="feedback__container feedback__container--thanks">
+                        <h2>Thank you for your feedback.</h2>
+                        <p>We'll send a reply to your Samaritans email address</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+// lightGallery overrides
+.lg {
+    $root: &;
+
+    &-backdrop {
+        background-color: rgba($white, 0.8);
+    }
+
+    &-toolbar {
+        background-color: transparent;
+
+        #{$root}-close {
+            &::after {
+                @include font-size(xxxl);
+                content: '\00d7';
+                color: $black;
+                font-weight: $weight--bold;
+            }
+        }
+    }
+
+    &-actions {
+        #{$root}-next,
+        #{$root}-prev {
+            background-color: transparent;
+
+            &::after,
+            &::before {
+                display: none;
+            }
+        }
+    }
+}

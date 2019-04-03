@@ -1,0 +1,51 @@
+.apply {
+    display: flex;
+    flex-direction: column;
+
+    @include media-query(tablet-portrait) {
+        flex-direction: row;
+    }
+
+    &__column {
+        &:not(:last-child) {
+            margin-bottom: $gutter-large;
+        }
+
+        @include media-query(tablet-portrait) {
+            &:not(:last-child) {
+                margin-bottom: 0;
+                margin-right: $gutter-large;
+            }
+
+            &--small {
+                flex-basis: 25%;
+            }
+
+            &--large {
+                flex-basis: 75%;
+            }
+        }
+    }
+
+    &__heading {
+        margin-top: -$gutter-large;
+        padding-top: $gutter-large;
+    }
+
+    &__icon {
+        width: 50%;
+    }
+
+    &__info {
+        font-size: 21px;
+        font-weight: $weight--bold;
+
+        &:not(:last-child) {
+            margin-bottom: 0;
+        }
+    }
+
+    &__button {
+        margin-top: $gutter-medium;
+    }
+}

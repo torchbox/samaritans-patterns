@@ -1,0 +1,7 @@
+{% extends "patterns/templates/narrow-page.html" %}
+{% load wagtailcore_tags %}
+
+{% block content_inner %}
+    <h1>Thank you</h1>
+    {{ page.thank_you_text|richtext }}
+{% endblock %}

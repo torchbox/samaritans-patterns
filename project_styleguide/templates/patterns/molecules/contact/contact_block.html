@@ -1,0 +1,52 @@
+<section class="contact-block">
+    <div class="contact-block__header">
+        <h2 class="contact-block__title">{{ value.title }}</h2>
+        <p class="contact-block__description">{{ value.description }}</p>
+    </div>
+
+    <div class="contact-block__details">
+        {% if value.department %}
+        <div class="contact-block__detail contact-block__detail--department">
+            {% include "patterns/atoms/svg/colour-icons/icon-color-door-open.html" with classes="contact-block__icon contact-block__icon--door-open" %}
+            <p class="contact-block__detail-inner">{{ value.department }}</p>
+        </div>
+        {% endif %}
+
+        {% if value.name %}
+        <div class="contact-block__detail contact-block__detail--name">
+            {% include "patterns/atoms/svg/colour-icons/icon-color-people.html" with classes="contact-block__icon contact-block__icon--people" %}
+            <p class="contact-block__detail-inner">{{ value.name }}</p>
+        </div>
+        {% endif %}
+
+        {% if value.website %}
+        <div class="contact-block__detail contact-block__detail--website">
+            {% include "patterns/atoms/svg/colour-icons/icon-color-globe.html" with classes="contact-block__icon contact-block__icon--globe" %}
+            <a class="contact-block__detail-inner" href="{{ value.website }}">{{ value.website }}</a>
+        </div>
+        {% endif %}
+
+        {% if value.phone_number %}
+        <div class="contact-block__detail contact-block__detail--phone">
+            {% include "patterns/atoms/svg/colour-icons/icon-color-mobile.html" with classes="contact-block__icon contact-block__icon--mobile" %}
+            <p class="contact-block__detail-inner">{{ value.phone_number }}</p>
+        </div>
+        {% endif %}
+
+        {% if value.email %}
+        <div class="contact-block__detail contact-block__detail--email">
+            {% include "patterns/atoms/svg/colour-icons/icon-color-envelope-closed.html" with classes="contact-block__icon contact-block__icon--envelope-closed" %}
+            <a class="contact-block__detail-inner" href="mailto:{{ value.email }}">{{ value.email }}</a>
+        </div>
+        {% endif %}
+
+        {% if value.address %}
+        <div class="contact-block__detail contact-block__detail--address">
+            {% include "patterns/atoms/svg/colour-icons/icon-color-directions.html" with classes="contact-block__icon contact-block__icon--directions" %}
+            <address class="contact-block__detail-inner">{{ value.address|linebreaksbr }}</address>
+        </div>
+        {% endif %}
+    </div>
+
+    <span class="contact-block__connectors"></span>
+</section>

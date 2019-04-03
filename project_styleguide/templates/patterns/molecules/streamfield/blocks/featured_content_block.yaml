@@ -1,0 +1,18 @@
+context:
+  value:
+    - title: 'A piece of featured content'
+      description: 'Description for a piece of featured content'
+      link_text: 'Link text'
+    - title: 'Another piece of featured content'
+      description: 'Description for another piece of featured content'
+      link_text: 'Link text'
+
+tags:
+  pageurl:
+    "block.link as href":
+      target_var: href
+      raw: '#'
+  image:
+    block.image original:
+      raw: |
+        <img src="http://via.placeholder.com/320x175" width="320" height="175" alt="Some alt" class="card__image">

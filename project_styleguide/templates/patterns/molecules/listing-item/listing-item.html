@@ -1,0 +1,47 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<a href="{% pageurl value %}"  class="listing-item{% if classes %} {{ classes }}{% endif %}">
+    {% if value.listing_image %}
+        {% image value.listing_image fill-480x320 class="listing-item__image" %}
+    {% else %}
+        <div class="listing-item__image"></div>
+    {% endif %}
+    <div class="listing-item__content">
+        <h2 class="listing-item__title">
+            <span class="listing-item__title-text">
+                {{ value.listing_title|default:value.title }}
+            </span>
+        </h2>
+        {% if value.listing_summary or value.introduction %}
+            <p class="listing-item__summary">{% firstof value.listing_summary value.introduction %}</p>
+        {% endif %}
+        <ul class="list-inline-bulleted">
+            {% if value.start_date %}
+                <li class="list-inline-bulleted__item">{{ value.start_date|date:"jS F Y" }}</li>
+            {% elif value.publication_date %}
+                <li class="list-inline-bulleted__item">{{ value.publication_date|date:"jS F Y" }}</li>
+            {% endif %}
+
+            {% for type in value.news_types.all %}
+                <li class="list-inline-bulleted__item">{{ type|capfirst }}</li>
+            {% endfor %}
+
+            {% for type in value.event_types.all %}
+                <li class="list-inline-bulleted__item">{{ type|capfirst }}</li>
+            {% endfor %}
+
+            {% for type in value.role_types.all %}
+                <li class="list-inline-bulleted__item">{{ type|capfirst }}</li>
+            {% endfor %}
+
+            {% if value.location or value.country %}
+                {% firstof value.location value.get_country_display as location %}
+                <li class="list-inline-bulleted__item">{{ location|capfirst }}</li>
+            {% endif %}
+
+            {% if value.topic %}
+                <li class="list-inline-bulleted__item">{{ value.topic|capfirst }}</li>
+            {% endif %}
+        </ul>
+    </div>
+</a>

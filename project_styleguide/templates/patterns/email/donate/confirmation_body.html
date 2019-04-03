@@ -1,0 +1,24 @@
+{% extends "patterns/email/base.html" %}
+{% load i18n wagtailcore_tags %}
+
+{% block preheader %}{% if is_pay_in %}{% trans "Thank you for your payment" %}{% else %}{% trans "Thank you for your donation" %}{% endif %}{% endblock %}
+
+{% block content %}
+    <h2>{% blocktrans with name=first_name %}Dear {{ first_name }},{% endblocktrans %}</h2>
+
+    <p>
+    {% if payment_frequency == 'single' %}
+        {% if is_pay_in %}
+            {% blocktrans with amount=amount|floatformat:"-2" %}Thank you for paying in your fundraising of £{{ amount }}.{% endblocktrans %}
+        {% else %}
+            {% blocktrans with amount=amount|floatformat:"-2" %}Thank you for your donation of £{{ amount }}.{% endblocktrans %}
+        {% endif %}
+    {% else %}
+        {% blocktrans with amount=amount|floatformat:"-2" %}Thank you for setting up your monthly donation of £{{ amount }}.{% endblocktrans %}
+    {% endif %}
+    </p>
+
+    {{ confirmation_email_content|richtext }}
+
+    <p>{% blocktrans with ref=transaction_id %}Your transaction reference is: {{ ref }}{% endblocktrans %}</p>
+{% endblock %}

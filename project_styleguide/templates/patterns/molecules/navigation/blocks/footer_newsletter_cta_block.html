@@ -1,0 +1,13 @@
+{% load icon_tags wagtailcore_tags %}
+
+<a href="{% url 'newsletter' %}" class="footer-cta footer-cta--link footer-cta--newsletter">
+    <div class="footer-cta__inner">
+        <div class="footer-cta__heading">
+            <h2 class="footer-cta__heading-text">
+                {% include "patterns/molecules/chevron-link/chevron-link.html" with title="Newsletter" %}
+            </h2>
+            {% render_icon value.icon 'footer-cta__icon' %}
+        </div>
+        <p>{{ value.description }}</p>
+    </div>
+</a>

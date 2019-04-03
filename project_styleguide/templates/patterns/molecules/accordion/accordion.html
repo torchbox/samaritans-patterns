@@ -1,0 +1,11 @@
+{% load wagtailcore_tags icon_tags %}
+
+{% if accordions.title %}
+    <h2 class="heading-block">{{ accordions.title }}</h2>
+{% endif %}
+
+<div class="streamfield" role="tablist" aria-multiselectable="true">
+    {% for accordion in accordions.details %}
+        {% include "patterns/molecules/accordion/accordion-item.html" with index=forloop.counter heading=accordion.heading description=accordion.description icon=accordion.icon %}
+    {% endfor %}
+</div>

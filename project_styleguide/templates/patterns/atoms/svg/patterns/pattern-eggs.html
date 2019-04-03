@@ -1,0 +1,109 @@
+<svg id="pattern--eggs" {% if classes %} class="{{ classes }}"{% endif %} {% if aria_hide %} aria-hidden="true"{% endif %} viewbox="0 0 175 180">
+    {% if title %}<title>{{ title }}</title>{% endif %}
+    <defs>
+
+        <!-- Define a base egg -->
+        <g>
+            <path id="egg-base" d="M11.6 9.9v-.3c-.1.3-.1-.1-.2.1 0-.1.1-.3.1-.2.1.1.1-.4.2-.4 0-.7 0-1.3-.1-1.9l-.1.1v-.2c0-.1.1-.1.1.1 0-.1-.1-.2-.1-.2 0-.3.2.1.1 0v-.1c-.1-.1-.1-.1-.2-.3v-.1-.1l-.1-.3v.1c-.1-.1-.1-.2-.1-.1.1-.2-.3-.9-.3-1.1-.1-.1-.2-.3-.3-.5 0 .1-.1.1-.1 0 .2 0-.1-.3 0-.5 0 .2-.3-.4-.3-.2-.1-.1.1 0 .1-.2-.2-.3-.3-.7-.6-1 0 0 0 .1-.1 0v-.3c-.1-.1-.2 0-.2-.1 0 0 0 .1-.1 0-.4-.7-1.2-1.2-2-1.7.1.1 0 .1-.1 0 .1 0 0 .1 0 .1L6.9.4c-.1.1-.4 0-.5 0h.1c-.1 0 0 .1 0 .2h-.3C4.8.6 3.5 1.9 2.5 3.5v.1c0 .1-.1.1-.1.2 0-.1-.2-.1-.3-.1v.2c.1 0 .2-.2.2-.1-.2.3-.3.2-.3.3.1 0 0 .2.1.3 0 .1-.1.2-.1.3h-.1v.1-.1c-.1.2-.2.5-.3.8v.1c-.1.1 0-.2-.1-.1 0-.1 0-.3.1-.5h.1s-.1.1-.1.2c0-.1.2-.2.2-.4l-.1.1c0-.1 0-.4.1-.5-.1 0 0 0-.2.1.2 0-.2.4 0 .3-.2.1-.1.2-.3.3 0 0 .1 0 0 .1 0 0 .1 0 .1-.1v.4c0 .1 0 0-.1 0v.1c-.1 0-.2.2-.2 0l-.1.2c-.1.1-.1.2-.1.3v.4c-.1.3-.1.6-.2.9 0 .1 0 .2-.1.4H.5c0 .1-.1.4-.1.4-.2.1-.1.6-.1.9h.1c0 .2 0 .3.1.5h.1c.1.2 0 .4.1.7v-.1c-.1.3.3.6.3.9 0 .1.1.1.1.2v0s.1.1.1.2v.1c0 .1.1 0 .1 0l.1.1c-.1.1.1.2.1.3.1 0 .3.3.4.3 0 .1.1.2.2.2v.1l.2.1c0 .1 0 .2-.1.1.3.1.2.2.4.2h-.1c.1.1.2.1.2.2.1.2.7.6 1.1.9 0-.2.2.2.3.1 0 .1.1.1 0 .1.3.1.3.2.5.2 0 0-.1 0-.1.1h0c.3.1.3-.1.4-.2.1.1.2.1.3 0 0 0 .1.1-.1.1.1 0 .5.1.6.1H6.3h-.1c.1-.1.2 0 .3 0 .4.1.2 0 .5 0v-.1c0-.2.3.1.5-.1h-.1c.1-.1.4.1.5.1h-.1c.3 0 0-.1.2-.2.1 0 0 .1.1.1s.4-.3.6-.3c-.1 0-.1 0 0-.1s.5-.1.5-.3c.1-.1.3-.3.3-.4.3.1.5-.6.6-.4l.2-.3c.2-.2.2-.3.2-.4.2-.3.2-.3.3-.6h.1c0-.1.3-.4.4-.8.1-.2.5-.7.3-.9zm-.3-3.4c-.1-.1-.1-.1 0 0zM2.2 4c0 .1-.1.1-.1.2 0-.1.1-.2.1-.2zM1 5.9c0 .1 0 .1 0 0zm-.1.9c0-.2.1-.1.1-.1.1-.4-.1-.4.1-.7.1-.1.2 0 .2 0 0 .2-.1.3-.2.4l.1-.1c0 .1 0 .2-.1.2-.1.3-.2.6-.2.8v-.5zM.8 8.2v0zM.6 9.4s.1-.3.1-.4V9.3H.6h.1v.2s-.1 0-.1-.1zm.2 1.2l-.1-.3c.1 0 .2.1.3.2 0 .1.1.2.1.3-.1 0-.3-.1-.3-.2zM2 12.5l.1.1c-.1 0-.2 0-.1-.1 0 .1 0 0 0 0zm2.7 1.8s.1 0 0 0v-.1c.1 0 .1 0 0 .1.1-.1.1-.1 0 0l.1-.1h.1l.1.1h-.3z" fill-rule="nonzero"/>
+        </g>
+
+        <!-- Rotate the base egg -->
+        <g id="egg">
+            <use xlink:href="#egg-base"/>
+        </g>
+
+        <g id="egg-45">
+            <use xlink:href="#egg" transform="rotate(45, 6, 8)"/>
+        </g>
+
+        <g id="egg-90">
+            <use xlink:href="#egg" transform="rotate(90, 6, 8)"/>
+        </g>
+
+        <g id="egg-180">
+            <use xlink:href="#egg" transform="rotate(180, 6, 8)"/>
+        </g>
+
+        <g id="egg-225">
+            <use xlink:href="#egg" transform="rotate(225, 6, 8)"/>
+        </g>
+
+        <g id="egg-270">
+            <use xlink:href="#egg" transform="rotate(270, 6, 8)"/>
+        </g>
+
+        <g id="egg-315">
+            <use xlink:href="#egg" transform="rotate(315, 6, 8)"/>
+        </g>
+
+        <!-- Create the egg patterns -->
+        <g id="egg-pattern-1">
+            <use xlink:href="#egg" x="0" y="0"/>
+            <use xlink:href="#egg-45" x="16" y="0" />
+            <use xlink:href="#egg" x="32" y="0" />
+            <use xlink:href="#egg" x="48" y="0" />
+            <use xlink:href="#egg-270" x="64" y="0" />
+            <use xlink:href="#egg-180" x="80" y="0" />
+            <use xlink:href="#egg" x="96" y="0" />
+            <use xlink:href="#egg-45" x="112" y="0"/>
+            <use xlink:href="#egg" x="128" y="0" />
+            <use xlink:href="#egg" x="144" y="0" />
+            <use xlink:href="#egg-270" x="160" y="0" />
+        </g>
+
+        <g id="egg-pattern-2">
+            <use xlink:href="#egg-180" x="0" y="0"/>
+            <use xlink:href="#egg-270" x="16" y="0" />
+            <use xlink:href="#egg" x="32" y="0" />
+            <use xlink:href="#egg-90" x="48" y="0" />
+            <use xlink:href="#egg" x="64" y="0" />
+            <use xlink:href="#egg" x="80" y="0" />
+            <use xlink:href="#egg-315" x="96" y="0" />
+            <use xlink:href="#egg" x="112" y="0"/>
+            <use xlink:href="#egg-180" x="128" y="0" />
+            <use xlink:href="#egg-90" x="144" y="0" />
+            <use xlink:href="#egg" x="160" y="0" />
+        </g>
+
+        <g id="egg-pattern-3">
+            <use xlink:href="#egg-225" x="0" y="0"/>
+            <use xlink:href="#egg-45" x="16" y="0" />
+            <use xlink:href="#egg" x="32" y="0" />
+            <use xlink:href="#egg" x="48" y="0" />
+            <use xlink:href="#egg-270" x="64" y="0" />
+            <use xlink:href="#egg-180" x="80" y="0" />
+            <use xlink:href="#egg" x="96" y="0" />
+            <use xlink:href="#egg-45" x="112" y="0"/>
+            <use xlink:href="#egg" x="128" y="0" />
+            <use xlink:href="#egg" x="144" y="0" />
+            <use xlink:href="#egg-270" x="160" y="0" />
+        </g>
+
+        <g id="egg-pattern-4">
+            <use xlink:href="#egg-90" x="0" y="0"/>
+            <use xlink:href="#egg-270" x="16" y="0" />
+            <use xlink:href="#egg" x="32" y="0" />
+            <use xlink:href="#egg-90" x="48" y="0" />
+            <use xlink:href="#egg" x="64" y="0" />
+            <use xlink:href="#egg" x="80" y="0" />
+            <use xlink:href="#egg-225" x="96" y="0" />
+            <use xlink:href="#egg" x="112" y="0"/>
+            <use xlink:href="#egg-180" x="128" y="0" />
+            <use xlink:href="#egg-90" x="144" y="0" />
+            <use xlink:href="#egg" x="160" y="0" />
+        </g>
+    </defs>
+
+    <!-- Create square of patterns -->
+    <use xlink:href="#egg-pattern-1" x="0" y="0"/>
+    <use xlink:href="#egg-pattern-2" x="0" y="16"/>
+    <use xlink:href="#egg-pattern-1" x="0" y="32"/>
+    <use xlink:href="#egg-pattern-2" x="0" y="48"/>
+    <use xlink:href="#egg-pattern-3" x="0" y="64"/>
+    <use xlink:href="#egg-pattern-2" x="0" y="80"/>
+    <use xlink:href="#egg-pattern-1" x="0" y="96"/>
+    <use xlink:href="#egg-pattern-4" x="0" y="112"/>
+    <use xlink:href="#egg-pattern-1" x="0" y="128"/>
+    <use xlink:href="#egg-pattern-2" x="0" y="144"/>
+    <use xlink:href="#egg-pattern-1" x="0" y="160"/>
+</svg>

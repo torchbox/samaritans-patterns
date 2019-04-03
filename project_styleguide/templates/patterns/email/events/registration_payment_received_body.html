@@ -1,0 +1,10 @@
+{% extends "patterns/email/events/registration_base.html" %}
+{% load i18n %}
+
+{% block content %}
+    {{ block.super }}
+
+    <p>{% blocktrans with amount=amount|floatformat:"-2" %}Thank you for paying your {{ submission.get_event_page.title }} registration fee of £{{ amount }}. Welcome to Team Samaritans! The Events team will be in touch about what happens next.{% endblocktrans %}</p>
+
+    <p>{% blocktrans with ref=transaction_id %}Your transaction reference is: {{ ref }}{% endblocktrans %}</p>
+{% endblock %}

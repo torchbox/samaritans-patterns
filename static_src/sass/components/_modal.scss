@@ -1,0 +1,164 @@
+.modal {
+    $root: &;
+
+    display: none;
+
+    &.is-open {
+        display: block;
+    }
+
+    &[aria-hidden='false'] {
+        #{$root}__overlay {
+            animation: mmfadeIn $transition;
+        }
+
+        #{$root}__container {
+            animation: mmslideIn 0.35s ease-in;
+        }
+
+    }
+
+    &[aria-hidden='true'] {
+        #{$root}__overlay {
+            animation: mmfadeOut 0.5s ease-in;
+        }
+
+        #{$root}__container {
+            animation: mmslideOut $transition;
+        }
+    }
+
+    &__overlay {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        background: rgba($off-white, 0.95);
+        z-index: z($z-elements, modal);
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__container {
+        width: 100%;
+        max-width: $wrapper--small;
+        margin: $gutter $gutter 0;
+        padding-bottom: $gutter;
+        will-change: transform;
+
+        @include media-query(tablet-portrait) {
+            margin: $gutter-large $gutter-large 0;
+            padding-bottom: $gutter-large;
+        }
+
+        @include media-query(tablet-landscape) {
+            margin: $gutter-xxl $gutter-xxl 0;
+            padding-bottom: $gutter-xxl;
+        }
+    }
+
+    &__content {
+        position: relative;
+        background-color: $white;
+        padding: $gutter;
+
+        & > *:last-child {
+            margin-bottom: 0;
+        }
+
+        @include media-query(tablet-portrait) {
+            @include corner($lime, bottom, left, $width: 40%, $height: 30%, $offset: 16px);
+            padding: $gutter-large;
+        }
+
+        @include media-query(tablet-landscape) {
+            padding: $gutter-xxl;
+        }
+    }
+
+    &__connectors {
+        @include media-query(tablet-portrait) {
+            @include connectors($lime, bottom, left);
+        }
+    }
+
+    &__close {
+        position: absolute;
+        right: $gutter-small;
+        top: $gutter-small;
+        width: 35px;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        background-color: $off-white;
+        color: $color--link;
+        transition: background-color $transition, color $transition;
+
+        &:focus {
+            background-color: $off-white;
+            color: $color--link-hover;
+        }
+
+        &:hover,
+        &:active {
+            background-color: $color--link-hover;
+            color: $white;
+        }
+    }
+
+    &__close-icon {
+        width: 15px;
+        height: 15px;
+        pointer-events: none;
+        color: currentColor;
+    }
+}
+
+
+/**************************\
+  Demo Animation Style
+\**************************/
+@keyframes mmfadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes mmfadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes mmslideIn {
+    from {
+        transform: translateY(15%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes mmslideOut {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(15%);
+    }
+}

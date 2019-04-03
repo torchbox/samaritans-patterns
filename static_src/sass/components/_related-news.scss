@@ -1,0 +1,50 @@
+.related-news {
+    $root: &;
+    margin-top: $gutter-x-large;
+
+    @include media-query(tablet-portrait) {
+        margin-top: $gutter-xxl;
+    }
+
+    &__header {
+        @include media-query(mob-landscape) {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+
+    &__title {
+        @include font-size(xxl);
+        font-weight: $weight--normal;
+        margin: 0;
+
+        @include media-query(tablet-portrait) {
+            @include font-size(xxxl);
+        }
+    }
+
+    &__more-icon {
+        fill: $color--link;
+        width: 10px;
+        height: 15px;
+        margin-left: 8px;
+    }
+
+    &__more {
+        @include font-size(xs);
+        font-weight: $weight--bold;
+        display: inline-flex;
+        align-items: center;
+
+        @include media-query(tablet-portrait) {
+            @include font-size(s);
+        }
+
+        #{$hover} {
+            #{$root}__more-icon {
+                fill: $color--link-hover;
+            }
+        }
+    }
+}

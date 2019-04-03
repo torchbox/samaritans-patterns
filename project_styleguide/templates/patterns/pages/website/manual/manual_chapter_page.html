@@ -1,0 +1,36 @@
+{% extends "patterns/base_page--website.html" %}
+{% load wagtailcore_tags wagtailimages_tags navigation_tags static %}
+
+{% block content %}
+
+    <div class="wrapper wrapper--flex">
+        <section class="section section--main">
+            <h1>{{ page.get_parent.title }}</h1>
+            {% image page.main_image fill-1200x600 %}
+            {% for sibling in page.get_siblings.live.public %}
+                <p><a href="{% pageurl sibling %}" {% if sibling.path == page.path %}style='color:red;'{% endif %}>{{ sibling.title }}</a></p>
+            {% endfor %}
+
+            <h1>{{ page.title }}</h1>
+            <h5>{{ page.introduction }}</h5>
+
+            {% include_block page.body %}
+
+            {% if page.prev_manual_chapter %}
+                <p>< Previous</p>
+                <a href="{% pageurl page.prev_manual_chapter %}">{{ page.prev_manual_chapter.title }}</a>
+            {% endif %}
+
+            {% if page.next_manual_chapter %}
+                <p>Next ></p>
+                <a href="{% pageurl page.next_manual_chapter %}">{{ page.next_manual_chapter.title }}</a>
+            {% endif %}
+        </section>
+
+    </div>
+
+    {% include "patterns/molecules/related-pages/related-pages--small.html" with related_pages=page.related_pages.all %}
+    {% if page.published_by and user.is_authenticated %}
+        {% include 'patterns/organisms/form/feedback-form.html' %}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,5 @@
+context:
+  card:
+    title: About the charity
+    text: We can give you advice and information
+    url: /

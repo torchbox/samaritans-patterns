@@ -1,0 +1,29 @@
+.story-call-to-action-block {
+    $root: &;
+
+    @include margin-streamfield-block;
+    margin-left: 0;
+    margin-right: 0;
+    display: flex;
+    flex-direction: column;
+
+    @include media-query(tablet-portrait) {
+        flex-direction: row;
+    }
+
+    &__image {
+        height: auto;
+        flex-shrink: 0;
+        margin-bottom: $gutter;
+
+        @include media-query(mob-landscape) {
+            align-self: flex-start;
+            max-width: 296px;
+        }
+
+        @include media-query(tablet-portrait) {
+            margin-bottom: 0;
+            margin-right: $gutter-large;
+        }
+    }
+}

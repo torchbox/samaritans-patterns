@@ -1,0 +1,4 @@
+context:
+  page:
+    title: "Base: Page title from a stub file"
+  button_text: "Base: Button text from a stub file"

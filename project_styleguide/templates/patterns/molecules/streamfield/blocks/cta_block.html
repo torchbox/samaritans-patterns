@@ -1,0 +1,16 @@
+{% load wagtailcore_tags %}
+
+<div class="page-teaser {% if classes %}{{ classes }}{% endif %}">
+    <div class="page-teaser__content">
+        <div class="page-teaser__content-inner">
+            <h2 class="page-teaser__title">{{ value.title }}</h2>
+            <p class="page-teaser__text">{{ value.description }}</p>
+            <a href="{% pageurl value.button_link %}" class="button button--alt page-teaser__button">
+                <div class="button__shadow"></div>
+                <div class="button__inner">
+                    {{ value.button_text }}
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

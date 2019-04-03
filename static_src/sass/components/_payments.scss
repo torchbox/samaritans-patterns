@@ -1,0 +1,66 @@
+.payments {
+    &__braintree-error {
+        margin: 10px 0;
+        padding: 10px;
+        background-color: $hot-pink;
+        color: $white;
+    }
+
+    &__braintree-hosted-field {
+        height: 52px;
+        background-color: $off-white;
+        padding: 10px;
+        border: 1px solid $grey-light;
+        border-radius: 5px;
+        width: 100%;
+        max-width: 370px;
+    }
+
+    &__amount-box {
+        @include clear-child-margins;
+        border: 1px solid $grey-light;
+        padding: $gutter-medium;
+        color: $plum;
+        width: 100%;
+
+        @include media-query(tablet-portrait) {
+            max-width: 45%;
+            margin-left: $gutter-large;
+        }
+
+        @include media-query(tablet-landscape) {
+            margin-left: $gutter-xxl;
+        }
+
+        svg {
+            width: 50px;
+            height: 40px;
+            margin-bottom: $gutter;
+
+            @include media-query(tablet-landscape) {
+                width: 100px;
+                height: 95px;
+            }
+        }
+    }
+
+    &__complete {
+        @include media-query(tablet-portrait) {
+            display: flex;
+        }
+    }
+
+    &__paypal-button {
+        max-width: 150px;
+        min-height: 50px;
+    }
+}
+
+
+// Vendor-generated classes
+.braintree-hosted-fields-invalid {
+    border: 1px solid $hot-pink;
+}
+
+// .braintree-hosted-fields-valid {
+// }

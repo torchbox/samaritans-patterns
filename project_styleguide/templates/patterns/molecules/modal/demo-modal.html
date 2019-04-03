@@ -1,0 +1,14 @@
+{% extends "patterns/base_page--website.html" %}
+
+
+{% block content %}
+
+    <button class="js-modal" data-micromodal-trigger="{{ slug }}">
+        Open modal
+    </button>
+
+{% endblock content %}
+
+{% block after_footer %}
+    {% include "patterns/molecules/modal/modal.html" %}
+{% endblock after_footer %}

@@ -1,0 +1,11 @@
+{% extends "patterns/base_page--website.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="wrapper">
+    <section class="section section--main">
+        <h1>{% trans "Error" %}</h1>
+        <p>{% trans "Sorry, we are unable to process donations at the moment. Please try again later." %}</p>
+    </section>
+</div>
+{% endblock %}

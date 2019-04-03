@@ -1,0 +1,7 @@
+{% load wagtailcore_tags i18n %}
+
+{% if dark_bg %}
+    {% include "patterns/molecules/tabccordion/tabccordion.html" with tabs=all_listening_service_pages id="listening-services" classes="tabccordion--streamfield tabccordion--dark-bg" %}
+{% else %}
+    {% include "patterns/molecules/tabccordion/tabccordion.html" with tabs=all_listening_service_pages id="listening-services" classes="tabccordion--streamfield tabccordion--light-bg" %}
+{% endif %}

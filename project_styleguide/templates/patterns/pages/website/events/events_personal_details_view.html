@@ -1,0 +1,95 @@
+{% extends "patterns/templates/donate-form-page.html" %}
+{% load i18n form_tags helper_tags icon_tags loqate_tags static wagtailimages_tags %}
+
+{% block title %}{% trans "Your information | Event registration payment" %}{% endblock %}
+
+{% block progress_bar %}
+    {% include "patterns/pages/donate/partials/progress_bar.html" with classes="first-active" %}
+{% endblock %}
+
+{% block content_inner %}
+<div class="payments" id="events__personal-details-wrapper">
+    <h1>{% trans "Payment for your place" %}</h1>
+
+    <div class="donate__bar">
+        <p class="donate__bar-text"><span class="donate__bar-standout">{% trans "Event" %}:</span> {{ event_page.title }}</p>
+        <p class="donate__bar-text"><span class="donate__bar-standout">{% trans "Registration fee" %}:</span> £{{ payment_amount|floatformat:"-2" }}</p>
+    </div>
+
+    {% if payment_allowed %}
+    <div class="donate__form-wrapper">
+        <form method="post" class="form">
+            <div class="form__container form__container--flex">
+                <div class="form__section form__section--main-column">
+                    {% csrf_token %}
+
+                    {% if form.non_field_errors %}
+                        {% for error in form.non_field_errors %}
+                        <div class="form__errors">{{ error }}</div>
+                        {% endfor %}
+                    {% elif form.errors %}
+                        <div class="form__errors">
+                            There were some errors with your form. Please amend the fields highlighted below.
+                        </div>
+                    {% elif request.session.gateway_address_errors %}
+                        <div class="form__errors">
+                            <p>We were unable to take payment because the payment processor reported an error with your address information:</p>
+                            {% for error in request.session.gateway_address_errors %}
+                            <p><strong>{{ error }}</strong></p>
+                            {% endfor %}
+                            Please correct these errors and try again.
+                        </div>
+                    {% endif %}
+
+                    {% if form.amount %}
+                        <div class="form__gbp-field-wrapper">
+                            {% render_form_field form.amount %}
+                        </div>
+                    {% endif %}
+
+                    <div class="form-item-wrapper form-item-wrapper--two-col">
+                        {% render_form_field form.first_name %}
+                        {% render_form_field form.last_name %}
+                    </div>
+
+                    {% render_form_field form.email %}
+                    <h2>{% trans "Your address" %}</h2>
+
+                    {% render_form_field form.address_line_1 %}
+                    {% render_form_field form.address_line_2 %}
+                    {% render_form_field form.town %}
+                    {% render_form_field form.post_code %}
+                    {% render_form_field form.country %}
+                    {% render_form_field form.phone_number %}
+
+                    {% include "patterns/atoms/buttons/button--button.html" with label="Continue to payment" large=True classes="button--large button--secondary" %}
+
+                    <div class="donate__form-payment-info">
+                        <small>
+                            This payment is not tax exempt.
+                            This payment will be sent to Samaritans Enterprise,
+                            a limited company (01451175),
+                            which is the trading arm of Samaritans,
+                            a charity registered in England and Wales (219432)
+                            and in Scotland (SC040604)
+                            and incorporated in England and Wales as a company limited by guarantee (757372).
+                        </small>
+                    </div>
+                </div>
+
+                {% include "patterns/molecules/payments/payments-sidebar.html" %}
+            </div>
+
+        </form>
+    </div>
+    {% else %}
+    <div class="form__errors">
+        {{ payment_not_allowed_reason }}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+{% loqate_script %}
+{% endblock %}

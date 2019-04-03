@@ -1,0 +1,109 @@
+/* ============================================
+  Placeholder text
+*/
+@mixin placeholder-text {
+    // sass-lint:disable no-vendor-prefixes
+    &.placeholder { @content; }
+    &:-moz-placeholder { @content; }
+    &::-moz-placeholder { @content; }
+    &:-ms-input-placeholder { @content; }
+    &::-webkit-input-placeholder { @content; }
+    // sass-lint:enddisable
+}
+
+
+/* ============================================
+    Input styles
+*/
+
+@mixin input-style {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid $grey-light;
+    background-color: $off-white;
+    color: inherit;
+}
+
+@mixin input--currency {
+    @include input-style;
+    display: flex;
+    align-items: center;
+
+    #{$input--string} {
+        display: inline;
+        width: 20%;
+        flex-shrink: 1;
+        flex-grow: 1;
+        border-width: 0;
+        padding: 0;
+    }
+
+    &::before {
+        @include font-size(m);
+        content: '£';
+        display: inline;
+        margin-right: 5px;
+        font-weight: $weight--bold;
+    }
+}
+
+
+/* ============================================
+    Dropdown styles
+*/
+
+@mixin dropdown-wrapper($root) {
+    position: relative;
+
+    #{$hover} {
+        #{$root}__icon,
+        #{$root}__select-icon {
+            fill: $color--link-hover;
+        }
+    }
+}
+
+@mixin dropdown-select {
+    @include font-size(s);
+
+    -webkit-appearance: none; // sass-lint:disable-line no-vendor-prefixes
+    border-radius: 0;
+    background-color: $white;
+    display: block;
+    padding: 10px 65px 10px 15px;
+    border: 1px solid $grey-light;
+    cursor: pointer;
+
+    // hide select arrow ie11
+    &::-ms-expand { // sass-lint:disable-line no-vendor-prefixes
+        display: none;
+    }
+}
+
+@mixin dropdown-select-icon-wrapper {
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    bottom: 2px; // stop icon overlapping border in ie11
+    background-color: $white;
+    width: 50px;
+    text-align: center;
+    box-shadow: -11px 0 0 -10px $grey-light;
+    pointer-events: none;
+}
+
+@mixin dropdown-select-icon {
+    width: 13px;
+    transform: rotate(90deg);
+    fill: $color--link;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    transition: fill $transition;
+
+    // hover styles are in @mixin dropdown-wrapper
+}

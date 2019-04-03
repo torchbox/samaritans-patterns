@@ -1,0 +1,13 @@
+<div class="highlight highlight--{{ value.highlight_type }}">
+    {% if value.highlight_type == 'tip' %}
+        {% include "patterns/atoms/svg/colour-icons/icon-color-bulb-arrow.html" with classes="highlight__icon" %}
+    {% elif value.highlight_type == 'note' %}
+        {% include "patterns/atoms/svg/colour-icons/icon-color-arrows.html" with classes="highlight__icon" %}
+    {% elif value.highlight_type == 'warning' %}
+        {% include "patterns/atoms/svg/colour-icons/icon-color-warning.html" with classes="highlight__icon" %}
+    {% endif %}
+
+    <h3 class="highlight__title">{{ value.highlight_type }}</h3>
+    <p class="highlight__content">{{ value.content }}</p>
+    <span class="highlight__connectors"></span>
+</div>

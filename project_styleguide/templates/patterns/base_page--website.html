@@ -1,0 +1,70 @@
+{% extends "patterns/base_page.html" %}
+
+{% load cache i18n locale_tags static %}
+
+{% block meta_tags %}
+    {% with analytics_id=settings.utils.AnalyticsSettings.google_analytics_property_id tag_manager_id=settings.utils.AnalyticsSettings.google_tag_manager_id optimise_id=settings.utils.AnalyticsSettings.google_optimise_id %}
+
+    {% get_current_language as LANGUAGE_CODE %}
+    <script>window.dataLayer = [{'locale': '{{ LANGUAGE_CODE }}'}];</script>
+    {% if tag_manager_id %}
+        {% if analytics_id and optimise_id %}
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ analytics_id }}"></script>
+        <script>
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{ analytics_id }}', { 'send_page_view': false, 'optimize_id': '{{ optimise_id }}' });
+        </script>
+        {% endif %}
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','{{ tag_manager_id }}');
+    </script>
+    {% endif %}
+    {% endwith %}
+
+    {# favicons #}
+    {% comment %}
+        Generate favicons by http://realfavicongenerator.net using the following path: settings.STATIC_URL + img/favicons.
+        Then favicon.ico should be copied to a directory called "public" in the application root and puppet does some magic to serve it up at the site root.
+    {% endcomment %}
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicons/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicons/favicon-16x16.png' %}">
+    <link rel="mask-icon" href="{% static 'images/favicons/safari-pinned-tab.svg' %}" color="#84bd00">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-config" content="{% static 'images/favicons/browserconfig.xml' %}">
+    {% canonical_and_alternate_links %}
+
+    {{ block.super }}
+{% endblock %}
+
+
+{% block body_class %}{{ block.super }} body--website{% endblock body_class %}
+
+{% block header %}
+    {% get_current_language as LANGUAGE_CODE %}
+    {% cache 900 header LANGUAGE_CODE %}
+    {% include "patterns/organisms/header/header--website.html" with show_nav=True %}
+    {% endcache %}
+{% endblock header %}
+
+{% block outer_content %}
+    <main class="wrapper">
+        {% block content %}
+            {{ pattern_library_rendered_pattern }}
+        {% endblock %}
+    </main>
+{% endblock outer_content %}
+
+{% block footer %}
+    {% include 'patterns/organisms/footer/footer--website.html' %}
+{% endblock footer %}
+
+{% block main_js %}
+    <script type="text/javascript" src="{% static 'js/website.js' %}"></script>
+{% endblock main_js %}

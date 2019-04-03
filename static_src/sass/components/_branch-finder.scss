@@ -1,0 +1,32 @@
+.branch-finder {
+    margin-top: $gutter-large;
+
+    @include media-query(tablet-portrait) {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    &__map {
+        display: none;
+        width: 50%;
+        height: 500px;
+        margin-left: $gutter;
+
+        @include media-query(tablet-portrait) {
+            display: block;
+        }
+    }
+
+    &__map-link {
+        @include media-query(tablet-portrait) {
+            display: none;
+        }
+    }
+
+    &__listings {
+        @include media-query(tablet-portrait) {
+            flex: 1;
+        }
+    }
+}

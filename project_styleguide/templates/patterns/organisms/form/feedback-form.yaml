@@ -1,0 +1,46 @@
+context:
+  page:
+    published_by:
+      get_full_name:
+        Firstname McLastname
+  form:
+    !!python/object:django.forms.Form
+      'fields':
+        'is_helpful':
+          !!python/object:django.forms.fields.ChoiceField
+            label: Was this page useful?
+            required: true
+            help_text: ''
+            show_hidden_initial: false
+            localize: false
+            initial: {}
+            disabled: false
+            widget: !!python/object:django.forms.widgets.RadioSelect
+              attrs: {}
+              choices: [['yes', 'Yes'],['no', 'No']]
+              is_required: true
+              errors: {}
+        'message':
+          !!python/object:django.forms.fields.CharField
+            disabled: false
+            empty_value: ''
+            help_text: null
+            initial: null
+            label: Anything to add?
+            localize: false
+            required: false
+            show_hidden_initial: false
+            widget: !!python/object:django.forms.widgets.Textarea
+              attrs: {cols: '40', rows: '10'}
+              is_required: false
+      'is_bound': false
+      '_bound_fields_cache': {'get': 'no'}
+      '_errors':
+        !!python/object:django.forms.utils.ErrorDict {}
+      'error_class':
+        !!python/name:django.forms.utils.ErrorDict
+      'auto_id': true
+      'has_error': false
+      'initial': {}
+      'renderer':
+        !!python/object:django.forms.renderers.DjangoTemplates {}

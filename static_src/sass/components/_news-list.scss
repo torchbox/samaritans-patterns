@@ -1,0 +1,13 @@
+.news-list {
+    > li {
+        padding: $gutter-medium 0;
+
+        &:not(:first-child) {
+            border-top: $grey-border;
+
+            @include media-query--takes-value($listing-item-breakpoint) {
+                border-top-width: 0;
+            }
+        }
+    }
+}

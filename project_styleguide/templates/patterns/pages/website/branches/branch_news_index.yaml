@@ -1,0 +1,61 @@
+context:
+  page:
+    title: Latest Branch News
+  news:
+    - title: Page title 1
+      introduction: Intro 1
+      listing_image: dummy
+      listing_title: Item title 1
+      listing_summary: Some listing summary 1
+      publication_date: !!timestamp '2018-12-13'
+      news_types:
+        all:
+          - Type
+          - Another type
+    - title: Page title 2
+      introduction: Intro 2
+      listing_image: dummy
+      listing_title: Item title 2
+      listing_summary: Some listing summary 2
+      publication_date: !!timestamp '2018-12-13'
+      news_types:
+        all:
+          - Type
+          - Another type
+    - title: Page title 3
+      introduction: Intro 3
+      listing_image: dummy
+      listing_title: Item title 3
+      listing_summary: Some listing summary 3
+      publication_date: !!timestamp '2018-12-13'
+      news_types:
+        all:
+          - Type
+          - Another type
+    - title: Page title 4
+      introduction: Intro 4
+      listing_image: dummy
+      listing_title: Item title 4
+      listing_summary: Some listing summary 4
+      publication_date: !!timestamp '2018-12-13'
+      news_types:
+        all:
+          - Type
+          - Another type
+  news_types:
+  - ['press_release', "Press Release"]
+  - ['media_coverage', "Media coverage"]
+  topics:
+  - ['topic1', "Topic 1"]
+  - ['topic2', "Topic 2`"]
+
+tags:
+  pageurl:
+    "n":
+      raw: '#'
+    featured:
+      raw: '#'
+  image:
+    featured.listing_image fill-1064x400 class="listing-item-featured__image":
+      raw: |
+        <img src="http://via.placeholder.com/1064x400" width="1064" height="400" alt="Some alt" class="listing-item-featured__image">

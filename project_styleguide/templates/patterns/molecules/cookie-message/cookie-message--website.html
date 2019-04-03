@@ -1,0 +1,33 @@
+{% load wagtailcore_tags %}
+<div id="js-cookie" class="cookie-banner">
+    <div id="js-cookie__message-initial">
+        <div>
+            {{ settings.cookie_banner_text }}
+        </div>
+        <div>
+            <a href="#" id="js-cookie__accept" class="cookie-banner__link cookie-banner__link--button">
+                {{ settings.cookie_banner_accept_button_text }}
+            </a>
+            <a href="{% pageurl settings.cookie_banner_more_info_link %}" class="cookie-banner__link cookie-banner__link--button">
+                {{ settings.cookie_banner_more_info_button_text }}
+            </a>
+        </div>
+    </div>
+    <div id="js-cookie__message-accepted" hidden>
+        <div>
+            {{ settings.cookie_banner_accepted_text }}
+            You can now
+            <a href="#" id="js-cookie__dismiss-link" class="cookie-banner__link">
+                hide this message
+            </a>
+            or
+            <a href="{% pageurl settings.cookie_banner_more_info_link %}" class="cookie-banner__link">
+                find out more about cookies
+            </a>.
+        </div>
+    </div>
+
+    <a aria-label="Close" href="#" id="cookie-banner__close">
+        {% include "patterns/atoms/svg/icons/icon-close.html" with classes="cookie-banner__icon js-cookie__dismiss-button" title="Samaritans" %}
+    </a>
+</div>

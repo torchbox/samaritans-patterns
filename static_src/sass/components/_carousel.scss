@@ -1,0 +1,13 @@
+.carousel {
+    &__figure {
+        margin: 0;
+    }
+
+    &__figcaption {
+        margin-top: $gutter;
+    }
+
+    &__liveregion {
+        @include hidden();
+    }
+}

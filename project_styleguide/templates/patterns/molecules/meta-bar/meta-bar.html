@@ -1,0 +1,47 @@
+{% load wagtailcore_tags %}
+
+<ul class="meta-bar{% if apply_button %} meta-bar--apply-button{% endif %}{% if modifier %} meta-bar--{{ modifier }}{% endif %}">
+    {% if value.news_types.all|length > 0 %}
+        {% include 'patterns/molecules/meta-bar/meta-bar__item.html' with icon="pen" text=value.news_types.all|join:", "|title %}
+    {% endif %}
+    {% if value.publication_date or value.start_date %}
+        <li class="meta-bar__item meta-bar__item--no-shrink">
+            {% include "patterns/atoms/svg/colour-icons/icon-color-diary.html" with classes="meta-bar__icon" %}
+            {% if value.start_date %}
+                <span class="meta-bar__text">
+                    {{ value.start_time|default:""|date:"fA"|lower }}
+                    {{ value.start_date|date:"l jS F" }}
+                    {% if value.end_date %}
+                        – <br/>
+                        {{ value.end_time|default:""|date:"fA"|lower }}
+                        {{ value.end_date|default:""|date:"l jS F" }}
+                    {% endif %}
+                </span>
+            {% elif value.publication_date %}
+                <span class="meta-bar__text">Posted {{ value.publication_date|date:'jS F Y' }}</span>
+            {% endif %}
+        </li>
+    {% endif %}
+    {% firstof value.location value.get_country_display as location %}
+    {% if location %}
+        {% include 'patterns/molecules/meta-bar/meta-bar__item.html' with icon="globe" text=location|title %}
+    {% endif %}
+    {% if value.event_types.get_object_list|length > 0 or value.news_topics.all|length > 0 %}
+        {% if value.event_types %}
+            {% include 'patterns/molecules/meta-bar/meta-bar__item.html' with icon="bullets" text=value.event_types.get_object_list|join:", "|title %}
+        {% else %}
+            {% include 'patterns/molecules/meta-bar/meta-bar__item.html' with icon="bullets" text=value.news_topics.all|join:", "|title %}
+        {% endif %}
+    {% endif %}
+    {% if value.distance_number %}
+        {% include 'patterns/molecules/meta-bar/meta-bar__item.html' with icon="zebra-crossing" text=value.distance_number|stringformat:"s"|add:" "|add:value.distance_unit %}
+    {% endif %}
+    {% if apply_button %}
+        <li class="meta-bar__item meta-bar__item--button-wrapper">
+            <a href="#apply-section" class="meta-bar__button js-smooth-scroll">
+                <span class="meta-bar__text meta-bar__text--button">Apply now</span>
+                {% include "patterns/atoms/svg/icons/icon-arrow-downward.html" with classes="meta-bar__icon meta-bar__icon--chevron" %}
+            </a>
+        </li>
+    {% endif %}
+</ul>

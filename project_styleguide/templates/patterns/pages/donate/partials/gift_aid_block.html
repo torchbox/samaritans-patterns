@@ -1,0 +1,15 @@
+{% load form_tags icon_tags i18n %}
+
+<div class="page-teaser page-teaser--giftaid streamfield--dark-bg">
+    <div class="page-teaser__content page-teaser__content--giftaid">
+        <div class="page-teaser__content-inner page-teaser__content-inner--giftaid">
+            <div class="page-teaser__giftaid-copy">
+                {% render_form_field form.gift_aid %}
+
+                <p class="page-teaser__text">{% blocktrans %}Please let us know if your tax circumstances or name/address change so we can update our records.{% endblocktrans %}</p>
+            </div>
+
+            {% render_icon "icon-color-giftaid" "" %}
+        </div>
+    </div>
+</div>

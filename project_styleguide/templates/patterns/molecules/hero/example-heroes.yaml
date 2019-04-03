@@ -1,0 +1,10 @@
+context:
+  page:
+    title: "Listener Scheme: Introduction and key principles"
+
+tags:
+  image:
+    hero_image fill-2450x1600 as hero_image:
+      target_var: hero_image
+      raw:
+        url: http://via.placeholder.com/2048x2048

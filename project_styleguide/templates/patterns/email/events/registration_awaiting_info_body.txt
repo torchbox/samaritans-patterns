@@ -1,0 +1,1 @@
+{% extends "patterns/email/events/registration_base.txt" %}

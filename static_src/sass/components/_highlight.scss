@@ -1,0 +1,95 @@
+.highlight {
+    $root: &;
+    @include margin-streamfield-block;
+    position: relative;
+    background: $page-bg;
+    padding: $gutter $gutter-medium;
+    margin-left: 25px;
+
+    @include media-query(tablet-portrait) {
+        margin-left: 50px;
+        padding: $gutter-medium 60px;
+    }
+
+    @include media-query(desktop) {
+        margin-left: 90px;
+    }
+
+    &--note {
+        @include corner($emerald, bottom, right, 80%, 80%, 10px);
+
+        @include media-query(tablet-portrait) {
+            @include corner($emerald, bottom, right, 430px, 80%, 10px);
+        }
+
+        #{$root}__connectors {
+            @include connectors($emerald, bottom, right, medium);
+        }
+    }
+
+    &--tip {
+        @include corner($sunflower, bottom, right, 80%, 80%, 10px);
+
+        @include media-query(tablet-portrait) {
+            @include corner($sunflower, bottom, right, 430px, 80%, 10px);
+        }
+
+        #{$root}__connectors {
+            @include connectors($sunflower, bottom, right, medium);
+        }
+    }
+
+    &--warning {
+        @include corner($pumpkin, bottom, right, 80%, 80%, 10px);
+
+        @include media-query(tablet-portrait) {
+            @include corner($pumpkin, bottom, right, 430px, 80%, 10px);
+        }
+
+        #{$root} {
+            &__connectors {
+                @include connectors($pumpkin, bottom, right, medium);
+            }
+
+            &__icon {
+                width: 50px;
+                height: 40px;
+
+                @include media-query(tablet-portrait) {
+                    width: 100px;
+                    height: 80px;
+                }
+            }
+        }
+    }
+
+    &__icon {
+        width: 40px;
+        height: 50px;
+        position: absolute;
+        top: 5px;
+        left: -23px;
+
+        @include media-query(tablet-portrait) {
+            width: 80px;
+            height: 100px;
+            left: -45px;
+        }
+    }
+
+    &__title {
+        @include font-size(default);
+        text-transform: uppercase;
+        display: inline-block;
+    }
+
+    &__content {
+        @include font-size(s);
+        font-weight: $weight--light;
+        line-height: 1.4;
+
+        @include media-query(tablet-portrait) {
+            @include font-size(m);
+        }
+    }
+}

@@ -1,0 +1,21 @@
+{% load wagtailcore_tags %}{% pageurl page as item_url %}
+<a class="{% if classes %}{{ classes }}{% else %}nav__link{% endif %}" href="{{ item_url }}"
+    role="menuitem"
+    {% if has_children %} aria-haspopup="true" {% endif %}
+    >
+    {% if chevron_before %}
+        {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="footer-nav__icon" %}
+    {% endif %}
+
+    {% firstof title page.title as link_title %}
+
+    {% if has_children or description or structure == 'alternate_structure_item' %}
+        {% include "patterns/molecules/chevron-link/chevron-link.html" with title=link_title chevron_classes="nav__icon nav__icon--chevron" %}
+    {% else %}
+        <span>{{ link_title }}</span>
+    {% endif %}
+</a>
+
+{% if description %}
+    <span class="nav__description">{{ description }}</span>
+{% endif %}

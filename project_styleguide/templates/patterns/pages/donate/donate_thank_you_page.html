@@ -1,0 +1,71 @@
+{% extends "patterns/base_page--website.html" %}
+{% load i18n helper_tags static wagtailcore_tags wagtailimages_tags icon_tags %}
+
+{% block content %}
+
+{% include "patterns/molecules/hero/hero--image-background.html" with pattern="diamonds" %}
+
+<div class="wrapper wrapper--large wrapper--padding-for-page">
+    <section class="section section--donate">
+
+        <div class="payments__complete">
+            <div>
+                <h1>{% blocktrans with name=completed_transaction_details.first_name %}Thank you, {{ name }}{% endblocktrans %}</h1>
+                <p>{{ page.thank_you_summary }}</p>
+            </div>
+            <div class="payments__amount-box">
+                {% render_icon "icon-color-star" "" %}
+                {% if completed_transaction_details.payment_frequency == 'single' %}
+                <h4>
+                    {% if is_pay_in %}
+                        {% if completed_transaction_details.payment_method == 'card' %}
+                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"-2" %}Your £{{ amount }} payment through credit card has been successful.{% endblocktrans %}
+                        {% elif completed_transaction_details.payment_method == 'paypal' %}
+                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"-2" %}Your £{{ amount }} payment through Paypal has been successful.{% endblocktrans %}
+                        {% elif completed_transaction_details.payment_method == 'googlepay' %}
+                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"-2" %}Your £{{ amount }} payment through Google Pay has been successful.{% endblocktrans %}
+                        {% elif completed_transaction_details.payment_method == 'applepay' %}
+                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"-2" %}Your £{{ amount }} payment through Apple Pay has been successful.{% endblocktrans %}
+                        {% endif %}
+                    {% else %}
+                        {% if completed_transaction_details.payment_method == 'card' %}
+                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"-2" %}Your £{{ amount }} donation through credit card has been successful.{% endblocktrans %}
+                        {% elif completed_transaction_details.payment_method == 'paypal' %}
+                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"-2" %}Your £{{ amount }} donation through Paypal has been successful.{% endblocktrans %}
+                        {% elif completed_transaction_details.payment_method == 'googlepay' %}
+                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"-2" %}Your £{{ amount }} donation through Google Pay has been successful.{% endblocktrans %}
+                        {% elif completed_transaction_details.payment_method == 'applepay' %}
+                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"-2" %}Your £{{ amount }} donation through Apple Pay has been successful.{% endblocktrans %}
+                        {% endif %}
+                    {% endif %}
+                </h4>
+                <p>{% blocktrans %}A confirmation email will be sent straight to your email address.{% endblocktrans %}</p>
+                {% else %}
+                    <h4>{% blocktrans with amount=completed_transaction_details.amount|floatformat:"-2" %}Your £{{ amount }} recurring payment through Direct Debit has been set up successfully.{% endblocktrans %}</h4>
+                    <p>{% blocktrans %}A confirmation email will be sent straight to your email address. You will also receive an email within 3 working days confirming that your Direct Debit has been set up. The name on your bank statement will be &quot;Samaritans&quot;.{% endblocktrans %}</p>
+                {% endif %}
+
+                <p><small>{% blocktrans with ref=completed_transaction_details.transaction_id %}Your transaction reference is: {{ ref }}{% endblocktrans %}</small></p>
+            </div>
+        </div>
+
+        <hr class="hr hr--donate-thank-you" />
+
+        {% include_block page.body %}
+
+        {% include "patterns/atoms/corners/corners.html" with size="page" %}
+    </section>
+</div>
+
+<section class="section section--page-end-cta streamfield--dark-bg">
+    <div class="wrapper wrapper--large wrapper--padding-for-page">
+        {% include "patterns/molecules/tabccordion/tabccordion--donate-onward-actions.html" with title=page.onward_action_heading %}
+    </div>
+</section>
+
+{% endblock %}
+
+
+{% block extra_js %}
+    {{ tag_manager_events|json_script:"tag_manager_events" }}
+{% endblock %}

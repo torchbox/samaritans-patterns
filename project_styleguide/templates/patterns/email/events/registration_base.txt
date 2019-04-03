@@ -1,0 +1,7 @@
+{% extends "patterns/email/base.txt" %}
+
+{% block content %}
+Dear {{ first_name }},
+
+{{ body|striptags }}
+{% endblock %}

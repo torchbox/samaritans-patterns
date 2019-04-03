@@ -1,0 +1,7 @@
+{% extends "patterns/email/events/registration_base.html" %}
+
+{% block content %}
+    {{ block.super }}
+
+    <p>Please <a href="{{ base_url }}{{ submission.get_payment_url }}">make payment</a> for your registration.</p> 
+{% endblock %}

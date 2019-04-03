@@ -1,0 +1,37 @@
+{% load wagtailcore_tags %}
+
+{% if type == 'short' %}
+
+<a href="{% pageurl value.link.page %}" class="card-new card-new--listening-service card-new--listening-service--short">
+    <span class="card-new__corner"></span>
+    <div class="card-new__inner">
+        <div class="card-new__container">
+            <h2 class="card-new__title">
+                {% firstof value.title value.link.title value.link.page.title as card_title %}
+                {% include "patterns/molecules/chevron-link/chevron-link.html" with title=card_title %}
+            </h2>
+            <p class="card-new__text">{{ value.description }}</p>
+        </div>
+        <span class="card-new__connectors"></span>
+    </div>
+</a>
+
+{% else %}
+
+<div class="card-new card-new--listening-service card-new--listening-service--full">
+    <span class="card-new__corner"></span>
+    <div class="card-new__inner">
+        <div class="card-new__container">
+            <h2 class="card-new__title">
+                {{ value.title }}
+            </h2>
+            <p class="card-new__text">{{ value.description }}</p>
+            {% include_block value.call_to_action with type='hero_cta' %}
+            <a class="card-new__link" href="{% pageurl value.link.page %}">{{ value.link.title|default:value.link.page.title }}</a>
+        </div>
+    </div>
+    <span class="card-new__connectors"></span>
+    <span class="card-new__connectors--extra"></span>
+</div>
+
+{% endif %}

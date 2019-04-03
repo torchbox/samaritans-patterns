@@ -1,0 +1,22 @@
+.figure {
+    @include margin-streamfield-block;
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 728px;
+
+
+    &__image {
+        width: 100%;
+        display: block;
+    }
+
+    &__caption {
+        @include font-size(xs);
+        color: $grey-text;
+        margin-top: $gutter-small;
+
+        > p:last-child {
+            margin: 0;
+        }
+    }
+}

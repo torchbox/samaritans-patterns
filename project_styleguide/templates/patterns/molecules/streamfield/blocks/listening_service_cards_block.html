@@ -1,0 +1,10 @@
+{% load wagtailcore_tags %}
+<div class="streamfield streamfield--listening-services">
+    {% include_block value.listening_service_1 %}
+    {% include_block value.listening_service_2 %}
+    <div class="streamfield__service-buttons">
+        {% pageurl value.ambulance_link as href %}
+        {% include "patterns/atoms/buttons/button.html" with label=value.ambulance_text href=href classes="button button--tertiary" %}
+        {% include "patterns/atoms/buttons/button.html" with label=value.listening_services_link_text href="#listening-services" classes="button button--tertiary js-smooth-scroll" icon="arrow-downward" %}
+    </div>
+</div>

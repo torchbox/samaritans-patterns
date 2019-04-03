@@ -1,0 +1,101 @@
+/*------------------------------------*\
+	$BASE DEFAULTS
+\*------------------------------------*/
+
+// Box Sizing
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+// Prevent text size change on orientation change.
+// sass-lint:disable no-vendor-prefixes
+html {
+    font-family: $font--primary;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden; // Safari doesn't respect `overflow-x: hidden` on `body` unless it's also on `html`
+}
+
+body {
+    overflow-x: hidden;
+    background-color: $color--tertiary;
+
+    &.no-scroll,
+    &.mob-nav-open, {
+        overflow-y: hidden;
+    }
+}
+
+.body--website {
+    background-color: $off-white;
+    padding: 0 $body-padding--website;
+
+    // fixed position borders at the top of the stacking context
+    &::before,
+    &::after {
+        content: '';
+        background-color: $white;
+        display: block;
+        width: 10px;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        z-index: z($z-elements, page-borders);
+    }
+
+    &::before {
+        left: 0;
+    }
+
+    &::after {
+        right: 0;
+    }
+}
+
+// Prevent empty space below images appearing
+img,
+svg {
+    vertical-align: top;
+}
+
+// Responsive images
+img {
+    height: auto;
+    max-width: 100%;
+}
+
+// sass-lint:disable single-line-per-selector
+button, input, select, textarea {
+    font-family: inherit;
+}
+// sass-lint:enddisable
+
+button {
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    background-image: none;
+    box-shadow: none;
+    cursor: pointer;
+}
+
+a {
+    @include link;
+
+    .rich-text & {
+        @include underline(transparent, currentColor);
+    }
+}
+
+ul,
+ol {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.hidden {
+    @include hidden;
+}

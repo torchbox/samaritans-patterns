@@ -1,0 +1,50 @@
+{% load i18n icon_tags %}
+
+{% if type == 'hero_cta' %}
+
+<a href="tel:{{ value.phone_number }}" class="listening-cta listening-cta--primary listening-cta--link">
+    <span class="listening-cta__corner"></span>
+    <div class="listening-cta__inner">
+        <div class="listening-cta__container">
+            {% if page.icon %}
+                {% render_icon page.icon "listening-cta__icon" %}
+            {% endif %}
+            <div class="listening-cta__text">
+                <h2 class="listening-cta__heading">Call {{ value.phone_number }}</h2>
+                {% if value.wait_time %}
+                <p>
+                    {% trans "Wait time:" %}
+                    {{ value.wait_time }}
+                </p>
+                {% endif %}
+            </div>
+        </div>
+        {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="listening-cta__chevron" aria_hide="true" %}
+    </div>
+    <span class="listening-cta__connectors"></span>
+</a>
+
+{% else %}
+
+<div class="service-block">
+    <h2 class="service-block__heading">
+        {{ value.call_to_action_text }}
+        <a class="service-block__cta" href="tel:{{ value.phone_number }}">
+            {{ value.phone_number }}
+        </a>
+    </h2>
+    {% if value.wait_time %}
+        <span>{% trans "Wait time:" %} {{ value.wait_time }}</span>
+    {% endif %}
+</div>
+
+<a href="tel:{{ value.phone_number }}" class="service-block service-block--sticky service-block--link">
+    {% include "patterns/atoms/svg/colour-icons/icon-color-mobile.html" with classes="service-block__icon" %}
+    <span class="service-block__link service-block__no-shrink">{{ value.phone_number }}</span>
+    <span>{{ value.call_to_action_text }}</span>
+    {% if value.wait_time %}
+        <span class="service-block__no-shrink">{% trans "Wait time:" %} {{ value.wait_time }}</span>
+    {% endif %}
+</a>
+
+{% endif %}

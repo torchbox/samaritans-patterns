@@ -1,0 +1,79 @@
+.contact-block {
+    $root: &;
+    @include corner($lime, bottom, right);
+    @include margin-streamfield-block;
+    background: $ink;
+    padding: $gutter-x-large $gutter-medium;
+    color: $white;
+
+    &__connectors {
+        @include connectors($lime, bottom, right, medium);
+    }
+
+    &__header {
+        max-width: 730px;
+    }
+
+    &__description {
+        @include font-size(s);
+        margin-bottom: $gutter-large;
+    }
+
+    &__details {
+        max-width: 730px;
+
+        @include media-query(tablet-portrait) {
+            column-count: 2;
+            column-gap: $gutter-xxl;
+        }
+    }
+
+    &__detail {
+        @include font-size(s);
+        display: flex;
+        align-items: center;
+        break-inside: avoid;
+        margin-bottom: $gutter;
+
+        @include media-query(tablet-portrait) {
+            @include font-size(default);
+        }
+
+        &--email,
+        &--website {
+            #{$root}__detail-inner {
+                @include underline(transparent, currentColor);
+                color: $white;
+
+                #{$hover} {
+                    color: $white;
+                }
+            }
+        }
+    }
+
+    &__detail-inner {
+        margin: 0;
+    }
+
+    &__icon {
+        margin-right: $gutter-small;
+        flex-shrink: 0;
+        width: 30px;
+        height: 30px;
+
+        @include media-query(tablet-portrait) {
+            width: 42px;
+            height: 42px;
+        }
+
+        &--directions {
+            height: 50px;
+
+            @include media-query(tablet-portrait) {
+                width: 62px;
+                height: 96px;
+            }
+        }
+    }
+}

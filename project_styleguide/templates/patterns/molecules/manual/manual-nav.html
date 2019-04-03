@@ -1,0 +1,16 @@
+{% load wagtailcore_tags %}
+
+<header class="manual__header">
+    <nav class="manual__nav">
+        <ul class="manual__list">
+            {% for sibling in page.get_siblings.live %}
+                <li class="manual__item">
+                    <a class="manual__link {% if sibling.path == page.path %}manual__link--active{% endif %}" href="{% pageurl sibling %}">
+                        {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="manual__chevron" aria_hidden=True %}
+                        <span>{{ sibling.title }}</span>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </nav>
+</header>

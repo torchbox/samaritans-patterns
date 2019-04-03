@@ -1,0 +1,189 @@
+{% extends "patterns/base_page--website.html" %}
+{% load wagtailcore_tags wagtailimages_tags icon_tags static %}
+
+{% block content %}
+
+    <div class="hero hero--homepage">
+
+        {% image page.hero_image fill-3800x2500 jpegquality-40 as hero_image %}
+        <div class="donate-landing-hero__image" style="background-image: url({{ hero_image.url}});"></div>
+
+        <div class="hero__inner wrapper wrapper--large wrapper--padding">
+
+            <h1 class="hidden">Samaritans</h1>
+
+            <div class="hero-widget">
+                <div class="hero-widget__corner"></div>
+                <div class="hero-widget__inner">
+                    <span class="hero-widget__connectors"></span>
+                    <span class="hero-widget__connectors--extra"></span>
+
+                    {% if page.hero_headline %}
+                        <h2 class="hero-widget__heading">{{ page.hero_headline }}</h2>
+                    {% endif %}
+                    {% if page.hero_description %}
+                        <p>{{ page.hero_description }}</p>
+                    {% endif %}
+
+                    <hr class="hr hr--dashed hr--dark">
+
+                    <a class="inline-cta inline-cta--homepage-widget" href="{% if page.hero_cta_link %}{% pageurl page.hero_cta_link %}{% endif %}">
+                        {% if page.hero_cta_icon %}
+                            {% render_icon page.hero_cta_icon "inline-cta__icon" %}
+                        {% endif %}
+                        <div class="inline-cta__text">
+                            {% if page.hero_cta_title %}
+                                <p>{{ page.hero_cta_title }}</p>
+                            {% endif %}
+                            <p class="inline-cta__link">
+                                {% include "patterns/molecules/chevron-link/chevron-link.html" with title=page.hero_cta_link_text chevron_link_classes="chevron-link--underline" %}
+                            </p>
+                        </div>
+                    </a>
+
+                </div> {# /.hero-widget__inner #}
+            </div> {# /.hero-widget #}
+        </div>
+    </div>
+
+    <section class="section--website-homepage-top">
+        <div class="wrapper wrapper--small">
+            <h2 class="heading-secondary heading-secondary--large">
+                {{ page.secondary_headline }}
+            </h2>
+            <p class="website-homepage__text website-homepage__text--top-section">
+                {{ page.secondary_description }}
+            </p>
+        </div>
+    </section>
+
+    <div class="wrapper wrapper--large wrapper--padding-for-page-tablet-portrait">
+
+        <section class="horizontal-card horizontal-card--homepage-support">
+            <div class="horizontal-card__inner">
+                {% if page.support_image %} {# if statement can be removed after these are added in the db. these fields are required, but the page breaks when the change is first made. #}
+                {% image page.support_image fill-1300x1300 as support_image %}
+                <div class="horizontal-card__image" style="background-image: url({{ support_image.url }});"></div>
+                {% endif %}
+
+                <div class="horizontal-card__container">
+                    <h2 class="horizontal-card__heading">
+                        {{ page.support_headline }}
+                    </h2>
+                    <ul class="grid grid--homepage-support nav--homepage-support">
+                        {% for support_link in page.support_us_links.all %}
+                            <li class="nav__item nav__heading nav__heading--homepage-support" role="presentation">
+                                {% include "patterns/molecules/navigation/includes/menu_item.html" with page=support_link.link title=support_link.link_text description=support_link.summary classes="nav__link nav__link--description" %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <span class="horizontal-card__connectors"></span>
+        </section>
+
+        <section class="horizontal-card horizontal-card--homepage-volunteer">
+            <div class="horizontal-card__inner">
+
+                {% if page.volunteer_image %}
+                    {% image page.volunteer_image width-1300 as volunteer_image %}
+                    <div class="horizontal-card__image" style="background-image: url({{ volunteer_image.url }});"></div>
+                {% endif %}
+
+                <div class="horizontal-card__container">
+                    <h2 class="heading-secondary heading-secondary--large website-homepage__volunteer__heading">
+                        {% if page.volunteer_icon %} {# if statement can be removed after these are added in the db. these fields are required, but the page breaks when the change is first made. #}
+                        {% include "patterns/molecules/chevron-link/chevron-link.html" with title=page.volunteer_headline color_icon=page.volunteer_icon %}
+                        {% else %}
+                        {{ page.volunteer_headline }}
+                        {% endif %}
+                    </h2>
+                    <p class="website-homepage__text">{{ page.volunteer_description }}</p>
+                    <a href="{{ page.volunteer_link.url }}" class="horizontal-card__link">
+                        {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="horizontal-card__link-chevron" aria_hide="true" %}
+                        <span>
+                            <span class="horizontal-card__link-text">
+                                {{ page.volunteer_link_text }}
+                            </span>
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <span class="horizontal-card__connectors"></span>
+        </section>
+
+    </div> {# /.wrapper--large.wrapper--padding-for-page-tablet-portrait #}
+
+    <div class="wrapper wrapper--large wrapper--padding-for-page">
+
+        <div class="wrapper wrapper--website-homepage">
+
+            {% include "patterns/atoms/svg/patterns/pattern-arrow.html" with classes="pattern" %}
+
+            <section class="section section--page-padding">
+                <div class="news-cards news-cards--homepage">
+                <div class="news-cards__heading">
+                    <h2 class="heading-secondary news-cards__heading-text">
+                        Samaritans news
+                    </h2>
+                    <a href="/news" class="news-cards__heading-link">
+                        <span class="news-cards__heading-link-inner">
+                            View all news
+                        </span>
+                    </a>
+                </div>
+                </div>
+                {% if page.featured_news %}
+                    <div class="grid grid--3col">
+                        {% for card in page.featured_news.get_object_list %}
+                            {% include "patterns/molecules/cards/related-card.html" with value=card.news.specific classes="card-new--homepage-news" type="news" %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </section>
+
+        </div>
+
+        <section class="section section--website-homepage-bottom">
+
+            {% include "patterns/atoms/corners/corners.html" with size="page" %}
+
+            <div class="grid grid--3col grid--no-margin">
+                <div class="grid__double-width">
+
+                    <h2 class="heading-secondary heading-secondary--large">{{ page.more_info_headline }}</h2>
+                    <p class="website-homepage__text">{{ page.more_info_description }}</p>
+
+                    {% if page.more_info_pages %}
+                        <div class="grid grid--2col grid--no-margin">
+                            {% for card in page.more_info_pages.get_object_list %}
+                                {% include "patterns/molecules/cards/related-card.html" with value=card.more_info_pages.specific classes="card-new--dark" %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                </div>
+            </div>
+
+        </section> {# /.section--website-homepage-bottom #}
+
+    </div> {# /.wrapper--large.wrapper--padding-for-page #}
+
+
+    <section class="section section--page-end-cta">
+        <div class="website-homepage__cta wrapper wrapper--small">
+            <h2 class="website-homepage__cta__heading">
+                {% if page.cta_title %} {# if statement can be removed after these are added in the db. these fields are required, but the page breaks when the change is first made. #}
+                {% render_icon page.cta_icon "website-homepage__cta__icon" %}
+                {% endif %}
+                <span class="website-homepage__cta__heading-text">
+                    {{ page.cta_title }}
+                </span>
+            </h2>
+            <p class="website-homepage__cta__text">{{ page.cta_description }}</p>
+            {% include "patterns/atoms/buttons/button.html" with large=True label=page.cta_link_text href=page.cta_link.url %}
+        </div>
+    </section>
+
+{% endblock %}

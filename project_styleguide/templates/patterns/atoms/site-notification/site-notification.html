@@ -1,0 +1,6 @@
+{% load wagtailcore_tags %}
+
+<div class="site-notification">
+    {% include "patterns/atoms/svg/icons/icon-info-circle.html" with classes="site-notification__icon" %}
+    {{ settings.utils.SystemMessagesSettings.notification_text|richtext }}
+</div>

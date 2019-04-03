@@ -1,0 +1,11 @@
+context:
+  value:
+    cta_title: Title
+    summary: Check out our awesome stub content
+    get_link_text: Click here
+    get_link_url: "#"
+    button_text: Test event
+    button_link:
+      - block_type: page
+        value:
+          url: /

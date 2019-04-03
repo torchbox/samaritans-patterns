@@ -1,0 +1,62 @@
+{% extends "patterns/base_page--website.html" %}
+{% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags static %}
+
+{% block header %}
+    {% include "patterns/organisms/header/header--website.html" with show_nav=True transparent_nav=True %}
+{% endblock header %}
+
+
+{% block content %}
+<div class="wrapper wrapper--flex">
+    {% include "patterns/molecules/hero/hero--image-background.html" with pattern="alt" %}
+
+    <div class="wrapper wrapper--large wrapper--padding-for-page">
+
+        <section class="section section--website-event">
+            {% include "patterns/molecules/navigation/breadcrumbs.html" with on_light=True %}
+
+            <h1>{{ page.title }}</h1>
+
+            {% include 'patterns/molecules/meta-bar/meta-bar.html' with value=page modifier="event" apply_button=page.applications_tab_count %}
+
+            {% if page.introduction %}
+                <p class="intro">{{ page.introduction }}<p>
+            {% endif %}
+
+            {# copied from patterns/molecules/accordion/accordion-item.html #}
+            {% if page.support_how or page.support_why or page.more_info %}
+                <div role="tablist" aria-multiselectable="true">
+                    {% if page.support_how|striptags %}
+                        {% include "patterns/molecules/accordion/accordion-item.html" with index=0 heading="How Samaritans will support you" description=page.support_how %}
+                    {% endif %}
+                    {% if page.support_why|striptags %}
+                        {% include "patterns/molecules/accordion/accordion-item.html" with index=1 heading="Why Samaritans need your support" description=page.support_why %}
+                    {% endif %}
+                    {% if page.more_info|striptags %}
+                        {% include "patterns/molecules/accordion/accordion-item.html" with index=2 heading="More information" description=page.more_info %}
+                    {% endif %}
+                </div>
+            {% endif %}
+
+            {% include "patterns/molecules/gallery/gallery.html" with title=page.gallery_title gallery=page.gallery_items|slice:":6" %}
+
+            {% include_block page.body %}
+
+            {% include "patterns/atoms/corners/corners.html" with size="page" %}
+        </section>
+
+        {% if page.applications_tab_count %}
+            <section class="section section--website-event-after apply" id="apply">
+                <div class="apply__column apply__column--small">
+                    <h1 class="apply__heading" id="apply-section">Apply Now</h1>
+                    {% include "patterns/atoms/svg/colour-icons/icon-color-trainers.html" with classes="apply__icon" %}
+                </div>
+                <div class="apply__column apply__column--large">
+                    {% include "patterns/molecules/tabccordion/tabccordion--apply.html" with tab_count=page.applications_tab_count %}
+                </div>
+            </section>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock content %}

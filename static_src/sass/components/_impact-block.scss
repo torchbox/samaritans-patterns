@@ -1,0 +1,81 @@
+.impact-block {
+    $root: &;
+    $background-color: rgba($amethyst, 0.9);
+    $corner-offset: $gutter-large + 5px;
+
+    &__image-section {
+        position: relative;
+
+        .section--landing-page-light-bg & {
+            @include page-child-negative-margin--vertical(top);
+            @include page-child-negative-margin--horizontal(left);
+            @include page-child-negative-margin--horizontal(right);
+        }
+    }
+
+    &__heading {
+        padding: $gutter-small;
+        color: $white;
+        background-color: $amethyst;
+
+        @include media-query(tablet-portrait) {
+            position: absolute;
+            left: 0;
+            bottom: $gutter-large;
+            padding: $gutter-small $gutter-medium $gutter-small $gutter-xxl;
+            background-color: $background-color;
+        }
+    }
+
+    &__heading-corner-padding-filler {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        left: 100%;
+        width: $corner-offset - 15px;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0.5 * $corner-offset;
+            left: 0;
+            width: 100%;
+            background-color: $background-color;
+        }
+    }
+
+    &__heading-corner {
+        position: absolute;
+        bottom: 0;
+        left: 100%;
+        height: 0.5 * $corner-offset;
+        width: $corner-offset - 15px;
+        overflow: hidden;
+    }
+
+    &__heading-corner-image {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        transform: rotate(180deg);
+        fill: $background-color;
+    }
+
+    &__content {
+        .streamfield--dark-bg & {
+            @include section--page;
+            background-color: $white;
+
+            @include media-query($page-connectors-breakpoint) {
+                #{$root}__connectors {
+                    @include connectors($amethyst, bottom, left, page);
+                }
+
+                #{$root}__connectors--extra {
+                    @include connectors($amethyst, bottom, right, page);
+                }
+            }
+        }
+    }
+}

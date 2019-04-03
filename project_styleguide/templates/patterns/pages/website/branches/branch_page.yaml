@@ -1,0 +1,40 @@
+context:
+  page:
+    charity_registered_name: Test branch page
+    phone_number: 9999999999
+    email: test@example.com
+    street_address_1: 3rd Floor
+    street_address_2: 15 Colston Street
+    city: Bristol
+    postcode: BS1 5AP
+    get_country_display: UK
+    branch_opening_hours:
+      all:
+        - get_weekday_display: Monday
+          from_hour:  10 a.m.
+          to_hour: 5 p.m.
+        - get_weekday_display: Tuesday
+          from_hour: 10 a.m.
+          to_hour: 11 a.m.
+        - get_weekday_display: Tuesday
+          from_hour: 2 p.m.
+          to_hour: 6 p.m.
+    accessible_toilets: true
+    wheelchair_accessible: false
+    accessibility_notes: Test note about accessibility
+    branch_activities:
+      all:
+        - activity_type: Activity 1
+          information: information about activity
+        - activity_type: Activity 2
+          information: information about activity
+    introduction: test introduction
+    volunteer_link: https://www.example.com
+    donate_link: https://www.example.com
+    registered_charity_details: Registered charity details
+
+tags:
+  image:
+    page.branch_image fill-450x300:
+      raw: |
+        <img src="http://via.placeholder.com/450x300" width="450" height="300" alt="Some alt">

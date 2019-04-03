@@ -1,0 +1,24 @@
+.news-cards {
+    $root: &;
+
+    &__heading {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    &__heading-text {
+        margin-bottom: 0;
+    }
+
+    &__heading-link {
+        @include underline($element: #{$root}__heading-link-inner);
+        padding-left: $gutter-medium;
+        border-left: 1px dashed $grey-text;
+        margin-left: $gutter-medium;
+
+        #{$root}--homepage & {
+            @include link($color--link--on-off-white);
+        }
+    }
+}

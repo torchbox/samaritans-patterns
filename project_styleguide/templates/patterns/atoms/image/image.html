@@ -1,0 +1,11 @@
+{% load wagtailimages_tags %}
+
+<figure class="figure">
+    {% image value.image width-728 class="figure__image" %}
+
+    {% if value.caption %}
+        <figcaption class="figure__caption">
+            <p>{{ value.caption }}</p>
+        </figcaption>
+    {% endif %}
+</figure>

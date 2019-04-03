@@ -1,0 +1,7 @@
+{% block content %}{% endblock %}
+
+--
+Copyright © 2019 Samaritans, All rights reserved._
+Samaritans, The Upper Mill, KT17 2AF
+
+Founded in 1953 by Prebendary Dr Chad Varah CH CBE.A company limited by guarantee registered in England & Wales (757372) and a charity registered in England & Wales (219432) and in Scotland (SC040604).

@@ -1,0 +1,8 @@
+{% load i18n %}
+{% if form_pages %}
+    {% include "patterns/pages/website/forms/admin/list_forms.html" %}
+
+    {% include "wagtailadmin/shared/pagination_nav.html" with items=page_obj linkurl="forms-admin-custom-index" %}
+{% else %}
+    <p>{% trans "No form pages have been created." %}</p>
+{% endif %}

@@ -1,0 +1,14 @@
+context:
+  related_pages:
+    - page:
+        specific:
+          listing_title: If you're worried about someone else
+          listing_summary: We can give you advice and information
+    - page:
+        specific:
+          listing_title: Understanding emotional health
+          listing_summary: We can give you advice and information
+    - page:
+        specific:
+          listing_title: Chat to a Samaritan
+          listing_summary: We can give you advice and information

@@ -1,0 +1,101 @@
+{% extends "patterns/base_page--website.html" %}
+{% load wagtailcore_tags i18n icon_tags locale_tags %}
+
+{% block body_class %}{{ block.super }} template-listening-service{% endblock %}
+
+{% block content %}
+
+    <div class="hero
+        hero--emerald
+        hero--short
+        hero--services
+        {% if page.get_ancestors|length > 1 %}hero--breadcrumb{% endif %}
+        ">
+        <div class="hero__wrapper wrapper wrapper--large wrapper--padding wrapper--relative">
+            <div class="hero__inner">
+                {% if settings.utils.SystemMessagesSettings.show_notification %}
+                    {% include "patterns/atoms/site-notification/site-notification.html" %}
+                {% endif %}
+
+                {% include "patterns/molecules/navigation/breadcrumbs.html"%}
+
+                <h1 class="hero__title">{{ page.title }}</h1>
+
+                {% language_switcher %}
+
+                <h2 class="hero__subtitle">{% include_block page.short_description %}</h2>
+
+                <div class="listening-cta-grid">
+                    <div> {# for flex #}
+                        {% include_block page.service_call_to_action with type='hero_cta' %}
+
+                        <div class="sticky-cta js-sticky-cta">
+                            <div class="sticky-cta__sticky">
+                                <div class="wrapper wrapper--large wrapper--padding-for-page">
+                                    <aside class="sticky-cta__inner">
+                                        {% include_block page.service_call_to_action %}
+                                    </aside>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> {# for flex #}
+
+                    {% if page.secondary_cta_heading or page.secondary_cta_content %}
+                        <div class="listening-cta listening-cta--secondary">
+                            <span class="listening-cta__corner"></span>
+                            <div class="listening-cta__inner">
+                                <div class="listening-cta__text">
+                                    {% if page.secondary_cta_heading %}
+                                        <h2 class="listening-cta__heading">{{ page.secondary_cta_heading }}</h2>
+                                    {% endif %}
+                                    {{ page.secondary_cta_content|richtext }}
+                                </div>
+                            </div>
+                            <div class="listening-cta__connectors"></div>
+                        </div>
+                    {% endif %}
+                </div> {# /.listening-cta-grid #}
+
+            </div> {# /.hero__inner #}
+        </div> {# /.hero__wrapper #}
+    </div> {# /.hero #}
+
+    {% if page.information_cards %}
+        <div class="wrapper wrapper--large wrapper--padding-for-page">
+            <section class="section section--page-padding">
+                <div class="streamfield streamfield--white-bg">
+                    {% include_block page.information_cards %}
+                </div>
+            </section>
+        </div>
+    {% endif %}
+
+    <div class="wrapper wrapper--white-background">
+        <div class="wrapper wrapper--small wrapper--padding-for-page">
+            <section class="section section--page-padding">
+                {% include_block page.long_description %}
+            </section>
+        </div>
+    </div>
+
+    <div class="wrapper wrapper--teal-background">
+        <div class="wrapper wrapper--large wrapper--padding-for-page">
+            <section class="section section--page-padding">
+                <h2 id="listening-services" class="heading-block heading-block--services heading-block--dark-background">{% trans "Find the service that's right for you..." %}</h2>
+
+                {% include "patterns/molecules/tabccordion/tabccordion.html" with tabs=all_listening_service_pages id="listening-services" classes="tabccordion--streamfield tabccordion--dark-bg" %}
+
+                {% if page.related_pages.all|length > 0 %}
+                    <h2 class="heading-block heading-block--dark-background heading-block--related">{% trans "You might also be interested in..." %}</h2>
+                    <div class="grid grid--no-margin grid--3col grid--large-gutters">
+                        {% for card in page.related_pages.all %}
+                            {% include "patterns/molecules/cards/related-card.html" with value=card.page.specific %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </section>
+        </div>
+    </div>
+
+{% endblock %}

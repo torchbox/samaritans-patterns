@@ -1,0 +1,38 @@
+{% load wagtailcore_tags icon_tags %}
+
+{% if type == 'hero_cta' %}
+
+<a href="{% pageurl value.button_link %}" class="listening-cta listening-cta--primary listening-cta--link">
+    <span class="listening-cta__corner"></span>
+    <div class="listening-cta__inner">
+        <div class="listening-cta__container">
+            {% if page.icon %}
+                {% render_icon page.icon "listening-cta__icon" %}
+            {% endif %}
+            <div class="listening-cta__text">
+                <h2 class="listening-cta__heading">{{ value.call_to_action_text }}</h2>
+                <p>
+                    {{ value.button_text }}
+                </p>
+            </div>
+        </div>
+        {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="listening-cta__chevron" aria_hide="true" %}
+    </div>
+    <span class="listening-cta__connectors"></span>
+</a>
+
+{% else %}
+
+{% pageurl value.button_link as href %}
+<div class="service-block">
+    <p>{{ value.call_to_action_text }}</p>
+    {% include "patterns/atoms/buttons/button.html" with label=value.button_text href=href classes="button--large" %}
+</div>
+
+<a href="{{ href }}" class="service-block service-block--sticky service-block--link">
+    {% include "patterns/atoms/svg/colour-icons/icon-color-door-open.html" with classes="service-block__icon" %}
+    <span>{{ value.call_to_action_text }}</span>
+    <span class="service-block__link">{{ value.button_text }}</span>
+</a>
+
+{% endif %}

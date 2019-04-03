@@ -1,0 +1,7 @@
+{% load staticfiles %}
+{% load wagtailimages_tags %}
+
+<blockquote class="story-call-to-action-block">
+    {% image value.image max-440x440 class="story-call-to-action-block__image" %}
+    {% include "patterns/molecules/streamfield/blocks/quote_block.html" with story_cta=True %}
+</blockquote>

@@ -1,0 +1,12 @@
+context:
+  accordions:
+    details:
+    - heading: Accordion title
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam magna justo, sollicitudin sit amet laoreet id, sodales vel metus. Etiam bibendum, augue in porta ultricies, elit sapien fringilla nisl, sit amet fermentum ligula augue nec sapien. Aliquam eu aliquet metus. Donec quis dolor at tellus viverra molestie."
+      icon: icon-color-cupcake
+    - heading: Accordion 2 title
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam magna justo, sollicitudin sit amet laoreet id, sodales vel metus. Etiam bibendum, augue in porta ultricies, elit sapien fringilla nisl, sit amet fermentum ligula augue nec sapien. Aliquam eu aliquet metus. Donec quis dolor at tellus viverra molestie."
+      icon: icon-color-cupcake
+    - heading: Accordion 3 title
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam magna justo, sollicitudin sit amet laoreet id, sodales vel metus. Etiam bibendum, augue in porta ultricies, elit sapien fringilla nisl, sit amet fermentum ligula augue nec sapien. Aliquam eu aliquet metus. Donec quis dolor at tellus viverra molestie."
+      icon: icon-color-cupcake

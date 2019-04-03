@@ -1,0 +1,27 @@
+.sticky-cta {
+    $root: &;
+    position: relative;
+    z-index: z($z-elements, sticky-cta);
+
+    &__sticky {
+        display: none;
+
+        #{$root}--is-stuck & {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: $body-padding--website;
+            right: $body-padding--website;
+            padding-top: $gutter;
+            padding-bottom: $gutter;
+            z-index: z($z-elements, sticky-cta);
+            background-color: rgba($amethyst, 0.95);
+            color: $white;
+        }
+    }
+
+    &__inner {
+        @include page-padding--horizontal(left);
+        @include page-padding--horizontal(right);
+    }
+}

@@ -1,0 +1,136 @@
+.horizontal-card {
+    $root: &;
+
+    @mixin card-corner($color, $position-1: top, $position-2: left) {
+        @include media-query(tablet-portrait) {
+            @include corner($color, $position-1, $position-2, $width: 200px, $height: 50%, $offset: 10px);
+
+            &::before {
+                z-index: auto;
+            }
+
+            #{$root}__connectors {
+                @include connectors($color, $position-1, $position-2, medium);
+            }
+        }
+    }
+
+    position: relative;
+
+    &--homepage-support {
+        @include card-corner($lime);
+        margin-top: $gutter-xxl;
+
+        @include media-query(tablet-landscape) {
+            margin-top: (-2 * $section-overlap);
+        }
+    }
+
+    &--homepage-volunteer {
+        @include card-corner($amethyst, bottom, right);
+        margin-top: $gutter-x-large;
+        margin-bottom: $gutter-x-large;
+
+        @include media-query(tablet-landscape) {
+            margin-bottom: 0;
+        }
+    }
+
+    &__inner {
+        @include media-query(tablet-portrait) {
+            display: flex;
+            justify-content: stretch;
+        }
+
+        #{$root}--homepage-support & {
+            flex-direction: row-reverse;
+        }
+    }
+
+    &__image {
+        background-color: $color--default;
+        background-position: center;
+        background-size: cover;
+        flex-shrink: 0;
+        width: 100%;
+        height: 50vh;
+
+        @include media-query(tablet-portrait) {
+            width: 50%;
+            height: auto;
+        }
+
+        #{$root}--homepage-support & {
+            @include media-query(tablet-landscape) {
+                width: 33%;
+            }
+        }
+    }
+
+    &__container {
+        @include section--page;
+        background-color: $white;
+        z-index: auto;
+        padding: $gutter;
+
+        @include target-ie11 {
+            .rich-text {
+                width: 100%;
+            }
+        }
+
+        #{$root}--homepage-support & {
+            background-color: $ink;
+            color: $white;
+
+            @include media-query(tablet-landscape) {
+                padding: 40px;
+            }
+        }
+    }
+
+    &__heading {
+        #{$root}--homepage-support & {
+            border-bottom: 1px solid rgba($white, 0.2);
+            padding-bottom: $gutter;
+            margin-bottom: $gutter;
+
+            @include media-query(tablet-landscape) {
+                padding-bottom: $gutter-medium;
+                margin-bottom: $gutter-medium;
+            }
+        }
+    }
+
+    &__link {
+        #{$root}--homepage-volunteer & {
+            @include link($color--link, $color--link-hover-subtle);
+            @include underline($element: #{$root}__link-text);
+            display: flex;
+            align-items: center;
+            font-weight: $weight--bold;
+
+            #{$hover} {
+                #{$root}__link-chevron {
+                    transform: translateX(50%);
+                }
+            }
+        }
+    }
+
+    // this needs to be wrapped in a span because the parent is displayed flex
+    &__link-text {
+        #{$root}--homepage-volunteer & {
+            margin-bottom: 0;
+        }
+    }
+
+    &__link-chevron {
+        #{$root}--homepage-volunteer & {
+            @include link-chevron--underline-link;
+            height: $base-font-size;
+            margin-left: 0;
+            margin-right: 15px;
+        }
+    }
+}

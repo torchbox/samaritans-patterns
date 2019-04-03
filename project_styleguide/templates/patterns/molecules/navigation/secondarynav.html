@@ -1,0 +1,10 @@
+{% load wagtailcore_tags %}
+<nav class="nav nav--cta" role="navigation" aria-label="Secondary">
+    <ul class="nav nav--secondary" role="menubar">
+        {% for item in secondarynav %}
+            <li class="nav__item" role="presentation">
+                {% include "patterns/molecules/navigation/includes/menu_item--icon.html" with page=item.value.page title=item.value.title icon=item.value.icon %}
+            </li>
+        {% endfor %}
+    </ul>
+</nav>

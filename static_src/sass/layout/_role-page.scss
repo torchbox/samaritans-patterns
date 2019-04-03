@@ -1,0 +1,25 @@
+.role-page {
+
+    &__body {
+        @include font-size(s);
+
+        ul {
+            margin-left: 0;
+        }
+
+        li {
+            padding-left: $gutter;
+            margin-bottom: 5px;
+        }
+    }
+
+    &__info-list {
+        li {
+            margin-bottom: $gutter-small;
+        }
+    }
+
+    &__apply-button {
+        margin-top: $gutter-xxl;
+    }
+}

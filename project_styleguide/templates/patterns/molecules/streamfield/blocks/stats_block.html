@@ -1,0 +1,5 @@
+{% load wagtailcore_tags %}
+
+{% for stat in value %}
+    {% include_block stat %}
+{% endfor %}

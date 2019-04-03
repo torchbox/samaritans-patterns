@@ -1,0 +1,40 @@
+{% load form_tags helper_tags i18n icon_tags %}
+
+<section class="section section--donate-marketing streamfield--dark-bg">
+    <div class="section__connectors--extra"></div>
+    <h2>{% trans "Stay in touch" %}</h2>
+    <div class="donate__marketing-intro">
+        <p class="donate__marketing-meta">{% trans "We’d like to keep you updated about our work and fundraising campaigns by post. Samaritans volunteers work around the clock to be there for anyone who needs us. But we can’t do it on our own." %}</p>
+        {% render_icon "icon-color-envelope-open" "" %}
+    </div>
+
+    <div class="js-select-all-checkbox-toggle">
+        <div class="form-item-wrapper form-item-wrapper--group" id="donate__contact-prefs">
+            {% render_form_field form.prefs_updates %}
+            {% render_form_field form.prefs_fundraising %}
+            {% render_form_field form.prefs_volunteering %}
+        </div>
+        <p><a class="donate__marketing-select-all js-select-all" id="donate__select-all-contact-prefs" href="#donate__contact-prefs">Or check all</a></p>
+    </div>
+
+    <h3>{% trans "How would you like to be updated?" %}</h3>
+    <p class="donate__marketing-meta">{% trans "We will keep in touch with you by post, but we’d also like to keep in touch in these other ways, if you are happy for us to." %}</p>
+
+    <div class="form-item-wrapper form-item-wrapper--radio-select-inline">
+        {% render_form_field form.prefs_phone %}
+        {% render_form_field form.prefs_email %}
+    </div>
+
+    <small class="donate__marketing-meta donate__marketing-meta--small">
+        <p>We will keep your details safe and you can change your preferences at any time by calling our Supporter Care Team on
+        03709 00 00 32. Or you can email <a href="mailto:supportercare@samaritans.org">supportercare@samaritans.org</a> or write to us at Samaritans, The Upper Mill, Kingston
+        Road, Ewell KT17 2AF. We’d love to hear from you.</p>
+
+        <p>Samaritans is made up of branches across the UK, the Republic of Ireland, the Channel Islands and the Isle of Man, some
+        of which are registered as independent charities. Your information will only be used for the purposes of Samaritans and
+        its branches.</p>
+
+        <p>For more information on how Samaritans handles and protects your personal information, please see our <a href="{% privacy_statement_url %}">privacy statement</a>.</p>
+    </small>
+
+</section>

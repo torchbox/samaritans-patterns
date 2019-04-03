@@ -1,0 +1,12 @@
+{% load i18n %}
+
+<div class="button__shadow"></div>
+<div class="button__inner">
+    {% trans label %}
+    {% firstof icon button.icon "chevron" as button_icon %}
+    {% if large %}
+        {% include "patterns/atoms/svg/icons/icon-"|add:button_icon|add:".html" with classes="icon icon--medium button__icon" %}
+    {% else %}
+        {% include "patterns/atoms/svg/icons/icon-"|add:button_icon|add:".html" with classes="icon button__icon" %}
+    {% endif %}
+</div>

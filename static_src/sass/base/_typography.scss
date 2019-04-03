@@ -1,0 +1,123 @@
+/*------------------------------------*\
+    $TYPOGRAPHY
+\*------------------------------------*/
+
+/* ============================================
+    Base font
+*/
+html {
+    font-size: ($base-font-size / 16px) * 100%;
+    line-height: $base-line-height;
+    color: $color--default;
+}
+
+// sass-lint:disable single-line-per-selector
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 $gutter;
+}
+// sass-lint:enddisable
+
+// sass-lint:disable single-line-per-selector
+h1, h2, h3, h4, h5, h6,
+.heading-text {
+    @include heading-text;
+}
+// sass-lint:enddisable
+
+html,
+.body-text {
+    @include body-text;
+}
+
+.body--website {
+    font-size: 16px;
+
+    @include media-query(mob-landscape) {
+        font-size: $base-font-size;
+    }
+}
+
+// Default sizes
+h1 {
+    @include font-size(xxl);
+
+    @include media-query(tablet-portrait) {
+        @include font-size(xxxl);
+    }
+
+    @include media-query(tablet-landscape) {
+        @include font-size(xxxxl);
+    }
+}
+
+h2 {
+    @include font-size(m);
+
+    @include media-query(tablet-portrait) {
+        @include font-size(l);
+    }
+
+    @include media-query(tablet-landscape) {
+        @include font-size(xl);
+    }
+}
+
+h3 {
+    @include font-size(s);
+
+    @include media-query(tablet-portrait) {
+        @include font-size(m);
+    }
+}
+
+h4, h5, h6 {
+    @include font-size(default);
+}
+
+small {
+    @include font-size(xxs);
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: $gutter;
+}
+
+b, strong {
+    font-weight: $weight--bold;
+}
+
+.last-updated {
+    @include font-size(s);
+    color: $grey-text;
+    margin-bottom: $gutter-large;
+
+    .template-category-page & {
+        margin-bottom: 0;
+    }
+}
+
+.heading-secondary {
+    @include font-size(xl);
+
+    @include media-query(tablet-portrait) {
+        @include font-size(xxl);
+    }
+
+    @include media-query(tablet-landscape) {
+        font-size: 36px;
+        line-height: 45px;
+    }
+
+    &--large {
+        @include font-size(xxl);
+
+        @include media-query(tablet-portrait) {
+            font-size: 38px;
+        }
+    }
+
+    &--narrow {
+        max-width: $wrapper--small;
+    }
+}

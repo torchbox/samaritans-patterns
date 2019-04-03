@@ -1,0 +1,52 @@
+.chevron-link {
+    $root: &;
+
+    &--underline-on-hover {
+        @include underline(transparent, currentColor, #{$root}__text);
+    }
+
+    &__last-word {
+        display: inline-block;
+    }
+
+    &__last-word-text-wrapper {
+        display: inline-block;
+        margin-right: 0.5em;
+
+        @include target-ie11 {
+            margin-right: 0.45em;
+        }
+
+        .nav__item--primary & {
+            margin-right: $gutter-small;
+        }
+    }
+
+    &__text {
+        display: inline;
+
+        #{$root}--underline & {
+            @include underline;
+        }
+    }
+
+    &__chevron {
+        @include link-chevron;
+
+        #{$root}--underline &,
+        #{$root}--underline-on-hover & {
+            @include link-chevron--underline-link;
+        }
+
+        &--full-size {
+            height: 1.25em;
+            width: auto;
+            vertical-align: bottom;
+
+            @include target-ie11 {
+                height: 1em;
+                width: $base-line-height * 1em;
+            }
+        }
+    }
+}

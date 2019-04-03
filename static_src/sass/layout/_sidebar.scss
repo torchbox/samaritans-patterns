@@ -1,0 +1,108 @@
+.sidebar {
+    flex: 0 0 12rem;
+    margin-top: 20px;
+
+    @include media-query(tablet-portrait) {
+        order: -1;
+        margin: 0 20px 0 0;
+    }
+
+    &--filters {
+        flex: 0 0 2rem;
+        order: -1;
+
+        @include media-query(tablet-portrait) {
+            flex: 0 0 12rem;
+        }
+    }
+
+    &--donate {
+        @include connectors($white, top, left, medium);
+        position: relative;
+        background-color: $off-white;
+        border: 1px solid $grey-light;
+        padding: $gutter-large $gutter-medium;
+        margin: $gutter-medium 0 0;
+
+
+        @include media-query(tablet-landscape) {
+            margin: 0 0 0 $gutter-x-large;
+            flex-basis: 320px;
+            order: -1;
+        }
+
+        &::after {
+            border: 1px solid $grey-light;
+            border-top: 0;
+            top: -1px;
+        }
+
+        &::before {
+            display: none;
+        }
+
+        p {
+            font-size: 15px;
+        }
+    }
+
+    &__inner {
+        padding: 20px;
+        background: $color--tertiary;
+    }
+
+    &__text-link {
+        display: inline-block;
+    }
+
+    &__icon {
+        &--donate-padlock {
+            width: 47px;
+            height: 65px;
+            margin-bottom: $gutter;
+        }
+
+        &--fundraising-regulator {
+            height: 50px;
+            width: 160px;
+        }
+    }
+
+    &__payment-icons {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        margin: -0.5 * $gutter;
+    }
+
+    &__payment-icon {
+        margin: 0.5 * $gutter;
+        width: 70px;
+        height: 30px;
+
+        &--direct-debit {
+            width: auto;
+
+            @include target-ie11 {
+                width: 70px;
+            }
+        }
+
+        &--visa,
+        &--mastercard,
+        &--google-pay,
+        &--apple-pay {
+            width: auto;
+
+            @include target-ie11 {
+                width: 47px;
+            }
+        }
+
+        &--paypal {
+            width: 95px;
+            position: relative;
+            top: 2px;
+        }
+    }
+}

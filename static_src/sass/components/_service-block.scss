@@ -1,0 +1,101 @@
+.service-block {
+    $root: &;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    &--address {
+        display: block;
+        margin: 0 $gutter-large $gutter 0;
+
+        @include media-query(tablet-portrait) {
+            margin: 0 $gutter-medium 0 0;
+        }
+
+        p {
+            @include font-size(s);
+            margin-bottom: 0;
+        }
+    }
+
+
+    // TODO: make this less hacky
+    .sticky-cta & {
+        display: none;
+
+    }
+
+    &--sticky {
+        display: none;
+        color: $white;
+
+        a {
+            color: $white;
+        }
+
+        &#{$root}--link,
+        a {
+            #{$hover} {
+                color: rgba($white, 0.7);
+            }
+        }
+
+        .sticky-cta & {
+            display: flex;
+
+            @include media-query(tablet-portrait) {
+                flex-wrap: nowrap;
+            }
+        }
+    }
+    // end hacky section
+
+
+    &__icon {
+        display: none;
+
+        @include media-query(tablet-portrait) {
+            display: block;
+            flex: 0 0 $icon-size--large;
+            height: $icon-size--large;
+            margin-right: $gutter-large;
+        }
+    }
+
+    &__heading {
+        margin-bottom: 0;
+    }
+
+    &__cta {
+        @include media-query(tablet-landscape) {
+            pointer-events: none;
+            color: inherit;
+        }
+    }
+
+    // adds spacing between cta children
+    > * {
+        margin: 0 $gutter-large $gutter 0;
+
+        .sticky-cta & {
+            margin-bottom: 0;
+        }
+
+        @include media-query(tablet-portrait) {
+            margin: 0 $gutter-medium 0 0;
+        }
+    }
+
+    &__link {
+        @include underline;
+
+        #{$root}--sticky & {
+            font-weight: $weight--bold;
+        }
+    }
+
+    &__no-shrink {
+        flex-shrink: 0;
+    }
+}

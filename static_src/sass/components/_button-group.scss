@@ -1,0 +1,46 @@
+.button-group {
+    $root: &;
+
+    display: flex;
+    max-width: 100%;
+
+    &__button {
+        width: 184px;
+        padding: 10px 20px 8px;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        text-decoration: none;
+        transition: color $transition, background-color $transition;
+        background-color: $teal;
+        color: $white;
+
+        #{hover} {
+            color: $white;
+            cursor: default;
+        }
+
+        &:first-child {
+            border-radius: 14px 0 0 14px;
+        }
+
+        &:last-child {
+            border-radius: 0 14px 14px 0;
+        }
+
+        &:not([disabled]) {
+            @include link($color--link--on-off-white, $color--link-hover, #{$root}__button-text);
+            @include underline($element: #{$root}__button-text);
+            background-color: $off-white;
+
+            #{$root}--white & {
+                @include link($color--link, $color--link-hover, #{$root}__button-text);
+                background-color: $white;
+            }
+        }
+    }
+
+    &--centered {
+        justify-content: center;
+    }
+}

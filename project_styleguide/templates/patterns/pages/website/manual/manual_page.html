@@ -1,0 +1,29 @@
+{% extends "patterns/base_page--website.html" %}
+{% load wagtailcore_tags wagtailimages_tags navigation_tags static %}
+
+{% block content %}
+<div class="wrapper">
+    <section class="section section--main">
+        <h1>{{ page.title }}</h1>
+        <p>{{ page.introduction }}</p>
+        {% for child in page.get_children.live.public %}
+            <a href="{% pageurl child %}"><p>{{ child.title }}</p></a>
+        {% endfor %}
+
+        <h1>{{ page.first_manual_chapter.title }}</h1>
+        <h5>{{ page.first_manual_chapter.introduction }}</h5>
+
+        {% include_block page.first_manual_chapter.body %}
+
+        {% if page.first_manual_chapter.next_manual_chapter %}
+            <p>Next ></p>
+            <a href="{% pageurl page.first_manual_chapter.next_manual_chapter %}">{{ page.first_manual_chapter.next_manual_chapter.title }}</a>
+        {% endif %}
+    </section>
+</div>
+
+{% include "patterns/molecules/related-pages/related-pages--small.html" with related_pages=page.first_manual_chapter.related_pages.all %}
+{% if page.published_by and user.is_authenticated %}
+    {% include 'patterns/organisms/form/feedback-form.html' %}
+{% endif %}
+{% endblock %}

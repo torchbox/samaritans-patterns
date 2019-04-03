@@ -1,0 +1,41 @@
+{% extends "patterns/base_page--intranet.html" %}
+{% load wagtailcore_tags wagtailimages_tags navigation_tags static %}
+
+{% block content %}
+
+    {% block hero %}
+        {% include "patterns/molecules/hero/hero.html" with pattern_bottom=True %}
+    {% endblock %}
+
+    <div class="wrapper wrapper--large wrapper--flex">
+        <section class="section section--main section--main-intranet section--overlap">
+            {% block page_intro %}
+                {% if page.introduction %}
+                    <p class="intro {% if page.last_updated or page.publication_date %}intro--less-margin{% endif %}">{{ page.introduction }}</p>
+                {% endif %}
+
+                {% if page.last_updated or page.publication_date %}
+                    <p class="last-updated">Last updated: <b>{% firstof page.publication_date|date:"jS F Y" page.last_updated|date:"jS F Y" %}</b></p>
+                {% endif %}
+            {% endblock %}
+
+            {% block meta_bar %}{% endblock %}
+
+            {% block page_content %}
+                {% include_block page.body %}
+            {% endblock %}
+        </section>
+    </div>
+
+    {% block secondary_content %}{% endblock %}
+
+    {% block related_content %}
+        {% include "patterns/molecules/related-pages/related-pages--small.html" with related_pages=page.related_pages.all %}
+    {% endblock %}
+
+    {% block feedback_form %}
+        {% if page.published_by and user.is_authenticated %}
+            {% include "patterns/organisms/form/feedback-form.html" %}
+        {% endif %}
+    {% endblock %}
+{% endblock %}

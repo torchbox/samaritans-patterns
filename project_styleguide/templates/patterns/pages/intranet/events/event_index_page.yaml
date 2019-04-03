@@ -1,0 +1,35 @@
+context:
+  page:
+    title: Events
+  events:
+    object_list:
+      exists: true
+      specific:
+      - title: Test event
+        listing_image: fake
+        listing_summary: Come to our event and have fun
+        start_date: !!timestamp '2018-12-13'
+        start_time: !!timestamp '2018-12-13 2:00:00'
+        end_date: !!timestamp '2018-12-15'
+        end_time: !!timestamp '2018-12-15 15:00:00'
+      - title: Another event
+        listing_image: fake
+        listing_summary: Another listing summary
+        start_date: !!timestamp '2018-12-13'
+        start_time: !!timestamp '2018-12-13 13:00:00'
+        end_date: !!timestamp '2018-12-13'
+        end_time: !!timestamp '2018-12-13 15:00:00'
+  show_past: true
+  upcoming_events:
+    exists: true
+
+tags:
+  pageurl:
+    event:
+      raw: '#'
+    page:
+      raw: '#'
+  image:
+    event.listing_image fill-450x300:
+      raw: |
+        <img src="http://via.placeholder.com/450x300" width="450" height="300" alt="Some alt">

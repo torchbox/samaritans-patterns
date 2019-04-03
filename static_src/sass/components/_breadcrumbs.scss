@@ -1,0 +1,94 @@
+.breadcrumb {
+    $root: &;
+    $breadcrumb-primary--on-dark: $white;
+    $breadcrumb-secondary-on-dark: $meadow;
+    $breadcrumb-primary--on-light: $color--default;
+    $breadcrumb-secondary--on-light: $color--primary;
+
+    display: none;
+
+    @include media-query(tablet-portrait) {
+        display: block;
+        margin-bottom: $gutter;
+    }
+
+    @include media-query(tablet-landscape) {
+        margin-bottom: $gutter-large;
+    }
+
+    .hero--landing-page & {
+        margin-bottom: $gutter;
+    }
+
+    &__list {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    &__item,
+    &__link {
+        padding: 4px 0;
+        font-size: 14px;
+        color: $breadcrumb-primary--on-dark;
+
+        #{$root}--on-light & {
+            color: $breadcrumb-primary--on-light;
+        }
+
+        @include media-query(tablet-portrait) {
+            font-size: 15px;
+        }
+
+        .hero--landing-page & {
+            color: $ink;
+        }
+    }
+
+    &__link {
+        @include underline(transparent, $breadcrumb-secondary-on-dark);
+
+        #{$root}--on-light & {
+            @include underline(transparent, $breadcrumb-secondary--on-light);
+        }
+
+        &--home {
+            @include underline(transparent, transparent);
+        }
+
+        #{$hover} {
+            color: lighten($breadcrumb-secondary-on-dark, 5);
+
+            #{$root}--on-light & {
+                color: $breadcrumb-secondary--on-light;
+            }
+        }
+    }
+
+    &__icon {
+
+        &--chevron {
+            width: 7px;
+            height: 10px;
+            margin: 0 $gutter-small;
+            fill: $breadcrumb-primary--on-dark;
+
+            #{$root}--on-light & {
+                fill: $breadcrumb-secondary--on-light;
+            }
+
+            .hero--landing-page & {
+                fill: $lime;
+            }
+        }
+
+        &--home {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+            vertical-align: sub;
+            margin: 0;
+            transition: fill $transition;
+        }
+    }
+}

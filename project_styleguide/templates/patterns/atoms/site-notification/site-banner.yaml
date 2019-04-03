@@ -1,0 +1,5 @@
+context:
+  settings:
+    utils:
+      SystemMessagesSettings:
+        site_banner_text: This site is currently in beta

@@ -1,0 +1,73 @@
+<div class="pl-icons">
+    <h2>Icons</h2>
+    <div class="pl-icons__section">
+        {% for icon in icons %}
+            <div class="tooltip tooltip--pattern-library">
+                {% include "patterns/atoms/svg/icons/icon-"|add:icon|add:".html" with title=icon classes="pl-icons__icon" %}
+                <div class="tooltip__content">
+                    <p>{{ icon }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <h2>Color Icons</h2>
+    <div class="pl-icons__section">
+        {% for icon in color_icons %}
+            <div class="tooltip tooltip--pattern-library">
+                {% include "patterns/atoms/svg/colour-icons/icon-color-"|add:icon|add:".html" with title=icon classes="pl-icons__icon pl-icon--color" %}
+                <div class="tooltip__content">
+                    <p>{{ icon }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <h2>Color Icons for specific use</h2>
+    <div class="pl-icons__section">
+        {% for icon in color_icons_specific_use %}
+            <div class="tooltip tooltip--pattern-library">
+                {% include "patterns/atoms/svg/colour-icons/icon-color-"|add:icon|add:".html" with title=icon classes="pl-icons__icon pl-icon--color" %}
+                <div class="tooltip__content">
+                    <p>{{ icon }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <h2>Pattern Icons</h2>
+    <div class="pl-icons__section">
+        {% for icon in pattern_icons %}
+            <div class="tooltip tooltip--pattern-library">
+                {% include "patterns/atoms/svg/pattern-icons/icon-pattern-"|add:icon|add:".html" with title=icon classes="pl-icons__icon pl-icon--pattern" %}
+                <div class="tooltip__content">
+                    <p>{{ icon }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <h2>Patterns</h2>
+    <div class="pl-icons__section">
+        {% for pattern in patterns %}
+            <div class="tooltip tooltip--pattern-library">
+                {% include "patterns/atoms/svg/patterns/pattern-"|add:pattern|add:".html" with title=pattern classes="pl-icons__pattern" %}
+                <div class="tooltip__content">
+                    <p>{{ pattern }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <h2>Logos</h2>
+    <div class="pl-icons__section">
+        {% for logo in logos %}
+            <div class="tooltip tooltip--pattern-library">
+                {% include "patterns/atoms/svg/logos/"|add:logo|add:".html" with title=logo classes="pl-icons__logo" %}
+                <div class="tooltip__content">
+                    <p>{{ logo }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

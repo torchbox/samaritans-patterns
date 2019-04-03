@@ -1,0 +1,30 @@
+<div class="pl-colors">
+    <h2>Colors</h2>
+    <h3>Core palette</h3>
+    <div class="pl-colors__section">
+        {% for color in colors %}
+            <span class="pl-colors__color pl-colors__color--{{ color.name }}" style="background-color: #{{ color.hex }}">{{ color.name }}<br>#{{ color.hex }}</span>
+        {% endfor %}
+    </div>
+
+    <h3>Font color</h3>
+    <div class="pl-colors__section">
+        {% for color in font_colors %}
+            <span class="pl-colors__color pl-colors__color--{{ color.name }}" style="background-color: #{{ color.hex }}">{{ color.name }}<br>#{{ color.hex }}</span>
+        {% endfor %}
+    </div>
+
+    <h3>Other colors</h3>
+    <div class="pl-colors__section">
+        {% for color in other_colors %}
+            <span class="pl-colors__color pl-colors__color--{{ color.name }}" style="background-color: #{{ color.hex }}">{{ color.name }}<br>#{{ color.hex }}</span>
+        {% endfor %}
+    </div>
+
+    <h3>Supporting palette</h3>
+    <div class="pl-colors__section">
+        {% for color in supporting_colors %}
+            <span class="pl-colors__color pl-colors__color--{{ color.name }}" style="background-color: #{{ color.hex }}">{{ color.name }}<br>#{{ color.hex }}</span>
+        {% endfor %}
+    </div>
+</div>

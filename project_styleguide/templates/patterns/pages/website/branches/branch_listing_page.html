@@ -1,0 +1,41 @@
+{% extends "patterns/base_page--website.html" %}
+{% load wagtailcore_tags helper_tags %}
+
+
+{% block content %}
+
+{% include "patterns/molecules/hero/hero.html" with hero_color="emerald" hero_short=True %}
+
+<div class="wrapper wrapper--large wrapper--padding-for-page">
+    <section class="section section--overlap section--website-search-page">
+
+        {% if page.introduction %}
+            <p class="intro">{{ page.introduction }}</p>
+        {% endif %}
+
+        <form id="branch-form" role="search" class="form search search--page search--website">
+            <label class="hidden" for="branch-input">Search by town or postcode</label>
+            <input class="search__input" id="branch-input" type="text" placeholder="Search by town or postcode" name="query" {% if search_query %}value="{{ search_query }}{% endif %}">
+            <button class="search__button search__button--with-text button button--search" type="submit">
+                <span class="search__button-text">Search</span>
+                {% include "patterns/atoms/svg/icons/icon-search.html" with classes="icon button__icon search__icon" title="Search" %}
+            </button>
+        </form>
+
+        <div class="branch-finder">
+            <div id="branch-list" class="branch-finder__listings" aria-live="polite"></div>
+            <div id="branch-finder-map" class="branch-finder__map"></div>
+        </div>
+
+        {% include "patterns/atoms/corners/corners.html" with size="page" %}
+
+    </section>
+</div>
+
+{% endblock content %}
+
+
+{% block extra_js %}
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ maps_api_key }}&libraries=geometry"></script>
+    {{ branches_dict|json_script:"branches_json" }}
+{% endblock %}

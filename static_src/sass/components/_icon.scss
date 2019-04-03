@@ -1,0 +1,60 @@
+.icon {
+    width: $icon-size--small;
+    height: $icon-size--small;
+    transition: fill $transition;
+    fill: $color--white;
+
+    &--inline {
+        @include link-chevron--underline-link;
+        width: auto;
+        max-width: 1em;
+    }
+
+    &--medium {
+        width: $icon-size--medium;
+        height: $icon-size--medium;
+    }
+
+    &--large {
+        width: $icon-size--large;
+        height: $icon-size--large;
+    }
+
+    &--x-large {
+        width: $icon-size--large;
+        height: $icon-size--large;
+
+        @include media-query(tablet-landscape) {
+            width: $icon-size--x-large;
+            height: $icon-size--x-large;
+        }
+    }
+
+    &--home {
+        width: $icon-size--small;
+        height: $icon-size--small;
+        margin-right: 5px;
+        fill: $color--primary;
+    }
+
+    &--footer-social {
+        fill: currentColor;
+        height: 21px;
+        width: 21px;
+    }
+
+    &--footer-social-twitter {
+        height: 18px;
+    }
+
+    &--footer-social-youtube {
+        height: 14px;
+    }
+
+    &--arrow-downward {
+        path {
+            transform: scale(1.5);
+            transform-origin: center;
+        }
+    }
+}

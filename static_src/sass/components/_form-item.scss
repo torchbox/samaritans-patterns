@@ -1,0 +1,182 @@
+.form-item {
+    // sass-lint:disable-block class-name-format
+
+    $root: &;
+
+    @include font-size(s);
+    margin-bottom: $gutter-medium;
+
+
+    // for date widget
+    &__fieldset {
+        padding: 0;
+        border: 0;
+        margin: 0;
+    }
+
+    label, // labels inside form fields
+    &__legend { // legend for date widget
+        display: flex;
+        margin-bottom: $gutter-small;
+
+        // labels we have access to the markup for
+        &#{$root}__label {
+            display: block;
+            margin-bottom: 8px;
+
+            &--checkbox_input {
+                margin-bottom: 0;
+                font-weight: normal;
+            }
+        }
+    }
+
+    #{$input--string},
+    textarea,
+    select {
+        @include input-style;
+    }
+
+    textarea {
+        height: 152px;
+    }
+
+    select:not([multiple='multiple']) {
+        @include dropdown-select;
+        height: 52px;
+        width: 100%;
+    }
+
+    #{$input--boolean} {
+        appearance: none;
+        -webkit-appearance: none; // sass-lint:disable-line no-vendor-prefixes
+        -moz-appearance: none; // sass-lint:disable-line no-vendor-prefixes
+        flex: 0 0 auto;
+        width: 18px;
+        height: 18px;
+        margin-top: 4px;
+        margin-right: 10px;
+        background-color: $white;
+        border: 3px solid $grey-light;
+
+        &:checked {
+            background-color: $cerulean;
+        }
+
+        .streamfield--dark-bg & {
+            border-color: $white;
+        }
+
+        @include media-query(mob-landscape) {
+            margin-top: 0;
+            width: 28px;
+            height: 28px;
+            border: 5px solid $grey-light;
+        }
+    }
+
+    input[type='checkbox'] {
+        border-radius: 3px;
+
+        @include media-query(mob-landscape) {
+            border-radius: 5px;
+        }
+    }
+
+    input[type='radio'] {
+        border-radius: 50%;
+    }
+
+    &__required {
+        color: $bubblegum;
+    }
+
+    &__errors {
+        @include font-size(s);
+        margin-bottom: $gutter-large;
+        font-weight: bold;
+        color: $hot-pink;
+    }
+
+    &__help {
+        @include font-size(xxs);
+        margin-top: 5px;
+        color: rgba($color--default, 0.6);
+    }
+
+    &__tooltip-wrapper {
+        display: flex;
+        align-items: center;
+    }
+
+    &__wrapper {
+        #{$root}__tooltip-wrapper & {
+            width: 100%;
+        }
+
+        #{$root}--checkbox_input & {
+            display: flex;
+        }
+
+        #{$root}--select &,
+        #{$root}--lazy_select & {
+            @include dropdown-wrapper($root);
+        }
+
+        .form__gbp-field-wrapper & {
+            @include input--currency;
+            display: flex;
+            align-items: center;
+
+            &::before {
+                line-height: 30px;
+            }
+        }
+    }
+
+    &__select-icon-wrapper {
+        @include dropdown-select-icon-wrapper;
+    }
+
+    &__select-icon {
+        @include dropdown-select-icon;
+    }
+
+    &-wrapper {
+        &--two-col {
+            @supports(display: grid) {
+                @include media-query(mob-landscape) {
+                    display: grid;
+                    grid-gap: $gutter-medium;
+                    grid-template-columns: 1fr 1fr;
+                }
+            }
+        }
+
+        &--group {
+            #{$root}:not(:last-child) {
+                margin-bottom: $gutter-small;
+            }
+        }
+
+        &--radio-select-inline {
+            li {
+                display: inline-block;
+
+                &:not(:last-child) {
+                    margin-right: 2em;
+                }
+            }
+        }
+    }
+
+    &--errors {
+        padding: 20px;
+        margin-bottom: 20px;
+        border: 1px dotted red;
+    }
+
+    &--hidden_input {
+        display: none;
+    }
+}

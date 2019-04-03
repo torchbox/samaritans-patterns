@@ -1,0 +1,41 @@
+{% load search_tags %}
+
+{% if paginator_page.paginator.num_pages > 1 %}
+    <nav class="pagination" role="navigation" aria-label="Pagination">
+        <div class="pagination__link-wrapper pagination__link-wrapper--previous">
+            {% if paginator_page.has_previous %}
+                <a class="pagination__link pagination__link--previous" href="{% pagination_link paginator_page.previous_page_number %}" class="previous">
+                    {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="pagination__icon pagination__icon--previous" aria_hide=True %}
+                    <span class="pagination__link-text pagination__link-text--mobile">Previous</span>
+                    <span class="pagination__link-text pagination__link-text--desktop">Previous page</span>
+                </a>
+            {% endif %}
+        </div>
+
+        <ul class="pagination__list">
+            {% for page_number in paginator_page.paginator.page_range|slice_pagination:paginator_page.number %}
+                <li class="pagination__item">
+                    {% if paginator_page.number == page_number %}
+                        <span class="pagination__link pagination__link--active">
+                            {{ page_number }}
+                        </span>
+                    {% else %}
+                        <a class="pagination__link" href="{% pagination_link page_number %}">
+                            {{ page_number }}
+                        </a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div class="pagination__link-wrapper pagination__link-wrapper--next">
+            {% if paginator_page.has_next %}
+                <a class="pagination__link pagination__link--next" href="{% pagination_link paginator_page.next_page_number %}" class="next">
+                    <span class="pagination__link-text pagination__link-text--mobile">Next</span>
+                    <span class="pagination__link-text pagination__link-text--desktop">Next page</span>
+                    {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="pagination__icon pagination__icon--next" aria_hide=True %}
+                </a>
+            {% endif %}
+        </div>
+    </nav>
+{% endif %}

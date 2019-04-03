@@ -1,0 +1,11 @@
+.index {
+
+    &__story-wrapper {
+        margin: $gutter-large 0;
+
+        @include media-query(tablet-landscape) {
+            margin: $gutter-xxl 0;
+            max-width: $wrapper--small;
+        }
+    }
+}

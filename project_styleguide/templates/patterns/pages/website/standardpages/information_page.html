@@ -1,0 +1,28 @@
+{% extends "patterns/base_page--website.html" %}
+{% load wagtailcore_tags navigation_tags static %}
+
+{% block content %}
+    {% if page.hero_image %}
+        {% include "patterns/molecules/hero/hero.html" with hero_color="emerald" pattern="dots" %}
+    {% else %}
+        {% include "patterns/molecules/hero/hero.html" with hero_color="emerald" pattern="dots" hero_short=True %}
+    {% endif %}
+
+    <section class="wrapper wrapper--large wrapper--padding-for-page">
+        <div class="
+        section section--overlap
+        section--information-page
+        {% if page.hero_image %}section--hero-with-image{% endif %}
+        ">
+            {% if page.introduction %}
+                <p class="intro">{{ page.introduction }}</p>
+            {% endif %}
+            {% comment %} Used in news template which extends info page {% endcomment %}
+            {% block news_meta %}{% endblock %}
+            {% include_block page.body %}
+            {% include "patterns/atoms/corners/corners.html" with size="page" %}
+        </div>
+    </section>
+
+    {% include "patterns/molecules/related-pages/related-pages--large.html" with related_pages=page.related_pages.all %}
+{% endblock %}

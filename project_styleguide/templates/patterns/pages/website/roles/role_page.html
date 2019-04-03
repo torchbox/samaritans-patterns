@@ -1,0 +1,68 @@
+{% extends "patterns/base_page--website.html" %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block content %}
+<section class="section section--main">
+
+    <div class="intro">
+        <div class="container">
+            <h1>{{ page.title }}</h1>
+            <h4>{{ page.summary }}</h4>
+
+            {% if page.role_types.all %}
+                <h2>Role types</h2>
+                {% for role in page.role_types.all %}{{ role.role_type.title }} {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Role and support in the organisation</h2>
+        <p>Accountable to: {{ page.accountable_to }}</p>
+        <p>Support the work of: {{ page.supports_the_work_of }}</p>
+        <p>Liase with: {{ page.liasises_with }}</p>
+
+        {% include_block page.body %}
+
+        {% if page.qualities_and_experiences.all %}
+            <h2>Qualities and experience</h2>
+            <ul>
+                {% for quality in page.qualities_and_experiences.all %}
+                    <li>{{ quality.content }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if page.key_responsibilities.all %}
+            <h2>Key responsibilities</h2>
+            <ul>
+                {% for responsibility in page.key_responsibilities.all %}
+                    <li>{{ responsibility.content }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if page.time_commitment %}
+            <h2>Time commitment</h2>
+            <p>{{ page.time_commitment|richtext }}</p>
+        {% endif %}
+
+        {% if page.benefits %}
+            <h2>Benefits</h2>
+            <p>{{ page.benefits|richtext }}</p>
+        {% endif %}
+
+        <h2>Location, travel and expenses</h2>
+        <p>{{ page.location_travel_expenses|richtext }}</p>
+
+        <h2>Applications</h2>
+        <p>{{ page.applications|richtext }}</p>
+        {% if page.apply_link %}
+            <a href="{{ page.apply_link }}">Apply</a>
+        {% endif %}
+    </div>
+</section>
+<h2>Other roles you might be interested in</h2>
+{% include "patterns/molecules/related-pages/related-pages--small.html" with related_pages=page.related_roles.all %}
+
+{% endblock %}

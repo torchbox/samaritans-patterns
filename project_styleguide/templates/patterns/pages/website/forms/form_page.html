@@ -1,0 +1,16 @@
+{% extends "patterns/templates/narrow-page.html" %}
+{% load form_tags wagtailcore_tags wagtailimages_tags static %}
+
+{% block content_inner %}
+
+    <h1>{{ page.title }}</h1>
+
+    <h2 class="intro intro--heading-margin">{{ page.introduction }}</h2>
+
+    {{ page.body|richtext }}
+
+    {% if page.form_fields %}
+        {% include 'patterns/organisms/form/form.html' with form_classes="form--after-body" %}
+    {% endif %}
+
+{% endblock %}

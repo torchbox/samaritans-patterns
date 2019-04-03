@@ -1,0 +1,19 @@
+{% if carousel|length > 1 %}
+    <nav class="pagination pagination--carousel js-controls" role="navigation" data-glide-el="controls">
+        <button
+          class="pagination__link pagination__link--previous"
+          data-glide-dir="<"
+          >
+            {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="pagination__icon pagination__icon--previous" aria_hide=True %}
+            <span class="pagination__link-text">Previous</span>
+        </button>
+
+        <button
+          class="pagination__link pagination__link--next"
+          data-glide-dir=">"
+          >
+            <span class="pagination__link-text">Next</span>
+            {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="pagination__icon pagination__icon--next" aria_hide=True %}
+        </button>
+    </nav>
+{% endif %}

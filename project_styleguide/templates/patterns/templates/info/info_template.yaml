@@ -1,0 +1,6 @@
+# Stub data for the pattern
+context:
+    page:
+        title: "Apply template: Title from a stub file"
+        introduction: "Introductory gubbins"
+    button_text: "Apply template: Button text from a stub file"

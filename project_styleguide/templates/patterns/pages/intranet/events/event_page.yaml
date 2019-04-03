@@ -1,0 +1,18 @@
+context:
+  page:
+    title: Test event
+    introduction: Event intro text
+    start_date: !!timestamp '2018-12-13'
+    start_time: !!timestamp '2018-12-13 2:00:00'
+    end_date: !!timestamp '2018-12-15'
+    end_time: !!timestamp '2018-12-15 15:00:00'
+    street_address_1: 3rd Floor
+    street_address_2: 15 Colston Street
+    city: Bristol
+    postcode: BS1 5AP
+    country: UK
+
+tags:
+  include_block:
+    page.body:
+      template_name: "patterns/molecules/streamfield/stream_block.html"

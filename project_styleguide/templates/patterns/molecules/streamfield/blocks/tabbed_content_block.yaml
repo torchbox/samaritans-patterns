@@ -1,0 +1,16 @@
+context:
+  value:
+    - value:
+        heading: Tab 1
+        description: Description for tab 1
+        link_text: Donate today
+    - value:
+        heading: Tab 2
+        description: Description for tab 2
+        link_text: Share on Facebook
+
+tags:
+  pageurl:
+    "tab.value.link as href":
+      target_var: href
+      raw: "#"

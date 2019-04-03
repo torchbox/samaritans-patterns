@@ -1,0 +1,45 @@
+{% load i18n icon_tags %}
+
+{% if type == 'hero_cta' %}
+
+<a href="{{ href }}" class="listening-cta listening-cta--primary listening-cta--link">
+    <span class="listening-cta__corner"></span>
+    <div class="listening-cta__inner">
+        <div class="listening-cta__container">
+            {% if page.icon %}
+                {% render_icon page.icon "listening-cta__icon" %}
+            {% endif %}
+            <div class="listening-cta__text">
+                <h2 class="listening-cta__heading">{{ value.call_to_action_text }}</h2>
+                <p>
+                    {% trans "Wait time: 30 minutes" %}
+                </p>
+            </div>
+        </div>
+        {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="listening-cta__chevron" aria_hide="true" %}
+    </div>
+    <span class="listening-cta__connectors"></span>
+</a>
+
+{% else %}
+
+<div class="service-block">
+<a href="{{ href }}" class="button button--large button--tertiary">
+    <div class="button__shadow"></div>
+    <div class="button__inner button__inner--chat">
+        <div>
+            {{ value.call_to_action_text }}
+            <p class="button__meta">{% trans "Wait time: 30 minutes" %}</p>
+        </div>
+        {% include "patterns/atoms/svg/colour-icons/icon-color-speechbubble-alt.html" with classes="button__icon button__icon--chat" %}
+    </div>
+</a>
+</div>
+
+<a href="{{ href }}" class="service-block service-block--sticky service-block--link">
+    {% include "patterns/atoms/svg/colour-icons/icon-color-speechbubble-alt.html" with classes="service-block__icon" %}
+    <span class="service-block__link">{{ value.call_to_action_text }}</span>
+    <span>{% trans "Wait time: 30 minutes" %}</span>
+</a>
+
+{% endif %}

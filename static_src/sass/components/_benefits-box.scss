@@ -1,0 +1,65 @@
+.benefits-box {
+    $root: &;
+    margin-bottom: $gutter;
+
+    @include media-query(tablet-portrait) {
+        margin: $gutter-large 0;
+    }
+
+    @supports(display: grid) {
+
+        @include media-query(tablet-portrait) {
+            grid-gap: $gutter;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @include media-query(desktop) {
+            grid-gap: $gutter-medium;
+        }
+    }
+
+    &__tile {
+        background-color: $white;
+        margin-bottom: $gutter;
+
+        @include media-query(tablet-portrait) {
+            border: 1px solid $grey-light;
+            padding: $gutter-medium;
+            margin: 0;
+        }
+
+        @include media-query(desktop) {
+            padding: $gutter-medium $gutter-large;
+        }
+    }
+
+    &__item {
+        display: flex;
+
+        &:not(:last-child) {
+            margin-bottom: 5px;
+        }
+
+        span {
+            flex: 1;
+        }
+    }
+
+    &__icon {
+        width: 17px;
+        height: 17px;
+        margin: 5px 10px 0 0;
+
+        &--benefit {
+            fill: $white;
+            background-color: $lime;
+            border-radius: 50%;
+            padding: 2px;
+        }
+
+        &--drawback {
+            fill: $amethyst;
+        }
+    }
+}

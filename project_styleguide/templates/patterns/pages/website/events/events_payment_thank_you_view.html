@@ -1,0 +1,44 @@
+{% extends "patterns/base_page--website.html" %}
+{% load i18n helper_tags wagtailcore_tags icon_tags %}
+
+{% block title %}{% trans "Thank you | Event registration payment" %}{% endblock %}
+
+{% block content %}
+
+<div class="wrapper wrapper--large wrapper--padding-for-page">
+    <section class="section section--donate section--no-hero">
+
+        <div class="payments__complete">
+            <div>
+                <h1>{% blocktrans with name=completed_transaction_details.first_name %}Thank you, {{ name }}{% endblocktrans %}</h1>
+                <p>Thank you for paying your event registration fee. The Events Team will be in touch shortly to confirm the next steps.</p>
+                <p>If you have any queries in the meantime, please email <a href="mailto:events@samaritans.org">events@samaritans.org</a>.</p>
+            </div>
+            <div class="payments__amount-box">
+                {% render_icon "icon-color-star" "" %}
+                <h4>
+                    {% if completed_transaction_details.payment_method == 'card' %}
+                        {% blocktrans with amount=completed_transaction_details.amount|floatformat:"-2" %}Your £{{ amount }} payment through credit card has been successful.{% endblocktrans %}
+                    {% elif completed_transaction_details.payment_method == 'paypal' %}
+                        {% blocktrans with amount=completed_transaction_details.amount|floatformat:"-2" %}Your £{{ amount }} payment through Paypal has been successful.{% endblocktrans %}
+                    {% elif completed_transaction_details.payment_method == 'googlepay' %}
+                        {% blocktrans with amount=completed_transaction_details.amount|floatformat:"-2" %}Your £{{ amount }} payment through Google Pay has been successful.{% endblocktrans %}
+                    {% elif completed_transaction_details.payment_method == 'applepay' %}
+                        {% blocktrans with amount=completed_transaction_details.amount|floatformat:"-2" %}Your £{{ amount }} payment through Apple Pay has been successful.{% endblocktrans %}
+                    {% endif %}
+                </h4>
+
+                <p>{% blocktrans %}A confirmation email will be sent straight to your email address.{% endblocktrans %}</p>
+                <p><small>{% blocktrans with ref=completed_transaction_details.transaction_id %}Your transaction reference is: {{ ref }}{% endblocktrans %}</small></p>
+            </div>
+        </div>
+
+        {% include "patterns/atoms/corners/corners.html" with size="page" %}
+    </section>
+</div>
+{% endblock %}
+
+
+{% block extra_js %}
+    {{ tag_manager_events|json_script:"tag_manager_events" }}
+{% endblock %}

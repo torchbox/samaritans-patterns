@@ -1,0 +1,51 @@
+{% load icon_tags %}
+
+{% if type == 'hero_cta' %}
+
+<div class="listening-cta listening-cta--primary">
+    <span class="listening-cta__corner"></span>
+    <div class="listening-cta__inner">
+        <div class="listening-cta__container">
+            {% if page.icon %}
+                {% render_icon page.icon "listening-cta__icon" %}
+            {% endif %}
+            <div class="listening-cta__text">
+                <h2 class="listening-cta__heading">{{ value.call_to_action_text }}</h2>
+                <p>
+                    {{ value.address_line_1 }}
+                    <br/> {{ value.address_line_2 }}
+                    <br/> {{ value.address_line_3 }}
+                    {% if value.address_line_4 %}
+                        <br/> {{ value.address_line_4 }}
+                    {% endif %}
+                    {{ value.post_code }}
+                </p>
+            </div>
+        </div>
+        <span class="listening-cta__connectors"></span>
+    </div>
+</div>
+
+{% else %}
+
+<div class="service-block service-block--address">
+    <h2 class="service-block__header">{{ value.call_to_action_text }}</h2>
+    <p>{{ value.address_line_1 }}</p>
+    <p>{{ value.address_line_2 }}</p>
+    <p>{{ value.address_line_3 }}</p>
+    <p>{{ value.address_line_4 }}</p>
+    <p>{{ value.post_code }}</p>
+</div>
+
+<div class="service-block service-block--sticky">
+    {% include "patterns/atoms/svg/colour-icons/icon-color-pen.html" with classes="service-block__icon" %}
+    <strong class="service-block__no-shrink">{{ value.call_to_action_text }}</strong>
+    <span>
+        {{ value.address_line_1 }},
+        {{ value.address_line_2 }},
+        {{ value.address_line_3 }}{% if value.address_line_4 %}, {{ value.address_line_4 }}{% endif %},
+        {{ value.post_code }}
+    </span>
+</div>
+
+{% endif %}

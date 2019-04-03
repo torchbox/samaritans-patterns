@@ -1,0 +1,136 @@
+<svg id="pattern--arrow" {% if classes %} class="{{ classes }}"{% endif %} {% if aria_hide %} aria-hidden="true"{% endif %} viewbox="0 0 175 180">
+    {% if title %}<title>{{ title }}</title>{% endif %}
+    <defs>
+        <!-- Define a base arrow -->
+        <g>
+            <path id="base-arrow" d="M12.1 5.1l-.9-.8-.1-.1s.1 0 0 0H11l-.2-.2-.2-.1-4-3.7-.3.3h-.2c-.1.2-.5.2-.6.5-.1 0 0-.1 0-.1 0 .1-.1.2-.2.3-.3.3-.5.4-1 .7h.1c-.1.1-.1.1-.2.1 0 .2.2-.2.2-.1-.2 0-.6.5-.8.5-.1.1.1 0 0 .1h-.1v.1c-.1.1-.2.1-.2.1l.1-.1c-.1.1-.3.3-.4.3l.1-.1c-.3.3-.8.7-1.1 1.1 0 .1 0 0-.3.3 0 .1-.1.2-.2.2.1-.1-.2.1-.1 0-.3.3-.1.2-.2.4h-.1c0 .1 0 .1-.2.3C1 5 .9 5 .9 5s-.1 0 0-.1c-.1.1-.2.1-.3.2v.5c0 .1 0 .2-.1.2.1.2.1-.4.1-.2 0-.1.1.2.1.3 0 .1-.2.2-.2.5v-.1.4c.1.1 0 .2.1.2v-.3c0 .2.1.3.1.6 0 0 0-.1-.1-.2v.2c-.1 0 0-.4-.1-.5 0 .1.1.3 0 .3.1.1 0 .3.1.5H.5v.2l-.1-.1c.1.2-.1.3 0 .5 0-.4.1-.1.1-.2.1.4-.2.3-.1.8 0-.1 0-.3.1-.1 0 .1 0 .2-.1.3 0 .3.1 0 .1.1-.1.1 0 .2.1.3H.5c0 .4.1.1.1.4l-.1-.1v.2H.4V10.5c0-.1.1 0 .1.2s-.1 0-.1.3c0 0-.1-.1 0-.3l-.1-.1V11.5c0 .1 0 .1-.1.1v.1l.2-.2c-.1.1-.1.2-.3.4v-.1.1l.4-.4s.2-.1.1 0l.4-.4c.2-.2.3-.3.5-.4l.1-.1c.2-.1.4-.2.5-.4h.2c.1-.2-.2 0 0-.2s.1 0 .2 0c.1-.1.2-.3.4-.4 0 .1-.1.1-.1.1l.2-.1c-.1.2-.2.3-.1.2-.1-.1.5-.5.4-.6h.1v.1c.2-.1 0-.2.3-.4.1-.1.2-.1.1 0l.1-.2c.1 0 .1 0 0 0l.2-.2c0-.1.1-.2.1-.2.1 0 0 0 0 0l.1-.2c.1 0 0 .1-.1.2.2 0 .1-.1.4-.3l-.1.1c.2 0 .2-.1.4-.2-.1 0-.4.1-.3 0 .1 0 .1-.1.2-.2 0 0 .1 0 .2-.1v.1c.1-.1.1-.1.1-.2.1-.1.2-.1.3-.1.2-.2-.2 0 0-.2.2-.1.3-.2.4-.4.1-.1 0 .1.1 0v-.1-.2s0-.1.1-.1c.1.1.1.2.2.2l-.1.1H6.4c.1 0 .1 0 .2.1l.1.2c-.1-.1.1-.1.3 0l.1.1H7V7h-.2.2v.1l.2.3c.3.1.5.1.8.4-.1 0-.1.1-.1.1 0-.1-.3-.2-.4-.3.1.1 0 .1 0 .1l.3.2s0 .1.1.2c0-.1.3.1.4.2 0 0-.1 0-.2-.1.1.2.3.1.4.3 0 0 0-.1-.1 0 .1 0 .3.2.2.2.2.2.7.6.8.6l-.1.1.4.1.1.1c-.1.1-.1.2-.3.1 0 .1.1.1.2.2 0 0 0-.2.1-.1.1.2.1.1.2.3 0-.1.1-.1.2 0l-.1.1.3.1c-.1 0-.1.1-.1.2 0 0 .2.2.3.2l.4-.5c.1.1.2.1.3.2.1 0 .2 0 .3.1 0 0-.1.1.1.3 0 0 .1-.1.2-.1l.3.2c0 .1-.1.1-.3.1l.3.3c.1.1-.1 0-.2-.1l.5.5v-.1c-.1-.2-.1-.7-.1-.8l.1.7-.1-.1v-.2c-.1-.3-.1-.6-.1-.8 0 0 .1 0 .1.1s.1.2.1.2c0-.1-.1-.5 0-.5V10v-.4c0-.1.1-.2.1-.2-.1.1-.2.1-.3.1v-.4c.1 0 .2.2.2.1l-.1-.1c0-.1.1 0 .1-.1-.1 0 0-.3-.1-.1v-.4s-.1 0-.2-.2v-.2c0-.3.1-.5.1-.8 0 0 0-.2.1-.1V7c.1-.2 0 .2.1.1-.1 0-.1-.2-.1-.4-.1 0 0 .3 0 .4 0 0-.1 0-.1-.1V6v-.4V5s0-.1-.1-.1c0 .3-.1.2-.1.2zm-4.4 2L7.6 7l.1.1zm-2.8.6c0-.1.1-.1.1-.1l-.1.1z" fill-rule="nonzero"/>
+        </g>
+
+        <!-- Rotate the base arrow -->
+        <g id="arrow">
+            <use xlink:href="#base-arrow"/>
+        </g>
+
+        <g id="arrow-45">
+            <use xlink:href="#arrow" transform="rotate(45, 7, 6)"/>
+        </g>
+
+        <g id="arrow-90">
+            <use xlink:href="#arrow" transform="rotate(90, 7, 6)"/>
+        </g>
+
+        <g id="arrow-180">
+            <use xlink:href="#arrow" transform="rotate(180, 6, 6)"/>
+        </g>
+
+        <g id="arrow-225">
+            <use xlink:href="#arrow" transform="rotate(225, 6, 7)"/>
+        </g>
+
+        <g id="arrow-270">
+            <use xlink:href="#arrow" transform="rotate(270, 7, 6)"/>
+        </g>
+
+        <g id="arrow-315">
+            <use xlink:href="#arrow" transform="rotate(315, 7, 6)"/>
+        </g>
+
+        <!-- Create the arrow patterns -->
+        <g id="arrow-pattern-1">
+            <use xlink:href="#arrow-45" x="0" y="0"/>
+            <use xlink:href="#arrow" x="16" y="0" />
+            <use xlink:href="#arrow-270" x="32" y="0" />
+            <use xlink:href="#arrow-225" x="48" y="0" />
+            <use xlink:href="#arrow" x="64" y="0" />
+            <use xlink:href="#arrow-90" x="80" y="0" />
+            <use xlink:href="#arrow-180" x="96" y="0" />
+            <use xlink:href="#arrow-225" x="112" y="0"/>
+            <use xlink:href="#arrow-45" x="128" y="0" />
+            <use xlink:href="#arrow" x="144" y="0" />
+            <use xlink:href="#arrow-270" x="160" y="0" />
+        </g>
+
+        <g id="arrow-pattern-2">
+            <use xlink:href="#arrow" x="0" y="0"/>
+            <use xlink:href="#arrow-270" x="16" y="0" />
+            <use xlink:href="#arrow-225" x="32" y="0" />
+            <use xlink:href="#arrow" x="48" y="0" />
+            <use xlink:href="#arrow-90" x="64" y="0" />
+            <use xlink:href="#arrow-180" x="80" y="0" />
+            <use xlink:href="#arrow-45" x="96" y="0" />
+            <use xlink:href="#arrow" x="112" y="0"/>
+            <use xlink:href="#arrow-270" x="128" y="0" />
+            <use xlink:href="#arrow-225" x="144" y="0" />
+            <use xlink:href="#arrow" x="160" y="0" />
+        </g>
+
+        <g id="arrow-pattern-3">
+            <use xlink:href="#arrow-225" x="0" y="0"/>
+            <use xlink:href="#arrow" x="16" y="0" />
+            <use xlink:href="#arrow-45" x="32" y="0" />
+            <use xlink:href="#arrow" x="48" y="0" />
+            <use xlink:href="#arrow-270" x="64" y="0" />
+            <use xlink:href="#arrow-225" x="80" y="0" />
+            <use xlink:href="#arrow" x="96" y="0" />
+            <use xlink:href="#arrow-90" x="112" y="0"/>
+            <use xlink:href="#arrow-180" x="128" y="0" />
+            <use xlink:href="#arrow-225" x="144" y="0" />
+            <use xlink:href="#arrow" x="160" y="0" />
+        </g>
+
+        <g id="arrow-pattern-4">
+            <use xlink:href="#arrow-180" x="0" y="0"/>
+            <use xlink:href="#arrow-225" x="16" y="0" />
+            <use xlink:href="#arrow" x="32" y="0" />
+            <use xlink:href="#arrow-90" x="48" y="0" />
+            <use xlink:href="#arrow-45" x="64" y="0" />
+            <use xlink:href="#arrow" x="80" y="0" />
+            <use xlink:href="#arrow-270" x="96" y="0" />
+            <use xlink:href="#arrow-180" x="112" y="0"/>
+            <use xlink:href="#arrow-45" x="128" y="0" />
+            <use xlink:href="#arrow-90" x="144" y="0" />
+            <use xlink:href="#arrow-180" x="160" y="0" />
+        </g>
+
+        <g id="arrow-pattern-5">
+            <use xlink:href="#arrow-45" x="0" y="0"/>
+            <use xlink:href="#arrow" x="16" y="0" />
+            <use xlink:href="#arrow-270" x="32" y="0" />
+            <use xlink:href="#arrow-180" x="48" y="0" />
+            <use xlink:href="#arrow-45" x="64" y="0" />
+            <use xlink:href="#arrow-90" x="80" y="0" />
+            <use xlink:href="#arrow-180" x="96" y="0" />
+            <use xlink:href="#arrow-225" x="112" y="0"/>
+            <use xlink:href="#arrow" x="128" y="0" />
+            <use xlink:href="#arrow-270" x="144" y="0" />
+            <use xlink:href="#arrow-180" x="160" y="0" />
+        </g>
+
+        <g id="arrow-pattern-6">
+            <use xlink:href="#arrow-180" x="0" y="0"/>
+            <use xlink:href="#arrow-225" x="16" y="0" />
+            <use xlink:href="#arrow" x="32" y="0" />
+            <use xlink:href="#arrow-90" x="48" y="0" />
+            <use xlink:href="#arrow-180" x="64" y="0" />
+            <use xlink:href="#arrow-225" x="80" y="0" />
+            <use xlink:href="#arrow-45" x="96" y="0" />
+            <use xlink:href="#arrow" x="112" y="0"/>
+            <use xlink:href="#arrow-270" x="128" y="0" />
+            <use xlink:href="#arrow-180" x="144" y="0" />
+            <use xlink:href="#arrow-45" x="160" y="0" />
+        </g>
+    </defs>
+
+    <!-- Create square of patterns -->
+    <use xlink:href="#arrow-pattern-1" x="0" y="0"/>
+    <use xlink:href="#arrow-pattern-2" x="0" y="16"/>
+    <use xlink:href="#arrow-pattern-3" x="0" y="32"/>
+    <use xlink:href="#arrow-pattern-4" x="0" y="48"/>
+    <use xlink:href="#arrow-pattern-5" x="0" y="64"/>
+    <use xlink:href="#arrow-pattern-6" x="0" y="80"/>
+    <use xlink:href="#arrow-pattern-1" x="0" y="96"/>
+    <use xlink:href="#arrow-pattern-2" x="0" y="112"/>
+    <use xlink:href="#arrow-pattern-3" x="0" y="128"/>
+    <use xlink:href="#arrow-pattern-4" x="0" y="144"/>
+    <use xlink:href="#arrow-pattern-5" x="0" y="160"/>
+</svg>

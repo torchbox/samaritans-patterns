@@ -1,0 +1,178 @@
+$white: #fff;
+$black: #000;
+
+$lime: #84bd00;
+$emerald: #00a589;
+$grass: #00a862;
+$meadow: #b6d8a3;
+$teal: #115e67;
+$ink: #045;
+$petrol: #0f2522;
+$holly: #102622;
+$mandarin: #ff6008;
+$lemon: #f8e71c;
+
+// Supporting pallette
+$off-white: #f4f7f8;
+$pumpkin: #fb7332;
+$sunflower: #fecb4e;
+$bubblegum: #e57ca5;
+$hot-pink: #e0457b;
+$lilac: #9099ba;
+$spearmint: #49aab2;
+$sky: #62a7e2;
+$ocean: #009bc8;
+$plum: #6e2b62;
+$amethyst: #72619f;
+$cerulean: #0083a9;
+
+// Greys
+$page-bg: #eaeaea;
+$grey-light: #e1e1e1;
+$grey-on-photo: #d8d8d8;
+$grey-text: #9b9b9b;
+
+// Color usage
+$color--primary: $lime;
+$color--secondary: $emerald;
+$color--tertiary: $page-bg;
+
+$color--white: $white;
+$color--black: $black;
+
+$color--default: $ink;
+$color--link: $ocean;
+$color--link--on-off-white: darken($color--link, 8%);
+$color--link-hover: $ink;
+$color--link-hover-subtle: darken($color--link, 5%);
+
+// Button colours
+$button-colours: (
+    primary:    (bg: $color--primary, color: $white),
+    secondary:  (bg: $color--secondary, color: $ink),
+    tertiary:   (bg: $color--tertiary, color: $ink),
+);
+
+// Fonts
+$font--primary: 'Varah', Sans-serif;
+
+// Font weights
+$weight--bold: 700;
+$weight--normal: 400;
+$weight--light: 200;
+
+// Font sizes
+$base-font-size: 20px;
+$base-line-height: 1.5;
+$font-sizes: (
+    default:    $base-font-size,
+    xxxxl:      55px,
+    xxxl:       45px,
+    xxl:        32px,
+    xl:         28px,
+    l:          26px,
+    m:          24px,
+    s:          18px,
+    xs:         16px,
+    xxs:        14px
+);
+
+// Icon sizes
+$icon-size--small: 15px;
+$icon-size--medium: 20px;
+$icon-size--large: 40px;
+$icon-size--x-large: 75px;
+
+// Hover states
+$hover: '&:hover, &:active, &:focus';
+
+// Z-indices, in ascending order
+$z-elements: (
+    footer-dropdown,
+    related,
+    page-behind,
+    hero,
+    pattern,
+    hero-inner,
+    page,
+    card-background,
+    corner,
+    card,
+    card-foreground,
+    tooltip,
+    cookie-banner,
+    header-menu-overlay,
+    header-menu,
+    menu,
+    sticky-cta,
+    page-borders,
+    modal
+);
+
+// Gutters
+$gutter: 20px;
+$gutter-small: 15px;
+$gutter-medium: 30px;
+$gutter-large: 40px;
+$gutter-x-large: 50px;
+$gutter-xxl: 60px;
+
+//spacings
+$section-overlap: 120px;
+$body-padding--website: 10px;
+$margin--main-after: $gutter-xxl;
+
+$page-padding-vertical-base:               $gutter;
+$page-padding-horizontal-base:             $gutter - $body-padding--website;
+$page-padding-vertical-mob-landscape:      $gutter-medium;
+$page-padding-horizontal-mob-landscape:    $gutter-medium - $body-padding--website;
+$page-padding-vertical-tablet-portrait:    $gutter-large;
+$page-padding-horizontal-tablet-portrait:  $gutter-large - $body-padding--website;
+$page-padding-vertical-tablet-landscape:   $gutter-xxl;
+$page-padding-horizontal-tablet-landscape: $gutter-xxl;
+
+// component sizes
+$header-nav-height: 56px;
+$header-nav-height--inner: 35px;
+
+// Borders
+$grey-border: 1.5px solid $grey-light;
+
+// Breakpoints
+
+$breakpoint-mob-portrait:       320px;
+$breakpoint-mob-landscape:      480px;
+$breakpoint-tablet-portrait:    768px;
+$breakpoint-tablet-landscape:  1024px;
+$breakpoint-desktop:           1280px;
+$breakpoint-desktop-medium:    1500px;
+$breakpoint-desktop-wide:      2556px;
+
+$breakpoints: (
+    'mob-portrait'      '(min-width: #{$breakpoint-mob-portrait    })',
+    'mob-landscape'     '(min-width: #{$breakpoint-mob-landscape   })',
+    'tablet-portrait'   '(min-width: #{$breakpoint-tablet-portrait })',
+    'tablet-landscape'  '(min-width: #{$breakpoint-tablet-landscape})',
+    'desktop'           '(min-width: #{$breakpoint-desktop         })',
+    'desktop-medium'    '(min-width: #{$breakpoint-desktop-medium  })',
+    'desktop-wide'      '(min-width: #{$breakpoint-desktop-wide    })'
+);
+
+$menu-breakpoint: 'tablet-landscape';
+$page-connectors-breakpoint: 'tablet-landscape';
+$listing-item-breakpoint: 570px;
+
+
+// Wrappers
+$site-width: $breakpoint-desktop - (2 * $page-padding-horizontal-tablet-portrait); // 1220px
+$wrapper--medium: $breakpoint-tablet-landscape - (2 * $page-padding-horizontal-tablet-portrait); // 964px
+$wrapper--small: 850px;
+$wrapper--smaller: 800px; // can probably be combined with $wrapper--small on tablet-size review but 800px was specifically requested
+
+
+// Transition speeds
+$transition: 0.25s ease-out;
+
+// Form selectors
+$input--string: 'input:not([type="checkbox"]):not([type="radio"])';
+$input--boolean: 'input[type="checkbox"],input[type="radio"]';

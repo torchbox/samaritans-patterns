@@ -1,0 +1,33 @@
+{% load i18n %}
+<table class="listing">
+    <col width="5%"/>
+    <col width="50%"/>
+    <col width="45%"/>
+    <thead>
+        <tr>
+            <th colspan="4">
+                <button name="action" value="zip" class="button bicolor icon icon-download" id="download-zip-forms" style="visibility: hidden">{% trans "Download Zip" %}</button>
+            </th>
+        </tr>
+        <tr>
+            <th><input type="checkbox" id="select-all" /></th>
+            <th class="title">{% trans "Title" %}</th>
+            <th class="type">{% trans "Origin" %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for fp in form_pages %}
+            <tr>
+                <td>
+                    <input type="checkbox" name="selected-forms" class="select-form" value="{{ fp.pk }}" />
+                </td>
+                <td class="title">
+                    <h2><a href="{% url 'wagtailforms:list_submissions' fp.id %}">{{ fp|capfirst }}</a></h2>
+                </td>
+                <td class="type">
+                    <small><a href="{% url 'wagtailadmin_pages:edit' fp.id %}" class="nolink">{{ fp.content_type.name |capfirst }} ({{ fp.content_type.app_label }}.{{ fp.content_type.model }})</a></small>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

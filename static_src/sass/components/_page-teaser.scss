@@ -1,0 +1,120 @@
+.page-teaser {
+    $root: &;
+
+    @include corner($lime, bottom, right, 150px, 150px, 7px, '&::before', 0);
+    position: relative;
+    margin: $gutter-xxl 0;
+
+    @include media-query(tablet-portrait) {
+        @include corner($lime, bottom, right, 360px, 190px, 7px, '&::before', 0);
+    }
+
+    &__content {
+        @include connectors($lime, bottom, right);
+        position: relative;
+        z-index: z($z-elements, card);
+        padding: $gutter;
+        padding-bottom: $gutter-medium;
+        background: $teal;
+        color: $white;
+
+        @include media-query(tablet-portrait) {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: $gutter-medium;
+        }
+
+        @include media-query(tablet-landscape) {
+            @include connectors($lime, bottom, right, medium);
+            padding: $gutter-large 60px;
+        }
+
+        #{$root}--nation & {
+            z-index: auto;
+        }
+
+        &--giftaid {
+            @include connectors($lime, bottom, right, medium);
+            background-color: $ink;
+
+            @include media-query(tablet-landscape) {
+                padding: $gutter-large 60px;
+            }
+        }
+    }
+
+    &__image {
+        &--mobile {
+            max-width: none;
+            width: 100vw;
+            height: auto;
+        }
+
+        &--desktop {
+            display: none;
+
+            @include media-query(tablet-portrait) {
+                display: block;
+                width: 380px;
+                max-width: 50%;
+                margin: 0;
+                margin-left: $gutter-medium;
+            }
+        }
+    }
+
+    &__mobile-image-wrapper {
+        @include pattern($white);
+        position: relative;
+        margin: 0 (-$gutter-small);
+        margin-bottom: -$gutter-large;
+
+        @include media-query(tablet-portrait) {
+            display: none;
+        }
+
+        .pattern {
+            max-width: 350px;
+            top: 30%;
+            left: 75%;
+        }
+    }
+
+    &__content-inner {
+        &--giftaid {
+            @include media-query(tablet-landscape) {
+                display: flex;
+                align-items: flex-start;
+                justify-content: space-between;
+            }
+
+            svg {
+                width: 170px;
+                height: 60px;
+                margin-left: $gutter-large;
+
+                @include media-query(tablet-landscape) {
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+
+    &__giftaid-copy {
+        @include font-size(s);
+
+        @include media-query(tablet-landscape) {
+            width: 70%;
+
+            .form-item {
+                flex-wrap: nowrap;
+                align-items: flex-start;
+            }
+        }
+
+        label {
+            flex: 1;
+        }
+    }
+}

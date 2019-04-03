@@ -1,0 +1,78 @@
+.hero-widget {
+    $root: &;
+
+    @include corner($lime, top, left, $width: 60%, $height: 160px, $offset: 7px, $selector: '&__corner');
+    max-width: 533px;
+    margin: 0 auto $gutter-medium;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    @include media-query(mob-landscape) {
+        @include corner($lime, top, left, $width: 60%, $height: 170px, $offset: 10px, $selector: '&__corner');
+    }
+
+    @include media-query(tablet-portrait) {
+        max-width: 365px;
+        margin-left: 0;
+
+    }
+
+    @include media-query(tablet-landscape) {
+        max-width: 533px;
+        margin-bottom: 0;
+        margin-left: $gutter-xxl;
+    }
+
+    &__corner {
+        z-index: z($z-elements, corner);
+    }
+
+    &__inner {
+        padding: $gutter;
+        position: relative;
+        z-index: z($z-elements, card);
+        background-color: rgba($white, 0.95);
+
+        @include media-query(mob-landscape) {
+            padding: $gutter-large;
+        }
+
+        @include media-query(tablet-landscape) {
+            padding: $gutter-xxl;
+        }
+    }
+
+    &__connectors {
+        @include connectors($lime, top, left, card);
+
+        @include media-query(mob-landscape) {
+            @include connectors($lime, top, left, medium);
+        }
+    }
+
+    &__heading {
+        @include font-size(xxl);
+        margin-bottom: $gutter-medium;
+
+        @include media-query(tablet-landscape) {
+            @include font-size(xxxl);
+            line-height: 55px;
+        }
+    }
+
+    &__button-group {
+        margin-bottom: $gutter-medium;
+    }
+
+    &--donate-landing {
+        @include media-query(tablet-landscape) {
+            width: calc(50% - #{$gutter-xxl + $gutter-medium});
+        }
+
+        #{$root}__inner {
+            background-color: rgba($white, 0.9);
+        }
+    }
+}

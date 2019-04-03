@@ -1,0 +1,15 @@
+context:
+  page:
+    title: Our team
+  people:
+  - first_name: John
+    last_name: Doe
+    listing_summary: A very important team member
+  - first_name: Jane
+    last_name: Doe
+    listing_summary: Another very important person
+
+tags:
+  pageurl:
+    person:
+      raw: '#'

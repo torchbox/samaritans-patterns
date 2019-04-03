@@ -1,0 +1,11 @@
+context:
+  page:
+    title: Some fake title that happens to be exceedingly verbose nay needlessly wordy, though is it needless if the purpose is to test the display of very long titles?
+    display_date: 1 Oct 1970
+    introduction: A mistake is a wholesaler from the right perspective. An unshaved fish is a fur of the mind. Recent controversy aside, a creature is a lignite scallion. Far from the truth, we can assume that any instance of a mustard can be construed as a potty diploma. An elizabeth is a calculus from the right perspective. Some assert that few can name a bumpy objective that isn't a fronded beat.
+    hero_image: true
+
+tags:
+  include_block:
+    page.body:
+      template_name: "patterns/molecules/streamfield/stream_block.html"

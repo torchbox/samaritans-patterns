@@ -1,0 +1,6 @@
+context:
+  name: news_type
+  title: Type of news
+  options:
+  - ['press_release', "Press Release"]
+  - ['media_coverage', "Media coverage"]

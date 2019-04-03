@@ -1,0 +1,4 @@
+context:
+  value:
+    highlight_type: warning
+    content: blah

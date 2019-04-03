@@ -1,0 +1,25 @@
+{% extends "patterns/templates/index_page/listing_template_website.html" %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block filters_intro %}
+    Browse our events by:
+{% endblock %}
+
+{% block filters %}
+    {% include "patterns/molecules/filters/filter.html" with title="All types of events" name="event_type" options=event_types %}
+{% endblock %}
+
+{% block listings %}
+    {% if events.object_list %}
+        {% include "patterns/organisms/listing-list/listing-list.html" with listings=events %}
+    {% else %}
+        No matching events
+    {% endif %}
+{% endblock listings %}
+
+
+{% comment %} block featured_listing
+    {% if events.object_list.specific.0 %}
+        {% include "patterns/molecules/listing-item/listing-item-featured.html" with value=events.object_list.specific.0 %}
+    {% endif %}
+{% endcomment %}

@@ -1,0 +1,7 @@
+// adjusts styles of gpay button added by js
+
+.gpay-button {
+    // sass-lint:disable-block no-important
+    height: 50px !important;
+    width: 140px !important;
+}

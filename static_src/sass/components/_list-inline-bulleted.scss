@@ -1,0 +1,28 @@
+.list-inline-bulleted {
+    $root: &;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 15px;
+
+    &__item:not(:last-child)::after {
+        content: '';
+        width: 5px;
+        height: 5px;
+        border-radius: 100%;
+        background: $lime;
+        margin: 0 8px 0.4em;
+        opacity: 0.7;
+        display: inline-block;
+        vertical-align: middle;
+
+        #{$root}--featured-listing & {
+            background: $white;
+        }
+    }
+
+    &--featured-listing {
+        @include font-size(s);
+    }
+}
