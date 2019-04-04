@@ -5,6 +5,8 @@
     - card
     - medium
     - page
+
+    There is a similar design pattern used for the impact block title when there is an image on that block, which may be affected by changes here.
 */
 
 @mixin connectors--transparent($size: card, $location-1: top-left, $location-2: null, $color: $white, $breakpoint: none) {

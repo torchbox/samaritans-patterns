@@ -1,7 +1,0 @@
-tags:
-  footernav:
-    "":
-      template_name: patterns/molecules/navigation/footernav.html
-  footerlinks:
-    "":
-      template_name: patterns/molecules/navigation/footerlinks.html

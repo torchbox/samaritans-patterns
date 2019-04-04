@@ -1,6 +1,4 @@
 .donate-landing {
-    $info-card-height-difference: $gutter-large;
-
     &__story-cta {
         color: $white;
         z-index: z($z-elements, page);
@@ -42,33 +40,28 @@
     &__call-to-donate {
         $local-root: &;
 
-        padding: $gutter-large 0;
+        background-color: rgba($white, 0.9);
+        padding: $gutter;
         text-align: center;
+        font-weight: $weight--bold;
+        transition: transform $transition, background-color $transition;
+        transform: translate3d(0, -100%, 0);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
 
-        &--sticky {
-            background-color: rgba($white, 0.9);
-            padding: $gutter;
-            text-align: center;
-            font-weight: $weight--bold;
-            transition: transform $transition, background-color $transition;
-            transform: translate3d(0, -100%, 0);
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
+        #{$hover} {
+            background-color: $white;
 
-            #{$hover} {
-                background-color: $white;
-
-                #{$local-root}__sticky-link {
-                    border-color: $color--default;
-                }
+            #{$local-root}__sticky-link {
+                border-color: $color--default;
             }
+        }
 
-            .sticky-cta--is-stuck & {
-                transform: translate3d(0, 0, 0);
-                z-index: z($z-elements, sticky-cta);
-            }
+        .sticky-cta--is-stuck & {
+            transform: translate3d(0, 0, 0);
+            z-index: z($z-elements, sticky-cta);
         }
 
         &__sticky-link {
@@ -84,7 +77,7 @@
     &__key-info-text {
         @include font-size(m);
         background-color: $teal;
-        padding: $gutter-xxl 0 ($gutter-xxl - $info-card-height-difference);
+        padding: $gutter-xxl 0 $gutter-medium;
         text-align: center;
         color: $white;
 
@@ -100,25 +93,63 @@
 
     &__key-info-cards {
         background-color: $teal;
-    }
 
-    &__key-info-card {
-        padding: $gutter;
-        background-color: $white;
-
-        @include media-query(tablet-portrait) {
-            @include font-size(m);
-            padding: $gutter-medium;
-            margin-bottom: $info-card-height-difference;
-
-            &:nth-of-type(2) {
-                @include font-size(xl);
-                margin-bottom: 0;
-            }
+        &__grid {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
         }
 
-        @include media-query(desktop) {
-            padding: $gutter-large;
+        &__card {
+            padding: $gutter;
+            background-color: $white;
+            width: 100%;
+            margin-bottom: $gutter;
+
+            &:nth-of-type(2) {
+                @include font-size(s);
+                order: -1;
+            }
+
+            @include media-query(mob-landscape) {
+                width: column-width(2, $gutter);
+
+                &:nth-of-type(2) {
+                    @include font-size(m);
+                    width: 100%;
+                    padding: $gutter-medium;
+                }
+            }
+
+            @include media-query(tablet-portrait) {
+                width: column-width(3, $gutter-medium);
+                padding: $gutter-medium;
+                margin-bottom: 80px; // on cards 1 and 3 to make the height variation
+
+                &:nth-of-type(2) {
+                    width: column-width(3, $gutter-medium);
+                    margin-bottom: 0;
+                    order: 0;
+                }
+            }
+
+            @include media-query(tablet-landscape) {
+                @include font-size(m);
+                width: column-width(3, $gutter-large);
+
+                &:nth-of-type(2) {
+                    @include font-size(xl);
+                    width: column-width(3, $gutter-large);
+                }
+            }
+
+            @include media-query(desktop) {
+                padding: $gutter-large;
+
+                &:nth-of-type(2) {
+                    padding: $gutter-large;
+                }
+            }
         }
 
         .rich-text {

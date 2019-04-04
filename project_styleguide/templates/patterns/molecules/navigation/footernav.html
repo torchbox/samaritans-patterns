@@ -1,7 +1,5 @@
-{# For the intranet #}
-
 {% load wagtailcore_tags %}
-<nav class="grid footer-nav footer-nav--intranet" role="navigation" aria-label="Tertiary">
+<nav class="grid grid--4col footer-nav" role="navigation" aria-label="Tertiary">
     {% for footer in footernav %}
         {% include_block footer %}
     {% endfor %}

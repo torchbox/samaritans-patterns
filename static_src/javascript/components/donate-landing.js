@@ -8,7 +8,8 @@ function donateLanding() {
     var donateFormMonthlyToggle = document.getElementById('donate__form__toggle-monthly'),
         donateFormSingleToggle = document.getElementById('donate__form__toggle-single'),
         donateFormMonthly = document.getElementById('donate_form--monthly'),
-        donateFormSingle = document.getElementById('donate_form--single');
+        donateFormSingle = document.getElementById('donate_form--single'),
+        donateFormIcons = document.getElementsByClassName('js-donate-landing__payment-icons')[0];
 
     var donateExamplesMonthlyToggle = document.getElementById('donate__examples__toggle-monthly'),
         donateExamplesSingleToggle = document.getElementById('donate__examples__toggle-single'),
@@ -44,6 +45,7 @@ function donateLanding() {
             donateFormSingleToggle.toggleAttribute('disabled', false);
             donateFormMonthly.toggleAttribute('hidden', false);
             donateFormSingle.toggleAttribute('hidden', true);
+            donateFormIcons.classList.add('is-hidden');
         }
     }
 
@@ -53,6 +55,7 @@ function donateLanding() {
             donateFormMonthlyToggle.toggleAttribute('disabled', false);
             donateFormSingle.toggleAttribute('hidden', false);
             donateFormMonthly.toggleAttribute('hidden', true);
+            donateFormIcons.classList.remove('is-hidden');
         }
     }
 

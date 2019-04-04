@@ -60,6 +60,11 @@
                     {% render_form_field form.town %}
                     {% render_form_field form.post_code %}
                     {% render_form_field form.country %}
+
+                    <div id="donate__form__region" class="js-region-field" {% if not form.country.value == 'US' %}hidden{% endif %}>
+                        {% render_form_field form.region %}
+                    </div>
+
                     {% render_form_field form.phone_number %}
 
                     {% include "patterns/atoms/buttons/button--button.html" with label="Continue to payment" large=True classes="button--large button--secondary" %}

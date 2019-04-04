@@ -1,0 +1,43 @@
+.awesomplete {
+
+    position: relative;
+
+    .visually-hidden {
+        @include hidden;
+    }
+
+    mark {
+        font-weight: $weight--bold;
+        background-color: transparent; // undo base styles
+        color: inherit;                // undo base styles
+    }
+
+    ul {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 100%;
+        background: $white;
+        border: 1px solid $grey-light;
+        border-top-width: 0;
+        border-radius: 0 0 5px 5px;
+        box-shadow:
+        0 -6px 0 -1px $off-white,
+        0 -5px 0  0   $grey-light;
+
+        &:empty {
+            display: none;
+        }
+    }
+
+    li {
+        border-top: 1px solid $grey-light;
+        padding: 5px;
+
+        &[aria-selected='true'],
+        #{$hover} {
+            background-color: $color--link;
+            color: $white;
+        }
+    }
+}

@@ -1,7 +1,6 @@
 context:
     logos:
         - logo
-        - logo-intranet
     icons:
         - account
         - arrow-angle

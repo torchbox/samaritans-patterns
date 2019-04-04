@@ -3,81 +3,83 @@
 class="js-tabccordion tabccordion {% if classes %}{{ classes }}{% endif %}"
 {% if id %}id="{{id}}"{% endif %}
 >
-  {% if title %}
-      <h2 class="tabccordion__title">{{ title }}</h2>
-  {% endif %}
+    {% if title %}
+        <h2 class="tabccordion__title">{{ title }}</h2>
+    {% endif %}
 
-  <nav>
-    <ul class="tabccordion__nav js-tabccordion-nav">
-      {% for tab in tabs %}
-        <li><a href="#tab{{ forloop.counter }}" class="tabccordion__nav-item {% if forloop.first %}is-active{% endif %}">{% firstof tab.proposition tab.value.heading %}</a></li>
-      {% endfor %}
-    </ul>
-  </nav>
+    <nav>
+        <ul class="tabccordion__nav js-tabccordion-nav">
+            {% for tab in tabs %}
+                <li><a href="#tab{{ forloop.counter }}" class="tabccordion__nav-item {% if forloop.first %}is-active{% endif %}">{% firstof tab.proposition tab.value.heading %}</a></li>
+            {% endfor %}
+        </ul>
+    </nav>
 
-  {% for tab in tabs %}
+    {% for tab in tabs %}
 
-    <section id="tab{{ forloop.counter }}" class="accordion accordion--tabccordion tabccordion__panel js-tabccordion-panel{% if forloop.first %} is-active{% endif %}">
+        <section id="tab{{ forloop.counter }}" class="accordion accordion--tabccordion tabccordion__panel js-tabccordion-panel{% if forloop.first %} is-active{% endif %}">
 
-      <a class="accordion__heading" href="#tab{{ forloop.counter }}">
-          <h3 class="accordion__heading-text">
-              {% firstof tab.proposition tab.value.heading %}
-          </h3>
-          {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="accordion__icon" aria_hide="true" %}
-      </a>
+            <a class="accordion__heading" href="#tab{{ forloop.counter }}">
+                <h3 class="accordion__heading-text">
+                        {% firstof tab.proposition tab.value.heading %}
+                </h3>
+                {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="accordion__icon" aria_hide="true" %}
+            </a>
 
-      <div class="accordion__content tabccordion__content {% if tab.value.image %}tabccordion__content--has-image{% endif %}">
-          {% if tab.short_description or tab.icon %}
-              <div class="tabccordion__intro">
-                  <h2>{{ tab.short_description }}</h2>
-                  {% if tab.icon %}
-                  {% render_icon tab.icon "tabccordion__icon" %}
-                  {% endif %}
-              </div>
-          {% endif %}
+            <div class="accordion__content tabccordion__content {% if tab.value.image %}tabccordion__content--has-image{% endif %}">
+                {% if tab.short_description or tab.icon %}
+                    <div class="tabccordion__intro">
+                        <h2>{{ tab.short_description }}</h2>
+                        {% if tab.icon %}
+                            {% render_icon tab.icon "tabccordion__icon" %}
+                        {% endif %}
+                    </div>
+                {% endif %}
 
-        {# content for listening services #}
-        {% if tab.benefits.all or tab.drawbacks.all %}
-          {% include "patterns/molecules/benefits-box/benefits-box.html" with benefits=tab.benefits.all|slice:"3" drawbacks=tab.drawbacks.all|slice:"3"  %}
-        {% endif %}
-        {% if tab.service_call_to_action %}
-          <div class="tabccordion__cta">
-            {% include_block tab.service_call_to_action %}
-            <a class="tabccordion__cta-more" href="{{ tab.url }}">{% trans "Find out more" %}</a>
-          </div>
-        {% endif %}
+                {# content for listening services #}
+                {% if tab.benefits.all or tab.drawbacks.all %}
+                    {% include "patterns/molecules/benefits-box/benefits-box.html" with benefits=tab.benefits.all|slice:"3" drawbacks=tab.drawbacks.all|slice:"3"  %}
+                {% endif %}
+                {% if tab.service_call_to_action %}
+                    <div class="tabccordion__cta">
+                        {% include_block tab.service_call_to_action %}
+                        <a class="tabccordion__cta-more" href="{{ tab.url }}">{% trans "Find out more" %}</a>
+                    </div>
+                {% endif %}
 
-        {# content for tabbed content block #}
-        {% if tab.value.image %}
-          <div class="grid grid--tabccordion-image">
-            <div>
-              {% if tab.value.description %}
-                <p class="tabccordion__description">{{ tab.value.description }}</p>
-              {% endif %}
-              {% if tab.value.link %}
-                {% pageurl tab.value.link as href %}
-                <div class="tabccordion__links">
-                  {% include "patterns/atoms/buttons/button.html" with classes="button--large-tablet-portrait" label=tab.value.link_text href=href %}
-                </div>
-              {% endif %}
+                {# content for tabbed content block #}
+                {% if tab.value.image %}
+                    <div class="grid grid--tabccordion-image grid--no-margin">
+                        <div class="tabccordion__grid-item">
+                            {% if tab.value.description %}
+                                <p class="tabccordion__description">{{ tab.value.description }}</p>
+                            {% endif %}
+                            {% if tab.value.link %}
+                                {% pageurl tab.value.link as href %}
+                                <div class="tabccordion__links">
+                                    {% include "patterns/atoms/buttons/button.html" with classes="button--large-tablet-portrait" label=tab.value.link_text href=href %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        {% if tab.value.image %}
+                            <div class="tabccordion__image">
+                                {% image tab.value.image width-875 %}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% else %}
+                    {% if tab.value.description %}
+                        <p class="tabccordion__description tabccordion__description--centered">{{ tab.value.description }}</p>
+                    {% endif %}
+                    {% if tab.value.link %}
+                        {% pageurl tab.value.link as href %}
+                        <div class="tabccordion__links">
+                            {% include "patterns/atoms/buttons/button.html" with classes="button--large-tablet-portrait" label=tab.value.link_text href=href %}
+                        </div>
+                    {% endif %}
+                {% endif %}
+
             </div>
-            {% if tab.value.image %}
-              {% image tab.value.image width-875 %}
-            {% endif %}
-          </div>
-        {% else %}
-          {% if tab.value.description %}
-            <p class="tabccordion__description">{{ tab.value.description }}</p>
-          {% endif %}
-          {% if tab.value.link %}
-            {% pageurl tab.value.link as href %}
-            <div class="tabccordion__links">
-              {% include "patterns/atoms/buttons/button.html" with classes="button--large-tablet-portrait" label=tab.value.link_text href=href %}
-            </div>
-          {% endif %}
-        {% endif %}
-
-      </div>
-    </section>
-  {% endfor %}
+        </section>
+    {% endfor %}
 </div>

@@ -1,4 +1,4 @@
-{% extends "patterns/base_page--website.html" %}
+{% extends "patterns/base_page.html" %}
 {% load wagtailcore_tags i18n wagtailimages_tags %}
 
 {% block content %}
@@ -59,7 +59,7 @@
             </section>
         {% elif forloop.counter == 2 %}
         <!-- streamfield on a white background with connectors -->
-            <div class="streamfield streamfield--landing-page">
+            <div class="streamfield streamfield--landing-page streamfield--white-bg">
                 <div class="wrapper wrapper--large wrapper--padding-for-page">
                     <section class="section section--landing-page-light-bg">
                         {% include_block block %}

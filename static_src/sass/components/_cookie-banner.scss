@@ -21,7 +21,7 @@
     }
 
     &__link {
-        @include link($plum, $color--link-hover);
+        @include link($plum, $color--link);
         font-weight: $weight--bold;
 
         &--button {
@@ -34,14 +34,16 @@
         }
     }
 
+    &__close {
+        @include link($lime, $color--link);
+        margin-left: $gutter-small;
+        color: $lime;
+    }
+
     &__icon {
         height: $gutter-medium;
         width: $gutter-medium;
-        margin-left: $gutter-small;
-        fill: $lime;
-
-        #{$hover} {
-            fill: $color--link-hover;
-        }
+        fill: currentColor;
+        pointer-events: none;
     }
 }

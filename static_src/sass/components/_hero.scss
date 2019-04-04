@@ -1,5 +1,9 @@
 .hero {
     $root: &;
+    $hero-image-offset--tablet-landscape: $gutter-medium;
+    $hero-image-offset--desktop:          $gutter-xxl;
+    $hero-image-offset--desktop-medium:   $section-overlap;
+
     background-color: $teal;
     position: relative;
     padding: $gutter-medium 0;
@@ -54,7 +58,7 @@
 
         #{$root}--with-image & {
             @include media-query(tablet-landscape) {
-                padding-bottom: $section-overlap;
+                padding-bottom: $section-overlap--hero-with-image;
             }
         }
     }
@@ -100,24 +104,28 @@
         background-position: center;
         background-size: cover;
 
+        @include media-query(tablet-portrait) {
+            width: calc(100% + #{2 * $gutter-medium});
+            margin: $gutter (-$gutter-medium) 0;
+        }
+
         @include media-query(tablet-landscape) {
             align-self: flex-end;
             position: relative;
-            width: 50%;
-            height: calc(100% - #{$gutter-medium});
+            flex: 0 0 50%;
+            height: calc(100% + #{$gutter-small});
             max-height: 380px;
-            margin: 0 -9px $gutter-medium $gutter;
-        }
-
-        @include media-query--takes-value(#{$breakpoint-tablet-landscape + (5.5 * $gutter)}) {
-            height: calc(100% - #{$gutter-large - $gutter});
-            margin-right: 0;
-            margin-top: $gutter-large;
-            margin-bottom: -$gutter;
+            margin: 0 (-$hero-image-offset--tablet-landscape) (-$gutter-small) $gutter;
         }
 
         @include media-query(desktop) {
-            margin-right: -$gutter;
+            margin-right: -$hero-image-offset--desktop;
+            margin-left: $gutter-medium;
+        }
+
+        @include media-query(desktop-medium) {
+            height: calc(100% - #{$gutter-large - $gutter});
+            margin-right: -$hero-image-offset--desktop-medium;
         }
     }
 
@@ -183,16 +191,29 @@
             }
 
             #{$root}--with-image & {
+                // These offsets would put the pattern in the right place if the right-hand edge of the image were aligned with the right-hand edge of $wrapper-large. They are then adjusted at each breakpoint by the amount that the image is offset from that position.
+                $pattern-offset--from-right: 130px;
+                $pattern-offset--from-center: (0.5 * $site-width) - $pattern-offset--from-right;
+
                 @include media-query(tablet-landscape) {
                     top: auto;
                     right: auto;
-                    bottom: -287px;
-                    left: calc(100% - 110px);
-                    width: 450px;
+                    bottom: -330px;
+                    left: calc(100% - #{$pattern-offset--from-right} + #{$hero-image-offset--tablet-landscape});
+                    width: 500px;
+                }
+
+                // At this point, the page width is constant rather than being based on the viewpoint width, so the offset is from the center of the page.
+                @include media-query--takes-value($breakpoint-desktop - $gutter-large) {
+                    left: calc(50% + #{$pattern-offset--from-center + $hero-image-offset--tablet-landscape});
                 }
 
                 @include media-query(desktop) {
-                    left: calc(50% + #{(0.5 * $site-width) - 90px});
+                    left: calc(50% + #{$pattern-offset--from-center + $hero-image-offset--desktop});
+                }
+
+                @include media-query(desktop-medium) {
+                    left: calc(50% + #{$pattern-offset--from-center + $hero-image-offset--desktop-medium});
                 }
             }
 

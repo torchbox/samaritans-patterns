@@ -2,14 +2,6 @@
     $root: &;
     background-color: $white;
 
-    &--intranet {
-        padding: 10px;
-
-        @include media-query($menu-breakpoint) {
-            padding: $gutter $gutter-medium;
-        }
-    }
-
     &--website {
         @include media-query($menu-breakpoint) {
             padding: $gutter 0;
@@ -45,18 +37,6 @@
             }
         }
 
-        #{$root}--intranet & {
-            padding-top: $gutter-small;
-            position: relative;
-            flex-grow: 1;
-
-            @include media-query(mob-portrait) {
-                justify-content: flex-end;
-                padding: 0;
-                width: auto;
-            }
-        }
-
         #{$root}--website & {
             padding: $gutter-small;
 
@@ -64,16 +44,6 @@
                 padding: 0;
                 display: block;
             }
-        }
-    }
-
-    // Intranet only
-    &__controls {
-        display: flex;
-        align-items: center;
-
-        @include media-query(tablet-portrait) {
-            margin: 0 $gutter-large;
         }
     }
 
@@ -127,19 +97,6 @@
         @include media-query(tablet-portrait) {
             height: 66px;
             width: 188px;
-        }
-
-        #{$root}--intranet & {
-            margin-right: $gutter-medium;
-            width: 100px;
-
-            @include media-query(mob-landscape) {
-                width: 149px;
-            }
-
-            @include media-query(tablet-portrait) {
-                margin-right: 0;
-            }
         }
     }
 
@@ -213,16 +170,25 @@
     }
 
     &__menu-toggle {
-        width: 38px;
-        height: 35px;
         padding: 5px;
-
-        #{$hover} {
-            cursor: pointer;
-        }
 
         @include media-query($menu-breakpoint) {
             display: none;
+        }
+
+        &--burger {
+            @include link($teal, $color--link);
+        }
+
+        &--close {
+            @include link($white, $color--link);
+        }
+
+        &__icon {
+            width: 28px;
+            height: 25px;
+            fill: currentColor;
+            pointer-events: none;
         }
     }
 

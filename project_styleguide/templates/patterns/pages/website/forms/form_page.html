@@ -9,8 +9,31 @@
 
     {{ page.body|richtext }}
 
-    {% if page.form_fields %}
-        {% include 'patterns/organisms/form/form.html' with form_classes="form--after-body" %}
-    {% endif %}
+    <form action="{% pageurl page %}" method="post" class="form form--after-body">
+        <div class="form__container">
+            {% csrf_token %}
 
+            {% if form.errors %}
+                <div class="form__errors">
+                    There were some errors with your form. Please amend the fields highlighted below.
+                </div>
+            {% endif %}
+
+            {# Custom fields #}
+            {% for field in form %}
+                {% if not field.name in hard_coded_fields and not field.name == 'wagtailcaptcha' %}
+                    {% include 'patterns/molecules/forms/form_field.html' with field=field %}
+                {% endif %}
+            {% endfor %}
+
+            {% if page.include_gdpr_fields %}
+                {% include "patterns/molecules/gdpr/gdpr_marketing_form_fields.html" %}
+            {% endif %}
+
+            {% render_form_field form.wagtailcaptcha %}
+
+            {% firstof page.action_text|safe "Submit" as label %}
+            {% include "patterns/atoms/buttons/button--button.html" %}
+        </div>
+    </form>
 {% endblock %}

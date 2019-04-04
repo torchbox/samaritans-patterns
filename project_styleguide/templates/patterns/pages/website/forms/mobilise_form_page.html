@@ -1,0 +1,44 @@
+{% extends "patterns/templates/narrow-page.html" %}
+{% load form_tags wagtailcore_tags wagtailimages_tags static %}
+
+{% block content_inner %}
+    {% if request.GET.success %}
+
+        <h1>Thank you</h1>
+        {{ page.thank_you_text|richtext }}
+
+    {% else %}
+
+        <h1>{{ page.title }}</h1>
+        <h2 class="intro intro--heading-margin">{{ page.introduction }}</h2>
+
+        {% if request.GET.error %}
+
+            <div class="form__errors">
+                Sorry, there was an error when trying to process your request. Please try again, checking that the phone number you entered is a valid UK mobile number starting with either &quot;07&quot; or &quot;447&quot;.
+            </div>
+
+        {% endif %}
+
+        {{ page.body|richtext }}
+
+        <form class="form form--after-body" action="https://optimise.mobilisefundraising.com/api/mobilise_webform.php" id="mobilise-form" method="post">
+            <div class="form__container">
+                {# hidden fields #}
+                <input name="shortcode" type="hidden" value="{{ page.omg_shortcode }}">
+                <input name="message" type="hidden" value="{{ page.omg_keyword }}">
+                <input name="success_url" type="hidden" value="{{ page.full_url }}?success=1">
+                <input name="error_url" type="hidden" value="{{ page.full_url }}?error=1">
+
+                {# visible fields #}
+                <div class="form-item">
+                    <label for="mobilise-mobile-number" class="form-item__label">Telephone number</label>
+                    <input id="mobilise-mobile-number" maxlength="12" name="msisdn" type="tel">
+                </div>
+                {% include "patterns/atoms/buttons/button--button.html" with label="Sign me up" %}
+            </div>
+        </form>
+
+    {% endif %}
+
+{% endblock %}

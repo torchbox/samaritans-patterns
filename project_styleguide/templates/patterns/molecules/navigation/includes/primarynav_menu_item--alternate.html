@@ -3,37 +3,37 @@
 <div class="nav__dropdown">
 <div class="nav nav--subnav" role="menu">
     <span class="nav__triangle"></span>
-    <div class="nav__item nav__heading nav__heading--show-mobile nav__heading--top-level" role="presentation">{% include_block item.value.link with classes="nav__link nav__link--heading" %}</div>
+    <div class="nav__item nav__heading nav__heading--show-mobile nav__heading--top-level" role="none">{% include_block item.value.link with classes="nav__link nav__link--heading" %}</div>
     <ul class="grid grid--3col grid--subnav">
-        <li class="nav__item nav__heading nav__heading--show-mobile" role="presentation">
+        <li class="nav__item nav__heading nav__heading--show-mobile" role="none">
             {% with title_link=item.value.icon_link_list.title %}
             <a class="nav__link" href="{% pageurl title_link.page %}">{{ title_link.title|default:title_link.page.title }}</a>
             {% endwith %}
             <ul class="nav nav--alternate-icon">
                 {% for link in item.value.icon_link_list.links %}
-                <li class="nav__item">
+                <li class="nav__item" role="none">
                     {% include "patterns/molecules/navigation/includes/menu_item--icon.html" with page=link.page title=link.title icon=link.icon classes="nav__link nav__link--with-icon" %}
                 </li>
                 {% endfor %}
             </ul>
         </li>
-        <li class="nav__item nav__heading nav__heading--show-mobile" role="presentation">
+        <li class="nav__item nav__heading nav__heading--show-mobile" role="none">
             {% with title_link=item.value.section_index.title %}
             <a class="nav__link" href="{% pageurl title_link.page %}">{{ title_link.title|default:title_link.page.title }}</a>
             {% endwith %}
             <ul class="nav nav--section-index">
                 {% for link in item.value.section_index.links %}
-                <li class="nav__item nav__item--with-chevron">
+                <li class="nav__item nav__item--with-chevron" role="none">
                     {% include "patterns/atoms/svg/icons/icon-chevron.html" %}
                     {% include "patterns/molecules/navigation/includes/menu_item.html" with page=link.page title=link.title classes="nav__link nav__link--with-chevron" %}
                 </li>
                 {% endfor %}
             </ul>
         </li>
-        <li class="nav__item nav__item--secondary" role="presentation">
+        <li class="nav__item nav__item--secondary" role="none">
             <ul class="nav nav--extra-links">
                 {% for link in item.value.extra_links %}
-                <li class="nav__item nav__heading nav__heading--show-mobile">
+                <li class="nav__item nav__heading nav__heading--show-mobile" role="none">
                     {% include "patterns/molecules/navigation/includes/menu_item.html" with page=link.page title=link.title classes="nav__link nav__link--extra" %}
                 </li>
                 {% endfor %}

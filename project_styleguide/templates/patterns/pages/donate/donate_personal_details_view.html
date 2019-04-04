@@ -74,7 +74,9 @@
                 {% endif %}
 
                 {% if is_pay_in %}
-                    {% render_form_field form.payment_origin %}
+                    <div class="js-autocomplete" data-autocomplete-list="#payment_origin_options">
+                        {% render_form_field form.payment_origin %}
+                    </div>
                 {% endif %}
 
                 {% render_form_field form.frequency %}
@@ -92,6 +94,11 @@
                 {% render_form_field form.town %}
                 {% render_form_field form.post_code %}
                 {% render_form_field form.country %}
+
+                <div id="donate__form__region" class="js-region-field" {% if not form.country.value == 'US' %}hidden{% endif %}>
+                    {% render_form_field form.region %}
+                </div>
+
                 {% include 'patterns/molecules/forms/form_field.html' with field=form.phone_number tooltip="We'll only use this if you ask to be kept up-to-date by phone." %}
 
                 {% render_form_field form.in_memory %}
@@ -130,4 +137,7 @@
 {{ tag_manager_events|json_script:"tag_manager_events" }}
 <script src="{% static 'js/donate.js' %}"></script>
 {% loqate_script %}
+{% if is_pay_in %}
+    {{ fundraising_options|json_script:"payment_origin_options" }}
+{% endif %}
 {% endblock %}

@@ -1,8 +1,13 @@
 {% load wagtailcore_tags %}
 <nav class="nav nav--cta" role="navigation" aria-label="Secondary">
-    <ul class="nav nav--secondary" role="menubar">
+    <ul class="nav nav--secondary" role="menu">
+        {% if donate_page %}
+        <li class="nav__item" role="none">
+            {% include "patterns/molecules/navigation/includes/menu_item--icon.html" with page=donate_page title=donate_page.title icon="icon-color-coins" %}
+        </li>
+        {% endif %}
         {% for item in secondarynav %}
-            <li class="nav__item" role="presentation">
+            <li class="nav__item" role="none">
                 {% include "patterns/molecules/navigation/includes/menu_item--icon.html" with page=item.value.page title=item.value.title icon=item.value.icon %}
             </li>
         {% endfor %}

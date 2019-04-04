@@ -1,7 +1,6 @@
-import $ from 'jquery';
 import 'babel-polyfill';
-import 'select2';
 
+import Autocomplete from './components/autocomplete';
 import MobileMenu from './components/mobile-menu';
 import MobileSubMenu from './components/mobile-sub-menu';
 import CookieWarning from './components/cookie-message--website';
@@ -10,6 +9,7 @@ import Carousel from './components/carousel';
 import GoogleMap from './components/map';
 import Modal from './components/modal';
 import ProgressBar from './components/progress-bar';
+import RegionField from './components/region-field';
 import StickyCTA from './components/sticky-cta';
 import Tabccordion from './components/tabccordion';
 import Toggle from './components/toggle';
@@ -26,6 +26,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     for (const accordion of document.querySelectorAll(Accordion.selector())) {
         new Accordion(accordion);
+    }
+
+    for (const autocomplete of document.querySelectorAll(Autocomplete.selector())) {
+        new Autocomplete(autocomplete);
     }
 
     for (const carousel of document.querySelectorAll(Carousel.selector())) {
@@ -52,6 +56,10 @@ document.addEventListener('DOMContentLoaded', function() {
         new ProgressBar(progressbar);
     }
 
+    for (const regionfield of document.querySelectorAll(RegionField.selector())) {
+        new RegionField(regionfield);
+    }
+
     for (const stickycta of document.querySelectorAll(StickyCTA.selector())) {
         new StickyCTA(stickycta);
     }
@@ -75,14 +83,6 @@ document.addEventListener('DOMContentLoaded', function() {
     for (const inputblock of document.querySelectorAll(SelectAllCheckboxToggle.selector())) {
         new SelectAllCheckboxToggle(inputblock);
     }
-
-    $('.form-item--autocomplete_select').find('select').select2({
-        minimumInputLength: 3,
-        language: {
-            inputTooShort: function () { return ''; }
-        },
-        tags: true
-    });
 
     sendTagManagerEvents();
 });

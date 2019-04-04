@@ -3,6 +3,10 @@
 
     margin-bottom: $gutter-xxl;
 
+    &__heading {
+        @include font-size(default);
+    }
+
     &__item {
         @include font-size(s);
         margin-bottom: 5px;

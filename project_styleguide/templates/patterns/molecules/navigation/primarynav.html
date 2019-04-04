@@ -2,7 +2,7 @@
 <nav role="navigation" aria-label="Primary">
     <ul class="nav nav--primary" role="menubar">
         {% for item in primarynav %}
-            <li class="nav__item nav__item--primary js-header-menu {% if children.exists %}nav__item--is-parent{% endif %}" role="presentation">
+            <li class="nav__item nav__item--primary js-header-menu {% if children.exists %}nav__item--is-parent{% endif %}" role="none">
                 {% include_block item.value.link with has_children=item.value.children structure=item.block_type classes="nav__link js-open-header-menu" %}
                 {% if item.block_type == 'item' %}
                     {% include "patterns/molecules/navigation/includes/primarynav_menu_item.html" %}

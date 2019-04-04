@@ -6,7 +6,8 @@
         border-bottom: $grey-border;
     }
 
-    .streamfield--dark-bg & {
+    .streamfield--dark-bg &,
+    .tabccordion--actions & {
         color: $white;
         border-color: rgba($grey-light, 0.2);
     }
@@ -26,13 +27,18 @@
             justify-content: flex-end;
         }
 
-        .streamfield--dark-bg & {
+        .streamfield--dark-bg &,
+        .tabccordion--actions & {
             @include link($white, rgba($white, 0.8));
         }
 
         #{$root}--tabccordion & {
             @include media-query(tablet-portrait) {
                 display: none;
+            }
+
+            .streamfield--dark-bg & {
+                @include link;
             }
         }
 
@@ -63,8 +69,15 @@
         fill: $color--link;
         pointer-events: none;
 
-        .streamfield--dark-bg & {
+        .streamfield--dark-bg &,
+        .tabccordion--actions & {
             fill: $white;
+        }
+
+        #{$root}--tabccordion & {
+            .streamfield--dark-bg & {
+                fill: $color--link;
+            }
         }
     }
 

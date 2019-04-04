@@ -11,8 +11,9 @@
             </li>
         {% else %}
             <li class="language-switcher__item">
+                {% get_path_for_locale as redirect_url %}
                 <a
-                href="{% url 'set_locale' choice.slug %}?next={% get_path_for_locale %}"
+                href="{% url 'set_locale' choice.slug %}?next={{ redirect_url|urlencode }}"
                 class="language-switcher__link"
                 >
                     {{ name }}

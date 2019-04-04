@@ -1,4 +1,5 @@
 {% load formatting_tags %}
+{% if value.document %}
 <article class="document">
     {% include "patterns/atoms/svg/colour-icons/icon-color-arrows.html" with classes="document__icon" aria_hide=True %}
     <div>
@@ -13,3 +14,4 @@
         </p>
     </div>
 </article>
+{% endif %}

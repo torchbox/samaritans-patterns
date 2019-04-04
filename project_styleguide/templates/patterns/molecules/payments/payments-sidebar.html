@@ -1,4 +1,5 @@
 {% load helper_tags icon_tags %}
+
 <aside class="sidebar sidebar--donate">
     {% render_icon "icon-color-padlock" "sidebar__icon sidebar__icon--donate-padlock" %}
     <h4 class="sidebar__heading">Secure and private</h4>
@@ -17,9 +18,7 @@
 
     <div id="donate__methods--monthly" {% if not payment_frequency == 'monthly' %}hidden{% endif %}>
         <h4>We accept monthly donations through Direct Debit</h4>
-        <div class="sidebar__payment-icons">
-            {% render_icon "icon-color-direct-debit" "sidebar__payment-icon sidebar__payment-icon--direct-debit" %}
-        </div>
+        {% include "patterns/molecules/payments/payment-icons--monthly.html" %}
     </div>
 
     <div id="donate__methods--single" {% if payment_frequency == 'monthly' %}hidden{% endif %}>
@@ -29,15 +28,6 @@
             We accept all major cards, PayPal, Google Pay, and Apple Pay
             {% endcomment %}
         </h4>
-        <div class="sidebar__payment-icons">
-            {% render_icon "icon-color-visa" "sidebar__payment-icon sidebar__payment-icon--visa" %}
-            {% render_icon "icon-color-mastercard" "sidebar__payment-icon sidebar__payment-icon--mastercard" %}
-            {% comment %}
-            Google Pay and Apple Pay are temporarily disabled
-            {% render_icon "icon-color-google-pay" "sidebar__payment-icon sidebar__payment-icon--google-pay" %}
-            {% render_icon "icon-color-apple-pay" "sidebar__payment-icon sidebar__payment-icon--apple-pay" %}
-            {% endcomment %}
-            {% render_icon "icon-color-paypal" "sidebar__payment-icon sidebar__payment-icon--paypal" %}
-        </div>
+        {% include "patterns/molecules/payments/payment-icons--single.html" %}
     </div>
 </aside>

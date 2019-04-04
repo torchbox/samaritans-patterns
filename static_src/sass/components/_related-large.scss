@@ -38,21 +38,6 @@
         }
     }
 
-    &--intranet {
-        @include pattern($white, hidden, 0.2);
-        padding-top: $gutter-x-large * 3;
-        overflow: hidden;
-
-        .pattern {
-            @include media-query(tablet-portrait) {
-                top: 60%;
-                bottom: auto;
-                left: 50%;
-                max-width: 750px;
-            }
-        }
-    }
-
     &--donate-landing {
         @include pattern($white, visible, 0.05);
         padding: $gutter-large $gutter;

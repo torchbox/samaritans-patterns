@@ -1,0 +1,68 @@
+{% load cache i18n wagtailcore_tags navigation_tags icon_tags %}
+{% get_current_language as LANGUAGE_CODE %}
+<header>
+    <div class="header header--website">
+        <div class="header__inner wrapper wrapper--large wrapper--padding-for-page">
+
+            <div class="header__inner-top">
+                <a class="header__home-link" href="/">
+                    {% include "patterns/atoms/svg/logos/logo.html" with classes="header__logo" title="Samaritans" %}
+                </a>
+                {% if show_nav %}
+
+                <button class="header__menu-toggle header__menu-toggle--burger js-mobile-menu-toggle">
+                    {% render_icon "icon-color-burger-menu" "header__menu-toggle__icon" %}
+                </button>
+                {% endif %}
+            </div>
+
+            {% if show_nav %}
+                {% cache 900 secondarynav LANGUAGE_CODE page.pk %}
+                {% secondarynav %}
+                {% endcache %}
+            {% endif %}
+        </div>
+    </div>
+
+    {% if show_nav %}
+    <div class="js-header-nav js-header-nav--is-animated header-nav{% if transparent_nav %} header-nav--transparent{% endif %}">
+        <div class="wrapper wrapper--large wrapper--padding">
+        <div class="header-nav__inner">
+
+            <div class="header__inner-top header__inner-top--mobile">
+                <a class="header__home-link" href="/">
+                    {% include "patterns/atoms/svg/logos/logo.html" with classes="header__logo" title="Samaritans" %}
+                </a>
+                <button class="header__menu-toggle header__menu-toggle--close js-mobile-menu-toggle">
+                    {% include "patterns/atoms/svg/icons/icon-close.html" with classes="header__menu-toggle__icon js-mobile-menu-toggle" title="Close" %}
+                </button>
+
+            </div>
+
+
+            {% cache 900 primarynav LANGUAGE_CODE %}
+            {% primarynav %}
+            {% endcache %}
+
+            <div class="nav nav--secondary-mobile">
+                {% cache 900 secondarynav LANGUAGE_CODE page.pk %}
+                {% secondarynav %}
+                {% endcache %}
+            </div>
+
+            <form action="{% url 'search' %}" class="search search--website-header">
+                <input class="search__input" type="text" id="search" name="query" placeholder="Search our website">
+                <label class="search__label hidden" for="search">Search our website</label>
+                <button class="search__button" type="submit">
+                    <span class="hidden">Search</span>
+                    {% include "patterns/atoms/svg/icons/icon-search.html" with classes="search__icon icon" title="Search" %}
+                </button>
+            </form>
+
+        </div>
+        </div>
+    </div>
+    {% endif %}
+</header>
+
+<div class="header-menu-overlay js-header-menu-overlay"></div>

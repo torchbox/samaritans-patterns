@@ -8,12 +8,12 @@
                 {{ value.title }}
                 <span class="impact-block__heading-corner-padding-filler"></span>
                 <span class="impact-block__heading-corner">
-                    {% include "patterns/atoms/svg/corner/corner--medium.html" with classes="impact-block__heading-corner-image" %}
+                    {% include "patterns/atoms/svg/corner/corner--title.html" with classes="impact-block__heading-corner-image" %}
                 </span>
             </h2>
         </div>
         <div class="impact-block__content">
-            <div class="grid grid--3col">
+            <div class="stat-block stat-block--no-margin">
                 {% include_block value.stats %}
             </div>
             <span class="impact-block__connectors"></span>

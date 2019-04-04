@@ -9,6 +9,10 @@
         align-items: center;
     }
 
+    &--no-margin {
+        margin: 0;
+    }
+
     @include media-query(mob-landscape) {
         flex-direction: row;
         align-items: stretch;
@@ -18,17 +22,24 @@
 
     @include media-query(tablet-landscape) {
         @include margin-streamfield-block;
+
+        &--no-margin {
+            margin: 0;
+        }
     }
 
     &__block {
+        @include clear-child-margins;
         max-width: 365px;
         font-size: 16px;
+        padding: 0 $gutter-small;
 
         @include media-query(mob-landscape) {
             flex-basis: calc(50% - 30px);
             margin-left:  15px;
             margin-right: 15px;
             max-width: none;
+            padding: 0;
             font-size: 18px;
         }
 
@@ -54,6 +65,10 @@
             @include underline($element: #{$root}__link);
             padding: $gutter $gutter-small;
             transition: color $transition, background-color $transition;
+
+            @include media-query(mob-landscape) {
+                padding: $gutter $gutter-small;
+            }
 
             #{$hover} {
                 background-color: $off-white;
@@ -92,9 +107,5 @@
                 font-size: 50px;
             }
         }
-    }
-
-    &__link {
-        margin-bottom: 0;
     }
 }

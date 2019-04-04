@@ -118,7 +118,8 @@ $gutter-x-large: 50px;
 $gutter-xxl: 60px;
 
 //spacings
-$section-overlap: 120px;
+$section-overlap: 2 * $gutter-xxl;                          // 120px
+$section-overlap--hero-with-image: $gutter-xxl + $gutter;   //  80px
 $body-padding--website: 10px;
 $margin--main-after: $gutter-xxl;
 

@@ -53,20 +53,20 @@
             </a>
 
             <div class="accordion__content tabccordion__content">
-              <div> {# for apply__info:last-child #}
-                  {% if page.samaritans_place_registration_cost %}
-                      <p class="apply__info">Registration fee: £{{ page.samaritans_place_registration_cost|floatformat:"-2" }}</p>
-                  {% endif %}
-                  {% if page.samaritans_place_fundraising_target %}
-                      <p class="apply__info">Fundraising target: £{{ page.samaritans_place_fundraising_target|floatformat:"-2" }}</p>
-                  {% endif %}
-              </div>
+                <div> {# for apply__info:last-child #}
+                    {% if page.samaritans_place_registration_cost %}
+                        <p class="apply__info">Registration fee: £{{ page.samaritans_place_registration_cost|floatformat:"-2" }}</p>
+                    {% endif %}
+                    {% if page.samaritans_place_fundraising_target %}
+                        <p class="apply__info">Fundraising target: £{{ page.samaritans_place_fundraising_target|floatformat:"-2" }}</p>
+                    {% endif %}
+                </div>
 
-              {% if samaritans_place_form_page %}
-                  {% pageurl samaritans_place_form_page as href %}
-                  {% include "patterns/atoms/buttons/button-large.html" with label="Apply for your place" href=href classes="apply__button" %}
-              {% endif %}
-          </div>
+                {% if samaritans_place_form_page %}
+                    {% pageurl samaritans_place_form_page as href %}
+                    {% include "patterns/atoms/buttons/button-large.html" with label="Apply for your place" href=href classes="apply__button" %}
+                {% endif %}
+            </div>
         </section>
     {% endif %}
     {% endif %}
@@ -90,12 +90,12 @@
             </a>
 
             <div class="accordion__content tabccordion__content">
-              {{ page.own_place_description|richtext }}
-              {% if own_place_form_page %}
-                  {% pageurl own_place_form_page as href %}
-                  {% include "patterns/atoms/buttons/button-large.html" with label=page.own_place_button_text|default:"Apply for your place" href=href classes="apply__button" %}
-              {% endif %}
-          </div>
+                {{ page.own_place_description|richtext }}
+                {% if own_place_form_page %}
+                    {% pageurl own_place_form_page as href %}
+                    {% include "patterns/atoms/buttons/button-large.html" with label=page.own_place_button_text|default:"Apply for your place" href=href classes="apply__button" %}
+                {% endif %}
+            </div>
         </section>
     {% endif %}
     {% endif %}
@@ -119,12 +119,12 @@
             </a>
 
             <div class="accordion__content tabccordion__content">
-              {{ page.other_description|richtext }}
+                {{ page.other_description|richtext }}
 
-              {% if page.other_button_url %}
-                  {% include "patterns/atoms/buttons/button-large.html" with label=page.other_button_text href=page.other_button_url classes="apply__button" %}
-              {% endif %}
-          </div>
+                {% if page.other_button_url %}
+                    {% include "patterns/atoms/buttons/button-large.html" with label=page.other_button_text href=page.other_button_url classes="apply__button" %}
+                {% endif %}
+            </div>
         </section>
     {% endif %}
     {% endif %}

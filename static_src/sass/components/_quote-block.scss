@@ -6,7 +6,8 @@
         @include margin-streamfield-block;
     }
 
-    &--dark {
+    &--dark,
+    .streamfield--dark-bg & {
         color: $color--white;
     }
 

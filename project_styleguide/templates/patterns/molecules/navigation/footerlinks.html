@@ -1,8 +1,8 @@
 {% load wagtailcore_tags %}
 
-<ul class="footer-links__list footer-links__list--default">
+<ul class="footer-links__list footer-links__list--default" role="menu">
     {% for link in footerlinks %}
-        <li class="footer-links__item">
+        <li class="footer-links__item" role="none">
             {% include_block link with classes="footer-links__link" %}
         </li>
     {% endfor %}

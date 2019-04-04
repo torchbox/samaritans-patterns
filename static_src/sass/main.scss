@@ -2,7 +2,6 @@
 @import 'vendor/normalize';
 @import 'vendor/lightgallery';
 @import 'node_modules/@glidejs/glide/src/assets/sass/glide.core';
-@import 'node_modules/select2/dist/css/select2';
 
 // Abstracts
 @import 'abstracts/fonts';
@@ -50,7 +49,6 @@
 @import 'components/document';
 @import 'components/header-menu';
 @import 'components/highlight';
-@import 'components/feedback';
 @import 'components/filters';
 @import 'components/footer-cta';
 @import 'components/footer-links';
@@ -75,6 +73,7 @@
 @import 'components/page-teaser';
 @import 'components/pagination';
 @import 'components/payments';
+@import 'components/payment-icons';
 @import 'components/progress-bar';
 @import 'components/quote-block';
 @import 'components/related-large';
@@ -97,7 +96,7 @@
 @import 'components/streamfield';
 @import 'components/stat-block';
 @import 'components/lg';
-@import 'components/select2';
+@import 'components/awesomplete';
 @import 'components/website-news-cards';
 @import 'components/gpay-button';
 @import 'components/apple-pay-button';

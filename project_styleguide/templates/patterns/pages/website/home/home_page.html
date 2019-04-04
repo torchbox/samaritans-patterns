@@ -1,4 +1,4 @@
-{% extends "patterns/base_page--website.html" %}
+{% extends "patterns/base_page.html" %}
 {% load wagtailcore_tags wagtailimages_tags icon_tags static %}
 
 {% block content %}
@@ -73,7 +73,7 @@
                     <ul class="grid grid--homepage-support nav--homepage-support">
                         {% for support_link in page.support_us_links.all %}
                             <li class="nav__item nav__heading nav__heading--homepage-support" role="presentation">
-                                {% include "patterns/molecules/navigation/includes/menu_item.html" with page=support_link.link title=support_link.link_text description=support_link.summary classes="nav__link nav__link--description" %}
+                                {% include "patterns/molecules/navigation/includes/menu_item.html" with page=support_link.link title=support_link.link_text description=support_link.summary classes="nav__link nav__link--description" is_menuitem=False %}
                             </li>
                         {% endfor %}
                     </ul>
@@ -134,13 +134,17 @@
                     </a>
                 </div>
                 </div>
-                {% if page.featured_news %}
+                {% with news=page.get_nation_specific_news %}
+                {% if news %}
                     <div class="grid grid--3col">
-                        {% for card in page.featured_news.get_object_list %}
-                            {% include "patterns/molecules/cards/related-card.html" with value=card.news.specific classes="card-new--homepage-news" type="news" %}
+                        {% for item in news %}
+                            {% if item.value and item.value.live %}
+                                {% include "patterns/molecules/cards/related-card.html" with value=item.value.specific classes="card-new--homepage-news" type="news" %}
+                            {% endif %}
                         {% endfor %}
                     </div>
                 {% endif %}
+                {% endwith %}
             </section>
 
         </div>

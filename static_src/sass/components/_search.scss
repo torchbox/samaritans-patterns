@@ -74,21 +74,6 @@
         display: flex;
     }
 
-    &--intranet-header {
-        max-width: none;
-        height: 52px;
-
-        @include media-query(tablet-portrait) {
-            height: 50px;
-            max-width: 300px;
-        }
-
-        #{$root}__input {
-            font-size: 20px;
-            height: 100%;
-        }
-    }
-
     &--website-header {
         #{$root}__input {
             font-size: 18px;
@@ -163,18 +148,6 @@
             &__button-text {
                 display: block;
                 margin-right: $gutter;
-            }
-        }
-
-        &#{$root}--intranet {
-            #{$root}__button {
-                @include media-query(mob-landscape) {
-                    margin-top: $gutter;
-                }
-
-                @include media-query(tablet-landscape) {
-                    margin-top: 0;
-                }
             }
         }
     }

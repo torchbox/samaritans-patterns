@@ -1,18 +1,18 @@
-{% extends "patterns/base_page--website.html" %}
+{% extends "patterns/base_page.html" %}
 {% load wagtailcore_tags navigation_tags static %}
 
 {% block content %}
-    {% if page.hero_image %}
-        {% include "patterns/molecules/hero/hero.html" with hero_color="emerald" pattern="dots" %}
-    {% else %}
-        {% include "patterns/molecules/hero/hero.html" with hero_color="emerald" pattern="dots" hero_short=True %}
-    {% endif %}
+    {% include "patterns/molecules/hero/hero.html" with hero_color="emerald" pattern="dots" hero_short=True %}
 
     <section class="wrapper wrapper--large wrapper--padding-for-page">
         <div class="
-        section section--overlap
-        section--information-page
-        {% if page.hero_image %}section--hero-with-image{% endif %}
+        section
+        section--overlap
+        {% if page.hero_image %}
+            section--information-page-with-hero-image
+        {% else %}
+            section--information-page
+        {% endif %}
         ">
             {% if page.introduction %}
                 <p class="intro">{{ page.introduction }}</p>

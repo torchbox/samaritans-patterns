@@ -89,12 +89,9 @@
             opacity: 0;
             transition: opacity $transition;
 
-            #{$root}--light-bg & {
+            #{$root}--light-bg &,
+            .streamfield--white-bg & {
                 border-top-color: $tabs-on-white-color;
-            }
-
-            .streamfield--dark-bg & {
-                border-top-color: $white;
             }
         }
 
@@ -107,12 +104,9 @@
                 color: $color--default;
                 cursor: default;
 
-                #{$root}--light-bg & {
+                #{$root}--light-bg &,
+                .streamfield--white-bg & {
                     background-color: $tabs-on-white-color;
-                }
-
-                .streamfield--dark-bg & {
-                    background-color: $white;
                 }
             }
 
@@ -120,12 +114,9 @@
                 opacity: 1;
             }
 
-            #{$root}--light-bg & {
+            #{$root}--light-bg &,
+            .streamfield--white-bg & {
                 background-color: $tabs-on-white-color;
-            }
-
-            .streamfield--dark-bg & {
-                background-color: $white;
             }
         }
     }
@@ -194,7 +185,9 @@
             }
         }
 
-        #{$root}--dark-bg & {
+        #{$root}--dark-bg &,
+        .streamfield--dark-bg & {
+            color: $color--default;
             padding: 0 $gutter-small;
 
             @include media-query(tablet-portrait) {
@@ -215,8 +208,7 @@
             border-color: rgba($color--default, 0.4);
         }
 
-        #{$root}--actions &,
-        .streamfield--dark-bg & {
+        #{$root}--actions & {
             background: transparent;
             border-color: rgba($white, 0.3);
             color: $white;
@@ -293,7 +285,8 @@
                     display: block;
                 }
 
-                #{$root}--light-bg & {
+                #{$root}--light-bg &,
+                .streamfield--white-bg & {
                     padding: $gutter-medium 0 0;
                 }
 
@@ -306,20 +299,21 @@
             @include media-query(tablet-landscape) {
                 padding: $gutter-x-large;
 
-                #{$root}--light-bg & {
+                #{$root}--light-bg &,
+                .streamfield--white-bg &,
+                #{$root}--actions & {
                     padding: $gutter-large 0 0;
                 }
 
-                #{$root}--apply &,
-                #{$root}--actions & {
+                #{$root}--apply & {
                     padding: 0;
                 }
             }
         }
+    }
 
-        .streamfield--dark-bg & {
-            color: $white;
-        }
+    &__grid-item {
+        width: 100%;
     }
 
     // for listening page tabccordion
@@ -344,8 +338,20 @@
         margin-bottom: $gutter-medium;
 
         @include media-query(tablet-portrait) {
-            padding-top: $gutter;
             margin-bottom: $gutter-x-large;
+        }
+
+        #{$root}--streamfield & {
+            @include font-size(l);
+            font-weight: $weight--bold;
+
+            @include media-query(tablet-portrait) {
+                @include font-size(xl);
+            }
+        }
+
+        &--centered {
+            text-align: center;
         }
     }
 
@@ -372,5 +378,9 @@
                 margin: $gutter-small;
             }
         }
+    }
+
+    &__image {
+        align-self: flex-start;
     }
 }

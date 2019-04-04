@@ -8,10 +8,10 @@
 
 
     {% if item.value.children %}
-        <div class="nav__item nav__heading nav__heading--show-mobile nav__heading--top-level" role="presentation">{% include_block item.value.link %}</div>
+        <div class="nav__item nav__heading nav__heading--show-mobile nav__heading--top-level" role="none">{% include_block item.value.link %}</div>
         <ul class="grid grid--3col grid--subnav-top">
             {% for child in item.value.children %}
-            <li class="nav__item nav__heading nav__heading--show-mobile" role="presentation">
+            <li class="nav__item nav__heading nav__heading--show-mobile" role="none">
                 {% include "patterns/molecules/navigation/includes/menu_item.html" with page=child.link.page title=child.link.title description=child.description classes="nav__link nav__link--description" %}
             </li>
             {% endfor %}
@@ -22,7 +22,7 @@
         <div class="nav__bottom-section">
             <ul class="grid grid--2col grid--subnav-bottom">
                 {% for child in item.value.icon_links %}
-                    <li class="nav__item nav__heading nav__heading--show-mobile" role="presentation">
+                    <li class="nav__item nav__heading nav__heading--show-mobile" role="none">
                         {% include "patterns/molecules/navigation/includes/menu_item--icon.html" with page=child.page title=child.title summary=child.summary icon=child.icon classes="nav__link nav__link--large-icon" %}
                     </li>
                 {% endfor %}

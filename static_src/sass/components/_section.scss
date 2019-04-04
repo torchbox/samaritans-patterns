@@ -80,33 +80,26 @@
         }
     }
 
-    &--hero-with-image {
-        @include media-query($page-connectors-breakpoint) {
-            #{$root}__connectors {
-                @include connectors($emerald, top, left, page);
-                right: auto;
-                left: 0;
-            }
-        }
-    }
-
     &--no-hero {
         @include media-query($page-connectors-breakpoint) {
             margin-top: $gutter-large;
         }
     }
 
-    &--main-intranet {
-        margin-bottom: $gutter-xxl;
+    &--information-page {
+        @include page(top-right, bottom-right, $width: medium);
+    }
 
-        @include media-query($page-connectors-breakpoint) {
-            @include connectors($teal, top, left, page);
+    &--information-page-with-hero-image {
+        @include page(top-left, bottom-right, $width: medium);
+
+        &#{$root}--overlap {
+            @include media-query(tablet-landscape) {
+                margin-top: -($section-overlap--hero-with-image - $gutter-xxl);
+            }
         }
     }
 
-    &--information-page {
-        @include page(top-right, bottom-right);
-    }
 
     &--index-website {
         @include page(top-right, bottom-left);
@@ -239,7 +232,7 @@
         padding-bottom: $gutter-medium;
 
         @include media-query(tablet-landscape) {
-            padding-bottom: $gutter-x-large;
+            padding-bottom: $gutter-xxl;
         }
     }
 

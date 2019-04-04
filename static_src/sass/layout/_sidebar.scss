@@ -67,42 +67,4 @@
             width: 160px;
         }
     }
-
-    &__payment-icons {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        margin: -0.5 * $gutter;
-    }
-
-    &__payment-icon {
-        margin: 0.5 * $gutter;
-        width: 70px;
-        height: 30px;
-
-        &--direct-debit {
-            width: auto;
-
-            @include target-ie11 {
-                width: 70px;
-            }
-        }
-
-        &--visa,
-        &--mastercard,
-        &--google-pay,
-        &--apple-pay {
-            width: auto;
-
-            @include target-ie11 {
-                width: 47px;
-            }
-        }
-
-        &--paypal {
-            width: 95px;
-            position: relative;
-            top: 2px;
-        }
-    }
 }

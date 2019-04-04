@@ -5,9 +5,9 @@
             {{ settings.cookie_banner_text }}
         </div>
         <div>
-            <a href="#" id="js-cookie__accept" class="cookie-banner__link cookie-banner__link--button">
+            <button href="#" id="js-cookie__accept" class="cookie-banner__link cookie-banner__link--button">
                 {{ settings.cookie_banner_accept_button_text }}
-            </a>
+            </button>
             <a href="{% pageurl settings.cookie_banner_more_info_link %}" class="cookie-banner__link cookie-banner__link--button">
                 {{ settings.cookie_banner_more_info_button_text }}
             </a>
@@ -17,9 +17,9 @@
         <div>
             {{ settings.cookie_banner_accepted_text }}
             You can now
-            <a href="#" id="js-cookie__dismiss-link" class="cookie-banner__link">
+            <button href="#" id="js-cookie__dismiss-link" class="cookie-banner__link cookie-banner__link--button">
                 hide this message
-            </a>
+            </button>
             or
             <a href="{% pageurl settings.cookie_banner_more_info_link %}" class="cookie-banner__link">
                 find out more about cookies
@@ -27,7 +27,7 @@
         </div>
     </div>
 
-    <a aria-label="Close" href="#" id="cookie-banner__close">
-        {% include "patterns/atoms/svg/icons/icon-close.html" with classes="cookie-banner__icon js-cookie__dismiss-button" title="Samaritans" %}
-    </a>
+    <button aria-label="Close" href="#" id="cookie-banner__close" class="cookie-banner__close js-cookie__dismiss-button">
+        {% include "patterns/atoms/svg/icons/icon-close.html" with classes="cookie-banner__icon" %}
+    </button>
 </div>

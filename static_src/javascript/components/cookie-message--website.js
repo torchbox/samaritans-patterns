@@ -26,7 +26,7 @@ class CookieWarning {
         var node = document.createElement('div');
         node.id = this.messageContainerID;
         node.innerHTML = data.cookie_banner_html;
-        document.body.appendChild(node);
+        document.body.insertBefore(node, document.body.firstChild);
         this.bindEvents();
     }
 

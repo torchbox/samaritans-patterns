@@ -1,0 +1,47 @@
+.payment-icons {
+    $spacer: 0.5 * $gutter;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: -$spacer;
+
+    &--donate-landing {
+        margin-top: $gutter-medium - $spacer;
+
+        @include media-query(mob-landscape) {
+            margin-top: $gutter-large - $spacer;
+        }
+    }
+
+    &__icon {
+        margin: $spacer;
+        width: 70px;
+        height: 30px;
+
+        &--direct-debit {
+            width: auto;
+
+            @include target-ie11 {
+                width: 70px;
+            }
+        }
+
+        &--visa,
+        &--mastercard,
+        &--google-pay,
+        &--apple-pay {
+            width: auto;
+
+            @include target-ie11 {
+                width: 47px;
+            }
+        }
+
+        &--paypal {
+            width: 95px;
+            position: relative;
+            top: 2px;
+        }
+    }
+}

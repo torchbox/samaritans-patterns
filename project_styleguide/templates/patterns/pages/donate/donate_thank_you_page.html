@@ -1,4 +1,4 @@
-{% extends "patterns/base_page--website.html" %}
+{% extends "patterns/base_page.html" %}
 {% load i18n helper_tags static wagtailcore_tags wagtailimages_tags icon_tags %}
 
 {% block content %}
@@ -57,7 +57,7 @@
     </section>
 </div>
 
-<section class="section section--page-end-cta streamfield--dark-bg">
+<section class="section section--page-end-cta">
     <div class="wrapper wrapper--large wrapper--padding-for-page">
         {% include "patterns/molecules/tabccordion/tabccordion--donate-onward-actions.html" with title=page.onward_action_heading %}
     </div>
