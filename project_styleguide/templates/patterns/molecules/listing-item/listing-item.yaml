@@ -18,6 +18,6 @@ tags:
     "value":
       raw: '#'
   image:
-    value.listing_image fill-240x180 class="listing-item__image":
+    value.listing_image fill-480x320 class="listing-item__image":
       raw: |
         <img src="http://via.placeholder.com/240x180" width="240" height="180" alt="Some alt" class="listing-item__image">

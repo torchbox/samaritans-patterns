@@ -15,6 +15,7 @@ html {
     font-family: $font--primary;
     -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
+    height: 100%;
     overflow-x: hidden; // Safari doesn't respect `overflow-x: hidden` on `body` unless it's also on `html`
 }
 
@@ -22,6 +23,7 @@ body {
     overflow-x: hidden;
     background-color: $off-white;
     padding: 0 $body-padding--website;
+    min-height: 100%;
 
     // fixed position borders at the top of the stacking context
     &::before,

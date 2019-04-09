@@ -20,13 +20,11 @@ context:
 
 tags:
   image:
-    item.value.image fill-597x336 class="gallery__image":
-      raw: |
-        <img src="http://via.placeholder.com/597x336" width="597" height="336" alt="Some alt" class="gallery__image">
-  embed:
-    item.value.video.url:
-      raw: |
-        <div style="padding-bottom: 56.25%;" class="responsive-object">
-          <iframe width="480" height="270" src="https://www.youtube.com/embed/1PWTqCBVjjU?feature=oembed" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen>
-          </iframe>
-        </div>
+    item.value.image fill-518x292 as gallery_image_thumb:
+      target_var: gallery_image_thumb
+      raw:
+        url: http://via.placeholder.com/518x292
+    item.value.image fill-1190x790 as gallery_image:
+      target_var: gallery_image
+      raw:
+        url: http://via.placeholder.com/1190x790

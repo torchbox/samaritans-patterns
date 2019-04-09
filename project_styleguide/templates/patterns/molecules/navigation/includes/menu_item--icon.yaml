@@ -1,0 +1,10 @@
+context:
+  icon: icon-color-coins
+  page:
+    title: Menu item title
+
+tags:
+  pageurl:
+    page as item_url:
+      target_var: item_url
+      raw: "#"

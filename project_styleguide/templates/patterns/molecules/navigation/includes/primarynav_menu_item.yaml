@@ -1,7 +1,5 @@
 context:
-  primarynav:
-  - dummy
-  - block_type: item
+  item:
     value:
       children:
       - link:
@@ -28,8 +26,7 @@ context:
         summary: link summary
         icon: icon-color-cup
 
-
 tags:
   include_block:
-    'item.value.link with has_children=item.value.children structure=item.block_type classes="nav__link js-open-header-menu"':
+    item.value.link:
       template_name: "patterns/molecules/navigation/blocks/menu_item.html"

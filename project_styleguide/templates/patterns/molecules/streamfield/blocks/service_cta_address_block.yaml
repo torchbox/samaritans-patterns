@@ -1,0 +1,11 @@
+context:
+  page:
+    icon: true
+  value:
+    call_to_action_text: This is the CTA text
+    button_text: click me
+    address_line_1: Address Line 1
+    address_line_2: Address Line 2
+    address_line_3: Address Line 3
+    address_line_4: Address Line 4
+    post_code: Postcode

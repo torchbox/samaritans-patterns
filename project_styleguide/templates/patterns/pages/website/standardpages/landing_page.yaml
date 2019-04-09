@@ -1,7 +1,7 @@
 context:
   page:
     title: Contact us
-    introduction: When life's hard, we're here if you need us. Whoever you are, whatever you're feeling - we won't judge. You don't have to face it alone.
+    introduction: When life's hard, we're here if you need us. Whoever you are, whatever you're feeling - we won't judge. You do not have to face it alone.
     hero_image: fake
 
 tags:

@@ -1,0 +1,11 @@
+context:
+  value:
+    title: This is a title
+    description: This is a description
+    button_text: Click me
+
+tags:
+  image:
+    call_to_action.image fill-380x270:
+      raw: |
+        <img src="http://via.placeholder.com/380x270" class="page-teaser__image page-teaser__image--desktop" alt="Some alt">

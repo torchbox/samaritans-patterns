@@ -1,0 +1,9 @@
+context:
+  value:
+    link_text: This is some link text
+
+tags:
+  pageurl:
+    value.page as href:
+      target_var: href
+      raw: "#"

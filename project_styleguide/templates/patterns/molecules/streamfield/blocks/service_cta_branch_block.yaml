@@ -1,0 +1,12 @@
+context:
+  page:
+    icon: true
+  value:
+    call_to_action_text: This is the CTA text
+    button_text: click me
+
+tags:
+  pageurl:
+    value.button_link as href:
+      target_var: href
+      raw: '#'

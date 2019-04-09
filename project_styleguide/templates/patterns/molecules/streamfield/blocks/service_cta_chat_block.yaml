@@ -1,0 +1,5 @@
+context:
+  page:
+    icon: true
+  value:
+    call_to_action_text: This is the CTA text

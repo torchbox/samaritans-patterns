@@ -86,7 +86,11 @@
                     {% render_form_field form.last_name %}
                 </div>
 
-                {% include 'patterns/molecules/forms/form_field.html' with field=form.email tooltip="We'll use this to send you an email confirmation when you've made your donation, and we'll use it to keep you up-to-date if you choose to keep in touch." %}
+                {% if fake_forms %}
+                    {{ form.email }}
+                {% else %}
+                    {% include 'patterns/molecules/forms/form_field.html' with field=form.email tooltip="We'll use this to send you an email confirmation when you've made your donation, and we'll use it to keep you up-to-date if you choose to keep in touch." %}
+                {% endif %}
                 <h2>{% trans "Your address" %}</h2>
 
                 {% render_form_field form.address_line_1 %}
@@ -99,12 +103,21 @@
                     {% render_form_field form.region %}
                 </div>
 
-                {% include 'patterns/molecules/forms/form_field.html' with field=form.phone_number tooltip="We'll only use this if you ask to be kept up-to-date by phone." %}
+                {% if fake_forms %}
+                    {{ form.phone_number }}
+                {% else %}
+                    {% include 'patterns/molecules/forms/form_field.html' with field=form.phone_number tooltip="We'll only use this if you ask to be kept up-to-date by phone." %}
+                {% endif %}
 
                 {% render_form_field form.in_memory %}
                 <div id="donate__form__in_memory_fields" {% if not form.in_memory.value %}hidden{% endif %}>
-                    {% include 'patterns/molecules/forms/form_field.html' with field=form.in_memory_name tooltip="Who are you giving in memory of?" %}
-                    {% include 'patterns/molecules/forms/form_field.html' with field=form.in_memory_relationship tooltip="If you're comfortable doing so, please let us know your relationship with the person" %}
+                    {% if fake_forms %}
+                        {{ form.in_memory_name }}
+                        {{ form.in_memory_relationship }}
+                    {% else %}
+                        {% include 'patterns/molecules/forms/form_field.html' with field=form.in_memory_name tooltip="Who are you giving in memory of?" %}
+                        {% include 'patterns/molecules/forms/form_field.html' with field=form.in_memory_relationship tooltip="If you're comfortable doing so, please let us know your relationship with the person" %}
+                    {% endif %}
                 </div>
 
                 {% render_form_field form.is_corporate %}

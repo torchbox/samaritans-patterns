@@ -1,10 +1,9 @@
 context:
-  manual:
-    title: "Listener Scheme: Introduction and key principles"
+  hero_test_image: True
 
 tags:
   image:
-    hero_test_image fill-2450x1600 as hero_image:
+    hero_test_image fill-3800x2500 jpegquality-40 as hero_image:
       target_var: hero_image
       raw:
-        url: http://via.placeholder.com/2048x2048
+        url: http://via.placeholder.com/3800x2500

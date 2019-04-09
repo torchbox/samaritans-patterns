@@ -1,10 +1,8 @@
 context:
+  donate_page:
+    title: Donate
   secondarynav:
-  - dummy
-  - dummy
-  - dummy
-
-tags:
-  include_block:
-    link:
-      template_name: "patterns/molecules/navigation/blocks/menu_item.html"
+    - value:
+        page: fake
+        title: Link title
+        icon: icon-color-speechbubble

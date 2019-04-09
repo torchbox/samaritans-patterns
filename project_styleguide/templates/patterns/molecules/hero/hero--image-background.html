@@ -6,7 +6,7 @@
     {% image hero_test_image fill-3800x2500 jpegquality-40 as hero_image %}
 {% endif %}
 
-<div class="hero hero--image-background{% if classes %} {{ classes }}{% endif %}" {% if page.hero_image %}style="background-image: url({{ hero_image.url }})"{% endif %}>
+<div class="hero hero--image-background{% if classes %} {{ classes }}{% endif %}" {% if hero_image %}style="background-image: url({{ hero_image.url }})"{% endif %}>
     <div class="hero__pattern-wrapper {% if pattern_bottom %}hero__pattern-wrapper--bottom{% endif %}">
         {% if pattern == "dots" %}
             {% include "patterns/atoms/svg/patterns/pattern-dots.html" with classes="pattern" %}

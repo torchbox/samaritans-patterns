@@ -1,5 +1,5 @@
 context:
-  card:
+  value:
     title: About the charity
-    text: We can give you advice and information
+    listing_summary: We can give you advice and information
     url: /

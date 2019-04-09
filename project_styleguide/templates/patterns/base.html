@@ -31,6 +31,7 @@
             <main class="wrapper">
                 {% block content %}
                     {{ pattern_library_rendered_pattern }}
+                    <script type="text/javascript" src="{% static 'js/website.js' %}"></script>
                 {% endblock %}
             </main>
         {% endblock outer_content %}

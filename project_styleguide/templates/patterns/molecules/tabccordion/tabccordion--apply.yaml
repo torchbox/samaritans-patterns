@@ -1,0 +1,12 @@
+context:
+  tab_count: 2
+  page:
+    allow_samaritans_place: true
+    allow_own_place: true
+    allow_other: true
+    other_tab_title: A tab title
+    samaritans_place_registration_cost: 20
+    samaritans_place_fundraising_target: 200
+    samaritans_place_form_page: true
+    own_place_description: This is a description
+    other_description: This is a description

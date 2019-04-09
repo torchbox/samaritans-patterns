@@ -1,0 +1,17 @@
+context:
+  title: This is a title
+  page:
+    onward_actions:
+      - value:
+          time_value: Time value
+          title: Title
+          description: This is the description
+      - value:
+          time_value: Time value
+          title: Title
+          description: This is the description
+
+tags:
+  include_block:
+    action.value.links:
+      template_name: patterns/atoms/buttons/button-large.html

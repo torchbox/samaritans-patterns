@@ -1,0 +1,9 @@
+context:
+  value:
+    title: This is a title
+    cards:
+      - title: A Title
+        listing_summary: This is a listing summary
+      - title: A Title
+        listing_summary: This is a listing summary
+

@@ -3,7 +3,7 @@ context:
     title: About the charity
     text: We can give you advice and information
     url: /
-    image: true
+    listing_image: true
 
 tags:
   image:

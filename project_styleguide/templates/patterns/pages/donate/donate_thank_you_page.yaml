@@ -1,0 +1,12 @@
+context:
+  page:
+    title: Thank you
+    thank_you_summary: This is the thank you summary
+  completed_transaction_details:
+    first_name: Fname
+
+
+tags:
+  include_block:
+    page.body:
+      template_name: patterns/molecules/streamfield/blocks/impact_block.html

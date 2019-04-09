@@ -1,0 +1,11 @@
+context:
+  show_nav: True
+
+
+tags:
+  primarynav:
+    "":
+      template_name: "patterns/molecules/navigation/primarynav.html"
+  secondarynav:
+    "":
+      template_name: "patterns/molecules/navigation/secondarynav.html"

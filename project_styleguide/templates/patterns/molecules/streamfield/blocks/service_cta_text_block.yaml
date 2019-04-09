@@ -1,0 +1,7 @@
+context:
+  page:
+    icon: true
+  value:
+    phone_number: 123456
+    call_to_action_text: This is the CTA text
+    response_time: 30 minutes

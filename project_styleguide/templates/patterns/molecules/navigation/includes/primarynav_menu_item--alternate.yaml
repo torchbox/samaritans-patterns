@@ -1,0 +1,53 @@
+context:
+  item:
+    value:
+      icon_link_list:
+        page:
+          title: Link title
+        links:
+        - page: fake
+          title: Link title
+          icon: icon-color-pen
+        - page: fake
+          title: Link title
+          icon: icon-color-pen
+        - page: fake
+          title: Link title
+          icon: icon-color-pen
+        - page: fake
+          title: Link title
+          icon: icon-color-pen
+        - page: fake
+          title: Link title
+          icon: icon-color-pen
+      section_index:
+        title:
+          page:
+            title: Section title
+        links:
+        - page: fake
+          title: Link title
+        - page: fake
+          title: Link title
+        - page: fake
+          title: Link title
+        - page: fake
+          title: Link title
+      extra_links:
+        - page: fake
+          title: Link title
+        - page: fake
+          title: Link title
+        - page: fake
+          title: Link title
+        - page: fake
+          title: Link title
+
+
+tags:
+  include_block:
+    'item.value.link with classes="nav__link nav__link--heading"':
+      template_name: "patterns/molecules/navigation/blocks/menu_item.html"
+  pageurl:
+    title_link.page:
+      raw: "#"

@@ -1,9 +1,101 @@
 context:
   page:
     title: Homepage
-    strapline: This is a home page
-    call_to_action:
-      title: Stub content
-      summary: Check out our awesome stub content
-      get_link_text: Click here
-      get_link_url: "#"
+    hero_headline: Hero headline
+    hero_description: Hero description
+    hero_cta_icon: icon-color-mobile
+    hero_cta_title: Title
+    hero_cta_link: fake
+    hero_cta_link_text: Link text
+
+    secondary_headline: Secondary headline
+    secondary_description: Secondary description
+
+    support_image: fake
+    support_headline: Support headline
+    support_us_links:
+      all:
+      - link: "#"
+        link_text: Link text
+        summary: Link summary
+      - link: "#"
+        link_text: Link text
+        summary: Link summary
+      - link: "#"
+        link_text: Link text
+        summary: Link summary
+      - link: "#"
+        link_text: Link text
+        summary: Link summary
+
+    volunteer_image: fake
+    volunteer_icon: icon-color-people
+    volunteer_headline: Volunteer headline
+    volunteer_description: Volunteer description
+    volunteer_link:
+      url: "#"
+    volunteer_link_text: Volunteer link text
+
+    get_nation_specific_news:
+      - value:
+          live: True
+          specific:
+            title: Card Title
+            publication_date: !!timestamp '2018-12-13'
+      - value:
+          live: True
+          specific:
+            title: Card Title
+            publication_date: !!timestamp '2018-12-13'
+      - value:
+          live: True
+          specific:
+            title: Card Title
+            publication_date: !!timestamp '2018-12-13'
+
+    more_info_headline: More info headline
+    more_info_description: More info description
+    more_info_pages:
+      get_object_list:
+      - more_info_pages:
+          specific:
+            title: Card Title
+            listing_summary: Summary
+      - more_info_pages:
+          specific:
+            title: Card Title
+            listing_summary: Summary
+      - more_info_pages:
+          specific:
+            title: Card Title
+            listing_summary: Summary
+      - more_info_pages:
+          specific:
+            title: Card Title
+            listing_summary: Summary
+
+    cta_title: CTA title (can't be too short)
+    cta_description: CTA description
+    cta_icon: icon-color-trainers
+    cta_link:
+      url: "#"
+    cta_link_text: Link text
+
+
+tags:
+  image:
+    page.hero_image fill-3800x2500 jpegquality-40 as hero_image:
+      target_var: hero_image
+      raw:
+        url: http://via.placeholder.com/3800x2500
+    page.support_image fill-1300x1300 as support_image:
+      target_var: support_image
+      raw:
+        url: http://via.placeholder.com/1300x1300
+    page.volunteer_image width-1300 as volunteer_image:
+      target_var: volunteer_image
+      raw:
+        url: http://via.placeholder.com/1300x1300
+  pageurl:
+    page.hero_cta_link:
+      raw: "#"

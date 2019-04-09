@@ -1,18 +1,13 @@
 context:
+  classes: breadcrumb--on-light
   page:
-    title: Current page title
     get_ancestors:
-    - is_root: true
-      depth: 2
-      title: Home
-    - is_root: false
-      depth: 3
-      title: Some sub category
+    - title: fake
+    - title: fake
+    - title: Category
+    - title: Subcategory
 
 tags:
   pageurl:
     ancestor_page:
-      raw: "#"
-  slugurl:
-    "'home'":
       raw: "#"

@@ -2,7 +2,7 @@
 <a class="{% if classes %}{{ classes }}{% else %}nav__link{% endif %}" href="{{ item_url }}" role="menuitem">
     {% render_icon icon 'nav__icon' %}
     <div>
-        {{ title|default:page.title }}
+        {% firstof title page.title %}
         {% if summary %}
             <div class="nav__link-summary">{{ summary }}</div>
         {% endif %}

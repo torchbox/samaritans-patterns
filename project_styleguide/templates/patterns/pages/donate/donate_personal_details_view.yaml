@@ -1,0 +1,56 @@
+context:
+  fake_forms: --fake
+  form:
+    amount:
+      value: 5
+    email: |
+      <p>email field</p>
+    phone_number: |
+      <p>phone_number field</p>
+    in_memory: |
+      <p>in_memory field</p>
+    in_memory_relationship: |
+      <p>in_memory_relationship field</p>
+
+
+tags:
+  render_form_field:
+    form.amount:
+      raw: |
+        <p>amount field</p>
+    form.payment_origin:
+      raw: |
+        <p>payment_origin field</p>
+    form.frequency:
+      raw: |
+        <p>frequency field</p>
+    form.first_name:
+      raw: |
+        <p>first_name field</p>
+    form.last_name:
+      raw: |
+        <p>last_name field</p>
+    form.address_line_1:
+      raw: |
+        <p>address_line_1 field</p>
+    form.address_line_2:
+      raw: |
+        <p>address_line_2 field</p>
+    form.town:
+      raw: |
+        <p>town field</p>
+    form.post_code:
+      raw: |
+        <p>post_code field</p>
+    form.country:
+      raw: |
+        <p>country field</p>
+    form.region:
+      raw: |
+        <p>region field</p>
+    form.in_memory:
+      raw: |
+        <p>in_memory field</p>
+    form.is_corporate:
+      raw: |
+        <p>is_corporate field</p>
