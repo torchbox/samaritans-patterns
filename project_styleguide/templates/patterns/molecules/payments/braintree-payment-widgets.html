@@ -8,11 +8,11 @@
             <li>
                 <a href="#tab2" class="tabccordion__nav-item {% if active_payment_mode == 'paypal' %}is-active{% endif %}">{% trans 'Paypal' %}</a>
             </li>
-            {% comment %}
-            Google and Apple Pay are temporarily disabled
             <li class="js-google-pay-tab" hidden>
                 <a href="#tab3" class="tabccordion__nav-item {% if active_payment_mode == 'googlepay' %}is-active{% endif %}">{% trans 'Google Pay' %}</a>
             </li>
+            {% comment %}
+            Apple Pay temporarily disabled
             <li class="js-apple-pay-tab" hidden>
                 <a href="#tab4" class="tabccordion__nav-item {% if active_payment_mode == 'applepay' %}is-active{% endif %}">{% trans 'Apple Pay' %}</a>
             </li>
@@ -82,8 +82,6 @@
         </div>
     </section>
 
-    {% comment %}
-    Google and Apple Pay are temporarily disabled
     <section id="tab3" class="accordion accordion--tabccordion tabccordion__panel js-tabccordion-panel js-google-pay-tab {% if active_payment_mode == 'googlepay' %}is-active{% endif %}" hidden>
         <a class="accordion__heading" href="#tab3">
             <h3 class="accordion__heading-text">
@@ -98,6 +96,8 @@
         </div>
     </section>
 
+    {% comment %}
+    Apple Pay temporarily disabled
     <section id="tab4" class="accordion accordion--tabccordion tabccordion__panel js-tabccordion-panel js-apple-pay-tab {% if active_payment_mode == 'applepay' %}is-active{% endif %}" hidden>
         <a class="accordion__heading" href="#tab4">
             <h3 class="accordion__heading-text">

@@ -187,7 +187,7 @@ function setupPayment() {
         );
     }
 
-    function initGooglePay() {  // eslint-disable-line no-unused-vars
+    function initGooglePay() {
         var paymentsClient = new window.google.payments.api.PaymentsClient({
             environment: braintreeParams.use_sandbox ? 'TEST' : 'PRODUCTION'
         });
@@ -358,7 +358,7 @@ function setupPayment() {
     // Initialise both payment modes now so that they're ready when the user picks one
     initCard();
     initPaypal();
-    // initGooglePay();
+    initGooglePay();
     // initApplePay();
 }
 
