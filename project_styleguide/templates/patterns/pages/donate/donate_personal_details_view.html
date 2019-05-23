@@ -53,7 +53,7 @@
                     {% for error in form.non_field_errors %}
                     <div class="form__errors">{{ error }}</div>
                     {% endfor %}
-                {% elif form.errors %}
+                {% elif form.errors and not form.captcha.errors %}
                     <div class="form__errors">
                         There were some errors with your form. Please amend the fields highlighted below.
                     </div>
@@ -66,6 +66,11 @@
                         Please correct these errors and try again.
                     </div>
                 {% endif %}
+
+                {% if form.captcha.errors %}
+                    <div class="form__errors">{{form.captcha.errors}}</div>
+                {% endif %}
+                {{ form.captcha }}
 
                 {% if form.amount %}
                     <div class="form__gbp-field-wrapper">
