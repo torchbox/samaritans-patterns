@@ -17,6 +17,7 @@ import HeaderMenu from './components/header-menu';
 import Gallery from './components/gallery';
 import SelectAllCheckboxToggle from './components/select-all-checkbox-toggle';
 import sendTagManagerEvents from './components/tag-manager';
+import Beta from './components/beta';
 import './components/browser-polyfills';
 import './components/smooth-scroll';
 import './components/branch-finder';
@@ -82,6 +83,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     for (const inputblock of document.querySelectorAll(SelectAllCheckboxToggle.selector())) {
         new SelectAllCheckboxToggle(inputblock);
+    }
+
+    for (const beta of document.querySelectorAll(Beta.selector())) {
+        new Beta(beta);
     }
 
     sendTagManagerEvents();

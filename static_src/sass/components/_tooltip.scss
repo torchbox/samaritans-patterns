@@ -18,6 +18,53 @@
         display: inline-block;
     }
 
+    &--beta {
+        @include font-size(xxs);
+        color: $white;
+        background-color: $ink;
+        text-transform: uppercase;
+        padding: 5px 10px;
+        width: auto;
+        height: auto;
+        display: none;
+        margin-left: 0;
+        margin-bottom: 10px;
+
+        .show-beta & {
+            display: inline-block;
+        }
+
+        @include media-query(mob-landscape) {
+            padding: 5px $gutter;
+            margin-left: $gutter;
+            margin-bottom: 0;
+            display: none;
+            position: absolute;
+            top: 0;
+
+            .show-beta & {
+                display: inline;
+            }
+        }
+
+        @include media-query(tablet-portrait) {
+            font-size: 20px;
+        }
+    }
+
+    &--card {
+        position: relative;
+        font-weight: $weight--bold;
+        margin-left: 0;
+        margin-bottom: 5px;
+
+        @include media-query(tablet-landscape) {
+            position: absolute;
+            right: $gutter-medium;
+            top: $gutter-medium;
+        }
+    }
+
     &__icon {
         width: 30px;
         height: 30px;
@@ -38,11 +85,59 @@
         left: 50%;
         margin-left: -130px; // width / 2
         z-index: z($z-elements, tooltip);
+        line-height: 1.4;
 
         #{$root}--branch & {
             @include tooltip-triangle(10px, bottom, $off-white);
             background-color: $off-white;
             color: $color--default;
+        }
+
+        #{$root}--beta & {
+            @include tooltip-triangle(10px, bottom, $ink);
+            background-color: $ink;
+            text-transform: none;
+            bottom: calc(100% + 11px);
+            left: auto;
+            margin-left: 0; // width / 2
+
+            // override triangle positioning
+            &::after {
+                left: 10px;
+            }
+
+            @include media-query(mob-landscape) {
+                left: 50%;
+                margin-left: -130px; // width / 2
+
+                &::after {
+                    left: calc(50% - 10px);
+                }
+            }
+
+            a {
+                color: $white;
+                text-decoration: underline;
+            }
+        }
+
+        #{$root}--card & {
+            left: auto;
+            margin-left: 0; // width / 2
+
+            // override triangle positioning
+            &::after {
+                left: 10px;
+            }
+
+            @include media-query(tablet-portrait) {
+                left: 50%;
+                margin-left: -130px; // width / 2
+
+                &::after {
+                    left: calc(50% - 10px);
+                }
+            }
         }
 
         p {

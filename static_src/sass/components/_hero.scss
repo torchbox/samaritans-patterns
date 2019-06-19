@@ -68,6 +68,7 @@
         line-height: 1.15;
         max-width: $wrapper--smaller;
         margin-top: $gutter-x-large;
+        position: relative;
 
         @include media-query(tablet-portrait) {
             margin-bottom: $gutter-xxl;

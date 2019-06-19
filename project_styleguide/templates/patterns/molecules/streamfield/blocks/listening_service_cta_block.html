@@ -2,7 +2,7 @@
 
 {% if type == 'short' %}
 
-<a href="{% pageurl value.link.page %}" class="card-new card-new--listening-service card-new--listening-service--short">
+<a href="{% pageurl value.link.page %}" class="card-new card-new--listening-service card-new--listening-service--short js-beta-check">
     <span class="card-new__corner"></span>
     <div class="card-new__inner">
         <div class="card-new__container">
@@ -18,10 +18,11 @@
 
 {% else %}
 
-<div class="card-new card-new--listening-service card-new--listening-service--full">
+<div class="card-new card-new--listening-service card-new--listening-service--full js-beta-check">
     <span class="card-new__corner"></span>
     <div class="card-new__inner">
         <div class="card-new__container">
+            {% include 'patterns/atoms/beta-label/beta-label.html' with classes="tooltip--card" %}
             <h2 class="card-new__title">
                 {{ value.title }}
             </h2>

@@ -19,7 +19,10 @@
 
                 {% include "patterns/molecules/navigation/breadcrumbs.html"%}
 
-                <h1 class="hero__title">{{ page.title }}</h1>
+                <h1 class="hero__title">
+                    {{ page.title }}
+                    {% include 'patterns/atoms/beta-label/beta-label.html' %}
+                </h1>
 
                 {% language_switcher %}
 
