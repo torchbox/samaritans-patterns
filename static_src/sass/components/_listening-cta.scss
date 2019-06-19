@@ -161,3 +161,8 @@
         }
     }
 }
+
+// Special handling for Webchat CTA - hidden by default, displayed conditionally via Optimize
+.listening-cta--type-chat, .tabccordion__cta--type-chat {
+    display: none;
+}

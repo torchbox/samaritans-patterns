@@ -1,5 +1,5 @@
 {% extends "patterns/base_page.html" %}
-{% load wagtailcore_tags i18n icon_tags locale_tags %}
+{% load wagtailcore_tags i18n icon_tags helper_tags locale_tags static %}
 
 {% block body_class %}{{ block.super }} template-listening-service{% endblock %}
 
@@ -29,7 +29,7 @@
                 <h2 class="hero__subtitle">{% include_block page.short_description %}</h2>
 
                 <div class="listening-cta-grid">
-                    <div> {# for flex #}
+                    <div class="listening-cta--type-{{ page.service_call_to_action.0.block_type }}"> {# for flex #}
                         {% include_block page.service_call_to_action with type='hero_cta' %}
 
                         <div class="sticky-cta js-sticky-cta">
@@ -101,4 +101,10 @@
         </div>
     </div>
 
+{% endblock %}
+
+
+{% block extra_js %}
+{{ webchat_api_url|json_script:"webchat_api_url" }}
+<script src="{% static 'js/chat-utils.js' %}"></script>
 {% endblock %}

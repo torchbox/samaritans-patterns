@@ -7,6 +7,7 @@ const options = {
         donate: './static_src/javascript/donate-website.js',
         payments: './static_src/javascript/payments-website.js',
         loqate: './static_src/javascript/loqate.js',
+        'chat-utils': './static_src/javascript/chat-utils.js'
     },
     output: {
         path: path.resolve('./static_compiled/js/'),

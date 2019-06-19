@@ -1,5 +1,5 @@
 {% extends "patterns/base_page.html" %}
-{% load wagtailcore_tags i18n wagtailimages_tags %}
+{% load wagtailcore_tags i18n helper_tags static wagtailimages_tags %}
 
 {% block content %}
 
@@ -74,4 +74,9 @@
     </div>
 </div>
 
+{% endblock %}
+
+{% block extra_js %}
+{{ webchat_api_url|json_script:"webchat_api_url" }}
+<script src="{% static 'js/chat-utils.js' %}"></script>
 {% endblock %}

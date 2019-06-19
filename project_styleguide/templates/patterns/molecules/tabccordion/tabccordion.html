@@ -42,7 +42,9 @@ class="js-tabccordion tabccordion {% if classes %}{{ classes }}{% endif %}"
                 {% endif %}
                 {% if tab.service_call_to_action %}
                     <div class="tabccordion__cta">
-                        {% include_block tab.service_call_to_action %}
+                        <div class="tabccordion__cta--type-{{ tab.service_call_to_action.0.block_type }}">
+                            {% include_block tab.service_call_to_action %}
+                        </div>
                         <a class="tabccordion__cta-more" href="{{ tab.url }}">{% trans "Find out more" %}</a>
                     </div>
                 {% endif %}
