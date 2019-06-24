@@ -2,12 +2,29 @@
 
 {% if type == 'hero_cta' %}
 
-<a data-href="{{ value.call_to_action_url }}" class="listening-cta listening-cta--primary listening-cta--link listening-cta--type-chat">
+{# static cta to appear on all pages #}
+<div class="listening-cta listening-cta--primary listening-cta--link listening-cta--type-chat listening-cta--type-chat__static">
     <span class="listening-cta__corner"></span>
     <div class="listening-cta__inner">
         <div class="listening-cta__container">
             {% if page.icon %}
                 {% render_icon page.icon "listening-cta__icon" %}
+            {% endif %}
+            <div class="listening-cta__text">
+                <h2 class="listening-cta__heading">{{ value.call_to_action_text }}</h2>
+                <p class="listening-cta__wait-time">{% trans "This service is not currently available" %}</p>
+            </div>
+        </div>
+    </div>
+    <span class="listening-cta__connectors"></span>
+</div>
+{# Dynamic cta to appear when shown by optimize #}
+<a data-href="{{ value.call_to_action_url }}" class="listening-cta listening-cta--primary listening-cta--link listening-cta--type-chat listening-cta--type-chat__dynamic">
+    <span class="listening-cta__corner"></span>
+    <div class="listening-cta__inner">
+        <div class="listening-cta__container">
+            {% if page.icon %}
+            {% render_icon page.icon "listening-cta__icon" %}
             {% endif %}
             <div class="listening-cta__text">
                 <h2 class="listening-cta__heading">{{ value.call_to_action_text }}</h2>
@@ -34,7 +51,7 @@
 </a>
 </div>
 
-<a data-href="{{ value.call_to_action_url }}" class="service-block service-block--sticky service-block--link">
+<a data-href="{{ value.call_to_action_url }}" class="service-block service-block--sticky service-block--link service-block--sticky__type-chat">
     {% include "patterns/atoms/svg/colour-icons/icon-color-speechbubble-alt.html" with classes="service-block__icon" %}
     <span class="service-block__link">{{ value.call_to_action_text }}</span>
     <span class="listening-cta__wait-time">{% trans "This service is not currently available" %}</span>

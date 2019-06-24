@@ -14,24 +14,34 @@ document.addEventListener('DOMContentLoaded', function() {
                 if(data['active']) {
 
                     let waitMinutes = data['wait_time']/60;
-                    let status;
+                    let status = 'Estimated wait time: ';
                     if (waitMinutes <= 10 ) {
-                        status = 'up to 10 minutes';
+                        status += 'up to 10 minutes';
                     } else {
                         let baseTime = Math.ceil(waitMinutes/5) * 5;
-                        status = `${(baseTime - 5)} - ${(baseTime + 5)} minutes`;
+                        status += `${(baseTime - 5)} - ${(baseTime + 5)} minutes`;
                     }
 
                     // There can be several chat CTAs on the same page - primary, sticky, and tabccordion
-                    var ctas = document.querySelectorAll('.listening-cta--type-chat, .tabccordion__cta--type-chat');
+                    var ctas = document.querySelectorAll('.listening-cta--type-chat__dynamic, .tabccordion__cta--type-chat, .service-block--sticky__type-chat');
                     for (var cta of ctas) {
                         for(var waitTimeNode of cta.querySelectorAll('.listening-cta__wait-time')) {
                             waitTimeNode.innerText = status;
                         }
 
+                        if (cta.tagName === 'A') {
+                            let href = cta.getAttribute('data-href');
+                            if(href) {
+                                cta.setAttribute('href', href);
+                            }
+                        }
+                        for(var chevron of cta.querySelectorAll('.listening-cta__chevron')) {
+                            chevron.style.display = 'inline-block';
+                        }
+
                         // Add hrefs to all links, populating from data-href attributes
                         for(var anchor of cta.querySelectorAll('a')) {
-                            var href = anchor.getAttribute('data-href');
+                            let href = anchor.getAttribute('data-href');
                             if(href) {
                                 anchor.setAttribute('href', href);
                             }

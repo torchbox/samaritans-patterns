@@ -30,6 +30,11 @@
         margin-left: 0;
         margin-bottom: 10px;
 
+        // Special handling for Webchat CTA - hidden by default, displayed conditionally via Optimize
+        .template-listening-service--type-chat & {
+            display: inline-block;
+        }
+
         .show-beta & {
             display: inline-block;
         }

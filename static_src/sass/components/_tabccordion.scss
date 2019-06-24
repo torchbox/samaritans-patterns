@@ -323,6 +323,11 @@
         display: flex;
         flex-wrap: wrap;
 
+        // Special handling for Webchat CTA - hidden by default, displayed conditionally via Optimize
+        &--type-chat {
+            display: none;
+        }
+
         .block-chat {
             margin-right: $gutter-medium;
         }

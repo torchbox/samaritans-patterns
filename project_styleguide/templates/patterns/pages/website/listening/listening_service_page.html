@@ -1,7 +1,7 @@
 {% extends "patterns/base_page.html" %}
 {% load wagtailcore_tags i18n icon_tags helper_tags locale_tags static %}
 
-{% block body_class %}{{ block.super }} template-listening-service{% endblock %}
+{% block body_class %}{{ block.super }} template-listening-service template-listening-service--type-{{ page.service_call_to_action.0.block_type }}{% endblock %}
 
 {% block content %}
 

@@ -32,15 +32,7 @@
     display: flex;
     align-items: stretch;
 
-    &:first-child {
-        @include corner($lime, top, left, $selector: '#{$root}__corner', $z-index: auto);
-
-        #{$root}__connectors {
-            @include connectors($lime, top, left);
-        }
-    }
-
-    &:nth-child(2) {
+    &--secondary {
         @include corner($lime, bottom, right, $selector: '#{$root}__corner', $z-index: auto);
 
         #{$root}__connectors {
@@ -49,6 +41,12 @@
     }
 
     &--primary {
+        @include corner($lime, top, left, $selector: '#{$root}__corner', $z-index: auto);
+
+        #{$root}__connectors {
+            @include connectors($lime, top, left);
+        }
+
         &#{$root}--link {
             #{$hover} {
                 color: $white;
@@ -160,9 +158,19 @@
             margin-right: $gutter;
         }
     }
-}
 
-// Special handling for Webchat CTA - hidden by default, displayed conditionally via Optimize
-.listening-cta--type-chat, .tabccordion__cta--type-chat {
-    display: none;
+    // Special handling for Webchat CTA - hidden by default, displayed conditionally via Optimize
+    &--type-chat  {
+        .template-listening-service--type-chat & {
+            display: none;
+        }
+
+        &__dynamic {
+            display: none;
+
+            .listening-cta__chevron {
+                display: none;
+            }
+        }
+    }
 }
