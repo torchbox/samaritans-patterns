@@ -1,0 +1,144 @@
+// styles used for various iframes on the in_memory_widget_block.html
+
+// funeral and tribute iframes
+#ml-tributecreate-container {
+    margin-bottom: 30px;
+    padding-bottom: 24px;
+    min-height: 235px;
+    max-width: 600px;
+
+    iframe {
+        width: 100%;
+    }
+}
+
+// search iframe
+.ml-tributesearch {
+    margin-top: 24px;
+    margin-bottom: 48px;
+
+    &-results {
+        border-bottom: 1.5px solid #e1e1e1;
+        margin-bottom: 20px;
+    }
+
+    &-summary {
+        margin: 20px 0;
+    }
+
+    &-thumbnail {
+        width: 50px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        border-bottom:0;
+
+        img {
+            width: 50px;
+        }
+    }
+
+    &-resultscontainer {
+        margin-bottom: 20px;
+        padding: 3px;
+    }
+
+    &-result {
+        position: relative;
+        padding-left: 80px;
+        margin-bottom: 24px;
+        min-height: 50px;
+
+        h3 {
+            padding-top:10px;
+        }
+    }
+
+    &-pager {
+        position: relative;
+        min-height: 59px;
+        text-align: center;
+
+        @media screen and (max-width: 1110px) and (min-width: 0px) {
+            width:100%;
+            margin:0;
+            min-height: 100px;
+        }
+
+        &:blank {
+            display:none;
+        }
+    }
+
+    &-pager-summary {
+        display: inline-block;
+        height: 59px;
+        line-height: 59px;
+    }
+
+    &-btn-next,
+    &-btn-previous {
+        position: absolute;
+        top: 0;
+
+        @media screen and (max-width: 1110px) and (min-width: 0px) {
+            top: 50px;
+        }
+    }
+
+    &-btn-next {
+        right: 0;
+    }
+
+    &-btn-previous {
+        left: 0;
+    }
+
+    &-btn-search {
+        margin-left: 15px;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 0 auto;
+        flex: 1 0 auto;
+    }
+
+    &-form {
+        margin-bottom: 10px;
+        flex-wrap: nowrap;
+        display: flex;
+    }
+}
+
+input.ml-tributesearch-searchbox {
+    display:inline-block;
+    padding: 14px;
+    width:100%;
+    border: 1px solid #ccc;
+    padding: 0 10px 0 10px;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 35px;
+    border-radius: 0;
+
+    @media screen and (max-width: 1110px) and (min-width: 0px) {
+        margin: 0 0 10px 0;
+        max-width:100%;
+    }
+}
+
+.ml-button {
+    color: #fff;
+    border: none;
+    font-family: "varah";
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+    padding: 15px 20px;
+    height: auto;
+    background-color: #045;
+    transition: color 0.2s ease-out;
+    border-radius: 0;
+
+    &:hover {
+        background-color: #14a488;
+    }
+}

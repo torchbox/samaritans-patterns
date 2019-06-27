@@ -1,6 +1,7 @@
 // Vendor
 @import 'vendor/normalize';
 @import 'vendor/lightgallery';
+@import 'vendor/muchloved';
 @import 'node_modules/@glidejs/glide/src/assets/sass/glide.core';
 
 // Abstracts
@@ -68,6 +69,7 @@
 @import 'components/manual';
 @import 'components/meta-bar';
 @import 'components/modal';
+@import 'components/nation';
 @import 'components/nav';
 @import 'components/news-list';
 @import 'components/page-teaser';

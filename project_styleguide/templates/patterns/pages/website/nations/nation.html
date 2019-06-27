@@ -20,16 +20,10 @@
 
             {% if page.donate_link %}
                 <hr class="hr hr--dashed">
-                <div class="donate-landing__call-to-donate">
+                <div class="nation__call-to-donate">
                     <h2>Donate to Samaritans {{ country_name }}</h2>
                     {% include "patterns/atoms/buttons/button.html" with href=page.donate_link label="Donate" large=True classes="button--plain" %}
                 </div>
-                <aside class="js-sticky-cta">
-                    <a href="#hero" class="donate-landing__call-to-donate--sticky js-smooth-scroll">
-                        <span class="donate-landing__call-to-donate__sticky-text">{{ page.call_to_donate }}</span>
-                        <span class="donate-landing__call-to-donate__sticky-link">Donate today</span>
-                    </a>
-                </aside>
             {% endif %}
 
             {% include "patterns/atoms/corners/corners.html" with size="page" %}
