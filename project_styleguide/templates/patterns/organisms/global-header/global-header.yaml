@@ -1,0 +1,6 @@
+context:
+  site_name: 'Samaritans Home (Intranet)'
+  logout_text: 'Sign out ()'
+  link_one: 'Status dashboard'
+  link_two: 'Favourites'
+  search_text: 'Search the Intranet'

@@ -1,0 +1,135 @@
+{% comment %}
+This pattern is not used on Samaritans.org but is on the Samaritans Intranet.
+It has been made available in this pattern library so it can be used by third parties.
+{% endcomment %}
+
+<header class="global-header">
+    <section class="global-header__section global-header__section--global">
+        <div class="global-header__inner wrapper wrapper--large wrapper--padding">
+            <span class="header__home-link">
+                {% include "patterns/atoms/svg/logos/logo.html" with classes="global-header__logo" title="Samaritans Home" %}
+            </span>
+
+            {# Secondary Nav #}
+            <nav role="navigation" aria-label="Secondary">
+                <ul class="global-nav global-nav--secondary" role="menubar">
+                    <li class="global-nav__item" role="presentation">
+                        <a class="global-nav__link" href="/" role="menuitem">
+                            <span>{{site_name}}</span>
+                        </a>
+                    </li>
+                    <li class="global-nav__item" role="presentation">
+                        <a class="global-nav__link" href="/logout/">
+                            <span>{{logout_text}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+
+    <section class="global-header__section">
+        <div class="global-header__inner wrapper wrapper--large wrapper--padding">
+            <a class="global-header__site-name" href='/'>Home</a>
+
+            <div class="global-header__nav-wrapper">
+                {# Primary Nav #}
+                <nav class="js-header-nav" role="navigation" aria-label="Primary">
+                    <ul class="global-nav global-nav--primary" role="menubar">
+                        <li class="global-nav__item global-nav__item--primary js-header-menu">
+                            <a class="global-nav__link" href="/dashboard/" role="menuitem">
+                                <span>{{link_one}}</span>
+                            </a>
+                        </li>
+                        <li class="global-nav__item global-nav__item--primary js-header-menu">
+                            <a class="global-nav__link" href="/users/favourites/">
+                                <span>{{link_two}}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <button class="global-header__menu-toggle global-header__menu-toggle--burger js-mobile-menu-toggle">
+                    {% include "patterns/atoms/svg/colour-icons/icon-color-burger-menu.html" with classes="global-header__menu-toggle__icon" title="Menu" %}
+                    <span>Menu</span>
+                </button>
+
+                <div class="global-header__search js-search">
+                    <form class="global-search global-search--header" action="{% url 'search' %}" method="get" role="search">
+                        <input class="global-search__input" type="text" id="search" name="query"
+                            placeholder="Search the Intranet">
+                        <label class="hidden" for="search">{{search_text}}</label>
+                        <button class="global-search__button" type="submit">
+                            <span class="hidden">Search</span>
+                            {% include "patterns/atoms/svg/icons/icon-search.html" with classes="global-search__icon icon" title="Open Search" %}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="js-header-nav js-header-nav--is-animated global-header-nav">
+        <div class="wrapper wrapper--large wrapper--padding">
+            <div class="global-header-nav__inner">
+
+                <div class="header__inner-top header__inner-top--mobile">
+                    <span class="header__home-link">
+                        {% include "patterns/atoms/svg/logos/logo.html" with classes="header__logo" title="Samaritans" %}
+                    </span>
+
+                    <button class="header__menu-toggle header__menu-toggle--close js-mobile-menu-toggle">
+                        {% include "patterns/atoms/svg/icons/icon-close.html" with classes="header__menu-toggle__icon js-mobile-menu-toggle" title="Close" %}
+                    </button>
+                </div>
+
+                <div class="global-nav--primary-mobile">
+                    {# Primary Nav #}
+                    <nav class="js-header-nav" role="navigation" aria-label="Primary">
+                        <ul class="global-nav global-nav--primary" role="menubar">
+                            <li class="global-nav__item global-nav__item--primary js-header-menu">
+                                <a class="global-nav__link" href="/dashboard/" role="menuitem">
+                                    <span>{{link_one}}</span>
+                                </a>
+                            </li>
+                            <li class="global-nav__item global-nav__item--primary js-header-menu">
+                                <a class="global-nav__link" href="/users/favourites/">
+                                    <span>{{link_two}}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="global-nav global-nav--secondary-mobile">
+                    {# Secondary Nav #}
+                    <nav role="navigation" aria-label="Secondary">
+                        <ul class="global-nav global-nav--secondary" role="menubar">
+                            <li class="global-nav__item" role="presentation">
+                                <a class="global-nav__link" href="/" role="menuitem">
+                                    <span>{{site_name}}</span>
+                                </a>
+                            </li>
+                            <li class="global-nav__item" role="presentation">
+                                <a class="global-nav__link" href="/logout/">
+                                    <span>{{logout_text}}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <form action="{% url 'search' %}" class="search search--mobile-menu">
+                    <input class="search__input" type="text" id="search" name="query" placeholder="Search the Intranet">
+                    <label class="search__label hidden" for="search">{{search_text}}</label>
+                    <button class="search__button" type="submit">
+                        <span class="hidden">Search</span>
+                        {% include "patterns/atoms/svg/icons/icon-search.html" with classes="search__icon icon" title="Search" %}
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</header>
+

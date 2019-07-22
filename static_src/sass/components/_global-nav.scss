@@ -1,0 +1,162 @@
+// Styles here are used for global-header.html which is not used on this site
+// but is used on the Samaritans Intranet. It has been made availble in the
+// public pattern library for third party use.
+
+.global-nav {
+    $root: &;
+
+    display: flex;
+
+    @include media-query($menu-breakpoint) {
+        align-items: center;
+        flex-direction: row;
+    }
+
+    &--primary {
+        flex-direction: column;
+        border-bottom: 1px solid rgba($off-white, 0.15);
+        margin-bottom: $gutter-small;
+        padding-bottom: $gutter-small;
+        display: none;
+
+        @include media-query($menu-breakpoint) {
+            display: flex;
+            flex-direction: row;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+
+        #{$root}--primary-mobile & {
+            display: flex;
+        }
+    }
+
+    // for desktop secondary menu
+    &--secondary {
+        padding: $gutter-small 0;
+        align-items: center;
+        display: none;
+
+        @include media-query(tablet-portrait) {
+            display: flex;
+        }
+
+        @include media-query($menu-breakpoint) {
+            padding: 0;
+            justify-content: flex-start;
+        }
+
+        #{$root}--secondary-mobile & {
+            flex-direction: column;
+            background-color: transparent;
+            align-items: flex-start;
+            display: flex;
+        }
+    }
+
+    &__item {
+        font-weight: $weight--bold;
+
+        &:last-child {
+            border-bottom: 0;
+        }
+
+        &.is-open--header-menu {
+            margin-bottom: $gutter-small;
+
+            @include media-query($menu-breakpoint) {
+                margin-bottom: 0;
+            }
+        }
+
+        @include media-query($menu-breakpoint) {
+            width: auto;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+            border-bottom: 0;
+
+            &--primary {
+                margin-right: $gutter-xxl;
+            }
+        }
+
+        #{$root}--secondary & {
+            margin-right: $gutter-small;
+            padding-right: $gutter-small;
+            border-right: 1px solid rgba($white, 0.2);
+
+            &:last-child {
+                margin-right: 0;
+                padding-right: 0;
+                border: 0;
+            }
+        }
+
+        #{$root}--secondary-mobile & {
+            margin-right: 0;
+            border-right: 0;
+        }
+    }
+
+    &__link {
+        transition: color $transition;
+        padding: 4px 0;
+        cursor: pointer;
+
+        @include media-query($menu-breakpoint) {
+            margin: 0 10px;
+        }
+
+        &--breadcrumb {
+            color: $color--primary;
+
+            #{$hover} {
+                color: lighten($color--primary, 20%);
+                border-bottom: 1px solid $color--primary;
+            }
+        }
+
+        #{$root}--primary & {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: $white;
+
+            @include media-query($menu-breakpoint) {
+                @include font-size(s);
+                font-weight: $weight--bold;
+                line-height: $header-nav-height--inner;
+                color: $color--link-hover;
+                margin: 0;
+                padding: 0;
+                justify-content: flex-start;
+            }
+        }
+
+        #{$root}--primary-mobile & {
+            @include underline(transparent, $white, span);
+        }
+
+        // for desktop secondary menu & mobile CTA
+        #{$root}--secondary & {
+            @include underline(transparent, $white, span);
+            @include font-size(xxs);
+            color: $white;
+            font-weight: $weight--normal;
+            margin: 0;
+            display: flex;
+            align-items: center;
+
+            @include media-query(mob-landscape) {
+                justify-content: center;
+            }
+        }
+
+        // for mobile secondary menu
+        #{$root}--secondary-mobile & {
+            @include font-size(xs);
+        }
+    }
+}

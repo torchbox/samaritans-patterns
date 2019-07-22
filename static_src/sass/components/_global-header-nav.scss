@@ -1,0 +1,50 @@
+// Styles here are used for global-header.html which is not used on this site
+// but is used on the Samaritans Intranet. It has been made availble in the
+// public pattern library for third party use.
+
+.global-header-nav {
+    background-color: $ink;
+    color: $white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: z($z-elements, header-menu);
+    right: 0;
+    bottom: 0;
+    transform: translate3d(-100%, 0, 0);
+    height: 100%;
+    overflow-x: scroll;
+
+    @include media-query($menu-breakpoint) {
+        position: relative;
+        background-color: $teal;
+        transform: translate3d(0, 0, 0);
+        height: auto;
+        overflow-x: visible;
+        display: none;
+    }
+
+    .mob-nav-open & {
+        transform: translate3d(0, 0, 0);
+    }
+
+    // removed and re-added in mobile-menu.js to prevent flash on window resize
+    &.js-header-nav--is-animated {
+        transition: transform $transition;
+    }
+
+    &__inner {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        padding: 10px;
+
+        @include media-query($menu-breakpoint) {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            height: $header-nav-height;
+            padding: 0;
+        }
+    }
+}

@@ -1,0 +1,69 @@
+// Styles here are used for global-header.html which is not used on this site
+// but is used on the Samaritans Intranet. It has been made availble in the
+// public pattern library for third party use.
+
+.global-search {
+    $root: &;
+
+    &--header {
+        display: none;
+        height: 36px;
+        width: 250px;
+
+        @include media-query($menu-breakpoint) {
+            display: block;
+        }
+
+        #{$root} {
+            &__input {
+                font-size: 16px;
+                padding: 8px 14px;
+                height: 100%;
+            }
+
+            &__icon {
+                fill: $color--link-hover;
+            }
+
+            &__button {
+                width: 40px;
+
+                #{$hover} {
+                    #{$root}__icon {
+                        fill: $color--link;
+                    }
+                }
+            }
+        }
+    }
+
+    &__input {
+        width: 100%;
+        border: 1px solid $grey-light;
+        padding: 14px;
+        padding-right: 50px;
+    }
+
+    &__icon {
+        width: 21px;
+        height: 21px;
+        fill: $color--link-hover;
+    }
+
+    &__button {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 50px;
+        height: 100%;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+
+        #{$hover} {
+            #{$root}__icon {
+                fill: darken($grass, 20);
+            }
+        }
+    }
+}

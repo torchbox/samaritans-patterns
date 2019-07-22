@@ -1,0 +1,126 @@
+// Styles here are used for global-header.html which is not used on this site
+// but is used on the Samaritans Intranet. It has been made availble in the
+// public pattern library for third party use.
+
+.global-header {
+    background-color: $white;
+
+    &__section {
+        padding: $gutter-small 0;
+
+        &--global {
+            background: $teal;
+            color: $white;
+        }
+    }
+
+    &__inner {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+    }
+
+    &__site-name {
+        font-size: 36px;
+        font-weight: $weight--bold;
+        color: $ink;
+    }
+
+    &__nav-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding-top: $gutter-small;
+        flex-grow: 1;
+
+        @include media-query(mob-portrait) {
+            justify-content: flex-end;
+            padding: 0;
+            width: auto;
+        }
+
+        @include media-query(mob-landscape) {
+            position: relative;
+        }
+
+        @include media-query($menu-breakpoint) {
+            width: auto;
+            padding: 0;
+        }
+
+        &--mobile {
+            padding-top: 5px;
+            padding-bottom: $gutter-small;
+            border-bottom: 1px solid rgba($white, 0.2);
+            margin-bottom: $gutter-small;
+
+            @include media-query($menu-breakpoint) {
+                display: none;
+            }
+        }
+    }
+
+    &__menu-toggle {
+        padding: 5px;
+        font-weight: $weight--bold;
+        transition: color $transition;
+        cursor: pointer;
+
+        @include media-query($menu-breakpoint) {
+            display: none;
+        }
+
+        #{$hover} {
+            color: $color--link;
+
+            &__icon {
+                fill: $color--link;
+            }
+        }
+
+        &--burger {
+            @include link($teal, $color--link);
+        }
+
+        &--close {
+            @include link($white, $color--link);
+        }
+
+        &__icon {
+            width: 28px;
+            height: 25px;
+            fill: currentColor;
+            pointer-events: none;
+        }
+    }
+
+    &__search {
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.3s;
+        position: absolute;
+        left: 0;
+        right: 45px;
+        bottom: 0;
+        margin: 0 $gutter-small;
+
+        @include media-query(tablet-portrait) {
+            margin: 0;
+            transform: none;
+            position: static;
+            width: auto;
+        }
+
+        &.is-open {
+            transform: scaleX(1);
+        }
+    }
+
+    &__logo {
+        height: 35px;
+        margin-right: $gutter-medium;
+    }
+}
