@@ -145,11 +145,6 @@
         }
     }
 
-    &--listening-services-top {
-        @include page(top-right, bottom-right);
-
-    }
-
     &--centered {
         margin: 0 auto;
     }

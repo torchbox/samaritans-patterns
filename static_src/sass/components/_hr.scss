@@ -6,14 +6,6 @@
     padding: 0;
     border-top: 2px solid $grey-light;
 
-    &--listening-services {
-        margin: $gutter 0;
-
-        @include media-query(tablet-portrait) {
-            margin: $gutter-x-large 0;
-        }
-    }
-
     &--donate-thank-you {
         border-width: 0;
         margin-bottom: $gutter-large;
