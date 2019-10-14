@@ -3,7 +3,7 @@
 {% load locale_tags static wagtailuserbar wagtailcore_tags wagtailimages_tags navigation_tags util_tags i18n %}
 
 {% block meta_tags %}
-    {% with tag_manager_id=settings.utils.AnalyticsSettings.google_tag_manager_id %}
+    {% with tag_manager_id=settings.utils.AnalyticsSettings.google_tag_manager_id global_anti_flicker=settings.utils.AnalyticsSettings.enable_optimize_anti_flicker %}
     {% if tag_manager_id %}
     {% get_current_language as LANGUAGE_CODE %}
     <script>
@@ -12,6 +12,19 @@
         'loggedIn': {% if request.user.is_authenticated %}true{% else %}false{% endif %}
     }];
     </script>
+    {% if global_anti_flicker or page.enable_optimize_anti_flicker %}
+        <!-- Anti-flicker snippet -->
+        <style>.async-hide { opacity: 0 !important} </style>
+        <script>
+        (function(a,s,y,n,c,h,i,d,e){
+            s.className+=' '+y;h.start=1*new Date;
+            h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
+            (a[n]=a[n]||[]).hide=h;
+            setTimeout(function(){i();h.end=null},c);
+            h.timeout=c;
+        })(window,document.documentElement,'async-hide','dataLayer',1000,{'{{ tag_manager_id }}': true});
+        </script>
+    {% endif %}
     <!-- Google Tag Manager -->
     <script>(function (w, d, s, l, i) {
         w[l] = w[l] || []; w[l].push({
