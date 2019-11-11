@@ -1,6 +1,10 @@
 .section {
     $root: &;
 
+    &.is-hidden {
+        display: none;
+    }
+
     &__connectors {
         @include media-query($page-connectors-breakpoint) {
             @include connectors($emerald, top, right, page);
@@ -294,5 +298,20 @@
         @include page(top-right, bottom-right);
         height: 2200px;
         width: 100%;
+    }
+
+    &--stats {
+        @include section--page($padding: large);
+        z-index: auto;
+        background-color: $white;
+
+        @include media-query(tablet-landscape) {
+            padding-bottom: $gutter-x-large + (2 * $section-overlap);
+        }
+    }
+
+    &--mission-statement {
+        text-align: center;
+        margin: $gutter-xxl $gutter;
     }
 }

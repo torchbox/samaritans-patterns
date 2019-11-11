@@ -1,5 +1,5 @@
 {% extends "patterns/base_page.html" %}
-{% load wagtailcore_tags wagtailimages_tags icon_tags static %}
+{% load  wagtailcore_tags wagtailimages_tags icon_tags donate_tags static %}
 
 {% block content %}
 
@@ -46,16 +46,32 @@
         </div>
     </div>
 
-    <section class="section--website-homepage-top">
+    <section class="section section--page-padding section--stats is-hidden">
         <div class="wrapper wrapper--small">
-            <h2 class="heading-secondary heading-secondary--large">
-                {{ page.secondary_headline }}
+            <h2 class="heading-secondary heading-secondary--stats">
+                Why we need you to be part of our Christmas story
             </h2>
-            <p class="website-homepage__text website-homepage__text--top-section">
-                {{ page.secondary_description }}
-            </p>
         </div>
+
+        <div class="wrapper wrapper--large">
+            <div class="grid grid--3col grid--stats">
+                {% include "patterns/molecules/cards/card-with-icon.html" with icon="star" title="3,462 volunteers" description="Will give up their time to respond to vital calls for help this Christmas." %}
+                {% include "patterns/molecules/cards/card-with-icon.html" with icon="coin-box" title="It costs £52,628.40" description="to provide our service to individuals seeking support on Christmas day alone." %}
+                {% include "patterns/molecules/cards/card-with-icon.html" with icon="telephone" title="10,632 calls" description="for help were responded to by our incredible volunteers last Christmas day." %}
+            </div>
+        </div>
+
+        <p class="website-homepage__text website-homepage__text--stats">
+            By donating just &pound;4.95 this Christmas, you could help a Samaritans volunteer answer a life-saving call for life.
+        </p>
+
+        <div class="website-homepage__donate-button">
+            {% donate_url campaign_id=page.pk frequency="monthly" amount="4.95" as donate_stats_url %}
+            {% include "patterns/atoms/buttons/button.html" with label="Donate &pound;4.95 to fund a call" href=donate_stats_url large=True %}
+        <div>
     </section>
+
+    {% include "patterns/molecules/mission-statement/mission-statement.html" with heading=page.secondary_headline description=page.secondary_description classes="section--website-homepage-top" %}
 
     <div class="wrapper wrapper--large wrapper--padding-for-page-tablet-portrait">
 
@@ -82,6 +98,8 @@
 
             <span class="horizontal-card__connectors"></span>
         </section>
+
+        {% include "patterns/molecules/mission-statement/mission-statement.html" with heading=page.secondary_headline description=page.secondary_description classes="section--mission-statement is-hidden" %}
 
         <section class="horizontal-card horizontal-card--homepage-volunteer">
             <div class="horizontal-card__inner">

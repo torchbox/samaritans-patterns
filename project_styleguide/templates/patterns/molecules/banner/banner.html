@@ -1,0 +1,15 @@
+<div class="banner {% if classes %}{{classes}}{% endif %}">
+    <div class="banner__inner">
+        {% if icon %}
+            {% include "patterns/atoms/svg/colour-icons/icon-color-"|add:icon|add:".html" with classes="banner__icon" %}
+        {% endif %}
+
+        <p class="banner__text">
+            {{ copy }} <span class="banner__text banner__text--for-desktop">{{ copy_for_desktop }}</span>
+
+            {% if link_href %}
+                <span class="banner__link-container">{{ cta_text }} <a class="banner__link" href="{{ link_href }}">{{ link_text }}</a></span>
+            {% endif %}
+        </p>
+    </div>
+</div>

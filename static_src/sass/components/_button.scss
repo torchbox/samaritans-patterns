@@ -261,6 +261,10 @@
             opacity: 1;
         }
     }
+
+    &--donate-standout {
+        @include font-size(m);
+    }
 }
 
 .button-menu-toggle {

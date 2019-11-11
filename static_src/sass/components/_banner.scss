@@ -1,0 +1,70 @@
+.banner {
+    @include font-size(xs);
+    z-index: z($z-elements, banner);
+    position: fixed;
+    padding: ($gutter / 2) $gutter-small;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $grey-blue;
+    width: 100%;
+
+    @include media-query(tablet-portrait) {
+        @include font-size(s);
+        padding: $gutter;
+    }
+
+    &.is-hidden {
+        display: none;
+    }
+
+    &__inner {
+        max-width: $site-width;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+
+        @include media-query(desktop) {
+            padding: 0 $gutter-xxl;
+        }
+    }
+
+    &__icon {
+        width: 40px;
+        height: 55px;
+        margin-right: $gutter-medium;
+        display: none;
+
+        @include media-query(tablet-portrait) {
+            display: block;
+        }
+    }
+
+    &__text {
+        font-weight: $weight--bold;
+        margin: 0 0 ($gutter * 0.25);
+
+        &:last-child {
+            margin: 0;
+        }
+
+        &--for-desktop {
+            display: none;
+
+            @include media-query(tablet-portrait) {
+                display: inline-block;
+            }
+        }
+    }
+
+    &__link {
+        text-decoration: underline;
+        color: currentColor;
+    }
+
+    &__link-container {
+        @include media-query(tablet-portrait) {
+            display: block;
+        }
+    }
+}

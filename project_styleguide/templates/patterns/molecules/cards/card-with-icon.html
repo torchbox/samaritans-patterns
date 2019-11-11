@@ -1,0 +1,15 @@
+<div class="card-new card-new--with-icon">
+    <span class="card-new__corner" aria-hidden="true"></span>
+    <div class="card-new__inner">
+        <div class="card-new__container">
+            {% if icon %}
+                {% include "patterns/atoms/svg/icons/icon-"|add:icon|add:".html" with classes="card-new__icon" %}
+            {% endif %}
+            <h2 class="card-new__title">{{ title }}</h2>
+            {% if description %}
+                <p class="card-new__text">{{ description }}</p>
+            {% endif %}
+        </div>
+    </div>
+    <span class="card-new__connectors" aria-hidden="true"></span>
+</div>

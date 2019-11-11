@@ -161,6 +161,9 @@
         }
     }
 
+    &--stats {
+        margin: $gutter-large 0;
+    }
 
     @supports (display: grid) {
         margin: $gutter-large 0;
@@ -352,5 +355,15 @@
                 grid-gap: $gutter-large;
             }
         }
-	}
+
+        &--stats {
+            grid-gap: $gutter-large;
+            grid-template-columns: 1fr;
+
+            @include media-query(tablet-portrait) {
+                grid-template-columns: repeat(3, 1fr);
+                grid-gap: $gutter-medium;
+            }
+        }
+    }
 }

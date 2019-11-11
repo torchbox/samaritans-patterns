@@ -120,4 +120,10 @@ b, strong {
     &--narrow {
         max-width: $wrapper--small;
     }
+
+    &--stats {
+        text-align: center;
+        max-width: 620px;
+        margin: 0 auto $gutter-xxl;
+    }
 }
