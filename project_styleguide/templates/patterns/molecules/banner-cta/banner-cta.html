@@ -1,0 +1,10 @@
+{% load i18n donate_tags %}
+<div class="call-to-action call-to-action--banner {% if classes %}{{classes}}{% endif %}">
+    <div class="call-to-action__inner wrapper wrapper--large wrapper--padding">
+        {% include "patterns/atoms/svg/colour-icons/icon-color-snowflake-4.html" with classes="call-to-action__icon" %}
+        <p class="call-to-action__text">{% trans "Donating just &pound;5 could fund a lifesaving call for help this Christmas" %}</p>
+
+        {% donate_url campaign_id=page.pk frequency="single" amount="5" as footer_donate_url %}
+        {% include "patterns/atoms/buttons/button.html" with href=footer_donate_url label="Donate &pound;5" %}
+    </div>
+</div>

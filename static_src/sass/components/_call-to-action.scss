@@ -1,4 +1,49 @@
 .call-to-action {
     padding: 1rem 0;
     margin: 1rem 0;
+
+    &.is-hidden {
+        display: none;
+    }
+
+    &--banner {
+        padding: 0;
+        margin: 0;
+        background-color: $white;
+    }
+
+    &__inner {
+        padding: $gutter;
+
+        @include media-query(mob-landscape) {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    &__icon {
+        width: 50px;
+        height: 50px;
+        margin-bottom: $gutter;
+
+        @include media-query(mob-landscape) {
+            margin: 0 $gutter 0 0;
+        }
+    }
+
+    &__text {
+        margin-bottom: $gutter;
+        font-weight: $weight--bold;
+
+        @include media-query(mob-landscape) {
+            display: block;
+            margin: 0 $gutter 0 0;
+            flex: 1;
+        }
+
+        @include media-query(tablet-landscape) {
+            flex: inherit;
+        }
+    }
 }

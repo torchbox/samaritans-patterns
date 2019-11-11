@@ -99,6 +99,7 @@
 {% endblock header %}
 
 {% block footer %}
+    {% include "patterns/molecules/banner-cta/banner-cta.html" with classes="is-hidden" %}
     {% include 'patterns/organisms/footer/footer.html' %}
     {% include "patterns/molecules/banner/banner.html" with classes="is-hidden" icon="mobile" copy="Need support?" copy_for_desktop="We're here to listen 24 hours, 365 days a year." cta_text="Call 116 123 for free or view" link_text="other ways to get in touch." link_href="#" %}
 {% endblock footer %}
