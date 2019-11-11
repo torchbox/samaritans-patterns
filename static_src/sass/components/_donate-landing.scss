@@ -185,4 +185,48 @@
             }
         }
     }
+
+    &__usage {
+        display: flex;
+        align-items: center;
+        position: relative;
+        margin-bottom: $gutter;
+        background-color: $off-white;
+        padding: $gutter $gutter-small;
+        border-left: 1px solid $grey-light;
+        border-right: 1px solid $grey-light;
+        border-bottom: 1px solid $grey-light;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        margin-top: -33px; // overlap donate input
+
+        &.is-hidden {
+            display: none;
+        }
+
+        &::before {
+            content: '';
+            height: 2px;
+            width: 90%;
+            background-color: $ink;
+            position: absolute;
+            top: 0;
+        }
+
+        svg {
+            width: 50px;
+            height: 40px;
+            margin-right: $gutter;
+
+            @include media-query(mob-landscape) {
+                width: 80px;
+                height: 70px;
+            }
+        }
+
+        p {
+            flex: 1;
+            margin: 0;
+        }
+    }
 }

@@ -18,6 +18,7 @@ import Gallery from './components/gallery';
 import SelectAllCheckboxToggle from './components/select-all-checkbox-toggle';
 import sendTagManagerEvents from './components/tag-manager';
 import Beta from './components/beta';
+import DonateUsage from './components/donate-usage';
 import './components/browser-polyfills';
 import './components/smooth-scroll';
 import './components/branch-finder';
@@ -87,6 +88,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     for (const beta of document.querySelectorAll(Beta.selector())) {
         new Beta(beta);
+    }
+
+    for (const donateusage of document.querySelectorAll(DonateUsage.selector())) {
+        new DonateUsage(donateusage);
     }
 
     sendTagManagerEvents();
