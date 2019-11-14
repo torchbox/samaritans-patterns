@@ -1,15 +1,16 @@
 {% load form_tags icon_tags i18n %}
 
-<div class="page-teaser page-teaser--giftaid streamfield--dark-bg">
+<div class="page-teaser page-teaser--giftaid streamfield--dark-bg js-gift-aid">
     <div class="page-teaser__content page-teaser__content--giftaid">
-        <div class="page-teaser__content-inner page-teaser__content-inner--giftaid">
-            <div class="page-teaser__giftaid-copy">
-                {% render_form_field form.gift_aid %}
-
-                <p class="page-teaser__text">{% blocktrans %}Please let us know if your tax circumstances or name/address change so we can update our records.{% endblocktrans %}</p>
-            </div>
-
-            {% render_icon "icon-color-giftaid" "" %}
+        <div class="page-teaser__giftaid-field">
+            {% render_form_field form.gift_aid %}
+            {% render_icon "icon-color-giftaid" "page-teaser__icon page-teaser__icon--giftaid" %}
         </div>
+
+        <p class="page-teaser__meta page-teaser__meta--giftaid">
+            {% blocktrans %}
+            By ticking the box above I confirm that I am a UK taxpayer and would like Samaritans to reclaim the tax on all donations I have made in the last four years and for all future gifts of money that I make to be Gift Aid donations. I understand that if I pay less Income Tax and/or Capital Gains tax than the amount of Gift Aid claimed on all my donations in that tax year then it is my responsibility to pay any difference. Please let us know if your tax circumstances or name/address change so we can update our records.
+            {% endblocktrans %}
+        </p>
     </div>
 </div>

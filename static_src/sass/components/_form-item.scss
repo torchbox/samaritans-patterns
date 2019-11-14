@@ -6,6 +6,14 @@
     @include font-size(s);
     margin-bottom: $gutter-medium;
 
+    .page-teaser__giftaid-field & {
+        margin-bottom: 0;
+
+        @include media-query(mob-landscape) {
+            max-width: 65%;
+        }
+    }
+
 
     // for date widget
     &__fieldset {
@@ -27,6 +35,11 @@
             &--checkbox_input {
                 margin-bottom: 0;
                 font-weight: normal;
+
+                .page-teaser__giftaid-field & {
+                    @include font-size(m);
+                    font-weight: $weight--bold;
+                }
             }
         }
     }

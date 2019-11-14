@@ -19,6 +19,7 @@ import SelectAllCheckboxToggle from './components/select-all-checkbox-toggle';
 import sendTagManagerEvents from './components/tag-manager';
 import Beta from './components/beta';
 import DonateUsage from './components/donate-usage';
+import GiftAid from './components/gift-aid';
 import './components/browser-polyfills';
 import './components/smooth-scroll';
 import './components/branch-finder';
@@ -92,6 +93,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     for (const donateusage of document.querySelectorAll(DonateUsage.selector())) {
         new DonateUsage(donateusage);
+    }
+
+    for (const giftaid of document.querySelectorAll(GiftAid.selector())) {
+        new GiftAid(giftaid);
     }
 
     sendTagManagerEvents();

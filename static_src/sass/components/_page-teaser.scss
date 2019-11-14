@@ -36,6 +36,7 @@
 
         &--giftaid {
             @include connectors($lime, bottom, right, medium);
+            display: block;
             background-color: $ink;
 
             @include media-query(tablet-landscape) {
@@ -81,29 +82,7 @@
         }
     }
 
-    &__content-inner {
-        &--giftaid {
-            @include media-query(tablet-landscape) {
-                display: flex;
-                align-items: flex-start;
-                justify-content: space-between;
-            }
-
-            svg {
-                width: 170px;
-                height: 60px;
-                margin-left: $gutter-large;
-
-                @include media-query(tablet-landscape) {
-                    margin-left: 0;
-                }
-            }
-        }
-    }
-
     &__giftaid-copy {
-        @include font-size(s);
-
         @include media-query(tablet-landscape) {
             width: 70%;
 
@@ -115,6 +94,44 @@
 
         label {
             flex: 1;
+        }
+    }
+
+    &__giftaid-field {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__meta {
+        @include font-size(s);
+        margin: $gutter 0 0;
+        padding: $gutter 0;
+
+        &--giftaid {
+            border-top: 1px solid $white;
+            display: none;
+
+            .show-meta & {
+                display: block;
+            }
+        }
+    }
+
+    &__icon {
+        &--giftaid {
+            margin-left: $gutter;
+            display: none;
+
+            @include media-query(mob-landscape) {
+                display: block;
+                width: 140px;
+                height: 50px;
+            }
+
+            @include media-query(tablet-portrait) {
+                width: 170px;
+                height: 60px;
+            }
         }
     }
 }
