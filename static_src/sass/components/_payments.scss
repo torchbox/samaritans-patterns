@@ -28,10 +28,6 @@
             margin-left: $gutter-large;
         }
 
-        @include media-query(tablet-landscape) {
-            margin-left: $gutter-xxl;
-        }
-
         svg {
             width: 50px;
             height: 40px;

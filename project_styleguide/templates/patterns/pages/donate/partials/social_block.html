@@ -1,0 +1,23 @@
+{% load i18n wagtailcore_tags %}
+<div class="social">
+    {% include values.icon with classes="social__icon" aria_hide="true" %}
+    <div>
+        <h2 class="social__heading">{{ values.heading }}</h2>
+        <div class="social__message">
+            {{ values.text|richtext }}
+        </div>
+        <div class="social__buttons">
+            {% with uri=values.url|urlencode %}
+                <a class="social__button social__button--facebook" href="https://www.facebook.com/sharer.php?u={{uri}}">
+                    {% include "patterns/atoms/svg/icons/icon-social-facebook.html" with classes="social__button-icon" aria_hide="true" %}
+                    Share
+                </a>
+
+                <a class="social__button social__button--twitter" href="https://twitter.com/intent/tweet?text={{ values.default_tweet_text|urlencode }}&url={{uri}}">
+                    {% include "patterns/atoms/svg/icons/icon-social-twitter.html" with classes="social__button-icon" aria_hide="true" %}
+                    Tweet
+                </a>
+            {% endwith %}
+        </div>
+    </div>
+</div>

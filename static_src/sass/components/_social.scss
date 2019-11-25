@@ -1,0 +1,89 @@
+.social {
+    $root: &;
+    margin: $gutter-large 0;
+
+    @include media-query(mob-landscape) {
+        display: flex;
+    }
+
+    &__heading {
+        @include media-query(desktop) {
+            @include font-size(m);
+        }
+    }
+
+    &__icon {
+        display: none;
+
+        @include media-query(mob-landscape) {
+            display: block;
+            width: 190px;
+            height: 60px;
+            margin-right: $gutter;
+            fill: $emerald;
+        }
+    }
+
+    &__message b {
+        color: $emerald;
+        font-weight: $weight--bold;
+    }
+
+    &__buttons {
+        @include media-query(mob-landscape) {
+            display: flex;
+        }
+    }
+
+    &__button {
+        @include font-size(s);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        color: $white;
+        padding: ($gutter / 2) 0;
+        text-transform: uppercase;
+        font-weight: $weight--bold;
+        transition: background-color $transition;
+
+        #{$hover} {
+            color: $white;
+        }
+
+        &:first-child {
+            margin-bottom: $gutter / 2;
+
+            @include media-query(mob-landscape) {
+                margin-right: $gutter;
+                margin-bottom: 0;
+            }
+        }
+
+        &--facebook {
+            background-color: $facebook-blue;
+
+            #{$hover} {
+                background-color: lighten($facebook-blue, 10%);
+            }
+        }
+
+        &--twitter {
+            background-color: $twitter-blue;
+
+            #{$hover} {
+                background-color: lighten($twitter-blue, 10%);
+            }
+        }
+    }
+
+    &__button-icon {
+        width: 20px;
+        height: 20px;
+        margin-right: ($gutter / 2);
+
+        #{$root}__button--facebook & {
+            fill: $facebook-blue;
+        }
+    }
+}
