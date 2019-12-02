@@ -23,6 +23,8 @@ import GiftAid from './components/gift-aid';
 import './components/browser-polyfills';
 import './components/smooth-scroll';
 import './components/branch-finder';
+import initiMobileNumberAutocomplete from './components/mobile-number-autocomplete';
+import initMobileNumberField from './components/mobile-number-field';
 
 document.addEventListener('DOMContentLoaded', function() {
     new CookieWarning();
@@ -99,5 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
         new GiftAid(giftaid);
     }
 
+    initiMobileNumberAutocomplete();
+    initMobileNumberField();
     sendTagManagerEvents();
 });

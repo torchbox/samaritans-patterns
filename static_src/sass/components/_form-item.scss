@@ -180,6 +180,11 @@
                     margin-right: 2em;
                 }
             }
+
+            // targets mobile_number field amongst contact prefs
+            .form-item__wrapper {
+                max-width: 390px;
+            }
         }
     }
 

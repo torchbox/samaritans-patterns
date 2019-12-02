@@ -22,6 +22,10 @@
 
     <div class="form-item-wrapper form-item-wrapper--radio-select-inline">
         {% render_form_field form.prefs_phone %}
+        {% render_form_field form.prefs_sms %}
+        {% if form.mobile_number %}
+            {% include 'patterns/molecules/forms/form_field.html' with field=form.mobile_number %}
+        {% endif %}
         {% render_form_field form.prefs_email %}
     </div>
 

@@ -186,6 +186,10 @@
         p {
             @include font-size(s);
         }
+
+        input {
+            color: $black !important;
+        }
     }
 
     &--donate-landing {

@@ -15,3 +15,6 @@ tags:
     form.prefs_email:
       raw: |
         <p>prefs_email field</p>
+    form.prefs_sms:
+      raw: |
+        <p>prefs_sms field</p>
