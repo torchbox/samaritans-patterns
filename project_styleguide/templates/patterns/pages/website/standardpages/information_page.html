@@ -19,6 +19,7 @@
             {% endif %}
             {% comment %} Used in news template which extends info page {% endcomment %}
             {% block news_meta %}{% endblock %}
+
             {% include_block page.body %}
             {% include "patterns/atoms/corners/corners.html" with size="page" %}
         </div>

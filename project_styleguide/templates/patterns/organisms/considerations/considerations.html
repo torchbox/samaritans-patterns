@@ -1,0 +1,19 @@
+<div class="considerations js-considerations">
+    {% for consideration in considerations %}
+        {% include "patterns/molecules/consideration/consideration.html" %}
+    {% endfor %}
+
+    <div class="consideration js-consideration is-hidden consideration--last">
+        <div class="consideration__column consideration__column--first">
+            {% include "patterns/atoms/svg/icons/icon-tick.html" with classes="consideration__icon" %}
+        </div>
+        <div class="consideration__column consideration__column--second">
+            <div class="consideration__heading">
+                {{ cta_text|linebreaks }}
+            </div>
+            {% if cta_url and cta_button_text %}
+                {% include "patterns/atoms/buttons/button.html" with label=cta_button_text href=cta_url classes="consideration__button" %}
+            {% endif %}
+        </div>
+    </div>
+</div>

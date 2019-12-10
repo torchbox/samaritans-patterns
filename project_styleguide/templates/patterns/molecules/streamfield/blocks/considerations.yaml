@@ -1,0 +1,19 @@
+context:
+  value:
+    cta:
+      button_link_url: "http://samaritans.org/"
+      button_text: Enquire now
+      description: |
+        It's great you feel you're right for the role.
+        Let's start the application process
+    considerations:
+      - heading: I understand that some of the things I may hear as a listening volunteer will be difficult.
+        paragraph: People contact us when they're feeling desperate, angry, grieving or in pain. Some of them are feeling suicidal.
+      - heading: I understand that I can't tell people who contact us what to do.
+        paragraph: Our role as listening volunteers is to listen. You may really want to tell people what to do, or what not to do, but you can't.
+      - heading: I understand that I may have to listen to someone take their own life.
+        paragraph: If someone has made the decision to end their life, you have to accept that. All you can do is be there for them as long as they need you.
+      - heading: I am able to listen to others without judgement.
+        paragraph: You have to support callers even if they're doing things you don't approve of.
+      - heading: I can cope with feeling deeply uncomfortable.
+        paragraph: You sometimes have to hear about difficult things that have happened to someone. You'll also often never know what happens to someone after they've been in contact.

@@ -1,0 +1,7 @@
+{% load wagtailcore_tags %}
+
+{% if content %}
+    <div class="content-in-box">
+        {{ content|richtext }}
+    </div>
+{% endif %}

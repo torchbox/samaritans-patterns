@@ -1,0 +1,29 @@
+.reveal {
+    &__link {
+        display: flex;
+        align-items: center;
+        text-decoration: underline;
+        color: $ink;
+    }
+
+    &__icon {
+        width: 25px;
+        height: 15px;
+        transform: rotate(90deg);
+        fill: $emerald;
+        transition: transform $transition;
+
+        .is-open & {
+            transform: rotate(270deg);
+        }
+    }
+
+    &__content {
+        margin: $gutter 0 0;
+        display: none;
+
+        .is-open & {
+            display: block;
+        }
+    }
+}

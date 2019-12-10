@@ -20,6 +20,8 @@ import sendTagManagerEvents from './components/tag-manager';
 import Beta from './components/beta';
 import DonateUsage from './components/donate-usage';
 import GiftAid from './components/gift-aid';
+import Reveal from './components/reveal';
+import Considerations from './components/considerations';
 import './components/browser-polyfills';
 import './components/smooth-scroll';
 import './components/branch-finder';
@@ -103,5 +105,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     initiMobileNumberAutocomplete();
     initMobileNumberField();
+
+    for (const reveal of document.querySelectorAll(Reveal.selector())) {
+        new Reveal(reveal);
+    }
+
+    for (const considerations of document.querySelectorAll(Considerations.selector())) {
+        new Considerations(considerations);
+    }
+
     sendTagManagerEvents();
 });

@@ -1,0 +1,8 @@
+{% load wagtailcore_tags %}
+
+{% if value.cta.button_link_page %}
+    {% pageurl value.cta.button_link_page as page_url %}
+{% endif %}
+{% firstof page_url value.cta.button_link_url as cta_url %}
+
+{% include "patterns/organisms/considerations/considerations.html" with considerations=value.considerations cta_text=value.cta.description cta_button_text=value.cta.button_text cta_link=cta_url %}

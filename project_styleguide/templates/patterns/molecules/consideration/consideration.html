@@ -1,0 +1,28 @@
+{% load icon_tags %}
+
+<div class="consideration js-consideration {% if forloop.counter > 1 and not forloop.first %}is-hidden{% endif %}">
+    <div class="consideration__column consideration__column--first">
+        {% include "patterns/atoms/svg/icons/icon-tick.html" with classes="consideration__icon" %}
+    </div>
+    <div class="consideration__column consideration__column--second">
+        <h3 class="consideration__heading">{{ consideration.heading }}</h3>
+
+            <div class="consideration__copy">
+                {{ consideration.paragraph|linebreaks }}
+            </div>
+
+        {% if consideration.tell_me_more  %}
+            <div class="reveal" data-reveal>
+                <a class="reveal__link" href="#" data-reveal-link>
+                    Tell me more
+                    {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="reveal__icon" aria_hide=True %}
+                </a>
+                <div class="reveal__content consideration__copy consideration__copy--small">
+                    {{ consideration.tell_me_more|linebreaks }}
+                </div>
+            </div>
+        {% endif %}
+
+        {% include "patterns/atoms/buttons/button.html" with label="That's OK, continue" href='#' classes="consideration__button js-consideration-button" %}
+    </div>
+</div>
