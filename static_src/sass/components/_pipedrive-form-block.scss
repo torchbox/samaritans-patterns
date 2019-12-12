@@ -1,0 +1,6 @@
+.pipedriveWebForms{
+    @include margin-streamfield-block;
+    iframe {
+        max-width:100%!important;
+    }
+}
