@@ -53,4 +53,12 @@
     &--website {
         background-color: $off-white;
     }
+
+    &--with-banner {
+        padding-bottom: 90px;
+
+        @include media-query(tablet-portrait) {
+            padding-bottom: 110px;
+        }
+    }
 }
