@@ -1,0 +1,6 @@
+{% if cognito_account_id and value.form_id %}
+    <div class="cognito">
+        <script src="https://services.cognitoforms.com/s/{{ cognito_account_id|urlencode }}"></script>
+        <script type="text/javascript">Cognito.load("forms", { id: "{{ value.form_id|escapejs }}" });</script>
+    </div>
+{% endif %}
