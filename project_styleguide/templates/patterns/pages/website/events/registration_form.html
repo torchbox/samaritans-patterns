@@ -1,4 +1,7 @@
 {% load form_tags i18n wagtailcore_tags util_tags %}
+{% if page.introduction %}
+    <p class="intro">{{ page.introduction }}</p>
+{% endif %}
 <form action="{% pageurl page %}" method="post" class="form">
     <div class="form__container">
         {% csrf_token %}
