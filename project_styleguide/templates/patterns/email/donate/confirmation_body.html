@@ -12,16 +12,24 @@
             {% blocktrans with amount=amount|floatformat:"-2" %}Thank you for paying in your fundraising of £{{ amount }}.{% endblocktrans %}
         {% else %}
             {% if gift_aid %}
-                {% blocktrans with amount=amount|floatformat:"-2" amount_plus_gift_aid=amount_plus_gift_aid|floatformat:"-2" %}Thank you for your generous donation of £{{ amount }} with Gift Aid, taking your total donation amount to £{{ amount_plus_gift_aid }}. Your donation could help Samaritans answer {{ calls_funded }} more potentially life-saving calls for help.{% endblocktrans %}
+                {% blocktrans with amount=amount|floatformat:"-2" amount_plus_gift_aid=amount_plus_gift_aid|floatformat:"-2" calls_funded=calls_funded|default:"" %}
+                Thank you for your generous donation of £{{ amount }} with Gift Aid, taking your total donation amount to £{{ amount_plus_gift_aid }}. Your donation could help Samaritans answer {{ calls_funded }} more potentially life-saving calls for help.
+                {% endblocktrans %}
             {% else %}
-                {% blocktrans with amount=amount|floatformat:"-2" %}Thank you for your generous donation of £{{ amount }} which could help Samaritans answer {{ calls_funded }} more potentially life-saving calls for help.{% endblocktrans %}
+                {% blocktrans with amount=amount|floatformat:"-2" calls_funded=calls_funded|default:"" %}
+                Thank you for your generous donation of £{{ amount }} which could help Samaritans answer {{ calls_funded }} more potentially life-saving calls for help.
+                {% endblocktrans %}
             {% endif %}
         {% endif %}
     {% else %}
         {% if gift_aid %}
-            {% blocktrans with amount=amount|floatformat:"-2" amount_plus_gift_aid=amount_plus_gift_aid|floatformat:"-2" %}Thank you for your generous monthly donation of £{{ amount }} with Gift Aid, taking your total donation amount to £{{ amount_plus_gift_aid }}. Your donation could help Samaritans answer {{ calls_funded }} more potentially life-saving calls for help every month.{% endblocktrans %}
+            {% blocktrans with amount=amount|floatformat:"-2" amount_plus_gift_aid=amount_plus_gift_aid|floatformat:"-2" calls_funded=calls_funded|default:"" %}
+            Thank you for your generous monthly donation of £{{ amount }} with Gift Aid, taking your total donation amount to £{{ amount_plus_gift_aid }}. Your donation could help Samaritans answer {{ calls_funded }} more potentially life-saving calls for help every month.
+            {% endblocktrans %}
         {% else %}
-            {% blocktrans with amount=amount|floatformat:"-2" amount_plus_gift_aid=amount_plus_gift_aid|floatformat:"-2" %}Thank you for your generous monthly donation of £{{ amount }}, which could help Samaritans answer {{ calls_funded }} more potentially life-saving calls for help every month.{% endblocktrans %}
+            {% blocktrans with amount=amount|floatformat:"-2" amount_plus_gift_aid=amount_plus_gift_aid|floatformat:"-2" calls_funded=calls_funded|default:"" %}
+            Thank you for your generous monthly donation of £{{ amount }}, which could help Samaritans answer {{ calls_funded }} more potentially life-saving calls for help every month.
+            {% endblocktrans %}
         {% endif %}
     {% endif %}
     </p>
