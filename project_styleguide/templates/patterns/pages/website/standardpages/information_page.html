@@ -1,5 +1,5 @@
 {% extends "patterns/base_page.html" %}
-{% load wagtailcore_tags navigation_tags static %}
+{% load wagtailcore_tags navigation_tags helper_tags static %}
 
 {% block content %}
     {% include "patterns/molecules/hero/hero.html" with hero_color="emerald" pattern="dots" hero_short=True %}
@@ -26,4 +26,9 @@
     </section>
 
     {% include "patterns/molecules/related-pages/related-pages--large.html" with related_pages=page.related_pages.all %}
+{% endblock %}
+
+{% block extra_js %}
+{{ webchat_api_url|json_script:"webchat_api_url" }}
+<script src="{% static 'js/chat-utils.js' %}"></script>
 {% endblock %}
