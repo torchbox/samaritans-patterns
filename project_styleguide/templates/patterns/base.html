@@ -8,6 +8,7 @@
         <title>{% block title %}{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}{% endblock %}{% block title_suffix %}{% if not page.seo_title %} | {{ request.site.site_name }}{% endif %}{% endblock %}</title>
         <meta name="description" content="{% if page.search_description %}{{ page.search_description }}{% else %}{{ page.listing_summary }}{% endif %}" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {% if noindex %}<meta name="robots" content="noindex"> {% endif %}
 
         {% block main_css %}
             <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
@@ -15,7 +16,9 @@
 
         {% block extra_css %}{% endblock %}
 
-        {% block meta_tags %}{% endblock %}
+        {% block meta_tags %}
+            {% canonical_and_alternate_links %}
+        {% endblock %}
     </head>
 
     <body class="{% block body_class %}template-{{ page.get_verbose_name|slugify }}{% endblock %}">
