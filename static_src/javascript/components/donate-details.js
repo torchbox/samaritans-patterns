@@ -1,3 +1,5 @@
+import Utilities from '../utilities';
+
 function donateDetails() {
 
     if(!document.getElementById('donate__personal-details-wrapper')){
@@ -37,17 +39,22 @@ function donateDetails() {
             toggleDonateAmountEditor();
         });
 
+        const displayOptions = {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        };
         saveAmountButton.addEventListener('click', function(){
             var newAmount = parseFloat(editBox.querySelector('input').value).toFixed(2);
 
-            displayedAmountSpan.textContent = newAmount;
+            displayedAmountSpan.textContent = newAmount.toLocaleString('en', displayOptions);
             amountInput.value = newAmount;
 
             toggleDonateAmountEditor();
         });
 
         // Reset display amount - necessary if user hits back in browser
-        displayedAmountSpan.textContent = amountInput.value;
+        const displayNumber = Number(amountInput.value);
+        displayedAmountSpan.textContent = Utilities.number_format(displayNumber, 2, '.', ',');
 
         // Return key handling
         editBox.querySelector('input').addEventListener('keyup', function(event) {

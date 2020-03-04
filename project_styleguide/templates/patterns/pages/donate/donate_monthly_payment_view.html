@@ -1,5 +1,5 @@
 {% extends "patterns/templates/donate-form-page.html" %}
-{% load form_tags helper_tags i18n wagtailimages_tags %}
+{% load form_tags helper_tags i18n wagtailimages_tags humanize %}
 
 {% block title %}{% trans "Payment details | Donate" %}{% endblock %}
 
@@ -10,9 +10,9 @@
 {% block content_inner %}
 
 {% if gift_aid_allowed %}
-    <h1 class="wrapper--small-width">{% blocktrans with amount=payment_amount|floatformat:"-2" gift_aid_amount=gift_aid_amount|floatformat:"-2" %}Boost your monthly donation of £{{ amount }} to <span class="donate__gift-aid-figure">£{{ gift_aid_amount }}</span> at no extra cost to you with Gift Aid{% endblocktrans %}</h1>
+    <h1 class="wrapper--small-width">{% blocktrans with amount=payment_amount|floatformat:"2"|intcomma gift_aid_amount=gift_aid_amount|floatformat:"2"|intcomma %}Boost your monthly donation of £{{ amount }} to <span class="donate__gift-aid-figure">£{{ gift_aid_amount }}</span> at no extra cost to you with Gift Aid{% endblocktrans %}</h1>
 {% else %}
-    <h1 class="wrapper--small-width">{% blocktrans with amount=payment_amount|floatformat:"-2" %}You're making a monthly donation of £{{ amount }}{% endblocktrans %}</h1>
+    <h1 class="wrapper--small-width">{% blocktrans with amount=payment_amount|floatformat:"2"|intcomma %}You're making a monthly donation of £{{ amount }}{% endblocktrans %}</h1>
 {% endif %}
 
 
@@ -43,10 +43,10 @@
         {% render_form_field form.authorisation %}
     </div>
 
-    <button value="{% blocktrans with amount=payment_amount|floatformat:"-2" %}Donate £{{ amount }}{% endblocktrans %}" class="button button--large" type="submit" id="donate__gocardless-submit">
+    <button value="{% blocktrans with amount=payment_amount|floatformat:"2"|intcomma %}Donate £{{ amount }}{% endblocktrans %}" class="button button--large" type="submit" id="donate__gocardless-submit">
         <div class="button__shadow"></div>
         <div class="button__inner">
-                {% blocktrans with amount=payment_amount|floatformat:"-2" %}Donate £{{ amount }}{% endblocktrans %}
+            {% blocktrans with amount=payment_amount|floatformat:"2"|intcomma %}Donate £{{ amount }}{% endblocktrans %}
             {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="icon button__icon" %}
         </div>
     </button>

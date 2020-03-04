@@ -1,14 +1,16 @@
-{% load donate_tags i18n icon_tags %}
+{% load donate_tags i18n icon_tags humanize %}
 
 {% if link %}
     <a class="stat-block__block stat-block__block--link" href="{% donate_url campaign_id=page.pk frequency=frequency amount=value.amount %}">
         {% include "patterns/molecules/streamfield/partials/stat-block-inner.html" %}
         <span class="stat-block__link" >
-            {% if frequency == "monthly" %}
-                {% blocktrans with amount=value.amount %}Donate £{{ amount }} a month{% endblocktrans %}
-            {% else %}
-                {% blocktrans with amount=value.amount %}Donate £{{ amount }}{% endblocktrans %}
-            {% endif %}
+            {% language "en-gb" %}
+                {% if frequency == "monthly" %}
+                    {% blocktrans with amount=value.amount|floatformat:"-2"|intcomma %}Donate £{{ amount }} a month{% endblocktrans %}
+                {% else %}
+                    {% blocktrans with amount=value.amount|floatformat:"-2"|intcomma %}Donate £{{ amount }}{% endblocktrans %}
+                {% endif %}
+            {% endlanguage %}
         </span>
     </a>
 {% else %}

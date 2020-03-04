@@ -1,5 +1,5 @@
 {% extends "patterns/templates/donate-form-page.html" %}
-{% load i18n form_tags helper_tags icon_tags loqate_tags static wagtailimages_tags %}
+{% load i18n form_tags helper_tags icon_tags loqate_tags static wagtailimages_tags humanize %}
 
 {% block title %}{% if is_pay_in %}{% trans "Your information | Fundraising pay-in" %}{% else %}{% trans "Donate - your information" %}{% endif %}{% endblock %}
 
@@ -23,7 +23,7 @@
             {% render_icon "icon-color-coins" "donate__bar-icon" %}
             <p id="donate__heading--single" {% if not payment_frequency == 'single' %}hidden{% endif %}>{% trans "You're making a single donation of" %}</p>
             <p id="donate__heading--monthly" {% if not payment_frequency == 'monthly' %}hidden{% endif %}>{% trans "You're making a monthly donation of" %}</p>
-            <p class="donate__amount-display">£<span id="donate__amount__display">{{ form.amount.value }}</span></p>
+            <p class="donate__amount-display">£<span id="donate__amount__display">{{ form.amount.value|floatformat:"2"|intcomma }}</span></p>
         </div>
 
         <div class="donate__amount" id="donate__amount">
@@ -31,7 +31,7 @@
         </div>
 
         <div class="donate__bar-edit" id="donate__amount-edit" hidden>
-            <span class="form__input__prefix">£</span> <input type="number" value="{{ form.amount.value }}" step="1" min="1">
+            <span class="form__input__prefix">£</span> <input type="number" value="{{ form.amount.value }}" step="0.01" min="1">
             <button class="button" id="donate__amount__save">{% trans 'Confirm' %}</button>
         </div>
     </div>

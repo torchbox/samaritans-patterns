@@ -1,5 +1,5 @@
 {% extends "patterns/templates/donate-form-page.html" %}
-{% load i18n form_tags helper_tags static wagtailimages_tags %}
+{% load i18n form_tags helper_tags static wagtailimages_tags humanize %}
 
 {% block title %}{% if is_pay_in %}{% trans "Payment details | Fundraising pay-in" %}{% else %}{% trans "Donate - payment details" %}{% endif %}{% endblock %}
 
@@ -11,19 +11,16 @@
 <div id="payments__payment-wrapper">
 
     {% if gift_aid_allowed %}
-
         {% if is_pay_in %}
-            <h1 class="wrapper--small-width">{% blocktrans with amount=payment_amount|floatformat:"-2" gift_aid_amount=gift_aid_amount|floatformat:"-2" %}Boost your payment of £{{ amount }} to <span class="donate__gift-aid-figure">£{{ gift_aid_amount }}</span> at no extra cost to you with Gift Aid{% endblocktrans %}</h1>
+            <h1 class="wrapper--small-width">{% blocktrans with amount=payment_amount|floatformat:"2"|intcomma gift_aid_amount=gift_aid_amount|floatformat:"-2" %}Boost your payment of £{{ amount }} to <span class="donate__gift-aid-figure">£{{ gift_aid_amount }}</span> at no extra cost to you with Gift Aid{% endblocktrans %}</h1>
         {% else %}
-            <h1 class="wrapper--small-width">{% blocktrans with amount=payment_amount|floatformat:"-2" gift_aid_amount=gift_aid_amount|floatformat:"-2" %}Boost your single donation of £{{ amount }} to <span class="donate__gift-aid-figure">£{{ gift_aid_amount }}</span> at no extra cost to you with Gift Aid{% endblocktrans %}</h1>
+            <h1 class="wrapper--small-width">{% blocktrans with amount=payment_amount|floatformat:"2"|intcomma gift_aid_amount=gift_aid_amount|floatformat:"2"|intcomma %}Boost your single donation of £{{ amount }} to <span class="donate__gift-aid-figure">£{{ gift_aid_amount }}</span> at no extra cost to you with Gift Aid{% endblocktrans %}</h1>
         {% endif %}
-
     {% else %}
-
         {% if is_pay_in %}
-            <h1 class="wrapper--small-width">{% blocktrans with amount=payment_amount|floatformat:"-2" %}You're making a payment of £{{ amount }}{% endblocktrans %}</h1>
+            <h1 class="wrapper--small-width">{% blocktrans with amount=payment_amount|floatformat:"2"|intcomma %}You're making a payment of £{{ amount }}{% endblocktrans %}</h1>
         {% else %}
-            <h1 class="wrapper--small-width">{% blocktrans with amount=payment_amount|floatformat:"-2" %}You're making a single donation of £{{ amount }}{% endblocktrans %}</h1>
+            <h1 class="wrapper--small-width">{% blocktrans with amount=payment_amount|floatformat:"2"|intcomma %}You're making a single donation of £{{ amount }}{% endblocktrans %}</h1>
         {% endif %}
     {% endif %}
 

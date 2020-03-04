@@ -1,4 +1,4 @@
-{% load i18n helper_tags %}
+{% load i18n helper_tags humanize %}
 <div class="tabccordion tabccordion--light-bg tabccordion--payments js-tabccordion">
     <nav>
         <ul class="tabccordion__nav js-tabccordion-nav">
@@ -57,9 +57,9 @@
                 <div class="button__shadow"></div>
                 <div class="button__inner">
                     {% if is_pay_in or is_event_payment %}
-                        {% blocktrans with amount=payment_amount|floatformat:"-2" %}Pay £{{ amount }}{% endblocktrans %}
+                        {% blocktrans with amount=payment_amount|floatformat:"2"|intcomma %}Pay £{{ amount }}{% endblocktrans %}
                     {% else %}
-                        {% blocktrans with amount=payment_amount|floatformat:"-2" %}Donate £{{ amount }}{% endblocktrans %}
+                        {% blocktrans with amount=payment_amount|floatformat:"2"|intcomma %}Donate £{{ amount }}{% endblocktrans %}
                     {% endif %}
                     {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="icon button__icon" %}
                 </div>

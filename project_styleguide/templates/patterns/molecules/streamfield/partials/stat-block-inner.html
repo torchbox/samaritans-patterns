@@ -1,11 +1,13 @@
-{% load icon_tags %}
+{% load icon_tags humanize i18n %}
 
 {% render_icon value.icon "stat-block__icon" %}
 <h3 class="stat-block__heading">
-    {% if value.amount %}
-        £{{ value.amount }}
-    {% else %}
-        {{ value.value }}
-    {% endif %}
+    {% language "en-gb" %}
+        {% if value.amount %}
+            £{{ value.amount|floatformat:"-2"|intcomma }}
+        {% else %}
+            {{ value.value }}
+        {% endif %}
+    {% endlanguage %}
 </h3>
 <p>{{ value.description }}</p>
