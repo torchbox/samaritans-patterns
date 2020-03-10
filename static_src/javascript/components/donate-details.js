@@ -46,7 +46,7 @@ function donateDetails() {
         saveAmountButton.addEventListener('click', function(){
             var newAmount = parseFloat(editBox.querySelector('input').value).toFixed(2);
 
-            displayedAmountSpan.textContent = newAmount.toLocaleString('en', displayOptions);
+            displayedAmountSpan.textContent = Utilities.number_format(newAmount, 2, '.', ',');
             amountInput.value = newAmount;
 
             toggleDonateAmountEditor();
