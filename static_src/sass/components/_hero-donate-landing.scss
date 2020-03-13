@@ -43,12 +43,6 @@
         }
     }
 
-    &__payment-icons {
-        &.is-hidden {
-            visibility: hidden;
-        }
-    }
-
     &__text {
         @include clear-child-margins;
         margin: 0 auto 10px;

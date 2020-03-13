@@ -4,14 +4,10 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    margin: -$spacer;
+    margin: calc(#{$gutter-medium} - #{$spacer}) -#{$spacer} -#{$spacer};
 
-    &--donate-landing {
-        margin-top: $gutter-medium - $spacer;
-
-        @include media-query(mob-landscape) {
-            margin-top: $gutter-large - $spacer;
-        }
+    @include media-query(mob-landscape) {
+        margin-top: $gutter-large - $spacer;
     }
 
     &__icon {

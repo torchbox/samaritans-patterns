@@ -389,6 +389,26 @@
         }
     }
 
+    // PayPal monthly
+    &__braintree-fields {
+        @include media-query(tablet-landscape) {
+            width: 50%;
+            margin-bottom: $gutter-medium;
+        }
+    }
+
+    &__braintree-error {
+        margin: 10px 0;
+        padding: 10px;
+        background-color: $hot-pink;
+        color: $white;
+    }
+
+    &__paypal-button {
+        max-width: 150px;
+        min-height: 50px;
+    }
+
     &__user-details {
         margin-bottom: $gutter;
 
