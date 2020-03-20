@@ -1,5 +1,6 @@
 {% load form_tags i18n helper_tags %}
 
+{% comment %} 
 <div class="tabccordion tabccordion--light-bg tabccordion--payments js-tabccordion">
     <nav>
         <ul class="tabccordion__nav js-tabccordion-nav">
@@ -8,20 +9,12 @@
             </li>
             <li>
                 <a href="#tab2" class="tabccordion__nav-item {% if active_payment_mode == 'paypal' %}is-active{% endif %}">{% trans 'PayPal' %}</a>
-            </li>
+            </li> 
         </ul>
-    </nav>
+    </nav> 
+    {% endcomment %}
 
-    <!-- Direct Debit tab -->
-    <section id="tab1" class="accordion accordion--tabccordion tabccordion__panel js-tabccordion-panel {% if active_payment_mode == 'gocardless' or not active_payment_mode %}is-active{% endif %}">
-        <a class="accordion__heading" href="#tab1">
-            <h3 class="accordion__heading-text">
-                Direct Debit
-            </h3>
-            {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="accordion__icon" aria_hide="true" %}
-        </a>
-
-        <div class="accordion__content tabccordion__content">
+        <div class="">
             <form action="{% url 'donate:payment_monthly_gocardless' %}" class="form" id="donate__gocardless-form" method="post">
                 {% csrf_token %}
                 <input type="hidden" id="gocardless_gift_aid_hidden" name="gift_aid" value="{{ gocardless_form.data.gift_aid|default:'no' }}" />
@@ -47,9 +40,8 @@
 
             {% include "patterns/molecules/donate/payments-by-gocardless.html" %}
         </div>
-    </section>
 
-    <!-- PayPal tab -->
+   {% comment %}  <!-- PayPal tab -->
     <section id="tab2" class="accordion accordion--tabccordion tabccordion__panel js-tabccordion-panel {% if active_payment_mode == 'paypal' %}is-active{% endif %}">
         <a class="accordion__heading" href="#tab2">
             <h3 class="accordion__heading-text">
@@ -79,6 +71,7 @@
             </form>
 
         </div>
-    </section>
-
+    </section> 
 </div>
+{% endcomment %}
+

@@ -17,13 +17,16 @@
     <hr class="hr hr--dashed">
 
     <div id="donate__methods--monthly" {% if not payment_frequency == 'monthly' %}hidden{% endif %}>
-        <h4>We accept monthly donations through Direct Debit and PayPal</h4>
+        <h4>We accept monthly donations through Direct Debit</h4>
+        {% comment %}
+         <h4>We accept monthly donations through Direct Debit and PayPal</h4>
+         {% endcomment %}
         {% include "patterns/molecules/payments/payment-icons--monthly.html" %}
     </div>
 
     <div id="donate__methods--single" {% if payment_frequency == 'monthly' %}hidden{% endif %}>
         <h4 class="hidden">
-            We accept all major cards, PayPal and Google Pay
+            We accept all major cards and Google Pay
             {% comment %} Apple Pay temporarily disabled
             We accept all major cards, PayPal, Google Pay, and Apple Pay
             {% endcomment %}
