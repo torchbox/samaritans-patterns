@@ -80,6 +80,7 @@ context:
         - trainers
         - warning
         - zebra-crossing
+        - uk-ireland-territory
     color_icons_specific_use:
         - burger-menu
         - info-circle

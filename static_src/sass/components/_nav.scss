@@ -319,6 +319,27 @@ $menu-breakpoint: 'tablet-landscape';
             }
         }
 
+        &--nations {
+            color: $ocean;
+            font-weight: bold;
+            display: block;
+            margin: 10px auto;
+            text-align: center;
+            font-size: $base-font-size;
+        }
+
+        @include media-query(mob-landscape) {
+            &--nations {
+                color: $ocean;
+                font-weight: bold;
+                display: inline-block;
+                padding-right: 16px;
+                padding-left: 16px;
+                text-align: left;
+                font-size: $base-font-size;
+            }
+        }
+
         &--breadcrumb {
             color: $color--primary;
 

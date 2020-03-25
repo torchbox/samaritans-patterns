@@ -101,6 +101,37 @@
 
         {% include "patterns/molecules/mission-statement/mission-statement.html" with heading=page.secondary_headline description=page.secondary_description classes="section--mission-statement is-hidden" %}
 
+        {% if nation_pages|length %}
+            <div class="wrapper wrapper--large wrapper--padding-for-page">
+                <div class="wrapper wrapper--website-homepage">
+                    <section>
+                        <div class="news-cards news-cards--homepage">
+                            <div class="grid grid--2col grid--nations grid--center grid--no-gap">
+                                <div>
+                                    <h2 class="nations-title">
+                                        <div>
+                                            {% include "patterns/atoms/svg/colour-icons/icon-color-uk-ireland-territory.html" with classes="pl-icons__icon pl-icons__world pl-icon--color" %}
+                                        </div>
+                                        <div>
+                                            {{ page.nations_title }}
+                                        </div>
+                                    </h2>
+                                </div>
+                                <div>
+                                    {% for nation in nation_pages %}
+                                        <a class="nav__link nav__link--description nav__link--nations" href="{{ nation.url }}">
+                                            {{ nation.get_country_display }}
+                                            <svg id="icon--chevron" class="chevron-link__chevron nav__icon nav__icon--chevron" aria-hidden="true" viewBox="0 0 43.1 62.7" fill="currentColor"><use xlink:href="#icon-chevron"></use></svg>
+                                        </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        {% endif %}
+
         <section class="horizontal-card horizontal-card--homepage-volunteer">
             <div class="horizontal-card__inner">
 

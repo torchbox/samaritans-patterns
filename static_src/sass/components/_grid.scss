@@ -78,6 +78,11 @@
         }
     }
 
+    &--center {
+        align-items: center;
+        justify-items: center;
+    }
+
     &--website-footer-ctas {
         justify-content: space-around;
 
@@ -195,6 +200,16 @@
 
             @include media-query(tablet-landscape) {
                 grid-gap: $gutter-large;
+            }
+        }
+
+        &--nations {
+            grid-template-columns: 1fr;
+        }
+
+        @include media-query(tablet-landscape) {
+            &--nations {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -364,6 +379,10 @@
                 grid-template-columns: repeat(3, 1fr);
                 grid-gap: $gutter-medium;
             }
+        }
+
+        &--no-gap {
+            grid-gap: 0;
         }
     }
 }

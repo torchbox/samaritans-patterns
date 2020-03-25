@@ -30,4 +30,13 @@
         height: 60px;
         margin: 10px;
     }
+
+
+    @include media-query(tablet-landscape) {
+        &__world {
+            width: 85px;
+            height: 85px;
+            margin-right: 15px;
+        }
+    }
 }
