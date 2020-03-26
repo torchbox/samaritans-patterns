@@ -1,0 +1,32 @@
+{% extends "patterns/base_page.html" %}
+{% load wagtailcore_tags navigation_tags wagtailimages_tags helper_tags static %}
+
+{% block content %}
+    {% include "patterns/molecules/hero/hero.html" with hero_color="emerald" pattern="none" hero_short=False %}
+
+    <div class="wrapper wrapper--flex">
+        <section class="section section--main">
+            <h3>Sections</h3>
+            {% for child in page.get_children.live.public %}
+                <p><a href="{% pageurl child %}" {% if page.first_guide_chapter.title == child.title %}style='color:red;'{% endif %}>{{ forloop.counter }}. {{ child.title }}</a></p>
+            {% endfor %}
+
+            <h1>{{ page.first_guide_chapter.title }}</h1>
+
+            {% include_block page.first_guide_chapter.body %}
+
+
+            {% if page.first_guide_chapter.next_guide_chapter %}
+                <a href="{% pageurl page.first_guide_chapter.next_guide_chapter %}"><b>Next: </b> {{ page.first_guide_chapter.next_guide_chapter.title }}</a>
+            {% endif %}
+
+            </div>
+        </section>
+
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    {{ webchat_api_url|json_script:"webchat_api_url" }}
+    <script src="{% static 'js/chat-utils.js' %}"></script>
+{% endblock %}

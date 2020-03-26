@@ -1,0 +1,24 @@
+context:
+  page:
+    title: A Guide Page Title
+    hero_image: False
+    get_children:
+      live:
+        public:
+          - title: First Section
+          - title: Second Section
+          - title: Third Section
+    first_guide_chapter:
+      title: First Section
+      next_guide_chapter:
+        title: Second Section
+          
+tags:
+  pageurl:
+    child:
+      raw: "#"
+    page.first_guide_chapter.next_guide_chapter:
+      raw: '#'
+  include_block:
+    page.first_guide_chapter.body:
+      template_name: "patterns/_pattern_library_only/streamfield/story_container.html"

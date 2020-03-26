@@ -1,0 +1,29 @@
+{% extends "patterns/base_page.html" %}
+{% load wagtailcore_tags wagtailimages_tags navigation_tags static %}
+
+{% block content %}
+    {% include "patterns/molecules/hero/hero.html" with hero_color="emerald" hero_title=page.get_parent.title pattern="none" hero_short=False %}
+
+    <div class="wrapper wrapper--flex">
+        <section class="section section--main">
+           
+            <h3>Sections</h3>
+            {% for sibling in page.get_siblings.live.public %}
+                <p><a href="{% pageurl sibling %}" {% if sibling.path == page.path %}style='color:red;'{% endif %}>{{ forloop.counter }}. {{ sibling.title }}</a></p>
+            {% endfor %}
+
+            <h1>{{ page.title }}</h1>
+
+            {% include_block page.body %}
+
+            {% if page.prev_guide_chapter %}
+                <a href="{% pageurl page.prev_guide_chapter %}"><b>Previous: </b>{{ page.prev_guide_chapter.title }}</a>
+            {% endif %}
+
+            {% if page.next_guide_chapter %}
+                <a href="{% pageurl page.next_guide_chapter %}"><b>Next: </b>{{ page.next_guide_chapter.title }}</a>
+            {% endif %}
+        </section>
+    </div>
+
+{% endblock %}
