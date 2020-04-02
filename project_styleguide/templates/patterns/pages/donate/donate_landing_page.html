@@ -57,6 +57,11 @@
                                 <p>Could fund <span class="js-donation-usage-slot"><b>1</b> call</span> for help every month</p>
                             </div>
                             {% include "patterns/atoms/buttons/button--button.html" with label=page.donate_button_text large=True classes="button--secondary donate-landing-hero__donate-button" %}
+                            {% if monthly_form.amount.value == 5.00 %}
+                            <div class="donate-landing__mobile-cta">
+                                <a href="sms://70088;?&body=LISTEN5">Text LISTEN5 to 70088 to start donating £5 a month</a>
+                            </div>
+                            {% endif %}
                             {% include "patterns/molecules/payments/payment-icons--monthly.html" %}
                         </form>
                     {% endif %}

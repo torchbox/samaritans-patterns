@@ -35,7 +35,23 @@
 
     &__examples {
         margin: $gutter-large 0 $gutter-x-large;
+    }  
+
+    &__mobile-cta {
+        @include link;
+        padding: $gutter 0;
+        font-size: $base-font-size;
+        transition: color $transition;
+        font-weight: $weight--bold;
     }
+
+    @include media-query--takes-value($breakpoint-tablet-portrait) {
+        &__mobile-cta {
+            display: none;
+        }
+    }
+
+
 
     &__call-to-donate {
         $local-root: &;
