@@ -16,7 +16,7 @@
             {% else %}
                 {% firstof card.listing_title card.title as card_title %}
             {% endif %}
-            {% include "patterns/molecules/chevron-link/chevron-link.html" with title=card_title %}
+            {% include "patterns/molecules/chevron-link/chevron-link.html" with title=card_title hide_svg_title="true" %}
         </h2>
         <p class="card__text">
             {% if nation_related_page %}

@@ -143,7 +143,7 @@
                 <div class="horizontal-card__container">
                     <h2 class="heading-secondary heading-secondary--large website-homepage__volunteer__heading">
                         {% if page.volunteer_icon %} {# if statement can be removed after these are added in the db. these fields are required, but the page breaks when the change is first made. #}
-                        {% include "patterns/molecules/chevron-link/chevron-link.html" with title=page.volunteer_headline color_icon=page.volunteer_icon %}
+                        {% include "patterns/molecules/chevron-link/chevron-link.html" with title=page.volunteer_headline color_icon=page.volunteer_icon hide_svg_title="true" %}
                         {% else %}
                         {{ page.volunteer_headline }}
                         {% endif %}

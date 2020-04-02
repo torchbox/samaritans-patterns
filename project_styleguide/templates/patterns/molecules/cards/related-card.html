@@ -4,7 +4,7 @@
         <div class="card-new__container">
             <h2 class="card-new__title">
                 {% firstof value.listing_title value.title as card_title %}
-                {% include "patterns/molecules/chevron-link/chevron-link.html" with title=card_title %}
+                {% include "patterns/molecules/chevron-link/chevron-link.html" with title=card_title hide_svg_title="true" %}
             </h2>
             <p class="card-new__text">
                 {% if type == "news" %}

@@ -4,7 +4,7 @@
     <div class="card__container">
         <h2 class="card__title">
             {% firstof card.listing_title card.title as card_title %}
-            {% include "patterns/molecules/chevron-link/chevron-link.html" with title=card_title %}
+            {% include "patterns/molecules/chevron-link/chevron-link.html" with title=card_title hide_svg_title="true" %}
         </h2>
         {% if card.listing_summary or card.introduction %}
             <p class="card__text">{{ card.listing_summary|default:card.introduction }}</p>

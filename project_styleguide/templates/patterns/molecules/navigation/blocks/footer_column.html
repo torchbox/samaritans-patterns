@@ -3,7 +3,7 @@
     <h2 class="footer-nav__heading">
         {% if value.heading_link %}
             <a class="footer-nav__link footer-nav__link--heading" href="{% pageurl value.heading_link %}">
-                {% include "patterns/molecules/chevron-link/chevron-link.html" with title=value.heading chevron_classes="footer-nav__icon" %}
+                {% include "patterns/molecules/chevron-link/chevron-link.html" with title=value.heading chevron_classes="footer-nav__icon" hide_svg_title="true" %}
             </a>
         {% else %}
             {{ value.heading }}
