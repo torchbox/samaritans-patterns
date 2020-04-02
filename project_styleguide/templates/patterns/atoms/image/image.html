@@ -1,8 +1,13 @@
 {% load wagtailimages_tags %}
 
 <figure class="figure">
+    {% if value.link_url or value.link_page %}
+        <a href="{% if value.link_url %}{{ value.link_url }}{% else %}{{ value.link_page.url }}{% endif %}">
+            {% image value.image width-728 class="figure__image figure--link" %}
+        </a>
+    {% else %}
     {% image value.image width-728 class="figure__image" %}
-
+    {% endif %}
     {% if value.caption %}
         <figcaption class="figure__caption">
             <p>{{ value.caption }}</p>

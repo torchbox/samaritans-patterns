@@ -10,6 +10,12 @@
         display: block;
     }
 
+    &--link {
+        &:hover {
+            filter: brightness(80%);
+        }
+    }
+
     &__caption {
         @include font-size(xs);
         color: $grey-text;
