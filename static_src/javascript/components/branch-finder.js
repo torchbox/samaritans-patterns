@@ -121,6 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <ul class="list-inline-bulleted">
                                     <li class="list-inline-bulleted__item">Distance: ${getMiles(branch.distance)}m</li>
                                     ${branch.wheelchair_accessible ? '<li class="list-inline-bulleted__item">Wheelchair accessible</li>' : ''}
+                                    ${branch.welsh_speaking ? '<li class="list-inline-bulleted__item">Welsh speakers</li>' : ''}
                                 </ul>
                             </div>
                         </a>
