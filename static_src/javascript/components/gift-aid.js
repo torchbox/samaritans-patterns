@@ -12,8 +12,12 @@ class GiftAid {
     }
 
     bindEventListeners() {
-        this.giftAidInput.addEventListener('change', () => {
-            this.node.classList.toggle('show-meta');
+        this.giftAidInput.addEventListener('change', (event) => {
+            if (event.target.checked) {
+                this.node.classList.add('show-meta');
+            } else {
+                this.node.classList.remove('show-meta');
+            }
         });
     }
 

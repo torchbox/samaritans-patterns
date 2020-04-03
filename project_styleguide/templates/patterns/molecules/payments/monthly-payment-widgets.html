@@ -9,15 +9,15 @@
             </li>
             <li>
                 <a href="#tab2" class="tabccordion__nav-item {% if active_payment_mode == 'paypal' %}is-active{% endif %}">{% trans 'PayPal' %}</a>
-            </li> 
+            </li>
         </ul>
-    </nav> 
     {% endcomment %}
+    </nav>
 
         <div class="">
             <form action="{% url 'donate:payment_monthly_gocardless' %}" class="form" id="donate__gocardless-form" method="post">
                 {% csrf_token %}
-                <input type="hidden" id="gocardless_gift_aid_hidden" name="gift_aid" value="{{ gocardless_form.data.gift_aid|default:'no' }}" />
+                {{ gocardless_form.gift_aid.as_hidden }}
 
                 <div class="donate__direct-debit-fields light-bg">
                     {% render_form_field gocardless_form.debit_date %}
@@ -56,7 +56,7 @@
 
             <form action="{% url 'donate:payment_monthly_braintree' %}" class="form" id="donate__braintree-form" method="post" data-token="{{ braintree_tokenization_key }}">
                 {% csrf_token %}
-                <input type="hidden" id="braintree_gift_aid_hidden" name="gift_aid" value="{{ braintree_form.data.gift_aid|default:'no' }}" />
+                {{ braintree_form.gift_aid.as_hidden }}
 
                 <div class="donate__braintree-fields light-bg">
                     {% render_form_field braintree_form.billing_day %}
@@ -71,7 +71,6 @@
             </form>
 
         </div>
-    </section> 
+    </section>
 </div>
 {% endcomment %}
-
