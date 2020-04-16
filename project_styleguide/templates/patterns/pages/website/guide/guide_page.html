@@ -2,13 +2,14 @@
 {% load wagtailcore_tags navigation_tags wagtailimages_tags helper_tags static %}
 
 {% block content %}
-    {% include "patterns/molecules/hero/hero.html" with hero_color="emerald" pattern="none" hero_short=False %}
 
-    <div class="wrapper wrapper--flex">
-        <section class="section section--main">
+    {% include "patterns/molecules/hero/hero.html" with hero_color="emerald" pattern="none" hero_short=False %}
+    <div class="wrapper wrapper--large wrapper--padding-for-page">
+        <section class="section section--overlap section--guide-page">           
+
             <h3>Sections</h3>
             {% for child in page.get_children.live.public %}
-                <p><a href="{% pageurl child %}" {% if page.first_guide_chapter.title == child.title %}style='color:red;'{% endif %}>{{ forloop.counter }}. {{ child.title }}</a></p>
+                <p><a href="{% pageurl child %}" {% if page.first_guide_chapter.title == child.title %}class="emergency-notice__highlight-section"{% endif %}>{{ forloop.counter }}. {{ child.title }}</a></p>
             {% endfor %}
 
             <h1>{{ page.first_guide_chapter.title }}</h1>
@@ -17,12 +18,21 @@
 
 
             {% if page.first_guide_chapter.next_guide_chapter %}
-                <a href="{% pageurl page.first_guide_chapter.next_guide_chapter %}"><b>Next: </b> {{ page.first_guide_chapter.next_guide_chapter.title }}</a>
+                    <div class="page-navigation--next">
+                        <div class="page-navigation__text">
+                         <b class="page-navigation__direction">Next: </b> 
+                         <a class="page-navigation__link" href="{% pageurl page.first_guide_chapter.next_guide_chapter %}">
+                            <p>{{ page.first_guide_chapter.next_guide_chapter.title }}<p>
+                        </div>
+                            {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="page-navigation__icon" aria_hide="true" %}
+                        </a>
+                    </div>
             {% endif %}
+            
+            
+            {% include "patterns/atoms/corners/corners.html" with size="page" %}
 
-            </div>
         </section>
-
     </div>
 {% endblock %}
 

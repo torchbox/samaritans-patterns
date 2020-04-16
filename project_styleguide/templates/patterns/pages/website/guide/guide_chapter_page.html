@@ -2,28 +2,48 @@
 {% load wagtailcore_tags wagtailimages_tags navigation_tags static %}
 
 {% block content %}
-    {% include "patterns/molecules/hero/hero.html" with hero_color="emerald" hero_title=page.get_parent.title pattern="none" hero_short=False %}
 
-    <div class="wrapper wrapper--flex">
-        <section class="section section--main">
-           
+    {% include "patterns/molecules/hero/hero.html" with hero_color="emerald" pattern="none" hero_short=False %}
+    <div class="wrapper wrapper--large wrapper--padding-for-page">
+        <section class="section section--overlap section--guide-page">           
             <h3>Sections</h3>
             {% for sibling in page.get_siblings.live.public %}
-                <p><a href="{% pageurl sibling %}" {% if sibling.path == page.path %}style='color:red;'{% endif %}>{{ forloop.counter }}. {{ sibling.title }}</a></p>
+                <p><a href="{% pageurl sibling %}" {% if sibling.path == page.path %}class="emergency-notice__highlight-section"{% endif %}>{{ forloop.counter }}. {{ sibling.title }}</a></p>
             {% endfor %}
 
             <h1>{{ page.title }}</h1>
 
             {% include_block page.body %}
 
+            <div class="page-navigation">
             {% if page.prev_guide_chapter %}
-                <a href="{% pageurl page.prev_guide_chapter %}"><b>Previous: </b>{{ page.prev_guide_chapter.title }}</a>
+                    <div class="page-navigation page-navigation--previous">
+                        <div class="page-navigation__text">
+                         <b class="page-navigation__direction">Previous: </b> 
+                            <a class="page-navigation__link" href="{% pageurl page.prev_guide_chapter %}">
+                                <p>{{ page.prev_guide_chapter.title }}<p>
+                        </div>
+                            {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="page-navigation__icon--previous" aria_hide="true" %}
+                            </a>
+                    </div>
             {% endif %}
 
             {% if page.next_guide_chapter %}
-                <a href="{% pageurl page.next_guide_chapter %}"><b>Next: </b>{{ page.next_guide_chapter.title }}</a>
+                    <div class="page-navigation--next">
+                        <div class="page-navigation__text">
+                         <b class="page-navigation__direction">Next: </b> 
+                         <a class="page-navigation__link" href="{% pageurl page.next_guide_chapter %}">
+                            <p>{{ page.next_guide_chapter.title }}<p>
+                        </div>
+                            {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="page-navigation__icon" aria_hide="true" %}
+                        </a>
+                    </div>
             {% endif %}
+            </div>
+            {% include "patterns/atoms/corners/corners.html" with size="page" %}
+
         </section>
+            
     </div>
 
 {% endblock %}

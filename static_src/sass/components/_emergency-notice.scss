@@ -1,0 +1,69 @@
+.emergency-notice {
+    @include corner($pumpkin, top, left, $width: 40%, $height: 40%, $selector: '&__corner');
+    @include corner($pumpkin, bottom, right, $selector: '&::after',  $width: 40%, $height: 40%);
+    
+    @include media-query(tablet-landscape) {
+         @include corner($pumpkin, top, left, $width: 15%, $height: 90%, $selector: '&__corner');
+         @include corner($pumpkin, bottom, right, $selector: '&::after',  $width: 15%, $height: 90%);
+    }
+    
+    max-width: $wrapper--medium;
+    z-index: z($z-elements, hero-inner);
+    margin-bottom: $gutter-large;
+
+    &__inner {
+        @include media-query(tablet-landscape) {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            padding: $gutter;
+            background-color: $white;
+        }
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: $gutter-large;
+        background-color: $white;
+
+        &--text {
+            display: flex;
+            flex-direction: column;
+            padding: $gutter-small;
+        }
+    }
+
+    &__icon {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: $gutter;
+        width: $icon-size--x-large;
+        height: $icon-size--x-large;
+        fill: $pumpkin;
+    }
+
+    &__body {
+        margin: $gutter-small;
+    }
+
+    &__connectors--extra {
+        @include connectors($pumpkin, bottom, right, medium);
+    }
+
+
+    &__connectors {
+        @include connectors($pumpkin, top, left, medium);
+    }
+
+
+
+    &__url {
+        margin: $gutter-small;
+    }
+
+    &__highlight-section {
+        color: $pumpkin;
+    }
+
+}

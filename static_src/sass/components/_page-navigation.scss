@@ -1,0 +1,40 @@
+.page-navigation {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+
+    @include media-query(tablet-portrait) {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    &--previous {
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: row-reverse;
+
+    }
+
+    &--next {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    &__link {
+        text-decoration: underline;
+    }
+
+    &__icon {
+        height: $icon-size--large;
+        width: $icon-size--large;
+        color: $lime;
+
+        &--previous {
+            transform: rotate(180deg);
+            height: $icon-size--large;
+            width: $icon-size--large;
+            color: $lime;
+        }
+    }
+}

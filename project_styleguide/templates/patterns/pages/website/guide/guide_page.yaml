@@ -12,7 +12,11 @@ context:
       title: First Section
       next_guide_chapter:
         title: Second Section
-          
+    show_emergency_notice: True
+    emergency_notice_body: If you think someone is in immediate danger the quickest way to get help is to call an ambulance on 999.
+    emergency_notice_url: '#'
+    emergency_notice_link_text: What to do if you think someone is in immediate danger or experiencing a mental health crisis. 
+
 tags:
   pageurl:
     child:

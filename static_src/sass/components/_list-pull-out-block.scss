@@ -1,0 +1,19 @@
+.list-pull-out-block {
+    margin: $gutter-large;
+    padding: $gutter-large;
+    margin-left: 0;
+    border: 1px solid $grey-light;
+
+
+    &__list-item {
+        display: flex;
+    }
+
+    &__icon {
+        fill: $amethyst;
+        height: $icon-size--medium;
+        width: $icon-size--medium;
+        margin-right: $gutter;
+    }
+
+}

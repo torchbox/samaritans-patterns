@@ -46,6 +46,39 @@
         {% endif %}
     </div>
 
+    {% if page.show_emergency_notice %}
+        <div class="wrapper wrapper--large wrapper--padding">
+            <div class="emergency-notice">
+                <span class="emergency-notice__corner"></span>
+                <div class="emergency-notice__inner">
+                    {% include "patterns/atoms/svg/icons/icon-triangle-warning.html" with classes="emergency-notice__icon" %}
+                        <div class="emergency-notice__inner--text">
+                            <h5 class="emergency-notice__body">{{ page.emergency_notice_body }}</h5>
+                            <a class="emergency-notice__url" href="{% if page.emergency_notice_url %}{{ page.emergency_notice_url }}{% else %}{{ page.emergency_notice_link_page.url }}{% endif %}">{{ page.emergency_notice_link_text }}</a>
+                        </div>
+                    <span class="emergency-notice__connectors"></span>
+                <span class="emergency-notice__connectors--extra"></span>
+                </div>
+            </div>
+        </div>
+    {% elif page.get_parent.specific.show_emergency_notice %}
+        {% with parent=page.get_parent.specific %}
+        <div class="wrapper wrapper--large wrapper--padding">
+            <div class="emergency-notice">
+                <span class="emergency-notice__corner"></span>
+                <div class="emergency-notice__inner">
+                    {% include "patterns/atoms/svg/icons/icon-triangle-warning.html" with classes="emergency-notice__icon" %}
+                        <div class="emergency-notice__inner--text">
+                            <h5 class="emergency-notice__body">{{ parent.emergency_notice_body }}</h5>
+                            <a class="emergency-notice__url" href="{% if parent.emergency_notice_url %}{{ parent.emergency_notice_url }}{% else %}{{ parent.emergency_notice_link_page.url }}{% endif %}">{{ parent.emergency_notice_link_text }}</a>
+                        </div>
+                    <span class="emergency-notice__connectors"></span>
+                <span class="emergency-notice__connectors--extra"></span>
+                </div>
+            </div>
+        </div>
+        {% endwith %}
+    {% endif %}
 
     <div class="hero__pattern-wrapper {% if pattern_bottom %}hero__pattern-wrapper--bottom{% endif %}">
         {% if pattern == "dots" %}
@@ -53,7 +86,7 @@
         {% elif pattern == "egg" %}
             {% include "patterns/atoms/svg/patterns/pattern-eggs.html" with classes="pattern" %}
         {% elif pattern == "none" %}
-            
+
         {% else %}
             {% include "patterns/atoms/svg/patterns/pattern-arrow.html" with classes="pattern" %}
         {% endif %}

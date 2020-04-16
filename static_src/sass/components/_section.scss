@@ -93,6 +93,10 @@
     &--information-page {
         @include page(top-right, bottom-right, $width: medium);
     }
+    
+    &--guide-page {
+        @include page(top-right, $width: medium);
+    }
 
     &--information-page-with-hero-image {
         @include page(top-left, bottom-right, $width: medium);

@@ -273,6 +273,21 @@
         }
     }
 
+    &--light {
+        @include card-corner($white);
+        @include corner($white, top, left, $width: 60%, $height: 50%);
+
+        #{$root} {
+            &__container {
+                background-color: $teal;
+            }
+            &__text,
+            &__title {
+                color: $white;
+            }
+        }
+    }
+
     &--key-info {
         @include card-corner($lime, 10px);
         font-size: 22px;

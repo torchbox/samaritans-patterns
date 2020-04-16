@@ -21,7 +21,7 @@
 
     &__connectors {
         @include media-query(mob-portrait) {
-            @include connectors($meadow, top, left);
+        @include connectors($meadow, top, left);
         }
     }
 

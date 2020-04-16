@@ -4,21 +4,31 @@
 {% block content %}
 
     <article class="wrapper--flex">
+    {% if page.show_hero_pattern %}
         {% include "patterns/molecules/hero/hero.html" with hero_color="emerald" pattern="egg" hero_short="true" %}
+    {% else %}
+        {% include "patterns/molecules/hero/hero.html" with hero_color="emerald" pattern="none" hero_short="true" %}
+    {% endif %}
         <div class="
             wrapper wrapper--large wrapper--padding-for-page
             {% if page.related_pages.all|length == 0 %}
                 wrapper--index-pattern
             {% endif %}
         ">
-            <section class="section section--overlap section--index-website">
+            <section class="section section--overlap {% if page.show_page_teasers %}section--index-website{% else %}section--main{% endif %}">
                 {% if page.introduction %}
                     <p class="intro">{{ page.introduction }}</p>
                 {% endif %}
                 {% if subpages %}
                     <div class="grid grid--no-margin grid--3col">
                         {% for card in subpages %}
-                            {% include "patterns/molecules/cards/card-with-image.html" %}
+                            {% if card == subpages.first and page.highlight_first_child_page %} 
+                                {% include "patterns/molecules/cards/card-without-image.html" with card_light=True %}
+                            {% elif not page.show_child_page_listing_images %}
+                                {% include "patterns/molecules/cards/card-without-image.html" %}
+                            {% else %}
+                                {% include "patterns/molecules/cards/card-with-image.html" %}
+                            {% endif %}
                         {% endfor %}
                     </div>
                 {% endif %}
@@ -27,7 +37,9 @@
                         {% include_block page.story_cta %}
                     </div>
                 {% endif %}
-                {% include "patterns/atoms/corners/corners.html" with size="page" %}
+                {% if page.show_page_teasers %}
+                    {% include "patterns/atoms/corners/corners.html" with size="page" %}
+                {% endif %}
             </section>
         </div>
         {% if page.related_pages.all|length > 0 %}

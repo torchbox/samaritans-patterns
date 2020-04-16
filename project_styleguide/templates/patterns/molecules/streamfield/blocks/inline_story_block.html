@@ -1,0 +1,17 @@
+{% load wagtailembeds_tags wagtailimages_tags %}
+<div>
+<div class="inline-story-block">
+    <h2>{{ value.title }}</h2>
+        {% if value.video %}
+        <div class="inline-story-block__embed">
+            {{ value.video }}
+            </div>
+        {% endif %}
+    <p class="inline-story-block__description">{{ value.description }}</p>
+    <div class="inline-story-block__profile">
+        {% image value.head_shot fill-60x60 class="inline-story-block__headshot"%}
+        <p class="inline-story-block__description"><b>{{ value.name }}, {{ value.name_description }}</b></p>
+    </div>
+    <span class="inline-story-block__connectors"></span>
+</div>
+</div>

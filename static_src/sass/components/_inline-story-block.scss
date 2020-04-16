@@ -1,0 +1,38 @@
+.inline-story-block {
+    $root: &;
+    
+    position: relative;
+    margin-top: $gutter-large;
+    margin-bottom: $gutter-large;
+    padding: $gutter-large;
+    background-color: $aubergine;
+    color: $off-white;
+
+
+    #{$root}__connectors {
+        @include connectors(white, bottom, right, page);
+    }
+    
+
+    &__profile {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding-top: $gutter-large;
+    }
+
+    &__description {
+        color: $grey-light;
+        margin: initial;
+    }
+
+    &__embed {
+        padding-bottom: $gutter;
+    }
+    
+    &__headshot {
+        border-radius: 50%;
+        padding-right: $gutter *0.25;
+    }
+    
+}
