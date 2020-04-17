@@ -171,7 +171,6 @@ $menu-breakpoint: 'tablet-landscape';
 
         @include media-query($menu-breakpoint) {
             display: block;
-            margin-top: $gutter;
         }
     }
 
