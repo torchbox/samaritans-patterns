@@ -18,32 +18,17 @@
             </ul>
         </li>
         <li class="nav__item nav__heading nav__heading--show-mobile" role="none">
-        {% if item.value.primary_section_index %}
-            {% with title_link=item.value.primary_section_index.title %}
+            {% with title_link=item.value.section_index.title %}
             <a class="nav__link" href="{% pageurl title_link.page %}">{% firstof title_link.title title_link.page.title %}</a>
             {% endwith %}
             <ul class="nav nav--section-index">
-                {% for link in item.value.primary_section_index.links %}
+                {% for link in item.value.section_index.links %}
                 <li class="nav__item nav__item--with-chevron" role="none">
                     {% include "patterns/atoms/svg/icons/icon-chevron.html" %}
                     {% include "patterns/molecules/navigation/includes/menu_item.html" with page=link.page title=link.title classes="nav__link nav__link--with-chevron" %}
                 </li>
                 {% endfor %}
             </ul>
-            {% endif %}
-            {% if item.value.secondary_section_index %}
-            {% with title_link=item.value.secondary_section_index.title %}
-            <a class="nav__link" href="{% pageurl title_link.page %}">{% firstof title_link.title title_link.page.title %}</a>
-            {% endwith %}
-            <ul class="nav nav--section-index">
-                {% for link in item.value.secondary_section_index.links %}
-                <li class="nav__item nav__item--with-chevron" role="none">
-                    {% include "patterns/atoms/svg/icons/icon-chevron.html" %}
-                    {% include "patterns/molecules/navigation/includes/menu_item.html" with page=link.page title=link.title classes="nav__link nav__link--with-chevron" %}
-                </li>
-                {% endfor %}
-            </ul>
-            {% endif %}
         </li>
         <li class="nav__item nav__item--secondary" role="none">
             <ul class="nav nav--extra-links">
