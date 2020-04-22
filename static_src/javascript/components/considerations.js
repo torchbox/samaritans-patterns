@@ -21,11 +21,14 @@ class Considerations {
 
     handleNextConsideration(button) {
 
+
         // complete current consideration
         const current = button.closest('.js-consideration');
         current.classList.add('is-complete');
+        const clickedButton = button.closest('.js-consideration-button');
+        clickedButton.classList.add('is-hidden');
 
-        const next = document.querySelector('.js-consideration.is-hidden');
+        const next = current.nextElementSibling;
         if (next) {
             // show next consideration
             next.classList.remove('is-hidden');

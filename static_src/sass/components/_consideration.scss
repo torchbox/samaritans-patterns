@@ -93,5 +93,9 @@
             right: 0;
             bottom: 0;
         }
+
+        &.is-hidden {
+            display: none;
+        }
     }
 }
