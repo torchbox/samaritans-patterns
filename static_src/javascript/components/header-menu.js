@@ -14,10 +14,12 @@ class HeaderMenu {
     }
 
     bindEventListeners() {
-        this.navLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            this.toggle();
-        });
+        if (this.navLink) {
+            this.navLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.toggle();
+            });
+        }
         if (this.overlay) {
             this.overlay.addEventListener('click', (e) => {
                 e.preventDefault();
