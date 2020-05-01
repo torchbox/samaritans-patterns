@@ -7,40 +7,78 @@
     <div class="wrapper wrapper--large wrapper--padding-for-page">
         <section class="section section--overlap section--guide-page">           
             <h3>Sections</h3>
-            {% for sibling in page.get_siblings.live.public %}
-                <p><a href="{% pageurl sibling %}" {% if sibling.path == page.path %}class="emergency-notice__highlight-section"{% endif %}>{{ forloop.counter }}. {{ sibling.title }}</a></p>
-            {% endfor %}
+            {% if request.is_preview %}
+                {% for sibling in page.get_siblings %}
+                    <p><a href="{% pageurl sibling %}" {% if sibling.path == page.path %}class="emergency-notice__highlight-section"{% endif %}>{{ forloop.counter }}. {{ sibling.title }}</a></p>
+                {% endfor %} 
+            {% else %}
+                {% for sibling in page.get_siblings.live.public %}
+                    <p><a href="{% pageurl sibling %}" {% if sibling.path == page.path %}class="emergency-notice__highlight-section"{% endif %}>{{ forloop.counter }}. {{ sibling.title }}</a></p>
+                {% endfor %}
+            {% endif %}
 
             <h1>{{ page.title }}</h1>
 
             {% include_block page.body %}
 
-            <div class="page-navigation">
-            {% if page.prev_guide_chapter %}
-                    <div class="page-navigation page-navigation--previous">
-                        <div class="page-navigation__text">
-                         <b class="page-navigation__direction">Previous: </b> 
-                            <a class="page-navigation__link" href="{% pageurl page.prev_guide_chapter %}">
-                                <p>{{ page.prev_guide_chapter.title }}<p>
-                        </div>
-                            {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="page-navigation__icon--previous" aria_hide="true" %}
-                            </a>
-                    </div>
-            {% endif %}
+            {% if request.is_preview %}
 
-            {% if page.next_guide_chapter %}
-                    <div class="page-navigation--next">
-                        <div class="page-navigation__text">
-                         <b class="page-navigation__direction">Next: </b> 
-                         <a class="page-navigation__link" href="{% pageurl page.next_guide_chapter %}">
-                            <p>{{ page.next_guide_chapter.title }}<p>
+                {% if page.get_prev_sibling %}
+                    <div class="page-navigation">
+                        <div class="page-navigation page-navigation--previous">
+                            <div class="page-navigation__text">
+                                <b class="page-navigation__direction">Previous: </b> 
+                                <a class="page-navigation__link" href="{% pageurl page.get_prev_sibling %}">
+                                <p>{{ page.get_prev_sibling.title }}<p>
                         </div>
-                            {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="page-navigation__icon" aria_hide="true" %}
+                        {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="page-navigation__icon--previous" aria_hide="true" %}
                         </a>
                     </div>
+                {% endif %}
+
+                {% if page.get_next_sibling %}
+                    <div class="page-navigation--next">
+                        <div class="page-navigation__text">
+                            <b class="page-navigation__direction">Next: </b> 
+                            <a class="page-navigation__link" href="{% pageurl page.get_next_sibling %}">
+                                <p>{{ page.get_next_sibling.title }}<p>
+                        </div>
+                        {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="page-navigation__icon" aria_hide="true" %}
+                        </a>
+                    </div>
+                {% endif %}
+
+            {% else %}
+
+                {% if page.prev_guide_chapter %}
+                    <div class="page-navigation">
+                        <div class="page-navigation page-navigation--previous">
+                            <div class="page-navigation__text">
+                                <b class="page-navigation__direction">Previous: </b> 
+                                <a class="page-navigation__link" href="{% pageurl page.prev_guide_chapter %}">
+                                <p>{{ page.prev_guide_chapter.title }}<p>
+                        </div>
+                        {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="page-navigation__icon--previous" aria_hide="true" %}
+                        </a>
+                    </div>
+                {% endif %}
+
+                {% if page.next_guide_chapter %}
+                    <div class="page-navigation--next">
+                        <div class="page-navigation__text">
+                            <b class="page-navigation__direction">Next: </b> 
+                            <a class="page-navigation__link" href="{% pageurl page.next_guide_chapter %}">
+                                <p>{{ page.next_guide_chapter.title }}<p>
+                        </div>
+                        {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="page-navigation__icon" aria_hide="true" %}
+                        </a>
+                    </div>
+                {% endif %}
             {% endif %}
-            </div>
+            
             {% include "patterns/atoms/corners/corners.html" with size="page" %}
+            
+            </div>
 
         </section>
             
