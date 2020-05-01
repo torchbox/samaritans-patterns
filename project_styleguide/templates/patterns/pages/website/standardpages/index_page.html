@@ -24,7 +24,7 @@
                         {% for card in subpages %}
                             {% if card == subpages.first and page.highlight_first_child_page %} 
                                 {% include "patterns/molecules/cards/card-without-image.html" with card_light=True %}
-                            {% elif not page.show_child_page_listing_images %}
+                            {% elif page.highlight_first_child_page %}
                                 {% include "patterns/molecules/cards/card-without-image.html" %}
                             {% else %}
                                 {% include "patterns/molecules/cards/card-with-image.html" %}
