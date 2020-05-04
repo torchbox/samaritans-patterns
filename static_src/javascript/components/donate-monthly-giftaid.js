@@ -10,7 +10,7 @@ function bindGiftAidCheckboxToHiddenFields() {
             gocardlessFormField.value = val;
         }
         if (braintreeFormField) {
-            gocardlessFormField.value = val;
+            braintreeFormField.value = val;
         }
     }
 

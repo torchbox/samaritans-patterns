@@ -9,7 +9,7 @@ function setupPaymentMonthly() {
     }
 
     var paymentForm = document.getElementById('donate__braintree-form'),
-        nonceInput = document.getElementById('id_payment_method_nonce'),
+        nonceInput = document.getElementById('id_braintree-payment_method_nonce'),
         token = paymentForm.getAttribute('data-token'),
         loadingErrorMsg = 'There was an error loading this payment option. Please reload the page or try again later.';
 
