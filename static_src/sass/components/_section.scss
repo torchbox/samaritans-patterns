@@ -192,7 +192,9 @@
         }
 
         input {
+            //sass-lint:disable no-important
             color: $black !important;
+            //sass-lint:enable no-important
         }
     }
 

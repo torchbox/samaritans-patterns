@@ -8,11 +8,11 @@ function toggleMobileNumberField(visible, mobileNumberField) {
 
 function initMobileNumberField(radioYes, radioNo, mobileNumberField) {
     toggleMobileNumberField(radioYes.checked, mobileNumberField);
-    radioYes.addEventListener('change', ev => {
+    radioYes.addEventListener('change', () => {
         toggleMobileNumberField(radioYes.checked, mobileNumberField);
     });
 
-    radioNo.addEventListener('change', ev => {
+    radioNo.addEventListener('change', () => {
         toggleMobileNumberField(radioYes.checked, mobileNumberField);
     });
 }

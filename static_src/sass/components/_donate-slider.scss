@@ -1,0 +1,67 @@
+//sass-lint:disable class-name-format
+.noUi-target {
+    background: transparent;
+    border: 0;
+}
+
+.noUi-pips-horizontal {
+    top: initial;
+    bottom: -1em;
+
+    @include media-query(mob-landscape) {
+        bottom: initial;
+        top: -3.25em;
+    }
+}
+
+.noUi-marker {
+    &.noUi-marker-horizontal {
+        &.noUi-marker-normal,
+        &.noUi-marker-large {
+            display: none;
+        }
+    }
+}
+
+.noUi-horizontal {
+    height: 10px;
+    margin-bottom: 30px;
+    margin-top: 64px;
+
+    .noUi-handle {
+        border-radius: 50%;
+        height: 30px;
+        width: 30px;
+        top: -11px;
+
+        &::before,
+        &::after {
+            display: none;
+        }
+    }
+}
+
+.noUi-base {
+    background-color: #bdbec0;
+    border-radius: 20px;
+    height: 10px;
+}
+
+.noUi-value {
+    color: #014556;
+    font-size: 90%;
+
+    &:first-child {
+        transform: translate(0, 50%);
+    }
+
+    &:last-child {
+        transform: translate(-100%, 50%);
+    }
+
+    &.noUi-value-horizontal {
+        &.active {
+            font-weight: bold;
+        }
+    }
+}

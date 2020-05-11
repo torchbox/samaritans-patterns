@@ -5,8 +5,7 @@ context:
     allow_monthly_donation: True
     allow_one_off_donation: True
     default_to_monthly: True
-    hero_heading: Every 6 seconds, someone contacts us
-    hero_summary: Whether we can be there for every person though, depends on you
+    hero_summary: Today, our volunteers will answer almost 13,000 calls for help. Your donation could help them answer tomorrow's calls
     call_to_donate: Help us continue our lifesaving work
     where_money_goes_heading: Where your money goes
     where_money_goes_description: For every one pound donated to Samaritans and its branches in the UK and Ireland, 82p goes on our services and just 18p is invested in raising the next one pound.
@@ -32,7 +31,7 @@ context:
     - value:
         listing_title: Chat to a Samaritan
         listing_summary: We can give you advice and information
-    donate_form_heading: Make a donation
+    donate_form_heading: Your donation will help us answer more calls for help
     suggested_one_off_donation: 5
     suggested_monthly_donation: 50
     donation_examples_heading: How your money can help us
@@ -103,7 +102,7 @@ tags:
       raw: |
         <div class="form-item form-item--decimal_field form-item--number_input">
         <label for="id_amount" class=" form-item__label required">
-        Amount <span class="form-item__required">*</span>
+        Change amount <span class="form-item__required">*</span>
         </label>
         <div class="form-item__wrapper">
             <input type="number" name="amount" value="5" min="0.01" step="0.01" required="" id="id_amount">
@@ -117,7 +116,7 @@ tags:
       raw: |
         <div class="form-item form-item--decimal_field form-item--number_input">
         <label for="id_amount" class=" form-item__label required">
-        Amount <span class="form-item__required">*</span>
+        Change amount <span class="form-item__required">*</span>
         </label>
         <div class="form-item__wrapper">
             <input type="number" name="amount" value="5" min="0.01" step="0.01" required="" id="id_amount">

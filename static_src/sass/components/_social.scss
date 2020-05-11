@@ -24,9 +24,11 @@
         }
     }
 
-    &__message b {
-        color: $emerald;
-        font-weight: $weight--bold;
+    &__message {
+        b {
+            color: $emerald;
+            font-weight: $weight--bold;
+        }
     }
 
     &__buttons {

@@ -27,6 +27,8 @@ import './components/smooth-scroll';
 import './components/branch-finder';
 import initiMobileNumberAutocomplete from './components/mobile-number-autocomplete';
 import initMobileNumberField from './components/mobile-number-field';
+import initDonationSliders from './components/donate-slider';
+
 
 document.addEventListener('DOMContentLoaded', function() {
     new CookieWarning();
@@ -113,6 +115,9 @@ document.addEventListener('DOMContentLoaded', function() {
     for (const considerations of document.querySelectorAll(Considerations.selector())) {
         new Considerations(considerations);
     }
+
+    // Initialise and configure donation amount sliders.
+    initDonationSliders();
 
     sendTagManagerEvents();
 });

@@ -39,10 +39,6 @@ function donateDetails() {
             toggleDonateAmountEditor();
         });
 
-        const displayOptions = {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-        };
         saveAmountButton.addEventListener('click', function(){
             var newAmount = parseFloat(editBox.querySelector('input').value).toFixed(2);
 

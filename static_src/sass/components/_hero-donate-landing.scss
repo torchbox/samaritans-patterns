@@ -57,7 +57,7 @@
         @include media-query(tablet-landscape) {
             @include font-size(xl);
             align-self: flex-end;
-            width: calc(50% - #{$gutter-medium});
+            width: calc(35% - #{$gutter-medium});
         }
     }
 

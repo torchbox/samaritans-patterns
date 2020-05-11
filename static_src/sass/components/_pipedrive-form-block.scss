@@ -1,6 +1,9 @@
-.pipedriveWebForms{
+//sass-lint:disable class-name-format
+//sass-lint:disable no-important
+.pipedriveWebForms {
     @include margin-streamfield-block;
+
     iframe {
-        max-width:100%!important;
+        max-width: 100% !important;
     }
 }

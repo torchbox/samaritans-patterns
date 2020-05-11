@@ -20,7 +20,7 @@
     }
 
     @include media-query(tablet-landscape) {
-        max-width: 533px;
+        max-width: 625px;
         margin-bottom: 0;
         margin-left: $gutter-xxl;
     }
@@ -44,6 +44,10 @@
         }
     }
 
+    &__content {
+        max-width: 425px;
+    }
+
     &__connectors {
         @include connectors($lime, top, left, card);
 
@@ -53,12 +57,12 @@
     }
 
     &__heading {
-        @include font-size(xxl);
-        margin-bottom: $gutter-medium;
+        @include font-size(xl);
+        margin-bottom: $gutter-small;
 
         @include media-query(tablet-landscape) {
-            @include font-size(xxxl);
-            line-height: 55px;
+            line-height: 44px;
+            font-size: 40px;
         }
     }
 
@@ -68,7 +72,7 @@
 
     &--donate-landing {
         @include media-query(tablet-landscape) {
-            width: calc(50% - #{$gutter-xxl + $gutter-medium});
+            width: calc(65% - #{$gutter-xxl + $gutter-medium}); //
         }
 
         #{$root}__inner {

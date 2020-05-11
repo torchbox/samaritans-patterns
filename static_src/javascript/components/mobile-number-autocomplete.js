@@ -7,7 +7,7 @@ function retypePhoneNumberIfItsMobile(value, mobileNumberField) {
     if (mobileNumberField.value) {
         return;
     }
-    const valueNoWhitespace = value.replace(/\s/g, "");
+    const valueNoWhitespace = value.replace(/\s/g, '');
     const isMobile =
         valueNoWhitespace.startsWith('+447') ||
         valueNoWhitespace.startsWith('+4407') ||

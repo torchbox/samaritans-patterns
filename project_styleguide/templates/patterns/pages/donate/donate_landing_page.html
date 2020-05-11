@@ -22,7 +22,11 @@
 
                     <h2 class="hero-widget__heading">{{ page.donate_form_heading }}</h2>
 
-                    {% if page.allow_monthly_donation and page.allow_one_off_donation %}
+                    <p class="hero-widget__summary">{{ page.hero_summary }}</p>
+
+                    <div class="hero-widget__content">
+
+                        {% if page.allow_monthly_donation and page.allow_one_off_donation %}
                         <div class="hero-widget__button-group button-group button-group--white">
                             <button
                                 class="button-group__button"
@@ -43,45 +47,47 @@
                                 </span>
                             </button>
                         </div>
-                    {% endif %}
+                        {% endif %}
 
-                    {% if page.allow_monthly_donation %}
+                        {% if page.allow_monthly_donation %}
                         <form method="get" action="{% url 'donate:personal_details' %}" id="donate_form--monthly" {% if page.default_to_single %}hidden{% endif %} class="js-donate-usage">
+                            <div id="donate_slider--monthly" class="donate-landing__slider" hidden=""></div>
                             {% render_form_field monthly_form.campaign_id %}
                             {% render_form_field monthly_form.frequency %}
                             <div class="donate-landing-hero__form-input donate-landing-hero__form-input--monthly">
                                 {% render_form_field monthly_form.amount %}
                             </div>
-                            <div class="donate-landing__usage is-hidden">
+                            <div class="donate-landing__usage">
                                 {% include "patterns/atoms/svg/colour-icons/icon-color-speechbubble-green.html" with aria_hide=True %}
                                 <p>Could fund <span class="js-donation-usage-slot"><b>1</b> call</span> for help every month</p>
                             </div>
                             {% include "patterns/atoms/buttons/button--button.html" with label=page.donate_button_text large=True classes="button--secondary donate-landing-hero__donate-button" %}
                             {% if monthly_form.amount.value == 5.00 %}
-                            <div class="donate-landing__mobile-cta">
-                                <a href="sms://70088;?&body=LISTEN5">Text LISTEN5 to 70088 to start donating £5 a month</a>
-                            </div>
+                                <div class="donate-landing__mobile-cta" id="donate-landing__mobile-cta">
+                                    <a href="sms://70088;?&body=LISTEN5">Text LISTEN5 to 70088 to start donating £5 a month</a>
+                                </div>
                             {% endif %}
                             {% include "patterns/molecules/payments/payment-icons--monthly.html" %}
                         </form>
-                    {% endif %}
+                        {% endif %}
 
-                    {% if page.allow_one_off_donation %}
+                        {% if page.allow_one_off_donation %}
                         <form method="get" action="{% url 'donate:personal_details' %}" id="donate_form--single" {% if page.default_to_monthly %}hidden{% endif %} class="js-donate-usage">
+                            <div id="donate_slider--one_off" class="donate-landing__slider" hidden=""></div>
                             {% render_form_field one_off_form.campaign_id %}
                             {% render_form_field one_off_form.frequency %}
                             <div class="donate-landing-hero__form-input">
                                 {% render_form_field one_off_form.amount %}
                             </div>
-                            <div class="donate-landing__usage is-hidden">
+                            <div class="donate-landing__usage">
                                 {% include "patterns/atoms/svg/colour-icons/icon-color-speechbubble-green.html" with aria_hide=True %}
                                 <p>Could fund <span class="js-donation-usage-slot"><b>1</b> call</span> for help</p>
                             </div>
                             {% include "patterns/atoms/buttons/button--button.html" with label=page.donate_button_text large=True classes="button--secondary donate-landing-hero__donate-button" %}
                             {% include "patterns/molecules/payments/payment-icons--single.html" %}
                         </form>
-                    {% endif %}
-
+                        {% endif %}
+                    </div> {# /.hero-widget__content #}
                 </div> {# /.hero-widget__inner #}
 
                 {% if page.is_default %}
@@ -91,11 +97,6 @@
                 </a>
                 {% endif %}
             </div> {# /.hero-widget #}
-
-            <div class="donate-landing-hero__text">
-                <h2 class="donate-landing-hero__text-heading heading-secondary">{{ page.hero_heading }}</h2>
-                <p>{{ page.hero_summary }}</p>
-            </div>
 
         </div>
 

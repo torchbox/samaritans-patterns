@@ -35,7 +35,7 @@
 
     &__examples {
         margin: $gutter-large 0 $gutter-x-large;
-    }  
+    }
 
     &__mobile-cta {
         @include link;
@@ -199,6 +199,13 @@
             @include media-query(tablet-landscape) {
                 margin: 0 0 0 $gutter;
             }
+        }
+    }
+
+    &__slider {
+
+        &.is-hidden {
+            display: none;
         }
     }
 
