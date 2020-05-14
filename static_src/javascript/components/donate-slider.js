@@ -29,6 +29,7 @@ class DonateAmountSlider {
                     to: (value) => `£${value}`,
                 },
             },
+            callCounter: this.config.callCounter,
         });
     }
 
@@ -36,20 +37,18 @@ class DonateAmountSlider {
         const mobileCTA = document.getElementById('donate-landing__mobile-cta');
         const donateSlider = this.node;
         const pipValues = this.config.pipValues;
+        const amount = this.config.callCounter;
 
         // There are two #id_amount's in the DOM. Selecting by the name is more reliable
-        const amounts = document.querySelectorAll('[name="amount"]');
         const pips = donateSlider.querySelectorAll('.noUi-value');
         donateSlider.noUiSlider.on('update', function (values, handle) {
             // Update the input value when the slider is updated
             const sliderAmount = Number(values[handle]);
-            for (let i = 0; i < amounts.length; i++) {
-                const node = amounts[i];
-                node.value = sliderAmount;
+            const node = amount;
+            node.value = sliderAmount;
 
-                // Trigger input event to update donation usage counters
-                node.dispatchEvent(new Event('input'));
-            }
+            // Trigger input event to update donation usage counters
+            node.dispatchEvent(new Event('input'));
             for (let i = 0; i < pips.length; i++) {
                 const node = pips[i];
                 node.classList.remove('active');
@@ -66,24 +65,23 @@ class DonateAmountSlider {
             }
         });
 
-        for (let i = 0; i < amounts.length; i++) {
-            const node = amounts[i];
-            node.addEventListener('keyup', function (e) {
-                const num = Number(e.target.value);
-                if (pipValues.includes(num)) {
-                    for (let i = 0; i < pips.length; i++) {
-                        const node = pips[i];
-                        node.classList.remove('active');
-                    }
-                    donateSlider
-                        .querySelector(`.noUi-value[data-value='${num}']`)
-                        .classList.add('active');
-                    donateSlider.noUiSlider.updateOptions({
-                        start: [num],
-                    });
+        const node = amount;
+
+        node.addEventListener('keyup', function (e) {
+            const num = Number(e.target.value);
+            if (pipValues.includes(num)) {
+                for (let i = 0; i < pips.length; i++) {
+                    const node = pips[i];
+                    node.classList.remove('active');
                 }
-            });
-        }
+                donateSlider
+                    .querySelector(`.noUi-value[data-value='${num}']`)
+                    .classList.add('active');
+                donateSlider.noUiSlider.updateOptions({
+                    start: [num],
+                });
+            }
+        });
         // Delete the uimarkers from the DOM in the Donate slider only
         const ticks = donateSlider.querySelectorAll(
             '.noUi-marker.noUi-marker-horizontal.noUi-marker-normal, .noUi-marker.noUi-marker-horizontal.noUi-marker-large'
@@ -111,7 +109,9 @@ function initDonationSliders() {
             '80%': [50, 25],
             'max': [75],
         },
+        callCounter: document.querySelectorAll('[name="amount"]')[1],
     });
+
     // Monthly recurring donations slider
     new DonateAmountSlider(document.getElementById('donate_slider--monthly'), {
         pipValues: [5, 10, 15, 20],
@@ -123,6 +123,7 @@ function initDonationSliders() {
             '67%': [15, 5],
             'max': [20],
         },
+        callCounter: document.querySelectorAll('[name="amount"]')[0],
     });
 }
 
