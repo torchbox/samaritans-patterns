@@ -39,3 +39,9 @@
         background-color: darken($hot-pink, 5%);
     }
 }
+
+.mailchimp-form {
+    .indicates-required {
+        display: none;
+    }
+}

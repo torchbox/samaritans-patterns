@@ -78,6 +78,19 @@
     {% endfor %}
 </section>
 
-{% include "patterns/molecules/related-pages/related-pages--small.html" with related_pages=page.related_pages.all %}
+    {% include "patterns/molecules/related-pages/related-pages--small.html" with related_pages=page.related_pages.all %}
+
+    {% if page.email_subscription_form %}
+        <div class="wrapper">
+           <div class="wrapper wrapper--small">
+                <div class="section section--main section--no-hero mailchimp-form">
+                    {% if page.email_subscription_heading %}
+                        <h2 class="heading-secondary">{{ page.email_subscription_heading }}</h2>
+                    {% endif %}
+                    {{ page.email_subscription_form.embed_code|safe }}
+                </div>
+            </div>
+        </div>
+    {% endif %}
 
 {% endblock %}
