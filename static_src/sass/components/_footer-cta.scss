@@ -17,6 +17,11 @@
             background-color: $plum;
         }
 
+        #{$root}--additional & {
+            color: $ink;
+            background-color: $meadow;
+        }
+
     }
 
     &__connectors {
@@ -49,6 +54,10 @@
         line-height: 1;
         margin: 0;
         color: $white;
+
+        #{$root}--additional & {
+            color: $ink;
+        }
 
         #{$root}--phone & {
             font-size: 42px;
