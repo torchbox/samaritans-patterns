@@ -55,6 +55,19 @@
             </ul>
         </li>
     </ul>
+
+    {% if item.value.icon_links and item.value.icon_links.0 %}
+        <div class="nav__bottom-section">
+            <ul class="grid grid--2col grid--subnav-bottom">
+                {% for child in item.value.icon_links %}
+                    <li class="nav__item nav__heading nav__heading--show-mobile" role="none">
+                        {% include "patterns/molecules/navigation/includes/menu_item--icon.html" with page=child.page title=child.title summary=child.summary icon=child.icon classes="nav__link nav__link--large-icon" %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
     <span class="nav__connectors"></span>
 </div>
 </div>
