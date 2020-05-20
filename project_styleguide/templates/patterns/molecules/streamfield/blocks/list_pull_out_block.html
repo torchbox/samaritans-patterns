@@ -2,7 +2,10 @@
     <h3>{{ value.title }}</h3>
         <ul>
             {% for item in value.list_items %}
-                <li class="list-pull-out-block__list-item">{% include "patterns/atoms/svg/icons/icon-exclamation-octagon.html" with classes="list-pull-out-block__icon" %}{{ item }}</li>
+                <li class="list-pull-out-block__list-item">
+                    {% include "patterns/atoms/svg/icons/icon-exclamation-octagon.html" with classes="list-pull-out-block__icon" %}
+                    <span class="list-pull-out-block__text">{{ item }}</span>
+                </li>
             {% endfor %}
         </ul>
     <a class="list-pull-out-block__link" href="{% if value.link_page %}{{ value.link_page.url }}{% else %}{{ value.link_url }}{% endif %}">{% if value.link_title %}{{ value.link_title }}{% endif %}</a>

@@ -7,6 +7,7 @@
 
     &__list-item {
         display: flex;
+        margin-bottom: $gutter / 2;
     }
 
     &__icon {
@@ -14,6 +15,11 @@
         height: $icon-size--medium;
         width: $icon-size--medium;
         margin-right: $gutter;
+        margin-top: $gutter / 4;
     }
 
+    // ensure the icon doesn't get squashed
+    &__text {
+        flex: 1;
+    }
 }
