@@ -1,0 +1,16 @@
+.contents {
+    &__title {
+        margin-bottom: 10px;
+    }
+
+    &__item {
+        margin-bottom: 5px;
+    }
+
+    &__link {
+        &--active {
+            color: $ink;
+            font-weight: $weight--bold;
+        }
+    }
+}

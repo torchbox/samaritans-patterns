@@ -1,6 +1,14 @@
 .rich-text {
     max-width: $wrapper--small;
 
+    .template-guide-page,
+    .template-guide-chapter-page & {
+        h3,
+        h4 {
+            margin-bottom: 5px;
+        }
+    }
+
     ul,
     ol {
         list-style: none;

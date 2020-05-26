@@ -5,53 +5,60 @@
 
     {% include "patterns/molecules/hero/hero.html" with hero_color="emerald" pattern="none" hero_short=False %}
     <div class="wrapper wrapper--large wrapper--padding-for-page">
-        <section class="section section--overlap section--guide-page">           
+        <section class="section section--overlap section--guide-page">
 
-            <h3>Sections</h3>
             {% if request.is_preview %}
-                {% for child in page.get_children %}
-                    <p><a href="{% pageurl child %}" {% if page.first_guide_chapter.title == child.title %}class="emergency-notice__highlight-section"{% endif %}>{{ forloop.counter }}. {{ child.title }}</a></p>
-                {% endfor %}
+                <div class="contents streamfield">
+                    <h2 class="contents__title">Sections</h2>
+                    {% for child in page.get_children %}
+                        <p class="contents__item"><a href="{% pageurl child %}" {% if page.first_guide_chapter.title == child.title %}class="contents__link contents__link--active"{% endif %}>{{ forloop.counter }}. {{ child.title }}</a></p>
+                    {% endfor %}
+                </div>
 
-                <h1>{{ page.get_children.first.title }}</h1>
+                <h3 class="heading-secondary heading-secondary--large">1. {{ page.get_children.first.title }}</h3>
 
                 {% include_block page.get_children.specific.first.body %}
 
-
                 {% if page.get_children.first %}
-                        <div class="page-navigation--next">
-                            <div class="page-navigation__text">
-                            <b class="page-navigation__direction">Next: </b> 
-                            <a class="page-navigation__link" href="{% pageurl page.get_children.first %}">
-                                <p>{{ page.get_children.first.title }}<p>
+                    <div class="page-navigation">
+                        <div class="page-navigation__item page-navigation__item--next">
+                            <div>
+                                <b class="page-navigation__direction">Next: </b>
+                                <a class="page-navigation__link" href="{% pageurl page.get_children.first %}">
+                                    <p class="page-navigation__text">{{ page.get_children.first.title }}<p>
+                                </a>
                             </div>
-                                {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="page-navigation__icon" aria_hide="true" %}
-                            </a>
+                            {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="page-navigation__icon page-navigation__icon--next" aria_hide="true" %}
                         </div>
+                    </div>
                 {% endif %}
             {% else %}
-                {% for child in page.get_children.live.public %}
-                    <p><a href="{% pageurl child %}" {% if page.first_guide_chapter.title == child.title %}class="emergency-notice__highlight-section"{% endif %}>{{ forloop.counter }}. {{ child.title }}</a></p>
-                {% endfor %}
+                <div class="contents streamfield">
+                    <h2 class="contents__title">Sections</h2>
+                    {% for child in page.get_children.live.public %}
+                        <p class="contents__title"><a href="{% pageurl child %}" {% if page.first_guide_chapter.title == child.title %}class="contents__link contents__link--active"{% endif %}>{{ forloop.counter }}. {{ child.title }}</a></p>
+                    {% endfor %}
+                </div>
 
-                <h1>{{ page.first_guide_chapter.title }}</h1>
+                <h3 class="heading-secondary heading-secondary--large">1. {{ page.first_guide_chapter.title }}</h3>
 
                 {% include_block page.first_guide_chapter.body %}
 
-
                 {% if page.first_guide_chapter.next_guide_chapter %}
-                        <div class="page-navigation--next">
-                            <div class="page-navigation__text">
-                            <b class="page-navigation__direction">Next: </b> 
-                            <a class="page-navigation__link" href="{% pageurl page.first_guide_chapter.next_guide_chapter %}">
-                                <p>{{ page.first_guide_chapter.next_guide_chapter.title }}<p>
+                    <div class="page-navigation">
+                        <div class="page-navigation__item page-navigation__item--next">
+                            <div>
+                                <b class="page-navigation__direction">Next: </b>
+                                <a class="page-navigation__link" href="{% pageurl page.first_guide_chapter.next_guide_chapter %}">
+                                    <p class="page-navigation__text">{{ page.first_guide_chapter.next_guide_chapter.title }}<p>
+                                </a>
                             </div>
-                                {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="page-navigation__icon" aria_hide="true" %}
-                            </a>
+                            {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="page-navigation__icon page-navigation__icon--next" aria_hide="true" %}
                         </div>
+                    </div>
                 {% endif %}
             {% endif %}
-            
+
             {% include "patterns/atoms/corners/corners.html" with size="page" %}
 
         </section>

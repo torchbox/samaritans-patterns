@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column-reverse;
     justify-content: center;
+    margin-top: 60px;
 
     @include media-query(tablet-portrait) {
         display: flex;
@@ -10,16 +11,23 @@
         width: 100%;
     }
 
-    &--previous {
+    &__item {
         display: flex;
         justify-content: flex-end;
-        flex-direction: row-reverse;
 
-    }
+        @include media-query(tablet-portrait) {
+            width: 50%;
+        }
 
-    &--next {
-        display: flex;
-        justify-content: flex-end;
+        &--previous {
+            flex-direction: row-reverse;
+        }
+
+        &--next {
+            &:only-child {
+                margin-left: auto;
+            }
+        }
     }
 
     &__link {
@@ -30,12 +38,20 @@
         height: $icon-size--large;
         width: $icon-size--large;
         color: $lime;
+        margin-left: 10px;
+        margin-top: 10px;
 
         &--previous {
             transform: rotate(180deg);
             height: $icon-size--large;
             width: $icon-size--large;
             color: $lime;
+            margin-right: 10px;
+            margin-left: 0;
         }
+    }
+
+    &__text {
+        margin-bottom: 0;
     }
 }
