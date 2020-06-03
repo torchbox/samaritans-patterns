@@ -10,9 +10,9 @@
 {% block content_inner %}
 
 {% if gift_aid_allowed %}
-    <h1 class="wrapper--small-width">{% blocktrans with amount=payment_amount|floatformat:"2"|intcomma gift_aid_amount=gift_aid_amount|floatformat:"2"|intcomma %}Boost your monthly donation of £{{ amount }} to <span class="donate__gift-aid-figure">£{{ gift_aid_amount }}</span> at no extra cost to you with Gift Aid{% endblocktrans %}</h1>
+    <h1 class="wrapper--small-width">{% blocktrans with amount=payment_amount|floatformat:"2"|intcomma gift_aid_amount=gift_aid_amount|floatformat:"2"|intcomma %}Boost your monthly donation of £{{ amount }} to <span class="donate__gift-aid-figure">£{{ gift_aid_amount }}</span> at no extra cost to you with Gift Aid {% endblocktrans %}</h1>
 {% else %}
-    <h1 class="wrapper--small-width">{% blocktrans with amount=payment_amount|floatformat:"2"|intcomma %}You're making a monthly donation of £{{ amount }}{% endblocktrans %}</h1>
+    <h1 class="wrapper--small-width">{% blocktrans with amount=payment_amount|floatformat:"2"|intcomma %}You're making a monthly donation of £{{ amount }} {% endblocktrans %}</h1>
 {% endif %}
 
 
@@ -27,8 +27,6 @@
 {% endif %}
 
 {% if gift_aid_allowed %}
-    <h2 class="wrapper--small-width">{% blocktrans with amount=payment_amount|floatformat:"-2" gift_aid_amount=gift_aid_amount|floatformat:"-2" %}Boost your monthly donation of £{{ amount }} by £{{ gift_aid_amount }} at no extra cost with Gift Aid{% endblocktrans %}</h2>
-
     <p class="wrapper--small-width">{% trans "If you are a UK taxpayer, by ticking the box below the government will increase your donation by 25% and it won't cost you a penny." %}</p>
 
     {% include "patterns/pages/donate/partials/gift_aid_block.html" %}
