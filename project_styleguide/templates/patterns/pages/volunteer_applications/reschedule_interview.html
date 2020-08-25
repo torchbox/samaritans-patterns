@@ -1,0 +1,77 @@
+{% extends "patterns/pages/volunteer_applications/layouts/volunteer-full-width/volunteer_full_width.html" %}
+{% load static form_tags i18n %}
+
+{% block title %}{% trans 'Reschedule interview' %}{% endblock %}
+
+{% block content %}
+<div class="heading heading--overlapped">
+    <div class="heading__inner">
+        <h1>{% trans 'Reschedule interview' %}{% if first_name %}, {{ first_name }}{% endif %}</h1>
+    </div>
+</div>
+<div class="content">
+    <div class="content__inner content__inner--overlap-top">
+        {% if errors %}
+            <div class="form__errors">
+                {% for error in errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+            <p>
+                {% blocktrans %}
+                    Do you want to reschedule your interview? This will cancel your current interview and let you select a new interview time and date.
+                {% endblocktrans %}
+            </p>
+            <p>
+               {% blocktrans with location=branch.branch_name interview_date=application.booked_interview.datetime|date:"M d, Y" %}
+                   You&apos;re current interview is booked in <b>{{ location }}</b> on <b>{{ interview_date }}</b>.</p>
+               {% endblocktrans %}
+            </p>
+        <form method="post" data-reschedule-training-form>
+            {% csrf_token %}
+            <button class="form__submit button" type="submit" data-reschedule-training>
+                <div class="button__shadow"></div>
+                <div class="button__inner">
+                    Reschedule
+                </div>
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- Reschedule interview modal -->
+<div class="modal" id="reschedule-interview-modal" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true">
+            <button class="modal__close" aria-label="Close modal" data-micromodal-close>
+                {% include "patterns/atoms/svg/icons/icon-close.html" with classes="modal__close-icon" %}
+            </button>
+            <div class="modal__content">
+                <h2 class="modal__title">Before you change your interview&hellip;</h2>
+
+                {% include 'patterns/molecules/alert/alert.html' with alert="We&apos;ll need to cancel your existing interview in order to allow someone else to use it." %}
+
+                <p>
+                    {% blocktrans %}
+                     We&apos;ll send you updated confirmation of your new inteview and other helpful information to your email address after you select a new date.
+                    {% endblocktrans %}
+                </p>
+                <p>
+                    {% blocktrans %}
+                        As soon as you click the reschedule button your existing interview will be cancelled.
+                    {% endblocktrans %}
+                </p>
+                <div data-form-slot aria-live="polite"></div>
+                <p>
+                    {% blocktrans %}
+                        If you didn&apos;t mean to reschedule your interview, don&apos;t worry.
+                        Just close this window.
+                    {% endblocktrans %}
+                </p>
+                <div class="modal__connectors" aria-hidden="true"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

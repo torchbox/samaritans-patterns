@@ -1,0 +1,86 @@
+{% extends "patterns/pages/volunteer_applications/layouts/volunteer-full-width/volunteer_full_width.html" %}
+{% load wagtailcore_tags static form_tags i18n loqate_tags %}
+
+{% block title %}
+    {% include "patterns/atoms/volunteer-page-title/page-title.html" %}
+{% endblock %}
+
+
+{% block extra_js %}
+{% loqate_script %}
+{% endblock %}
+
+{% block content %}
+    <div class="heading heading--overlapped">
+        <div class="heading__inner">
+            <h1>{% include "patterns/atoms/volunteer-page-title/page-title.html" %}</h1>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="content__inner content__inner--overlap-top">
+            {% include "patterns/molecules/volunteer_applications/progress-indicator/progress-indicator.html" with current_step=1  %}
+            <form method="post">
+                <div class="form__container">
+                    {% csrf_token %}
+
+                    {% if form.errors %}
+                        <div class="form__errors">
+                            {% blocktrans %}
+                            There were some errors with your form. Please amend the
+                            fields highlighted below.
+                            {% endblocktrans %}
+                        </div>
+                    {% endif %}
+
+                    <h2>{% trans 'Full name' %}</h2>
+                    {% render_form_field form.first_name %}
+                    {% render_form_field form.last_name %}
+
+                    <h2>{% trans 'Contact details' %}</h2>
+                    {% render_form_field form.mobile_number %}
+                    {% render_form_field form.email_address %}
+
+                    <h2>{% trans 'Your address' %}</h2>
+                    {% render_form_field form.address_line_1 %}
+                    {% render_form_field form.address_line_2 %}
+                    {% render_form_field form.town %}
+                    {% render_form_field form.postcode %}
+                    {% render_form_field form.country %}
+
+                    <div class="form__section form__section--full-width">
+                        {% include "patterns/molecules/volunteer_applications/gdpr/gdpr_marketing_form_fields.html" %}
+                    </div>
+
+                    <h2>{% trans 'How we&apos;ll use your details' %}</h2>
+                    <p>
+                        {% blocktrans %}
+                        We&apos;ll use your details to keep in touch about your
+                        application, and to manage your involvement with us. We may
+                        need to use external organisations to help do this but
+                        we&apos;ll never let any of them use your details for their
+                        benefit.
+                        {% endblocktrans %}
+                    </p>
+                    <p>
+                        {% slugurl 'privacy-statement' as privacy_statement_url %}
+                        {% blocktrans with privacy_statement_url=privacy_statement_url %}
+                        We have branches across the United Kingdom, the Republic of
+                        Ireland, the Channel Islands and the Isle of Man, some of which
+                        are regsitered as independent charities. To find out more about
+                        how we handle and protect your personal information, see our
+                        <a
+                            target="__blank"
+                            rel="noopener noreferrer"
+                            href="{{ privacy_statement_url }}"
+                        >
+                            privacy statement
+                        </a>.{% endblocktrans %}
+                    </p>
+
+                    {% include "patterns/atoms/buttons/button--button.html" with classes='form__submit button' label="Submit" %}
+                </div>
+            </form>
+        </div>
+     </div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "patterns/pages/volunteer_applications/layouts/volunteer-thank-you/volunteer_thank_you.html" %}
+{% load form_tags i18n %}
+
+{% block title %}{% trans 'Thank you' %}{% endblock %}
+
+{% block content %}
+    <div class="heading heading--overlapped">
+        <div class="heading__inner">
+            <div class="thank-you__heading-wrapper">
+                <h1 class="thank-you__heading-text">{% trans 'Thank you' %}{% if first_name %}, {{ first_name }}{% endif %}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="content__inner content__inner--overlap-top">
+            <div class="thank-you__content">
+                <p>
+                    {% blocktrans with location_name=interview.location_name time=interview.datetime|date:"TIME_FORMAT" date=interview.datetime|date:"D j M Y" %}
+                    You&apos;ve booked a selection interview in <strong>{{ location_name }} at {{ time }} on {{ date }}</strong>.
+                    {% endblocktrans %}
+                </p>
+
+                {% if interview.location_name %}
+                    <h2 class="thank-you__content-heading">{% trans 'Address' %}</h2>
+                    <p>
+                        {{ interview.location_name }}, {{ interview.location_street }}, {{ interview.location_city}}, {{ interview.location_post_code }}
+                    </p>
+                {% endif %}
+
+                <h2 class="thank-you__content-heading">{% trans 'What happens next?' %}</h2>
+
+                <p>
+                    {% blocktrans %}
+                        A confirmation email will be sent straight to your email address.
+                    {% endblocktrans %}
+                </p>
+                {% blocktrans asvar info_text %}
+                To protect others we ask that you avoid publicly sharing your
+                application and any information about Samaritan services.
+                {% endblocktrans %}
+                {% include 'patterns/molecules/alert/alert.html' with alert=info_text %}
+
+                {% include 'patterns/molecules/volunteer_applications/next-steps-checklist/next-steps-checklist.html' with interview=True %}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

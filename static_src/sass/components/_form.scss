@@ -38,6 +38,13 @@
         color: $white;
         background-color: darken($hot-pink, 5%);
     }
+
+    &__fieldset {
+        border: 0;
+        padding: 0;
+        margin: 0 0 $gutter;
+        min-width: 0;
+    }
 }
 
 .mailchimp-form {

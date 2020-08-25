@@ -91,4 +91,37 @@
             transition: fill $transition;
         }
     }
+
+    .template-volunteer & {
+        $root: &;
+        display: inline-flex;
+        align-items: center;
+        margin-bottom: $gutter;
+
+        color: $ink;
+        fill: $lime;
+
+        &--white {
+            color: $white;
+            fill: $white;
+        }
+
+        &__icon {
+            width: 14px;
+            height: 14px;
+            transform: rotate(180deg);
+            margin-right: 5px;
+            transition: transform $transition;
+
+            #{$root}:hover & {
+                transform: rotate(180deg) translateX(30%);
+            }
+        }
+
+        &__text {
+            @include font-size(s);
+            margin: 0;
+            line-height: 1;
+        }
+    }
 }

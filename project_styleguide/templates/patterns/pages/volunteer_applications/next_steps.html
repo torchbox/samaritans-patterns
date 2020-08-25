@@ -1,0 +1,149 @@
+{% extends "patterns/pages/volunteer_applications/layouts/volunteer-full-width/volunteer_full_width.html" %}
+{% load humanize form_tags i18n %}
+
+{% block title %}{% trans 'Next steps' %}{% endblock %}
+
+{% block content %}
+    <div class="heading heading--overlapped">
+        <div class="heading__inner">
+            <h1>{% trans 'Next steps' %}</h1>
+        </div>
+    </div>
+    <div class="content">
+        <div class="content__inner content__inner--overlap-top content__inner--overlap-bottom">
+            <div>
+                <p class="lead">
+                    {% blocktrans %}
+                    You&apos;re well on your way to becoming a Samaritan. There are just
+                    a few things to do before you start.
+                    {% endblocktrans %}
+                </p>
+
+                <div class="check-block">
+                    <h2>{% trans 'Emergency contact' %}</h2>
+                    {% if application.emergency_contact_provided %}
+                        {% include "patterns/molecules/check-block-complete/check-block-complete.html" %}
+                        <p>
+                            {% blocktrans %}
+                            Great! We&apos;ve got what we need to make sure you&apos;re safe.
+                            {% endblocktrans %}
+                        </p>
+                    {% else %}
+                        <p>
+                            {% blocktrans %}
+                            Please provide contact details of someone we can contact in
+                            the event of an emergency.
+                            {% endblocktrans %}
+                        </p>
+                        {% include "patterns/atoms/buttons/button.html" with href=emergency_contact_url label="Provide emergency contact details" classes="check-block__button" %}
+                    {% endif %}
+                </div>
+
+                {% if application.criminal_record_check_enabled %}
+                    <div class="check-block">
+                        <h2 class="check-block__heading">{% trans 'Criminal record check' %}</h2>
+                        {% if not application.criminal_record_check_required %}
+                            <p>
+                                {% blocktrans %}
+                                    In order to safeguard our volunteers and callers this role
+                                    requires a criminal record check. You will be given
+                                    further information about this process separately.
+                                {% endblocktrans %}
+                            </p>
+                            <p>
+                                {% blocktrans %}
+                                    If you have a criminal record it won&apos;t
+                                    necessarily stop you from becoming a volunteer.
+                                    We&apos;ll consider each case individually.
+                                {% endblocktrans %}
+                            </p>
+                        {% elif application.criminal_record_check_complete %}
+                            {% include "patterns/molecules/check-block-complete/check-block-complete.html" %}
+                            <p>
+                                {% blocktrans %}
+                                You&apos;ve begun your background check. You will receive an email
+                                with further steps.
+                                {% endblocktrans %}
+                            </p>
+                        {% else %}
+                            <p>
+                                {% blocktrans %}
+                                    In order to safeguard our volunteers and callers this
+                                    role requires a criminal record check. To start the
+                                    process, we need a few pieces of information from you
+                                    including your date of birth
+                                {% endblocktrans %}
+                            </p>
+                            <p>
+                                {% blocktrans %}
+                                If you have a criminal record it won&apos;t necessarily
+                                stop you from becoming a volunteer. We&apos;ll consider
+                                each case individually.
+                                {% endblocktrans %}
+                            </p>
+
+                            {% include "patterns/atoms/buttons/button.html" with href=background_check_url label="Provide information for criminal record check" classes="check-block__button" %}
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                <div class="check-block">
+                    <h2>{% trans 'Provide referee details' %}</h2>
+                    {% if application.number_referees_missing %}
+                        <p>
+                            {% blocktrans count counter=application.number_referees_missing with number=application.number_referees_missing|apnumber %}
+                                Please choose {{ number }} person you would like to
+                                provide a reference for you. They should:
+                            {% plural %}
+                                Please choose {{ number }} people you would like to
+                                provide a reference for you. They should:
+                            {% endblocktrans %}
+                        </p>
+                        <ul class="list list--bullets">
+                            <li>{% trans 'Have known you for at least two years' %}</li>
+                            <li>{% trans 'Not be a family member' %}</li>
+                        </ul>
+                        <p>{% trans 'We suggest you contact your referees before submitting their details.' %}</p>
+                        {% include "patterns/atoms/buttons/button.html" with href=references_url label="Submit reference information" classes="check-block__button" %}
+                    {% else %}
+                        {% include "patterns/molecules/check-block-complete/check-block-complete.html" %}
+                        <p>
+                            {% blocktrans %}
+                            Thanks for providing referee details. We&apos;ll let you know when
+                            we&apos;ve completed these checks.
+                            {% endblocktrans %}
+                        </p>
+                    {% endif %}
+                </div>
+
+                {% if application.training_course_selection_enabled %}
+                    <div class="check-block">
+                        <h2>{% trans 'Book your training course' %}</h2>
+                        {% if application.training_course_selected %}
+                            {% include "patterns/molecules/check-block-complete/check-block-complete.html" %}
+                            <p>
+                                {% blocktrans %}
+                                You&apos;ve signed up for a training course in XXX at XXX.
+                                {% endblocktrans %}
+                            </p>
+                            {% include "patterns/atoms/buttons/button.html" with label="See your training dates" classes="check-block__button" %}
+                        {% else %}
+                            <p>
+                                {% blocktrans %}
+                                Your training will provide you with the knowledge, skills
+                                and support to become a listening volunteer. Our courses
+                                are five group sessions with online modules in between.
+                                {% endblocktrans %}
+                            </p>
+                            {% include "patterns/atoms/buttons/button.html" with href=training_courses_url label="View dates and locations" classes="check-block__button" %}
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {% include "patterns/molecules/volunteer_applications/dashboard-footer/dashboard-footer.html" %}
+{% endblock %}

@@ -1,0 +1,24 @@
+.callout-text-box {
+    background-color: $teal;
+    padding: $gutter * 1.5;
+    max-width: $wrapper--small;
+
+    &__heading {
+        @include font-size(m);
+        color: $white;
+    }
+
+    &__text {
+        color: $white;
+    }
+
+    &__link {
+        @include font-size(l);
+        color: $white;
+        text-decoration: underline;
+
+        &:hover {
+            color: $white;
+        }
+    }
+}

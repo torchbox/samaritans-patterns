@@ -1,0 +1,21 @@
+{% extends "patterns/pages/volunteer_applications/layouts/volunteer-full-width/volunteer_full_width.html" %}
+{% load humanize static form_tags i18n %}
+
+{% block title %}{% trans 'Provide a reference' %}{% endblock %}
+
+{% block content %}
+    <div class="heading heading--overlapped">
+        <div class="heading__inner">
+            <h1>{% trans 'Thank you' %}</h1>
+        </div>
+    </div>
+    <div class="content">
+        <div class="content__inner content__inner--overlap-top">
+            <p class="lead">
+                {% blocktrans %}
+                Thank you for providing the reference. You can close this window now.
+                {% endblocktrans %}
+            </p>
+        </div>
+    </div>
+{% endblock %}

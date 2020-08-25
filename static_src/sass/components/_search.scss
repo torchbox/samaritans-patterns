@@ -3,6 +3,36 @@
     max-width: 300px;
     position: relative;
 
+    .template-volunteer & {
+        max-width: 100%;
+    }
+
+    &--branch-finder {
+        border: $ink-border-thin;
+        padding: $gutter;
+        margin-bottom: $gutter;
+
+        @include media-query(mob-landscape) {
+            padding: $gutter $gutter $gutter-medium;
+        }
+
+        @include media-query(tablet-portrait) {
+            border: $ink-border-thick;
+        }
+    }
+
+    &__label {
+        margin-bottom: ($gutter / 2);
+        display: inline-block;
+    }
+
+    &__fields {
+        @include media-query(mob-landscape) {
+            display: flex;
+            flex-wrap: nowrap;
+        }
+    }
+
     &__input {
         width: 100%;
         border: 1px solid $grey-light;
@@ -13,6 +43,10 @@
             width: 50%;
             flex-grow: 1;
             padding-right: 14px;
+        }
+
+        .template-volunteer & {
+            margin-right: 15px;
         }
     }
 
@@ -30,6 +64,12 @@
             #{$root}__icon {
                 fill: darken($grass, 20);
             }
+        }
+
+        .template-volunteer & {
+            margin-left: 15px;
+            position: relative;
+            width: auto;
         }
 
         &--with-text {

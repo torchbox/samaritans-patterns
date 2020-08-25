@@ -1,0 +1,76 @@
+{% extends "patterns/pages/volunteer_applications/layouts/volunteer-full-width/volunteer_full_width.html" %}
+{% load humanize static form_tags i18n %}
+
+{% block title %}{% trans 'Provide a reference' %}{% endblock %}
+
+{% block content %}
+    <div class="heading heading--overlapped">
+        <div class="heading__inner">
+            <h1>{% trans 'Provide a reference' %}</h1>
+        </div>
+    </div>
+    <div class="content">
+        <div class="content__inner content__inner--overlap-top">
+            <p class="lead">
+                {% blocktrans %}
+                Thanks for choosing to provide a reference. Simply fill out the details
+                below.
+                {% endblocktrans %}
+            </p>
+
+            {% if form.non_field_errors %}
+                <div class="form__errors">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% elif form.errors %}
+                <div class="form__errors">
+                    {% blocktrans %}
+                    There were some errors with your form. Please amend the
+                    fields highlighted below.
+                    {% endblocktrans %}
+                </div>
+            {% endif %}
+
+            <h2>{% trans "About the applicant" %}</h2>
+
+            <form class="form form--alt" method="post">
+                <div class="form__container">
+                    {% csrf_token %}
+                    {% render_form_field form.relationship %}
+                    {% render_form_field form.relationship_length %}
+                    <p>
+                        {% blocktrans %}
+                        Samaritans service relies on our volunteers having key qualities. Please let us know how you feel the applicant meets these qualities?
+                        {% endblocktrans %}
+                    </p>
+                    {% render_form_field form.open_minded %}
+                    {% render_form_field form.discreet %}
+                    {% render_form_field form.supportive %}
+                    {% render_form_field form.respectful %}
+                    {% render_form_field form.emphatetic %}
+                    {% render_form_field form.honest %}
+                    {% render_form_field form.comments %}
+                    {% render_form_field form.vulnerable_people_concerns %}
+                    <div
+                        class="js-hide-if-checked"
+                        data-target-to-watch-for-showing="#{{ form.vulnerable_people_concerns.subwidgets.0.id_for_label }}"
+                        data-target-to-watch-for-hiding="#{{ form.vulnerable_people_concerns.subwidgets.1.id_for_label }}"
+                    >
+                        {% render_form_field form.vulnerable_people_comments %}
+                    </div>
+                    {% render_form_field form.further_information %}
+
+                    <button class="button" data-referee-form-submit>
+                        <div class="button__shadow"></div>
+                        <div class="button__inner">
+                            {% trans 'Submit reference' %}
+                            {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="icon button__icon" title="Submit" aria_hide=True %}
+                        </div>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

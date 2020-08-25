@@ -1,0 +1,12 @@
+<div class="selected-branch">
+    <div class="selected-branch__icon">
+
+        {% include "patterns/atoms/svg/icons/icon-map-marker.html" with aria_hide=True %}
+
+    </div>
+
+    <div class="selected-branch__content">
+        <p class="selected-branch__text">Selected branch: {{ branch_name }}</p>
+        <p class="selected-branch__text"><a class="selected-branch__link" href="{{ link_url }}">{{ link_text }}</a></p>
+    </div>
+</div>

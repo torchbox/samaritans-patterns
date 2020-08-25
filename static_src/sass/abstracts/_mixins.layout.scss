@@ -205,3 +205,21 @@
         margin-bottom: 0;
     }
 }
+
+/* ============================================
+    configure width based on body modifier
+*/
+
+@mixin width-from-modifier() {
+    .template-with-sidebar & {
+        max-width: 1060px;
+    }
+
+    .template-full-width & {
+        max-width: 960px;
+    }
+
+    .template-full-width--wide & {
+        max-width: 1060px;
+    }
+}

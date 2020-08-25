@@ -1,0 +1,127 @@
+/* stylelint-disable selector-class-pattern */
+$column-gap--desktop: 50px;
+$row-gap--desktop: 30px;
+$row-gap--mobile: 20px;
+
+.interview-picker {
+    display: grid;
+    width: calc(100vw - 15px);
+    margin-left: calc(-50vw + 7.5px + 50%);
+
+    @include media-query(tablet-landscape) {
+        width: unset;
+        margin-left: unset;
+    }
+}
+
+.availability-picker {
+    $root: &;
+    display: grid;
+    column-gap: $column-gap--desktop;
+    row-gap: $row-gap--mobile;
+    grid-template-columns: 1fr;
+
+    @include media-query(tablet-landscape) {
+        grid-template-columns: min-content 0 1fr;
+        row-gap: $row-gap--desktop;
+    }
+
+    &__date {
+        margin: auto;
+
+        @include media-query(tablet-landscape) {
+            margin: 0;
+        }
+    }
+
+    &--selected-date .DayPicker {
+        &::after {
+            background-color: $grey-light;
+        }
+    }
+
+    @include media-query(tablet-landscape) {
+        &--selected-date .DayPicker::after {
+            background-color: $grey-light;
+        }
+    }
+
+    &__line {
+        display: none;
+        @include media-query(tablet-landscape) {
+            display: block;
+            border-left: 1.5px dashed $grey-light;
+        }
+    }
+
+    &__slot {
+        display: none;
+        flex-direction: column;
+
+        @include media-query(tablet-landscape) {
+            display: flex;
+        }
+
+        #{$root}--selected-date & {
+            display: flex;
+        }
+    }
+
+    &__select {
+        position: sticky;
+        bottom: 0;
+        padding: 20px;
+        background-image: linear-gradient(180deg, transparent 0%, $white 33%);
+
+        .button {
+            width: 100%;
+        }
+
+        @include media-query(tablet-landscape) {
+            padding: 40px;
+        }
+    }
+
+    &__heading {
+        margin-bottom: 10px;
+        text-align: center;
+
+        @include media-query(tablet-landscape) {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        #{$root}__slot & {
+            opacity: 0.65;
+        }
+
+        #{$root}--selected-date #{$root}__slot & {
+            opacity: 1;
+        }
+    }
+}
+
+.interview-confirmation {
+    h3 {
+        background: $ink;
+        color: $white;
+        padding: $gutter;
+    }
+
+    &__details {
+        padding: $gutter;
+    }
+
+    button {
+        margin: $gutter 0;
+    }
+
+    a {
+        color: $ink;
+        text-decoration: underline;
+    }
+
+    address {
+        font-style: normal;
+    }
+}

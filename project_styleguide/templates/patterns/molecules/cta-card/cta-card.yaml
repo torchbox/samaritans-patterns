@@ -1,0 +1,6 @@
+context:
+  show_button: true
+  heading: Can’t make any of these times?
+  text: No problem. We’ll email you with new times as they become available.
+  button_text: Continue
+  button_url: '#'

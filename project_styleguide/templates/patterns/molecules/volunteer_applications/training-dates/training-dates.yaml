@@ -1,0 +1,17 @@
+context:
+  training_dates:
+    - week: Week 1
+      name: Learning how to do something awesome
+      date: Mon 20 August
+      start_time: 7:30pm
+      end_time: 8:30pm
+    - week: Week 2
+      name: Learning how to do something else awesome
+      date: Tue 28 August
+      start_time: 7:30pm
+      end_time: 8:30pm
+    - week: Week 3
+      name: Another awesome module
+      date: Fri 30 October
+      start_time: 7:30pm
+      end_time: 8:30pm

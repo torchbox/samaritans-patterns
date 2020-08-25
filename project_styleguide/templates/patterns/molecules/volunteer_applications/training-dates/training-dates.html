@@ -1,0 +1,22 @@
+{% load i18n %}
+<ul class="training-dates">
+
+    {% for session in training_dates %}
+        <li class="training-dates__session">
+            <div>
+                <p class="training-dates__text training-dates__text--week">{% blocktrans with week_no=forloop.counter %}Week {{ week_no }}{% endblocktrans %}</p>
+                <p class="training-dates__text training-dates__text--title">{{ session.name }}</p>
+            </div>
+            <div class="training-dates__right-column">
+                <p class="training-dates__text">{{ session.date }}</p>
+                <p class="training-dates__text training-dates__text--time">{{ session.start_time }}-{{ session.end_time }}</p>
+                <p>
+                    <a href="data:text/calendar;charset=utf-8;base64,{{ session.ics_base64 }}" download="{{ session.ics_filename }}">
+                        Download ICS
+                    </a>
+                </p>
+            </div>
+        </li>
+    {% endfor %}
+
+</ul>

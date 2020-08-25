@@ -1,0 +1,24 @@
+{% extends "patterns/pages/volunteer_applications/layouts/volunteer-full-width/volunteer_full_width.html" %}
+{% load static form_tags i18n %}
+
+{% block title %}{% trans 'Withdraw your application' %}{% endblock %}
+
+{% block content %}
+<div class="heading heading--overlapped">
+    <div class="heading__inner">
+        <h2>{% trans 'Your application has now been withdrawn.' %}</h2>
+    </div>
+</div>
+<div class="content">
+    <div class="content__inner content__inner--overlap-top">
+        {% url "volunteering-landing" as volunteering_landing_url %}
+        {% url "support-us" as support_us_url %}
+        <p class="lead">
+            {% blocktrans %}
+            <a href="{{ volunteering_landing_url }}">You can reapply to be a volunteer at any time</a>
+            or <a href="{{ support_us_url }}">you could support us in other ways</a>.
+            {% endblocktrans %}
+        </p>
+    </div>
+</div>
+{% endblock %}

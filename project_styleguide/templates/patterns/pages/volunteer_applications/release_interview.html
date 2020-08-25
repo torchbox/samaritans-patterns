@@ -1,0 +1,36 @@
+{% extends "patterns/pages/volunteer_applications/layouts/volunteer-full-width/volunteer_full_width.html" %}
+{% load static form_tags i18n %}
+
+{% block title %}{% trans 'Release interview' %}{% endblock %}
+
+{% block content %}
+<div class="heading heading--overlapped">
+    <div class="heading__inner">
+        <h1>{% trans 'Release interview' %}{% if first_name %}, {{ first_name }}{% endif %}</h1>
+    </div>
+</div>
+<div class="content">
+    <div class="content__inner content__inner--overlap-top">
+        {% if errors %}
+            <div class="form__errors">
+                {% for error in errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            <p>
+                {% trans 'Do you want to release your current interview slot?' %}
+            </p>
+            <button class="form__submit button" type="submit">
+                <div class="button__shadow"></div>
+                <div class="button__inner">
+                    Release
+                    {% comment %}{% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="icon button__icon" %}{% endcomment %}
+                </div>
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

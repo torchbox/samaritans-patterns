@@ -1,0 +1,123 @@
+{% extends "patterns/pages/volunteer_applications/layouts/volunteer-full-width/volunteer_full_width.html" %}
+{% load static form_tags i18n %}
+
+{% block title %}{% trans 'Book an interview' %}{% endblock %}
+
+{% block body_class %}{{ block.super }} template-full-width--wide{% endblock %}
+
+{% block content %}
+<div class="heading heading--overlapped">
+    <div class="notification">
+        <div class="notification__content">
+            {% include "patterns/atoms/svg/icons/icon-color-envelope-closed.html" with classes="notification__icon" aria_hidden=True %}
+            <div class="notification__text">
+                <p>
+                    {% blocktrans %}
+                    Thank you for your application.
+                    We&apos;ve sent a confirmation email to you.
+                    {% endblocktrans %}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="heading__inner">
+        <h1>{% trans 'Book an interview' %}</h1>
+    </div>
+</div>
+
+<div class="content">
+    <div class="content__inner content__inner--overlap-top">
+        <p>
+            {% blocktrans %}
+            The next step is to have an interview with us. This is a chance for you
+            to understand the role in more detail and ask questions. The interview should take about an hour.
+            {% endblocktrans %}
+        </p>
+
+        {% blocktrans asvar about_title %}
+            What is it like?
+        {% endblocktrans %}
+
+        {% blocktrans asvar about_interview %}
+            Our interviews are intended to be two-way conversation. We hope the
+            interview will allow you to find out more about us, as well as us to
+            find out more about you. Don't forget that all of our interviewers
+            are Samaritan volunteers - just ordinary people. They can tell you more
+            about what volunteering involves and if you have any questions or fears
+            about anything at all, please use the opportunity to talk it through.
+        {% endblocktrans %}
+        <div>
+            {% include "patterns/molecules/accordion/accordion-item.html" with index=forloop.counter heading=about_title description=about_interview classes="accordion--full-width" %}
+        </div>
+
+        {% if form.non_field_errors %}
+            <div class="form_errors">
+                {% for error in form.non_field_errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% for object, interview_form in interview_form_dict.items %}
+            <form method="post">
+                <div class="form__container">
+                    {% csrf_token %}
+
+                    <h2>{{ object.datetime|date:'P, D j M Y' }}</h2>
+                    <p>Type: {{ object.interview_type }}</p>
+                    {% if object.is_face_to_face %}
+                        <p>Location: {{ object.location_name }}</p>
+                        <p>{{ object.location_street}}, {{ object.location_city }}, {{ object.location_post_code }}</p>
+                    {% endif %}
+
+                    {% render_form_field interview_form.interview_datetime %}
+                    {% render_form_field interview_form.interview_type %}
+                    {% render_form_field interview_form.interview_location %}
+
+                    <button class="form__submit button" type="submit">
+                        <div class="button__shadow"></div>
+                        <div class="button__inner">
+                            {% trans 'Select' %}
+                        </div>
+                    </button>
+                </div>
+            </form>
+        {% endfor %}
+
+        {% include 'patterns/organisms/interview-picker/interview-picker.html' %}
+
+        <div class="js-interview-picker-wrapper availability-picker__select" style="display: none;">
+            <form method="post">
+                {% csrf_token %}
+                {% render_form_field form.interview_datetime %}
+                {% render_form_field form.interview_type %}
+                {% render_form_field form.interview_location %}
+                <button type="submit">
+                </button>
+            </form>
+        </div>
+
+        {{ interview_slots|json_script:"interview_slots" }}
+
+        <div class="section section--dark-bg">
+            <h2>{% trans 'Can&apos;t make any of these times?' %}</h2>
+            <p>
+                {% blocktrans %}
+                We&apos;ll be adding more interview appointment slots in the near future,
+                so it may be worth checking back another day. We&apos;ll let you
+                know when more interviews are available.
+                {% endblocktrans %}
+            </p>
+            <p>
+                {% blocktrans %}
+                In the meantime, there are loads of other ways you can support us.
+                Find out more.
+                {% endblocktrans %}
+            </p>
+            <a href="{{ thank_you_url }}">Continue</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

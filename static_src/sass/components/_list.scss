@@ -1,0 +1,8 @@
+.list {
+    margin-bottom: $gutter;
+
+    &--bullets {
+        list-style: disc outside;
+        padding-left: $gutter;
+    }
+}

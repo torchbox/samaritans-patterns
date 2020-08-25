@@ -1,6 +1,6 @@
 {% load wagtailcore_tags icon_tags %}
 
-<div class="accordion js-accordion">
+<div class="accordion js-accordion {% if classes %} {{ classes }}{% endif %}">
     <a
         href=""
         class="accordion__heading js-accordion-question"

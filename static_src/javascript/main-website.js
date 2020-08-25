@@ -1,48 +1,61 @@
-import 'babel-polyfill';
+import "babel-polyfill";
 
-import Autocomplete from './components/autocomplete';
-import MobileMenu from './components/mobile-menu';
-import MobileSubMenu from './components/mobile-sub-menu';
-import CookieWarning from './components/cookie-message--website';
-import Accordion from './components/accordion';
-import Carousel from './components/carousel';
-import GoogleMap from './components/map';
-import Modal from './components/modal';
-import ProgressBar from './components/progress-bar';
-import RegionField from './components/region-field';
-import StickyCTA from './components/sticky-cta';
-import Tabccordion from './components/tabccordion';
-import Toggle from './components/toggle';
-import HeaderMenu from './components/header-menu';
-import Gallery from './components/gallery';
-import SelectAllCheckboxToggle from './components/select-all-checkbox-toggle';
-import sendTagManagerEvents from './components/tag-manager';
-import Beta from './components/beta';
-import DonateUsage from './components/donate-usage';
-import GiftAid from './components/gift-aid';
-import Reveal from './components/reveal';
-import Considerations from './components/considerations';
-import './components/browser-polyfills';
-import './components/smooth-scroll';
-import './components/branch-finder';
-import initiMobileNumberAutocomplete from './components/mobile-number-autocomplete';
-import initMobileNumberField from './components/mobile-number-field';
-import initDonationSliders from './components/donate-slider';
+import Autocomplete from "./components/autocomplete";
+import MobileMenu from "./components/mobile-menu";
+import MobileSubMenu from "./components/mobile-sub-menu";
+import CookieWarning from "./components/cookie-message--website";
+import Accordion from "./components/accordion";
+import Carousel from "./components/carousel";
+import GoogleMap from "./components/map";
+import Modal from "./components/modal";
+import ProgressBar from "./components/progress-bar";
+import RegionField from "./components/region-field";
+import StickyCTA from "./components/sticky-cta";
+import Tabccordion from "./components/tabccordion";
+import Toggle from "./components/toggle";
+import HeaderMenu from "./components/header-menu";
+import Gallery from "./components/gallery";
+import SelectAllCheckboxToggle from "./components/select-all-checkbox-toggle";
+import sendTagManagerEvents from "./components/tag-manager";
+import Beta from "./components/beta";
+import DonateUsage from "./components/donate-usage";
+import GiftAid from "./components/gift-aid";
+import Reveal from "./components/reveal";
+import Considerations from "./components/considerations";
+import "./components/browser-polyfills";
+import "./components/smooth-scroll";
+import "./components/branch-finder";
+import "./components/volunteering-branch-finder";
+import initiMobileNumberAutocomplete from "./components/mobile-number-autocomplete";
+import RescheduleInterview from './components/reschedule-interview';
+import initMobileNumberField from "./components/mobile-number-field";
+import initDonationSliders from "./components/donate-slider";
+import { initInterviewPicker } from "./components/InterviewPicker/InterviewPicker";
+import initialiseHideIfCheckedElement from "./components/hide-if-checked";
+import TrainingCourse from './components/training-course';
+import './components/referee-details';
 
-
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener("DOMContentLoaded", function () {
     new CookieWarning();
 
     for (const accordion of document.querySelectorAll(Accordion.selector())) {
         new Accordion(accordion);
     }
 
-    for (const autocomplete of document.querySelectorAll(Autocomplete.selector())) {
+    for (const autocomplete of document.querySelectorAll(
+        Autocomplete.selector()
+    )) {
         new Autocomplete(autocomplete);
     }
 
     for (const carousel of document.querySelectorAll(Carousel.selector())) {
         new Carousel(carousel);
+    }
+
+    for (const trainingcourse of document.querySelectorAll(
+        TrainingCourse.selector(),
+    )) {
+        new TrainingCourse(trainingcourse);
     }
 
     for (const googlemap of document.querySelectorAll(GoogleMap.selector())) {
@@ -57,15 +70,21 @@ document.addEventListener('DOMContentLoaded', function() {
         new Modal(modal);
     }
 
-    for (const mobilesubmenu of document.querySelectorAll(MobileSubMenu.selector())) {
+    for (const mobilesubmenu of document.querySelectorAll(
+        MobileSubMenu.selector()
+    )) {
         new MobileSubMenu(mobilesubmenu);
     }
 
-    for (const progressbar of document.querySelectorAll(ProgressBar.selector())) {
+    for (const progressbar of document.querySelectorAll(
+        ProgressBar.selector()
+    )) {
         new ProgressBar(progressbar);
     }
 
-    for (const regionfield of document.querySelectorAll(RegionField.selector())) {
+    for (const regionfield of document.querySelectorAll(
+        RegionField.selector()
+    )) {
         new RegionField(regionfield);
     }
 
@@ -73,7 +92,9 @@ document.addEventListener('DOMContentLoaded', function() {
         new StickyCTA(stickycta);
     }
 
-    for (const tabccordion of document.querySelectorAll(Tabccordion.selector())) {
+    for (const tabccordion of document.querySelectorAll(
+        Tabccordion.selector()
+    )) {
         new Tabccordion(tabccordion);
     }
 
@@ -89,7 +110,9 @@ document.addEventListener('DOMContentLoaded', function() {
         new Gallery(gallery);
     }
 
-    for (const inputblock of document.querySelectorAll(SelectAllCheckboxToggle.selector())) {
+    for (const inputblock of document.querySelectorAll(
+        SelectAllCheckboxToggle.selector()
+    )) {
         new SelectAllCheckboxToggle(inputblock);
     }
 
@@ -97,7 +120,9 @@ document.addEventListener('DOMContentLoaded', function() {
         new Beta(beta);
     }
 
-    for (const donateusage of document.querySelectorAll(DonateUsage.selector())) {
+    for (const donateusage of document.querySelectorAll(
+        DonateUsage.selector()
+    )) {
         new DonateUsage(donateusage);
     }
 
@@ -112,7 +137,9 @@ document.addEventListener('DOMContentLoaded', function() {
         new Reveal(reveal);
     }
 
-    for (const considerations of document.querySelectorAll(Considerations.selector())) {
+    for (const considerations of document.querySelectorAll(
+        Considerations.selector()
+    )) {
         new Considerations(considerations);
     }
 
@@ -120,4 +147,28 @@ document.addEventListener('DOMContentLoaded', function() {
     initDonationSliders();
 
     sendTagManagerEvents();
+
+    for (const hideIfCheckedElement of document.querySelectorAll(
+        ".js-hide-if-checked"
+    )) {
+        const hideCheckbox = document.querySelector(
+            hideIfCheckedElement.dataset.targetToWatchForHiding
+        );
+        const showCheckbox = document.querySelector(
+            hideIfCheckedElement.dataset.targetToWatchForShowing
+        );
+        initialiseHideIfCheckedElement({
+            element: hideIfCheckedElement,
+            hideCheckbox,
+            showCheckbox,
+        });
+    }
+
+    for (const rescheduleinterview of document.querySelectorAll(
+        RescheduleInterview.selector(),
+    )) {
+        new RescheduleInterview(rescheduleinterview);
+    }
+
+    initInterviewPicker();
 });

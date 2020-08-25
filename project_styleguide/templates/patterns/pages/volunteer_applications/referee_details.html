@@ -1,0 +1,128 @@
+{% extends "patterns/pages/volunteer_applications/layouts/volunteer-with-sidebar/volunteer_with_sidebar.html" %}
+{% load humanize static form_tags i18n %}
+{% block body_class %}template-with-sidebar template-volunteer{% endblock %}
+
+{% block title %}{% trans 'Provide referee details' %}{% endblock %}
+
+{% block content %}
+    <div>
+        {% include "patterns/atoms/volunteer-breadcrumb/breadcrumb.html" with text="Next steps" href=next_steps_url %}
+        <h1>{% trans 'Provide referee details' %}</h1>
+
+        {% for subform in form %}
+            {% if subform.non_field_errors %}
+                <div class="form__errors">
+                    {% for error in subform.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% elif subform.errors %}
+                <div class="form__errors">
+                    {% blocktrans %}
+                    There were some errors with your form. Please amend the
+                    fields highlighted below.
+                    {% endblocktrans %}
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <p class="lead">
+            {% blocktrans count counter=application.number_referees_missing with number=application.number_referees_missing|apnumber %}
+            Please provide details of {{ number }} person to provide references
+            to support your application. We will only use these details for the
+            purposes of considering your application. They should:
+            {% plural %}
+            Please provide details of {{ number }} people to provide references
+            to support your application. We will only use these details for the
+            purposes of considering your application. They should:
+            {% endblocktrans %}
+        </p>
+        <ul class="list list--bullets">
+            <li>{% trans 'Have known you well for at least two years' %}</li>
+            <li>{% trans 'Not be a family member' %}</li>
+        </ul>
+        <p>
+            {% blocktrans with email_link="supportercare@samaritans.org"|urlize %}
+            If you are finding it hard to find someone to be a referee or to
+            provide two referees do get in touch so we can help - {{ email_link }}.
+            {% endblocktrans %}
+        </p>
+
+        <div role="tablist" aria-multiselectable="true">
+            {% include "patterns/molecules/accordion/accordion-item.html" with index=0 heading="You might like to know" description="Referees don't need to be from a place of work, they can be from a teacher or tutor if you're in education.<br/><br/>It might be someone who knows you in the community such as a religious figure or group leader. You might volunteer somewhere else or it could be a family friend who knows you well.<br/><br/>Other suggestions could be your driving instructor, GP or social worker. These are just some examples not a complete list so please put someone that you are comfortable asking for a reference for you." link_text="More FAQs" link_url="#" classes="accordion--hide-tablet-landscape" %}
+        </div>
+
+        <form class="form" method="post">
+            <div class="form__container">
+                {% csrf_token %}
+                {{ form.management_form }}
+                {% for referee_form in form %}
+                    <fieldset class="form__fieldset" data-referee-fieldset>
+                        {% if form|length > 1 %}
+                            <h2>{% blocktrans with ordinal=forloop.counter|ordinal %}{{ ordinal }} referee{% endblocktrans %}</h2>
+                        {% endif %}
+                        {% render_form_field referee_form.first_name %}
+                        {% render_form_field referee_form.last_name %}
+                        {% render_form_field referee_form.email_address %}
+                        {% render_form_field referee_form.contact_number %}
+                    </fieldset>
+                {% endfor %}
+
+                {% blocktrans asvar info_text %}
+                Please make sure your referees know you have given their detail
+                as references will be requested as soon as you submit the details.
+                {% endblocktrans %}
+
+                {% include "patterns/molecules/alert/alert.html" with alert=info_text %}
+
+                <button class="button" data-referee-form-submit>
+                    <div class="button__shadow"></div>
+                    <div class="button__inner">
+                        {% trans 'Submit' %}
+                        {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="icon button__icon" title="Select" aria_hide=True %}
+                    </div>
+                </button>
+            </div>
+
+            <div class="modal referees" id="referee-modal" aria-hidden="true">
+                <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+                    <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="referee-modal-title">
+                        <button class="modal__close" aria-label="Close modal" data-micromodal-close>
+                            {% include "patterns/atoms/svg/icons/icon-close.html" with classes="modal__close-icon" %}
+                        </button>
+                        <div class="modal__content" id="referee-modal-content">
+                            <h2 class="modal__title" id="referee-modal-title">Are these details correct?</h2>
+                            <p>Once you've confirmed these details we'll start contacting your referees right away.</p>
+                            <p class="referees__errors" data-referees-hint>Please close this dialog and fill out the form.</p>
+
+                            <div class="referees__items" aria-live="polite" data-modal-referees></div>
+
+                            <div class="modal__buttons">
+                                <button class="form__submit button" type="submit">
+                                    <div class="button__shadow"></div>
+                                    <div class="button__inner">
+                                        {% trans 'Submit' %}
+                                        {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="icon button__icon" title="Select" aria_hide=True %}
+                                    </div>
+                                </button>
+                                <a href="#" class="modal__link" data-micromodal-close>Change referee details</a>
+                            </div>
+
+                            <div class="modal__connectors" aria-hidden="true"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block sidebar %}
+    <aside class="sidebar">
+        {% include "patterns/molecules/callout-text-box/callout-text-box.html" with heading="Lorem ipsum dolor sit?" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." link_text="More FAQs" link_url="#" %}
+    </aside>
+{% endblock %}
+
+{% block footer %}
+    {% include "patterns/molecules/volunteer_applications/dashboard-footer/dashboard-footer.html" %}
+{% endblock %}

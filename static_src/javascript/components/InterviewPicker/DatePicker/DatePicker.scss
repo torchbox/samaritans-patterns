@@ -1,0 +1,131 @@
+/* stylelint-disable selector-class-pattern */
+// https://github.com/airbnb/react-dates#overriding-styles
+@import '~react-dates/lib/css/_datepicker.css';
+
+/**
+* The styles of react-dates are generally hard to override beyond simple theming, due to some sizes being calculated in JS code.
+* Proceed with caution!
+*/
+
+$day-size--min: 35px;
+$day-size--medium: 60px;
+$day-padding--medium: 5px;
+
+.DayPicker {
+    background: transparent;
+
+    &_transitionContainer {
+        overflow: unset;
+        @include media-query(desktop) {
+            overflow: hidden;
+        }
+    }
+
+    > div > div:first-child {
+        @include media-query(desktop) {
+            border: 1.5px solid $grey-light;
+            border-radius: 5px;
+            background-color: $white;
+        }
+    }
+}
+
+.DayPicker_weekHeader {
+    top: 75px;
+    background-color: transparent;
+
+    small {
+        @include font-size(xs);
+        color: $charcoal;
+        font-weight: $weight--bold;
+    }
+}
+
+.CalendarDay {
+    @include font-size(xxs);
+    color: $charcoal;
+    background: transparent;
+    border: 0;
+    border-radius: 50%;
+    padding: 0;
+    display: table-cell;
+
+    &:hover,
+    &:focus {
+        background: transparent;
+        border: 0;
+
+        .CalendarDay__inner {
+            background: $teal;
+            color: $white;
+        }
+    }
+
+    &__inner {
+        @include font-size(xs);
+        display: block;
+        border: 1.5px solid $teal;
+        border-radius: 50%;
+        font-weight: $weight--bold;
+        color: $teal;
+        transition: background-color $transition, color $transition;
+        height: 80%;
+        width: 80%;
+        margin: auto;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        @include media-query(tablet-portrait) {
+            font-size: 1rem;
+        }
+    }
+
+    &__selected > .CalendarDay__inner {
+        background-color: $teal;
+        color: $white;
+    }
+
+    &__blocked_calendar {
+        > .CalendarDay__inner {
+            border: none;
+            color: $charcoal;
+            opacity: 0.6;
+        }
+
+        &:hover,
+        &:focus {
+            > .CalendarDay__inner {
+                background: transparent;
+                color: $charcoal;
+                opacity: 0.6;
+            }
+        }
+    }
+}
+
+.CalendarMonth {
+    &_caption {
+        background-color: $ink;
+        padding: 14px;
+        border-radius: 3px 3px 0 0;
+        margin: 0 -400px 59px -400px;
+
+        @include media-query(tablet-landscape) {
+            margin: 0 -19px 58px -22px;
+        }
+    }
+
+    strong {
+        @include font-size(s);
+        color: $ink;
+        font-weight: 400;
+        border-radius: 16px;
+        padding: 8px 17px;
+        background: $color--white;
+    }
+}
+
+.CalendarMonthGrid {
+    background: transparent;
+}

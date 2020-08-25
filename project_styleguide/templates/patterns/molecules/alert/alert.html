@@ -1,0 +1,15 @@
+{% load form_tags i18n %}
+
+<div class="alert">
+    <div class="alert__icon">
+        {% include "patterns/atoms/svg/icons/icon-exclamation-circle.html" with aria_hide=True %}
+    </div>
+    <p class="alert__text">
+        {% blocktrans %}
+            {{ alert }}
+        {% endblocktrans %}
+        {% if contact_url %}
+            Please <a href="{{ contact_url }}">let us know as soon as possible</a> if you can't make one of your dates.
+        {% endif %}
+    </p>
+</div>

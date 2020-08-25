@@ -1,0 +1,19 @@
+{% extends "patterns/base_page.html" %}
+
+{% block body_class %}template-full-width{% endblock %}
+
+{% block content %}
+    <main class="wrapper wrapper--site wrapper--volunteer-content">
+        <div class="thank-you__heading-wrapper">
+            <div class="thank-you__heading-icon">
+
+                {% include 'patterns/atoms/svg/icons/icon-color-star.html' with classes="icon--thank-you" aria_hide=True %}
+
+            </div>
+            <h1 class="thank-you__heading-text">{{ main_heading }}</h1>
+        </div>
+        <div class="thank-you__content">
+            <h2 class="thank-you__content-heading">{{ content_heading }}</h2>
+        </div>
+    </main>
+{% endblock %}

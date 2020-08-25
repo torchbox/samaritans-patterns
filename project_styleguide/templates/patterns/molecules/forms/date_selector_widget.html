@@ -1,0 +1,17 @@
+{% load i18n %}
+
+<p class="form-item__hint">{% trans 'For example, 12 11 2007' %}</p>
+<ul class="form-item__date">
+{% for subwidget in widget.subwidgets %}
+    <li>
+        {% if forloop.counter0 == 0 %}
+        <label for="{{ subwidget.attrs.id }}">Day</label>
+        {% elif forloop.counter0 == 1 %}
+        <label for="{{ subwidget.attrs.id }}">Month</label>
+        {% else %}
+        <label for="{{ subwidget.attrs.id }}">Year</label>
+        {% endif %}
+        {% include subwidget.template_name with widget=subwidget %}
+    </li>
+{% endfor %}
+</ul>

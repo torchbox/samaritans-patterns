@@ -1,0 +1,31 @@
+{% extends "patterns/pages/volunteer_applications/layouts/volunteer-thank-you/volunteer_thank_you.html" %}
+{% load form_tags i18n %}
+
+{% block title %}{% trans 'Thanks, you&apos;re all done here' %}{% endblock %}
+
+{% block content %}
+    <div class="heading heading--overlapped">
+        <div class="heading__inner">
+            <div class="thank-you__heading-wrapper">
+                <h1 class="thank-you__heading-text">{% trans 'Thanks,' %} {% if first_name %}{{ first_name }}{% endif %} {% trans 'you&apos;re all done here' %}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="content__inner content__inner--overlap-top">
+            <div class="thank-you__content">
+
+                <h2 class="thank-you__content-heading">{% trans 'What happens next?' %}</h2>
+
+                <p>
+                    {% blocktrans %}
+                        You&apos;re well on your way to become a Samaritan.
+                    {% endblocktrans %}
+                </p>
+
+                {% include 'patterns/molecules/alert/alert.html' with alert="Our training team are volunteers too! Missed training days greatly impacts Samaritans ability to deliver our services to those that need them. But we get it, sometimes things change." contact_url="mailto:supportercare@samaritans.org" %}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

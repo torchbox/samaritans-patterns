@@ -1,0 +1,22 @@
+{% extends "patterns/base_page.html" %}
+
+{% block body_class %}template-with-sidebar{% endblock %}
+
+{% block header %}
+    {% include "patterns/organisms/header/header.html" with show_nav=False %}
+{% endblock header %}
+
+{% block outer_content %}
+<div class="content content--lighten-bg">
+    <div class="content__inner content__with-sidebar">
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+        <aside class="sidebar">
+            {% block sidebar %}{% endblock %}
+        </aside>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

@@ -1,0 +1,48 @@
+.calendar-button {
+    position: absolute;
+    cursor: pointer;
+
+    &--left {
+        left: -5px;
+        top: 6px;
+        width: 62.7px;
+        height: 43.1px;
+        background-image: url('../images/chevron.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        transform: scale(0.5) rotate(180deg);
+
+        @include media-query(mob-landscape) {
+            left: 0;
+            top: 5px;
+            transform: scale(0.55) rotate(180deg);
+        }
+
+        @include media-query(tablet-portrait) {
+            left: 5px;
+            transform: scale(0.6) rotate(180deg);
+        }
+    }
+
+    &--right {
+        right: -5px;
+        top: 6px;
+        width: 62.7px;
+        height: 43.1px;
+        background-image: url('../images/chevron.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        transform: scale(0.5);
+
+        @include media-query(mob-landscape) {
+            right: 0;
+            top: 5px;
+            transform: scale(0.55);
+        }
+
+        @include media-query(tablet-portrait) {
+            right: 5px;
+            transform: scale(0.6);
+        }
+    }
+}

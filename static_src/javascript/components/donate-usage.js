@@ -23,8 +23,13 @@ class DonateUsage {
         // work out how many calls will be answered
         const result = Math.floor(Number(value) / 4.75);
 
-        // show the value to the user
-        this.donateSlot.innerHTML = `<b>${result}</b> call${result === 1 ? '' : 's'}`;
+        // show the value to the user if number of calls > 1
+        if (result >= 1 ){
+            this.donateSlot.innerHTML = `<b>${result}</b> call${result === 1 ? '' : 's'}`;
+        } 
+        else {
+            this.donateSlot.innerHTML = 'a call';
+        }
     }
 }
 

@@ -1,0 +1,61 @@
+.selected-branch {
+    display: flex;
+    padding: $gutter $gutter ($gutter / 1.5);
+    max-width: $wrapper--small;
+    border: $grey-border;
+    border-radius: 3px;
+    margin-bottom: $gutter;
+
+    @include media-query(mob-landscape) {
+        margin-bottom: $gutter-medium;
+    }
+
+    @include media-query(tablet-portrait) {
+        padding: $gutter / 1.5 $gutter;
+    }
+
+    &__icon {
+        margin: 0 ($gutter / 1.5) auto 0;
+
+        @include media-query(tablet-portrait) {
+            margin-top: 2px;
+        }
+
+        svg {
+            fill: $ocean;
+            width: 25px;
+            height: 25px;
+        }
+    }
+
+    &__content {
+        width: 100%;
+        margin-top: 3px;
+
+        @include media-query(tablet-portrait) {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0;
+        }
+    }
+
+    &__text {
+        @include font-size(xs);
+        margin: auto 0 ($gutter / 2);
+
+        @include media-query(tablet-portrait) {
+            margin: auto 0;
+        }
+    }
+
+    &__link {
+        text-decoration: underline;
+        color: $ink;
+        line-height: 2;
+
+        @include media-query(tablet-portrait) {
+            margin-top: 0;
+            padding-right: $gutter / 2;
+        }
+    }
+}

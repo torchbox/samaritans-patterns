@@ -1,0 +1,34 @@
+{% extends "patterns/pages/volunteer_applications/layouts/volunteer-full-width/volunteer_full_width.html" %}
+{% load static form_tags i18n %}
+
+{% block title %}
+    {% include "patterns/atoms/volunteer-page-title/page-title.html" %}
+{% endblock %}
+
+{% block content %}
+<div class="heading heading--overlapped">
+    <div class="heading__inner">
+        <h1>{% include "patterns/atoms/volunteer-page-title/page-title.html" %}</h1>
+    </div>
+</div>
+<div class="content">
+    <div class="content__inner content__inner--overlap-top">
+    {% include "patterns/molecules/volunteer_applications/progress-indicator/progress-indicator.html" with current_step=2  %}
+
+    <p>
+        {% blocktrans %}
+        Most of our volunteering is done from a Samaritans location. To
+        complete your application, we need to know where you would like to
+        volunteer.
+        {% endblocktrans %}
+    </p>
+
+    {% include "patterns/organisms/volunteering-branch-finder/volunteering-branch-finder.html"  %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ maps_api_key }}&libraries=geometry"></script>
+    {{ dict_object_list|json_script:"branches_json" }}
+{% endblock %}

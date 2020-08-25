@@ -29,6 +29,7 @@ $cerulean: #0083a9;
 $grey-blue: #e8eff0;
 $mint: #effbea;
 $warning: #b52021;
+$charcoal: #333;
 
 // Greys
 $page-bg: #eaeaea;
@@ -147,6 +148,8 @@ $header-nav-height--inner: 35px;
 
 // Borders
 $grey-border: 1.5px solid $grey-light;
+$ink-border-thin: 3px solid $ink;
+$ink-border-thick: 7px solid $ink;
 
 // Breakpoints
 
@@ -178,7 +181,7 @@ $site-width: $breakpoint-desktop - (2 * $page-padding-horizontal-tablet-portrait
 $wrapper--medium: $breakpoint-tablet-landscape - (2 * $page-padding-horizontal-tablet-portrait); // 964px
 $wrapper--small: 850px;
 $wrapper--smaller: 800px; // can probably be combined with $wrapper--small on tablet-size review but 800px was specifically requested
-
+$wrapper--wide: 1060px;
 
 // Transition speeds
 $transition: 0.25s ease-out;
@@ -186,3 +189,4 @@ $transition: 0.25s ease-out;
 // Form selectors
 $input--string: 'input:not([type="checkbox"]):not([type="radio"])';
 $input--boolean: 'input[type="checkbox"],input[type="radio"]';
+$input-max-width: 430px;

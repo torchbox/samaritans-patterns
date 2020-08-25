@@ -1,0 +1,60 @@
+{% extends "patterns/pages/volunteer_applications/layouts/volunteer-with-sidebar/volunteer_with_sidebar.html" %}
+{% load i18n form_tags %}
+
+{% block title %}{% trans 'Your emergency contact' %}{% endblock %}
+{% block body_class %}template-with-sidebar template-volunteer{% endblock %}
+
+{% block content %}
+    {% include "patterns/atoms/volunteer-breadcrumb/breadcrumb.html" with text="Next steps" href=next_steps_url %}
+    <h1>{% trans 'Your emergency contact' %}</h1>
+    <p>
+        {% blocktrans %}
+        In case of an emergency please provide the name and number of the
+        person you would like us to contact.
+        {% endblocktrans %}
+    </p>
+
+    <div role="tablist" aria-multiselectable="true">
+        {% include "patterns/molecules/accordion/accordion-item.html" with index=0 heading="You might like to know" description="Your emergency contact details will be kept on your &lsquo;profile&rsquo;, but you will be able to change this once you are a volunteer with us." link_text="More FAQs" link_url="#" classes="accordion--hide-tablet-landscape" %}
+    </div>
+
+    {% if form.non_field_errors %}
+        <div class="form__errors">
+            {% for error in form.non_field_errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% elif form.errors %}
+        <div class="form__errors">
+            {% blocktrans %}
+            There were some errors with your form. Please amend the
+            fields highlighted below.
+            {% endblocktrans %}
+        </div>
+    {% endif %}
+
+    <form method="post">
+        <div class="form__container">
+            {% csrf_token %}
+            {% render_form_field form.first_name %}
+            {% render_form_field form.last_name %}
+            {% render_form_field form.relationship %}
+            {% render_form_field form.contact_number %}
+            {% render_form_field form.alternative_contact_number %}
+
+            {% include "patterns/molecules/alert/alert.html" with alert="Please make sure this person is aware that you have named them as your emergency contact." %}
+
+            {% include "patterns/atoms/buttons/button--button.html" with classes='form__submit button' label="Submit" %}
+        </div>
+    </form>
+
+{% endblock %}
+
+{% block sidebar %}
+    {% include "patterns/molecules/callout-text-box/callout-text-box.html" with heading="You might like to know" text="Your emergency contact details will be kept on your &lsquo;profile&rsquo;, but you will be able to change this once you are a volunteer with us." link_text="More FAQs" link_url="#" %}
+{% endblock %}
+
+
+{% block footer %}
+    {% include "patterns/molecules/volunteer_applications/dashboard-footer/dashboard-footer.html" %}
+{% endblock %}

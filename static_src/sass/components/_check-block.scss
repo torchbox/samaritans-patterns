@@ -1,0 +1,28 @@
+.check-block {
+    margin-bottom: $gutter-large;
+
+    &__complete {
+        display: flex;
+        align-items: center;
+        margin-bottom: ($gutter / 2);
+    }
+
+    &__icon {
+        fill: $lime;
+        margin-right: 5px;
+    }
+
+    &__text {
+        &--complete {
+            color: $teal;
+            text-transform: uppercase;
+            font-weight: $weight--bold;
+            margin-bottom: 0;
+            margin-top: 3px;
+        }
+    }
+
+    &__button {
+        margin-bottom: $gutter;
+    }
+}

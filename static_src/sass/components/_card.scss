@@ -30,6 +30,10 @@
         @include link($color--default, $color--default);
     }
 
+    &.is-hidden {
+        display: none;
+    }
+
     #{$hover} {
 
         #{$root},
@@ -41,6 +45,29 @@
 
         #{$root}__image {
             filter: brightness(80%);
+        }
+    }
+
+    &--with-button {
+        @include media-query(mob-landscape) {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+
+    .template-volunteer & {
+        padding: $gutter;
+        border: $grey-border;
+        border-radius: 5px;
+        margin-bottom: $gutter;
+    }
+
+    &__copy {
+        margin: 0;
+
+        &--meta {
+            @include font-size(s);
         }
     }
 

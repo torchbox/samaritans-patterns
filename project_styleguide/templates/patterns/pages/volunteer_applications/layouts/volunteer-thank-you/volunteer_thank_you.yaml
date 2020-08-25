@@ -1,0 +1,10 @@
+context:
+  main_heading: Thanks Tom, you're all done here
+  content_heading: What happens next?
+  first_name: Tom
+  interview:
+    location_name: Bristol
+    location_street: Floor 3, 15 Colston Street
+    location_city: Bristol
+    location_post_code: BS1 5AP
+    datetime: 2019-11-13 14:30:00

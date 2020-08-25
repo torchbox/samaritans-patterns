@@ -123,6 +123,8 @@
     }
 
     &__wrapper {
+        max-width: $input-max-width;
+
         #{$root}__tooltip-wrapper & {
             width: 100%;
         }
@@ -145,6 +147,23 @@
                 line-height: 30px;
             }
         }
+    }
+
+    &__date {
+        display: flex;
+
+        li {
+            margin-right: $gutter;
+            width: 80px;
+
+            &:last-child {
+                width: 120px;
+            }
+        }
+    }
+
+    &__hint {
+        color: rgba($charcoal, 0.7);
     }
 
     &__select-icon-wrapper {

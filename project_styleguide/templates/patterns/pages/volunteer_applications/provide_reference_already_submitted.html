@@ -1,0 +1,23 @@
+{% extends "patterns/pages/volunteer_applications/layouts/volunteer-full-width/volunteer_full_width.html" %}
+{% load humanize static form_tags i18n %}
+
+{% block title %}{% trans 'Provide a reference' %}{% endblock %}
+
+{% block content %}
+    <div class="heading heading--overlapped">
+        <div class="heading__inner">
+            <h1>{% trans 'Reference not found' %}</h1>
+        </div>
+    </div>
+    <div class="content">
+        <div class="content__inner content__inner--overlap-top">
+            <p class="lead">
+                {% blocktrans %}
+                If you are following a link this reference has
+                already been submitted.
+                {% endblocktrans %}
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -123,4 +123,13 @@
         margin-left: $gutter;
         flex-shrink: 0;
     }
+
+    &--hide-tablet-landscape {
+        max-width: 100%;
+        margin-bottom: $gutter;
+
+        @include media-query(tablet-landscape) {
+            display: none;
+        }
+    }
 }

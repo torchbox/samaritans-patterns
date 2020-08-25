@@ -1,0 +1,69 @@
+{% extends "patterns/pages/volunteer_applications/layouts/volunteer-full-width/volunteer_full_width.html" %}
+{% load static form_tags i18n %}
+
+{% block title %}
+    {% include "patterns/atoms/volunteer-page-title/page-title.html" %}
+{% endblock %}
+
+{% block content %}
+    <div class="heading heading--overlapped">
+        <div class="heading__inner">
+            <h1>{% include "patterns/atoms/volunteer-page-title/page-title.html" %}</h1>
+        </div>
+    </div>
+    <div class="content">
+        <div class="content__inner content__inner--overlap-top">
+            {% include "patterns/molecules/volunteer_applications/progress-indicator/progress-indicator.html" with current_step=3  %}
+
+            {% include "patterns/molecules/volunteer_applications/selected-branch/selected-branch.html" with branch_name=selected_branch.title link_text="Change branch" link_url=branch_selection_url %}
+
+            <form method="post">
+                <div class="form__container">
+                    {% csrf_token %}
+
+                    {% if form.non_field_errors %}
+                        <div class="form__errors">
+                            {% for error in form.non_field_errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% elif form.errors %}
+                        <div class="form__errors">
+                            {% blocktrans %}
+                            There were some errors with your form. Please amend the
+                            fields highlighted below.
+                            {% endblocktrans %}
+                        </div>
+                    {% endif %}
+
+                    <h2>{% trans 'Do you have any accessibility needs for the interview? Please let us know details here: (optional)' %}</h2>
+                    {% render_form_field form.accessibility_requirement %}
+
+                    {% render_form_field form.contact_reason %}
+
+                    <h2>{% trans 'Equal opportunities' %}</h2>
+                    <p>
+                        {% blocktrans %}
+                        We are committed to increasing diversity among our volunteers.
+                        If you&apos;d like to tell us about your background and
+                        identity then we&apos;ll use this information to track how
+                        we&apos;re doing.
+                        {% endblocktrans %}
+                    </p>
+                    <p>
+                        {% blocktrans %}
+                        <strong>This is entirely optional and has
+                        no effect on your application.</strong>
+                        {% endblocktrans %}
+                    </p>
+                    {% render_form_field form.age_range %}
+                    {% render_form_field form.gender %}
+                    {% render_form_field form.ethnic_group %}
+
+                    {% include "patterns/atoms/buttons/button--button.html" with classes="form__submit button" label="Submit" %}
+
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

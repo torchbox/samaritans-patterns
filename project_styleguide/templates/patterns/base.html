@@ -22,6 +22,9 @@
     </head>
 
     <body class="{% block body_class %}template-{{ page.get_verbose_name|slugify }}{% endblock %}">
+        <script type="text/javascript">
+            window.timezone = "{{ TIME_ZONE }}";
+        </script>
         {% block body_top %}{% endblock %}
 
         {% include "patterns/atoms/svg/sprites/sprites.html" %}

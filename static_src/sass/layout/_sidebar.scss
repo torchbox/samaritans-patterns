@@ -67,4 +67,17 @@
             width: 160px;
         }
     }
+
+    .template-volunteer & {
+        display: none;
+
+        @include media-query(tablet-landscape) {
+            display: block;
+            padding: ($gutter * 2) 0 0;
+            width: 370px;
+            margin: 0 0 0 ($gutter * 3);
+            flex: initial;
+            order: 0;
+        }
+    }
 }

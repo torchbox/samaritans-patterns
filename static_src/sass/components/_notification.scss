@@ -1,0 +1,31 @@
+.notification {
+    background-color: $amethyst;
+    color: $white;
+
+    &__content {
+        @include width-from-modifier();
+        margin: 0 auto;
+        padding: $gutter-small $gutter;
+
+        @include media-query('mob-landscape') {
+            display: grid;
+            align-items: center;
+            grid-template-columns: 55px auto;
+        }
+    }
+
+    &__icon {
+        display: none;
+        @include media-query('mob-landscape') {
+            display: block;
+        }
+        height: 35px;
+        width: 35px;
+    }
+
+    &__text {
+        > p {
+            margin-bottom: 0;
+        }
+    }
+}

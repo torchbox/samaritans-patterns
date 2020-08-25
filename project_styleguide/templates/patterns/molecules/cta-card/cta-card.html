@@ -1,0 +1,13 @@
+<section class="cta-card">
+    <h2 class="cta-card__heading">{{ heading }}</h2>
+    <p class="cta-card__text">{{ text }}</p>
+
+    {% if show_button %}
+        {% include "patterns/atoms/buttons/button.html" with href=button_url label=button_text %}
+    {% endif %}
+
+    {% if href %}
+        <a href="{{ href }}" class="cta-card__link">{{ link_text }}</a>
+    {% endif %}
+
+</section>

@@ -1,0 +1,66 @@
+{% extends "patterns/pages/volunteer_applications/layouts/volunteer-full-width/volunteer_full_width.html" %}
+{% load static form_tags i18n %}
+
+{% block title %}{% trans 'Withdraw your application' %}{% endblock %}
+
+{% block content %}
+<div class="heading heading--overlapped">
+    <div class="heading__inner">
+        <p class="lead">
+            {% blocktrans %}
+            We&apos;re sorry to see that you&apos;d like to withdraw your application,
+            but we appreciate you letting us know. You are welcome to reapply
+            to volunteer at any time.
+            {% endblocktrans %}
+        </p>
+    </div>
+</div>
+<div class="content">
+    <div class="content__inner content__inner--overlap-top">
+        <p>
+            {% blocktrans %}
+            To confirm you do want to withdraw your application, press the button below.
+            {% endblocktrans %}
+        </p>
+
+        {% if errors %}
+            <div class="form__errors">
+                {% for error in errors %}
+                    <p{% if forloop.last %} class="margin-bottom__remove"{% endif %}>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <button class="form__submit button" type="submit">
+                <div class="button__shadow"></div>
+                <div class="button__inner">
+                    Withdraw
+                </div>
+            </button>
+        </form>
+
+        <p>
+            {% blocktrans %}
+            If you didn&apos;t mean to withdraw your application, don&apos;t worry.
+            Just close this window.
+            {% endblocktrans %}
+        </p>
+        {% if application.booked_interview %}
+            <hr>
+            <p>
+                {% blocktrans %}
+                You can also cancel your current interview and select a new time and date.
+                {% endblocktrans %}
+            </p>
+            <a href="{% url 'applications:release-interview' %}?application_id={{ request.GET.application_id }}" class="form__submit button" type="submit">
+                <div class="button__shadow"></div>
+                <div class="button__inner">
+                    Release Interview
+                </div>
+            </a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

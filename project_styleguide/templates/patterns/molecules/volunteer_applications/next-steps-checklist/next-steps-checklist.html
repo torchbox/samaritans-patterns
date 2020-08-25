@@ -1,0 +1,30 @@
+<section class="next-steps-checklist">
+    <h2 class="thank-you__content-heading">{{ heading }}</h2>
+
+    <ul class="next-steps-checklist__list">
+
+        <li class="next-steps-checklist__item">
+            <h3 class="next-steps-checklist__item-heading">Complete the application form online</h3>
+            <p class="next-steps-checklist__item-text">It's quick – we just need a few details.</p>
+        </li>
+
+        <li class="next-steps-checklist__item">
+            <h3 class="next-steps-checklist__item-heading">
+                {% if interview %}
+                    Attend a selection interview
+                {% else %}
+                    Go through a selection process
+                {% endif %}
+            </h3>
+            <p class="next-steps-checklist__item-text">An opportunity learn more about the role and tell us why you want to become a Samaritan.</p>
+        </li>
+
+        {% if interview %}
+            <li class="next-steps-checklist__item">
+                <h3 class="next-steps-checklist__item-heading">Complete a criminal record check</h3>
+                <p class="next-steps-checklist__item-text"> If you have a criminal record it won't necessarily stop you from becoming a volunteer. We’ll consider each case individually.</p>
+            </li>
+        {% endif %}
+
+    </ul>
+</section>

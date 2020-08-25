@@ -1,0 +1,79 @@
+{% extends "patterns/pages/volunteer_applications/layouts/volunteer-with-sidebar/volunteer_with_sidebar.html" %}
+{% load static form_tags i18n %}
+
+{% block title %}{% trans 'Start a background check' %}{% endblock %}
+{% block body_class %}template-with-sidebar template-volunteer{% endblock %}
+
+{% block content %}
+<div class="wrapper wrapper--large">
+
+    {% include "patterns/atoms/volunteer-breadcrumb/breadcrumb.html" with text="Next steps" href=next_steps_url %}
+
+    <h1>{% trans 'Start a background check' %}</h1>
+
+    <p class="lead">
+        {% blocktrans %}
+        Samaritans is committed to safeguarding those that use our service,
+        which includes carrying out background checks on certain volunteer
+        and staff roles. This role therefore requires a criminal record check
+        to be carried out.
+        {% endblocktrans %}
+    </p>
+
+    <p>
+        {% blocktrans %}
+            To start we just need the following details. You&apos;ll then
+            receive a separate email with the next steps.
+        {% endblocktrans %}
+    </p>
+
+    <div role="tablist" aria-multiselectable="true">
+        {% include "patterns/molecules/accordion/accordion-item.html" with index=0 heading="What's involved in a background check?" description="Samaritans actively promotes equality of opportunity for all and welcomes applications from a wide range of applicants.<br/><br/>Samaritans recognises the contribution that people with criminal records make as employees and volunteers and welcomes applications from those with a criminal record. A criminal record will not normally prevent an applicant from being appointed as a volunteer. <br/><br/>We will judge each case on its merits and not discriminate unfairly against any applicant on the basis of a conviction or criminal record information disclosed to us." link_text="More FAQs" link_url="#" classes="accordion--hide-tablet-landscape" %}
+    </div>
+
+    <form  method="post">
+        <div class="form__container">
+            {% csrf_token %}
+            {% render_form_field form.dbs_update_service %}
+            <div
+                class="js-hide-if-checked"
+                data-target-to-watch-for-hiding="#{{ form.dbs_update_service.id_for_label }}"
+            >
+                {% render_form_field form.date_of_birth %}
+                {% render_form_field form.title %}
+                {% render_form_field form.gender %}
+            </div>
+
+            {% include "patterns/molecules/alert/alert.html" with alert="By submitting you confirm that Samaritans may begin a background check on your behalf" %}
+
+            <button class="form__submit button" type="submit">
+                <div class="button__shadow"></div>
+                <div class="button__inner">
+                    {% trans 'Submit' %}
+                    {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="icon button__icon" title="Select" aria_hide=True %}
+                </div>
+            </button>
+        </div>
+    </form>
+
+    <p>
+        {% url 'criminal-records-vetting-policy' as vetting_policy_url %}
+        {% blocktrans with url=vetting_policy_url %}
+        If you would like to find out more, our <a href="{{ url }}" target="_blank" rel="noopener noreferrer">criminal records vetting policy</a>
+        explains how we use criminal records as part of our recruitment and
+        selection process.
+        {% endblocktrans %}
+    </p>
+
+</div>
+{% endblock %}
+
+{% block sidebar %}
+    <aside class="sidebar">
+        {% include "patterns/molecules/callout-text-box/callout-text-box.html" with heading="What's involved in a background check?" text="Samaritans actively promotes equality of opportunity for all and welcomes applications from a wide range of applicants.<br/><br/>Samaritans recognises the contribution that people with criminal records make as employees and volunteers and welcomes applications from those with a criminal record.<br/><br/>A criminal record will not normally prevent an applicant from being appointed as a volunteer. We will judge each case on its merits and not discriminate unfairly against any applicant on the basis of a conviction or criminal record information disclosed to us." link_text="More FAQs" link_url="#" %}
+    </aside>
+{% endblock %}
+
+{% block footer %}
+    {% include "patterns/molecules/volunteer_applications/dashboard-footer/dashboard-footer.html" %}
+{% endblock %}

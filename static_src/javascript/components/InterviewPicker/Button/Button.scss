@@ -1,0 +1,106 @@
+.interview-button {
+    $root: &;
+    $padding: 12px;
+    $padding-large: 18px;
+    $icon-margin: 20px;
+
+    @include target-ie11() {
+        max-width: 100%;
+    }
+
+    @include font-size(s);
+    position: relative;
+    display: block;
+    max-width: 240px;
+    padding: 0 0 5px 5px;
+    color: $white;
+    transition: background-color, color, $transition;
+
+    #{$hover} {
+        color: $white;
+
+        #{$root}__inner {
+            background-color: $teal;
+        }
+
+        #{$root}__shadow,
+        #{$root}__inner::after {
+            background-color: $emerald;
+        }
+    }
+
+    &__shadow,
+    &__inner::after {
+        position: absolute;
+        content: '';
+        background-color: $teal;
+        transition: background-color $transition;
+    }
+
+    &__shadow {
+        top: 5px;
+        right: 5px;
+        bottom: 0;
+        left: 0;
+        height: 36px;
+        max-width: 240px;
+    }
+
+    &__inner {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: ($padding - 4.5px) $padding;
+        padding-left: $gutter-medium;
+        font-weight: $weight--bold;
+        background-color: $emerald;
+        transition: background-color $transition;
+
+        &::after {
+            width: 10px;
+            height: 5px;
+            margin-top: -2.5px;
+            top: 50%;
+            left: 0;
+            border-top-right-radius: 6px;
+            border-bottom-right-radius: 6px;
+        }
+    }
+
+    &__icon {
+        margin-left: $icon-margin;
+        opacity: 0.75;
+        flex-shrink: 0;
+        fill: currentColor;
+    }
+}
+
+.button-slot {
+    @include font-size(xs);
+    border-radius: 4px;
+    text-align: center;
+    font-weight: $weight--bold;
+    background-color: $white;
+    border: 1.5px solid $teal;
+    color: $teal;
+    padding: 10px 22px;
+    margin: 20px 20px 0 0;
+    min-width: 90px;
+
+    @include media-query(tablet-portrait) {
+        &:hover,
+        &:focus {
+            background-color: $teal;
+            color: $white;
+        }
+    }
+
+    &--selected {
+        &,
+        &:focus {
+            background-color: $teal;
+            color: $white;
+        }
+    }
+}

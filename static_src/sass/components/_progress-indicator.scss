@@ -1,0 +1,88 @@
+$blob-size-small: 30px;
+$blob-size-large: 40px;
+
+.progress-indicator {
+    $root: &;
+    display: flex;
+    justify-content: space-between;
+    margin: $gutter 2px;
+
+    @include media-query(mob-landscape) {
+        justify-content: flex-start;
+    }
+
+    @include media-query(tablet-portrait) {
+        margin: $gutter-medium 0;
+    }
+
+    &__step {
+        display: flex;
+        align-items: center;
+        margin-right: ($gutter / 2);
+        flex-direction: column;
+
+        @include media-query(mob-landscape) {
+            margin-right: $gutter * 2;
+        }
+
+        @include media-query(tablet-portrait) {
+            flex-direction: row;
+        }
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+    &__blob {
+        @include font-size(s);
+        width: ($blob-size-small + ($gutter / 2));
+        height: ($blob-size-small + ($gutter / 2));
+        background-color: $teal;
+        color: $color--white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: $weight--bold;
+        margin-bottom: ($gutter * 0.25);
+
+        @include media-query(tablet-portrait) {
+            margin-right: ($gutter / 2);
+            margin-bottom: 0;
+            width: ($blob-size-large + ($gutter / 2));
+            height: ($blob-size-large + ($gutter / 2));
+        }
+
+        #{$root}__step--active & {
+            position: relative;
+
+            &::after {
+                content: "";
+                width: $blob-size-small;
+                height: $blob-size-small;
+                background: transparent;
+                position: absolute;
+                border-radius: 50%;
+                z-index: 0;
+                border: 2px solid $color--white;
+                left: 0;
+                right: 0;
+                margin-left: auto;
+                margin-right: auto;
+                top: 50%;
+                transform: translateY(-50%);
+
+                @include media-query(tablet-portrait) {
+                    width: $blob-size-large;
+                    height: $blob-size-large;
+                }
+            }
+        }
+    }
+
+    &__text {
+        margin: 0;
+        font-weight: $weight--bold;
+    }
+}

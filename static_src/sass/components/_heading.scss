@@ -1,0 +1,36 @@
+.heading {
+    background: $emerald;
+
+    &--overlapped {
+        padding-bottom: 50px;
+    }
+
+    &--thank-you {
+        background-image: url('../images/thank-you-hero.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        height: 230px;
+
+        @include media-query(mob-landscape) {
+            height: 400px;
+        }
+
+        @include media-query(tablet-landscape) {
+            background-position: center -30px;
+            height: 670px;
+        }
+
+        @include media-query(desktop-medium) {
+            height: 760px;
+        }
+    }
+
+    &__inner {
+        @include width-from-modifier();
+
+        margin: 0 auto;
+        padding: $gutter-large $gutter;
+        color: $color--white;
+    }
+}

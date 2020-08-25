@@ -1,0 +1,54 @@
+{% load static form_tags i18n %}
+
+{% if form.errors %}
+    <div class="form__errors">
+        {% blocktrans %}
+            Could not select a branch. Try again later.
+        {% endblocktrans %}
+    </div>
+{% endif %}
+
+<form id="volunteering-branch-form" class="search search--branch-finder js-branch-search-form" method="post">
+    <h2>{% trans 'Where would you like to volunteer from?' %}</h2>
+    <label class="search__label" for="branch-input">Postcode or town/city</label>
+    <div class="search__fields">
+        <input class="search__input" id="branch-input" type="text" name="query" {% if search_query %}value="{{ search_query }}{% endif %}">
+        <button class="search__button button button--search" type="submit">
+            {% trans 'Search' %}
+            {% include "patterns/atoms/svg/icons/icon-search.html" with classes="icon button__icon" title="Search" aria_hide=True %}
+        </button>
+    </div>
+</form>
+
+<section>
+    <h2 hidden data-branches-results-heading>{% trans 'Your nearest Samaritans locations are:' %}</h2>
+
+    <div id="search-help-text" aria-live="polite"></div>
+
+    <div class="branch-list">
+        {% for object in object_list %}
+            <form class="card card--with-button is-hidden" method="post" data-branch data-branch-id="{{ object.branch_id }}">
+                <div class="card__inner">
+                    {% csrf_token %}
+                    <h3 class="card__heading">{{ object.title }}</h3>
+                    <p class="card__copy">{{ object.street_address_1 }}, {{ object.city }} {{ object.postcode }}</p>
+                    {% if object.wheelchair_accessible %}
+                        <p class="card__copy card__copy--meta">Wheelchair accessible</p>
+                    {% endif %}
+                    {% if object.accessibility_notes %}
+                        <p class="card__copy card__copy--meta">{{ object.accessibility_notes }}</p>
+                    {% endif %}
+                    <input type="hidden" name="branch_id" value="{{ object.branch_id }}" />
+                </div>
+
+                <button class="form__submit button" type="submit">
+                    <div class="button__shadow"></div>
+                    <div class="button__inner">
+                        {% trans 'Select' %}
+                        {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="icon button__icon" title="Select" aria_hide=True %}
+                    </div>
+                </button>
+            </form>
+        {% endfor %}
+    </div>
+</section>
