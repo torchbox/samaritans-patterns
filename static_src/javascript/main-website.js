@@ -27,13 +27,14 @@ import "./components/smooth-scroll";
 import "./components/branch-finder";
 import "./components/volunteering-branch-finder";
 import initiMobileNumberAutocomplete from "./components/mobile-number-autocomplete";
-import RescheduleInterview from './components/reschedule-interview';
+import RescheduleInterview from "./components/reschedule-interview";
 import initMobileNumberField from "./components/mobile-number-field";
 import initDonationSliders from "./components/donate-slider";
 import { initInterviewPicker } from "./components/InterviewPicker/InterviewPicker";
 import initialiseHideIfCheckedElement from "./components/hide-if-checked";
-import TrainingCourse from './components/training-course';
-import './components/referee-details';
+import TrainingCourse from "./components/training-course";
+import disableButtonAfterSubmit from "./components/disable-button-after-submit";
+import "./components/referee-details";
 
 document.addEventListener("DOMContentLoaded", function () {
     new CookieWarning();
@@ -53,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     for (const trainingcourse of document.querySelectorAll(
-        TrainingCourse.selector(),
+        TrainingCourse.selector()
     )) {
         new TrainingCourse(trainingcourse);
     }
@@ -165,10 +166,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     for (const rescheduleinterview of document.querySelectorAll(
-        RescheduleInterview.selector(),
+        RescheduleInterview.selector()
     )) {
         new RescheduleInterview(rescheduleinterview);
     }
 
     initInterviewPicker();
+
+    Array.from(
+        document.querySelectorAll("form[data-js-disable-button-after-submit]")
+    ).forEach((formElement) => disableButtonAfterSubmit(formElement));
 });

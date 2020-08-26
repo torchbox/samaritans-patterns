@@ -17,7 +17,7 @@
 
             {% include "patterns/molecules/volunteer_applications/selected-branch/selected-branch.html" with branch_name=selected_branch.title link_text="Change branch" link_url=branch_selection_url %}
 
-            <form method="post">
+            <form method="post" data-js-disable-button-after-submit>
                 <div class="form__container">
                     {% csrf_token %}
 
