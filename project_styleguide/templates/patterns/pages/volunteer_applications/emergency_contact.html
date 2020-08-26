@@ -15,7 +15,7 @@
     </p>
 
     <div role="tablist" aria-multiselectable="true">
-        {% include "patterns/molecules/accordion/accordion-item.html" with index=0 heading="You might like to know" description="Your emergency contact details will be kept on your &lsquo;profile&rsquo;, but you will be able to change this once you are a volunteer with us." link_text="More FAQs" link_url="#" classes="accordion--hide-tablet-landscape" %}
+        {% include "patterns/molecules/accordion/accordion-item.html" with index=0 heading="You might like to know" description="Your emergency contact details will be kept on your &lsquo;profile&rsquo;, but you will be able to change this once you are a volunteer with us." classes="accordion--hide-tablet-landscape" %}
     </div>
 
     {% if form.non_field_errors %}
@@ -51,7 +51,7 @@
 {% endblock %}
 
 {% block sidebar %}
-    {% include "patterns/molecules/callout-text-box/callout-text-box.html" with heading="You might like to know" text="Your emergency contact details will be kept on your &lsquo;profile&rsquo;, but you will be able to change this once you are a volunteer with us." link_text="More FAQs" link_url="#" %}
+    {% include "patterns/molecules/callout-text-box/callout-text-box.html" with heading="You might like to know" text="Your emergency contact details will be kept on your &lsquo;profile&rsquo;, but you will be able to change this once you are a volunteer with us." %}
 {% endblock %}
 
 
