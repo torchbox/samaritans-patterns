@@ -109,6 +109,7 @@
 @import 'components/index';
 @import 'components/inline-cta';
 @import 'components/inline-story-block';
+@import 'components/interview-filter';
 @import 'components/listening-cta';
 @import 'components/tabccordion';
 @import 'components/service-block';
@@ -132,6 +133,13 @@
 @import 'components/donate-slider';
 @import 'components/nations-block';
 @import 'components/referees';
+
+// React interview picker components
+@import '../javascript/components/InterviewPicker/Button/Button';
+@import '../javascript/components/InterviewPicker/DatePicker/DatePicker';
+@import '../javascript/components/InterviewPicker/SlotPicker/SlotPicker';
+@import '../javascript/components/InterviewPicker/CalendarButton/CalendarButton';
+@import '../javascript/components/InterviewPicker/InterviewPicker';
 
 // Layout
 @import 'layout/footer';

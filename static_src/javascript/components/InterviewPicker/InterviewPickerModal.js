@@ -22,11 +22,11 @@ export const InterviewPickerModal = ({
                 <p>
                     You have chosen to a {interview_type} interview on{' '}
                     {moment(datetime)
-                        .tz(window.djangoTimezone)
+                        .tz(window.timezone)
                         .format('MMMM Do')}{' '}
                     at{' '}
                     {moment(datetime)
-                        .tz(window.djangoTimezone)
+                        .tz(window.timezone)
                         .format('H:mm')}
                 </p>
                 {location && (

@@ -1,8 +1,8 @@
-import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
+import React, { Fragment } from "react";
+import PropTypes from "prop-types";
 
-import { typesOfInterview } from '../InterviewPicker';
-import InterviewSlots from '../InterviewSlots';
+import { typesOfInterview } from "../InterviewPicker";
+import InterviewSlots from "../InterviewSlots";
 
 /**
  * Widget to display a list of interview slots ordered by type,
@@ -17,11 +17,7 @@ const SlotPicker = ({
     filters,
 }) => {
     if (!date) {
-        return (
-            <div className="slotpicker slotpicker__empty">
-                Please choose your preferred date
-            </div>
-        );
+        return <div className="slotpicker slotpicker__empty" />;
     }
 
     const groupedByType = interviews.reduce((grouped, interview) => {
@@ -37,7 +33,7 @@ const SlotPicker = ({
     return (
         <div className="slotpicker">
             <div className="slotpicker__date">
-                {date.format('Do MMMM')} interview slots
+                {date.format("Do MMMM")} interview slots
             </div>
             {Object.values(typesOfInterview).map((interviewType) => {
                 if (!showAllFilters && !filters.includes(interviewType.key)) {
@@ -45,7 +41,7 @@ const SlotPicker = ({
                 }
                 const interviews = groupedByType[interviewType.name] || [];
                 switch (interviewType.key) {
-                    case typesOfInterview['Face-To-Face Interview'].key:
+                    case typesOfInterview["Face-To-Face Interview"].key:
                         return (
                             <InterviewSlots
                                 key={interviewType.key}

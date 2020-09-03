@@ -1,0 +1,39 @@
+.filter-container {
+    margin: 0 $gutter;
+    @include media-query(desktop) {
+        margin: unset;
+    }
+}
+
+.interview-filter {
+    &.form-item-wrapper--group {
+        display: grid;
+        grid-template-rows: 1fr 1fr 1fr;
+        margin-left: 4px;
+
+        @include media-query(mob-landscape) {
+            grid-template-columns: 1.2fr 1fr 1fr;
+            grid-template-rows: 1fr;
+        }
+
+        > * {
+            flex-basis: auto;
+            padding-right: $gutter;
+        }
+
+        input[type='checkbox'] {
+            border: 6px solid $white;
+            border-radius: 2px;
+            box-shadow: 0 0 0 2px $grey-dark;
+            width: 1.75rem;
+            height: 1.75rem;
+            margin-top: 0;
+            margin-right: $gutter;
+        }
+
+        label {
+            @include font-size(default);
+            align-self: center;
+        }
+    }
+}

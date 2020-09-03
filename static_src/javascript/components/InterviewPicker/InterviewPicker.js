@@ -1,3 +1,4 @@
+import 'react-dates/initialize';
 import ReactDOM from 'react-dom';
 import React, { useState, useEffect, useRef } from 'react';
 import ReactModal from 'react-modal';
@@ -243,7 +244,7 @@ export const initInterviewPicker = () => {
             const slotDatetime = new Date(selectedSlot.datetime);
             locationField.value = selectedSlot.location_name;
             (datetimeField.value = moment(slotDatetime)
-                .tz(window.djangoTimezone)
+                .tz(window.timezone)
                 .format('YYYY-MM-DD HH:mm:ss')),
                 (interviewTypeField.value = selectedSlot.interview_type);
             form.submit();

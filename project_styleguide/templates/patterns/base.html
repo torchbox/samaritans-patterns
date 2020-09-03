@@ -23,7 +23,7 @@
 
     <body class="{% block body_class %}template-{{ page.get_verbose_name|slugify }}{% endblock %}">
         <script type="text/javascript">
-            window.timezone = "{{ TIME_ZONE }}";
+            window.timezone = "{{ TIME_ZONE|escapejs }}";
         </script>
         {% block body_top %}{% endblock %}
 

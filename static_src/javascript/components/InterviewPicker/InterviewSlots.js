@@ -11,7 +11,7 @@ import Button from './Button/Button';
 const Slots = ({ slots, isSelected, onSelect }) => {
     return slots.map((slot) => {
         const label = moment(slot.datetime)
-            .tz(window.djangoTimezone)
+            .tz(window.timezone)
             .format('H:mm');
         return (
             <Button

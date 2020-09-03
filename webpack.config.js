@@ -14,6 +14,9 @@ const options = {
         path: path.resolve('./static_compiled/js/'),
         filename: '[name].js' // based on entry name, e.g. main.js
     },
+    plugins: [
+        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/, /moment-timezone$/),
+    ],
     module: {
         rules: [
             {
