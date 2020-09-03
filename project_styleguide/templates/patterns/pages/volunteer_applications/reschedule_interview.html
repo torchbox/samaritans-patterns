@@ -20,12 +20,14 @@
         {% endif %}
             <p>
                 {% blocktrans %}
-                    Do you want to reschedule your interview? This will cancel your current interview and let you select a new interview time and date.
+                    The people running your interview are volunteers too, and missed interviews greatly affect
+                    our ability to answer calls and deliver the rest of our service. In order to reschedule we
+                    first need to cancel your existing interview date.
                 {% endblocktrans %}
             </p>
             <p>
                {% blocktrans with location=branch.branch_name interview_date=application.booked_interview.datetime|date:"M d, Y" %}
-                   You&apos;re current interview is booked in <b>{{ location }}</b> on <b>{{ interview_date }}</b>.</p>
+                   Your current interview is booked in <b>{{ location }}</b> on <b>{{ interview_date }}</b>.</p>
                {% endblocktrans %}
             </p>
         <form method="post" data-reschedule-training-form>
