@@ -28,13 +28,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // get input contents
     function getRefereeDetails(fieldset) {
-        let details = [];
+        let details = {};
         let hasAddedInfo = false;
 
         const allInputs = [...fieldset.querySelectorAll('input')];
 
         allInputs.forEach((input) => {
-            details.push(input.value);
+            let labelText = input.id;
+            if (input.labels.length > 0) {
+                labelText = input.labels[0].textContent.replace("*", "").trim();
+            }
+            details[labelText] = input.value.trim();
             if (input.value && !hasAddedInfo) {
                 hasAddedInfo = true;
                 hintText.classList.add('is-hidden');
@@ -46,15 +50,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // create markup
     function createMarkup(details) {
-        const name = `${details[0]} ${details[1]}`;
-        const email = `${details[2]}`;
-        const phone = `${details[3]}`;
-
         const markup = `
             <div class="referees__item">
-                <p class="referees__text referees__text--standout">${name}</p>
-                <p class="referees__text">${email}</p>
-                <p class="referees__text">${phone}</p>
+                ${Object.entries(details).map(([k, v]) => {
+                    return `<p class="referees__text">${k}: ${v.trim()}</p>`;
+                }).join("")}
             </div>
         `;
 

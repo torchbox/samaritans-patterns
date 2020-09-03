@@ -35,6 +35,7 @@ import initialiseHideIfCheckedElement from "./components/hide-if-checked";
 import TrainingCourse from "./components/training-course";
 import disableButtonAfterSubmit from "./components/disable-button-after-submit";
 import "./components/referee-details";
+import GenderReveal from "./components/gender-reveal";
 
 document.addEventListener("DOMContentLoaded", function () {
     new CookieWarning();
@@ -171,6 +172,11 @@ document.addEventListener("DOMContentLoaded", function () {
         new RescheduleInterview(rescheduleinterview);
     }
 
+    for (const genderreveal of document.querySelectorAll(
+        GenderReveal.selector()
+    )) {
+        new GenderReveal(genderreveal);
+    }
     initInterviewPicker();
 
     Array.from(

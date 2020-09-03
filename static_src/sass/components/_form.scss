@@ -23,7 +23,6 @@
                 order: -2;
                 flex: 1;
             }
-
         }
 
         &--full-width {
@@ -44,6 +43,15 @@
         padding: 0;
         margin: 0 0 $gutter;
         min-width: 0;
+    }
+
+    // use <h2> for form field titles but make sure the label is accesible
+    &__heading {
+        &--hidden-label {
+            + div > label {
+                @include hidden();
+            }
+        }
     }
 }
 

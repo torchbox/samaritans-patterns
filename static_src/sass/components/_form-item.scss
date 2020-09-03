@@ -14,7 +14,6 @@
         }
     }
 
-
     // for date widget
     &__fieldset {
         padding: 0;
@@ -23,7 +22,8 @@
     }
 
     label, // labels inside form fields
-    &__legend { // legend for date widget
+    &__legend {
+        // legend for date widget
         display: flex;
         margin-bottom: $gutter-small;
 
@@ -54,7 +54,7 @@
         height: 152px;
     }
 
-    select:not([multiple='multiple']) {
+    select:not([multiple="multiple"]) {
         @include dropdown-select;
         height: 52px;
         width: 100%;
@@ -88,7 +88,7 @@
         }
     }
 
-    input[type='checkbox'] {
+    input[type="checkbox"] {
         border-radius: 3px;
 
         @include media-query(mob-landscape) {
@@ -96,7 +96,7 @@
         }
     }
 
-    input[type='radio'] {
+    input[type="radio"] {
         border-radius: 50%;
     }
 
@@ -176,7 +176,7 @@
 
     &-wrapper {
         &--two-col {
-            @supports(display: grid) {
+            @supports (display: grid) {
                 @include media-query(mob-landscape) {
                     display: grid;
                     grid-gap: $gutter-medium;
@@ -215,5 +215,19 @@
 
     &--hidden_input {
         display: none;
+    }
+
+    &--gender-reveal {
+        margin: 0;
+
+        #{$root}--text_input {
+            display: none;
+        }
+
+        &.reveal-gender-input {
+            #{$root}--text_input {
+                display: block;
+            }
+        }
     }
 }

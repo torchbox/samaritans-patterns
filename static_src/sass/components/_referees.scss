@@ -1,0 +1,42 @@
+.referees {
+    &__items {
+        margin-bottom: $gutter;
+
+        @include media-query(mob-landscape) {
+            display: flex;
+            flex-wrap: wrap;
+        }
+    }
+
+    // added via js
+    &__item {
+        margin-bottom: $gutter;
+
+        @include media-query(mob-landscape) {
+            width: calc(50% - #{$gutter});
+
+            &:nth-child(odd) {
+                margin-right: $gutter;
+            }
+        }
+    }
+
+    &__text {
+        margin: 0;
+        word-break: break-word;
+
+        &--standout {
+            font-weight: $weight--bold;
+        }
+    }
+
+    &__errors {
+        font-weight: $weight--bold;
+        color: $hot-pink;
+        margin-bottom: 0;
+
+        &.is-hidden {
+            display: none;
+        }
+    }
+}

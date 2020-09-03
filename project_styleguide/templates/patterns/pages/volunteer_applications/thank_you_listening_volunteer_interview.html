@@ -4,16 +4,11 @@
 {% block title %}{% trans 'Thank you' %}{% endblock %}
 
 {% block content %}
-    <div class="heading heading--overlapped">
-        <div class="heading__inner">
-            <div class="thank-you__heading-wrapper">
-                <h1 class="thank-you__heading-text">{% trans 'Thank you' %}{% if first_name %}, {{ first_name }}{% endif %}</h1>
-            </div>
-        </div>
-    </div>
+    <div class="heading heading--overlapped heading--thank-you" aria-hidden="true"></div>
     <div class="content">
-        <div class="content__inner content__inner--overlap-top">
+        <div class="content__inner content__inner--thank-you">
             <div class="thank-you__content">
+                <h1 class="thank-you__heading-text">{% trans 'Thank you' %}{% if first_name %}, {{ first_name }}{% endif %}</h1>
                 <p>
                     {% blocktrans with location_name=interview.location_name time=interview.datetime|date:"TIME_FORMAT" date=interview.datetime|date:"D j M Y" %}
                     You&apos;ve booked a selection interview in <strong>{{ location_name }} at {{ time }} on {{ date }}</strong>.
@@ -39,9 +34,6 @@
                 application and any information about Samaritan services.
                 {% endblocktrans %}
                 {% include 'patterns/molecules/alert/alert.html' with alert=info_text %}
-
-                {% include 'patterns/molecules/volunteer_applications/next-steps-checklist/next-steps-checklist.html' with interview=True %}
-
             </div>
         </div>
     </div>

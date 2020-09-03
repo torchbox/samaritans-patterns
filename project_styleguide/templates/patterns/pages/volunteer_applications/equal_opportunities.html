@@ -36,10 +36,11 @@
                         </div>
                     {% endif %}
 
-                    <h2>{% trans 'Do you have any accessibility needs for the interview? Please let us know details here: (optional)' %}</h2>
-                    {% render_form_field form.accessibility_requirement %}
-
+                    <h2 class="form__heading form__heading--hidden-label">{% trans 'Where did you find out about volunteering with us?' %}</h2>
                     {% render_form_field form.contact_reason %}
+
+                    <h2 class="form__heading">{% trans 'Do you have any accessibility needs for the interview?' %}</h2>
+                    {% render_form_field form.accessibility_requirement %}
 
                     <h2>{% trans 'Equal opportunities' %}</h2>
                     <p>
@@ -57,7 +58,10 @@
                         {% endblocktrans %}
                     </p>
                     {% render_form_field form.age_range %}
-                    {% render_form_field form.gender %}
+                    <div class="form-item form-item--gender-reveal" data-gender-reveal>
+                        {% render_form_field form.gender %}
+                        {% render_form_field form.gender_self_describe %}
+                    </div>
                     {% render_form_field form.ethnic_group %}
 
                     {% include "patterns/atoms/buttons/button--button.html" with classes="form__submit button" label="Submit" %}
