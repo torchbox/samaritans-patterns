@@ -8,6 +8,23 @@
         }
     }
 
+    &--volunteer {
+        background-color: $teal;
+        padding: 15px 0;
+
+        #{$root}__inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            justify-content: flex-start;
+        }
+
+        #{$root}__logo {
+            height: auto;
+            width: auto;
+        }
+    }
+
     &__inner {
         display: flex;
         flex-wrap: wrap;
@@ -227,6 +244,20 @@
             nav {
                 width: 100%;
             }
+        }
+    }
+
+    // Only used for volunteer at the mo
+    &__text {
+        @include font-size(s);
+        color: $color--white;
+        font-weight: $weight--bold;
+        margin: $gutter / 2 0 $gutter / 3;
+
+        @include media-query(tablet-portrait) {
+            @include font-size(m);
+            margin: auto $gutter;
+            align-self: center; // For IE11 support
         }
     }
 }
