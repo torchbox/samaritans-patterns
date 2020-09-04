@@ -41,6 +41,10 @@
         }
     }
 
+    &--group {
+        margin-right: $gutter;
+    }
+
     &__shadow,
     &__inner::after {
         background: $teal;
@@ -128,7 +132,6 @@
             @include media-query(mob-landscape) {
                 @include font-size(m);
             }
-
         }
 
         &#{$root}--plain {
@@ -244,7 +247,6 @@
             background: $teal;
             transition: background $transition;
         }
-
 
         #{$hover} {
             background: $teal;

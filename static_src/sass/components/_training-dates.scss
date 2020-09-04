@@ -34,4 +34,11 @@
             margin-top: 0;
         }
     }
+
+    .accordion--training & {
+        // Adding specificity as unsure if this is used in lots of places
+        flex-basis: 100%;
+        min-width: 100%;
+        max-width: 100%;
+    }
 }

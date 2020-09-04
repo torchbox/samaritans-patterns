@@ -102,14 +102,6 @@
             padding-left: 2 * $gutter;
         }
 
-        #{$root}--training & {
-            padding: 0 $gutter;
-
-            @include media-query(mob-landscape) {
-                padding: 0 $gutter-medium 0 $gutter;
-            }
-        }
-
         #{$root}--tabccordion & {
             @include media-query(tablet-portrait) {
                 padding: 0;
@@ -214,6 +206,15 @@
 
         #{$root}__icon-wrapper {
             margin: ($gutter-small / 2) 0 auto;
+        }
+
+        #{$root}__content {
+            flex-wrap: wrap;
+            padding: 0 $gutter;
+
+            @include media-query(mob-landscape) {
+                padding: 0 $gutter-medium 0 $gutter;
+            }
         }
 
         #{$root}__content-footer {
