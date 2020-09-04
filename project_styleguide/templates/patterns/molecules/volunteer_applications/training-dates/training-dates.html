@@ -10,11 +10,6 @@
             <div class="training-dates__right-column">
                 <p class="training-dates__text">{{ session.date }}</p>
                 <p class="training-dates__text training-dates__text--time">{{ session.start_time }}-{{ session.end_time }}</p>
-                <p>
-                    <a href="data:text/calendar;charset=utf-8;base64,{{ session.ics_base64 }}" download="{{ session.ics_filename }}">
-                        Download ICS
-                    </a>
-                </p>
             </div>
         </li>
     {% endfor %}

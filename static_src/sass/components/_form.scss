@@ -5,6 +5,12 @@
         margin-top: $gutter-xxl;
     }
 
+    &--training-course {
+        .accordion--training & {
+            display: none;
+        }
+    }
+
     &__container {
         margin-bottom: $gutter;
 

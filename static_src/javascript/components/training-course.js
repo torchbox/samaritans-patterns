@@ -29,7 +29,7 @@ class TrainingCourse {
         this.openModalButton.addEventListener('click', (e) => {
             e.preventDefault();
             this.openModal();
-            this.addFormMarkup(this.openModalButton.nextElementSibling);
+            this.addFormMarkup(this.openModalButton.parentNode.nextElementSibling);
         });
     }
 

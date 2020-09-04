@@ -52,7 +52,7 @@ export const InterviewPickerModal = ({
                         aria-hidden="true"
                     ></div>
                     <div className="interview-button__inner">
-                        Book this slot
+                        Book this interview
                         <svg
                             className="icon icon--icon-chevron button__icon button__icon--after"
                             aria-hidden="true"

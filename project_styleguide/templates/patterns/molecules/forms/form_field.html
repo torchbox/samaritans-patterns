@@ -25,6 +25,15 @@ form-item
             <legend class="form-item__legend">{{ field.label }}</legend>
             {% include "patterns/molecules/forms/_field-wrapper.html" %}
         </fieldset>
+    {% elif widget_type == 'radio_select' %}
+        <ul id="{{ field.auto_id }}" class="form-item__list">
+            {% for subfield in field %}
+                <li class="form-item__radio-checkbox">
+                    <input id="{{ subfield.id_for_label }}" type="{{ subfield.data.type }}" name="{{ subfield.data.name }}" value={{ subfield.data.value }}>
+                    <label for="{{ subfield.id_for_label }}" class="form-item__label">{{ subfield.data.label }}</label>
+                </li>
+            {% endfor %}
+        </ul>
     {% else %}
         {% include "patterns/molecules/forms/_field-wrapper.html" %}
     {% endif %}

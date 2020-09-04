@@ -50,6 +50,27 @@
         }
     }
 
+    &--dark-bg {
+        background-color: $ink;
+        color: $white;
+        margin-bottom: $gutter-medium;
+        padding: $gutter-medium;
+
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+
+        @include media-query(mob-landscape) {
+            width: unset;
+            margin-left: unset;
+            padding: $gutter-large;
+        }
+
+        a {
+            color: $white;
+            text-decoration: underline;
+        }
+    }
+
     &--page-padding {
         @include page-padding--vertical(top);
         @include page-padding--vertical(bottom);

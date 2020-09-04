@@ -1,0 +1,18 @@
+.cta-card {
+    max-width: $wrapper--wide;
+    background-color: $ink;
+    padding: $gutter * 2;
+
+    &__heading {
+        color: $white;
+    }
+
+    &__text {
+        color: $white;
+    }
+
+    &__link {
+        @include link($white, $white);
+        @include underline($white, $white);
+    }
+}

@@ -1,0 +1,37 @@
+.training-dates {
+    &__session {
+        border-bottom: $grey-border;
+        padding: ($gutter / 2) 0;
+
+        @include media-query(tablet-portrait) {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+
+    &__text {
+        margin: 0;
+
+        &--week {
+            text-transform: uppercase;
+        }
+
+        &--title {
+            font-weight: $weight--bold;
+        }
+
+        &--time {
+            font-weight: $weight--light;
+        }
+    }
+
+    &__right-column {
+        min-width: 200px;
+        margin-top: $gutter / 2;
+
+        @include media-query(tablet-portrait) {
+            text-align: right;
+            margin-top: 0;
+        }
+    }
+}

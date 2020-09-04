@@ -49,7 +49,7 @@ const InterviewSlots = ({ title, slots, groupBy, onSelect, isSelected }) => {
                     <span className="slotpicker__interview-type">{title}</span>
                 </span>
             </legend>
-            {slots.length === 0 && 'We do not have any slots for this date.'}
+            {slots.length === 0 && 'We do not have any interviews for this date.'}
             {Object.keys(grouped).map((group, i) => {
                 const groupData = grouped[group][i];
                 return (

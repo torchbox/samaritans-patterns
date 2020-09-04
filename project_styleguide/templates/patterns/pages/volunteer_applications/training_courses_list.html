@@ -54,6 +54,10 @@
                                     <p class="accordion__details accordion__details--label">{% trans 'Intensive' %}</p>
                                 {% endif %}
 
+                                {% if training_course.online %}
+                                    <p class="accordion__details accordion__details--label">{% trans 'Online' %}</p>
+                                {% endif %}
+
                                 {% if not training_course.intensive %}
                                     <p class="accordion__details accordion__details--meta">
                                         {% blocktrans count in_person_slots_number=training_course.in_person_slots|length %}
@@ -86,7 +90,7 @@
                                 {% for slot in training_course.in_person_slots %}
                                 <li class="training-dates__session">
                                     <div>
-                                        <p class="training-dates__text training-dates__text--week">{% blocktrans with week_no=forloop.counter %}Week {{ week_no }}{% endblocktrans %}</p>
+                                        <p class="training-dates__text training-dates__text--week">{% blocktrans with module_no=forloop.counter %}Module {{ module_no }}{% endblocktrans %}</p>
                                         <p class="training-dates__text training-dates__text--title">{{ slot.name }}</p>
                                     </div>
                                     <div class="training-dates__right-column">
@@ -98,11 +102,18 @@
                             </ul>
 
                             <div class="accordion__content-footer">
-                                <h3 class="accordion__footer-heading">{% trans 'Training location:' %}</h3>
-                                <p class="accordion__footer-text">{{ training_course.venue_address }}</p>
-                                <p class="accordion__footer-text accordion__footer-text--small">{{ training_course.accessibility_info }}</p>
+                                {% if training_course.online %}
+                                    <p class="accordion__footer-text">
+                                        We&apos;ll send you some details by email to access your online modules.
+                                    </p>
+                                {% else %}
+                                    <h3 class="accordion__footer-heading">{% trans 'Training location:' %}</h3>
+                                    <p class="accordion__footer-text">{{ training_course.venue_address }}</p>
+                                    <p class="accordion__footer-text accordion__footer-text--small">{{ training_course.accessibility_info }}</p>
+                                {% endif %}
+
                                 <div class="accordion__footer-button">
-                                {% include "patterns/atoms/buttons/button--button.html" with classes='button--alt' data_attr='data-open-training-modal' type='submit' label='Book this course' %}
+                                    {% include "patterns/atoms/buttons/button--button.html" with classes='button--alt' data_attr='data-open-training-modal' type='submit' label='Book this course' %}
                                 </div>
 
                                 <form method="post" class="form form--training-course">
@@ -133,13 +144,12 @@
             </button>
             <div class="modal__content">
                 <h2 class="modal__title">Before you confirm&hellip;</h2>
-                <p>Once you've confirmed these details we'll start contacting your referees right away.</p>
 
                 <p>You've booked a training course in <b data-venue-slot></b> running from <b data-date-slot></b>. We're excited for you to join us!</p>
 
                 {% include 'patterns/molecules/alert/alert.html' with alert="We have a waiting list of people waiting for an inteview. Missing your appointment greatly impacts Samaritans ability to deliver our services to those that need them so please ensure this time is right for you." %}
 
-                <p>We'll send confirmation of location, date, time and other helpful information to your email address after you confirm.</p>
+                <p>{% trans 'We&apos;ll send more information to your email address after you confirm.' %}</p>
 
                 <div data-form-slot aria-live="polite"></div>
 

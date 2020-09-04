@@ -47,8 +47,7 @@ export const typesOfInterview = {
  **/
 const InterviewPicker = ({ interviews, onSubmit, filterTitle }) => {
     const [selectedDate, setDate] = useState(null);
-
-    const [filters, setFilters] = useState([]);
+    const [filters, setFilters] = useState(Object.values(typesOfInterview).map(v => v.key));
     const [selectedSlot, setSelectedSlot] = useState(null);
     const [showModal, hideModal] = useModal(
         () => (
@@ -94,6 +93,9 @@ const InterviewPicker = ({ interviews, onSubmit, filterTitle }) => {
     );
     const slotsRef = useRef(null);
     const showAllFilters = filters.length === 0;
+
+    // De-select the date if filters change.
+    useEffect(() => setDate(null), [setDate, filters]);
 
     useEffect(() => {
         if (slotsRef.current && selectedDate) {
