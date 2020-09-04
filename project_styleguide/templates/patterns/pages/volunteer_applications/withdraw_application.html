@@ -36,7 +36,7 @@
             <button class="form__submit button" type="submit">
                 <div class="button__shadow"></div>
                 <div class="button__inner">
-                    Withdraw
+                    Withdraw application
                 </div>
             </button>
         </form>
@@ -54,10 +54,10 @@
                 You can also cancel your current interview and select a new time and date.
                 {% endblocktrans %}
             </p>
-            <a href="{% url 'applications:release-interview' %}?application_id={{ request.GET.application_id }}" class="form__submit button" type="submit">
+            <a href="{{ reschedule_interview_url }}" class="form__submit button" type="submit">
                 <div class="button__shadow"></div>
                 <div class="button__inner">
-                    Release Interview
+                    Reschedule interview
                 </div>
             </a>
         {% endif %}
