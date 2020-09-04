@@ -1,6 +1,8 @@
 {% load form_tags icon_tags %}
 
-{% firstof tooltip field.help_text as tooltip %}
+{% if show_tooltip %}
+    {% firstof tooltip field.help_text as tooltip %}
+{% endif %}
 {% with widget_type=field|widget_type field_type=field|field_type %}
 
 <div class="

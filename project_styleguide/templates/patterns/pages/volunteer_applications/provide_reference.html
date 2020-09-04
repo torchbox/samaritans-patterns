@@ -38,29 +38,29 @@
             <form class="form form--alt" method="post">
                 <div class="form__container">
                     {% csrf_token %}
-                    {% render_form_field form.relationship %}
-                    {% render_form_field form.relationship_length %}
+                    {% render_form_field_with_help_text form.relationship %}
+                    {% render_form_field_with_help_text form.relationship_length %}
                     <p>
                         {% blocktrans %}
                         Samaritans service relies on our volunteers having key qualities. Please let us know how you feel the applicant meets these qualities?
                         {% endblocktrans %}
                     </p>
-                    {% render_form_field form.open_minded %}
-                    {% render_form_field form.discreet %}
-                    {% render_form_field form.supportive %}
-                    {% render_form_field form.respectful %}
-                    {% render_form_field form.emphatetic %}
-                    {% render_form_field form.honest %}
-                    {% render_form_field form.comments %}
-                    {% render_form_field form.vulnerable_people_concerns %}
+                    {% render_form_field_with_help_text form.open_minded %}
+                    {% render_form_field_with_help_text form.discreet %}
+                    {% render_form_field_with_help_text form.supportive %}
+                    {% render_form_field_with_help_text form.respectful %}
+                    {% render_form_field_with_help_text form.emphatetic %}
+                    {% render_form_field_with_help_text form.honest %}
+                    {% render_form_field_with_help_text form.comments %}
+                    {% render_form_field_with_help_text form.vulnerable_people_concerns %}
                     <div
                         class="js-hide-if-checked"
                         data-target-to-watch-for-showing="#{{ form.vulnerable_people_concerns.subwidgets.0.id_for_label }}"
                         data-target-to-watch-for-hiding="#{{ form.vulnerable_people_concerns.subwidgets.1.id_for_label }}"
                     >
-                        {% render_form_field form.vulnerable_people_comments %}
+                        {% render_form_field_with_help_text form.vulnerable_people_comments %}
                     </div>
-                    {% render_form_field form.further_information %}
+                    {% render_form_field_with_help_text form.further_information %}
 
                     <button class="button" data-referee-form-submit>
                         <div class="button__shadow"></div>
