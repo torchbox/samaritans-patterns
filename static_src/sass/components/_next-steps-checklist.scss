@@ -1,0 +1,58 @@
+.next-steps-checklist {
+    $root: &;
+    max-width: $wrapper--small;
+    color: $charcoal;
+
+    &__list {
+        border-left: 8px solid $amethyst;
+        padding-left: ($gutter * 2.5);
+        margin: ($gutter * 2) ($gutter * 1.3);
+        counter-reset: checklist;
+    }
+
+    &__item-heading {
+        margin: 0;
+    }
+
+    &__item-text {
+        margin-bottom: $gutter / 2;
+    }
+
+    &__item {
+        position: relative;
+
+        &::before {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            content: counter(checklist);
+            counter-increment: checklist;
+            left: -75px;
+            top: -2px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: $amethyst;
+            font-weight: $weight--bold;
+            padding-top: 1px;
+            color: $white;
+            fill: $white;
+        }
+
+        &:first-child {
+            color: $darker-grey-text;
+
+            #{$root}__item-text {
+                margin-bottom: $gutter * 1.5;
+            }
+
+            &::before {
+                content: '';
+                background-image: url('../images/tick.svg');
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+        }
+    }
+}

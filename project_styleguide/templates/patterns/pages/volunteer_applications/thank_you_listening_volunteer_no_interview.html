@@ -4,24 +4,29 @@
 {% block title %}{% trans 'Thank you' %}{% endblock %}
 
 {% block content %}
-    <div class="heading heading--overlapped heading--thank-you" aria-hidden="true"></div>
-    <div class="content">
-        <div class="content__inner content__inner--thank-you">
-            <div class="thank-you__content">
-                <h1 class="thank-you__heading-text">{% trans 'Thank you' %}{% if first_name %}, {{ first_name }}{% endif %}</h1>
+<div class="heading heading--overlapped heading--thank-you" aria-hidden="true"></div>
+<div class="content">
+    <div class="content__inner content__inner--thank-you">
+        <div class="thank-you__content">
+            <h1 class="thank-you__heading-text">{% trans 'Thank you' %}{% if first_name %}, {{ first_name }}{% endif %}
+            </h1>
 
-                <p>{% trans 'Thanks for your interest in becoming a Samaritan.' %}</p>
+            <p>{% trans 'Thanks for your interest in becoming a Samaritan.' %}</p>
 
-                <p>{% trans 'Your volunteering application has been submitted and you will be contacted with details of what the next steps are.' %}</p>
+            <p>{% trans 'Your volunteering application has been submitted and you will be contacted with details of what the next steps are.' %}
+            </p>
 
-                <p>
-                    {% blocktrans %}
-                        We have also sent a welcome email to the email address you gave us.
-                    {% endblocktrans %}
-                </p>
+            <p>
+                {% blocktrans %}
+                We have also sent a welcome email to the email address you gave us.
+                {% endblocktrans %}
+            </p>
 
-                {% include 'patterns/molecules/alert/alert.html' with alert="To protect others we ask that you avoid publicly sharing your application and any information about Samaritan services." %}
-            </div>
+            {% include 'patterns/molecules/alert/alert.html' with alert="To protect others we ask that you avoid publicly sharing your application and any information about Samaritan services." %}
+
+            <br>
+            {% include 'patterns/molecules/volunteer_applications/other-ways-to-help-cta/other-ways-to-help-cta.html' %}
         </div>
     </div>
+</div>
 {% endblock %}

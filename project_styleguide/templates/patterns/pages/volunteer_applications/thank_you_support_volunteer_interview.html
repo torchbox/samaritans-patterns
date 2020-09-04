@@ -5,35 +5,41 @@
 
 {% block content %}
 <div class="heading heading--overlapped heading--thank-you" aria-hidden="true"></div>
-    <div class="content">
-        <div class="content__inner content__inner--thank-you">
-            <div>
-                <div class="thank-you__content">
-                    <h1 class="thank-you__heading-text">{% trans 'Thank you' %}{% if first_name %}, {{ first_name }}{% endif %}</h1>
-                    <p>
-                        {% blocktrans with location_name=interview.location_name time=interview.datetime|date:"TIME_FORMAT" date=interview.datetime|date:"D j M Y" %}
-                        You&apos;ve booked a selection interview in <strong>{{ location_name }} at {{ time }} on {{ date }}</strong>.
-                        {% endblocktrans %}
-                    </p>
+<div class="content">
+    <div class="content__inner content__inner--thank-you">
+        <div>
+            <div class="thank-you__content">
+                <h1 class="thank-you__heading-text">{% trans 'Thank you' %}{% if first_name %},
+                    {{ first_name }}{% endif %}</h1>
+                <p>
+                    {% blocktrans with location_name=interview.location_name time=interview.datetime|date:"TIME_FORMAT" date=interview.datetime|date:"D j M Y" %}
+                    You&apos;ve booked a selection interview in <strong>{{ location_name }} at {{ time }} on
+                        {{ date }}</strong>.
+                    {% endblocktrans %}
+                </p>
 
-                    {% if interview.location_name %}
-                        <h2 class="thank-you__content-heading">{% trans 'Address' %}</h2>
-                        <p>
-                            {{ interview.location_name }}, {{ interview.location_street }}, {{ interview.location_city}}, {{ interview.location_post_code }}
-                        </p>
-                    {% endif %}
+                {% if interview.location_name %}
+                <h2 class="thank-you__content-heading">{% trans 'Address' %}</h2>
+                <p>
+                    {{ interview.location_name }}, {{ interview.location_street }}, {{ interview.location_city}},
+                    {{ interview.location_post_code }}
+                </p>
+                {% endif %}
 
-                    <h2 class="thank-you__content-heading">{% trans 'What happens next?' %}</h2>
+                <h2 class="thank-you__content-heading">{% trans 'What happens next?' %}</h2>
 
-                    <p>
-                        {% blocktrans %}
-                            A confirmation email will be sent straight to your email address.
-                        {% endblocktrans %}
-                    </p>
+                <p>
+                    {% blocktrans %}
+                    A confirmation email will be sent straight to your email address.
+                    {% endblocktrans %}
+                </p>
 
-                    {% include 'patterns/molecules/alert/alert.html' with alert="To protect others we ask that you avoid publicly sharing your application and any information about Samaritan services." %}
-                </div>
+                {% include 'patterns/molecules/alert/alert.html' with alert="To protect others we ask that you avoid publicly sharing your application and any information about Samaritan services." %}
+
+                <br>
+                {% include 'patterns/molecules/volunteer_applications/other-ways-to-help-cta/other-ways-to-help-cta.html' %}
             </div>
         </div>
     </div>
+</div>
 {% endblock %}
