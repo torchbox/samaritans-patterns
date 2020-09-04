@@ -50,7 +50,7 @@
 
                 </div>
 
-                {% include 'patterns/molecules/alert/alert.html' with alert="Our training team are volunteers too! Missed training days greatly impacts Samaritans ability to deliver our services to those that need them. But we get it, sometimes things change." contact_url="mailto:supportercare@samaritans.org" %}
+                {% include 'patterns/molecules/alert/alert.html' with alert="Our training team are volunteers too! Missed training days greatly impacts Samaritans ability to deliver our services to those that need them. But we get it, sometimes things change." contact_url="mailto:"|add:application.recruitment_email %}
 
             </div>
         </div>

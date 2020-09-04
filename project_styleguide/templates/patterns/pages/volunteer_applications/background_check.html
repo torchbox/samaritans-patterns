@@ -77,5 +77,5 @@
 {% endblock %}
 
 {% block footer %}
-    {% include "patterns/molecules/volunteer_applications/dashboard-footer/dashboard-footer.html" %}
+    {% include "patterns/molecules/volunteer_applications/dashboard-footer/dashboard-footer.html" with get_in_touch_email=application.recruitment_email %}
 {% endblock %}
