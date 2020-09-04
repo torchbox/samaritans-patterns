@@ -44,7 +44,7 @@
                 {% render_form_field form.gender %}
             </div>
 
-            {% include "patterns/molecules/alert/alert.html" with alert="By submitting you confirm that Samaritans may begin a background check on your behalf" %}
+                {% include "patterns/molecules/alert/alert.html" with alert="Please note these fields are specified by our Online DBS provider to be able to register for the check to be carried out – the information will only be used in relation to your criminal record check.<br><br>By submitting you confirm that Samaritans may begin a background check on your behalf." %}
 
             <button class="form__submit button" type="submit">
                 <div class="button__shadow"></div>
@@ -57,9 +57,11 @@
     </form>
 
     <p>
-        {% url 'criminal-records-vetting-policy' as vetting_policy_url %}
         {% blocktrans with url=vetting_policy_url %}
-        If you would like to find out more, our <a href="{{ url }}" target="_blank" rel="noopener noreferrer">criminal records vetting policy</a>
+        If you would like to find out more, our
+        <a href="https://www.samaritans.org/support-us/volunteer/become-samaritans-listening-volunteer/criminal-records-policy/" target="_blank" rel="noopener noreferrer">
+            criminal records vetting policy
+        </a>
         explains how we use criminal records as part of our recruitment and
         selection process.
         {% endblocktrans %}
