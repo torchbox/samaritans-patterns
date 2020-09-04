@@ -193,7 +193,6 @@
         }
     }
 
-
     &__radio-checkbox {
         position: relative;
 
@@ -203,6 +202,11 @@
             &:last-child {
                 margin-right: 0;
             }
+        }
+
+        .form-item--boolean_field & {
+            display: flex;
+            flex-direction: row;
         }
     }
 
