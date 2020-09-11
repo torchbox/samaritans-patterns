@@ -47,8 +47,17 @@ body {
     }
 
     &.no-scroll,
-    &.mob-nav-open, {
+    &.mob-nav-open {
         overflow-y: hidden;
+    }
+
+    &.template-volunteer {
+        padding: 0;
+
+        &::before,
+        &::after {
+            content: none;
+        }
     }
 }
 
@@ -65,7 +74,10 @@ img {
 }
 
 // sass-lint:disable single-line-per-selector
-button, input, select, textarea {
+button,
+input,
+select,
+textarea {
     font-family: inherit;
 }
 // sass-lint:enddisable
