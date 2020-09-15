@@ -3,10 +3,14 @@
 {% render_icon value.icon "stat-block__icon" %}
 <h3 class="stat-block__heading">
     {% language "en-gb" %}
-        {% if value.amount %}
-            £{{ value.amount|floatformat:"-2"|intcomma }}
+        {% if not is_euro %}
+            {% if value.amount %}
+                £{{ value.amount|floatformat:"-2"|intcomma }}
+            {% else %}
+                {{ value.value }}
+            {% endif %}
         {% else %}
-            {{ value.value }}
+            €{{ amount }}
         {% endif %}
     {% endlanguage %}
 </h3>

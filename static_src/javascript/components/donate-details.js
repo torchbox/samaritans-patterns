@@ -16,12 +16,24 @@ function donateDetails() {
         singlePaymentHeading = document.getElementById('donate__heading--single'),
         monthlyPaymentHeading = document.getElementById('donate__heading--monthly'),
         singlePaymentMethods = document.getElementById('donate__methods--single'),
-        monthlyPaymentMethods = document.getElementById('donate__methods--monthly'),
+        monthlyPaymentMethodsGbp = document.getElementById('donate__methods--monthly-gbp'),
+        monthlyPaymentMethodsEur = document.getElementById('donate__methods--monthly-eur'),
         changeFrequencyButton = document.getElementById('donate__change-frequency'),
+        donateAmountCurrency = document.getElementById('donate_amount-currency'),
+        currencyToggleEUR = document.getElementById('id_currency_1'),
+        currencyToggleGBP = document.getElementById('id_currency_0'),
+        currencyToggle = document.getElementById('id_currency'),
+        currencySymbol = document.getElementById('donate__heading--currency'),
         displayedAmountSpan = document.getElementById('donate__amount__display'),
         inMemoryInput = document.getElementById('id_in_memory'),
-        inMemoryFields = document.getElementById('donate__form__in_memory_fields');
+        inMemoryFields = document.getElementById('donate__form__in_memory_fields'),
+        currencyStep = document.getElementById('currency-step'),
+        amountField = document.getElementById('amount_form_field');
 
+    const
+        currencyGbpSymbol = '£',
+        currencyEurSymbol = '€';
+    
     var toggleDonateAmountEditor = function() {
         if(editBox.hasAttribute('hidden')) {
             editBox.removeAttribute('hidden');
@@ -29,6 +41,15 @@ function donateDetails() {
         } else {
             editBox.setAttribute('hidden', true);
             displayBox.removeAttribute('hidden');
+        }
+    };
+
+    var convertCurrency = function(symbol, value) {
+        if(symbol === currencyEurSymbol) {
+            return (value * donateAmountCurrency.dataset.conversionRate).toFixed(2);
+        }
+        else {
+            return (value / donateAmountCurrency.dataset.conversionRate).toFixed(2);
         }
     };
 
@@ -43,8 +64,16 @@ function donateDetails() {
             var newAmount = parseFloat(editBox.querySelector('input').value).toFixed(2);
 
             displayedAmountSpan.textContent = Utilities.number_format(newAmount, 2, '.', ',');
-            amountInput.value = newAmount;
+            
+            var currentCurrency = currencyGbpSymbol;
 
+            if (currencyToggleEUR.checked) {
+                currentCurrency = currencyEurSymbol;
+            }
+
+            currencySymbol.innerHTML =  currentCurrency + '<span id="donate__amount__display">' + newAmount + '</span>';
+            
+            amountInput.value = newAmount;
             toggleDonateAmountEditor();
         });
 
@@ -67,7 +96,11 @@ function donateDetails() {
             singlePaymentHeading.toggleAttribute('hidden', true);
             monthlyPaymentHeading.toggleAttribute('hidden', false);
             singlePaymentMethods.toggleAttribute('hidden', true);
-            monthlyPaymentMethods.toggleAttribute('hidden', false);
+            if (currencyToggleEUR.checked) {
+                monthlyPaymentMethodsEur.toggleAttribute('hidden', false);
+            } else {
+                monthlyPaymentMethodsGbp.toggleAttribute('hidden', false);
+            }
             frequencyInput.value = 'monthly';
             changeFrequencyButton.toggleAttribute('hidden', true);
         });
@@ -80,6 +113,62 @@ function donateDetails() {
             inMemoryFields.toggleAttribute('hidden', !e.target.checked);
         });
     }
+    var isAmountHidden = amountInput.getAttribute('type') == 'hidden',
+        buttonClickedFlag = ((currencyToggleEUR.checked) ? currencyEurSymbol : currencyGbpSymbol);
+    currencyToggle.addEventListener('click', function() {
+        // Toggle between Euros and GBP 
+        // Donate one-off and monthly
+        if (isAmountHidden){
+
+            var newAmount = parseFloat(editBox.querySelector('input').value).toFixed(2);
+            var donateAmountInner;
+
+            if (currencyToggleEUR.checked && buttonClickedFlag != currencyEurSymbol){
+                newAmount = convertCurrency(currencyEurSymbol, newAmount);
+                donateAmountInner = '<span id="donate__amount__display">' + newAmount + '</span>';
+                currencySymbol.innerHTML = currencyEurSymbol + donateAmountInner;
+                donateAmountCurrency.innerText = currencyEurSymbol;
+                currencyStep.innerText = currencyEurSymbol;
+                buttonClickedFlag = currencyEurSymbol;
+            }
+            else if (currencyToggleGBP.checked && buttonClickedFlag != currencyGbpSymbol) {
+                newAmount = convertCurrency(currencyGbpSymbol, newAmount);
+                donateAmountInner = '<span id="donate__amount__display">' + newAmount + '</span>';
+                currencySymbol.innerHTML = currencyGbpSymbol + donateAmountInner;
+                donateAmountCurrency.innerText = currencyGbpSymbol;
+                currencyStep.innerText = currencyGbpSymbol;
+                buttonClickedFlag = currencyGbpSymbol;
+            }
+
+            editBox.querySelector('input').value = newAmount;
+            amountInput.value = newAmount;
+
+            // Toggle payment methods for monthly
+            // Single donations have no difference
+            if (frequencyInput.value == 'monthly'){
+                if (currencyToggleEUR.checked) {
+                    monthlyPaymentMethodsEur.toggleAttribute('hidden', false);
+                    monthlyPaymentMethodsGbp.toggleAttribute('hidden', true);
+                } else {
+                    monthlyPaymentMethodsEur.toggleAttribute('hidden', true);
+                    monthlyPaymentMethodsGbp.toggleAttribute('hidden', false);
+                }
+            }
+        }
+        else {
+            // Toggle between Euros and GBP 
+            // Pay-in
+            if (currencyToggleEUR.checked){
+                // Toggle the amount field class for Euro
+                amountField.className = 'form__euro-field-wrapper';
+                currencyStep.innerText = currencyEurSymbol;
+            } else {
+                // Toggle the amount field class for GBP
+                amountField.className = 'form__gbp-field-wrapper';
+                currencyStep.innerText = currencyGbpSymbol;
+            }
+        }
+    });
 }
 
 export default donateDetails;

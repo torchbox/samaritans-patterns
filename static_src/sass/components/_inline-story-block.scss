@@ -1,6 +1,6 @@
 .inline-story-block {
     $root: &;
-    
+
     position: relative;
     margin-top: $gutter-large;
     margin-bottom: $gutter-large;
@@ -12,7 +12,6 @@
     #{$root}__connectors {
         @include connectors(white, bottom, right, page);
     }
-    
 
     &__profile {
         display: flex;
@@ -29,10 +28,10 @@
     &__embed {
         padding-bottom: $gutter;
     }
-    
+
     &__headshot {
         border-radius: 50%;
-        padding-right: $gutter *0.25;
+        padding-right: $gutter * 0.25;
     }
-    
+
 }

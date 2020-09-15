@@ -3,7 +3,7 @@
 <div class="donate__progress {% if classes %}{{classes}}{% endif %}">
     <div class="donate__progress-inner">
         <div class="donate__progress-step"></div>
-        <div class="donate__progress-step">£</div>
+        <div id="currency-step" class="donate__progress-step">{% if currency_symbol %}{{ currency_symbol }}{% else %}£{% endif %}</div>
         <div class="donate__progress-step"></div>
     </div>
 </div>

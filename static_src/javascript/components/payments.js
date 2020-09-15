@@ -19,7 +19,7 @@ function setupPayment() {
         token = paymentForm.getAttribute('data-token'),
         loadingErrorMsg = 'There was an error loading this payment option. Please reload the page or try again later.',
         paymentAmount = paymentForm.getAttribute('data-amount'),
-        paymentCurrency = 'GBP';
+        paymentCurrency = paymentForm.getAttribute('currency');
 
     var braintreeParams = JSON.parse(document.getElementById('payments__braintree-params').textContent);
 

@@ -7,26 +7,26 @@
 {% spaceless %}
 {% if payment_frequency == 'single' %}
     {% if is_pay_in %}
-        {% blocktrans with amount=amount|floatformat:"2"|intcomma %}Thank you for paying in your fundraising of £{{ amount }}.{% endblocktrans %}
+        {% blocktrans with amount=amount|floatformat:"2"|intcomma %}Thank you for paying in your fundraising of {{ currency_symbol }}{{ amount }}.{% endblocktrans %}
     {% else %}
-        {% if gift_aid %}
-            {% blocktrans with amount=amount|floatformat:"2"|intcomma amount_plus_gift_aid=amount_plus_gift_aid|floatformat:"2"|intcomma calls_funded=calls_funded|default:"" %}Thank you for your generous donation of £{{ amount }} with Gift Aid, taking your total donation amount to £{{ amount_plus_gift_aid }}. Your donation could help Samaritans answer {{ calls_funded }} more potentially life-saving calls for help.{% endblocktrans %}
+        {% if gift_aid and currency != "EUR" %}
+            {% blocktrans with amount=amount|floatformat:"2"|intcomma amount_plus_gift_aid=amount_plus_gift_aid|floatformat:"2"|intcomma calls_funded=calls_funded|default:"" %}Thank you for your generous donation of {{ currency_symbol }}{{ amount }} with Gift Aid, taking your total donation amount to {{ currency_symbol }}{{ amount_plus_gift_aid }}. Your donation could help Samaritans answer {{ calls_funded }} more potentially life-saving calls for help.{% endblocktrans %}
         {% else %}
-            {% blocktrans with amount=amount|floatformat:"2"|intcomma calls_funded=calls_funded|default:"" %}Thank you for your generous donation of £{{ amount }} which could help Samaritans answer {{ calls_funded }} more potentially life-saving calls for help.{% endblocktrans %}
+            {% blocktrans with amount=amount|floatformat:"2"|intcomma calls_funded=calls_funded|default:"" %}Thank you for your generous donation of {{ currency_symbol }}{{ amount }} which could help Samaritans answer {{ calls_funded }} more potentially life-saving calls for help.{% endblocktrans %}
         {% endif %}
     {% endif %}
 {% else %}
-    {% if gift_aid %}
-        {% blocktrans with amount=amount|floatformat:"2"|intcomma amount_plus_gift_aid=amount_plus_gift_aid|floatformat:"2"|intcomma calls_funded=calls_funded|default:"" %}Thank you for your generous monthly donation of £{{ amount }} with Gift Aid, taking your total donation amount to £{{ amount_plus_gift_aid }}. Your donation could help Samaritans answer {{ calls_funded }} more potentially life-saving calls for help every month.{% endblocktrans %}
+    {% if gift_aid and currency != "EUR" %}
+        {% blocktrans with amount=amount|floatformat:"2"|intcomma amount_plus_gift_aid=amount_plus_gift_aid|floatformat:"2"|intcomma calls_funded=calls_funded|default:"" %}Thank you for your generous monthly donation of {{ currency_symbol }}{{ amount }} with Gift Aid, taking your total donation amount to {{ currency_symbol }}{{ amount_plus_gift_aid }}. Your donation could help Samaritans answer {{ calls_funded }} more potentially life-saving calls for help every month.{% endblocktrans %}
     {% else %}
-        {% blocktrans with amount=amount|floatformat:"2"|intcomma amount_plus_gift_aid=amount_plus_gift_aid|floatformat:"2"|intcomma calls_funded=calls_funded|default:"" %}Thank you for your generous monthly donation of £{{ amount }}, which could help Samaritans answer {{ calls_funded }} more potentially life-saving calls for help every month.{% endblocktrans %}
+        {% blocktrans with amount=amount|floatformat:"2"|intcomma amount_plus_gift_aid=amount_plus_gift_aid|floatformat:"2"|intcomma calls_funded=calls_funded|default:"" %}Thank you for your generous monthly donation of {{ currency_symbol }}{{ amount }}, which could help Samaritans answer {{ calls_funded }} more potentially life-saving calls for help every month.{% endblocktrans %}
     {% endif %}
 {% endif %}
 {% endspaceless %}
 
-{% if not gift_aid and gift_aid_allowed %}
-    {% blocktrans with amount=amount|floatformat:"2"|intcomma amount_plus_gift_aid=amount_plus_gift_aid|floatformat:"2"|intcomma %}By adding Gift Aid you could increase your donation of £{{ amount }} to £{{ amount_plus_gift_aid }} at no extra cost to you, helping to fund even more potentially life-saving calls.{% endblocktrans %}
-    {% blocktrans with amount_plus_gift_aid=amount_plus_gift_aid|floatformat:"2"|intcomma %}Increase my gift to £{{ amount_plus_gift_aid }}{% endblocktrans %}
+{% if not gift_aid and gift_aid_allowed and currency != "EUR" %}
+    {% blocktrans with amount=amount|floatformat:"2"|intcomma amount_plus_gift_aid=amount_plus_gift_aid|floatformat:"2"|intcomma %}By adding Gift Aid you could increase your donation of {{ currency_symbol }}{{ amount }} to {{ currency_symbol }}{{ amount_plus_gift_aid }} at no extra cost to you, helping to fund even more potentially life-saving calls.{% endblocktrans %}
+    {% blocktrans with amount_plus_gift_aid=amount_plus_gift_aid|floatformat:"2"|intcomma %}Increase my gift to {{ currency_symbol }}{{ amount_plus_gift_aid }}{% endblocktrans %}
     {{ gift_aid_declaration_url }}?utm_source=samaritans.org&utm_medium=email&utm_campaign=gift_aid_email&utm_content={{ payment_frequency }}-donation">
 {% endif %}
 

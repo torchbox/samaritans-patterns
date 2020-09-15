@@ -88,6 +88,17 @@
         text-decoration: underline;
     }
 
+    &__currency {
+        @include font-size(s);
+        text-decoration: underline;
+        padding-right: 5px;
+    }
+
+    &__options {
+        display: flex;
+        justify-content: space-between;
+    }
+
     &__marketing-intro {
         display: flex;
         margin-bottom: $gutter-medium;

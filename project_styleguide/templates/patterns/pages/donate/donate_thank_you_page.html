@@ -20,34 +20,34 @@
                 <h4>
                     {% if is_pay_in %}
                         {% if completed_transaction_details.payment_method == 'card' %}
-                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your £{{ amount }} payment through credit card has been successful.{% endblocktrans %}
+                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your {{ currency_symbol }}{{ amount }} payment through credit card has been successful.{% endblocktrans %}
                         {% elif completed_transaction_details.payment_method == 'paypal' %}
-                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your £{{ amount }} payment through Paypal has been successful.{% endblocktrans %}
+                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your {{ currency_symbol }}{{ amount }} payment through Paypal has been successful.{% endblocktrans %}
                         {% elif completed_transaction_details.payment_method == 'googlepay' %}
-                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your £{{ amount }} payment through Google Pay has been successful.{% endblocktrans %}
+                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your {{ currency_symbol }}{{ amount }} payment through Google Pay has been successful.{% endblocktrans %}
                         {% elif completed_transaction_details.payment_method == 'applepay' %}
-                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your £{{ amount }} payment through Apple Pay has been successful.{% endblocktrans %}
+                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your {{ currency_symbol }}{{ amount }} payment through Apple Pay has been successful.{% endblocktrans %}
                         {% endif %}
                     {% else %}
                         {% if completed_transaction_details.payment_method == 'card' %}
-                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your £{{ amount }} donation through credit card has been successful.{% endblocktrans %}
+                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your {{ currency_symbol }}{{ amount }} donation through credit card has been successful.{% endblocktrans %}
                         {% elif completed_transaction_details.payment_method == 'paypal' %}
-                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your £{{ amount }} donation through Paypal has been successful.{% endblocktrans %}
+                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your {{ currency_symbol }}{{ amount }} donation through Paypal has been successful.{% endblocktrans %}
                         {% elif completed_transaction_details.payment_method == 'googlepay' %}
-                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your £{{ amount }} donation through Google Pay has been successful.{% endblocktrans %}
+                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your {{ currency_symbol }}{{ amount }} donation through Google Pay has been successful.{% endblocktrans %}
                         {% elif completed_transaction_details.payment_method == 'applepay' %}
-                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your £{{ amount }} donation through Apple Pay has been successful.{% endblocktrans %}
+                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your {{ currency_symbol }}{{ amount }} donation through Apple Pay has been successful.{% endblocktrans %}
                         {% endif %}
                     {% endif %}
                 </h4>
                 <p>{% blocktrans %}A confirmation email will be sent straight to your email address.{% endblocktrans %}</p>
                 {% else %}
                     {% if completed_transaction_details.payment_method == 'gocardless' %}
-                        <h4>{% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your recurring direct debit of £{{ amount }} has been setup successfully.{% endblocktrans %}</h4>
+                        <h4>{% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your recurring direct debit of  {{ currency_symbol }}{{ amount }} has been setup successfully.{% endblocktrans %}</h4>
                     {% elif completed_transaction_details.payment_method == 'paypal' %}
-                        <h4>{% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your recurring PayPal payment of £{{ amount }} has been setup successfully.{% endblocktrans %}</h4>
+                        <h4>{% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your recurring PayPal payment of {{ currency_symbol }}{{ amount }} has been setup successfully.{% endblocktrans %}</h4>
                     {% endif %}
-                    <p>{% blocktrans %}A confirmation email will be sent straight to your email address. You will also receive an email within 3 working days confirming that your recurring payment has been set up. The name on your bank statement will be &quot;Samaritans&quot;.{% endblocktrans %}</p>
+                    <p>{% blocktrans %}A confirmation email will be sent straight to your email address. You will also receive an email within 3 working days confirming that your Direct Debit has been set up. The name on your bank statement will be &quot;Samaritans&quot;.{% endblocktrans %}</p>
                 {% endif %}
 
                 <p><small>{% blocktrans with ref=completed_transaction_details.transaction_id %}Your transaction reference is: {{ ref }}{% endblocktrans %}</small></p>

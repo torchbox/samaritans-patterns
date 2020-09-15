@@ -10,6 +10,15 @@
             display: none;
         }
     }
+    
+    &__radio-select {
+        display: flex;
+        justify-content: start;
+
+        > li {
+            margin-right: 2rem;
+        }
+    }
 
     &__container {
         margin-bottom: $gutter;

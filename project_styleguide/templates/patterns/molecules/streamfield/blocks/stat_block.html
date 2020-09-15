@@ -1,18 +1,36 @@
-{% load donate_tags i18n icon_tags humanize %}
+{% load donate_tags i18n icon_tags humanize wagtailsettings_tags to_euro %}
 
 {% if link %}
-    <a class="stat-block__block stat-block__block--link" href="{% donate_url campaign_id=page.pk frequency=frequency amount=value.amount %}">
-        {% include "patterns/molecules/streamfield/partials/stat-block-inner.html" %}
-        <span class="stat-block__link" >
-            {% language "en-gb" %}
-                {% if frequency == "monthly" %}
-                    {% blocktrans with amount=value.amount|floatformat:"-2"|intcomma %}Donate £{{ amount }} a month{% endblocktrans %}
-                {% else %}
-                    {% blocktrans with amount=value.amount|floatformat:"-2"|intcomma %}Donate £{{ amount }}{% endblocktrans %}
-                {% endif %}
-            {% endlanguage %}
-        </span>
-    </a>
+    {% if not is_euro %}
+        <a class="stat-block__block stat-block__block--link" href="{% donate_url campaign_id=page.pk frequency=frequency amount=value.amount currency=currency %}">
+            {% include "patterns/molecules/streamfield/partials/stat-block-inner.html" with amount=amount is_euro=is_euro  %}
+            <span class="stat-block__link" >
+                {% language "en-gb" %}
+                    {% if frequency == "monthly" %}
+                        {% blocktrans with amount=value.amount|floatformat:"-2"|intcomma %}Donate £{{ amount }} a month{% endblocktrans %}
+                    {% else %}
+                        {% blocktrans with amount=value.amount|floatformat:"-2"|intcomma %}Donate £{{ amount }}{% endblocktrans %}
+                    {% endif %}
+                {% endlanguage %}
+            </span>
+        </a>
+    {% else %}
+        {% with amount=value.amount|to_euro:request.site|floatformat:"-2"|intcomma %}
+        <a class="stat-block__block stat-block__block--link" href="{% donate_url campaign_id=page.pk frequency=frequency amount=amount currency=currency %}">
+            {% include "patterns/molecules/streamfield/partials/stat-block-inner.html" with amount=amount is_euro=is_euro currency=currency %}
+            <span class="stat-block__link" >
+                {% language "en-gb" %}
+                    {% if frequency == "monthly" %}
+                       {% blocktrans %}Donate €{{ amount }} a month{% endblocktrans %}
+                    {% else %}
+                        {% blocktrans %}Donate €{{ amount }}{% endblocktrans %}
+                    {% endif %}
+                {% endlanguage %}
+            </span>
+            {% endwith %}
+        </a>
+    {% endif %}
+
 {% else %}
     <div class="stat-block__block">
         {% include "patterns/molecules/streamfield/partials/stat-block-inner.html" %}

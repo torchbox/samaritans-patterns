@@ -4,7 +4,7 @@
 {% block title %}{% if is_pay_in %}{% trans "Your information | Fundraising pay-in" %}{% else %}{% trans "Donate - your information" %}{% endif %}{% endblock %}
 
 {% block progress_bar %}
-    {% include "patterns/pages/donate/partials/progress_bar.html" with classes="first-active" %}
+    {% include "patterns/pages/donate/partials/progress_bar.html" with classes="first-active" currency=currency %}
 {% endblock %}
 
 {% block content_inner %}
@@ -23,26 +23,27 @@
             {% render_icon "icon-color-coins" "donate__bar-icon" %}
             <p id="donate__heading--single" {% if not payment_frequency == 'single' %}hidden{% endif %}>{% trans "You're making a single donation of" %}</p>
             <p id="donate__heading--monthly" {% if not payment_frequency == 'monthly' %}hidden{% endif %}>{% trans "You're making a monthly donation of" %}</p>
-            <p class="donate__amount-display">£<span id="donate__amount__display">{{ form.amount.value|floatformat:"2"|intcomma }}</span></p>
+            <p id="donate__heading--currency" class="donate__amount-display">{% if is_euro %}€{% else %}£{% endif %}<span id="donate__amount__display">{{ form.amount.value|floatformat:"2"|intcomma }}</span></p>
         </div>
-
         <div class="donate__amount" id="donate__amount">
             <a id="donate__change-amount" href="#donate__amount-edit">Change amount</a>
         </div>
 
         <div class="donate__bar-edit" id="donate__amount-edit" hidden>
-            <span class="form__input__prefix">£</span> <input type="number" value="{{ form.amount.value }}" step="0.01" min="1">
+            <span id="donate_amount-currency" class="form__input__prefix" data-conversion-rate={{ settings.utils.GBPToEuroConversionSettings.conversion_rate }}>{% if is_euro %}€{% else %}£{% endif %}</span> <input type="number" value="{{ form.amount.value }}" step="0.01" min="1">
             <button class="button" id="donate__amount__save">{% trans 'Confirm' %}</button>
         </div>
     </div>
     {% endif %}
 </div>
 
-
-{% if not is_pay_in and allow_monthly_donation and not payment_frequency == 'monthly' %}
-    <p class="donate__frequency"><a id="donate__change-frequency" href="#">{% trans "Switch to a monthly donation" %}</a></p>
+{% if not is_pay_in%}
+    <div class="donate__options">
+        {% if allow_monthly_donation and not payment_frequency == 'monthly' %}
+            <p class="donate__frequency"><a id="donate__change-frequency" href="#">{% trans "Switch to a monthly donation" %}</a></p>
+        {% endif %}
+    </div>
 {% endif %}
-
 <div class="donate__form-wrapper">
     <form method="post" class="form">
         <div class="form__container form__container--flex">
@@ -71,12 +72,15 @@
                     <div class="form__errors">{{form.captcha.errors}}</div>
                 {% endif %}
                 {{ form.captcha }}
+                
+                {% render_form_field form.currency %}
 
                 {% if form.amount %}
-                    <div class="form__gbp-field-wrapper">
+                    <div id="amount_form_field" class="{% if is_euro %}form__euro-field-wrapper{% else %}form__gbp-field-wrapper{% endif %}">
                         {% render_form_field form.amount %}
                     </div>
                 {% endif %}
+
 
                 {% if is_pay_in %}
                     <div class="js-autocomplete" data-autocomplete-list="#payment_origin_options">
@@ -146,7 +150,7 @@
 
         </div> {# /.form__container--flex #}
     </form>
-</div> {# /.donate__form-wrapper #}
+</.div> {# /.donate__form-wrapper #}
 
 {% endblock %}
 

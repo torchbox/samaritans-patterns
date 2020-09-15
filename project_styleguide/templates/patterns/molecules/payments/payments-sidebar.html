@@ -16,9 +16,18 @@
 
     <hr class="hr hr--dashed">
 
-    <div id="donate__methods--monthly" {% if not payment_frequency == 'monthly' %}hidden{% endif %}>
+    <div id="donate__methods--monthly-gbp" {% if payment_frequency == 'single' or is_euro or event_page %}hidden{% endif %}>
         <h4>We accept monthly donations through Direct Debit and PayPal</h4>
-        {% include "patterns/molecules/payments/payment-icons--monthly.html" %}
+        {% include "patterns/molecules/payments/payment-icons--monthly.html" with is_euro=False %}
+    </div>
+
+    {% comment %}
+    Seperate versions for Euros and GBP;
+    allow for toggling in monthly donate page.
+    {% endcomment %}
+    <div id="donate__methods--monthly-eur" {% if payment_frequency == 'single' or not is_euro %}hidden{% endif %}>
+        <h4>We accept monthly donations through PayPal</h4>
+        {% include "patterns/molecules/payments/payment-icons--monthly.html" with is_euro=True %}
     </div>
 
     <div id="donate__methods--single" {% if payment_frequency == 'monthly' %}hidden{% endif %}>

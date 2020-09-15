@@ -8,6 +8,7 @@ const options = {
         payments: './static_src/javascript/payments-website.js',
         payments_monthly: './static_src/javascript/payments-monthly-website.js',
         loqate: './static_src/javascript/loqate.js',
+        event: './static_src/javascript/event-website.js',
         'chat-utils': './static_src/javascript/chat-utils.js'
     },
     output: {

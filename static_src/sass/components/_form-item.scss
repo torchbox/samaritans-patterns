@@ -178,6 +178,17 @@
                 line-height: 30px;
             }
         }
+
+        .form__euro-field-wrapper & {
+            @include input--currency;
+            display: flex;
+            align-items: center;
+
+            &::before {
+                line-height: 30px;
+                content: "€";
+            }
+        }
     }
 
     &__date {

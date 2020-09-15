@@ -1,12 +1,14 @@
 import noUiSlider from 'nouislider';
 
+const currencyCode = document.getElementById('id_currency');
+
 class DonateAmountSlider {
     constructor(node, config) {
         // Only initialise if the node to bind to exists.
         if (node !== null) {
             this.node = node;
             this.config = config;
-    
+
             this.init();
             this.bindEventListeners();
         }
@@ -14,6 +16,7 @@ class DonateAmountSlider {
 
     init() {
         const donateSlider = this.node;
+        const currency = this.config.currency;
 
         noUiSlider.create(donateSlider, {
             connect: true,
@@ -26,7 +29,7 @@ class DonateAmountSlider {
                 density: 4,
                 stepped: true,
                 format: {
-                    to: (value) => `£${value}`,
+                    to: (value) => `${currency}${value}`,
                 },
             },
             callCounter: this.config.callCounter,
@@ -94,9 +97,17 @@ class DonateAmountSlider {
 }
 
 function initDonationSliders() {
+    // localise currency
+    var currency = '£';
+
+    if (currencyCode && currencyCode.value == 'EUR'){
+        currency = '€';
+    }
+
     // One off donations slider
     new DonateAmountSlider(document.getElementById('donate_slider--one_off'), {
         pipValues: [5, 10, 15, 25, 50, 75],
+        currency: currency,
         start: 25,
         range: {
             // Starting at 5, step the value by 5 until 15 is reached.
@@ -115,6 +126,7 @@ function initDonationSliders() {
     // Monthly recurring donations slider
     new DonateAmountSlider(document.getElementById('donate_slider--monthly'), {
         pipValues: [5, 10, 15, 20],
+        currency: currency,
         start: 10,
         range: {
             // Starting at 5, step the value by 5 until 20 is reached.

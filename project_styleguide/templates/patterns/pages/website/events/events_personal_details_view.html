@@ -1,10 +1,10 @@
 {% extends "patterns/templates/donate-form-page.html" %}
-{% load i18n form_tags helper_tags icon_tags loqate_tags static wagtailimages_tags %}
+{% load i18n form_tags helper_tags icon_tags loqate_tags static wagtailimages_tags to_euro %}
 
 {% block title %}{% trans "Your information | Event registration payment" %}{% endblock %}
 
 {% block progress_bar %}
-    {% include "patterns/pages/donate/partials/progress_bar.html" with classes="first-active" %}
+    {% include "patterns/pages/donate/partials/progress_bar.html" with classes="first-active" currency=currency %}
 {% endblock %}
 
 {% block content_inner %}
@@ -13,7 +13,8 @@
 
     <div class="donate__bar">
         <p class="donate__bar-text"><span class="donate__bar-standout">{% trans "Event" %}:</span> {{ event_page.title }}</p>
-        <p class="donate__bar-text"><span class="donate__bar-standout">{% trans "Registration fee" %}:</span> £{{ payment_amount|floatformat:"-2" }}</p>
+        <p class="donate__bar-text" id="event__form__gbp" data-amount="{{ payment_amount|floatformat:"-2" }}"><span class="donate__bar-standout">{% trans "Registration fee" %}:</span> £{{ payment_amount|floatformat:"-2" }}</p>
+        <p class="donate__bar-text" hidden="true" id="event__form__euro" data-amount="{{ payment_amount|to_euro:request.site }}"><span class="donate__bar-standout">{% trans "Registration fee" %}:</span> €{{ payment_amount|to_euro:request.site|floatformat:"-2" }}</p>
     </div>
 
     {% if payment_allowed %}
@@ -41,12 +42,15 @@
                         </div>
                     {% endif %}
 
+                    {% render_form_field form.currency %}
+
                     {% if form.amount %}
                         <div class="form__gbp-field-wrapper">
                             {% render_form_field form.amount %}
                         </div>
                     {% endif %}
-
+                                
+                    
                     <div class="form-item-wrapper form-item-wrapper--two-col">
                         {% render_form_field form.first_name %}
                         {% render_form_field form.last_name %}
@@ -97,5 +101,6 @@
 {% endblock %}
 
 {% block extra_js %}
-{% loqate_script %}
+    {% loqate_script %}
+    <script src="{% static 'js/event.js' %}"></script>
 {% endblock %}

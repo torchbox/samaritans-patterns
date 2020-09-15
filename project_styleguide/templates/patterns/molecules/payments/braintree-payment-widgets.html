@@ -57,9 +57,9 @@
                 <div class="button__shadow"></div>
                 <div class="button__inner">
                     {% if is_pay_in or is_event_payment %}
-                        {% blocktrans with amount=payment_amount|floatformat:"2"|intcomma %}Pay £{{ amount }}{% endblocktrans %}
+                        {% blocktrans with amount=payment_amount|floatformat:"2"|intcomma %}Pay {{ currency_symbol }}{{ amount }}{% endblocktrans %}
                     {% else %}
-                        {% blocktrans with amount=payment_amount|floatformat:"2"|intcomma %}Donate £{{ amount }}{% endblocktrans %}
+                        {% blocktrans with amount=payment_amount|floatformat:"2"|intcomma %}Donate {{ currency_symbol }}{{ amount }}{% endblocktrans %}
                     {% endif %}
                     {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="icon button__icon" %}
                 </div>

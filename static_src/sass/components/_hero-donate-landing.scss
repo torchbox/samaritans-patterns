@@ -34,6 +34,22 @@
                 @include font-size(xl);
                 margin-right: 10px;
             }
+            
+            &--euro {
+                @include input--currency;
+                padding: 10px 15px;
+    
+                #{$input--string} {
+                    font-size: 22px;
+                }
+                
+                &::before {
+                    @include font-size(xl);
+                    margin-right: 10px;
+                    content: "€";
+                }
+            }
+            
         }
 
         &--monthly .form-item__wrapper::after { // sass-lint:disable-line force-element-nesting

@@ -4,7 +4,7 @@
 {% block title %}{% trans "Payment details | Donate" %}{% endblock %}
 
 {% block progress_bar %}
-    {% include "patterns/pages/donate/partials/progress_bar.html" with classes="second-active" %}
+    {% include "patterns/pages/donate/partials/progress_bar.html" with classes="second-active" currency=currency %}
 {% endblock %}
 
 {% block content_inner %}
