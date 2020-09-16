@@ -1,5 +1,6 @@
 {% load icon_tags wagtailcore_tags %}{% pageurl page as item_url %}
 <a class="{% if classes %}{{ classes }}{% else %}nav__link{% endif %}" href="{{ item_url }}" role="menuitem">
+    {% render_icon icon 'nav__icon' %}
     <div>
         {% firstof title page.title %}
         {% if summary %}
