@@ -2,24 +2,7 @@
 
 {% if type == 'hero_cta' %}
 
-{# static cta to appear on all pages #}
-<div class="listening-cta listening-cta--primary listening-cta--link listening-cta--type-chat listening-cta--type-chat__static">
-    <span class="listening-cta__corner"></span>
-    <div class="listening-cta__inner">
-        <div class="listening-cta__container">
-            {% if page.icon %}
-                {% render_icon page.icon "listening-cta__icon" %}
-            {% endif %}
-            <div class="listening-cta__text">
-                <h2 class="listening-cta__heading">{{ value.call_to_action_text }}</h2>
-                <p class="listening-cta__wait-time">{% trans "This service is not currently available" %}</p>
-            </div>
-        </div>
-    </div>
-    <span class="listening-cta__connectors"></span>
-</div>
-{# Dynamic cta to appear when shown by optimize #}
-<a data-href="{{ value.call_to_action_url }}" class="listening-cta listening-cta--primary listening-cta--link listening-cta--type-chat listening-cta--type-chat__dynamic">
+<a data-href="{{ value.call_to_action_url }}" class="listening-cta listening-cta--primary listening-cta--link" data-listening-cta-type="chat">
     <span class="listening-cta__corner"></span>
     <div class="listening-cta__inner">
         <div class="listening-cta__container">
@@ -28,7 +11,7 @@
             {% endif %}
             <div class="listening-cta__text">
                 <h2 class="listening-cta__heading">{{ value.call_to_action_text }}</h2>
-                <p class="listening-cta__wait-time">{% trans "This service is not currently available" %}</p>
+                <p class="listening-cta__wait-time" data-chat-wait-time>{% trans "This service is not currently available" %}</p>
             </div>
         </div>
         {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="listening-cta__chevron" aria_hide="true" %}
@@ -44,17 +27,21 @@
     <div class="button__inner button__inner--chat">
         <div>
             {{ value.call_to_action_text }}
-            <p class="button__meta listening-cta__wait-time">{% trans "The service is not currently available" %}</p>
+            <p class="button__meta" data-chat-wait-time>{% trans "The service is not currently available" %}</p>
         </div>
-        {% include "patterns/atoms/svg/colour-icons/icon-color-speechbubble-alt.html" with classes="button__icon button__icon--chat" %}
+        {% if page.icon %}
+        {% render_icon page.icon "button__icon button__icon--chat" %}
+        {% endif %}
     </div>
 </a>
 </div>
 
-<a data-href="{{ value.call_to_action_url }}" class="service-block service-block--sticky service-block--link service-block--sticky__type-chat">
-    {% include "patterns/atoms/svg/colour-icons/icon-color-speechbubble-alt.html" with classes="service-block__icon" %}
+<a data-href="{{ value.call_to_action_url }}" class="service-block service-block--sticky service-block--link" data-service-cta-type="chat">
+    {% if page.icon %}
+    {% render_icon page.icon "service-block__icon" %}
+    {% endif %}
     <span class="service-block__link">{{ value.call_to_action_text }}</span>
-    <span class="listening-cta__wait-time">{% trans "This service is not currently available" %}</span>
+    <span class="listening-cta__wait-time" data-chat-wait-time>{% trans "This service is not currently available" %}</span>
 </a>
 
 {% endif %}

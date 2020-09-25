@@ -29,20 +29,21 @@
                 <h2 class="hero__subtitle">{% include_block page.short_description %}</h2>
 
                 <div class="listening-cta-grid">
-                    <div class="listening-cta--type-{{ page.service_call_to_action.0.block_type }}"> {# for flex #}
-                        {% include_block page.service_call_to_action with type='hero_cta' %}
-
+                    {% with service_cta=page.service_call_to_action %}
+                    <div {% if service_cta.0.block_type == "chat" %} data-hidden-if-chat-unavailable data-shown-if-chat-available {% endif %}> {# for flex #}
+                        {% include_block service_cta with type='hero_cta' %}
                         <div class="sticky-cta js-sticky-cta">
                             <div class="sticky-cta__sticky">
                                 <div class="wrapper wrapper--large wrapper--padding-for-page">
                                     <aside class="sticky-cta__inner">
-                                        {% include_block page.service_call_to_action %}
+                                        {% include_block service_cta %}
                                     </aside>
                                 </div>
                             </div>
                         </div>
 
                     </div> {# for flex #}
+                    {% endwith %}
 
                     {% if page.secondary_cta_heading or page.secondary_cta_content %}
                         <div class="listening-cta listening-cta--secondary">

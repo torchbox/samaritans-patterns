@@ -42,6 +42,10 @@
         }
     }
 
+    &--hidden{
+        display: none;
+    }
+
     &__inner {
         position: relative;
         display: flex;

@@ -1,13 +1,13 @@
 class Beta {
     static selector() {
-        return '.block-chat';
+        return '[data-listening-cta-type="chat"]';
     }
 
     constructor(node) {
         this.node = node;
         this.body = document.body;
         this.activeClass = 'show-beta';
-        this.cards = [...document.querySelectorAll('.js-beta-check')];
+        this.cards = [...document.querySelectorAll('[data-beta-check]')];
         this.init();
     }
 

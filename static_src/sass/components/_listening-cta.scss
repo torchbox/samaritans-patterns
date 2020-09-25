@@ -158,19 +158,4 @@
             margin-right: $gutter;
         }
     }
-
-    // Special handling for Webchat CTA - hidden by default, displayed conditionally via Optimize
-    &--type-chat  {
-        .template-listening-service--type-chat & {
-            display: none;
-        }
-
-        &__dynamic {
-            display: none;
-
-            .listening-cta__chevron {
-                display: none;
-            }
-        }
-    }
 }

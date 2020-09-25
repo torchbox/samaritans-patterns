@@ -326,6 +326,10 @@
         // Special handling for Webchat CTA - hidden by default, displayed conditionally via Optimize
         &--type-chat {
             display: none;
+
+            &.active {
+                display: block;
+            }
         }
 
         .block-chat {

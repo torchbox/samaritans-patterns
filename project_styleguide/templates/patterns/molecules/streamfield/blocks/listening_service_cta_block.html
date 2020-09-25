@@ -2,7 +2,7 @@
 
 {% if type == 'short' %}
 
-<a href="{% pageurl value.link.page %}" class="card-new card-new--listening-service card-new--listening-service--short js-beta-check">
+<a href="{% pageurl value.link.page %}" class="card-new card-new--listening-service card-new--listening-service--short {{ class }}" data-cta-block-small data-beta-check data-cta-type="{{ value.call_to_action.0.block.name }}">
     <span class="card-new__corner"></span>
     <div class="card-new__inner">
         <div class="card-new__container">
@@ -18,7 +18,7 @@
 
 {% else %}
 
-<div class="card-new card-new--listening-service card-new--listening-service--full js-beta-check">
+<div class="card-new card-new--listening-service card-new--listening-service--full {{ class }}" data-cta-block-large data-beta-check data-cta-type="{{ value.call_to_action.0.block.name }}">
     <span class="card-new__corner"></span>
     <div class="card-new__inner">
         <div class="card-new__container">
