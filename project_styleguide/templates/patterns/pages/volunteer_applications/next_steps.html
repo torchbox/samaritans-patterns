@@ -119,12 +119,15 @@
                         <h2>{% trans 'Book your training course' %}</h2>
                         {% if application.training_course_selected %}
                             {% include "patterns/molecules/check-block-complete/check-block-complete.html" %}
+                            {% if training_course %}
                             <p>
-                                {% blocktrans %}
-                                You&apos;ve signed up for a training course in XXX at XXX.
+                                {% blocktrans with venue_name=training_course.venue_name start_date=training_course.start_date %}
+                                You&apos;ve signed up for a training course in {{ venue_name }} on {{ start_date }}.
                                 {% endblocktrans %}
                             </p>
-                            {% include "patterns/atoms/buttons/button.html" with label="See your training dates" classes="check-block__button" %}
+                            {% else %}
+                            <p>{% trans 'You&apos;ve signed up for a training course.' %}</p>
+                            {% endif %}
                         {% else %}
                             <p>
                                 {% blocktrans %}
@@ -145,4 +148,4 @@
 
 {% block footer %}
     {% include "patterns/molecules/volunteer_applications/dashboard-footer/dashboard-footer.html" with get_in_touch_email=application.recruitment_email %}
-{% endblock %}
+    {% endblock %}
