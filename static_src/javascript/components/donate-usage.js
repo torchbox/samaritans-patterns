@@ -7,6 +7,7 @@ class DonateUsage {
         this.node = node;
         this.donateInput = this.node.querySelector('#id_amount');
         this.donateSlot = this.node.querySelector('.js-donation-usage-slot');
+        this.mobileCTA = this.node.querySelector('[data-mobile-cta]');
 
         // update value on page load
         this.calculateValue(this.donateInput.value);
@@ -26,9 +27,18 @@ class DonateUsage {
         // show the value to the user if number of calls > 1
         if (result >= 1 ){
             this.donateSlot.innerHTML = `<b>${result}</b> call${result === 1 ? '' : 's'}`;
-        } 
+        }
         else {
             this.donateSlot.innerHTML = 'a call';
+        }
+        
+        if(this.mobileCTA) {
+            if (value == 5){
+                this.mobileCTA.classList.add('is-active');
+            }
+            else {
+                this.mobileCTA.classList.remove('is-active');
+            }
         }
     }
 }

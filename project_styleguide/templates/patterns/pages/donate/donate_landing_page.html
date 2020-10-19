@@ -60,10 +60,10 @@
                             {% render_form_field monthly_form.currency %}
                             {% if is_euro %}
                             <div class="form-item form-item--decimal_field form-item--number_input donate-landing-hero__form-input">
-                                <label for="{{ monthly_form.amount.id_for_label }}">{{ monthly_form.amount.label }}</label> 
+                                <label for="{{ monthly_form.amount.id_for_label }}">{{ monthly_form.amount.label }}</label>
                                 <div class="form-item__wrapper--euro donate-landing-hero__form-input--monthly">
                                     {{ monthly_form.amount.errors }}
-                                    <input type="number" id="id_amount" name="amount" value="{{ monthly_form.amount.value|to_euro:request.site }}" min="0.01" step="0.01" required=""> 
+                                    <input type="number" id="id_amount" name="amount" value="{{ monthly_form.amount.value|to_euro:request.site }}" min="0.01" step="0.01" required="">
                                  </div>
                             </div>
                             {% else %}
@@ -76,10 +76,10 @@
                                 <p>Could fund <span class="js-donation-usage-slot"><b>1</b> call</span> for help every month</p>
                             </div>
                             {% include "patterns/atoms/buttons/button--button.html" with label=page.donate_button_text large=True classes="button--secondary donate-landing-hero__donate-button" %}
-                            {% if monthly_form.amount.value == 5.00 and not is_euro %}
-                            <div class="donate-landing__mobile-cta">
-                                <a href="sms://70088;?&body=LISTEN5">Text LISTEN5 to 70088 to start donating £5 a month</a>
-                            </div>
+                            {% if not is_euro %}
+                                <div class="donate-landing__mobile-cta" aria-live="polite" data-mobile-cta>
+                                    <a href="sms://70470;?&body=LISTEN5">Text LISTEN5 to 70470 to start donating £5 a month</a>
+                                </div>
                             {% endif %}
                             {% include "patterns/molecules/payments/payment-icons--monthly.html" %}
                         </form>
@@ -96,10 +96,10 @@
                             {% render_form_field one_off_form.currency %}
                             {% if is_euro %}
                             <div class="form-item form-item--decimal_field form-item--number_input donate-landing-hero__form-input">
-                                <label for="{{ one_off_form.amount.id_for_label }}">{{ one_off_form.amount.label }}</label> 
+                                <label for="{{ one_off_form.amount.id_for_label }}">{{ one_off_form.amount.label }}</label>
                                 <div class="form-item__wrapper--euro">
                                     {{ one_off_form.amount.errors }}
-                                    <input type="number" id="id_amount" name="amount" value="{{ one_off_form.amount.value|to_euro:request.site }}" min="0.01" step="0.01" required=""> 
+                                    <input type="number" id="id_amount" name="amount" value="{{ one_off_form.amount.value|to_euro:request.site }}" min="0.01" step="0.01" required="">
                                  </div>
                             </div>
                             {% else %}
@@ -161,7 +161,7 @@
                 {% if page.allow_monthly_donation %}
                 <div class="donate-landing__examples" id="donate__examples--monthly" {% if page.default_to_single %}hidden{% endif %}>
                     <div class="stat-block stat-block--donate-landing">
-                        {% for example in page.donation_examples_monthly %} 
+                        {% for example in page.donation_examples_monthly %}
                             {% include "patterns/molecules/streamfield/blocks/stat_block.html" with value=example.value frequency="monthly" is_euro=is_euro link=True currency=currency %}
                         {% endfor %}
                     </div>
