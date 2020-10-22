@@ -16,3 +16,8 @@
     {{ block.super }}
     {% loqate_script %}
 {% endblock %}
+
+<!-- Overide footer so footer CTA does not display -->
+{% block footer %}
+    {% include 'patterns/organisms/footer/footer.html' %}
+{% endblock footer %}

@@ -42,6 +42,19 @@
 
 {% endblock %}
 
+<!-- Overide footer CTA display -->
+{% block footer %}
+    {% if page.related_pages.all %}
+        {% include "patterns/molecules/banner-cta/banner-cta.html" with page=page %}
+    {% else %}
+        <div class="call-to-action--footer-padding">
+            {% include "patterns/molecules/banner-cta/banner-cta.html" with page=page %}
+        </div>
+    {% endif %}
+
+    {% include 'patterns/organisms/footer/footer.html' %}
+{% endblock footer %}
+
 {% block extra_js %}
 {{ webchat_api_url|json_script:"webchat_api_url" }}
 <script src="{% static 'js/chat-utils.js' %}"></script>

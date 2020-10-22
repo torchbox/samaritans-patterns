@@ -163,3 +163,8 @@
     {{ fundraising_options|json_script:"payment_origin_options" }}
 {% endif %}
 {% endblock %}
+
+<!-- Overide footer so footer CTA does not display -->
+{% block footer %}
+    {% include 'patterns/organisms/footer/footer.html' %}
+{% endblock footer %}

@@ -5,3 +5,8 @@
     <h1>Thank you</h1>
     {{ page.thank_you_text|richtext }}
 {% endblock %}
+
+<!-- Overide footer so footer CTA does not display -->
+{% block footer %}
+    {% include 'patterns/organisms/footer/footer.html' %}
+{% endblock footer %}

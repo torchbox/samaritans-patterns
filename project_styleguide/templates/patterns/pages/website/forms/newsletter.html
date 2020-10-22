@@ -64,3 +64,8 @@
     <small>For information on how Samaritans handles and protects your information, please read our <a href="{% privacy_statement_url %}" target="_blank" rel="noopener">privacy policy</a>.</small>
 
 {% endblock %}
+
+<!-- Overide footer so footer CTA does not display -->
+{% block footer %}
+    {% include 'patterns/organisms/footer/footer.html' %}
+{% endblock footer %}

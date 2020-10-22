@@ -4,3 +4,8 @@
 {% block form_content %}
     {{ page.thank_you_message|richtext }}
 {% endblock form_content %}
+
+<!-- Overide footer so footer CTA does not display -->
+{% block footer %}
+    {% include 'patterns/organisms/footer/footer.html' %}
+{% endblock footer %}

@@ -1,10 +1,23 @@
 {% load i18n donate_tags %}
+{% if page.show_footer_banner_cta %}
+{% if page.footer_banner_cta or settings.navigation.NavigationSettings.footer_banner_cta %}
 <div class="call-to-action call-to-action--banner {% if classes %}{{classes}}{% endif %}">
-    <div class="call-to-action__inner wrapper wrapper--large wrapper--padding">
-        {% include "patterns/atoms/svg/colour-icons/icon-color-snowflake-4.html" with classes="call-to-action__icon" %}
-        <p class="call-to-action__text">{% trans "Donating just &pound;5 could fund a lifesaving call for help this Christmas" %}</p>
+    {% if page.footer_banner_cta %}
+        <div class="call-to-action__inner wrapper wrapper--large wrapper--padding">
+            {% include "patterns/atoms/svg/colour-icons/"|add:page.footer_banner_cta.icon|add:".html" with classes="banner__icon" %}
+            <p class="call-to-action__text">{{ page.footer_banner_cta.text }}</p>
 
-        {% donate_url campaign_id=page.pk frequency="single" amount="5" as footer_donate_url %}
-        {% include "patterns/atoms/buttons/button.html" with href=footer_donate_url label="Donate &pound;5" %}
-    </div>
+            {% include "patterns/atoms/buttons/button.html" with href=page.footer_banner_cta.url label=page.footer_banner_cta.button_text %}
+        </div>
+    {% elif settings.navigation.NavigationSettings.footer_banner_cta %}
+         <div class="call-to-action__inner wrapper wrapper--large wrapper--padding">
+            {% include "patterns/atoms/svg/colour-icons/"|add:settings.navigation.NavigationSettings.footer_banner_cta.icon|add:".html" with classes="banner__icon" %}
+            <p class="call-to-action__text">{{ settings.navigation.NavigationSettings.footer_banner_cta.text }}</p>
+
+            {% include "patterns/atoms/buttons/button.html" with href=settings.navigation.NavigationSettings.footer_banner_cta.url label=settings.navigation.NavigationSettings.footer_banner_cta.button_text %}
+        </div>
+    {% endif %}
+
 </div>
+{% endif %}
+{% endif %}

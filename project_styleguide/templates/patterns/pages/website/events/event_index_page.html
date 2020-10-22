@@ -23,3 +23,8 @@
         {% include "patterns/molecules/listing-item/listing-item-featured.html" with value=events.object_list.specific.0 %}
     {% endif %}
 {% endcomment %}
+
+<!-- Overide footer so footer CTA does not display -->
+{% block footer %}
+    {% include 'patterns/organisms/footer/footer.html' %}
+{% endblock footer %}

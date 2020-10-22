@@ -238,3 +238,8 @@
 {% block extra_js %}
     <script src="https://maps.googleapis.com/maps/api/js?key={{ maps_api_key }}"></script>
 {% endblock %}
+
+<!-- Overide footer so footer CTA does not display -->
+{% block footer %}
+    {% include 'patterns/organisms/footer/footer.html' %}
+{% endblock footer %}

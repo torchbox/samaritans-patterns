@@ -30,3 +30,8 @@
     <script src="https://www.paypalobjects.com/api/checkout.js" data-version-4></script>
     <script src="https://pay.google.com/gp/p/js/pay.js"></script>
 {% endblock %}
+
+<!-- Overide footer so footer CTA does not display -->
+{% block footer %}
+    {% include 'patterns/organisms/footer/footer.html' %}
+{% endblock footer %}

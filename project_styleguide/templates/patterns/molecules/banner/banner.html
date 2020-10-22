@@ -1,15 +1,17 @@
-<div class="banner {% if classes %}{{classes}}{% endif %}">
+{% load wagtailcore_tags %}
+{% if page.footer_banner_cta or settings.navigation.NavigationSettings.footer_banner_cta %}
+<div id="footer_banner_cta" class="banner">
     <div class="banner__inner">
-        {% if icon %}
+        {% if page.footer_banner_cta %}
             {% include "patterns/atoms/svg/colour-icons/icon-color-"|add:icon|add:".html" with classes="banner__icon" %}
+            <p class="banner__text">{{ page.footer_banner_cta.text }}</span>
+            <span class="banner__link-container">{{ page.footer_banner_cta.tex }} <a class="banner__link" href="{{ page.footer_banner_cta.url }}">{{ page.footer_banner_cta.button_text }}</a></span>
+        {% elif settings.navigation.NavigationSettings.footer_banner_cta %}
+            {% include "patterns/atoms/svg/colour-icons/icon-color-"|add:icon|add:".html" with classes="banner__icon" %}
+            <p class="banner__text">{{ settings.navigation.NavigationSettings.footer_banner_cta.text }}</span>
+            <span class="banner__link-container">{{ settings.navigation.NavigationSettings.footer_banner_cta.textext }} <a class="banner__link" href="{{ settings.navigation.NavigationSettings.footer_banner_cta.url }}">{{ settings.navigation.NavigationSettings.footer_banner_cta.button_text }}</a></span>
         {% endif %}
-
-        <p class="banner__text">
-            {{ copy }} <span class="banner__text banner__text--for-desktop">{{ copy_for_desktop }}</span>
-
-            {% if link_href %}
-                <span class="banner__link-container">{{ cta_text }} <a class="banner__link" href="{{ link_href }}">{{ link_text }}</a></span>
-            {% endif %}
         </p>
     </div>
 </div>
+{% endif %}

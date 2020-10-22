@@ -43,3 +43,8 @@
     <script src="{% static 'js/payments_monthly.js' %}"></script>
     <script src="https://www.paypalobjects.com/api/checkout.js" data-version-4></script>
 {% endblock %}
+
+<!-- Overide footer so footer CTA does not display -->
+{% block footer %}
+    {% include 'patterns/organisms/footer/footer.html' %}
+{% endblock footer %}

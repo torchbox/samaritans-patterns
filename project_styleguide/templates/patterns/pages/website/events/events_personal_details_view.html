@@ -104,3 +104,8 @@
     {% loqate_script %}
     <script src="{% static 'js/event.js' %}"></script>
 {% endblock %}
+
+<!-- Overide footer so footer CTA does not display -->
+{% block footer %}
+    {% include 'patterns/organisms/footer/footer.html' %}
+{% endblock footer %}
