@@ -9,7 +9,11 @@ tags:
     "":
       template_name: "patterns/molecules/navigation/sidebar.html"
   image:
-    hero_image fill-2450x1600 as hero_image:
+    page.hero_image fill-3800x2500 jpegquality-40 as hero_image:
       target_var: hero_image
       raw:
-        url: http://via.placeholder.com/2048x2048
+        url: http://via.placeholder.com/3800x2500
+    page.hero_image fill-768x500 jpegquality-40 as hero_image_mobile:
+      target_var: hero_image_mobile
+      raw:
+        url: http://via.placeholder.com/768x500

@@ -2,15 +2,36 @@
     $root: &;
 
     &__image {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        filter: brightness(70%);
-        background-color: $color--default;
-        background-position: center;
-        background-size: cover;
+        &--mobile {
+            display: block;
+            position: relative;
+        }
+
+        &--desktop {
+            @media only screen and (max-width: 767px) {
+                background-image: none !important;
+                display: none;
+            }
+        }
+
+        @include media-query(tablet-portrait) {
+            &--desktop {
+                display: block;
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                filter: brightness(70%);
+                background-color: $color--default;
+                background-position: center;
+                background-size: cover;
+            }
+
+            &--mobile {
+                display: none;
+            }
+        }
     }
 
     &__title {

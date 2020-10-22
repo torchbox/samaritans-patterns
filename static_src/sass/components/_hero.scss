@@ -48,8 +48,13 @@
     }
 
     &__inner {
+        margin-top: -$gutter-xxl;
         position: relative;
         z-index: z($z-elements, hero-inner);
+
+        @include media-query(tablet-portrait) {
+            margin-top: 0;
+        }
 
         .template-404 & {
             display: flex;
@@ -275,12 +280,11 @@
 
     &--homepage,
     &--donate-landing {
-        padding: $gutter 0;
+        padding: 0 0 $gutter 0;
 
-        @include media-query(mob-landscape) {
+        @include media-query(tablet-portrait) {
             padding: $gutter-xxl 0;
         }
-
     }
 
     // see also shared styles with &--homepage
@@ -299,19 +303,19 @@
     }
 
     &--landing-page {
+        background-color: $color--secondary;
         padding: 0;
-        display: flex;
-        background-size: cover;
-        align-items: flex-end;
-        min-height: 200px;
-        background-position: center;
 
         @include media-query(tablet-portrait) {
-            min-height: 500px;
+            padding: ($gutter-xxl * 4) 0 $gutter;
 
             h1 {
                 line-height: 1.2;
             }
+        }
+
+        @include media-query(tablet-landscape) {
+            padding-top: ($gutter-xxl * 2.5);
         }
 
         @include target-ie11 {

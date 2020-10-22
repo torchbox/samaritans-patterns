@@ -6,7 +6,11 @@
     <div class="hero hero--homepage">
 
         {% image page.hero_image fill-3800x2500 jpegquality-40 as hero_image %}
-        <div class="donate-landing-hero__image" style="background-image: url({{ hero_image.url}});"></div>
+        <div class="donate-landing-hero__image--desktop" style="background-image: url({{ hero_image.url}});"></div>
+        {% image page.hero_image fill-768x500 jpegquality-40 as hero_image_mobile %}
+        <div class="donate-landing-hero__image--mobile">
+            <img src="{{ hero_image_mobile.url}}" alt="{{ hero_image_mobile.alt }}" />
+        </div>
 
         <div class="hero__inner wrapper wrapper--large wrapper--padding">
 

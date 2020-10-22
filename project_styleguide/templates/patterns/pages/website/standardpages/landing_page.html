@@ -6,45 +6,51 @@
 <section class="section section--landing-page">
 
     {% if page.hero_image %}
-    <!-- layout with hero -->
-        {% image page.hero_image fill-3800x2500 jpegquality-40 as hero_image %}
-        <div class="hero hero--landing-page" style="background-image: url('{{ hero_image.url }}')">
-            <div class="hero__inner wrapper wrapper--large wrapper--padding">
-                <div class="card card--information">
-                    <span class="card__connectors"></span>
-                    <div class="card__container">
-                        {% include "patterns/molecules/navigation/breadcrumbs.html" %}
-                        <h1>{{ page.title }}</h1>
+        <!-- layout with hero -->
+            <div class="hero hero--landing-page">
+                {% image page.hero_image fill-3800x2500 jpegquality-40 as hero_image %}
+                <div class="donate-landing-hero__image--desktop" style="background-image: url({{ hero_image.url}});"></div>
+                {% image page.hero_image fill-768x500 jpegquality-40 as hero_image_mobile %}
+                <div class="donate-landing-hero__image--mobile">
+                    <img src="{{ hero_image_mobile.url}}" alt="{{ hero_image_mobile.alt }}" />
+                </div>
+                <div class="hero__inner wrapper wrapper--large wrapper--padding">
+                    <div class="card card--information">
+                        <span class="card__connectors"></span>
+                        <div class="card__container">
+                            {% include "patterns/molecules/navigation/breadcrumbs.html" %}
+                            <h1>{{ page.title }}</h1>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="wrapper wrapper--landing-page-pattern">
-            {% include "patterns/atoms/svg/patterns/pattern-diamonds.html" with classes="pattern" %}
-        </div>
-        {% if page.introduction %}
+
+            <div class="wrapper wrapper--landing-page-pattern">
+                {% include "patterns/atoms/svg/patterns/pattern-diamonds.html" with classes="pattern" %}
+            </div>
+            {% if page.introduction %}
+                <section class="section section--landing-page-introduction">
+                    <div class="wrapper wrapper--large wrapper--padding">
+                        <h2 class="heading-block heading-block--introduction">{{ page.introduction }}</h2>
+                    </div>
+                </section>
+            {% endif %}
+    {% else %}
+        <!-- layout without hero -->
             <section class="section section--landing-page-introduction">
                 <div class="wrapper wrapper--large wrapper--padding">
-                    <h2 class="heading-block heading-block--introduction">{{ page.introduction }}</h2>
+                    {% include "patterns/molecules/navigation/breadcrumbs.html" %}
+
+                    <h1>{{ page.title }}</h1>
+
+                    {% if page.introduction %}
+                        <h2 class="heading-block heading-block--introduction">{{ page.introduction }}</h2>
+                    {% endif %}
                 </div>
             </section>
-        {% endif %}
-    {% else %}
-    <!-- layout without hero -->
-        <section class="section section--landing-page-introduction">
-            <div class="wrapper wrapper--large wrapper--padding">
-                {% include "patterns/molecules/navigation/breadcrumbs.html" %}
-
-                <h1>{{ page.title }}</h1>
-
-                {% if page.introduction %}
-                    <h2 class="heading-block heading-block--introduction">{{ page.introduction }}</h2>
-                {% endif %}
+            <div class="wrapper wrapper--landing-page-pattern">
+                {% include "patterns/atoms/svg/patterns/pattern-diamonds.html" with classes="pattern" %}
             </div>
-        </section>
-        <div class="wrapper wrapper--landing-page-pattern">
-            {% include "patterns/atoms/svg/patterns/pattern-diamonds.html" with classes="pattern" %}
-        </div>
     {% endif %}
 
     {% for block in page.body %}

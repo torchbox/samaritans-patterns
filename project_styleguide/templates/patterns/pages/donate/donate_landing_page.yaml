@@ -93,6 +93,10 @@ tags:
       target_var: hero_image
       raw:
         url: http://via.placeholder.com/3800x2500
+    page.hero_image fill-768x500 jpegquality-40 as hero_image_mobile:
+      target_var: hero_image_mobile
+      raw:
+        url: http://via.placeholder.com/768x500
   render_form_field:
     monthly_form.campaign_id:
       raw: ""

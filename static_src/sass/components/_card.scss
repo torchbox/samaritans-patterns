@@ -257,7 +257,7 @@
         }
 
         .hero--landing-page & {
-            margin: 20px 0;
+            max-width: 100%;
 
             @include media-query(tablet-portrait) {
                 margin-bottom: $gutter-xxl;
