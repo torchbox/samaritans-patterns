@@ -1,3 +1,9 @@
+@keyframes spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 .button {
     $root: &;
     $padding: 12px;
@@ -26,6 +32,34 @@
         #{$root}__shadow,
         #{$root}__inner::after {
             background: $emerald;
+        }
+    }
+
+    &:disabled {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
+    &[data-loading] {
+        #{$root}__inner {
+            padding-left: ($gutter-medium + 20px);
+            padding-right: $gutter-small;
+
+            &:before {
+                content: '';
+                box-sizing: border-box;
+                position: absolute;
+                top: 50%;
+                left: $gutter-medium;
+                width: 20px;
+                height: 20px;
+                margin-top: -10px;
+                margin-left: -10px;
+                border-radius: 50%;
+                border: 2px solid $teal;
+                border-top-color: #fff;
+                animation: spinner .6s linear infinite;
+            }
         }
     }
 
@@ -266,6 +300,11 @@
 
     &--donate-standout {
         @include font-size(m);
+    }
+
+    + p.submit-help-text {
+        margin-top: 5px;
+        font-weight: $weight--bold;
     }
 }
 

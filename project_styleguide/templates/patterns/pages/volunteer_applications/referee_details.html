@@ -42,7 +42,7 @@
             {% include "patterns/molecules/accordion/accordion-item.html" with index=0 heading="Who can provide a reference?" description="Referees don&apos;t need to be from a place of work, they can be from a teacher or tutor if you&apos;re in education.<br><br>It might be someone who knows you in the community such as a religious figure or group leader. You might volunteer somewhere else or it could be a family friend who knows you well.<br><br>Other suggestions could be your driving instructor, GP or social worker. These are just some examples not a complete list so please put someone that you are comfortable asking for a reference for you." classes="accordion--hide-tablet-landscape" %}
         </div>
 
-        <form class="form" method="post">
+        <form class="form" method="post" data-js-disable-button-after-submit>
             <div class="form__container">
                 {% csrf_token %}
                 {{ form.management_form }}
@@ -69,7 +69,7 @@
                 <button class="button" data-referee-form-submit>
                     <div class="button__shadow"></div>
                     <div class="button__inner">
-                        {% trans 'Submit' %}
+                        {% trans 'Review details' %}
                         {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="icon button__icon" title="Select" aria_hide=True %}
                     </div>
                 </button>
@@ -91,7 +91,7 @@
                             <div class="referees__items" aria-live="polite" data-modal-referees></div>
 
                             <div class="modal__buttons">
-                                <button class="form__submit button" type="submit">
+                                <button class="form__submit button" type="submit" data-long-wait>
                                     <div class="button__shadow"></div>
                                     <div class="button__inner">
                                         {% trans 'Submit' %}

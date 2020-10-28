@@ -35,7 +35,7 @@
 
             <h2>{% trans "About the applicant" %}</h2>
 
-            <form class="form form--alt" method="post">
+            <form class="form form--alt" method="post" data-js-disable-button-after-submit>
                 <div class="form__container">
                     {% csrf_token %}
                     {% render_form_field_with_help_text form.relationship %}
@@ -62,7 +62,7 @@
                     </div>
                     {% render_form_field_with_help_text form.further_information %}
 
-                    <button class="button" data-referee-form-submit>
+                    <button class="button" data-referee-form-submit data-long-wait>
                         <div class="button__shadow"></div>
                         <div class="button__inner">
                             {% trans 'Submit reference' %}

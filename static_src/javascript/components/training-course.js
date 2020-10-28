@@ -1,3 +1,4 @@
+import {disableFormAfterSubmit} from './disable-button-after-submit';
 import MicroModal from 'micromodal';
 
 class TrainingCourse {
@@ -12,15 +13,9 @@ class TrainingCourse {
         this.venueSlot = document.querySelector('[data-venue-slot]');
         this.button = document.querySelector('[data-confirm-course]');
         this.modal = document.getElementById('training-course-modal');
-        this.courseDate = this.node.querySelector(
-            '[data-course-date]',
-        ).textContent;
-        this.courseVenue = this.node.querySelector(
-            '[data-course-venue]',
-        ).textContent;
-        this.openModalButton = this.node.querySelector(
-            '[data-open-training-modal]',
-        );
+        this.courseDate = this.node.querySelector('[data-course-date]').textContent;
+        this.courseVenue = this.node.querySelector('[data-course-venue]').textContent;
+        this.openModalButton = this.node.querySelector('[data-open-training-modal]');
 
         this.bindEventListeners();
     }
@@ -52,6 +47,7 @@ class TrainingCourse {
         // copy the form to the modal
         const duplicatedForm = form.cloneNode(true);
         this.formSlot.appendChild(duplicatedForm);
+        disableFormAfterSubmit(duplicatedForm);
     }
 
     resetUI() {

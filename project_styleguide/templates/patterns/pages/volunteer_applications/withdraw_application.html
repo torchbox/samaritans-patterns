@@ -18,9 +18,7 @@
 <div class="content">
     <div class="content__inner content__inner--overlap-top">
         <p>
-            {% blocktrans %}
-            To confirm you do want to withdraw your application, press the button below.
-            {% endblocktrans %}
+            {% trans "To confirm your application withdrawal, press the button below:" %}
         </p>
 
         {% if errors %}
@@ -31,35 +29,33 @@
             </div>
         {% endif %}
 
-        <form method="post">
+        <form method="post" data-js-disable-button-after-submit>
             {% csrf_token %}
             <p>
-                <button class="form__submit button" type="submit">
+                <button class="form__submit button" type="submit" data-long-wait>
                     <div class="button__shadow"></div>
                     <div class="button__inner">
-                        Withdraw application
+                        {% trans "Withdraw application" %}
+                        {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="icon button__icon" title="Select" aria_hide=True %}
                     </div>
                 </button>
             </p>
         </form>
 
-        <p>
-            {% blocktrans %}
-            If you didn&apos;t mean to withdraw your application, don&apos;t worry.
-            Just close this window.
-            {% endblocktrans %}
-        </p>
+        <p><small>
+            {%  trans "If you didn&apos;t mean to withdraw your application, just close this window." %}
+        </small></p>
+
         {% if application.booked_interview %}
-            <hr>
+            <hr><br />
             <p>
-                {% blocktrans %}
-                You can also cancel your current interview and select a new time and date.
-                {% endblocktrans %}
+                {% trans "You can also reschedule your interview for a different date/time." %}
             </p>
             <a href="{{ reschedule_interview_url }}" class="form__submit button" type="submit">
                 <div class="button__shadow"></div>
                 <div class="button__inner">
-                    Reschedule interview
+                    {% trans "Reschedule interview" %}
+                    {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="icon button__icon" title="Select" aria_hide=True %}
                 </div>
             </a>
         {% endif %}

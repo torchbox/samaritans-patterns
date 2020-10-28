@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment-timezone';
+import {disableButton} from '../disable-button-after-submit';
 
 export const InterviewPickerModal = ({
     interviewData,
@@ -20,7 +21,7 @@ export const InterviewPickerModal = ({
             <h3>Your interview slot</h3>
             <div className="interview-confirmation__details">
                 <p>
-                    You have chosen to a {interview_type} interview on{' '}
+                    You have chosen a {interview_type} on{' '}
                     {moment(datetime)
                         .tz(window.timezone)
                         .format('MMMM Do')}{' '}
@@ -42,10 +43,11 @@ export const InterviewPickerModal = ({
                 <button
                     type="button"
                     className="interview-button  "
-                    onClick={() => {
-                        hideModal();
+                    onClick={(event) => {
                         onInterviewChosen();
+                        disableButton(event.currentTarget);
                     }}
+                    data-long-wait
                 >
                     <div
                         className="interview-button__shadow"

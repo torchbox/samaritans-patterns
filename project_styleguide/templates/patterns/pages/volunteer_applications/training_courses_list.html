@@ -14,7 +14,7 @@
         <div class="content__inner content__inner--overlap-top content__inner--overlap-bottom">
             <div>
                 <p class="lead">
-                    {% blocktrans with branch_name=branch.branch_name%}
+                    {% blocktrans with branch_name=branch.title %}
                     You have chosen to volunteer in {{ branch_name }}, but you can choose
                     where and when you do your training. Our training courses are a mix of
                     in person and online content.
@@ -99,12 +99,12 @@
                                     {% include "patterns/atoms/buttons/button--button.html" with classes='button--alt' data_attr='data-open-training-modal' type='submit' label='Book this course' %}
                                 </div>
 
-                                <form method="post" class="form form--training-course">
+                                <form method="post" class="form form--training-course" data-js-disable-button-after-submit>
                                     {% csrf_token %}
                                     {% render_form_field training_course_form.training_course_id %}
 
                                     <div class="modal__buttons">
-                                        {% include "patterns/atoms/buttons/button--button.html" with classes='button--group button--alt' type='submit' label='Confirm booking' %}
+                                        {% include "patterns/atoms/buttons/button--button.html" with classes='button--group button--alt' type='submit' label='Confirm booking' data_attr="data-long-wait" %}
                                         <a href="#" class="modal__link" data-micromodal-close>Find another course</a>
                                     </div>
                                 </form>

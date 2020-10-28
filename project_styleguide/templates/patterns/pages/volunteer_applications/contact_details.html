@@ -20,7 +20,7 @@
     <div class="content">
         <div class="content__inner content__inner--overlap-top">
             {% include "patterns/molecules/volunteer_applications/progress-indicator/progress-indicator.html" with current_step=1  %}
-            <form method="post">
+            <form method="post" data-js-disable-button-after-submit>
                 <div class="form__container">
                     {% csrf_token %}
 

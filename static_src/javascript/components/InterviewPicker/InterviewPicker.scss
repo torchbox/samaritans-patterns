@@ -113,7 +113,11 @@ $row-gap--mobile: 20px;
     }
 
     button {
-        margin: $gutter 0;
+        margin: $gutter 0 0 0;
+
+        + p:not(.submit-help-text) {
+            margin-top: $gutter;
+        }
     }
 
     a {

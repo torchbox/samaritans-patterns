@@ -33,7 +33,7 @@
         </div>
     {% endif %}
 
-    <form method="post">
+    <form method="post" data-js-disable-button-after-submit>
         <div class="form__container">
             {% csrf_token %}
             {% render_form_field form.first_name %}
@@ -44,7 +44,7 @@
 
             {% include "patterns/molecules/alert/alert.html" with alert="Please make sure this person is aware that you have named them as your emergency contact." %}
 
-            {% include "patterns/atoms/buttons/button--button.html" with classes='form__submit button' label="Submit" %}
+            {% include "patterns/atoms/buttons/button--button.html" with classes='form__submit button' label="Submit" data_attr="data-long-wait" %}
         </div>
     </form>
 

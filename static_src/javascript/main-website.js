@@ -1,44 +1,42 @@
-import "babel-polyfill";
+import 'babel-polyfill';
 
-import Autocomplete from "./components/autocomplete";
-import MobileMenu from "./components/mobile-menu";
-import MobileSubMenu from "./components/mobile-sub-menu";
-import CookieWarning from "./components/cookie-message--website";
-import Accordion from "./components/accordion";
-import Carousel from "./components/carousel";
-import GoogleMap from "./components/map";
-import Modal from "./components/modal";
-import ProgressBar from "./components/progress-bar";
-import RegionField from "./components/region-field";
-import StickyCTA from "./components/sticky-cta";
-import Tabccordion from "./components/tabccordion";
-import Toggle from "./components/toggle";
-import HeaderMenu from "./components/header-menu";
-import Gallery from "./components/gallery";
-import SelectAllCheckboxToggle from "./components/select-all-checkbox-toggle";
-import sendTagManagerEvents from "./components/tag-manager";
-import Beta from "./components/beta";
-import DonateUsage from "./components/donate-usage";
-import GiftAid from "./components/gift-aid";
-import Reveal from "./components/reveal";
-import Considerations from "./components/considerations";
-import "./components/browser-polyfills";
-import "./components/smooth-scroll";
-import "./components/branch-finder";
-import "./components/volunteering-branch-finder";
-import initiMobileNumberAutocomplete from "./components/mobile-number-autocomplete";
-import RescheduleInterview from "./components/reschedule-interview";
-import initMobileNumberField from "./components/mobile-number-field";
-import initDonationSliders from "./components/donate-slider";
-import { initInterviewPicker } from "./components/InterviewPicker/InterviewPicker";
-import initialiseHideIfCheckedElement from "./components/hide-if-checked";
-import TrainingCourse from "./components/training-course";
-import disableButtonAfterSubmit from "./components/disable-button-after-submit";
-import "./components/referee-details";
-import GenderReveal from "./components/gender-reveal";
-import VideoModal from './components/video-modal';
+import Autocomplete from './components/autocomplete';
+import MobileMenu from './components/mobile-menu';
+import MobileSubMenu from './components/mobile-sub-menu';
+import CookieWarning from './components/cookie-message--website';
+import Accordion from './components/accordion';
+import Carousel from './components/carousel';
+import GoogleMap from './components/map';
+import Modal from './components/modal';
+import ProgressBar from './components/progress-bar';
+import RegionField from './components/region-field';
+import StickyCTA from './components/sticky-cta';
+import Tabccordion from './components/tabccordion';
+import Toggle from './components/toggle';
+import HeaderMenu from './components/header-menu';
+import Gallery from './components/gallery';
+import SelectAllCheckboxToggle from './components/select-all-checkbox-toggle';
+import sendTagManagerEvents from './components/tag-manager';
+import Beta from './components/beta';
+import DonateUsage from './components/donate-usage';
+import GiftAid from './components/gift-aid';
+import Reveal from './components/reveal';
+import Considerations from './components/considerations';
+import './components/browser-polyfills';
+import './components/smooth-scroll';
+import './components/branch-finder';
+import './components/volunteering-branch-finder';
+import initiMobileNumberAutocomplete from './components/mobile-number-autocomplete';
+import initMobileNumberField from './components/mobile-number-field';
+import initDonationSliders from './components/donate-slider';
+import { initInterviewPicker } from './components/InterviewPicker/InterviewPicker';
+import initialiseHideIfCheckedElement from './components/hide-if-checked';
+import TrainingCourse from './components/training-course';
+import {disableFormAfterSubmit} from './components/disable-button-after-submit';
+import './components/referee-details';
+import GenderReveal from './components/gender-reveal';
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', function () {
     new CookieWarning();
 
     for (const accordion of document.querySelectorAll(Accordion.selector())) {
@@ -156,7 +154,7 @@ document.addEventListener("DOMContentLoaded", function () {
     sendTagManagerEvents();
 
     for (const hideIfCheckedElement of document.querySelectorAll(
-        ".js-hide-if-checked"
+        '.js-hide-if-checked'
     )) {
         const hideCheckbox = document.querySelector(
             hideIfCheckedElement.dataset.targetToWatchForHiding
@@ -171,12 +169,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    for (const rescheduleinterview of document.querySelectorAll(
-        RescheduleInterview.selector()
-    )) {
-        new RescheduleInterview(rescheduleinterview);
-    }
-
     for (const genderreveal of document.querySelectorAll(
         GenderReveal.selector()
     )) {
@@ -185,6 +177,6 @@ document.addEventListener("DOMContentLoaded", function () {
     initInterviewPicker();
 
     Array.from(
-        document.querySelectorAll("form[data-js-disable-button-after-submit]")
-    ).forEach((formElement) => disableButtonAfterSubmit(formElement));
+        document.querySelectorAll('form[data-js-disable-button-after-submit]')
+    ).forEach((formElement) => disableFormAfterSubmit(formElement));
 });

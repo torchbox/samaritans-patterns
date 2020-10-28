@@ -31,7 +31,7 @@
         {% include "patterns/molecules/accordion/accordion-item.html" with index=0 heading="What's involved in a background check?" description="Samaritans actively promotes equality of opportunity for all and welcomes applications from a wide range of applicants.<br/><br/>Samaritans recognises the contribution that people with criminal records make as employees and volunteers and welcomes applications from those with a criminal record. A criminal record will not normally prevent an applicant from being appointed as a volunteer. <br/><br/>We will judge each case on its merits and not discriminate unfairly against any applicant on the basis of a conviction or criminal record information disclosed to us." classes="accordion--hide-tablet-landscape" %}
     </div>
 
-    <form  method="post">
+    <form method="post" data-js-disable-button-after-submit>
         <div class="form__container">
             {% csrf_token %}
             {% render_form_field form.dbs_update_service %}
@@ -46,7 +46,7 @@
 
                 {% include "patterns/molecules/alert/alert.html" with alert="Please note these fields are specified by our Online DBS provider to be able to register for the check to be carried out – the information will only be used in relation to your criminal record check.<br><br>By submitting you confirm that Samaritans may begin a background check on your behalf." %}
 
-            <button class="form__submit button" type="submit">
+            <button class="form__submit button" type="submit" data-long-wait>
                 <div class="button__shadow"></div>
                 <div class="button__inner">
                     {% trans 'Submit' %}

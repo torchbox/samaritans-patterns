@@ -119,13 +119,12 @@
     }
 
     &__buttons {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
+        button, a, p {
+            display: block;
+        }
 
-        @include media-query(mob-landscape) {
-            flex-direction: row;
-            align-items: center;
+        button + a {
+            margin-top: 10px;
         }
     }
 }
