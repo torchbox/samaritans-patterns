@@ -44,33 +44,16 @@
                             id="question-{{ index }}"
                         >
                             <div class="accordion__header-wrapper">
-
-                                <div class="accordion__column-left">
+                                <div class="accordion__column--left">
                                     <h2 class="accordion__location" data-course-venue>{{ training_course.venue_name }}</h2>
                                     <p class="accordion__details" data-course-date>{{ training_course.start_date|date:'D j M Y' }} - {{ training_course.end_date|date:'D j M Y' }}</p>
                                 </div>
 
-                                {% if training_course.intensive %}
-                                    <p class="accordion__details accordion__details--label">{% trans 'Intensive' %}</p>
-                                {% endif %}
+                                <div class="accordion__column--right">
+                                    <p class="accordion__details accordion__details--label{% if not training_course.intensive %} invisible" aria-hidden="true" tabindex="-1"{% else %}"{% endif %}>{% trans 'Intensive' %}</p>
 
-                                {% if training_course.online %}
-                                    <p class="accordion__details accordion__details--label">{% trans 'Online' %}</p>
-                                {% endif %}
-
-                                {% if not training_course.intensive %}
-                                    <p class="accordion__details accordion__details--meta">
-                                        {% blocktrans count in_person_slots_number=training_course.in_person_slots|length %}
-                                            {{ in_person_slots_number }} module in person,
-                                        {% plural %}
-                                            {{ in_person_slots_number }} modules in person,
-                                        {% endblocktrans %}
-                                        {% if training_course.description %}
-                                            {{ training_course.description }}
-                                        {% endif %}
-                                    </p>
-                                {% endif %}
-
+                                    <p class="accordion__details accordion__details--label{% if not training_course.online %} invisible" aria-hidden="true" tabindex="-1"{% else %}"{% endif %}>{% trans 'Online' %}</p>
+                                </div>
                             </div>
 
                             <div class="accordion__icon-wrapper">

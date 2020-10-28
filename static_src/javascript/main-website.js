@@ -36,6 +36,7 @@ import TrainingCourse from "./components/training-course";
 import disableButtonAfterSubmit from "./components/disable-button-after-submit";
 import "./components/referee-details";
 import GenderReveal from "./components/gender-reveal";
+import VideoModal from './components/video-modal';
 
 document.addEventListener("DOMContentLoaded", function () {
     new CookieWarning();
@@ -130,6 +131,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     for (const giftaid of document.querySelectorAll(GiftAid.selector())) {
         new GiftAid(giftaid);
+    }
+
+    for (const videomodal of document.querySelectorAll(VideoModal.selector())) {
+        new VideoModal(videomodal);
     }
 
     initiMobileNumberAutocomplete();

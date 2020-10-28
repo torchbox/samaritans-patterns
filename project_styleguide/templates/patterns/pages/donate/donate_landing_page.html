@@ -16,7 +16,35 @@
 
         <h1 class="donate-landing-hero__title">{{ page.title }}</h1>
 
-        <div class="hero__inner wrapper wrapper--large wrapper--padding">
+        <div class="hero__inner hero__inner--video wrapper wrapper--large wrapper--padding">
+            <div class="hero-widget__video-container" data-video-modal>
+            {% if page.hero_video_cta %}
+                <a href="/" class="hero-widget__video-link" data-modal-open>
+                    <span class="hero-widget__video-copy">
+                       {% if page.hero_video_cta %}<h3>{{ page.hero_video_cta }}</h3>{% endif %}
+                    </span>
+                </a>
+                <div data-modal-window class="video-modal video-modal--donate" aria-live="polite">
+                    <div class="video-modal__container">
+                        <div class="video-modal__inner">
+                            <a data-modal-close class="video-modal__close" aria-label="Close video">
+                                {% include "patterns/atoms/svg/icons/icon-close.html" with classes="video-modal__close-icon" %}
+                            </a>
+                            <span class="video-modal__connectors"></span>
+                            <div style="padding-bottom: 56.25%;" class="responsive-object">
+                              <iframe width="480" height="270" src="{{ page.hero_video }}" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen>
+                              </iframe>
+                              <div class="video-modal__corner"></div>
+                            </div>
+                            <a data-modal-close class="video-modal__container-close" aria-label="Close video">
+                                {% include "patterns/atoms/svg/icons/icon-close.html" with classes="video-modal__container-close-icon" %}
+                                Back to make a donation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
 
             <div class="hero-widget hero-widget--donate-landing">
                 <div class="hero-widget__corner"></div>
@@ -31,26 +59,26 @@
                     <div class="hero-widget__content">
 
                         {% if page.allow_monthly_donation and page.allow_one_off_donation %}
-                        <div class="hero-widget__button-group button-group button-group--white">
-                            <button
-                                class="button-group__button"
-                                id="donate__form__toggle-monthly"
-                                {% if page.default_to_monthly %}disabled{% endif %}
-                            >
-                                <span class="button-group__button-text">
-                                    {% trans "Monthly" %}
-                                </span>
-                            </button>
-                            <button
-                                class="button-group__button"
-                                id="donate__form__toggle-single"
-                                {% if page.default_to_single %}disabled{% endif %}
-                            >
-                                <span class="button-group__button-text">
-                                    {% trans "One-off" %}
-                                </span>
-                            </button>
-                        </div>
+                            <div class="hero-widget__button-group button-group button-group--white">
+                                <button
+                                    class="button-group__button"
+                                    id="donate__form__toggle-monthly"
+                                    {% if page.default_to_monthly %}disabled{% endif %}
+                                >
+                                    <span class="button-group__button-text">
+                                        {% trans "Monthly" %}
+                                    </span>
+                                </button>
+                                <button
+                                    class="button-group__button"
+                                    id="donate__form__toggle-single"
+                                    {% if page.default_to_single %}disabled{% endif %}
+                                >
+                                    <span class="button-group__button-text">
+                                        {% trans "One-off" %}
+                                    </span>
+                                </button>
+                            </div>
                         {% endif %}
 
                         {% if page.allow_monthly_donation %}

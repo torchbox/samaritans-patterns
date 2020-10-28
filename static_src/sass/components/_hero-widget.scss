@@ -17,12 +17,19 @@
         max-width: 365px;
         margin-left: 0;
 
+        .hero__inner--video & {
+            flex: 0 0 60%;
+        }
     }
 
     @include media-query(tablet-landscape) {
         max-width: 625px;
         margin-bottom: 0;
         margin-left: $gutter-xxl;
+
+        .hero__inner--video & {
+            flex: 0 0 50%;
+        }
     }
 
     &__corner {
@@ -77,6 +84,74 @@
 
         #{$root}__inner {
             background-color: rgba($white, 0.9);
+        }
+    }
+
+    &__video-container {
+        align-items: center;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+
+        @include media-query(tablet-portrait) {
+            flex: 1 0 50%;
+        }
+
+        @include media-query(tablet-landscape) {
+            flex: 0 0 50%;
+        }
+    }
+
+    &__video-link {
+        align-items: center;
+        border: 3px solid rgba($color--white, 0.5);
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: center;
+        margin-bottom: -$gutter;
+        padding: $gutter-large;
+        position: relative;
+        width: 100%;
+        transition: background-color $transition;
+
+        @include media-query(tablet-portrait) {
+            height: 80%;
+            margin-left: -$gutter;
+            padding: 0;
+        }
+
+        &:hover {
+            background-color: rgba($color--white, 0.1);
+
+            #{$root}__video-copy::before {
+                transform: scale(1.1);
+            }
+        }
+    }
+
+    &__video-copy {
+        color: $color--white;
+
+        @include media-query(tablet-portrait) {
+            width: 50%;
+        }
+
+        &::before {
+            content: "";
+            display: block;
+            width: 69px;
+            height: 64px;
+            margin: 0 auto $gutter-small;
+            background-image: url('../images/play-button-green.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 100%;
+            transform: scale(1);
+            transition: transform $transition;
         }
     }
 }

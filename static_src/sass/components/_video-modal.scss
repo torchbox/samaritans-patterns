@@ -1,0 +1,153 @@
+.video-modal {
+    $root: &;
+    display: none;
+    position: fixed;
+    z-index: z($z-elements, modal);
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background-color: rgba($color--white, 0.8);
+
+    &.open {
+        display: block;
+    }
+
+    &__wrapper {
+        position: relative;
+        width: 100%;
+        z-index: z($z-elements, modal);
+
+        @include media-query(tablet-portrait) {
+            max-width: 640px;
+        }
+    }
+
+    &__button {
+        top: 50%;
+        width: 100%;
+        transform: translateY(-50%);
+        position: absolute;
+        text-align: center;
+    }
+
+    &__button-icon {
+        transform: scale(1);
+        transition: $transition;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+
+    &__preview {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        min-height: 320px;
+        width: 100%;
+
+        @include media-query(tablet-portrait) {
+            min-height: 420px;
+        }
+    }
+
+    &__connectors {
+        @include connectors($lime, bottom, left, card);
+
+        @include media-query(mob-landscape) {
+            @include connectors($lime, bottom, left, medium);
+        }
+    }
+
+    &__container {
+        @include corner($lime, bottom, left, $offset: 20px);
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 90%;
+        margin: 0 auto;
+
+        @include media-query(tablet-portrait) {
+            width: 56%;
+            max-width: 800px;
+        }
+    }
+
+    &__inner {
+        position: relative;
+        background-color: $color--white;
+
+        #{$root}--donate & {
+            background-color: $color--white;
+            padding: $gutter-large $gutter-large 0;
+
+            @include media-query(tablet-portrait) {
+                padding: $gutter-xxl $gutter-xxl 0;
+            }
+        }
+    }
+
+    &__container-close {
+        border-top: 1px solid $color--tertiary;
+        display: block;
+        position: relative;
+        text-align: left;
+        vertical-align: middle;
+        margin-top: $gutter-medium;
+        padding: $gutter-medium 0 $gutter-large;
+
+        &:hover {
+            #{$root}__container-close-icon {
+                background-color: $color--primary;
+            }
+        }
+    }
+
+    &__container-close-icon {
+        margin-left: 5px;
+    }
+
+    &__container-close-icon,
+    &__close-icon {
+        #{$root}--donate & {
+            background-color: $color--link;
+            border-radius: 50%;
+            color: $color--white;
+            display: inline-block;
+            vertical-align: middle;
+            width: 25px;
+            height: 25px;
+            padding: 5px;
+            transition: background-color $transition;
+        }
+    }
+
+    &__close {
+        position: absolute;
+        display: inline-block;
+        top: $gutter;
+        right: $gutter;
+
+        #{$root}--donate & {
+            &:hover {
+                #{$root}__close-icon {
+                    background-color: $color--link;
+                    color: $color--white;
+                }
+            }
+        }
+    }
+
+    &__close-icon {
+        height: 48px;
+        width: 48px;
+        color: $color--black;
+
+        #{$root}--donate & {
+            background-color: $color--tertiary;
+            color: $color--link;
+        }
+    }
+}

@@ -157,6 +157,23 @@
                 width: 100%;
                 align-items: flex-start;
             }
+
+            @include media-query(tablet-portrait) {
+                .accordion__column {
+                    &--left {
+                        width: 60%;
+                    }
+
+                    &--right {
+                        width: 40%;
+                        text-align: right;
+
+                        p + p {
+                            margin-left: $gutter;
+                        }
+                    }
+                }
+            }
         }
 
         #{$root}__location {
@@ -175,16 +192,6 @@
                 @include font-size(s);
             }
 
-            &--meta {
-                color: rgba($charcoal, 0.7);
-                padding-top: $gutter / 2;
-
-                @include media-query(tablet-portrait) {
-                    text-align: right;
-                    min-width: 250px;
-                }
-            }
-
             &--label {
                 @include font-size(xs);
                 display: inline-block;
@@ -200,6 +207,10 @@
 
                 @include media-query(tablet-portrait) {
                     margin-top: 0;
+                }
+
+                &.invisible {
+                    opacity: 0;
                 }
             }
         }

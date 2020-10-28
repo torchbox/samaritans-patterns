@@ -66,6 +66,14 @@
                 padding-bottom: $section-overlap--hero-with-image;
             }
         }
+
+        &--video {
+            @include media-query(tablet-portrait) {
+                justify-content: flex-start;
+                display: flex;
+                flex-direction: row-reverse;
+            }
+        }
     }
 
     &__title {
@@ -292,13 +300,6 @@
         @include media-query(tablet-landscape) {
             padding-top: $section-overlap;
             padding-bottom: $section-overlap + $gutter-xxl;
-        }
-
-        #{$root}__inner {
-            @include media-query(tablet-landscape) {
-                display: flex;
-                justify-content: space-between;
-            }
         }
     }
 
