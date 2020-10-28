@@ -15,6 +15,7 @@ import Tabccordion from './components/tabccordion';
 import Toggle from './components/toggle';
 import HeaderMenu from './components/header-menu';
 import Gallery from './components/gallery';
+import VideoModal from './components/video-modal';
 import SelectAllCheckboxToggle from './components/select-all-checkbox-toggle';
 import sendTagManagerEvents from './components/tag-manager';
 import Beta from './components/beta';
