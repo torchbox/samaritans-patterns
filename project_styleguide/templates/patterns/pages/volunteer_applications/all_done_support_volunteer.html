@@ -7,7 +7,15 @@
     <div class="heading heading--overlapped">
         <div class="heading__inner">
             <div class="thank-you__heading-wrapper">
-                <h1 class="thank-you__heading-text">{% trans 'Thanks,' %} {% if first_name %}{{ first_name }}{% endif %} {% trans 'you&apos;re all done here' %}</h1>
+                <h1 class="thank-you__heading-text">
+                    {% if first_name %}
+                        {% blocktrans %}
+                            Thanks, {{ first_name }} you're all done here
+                        {% endblocktrans %}
+                    {% else %}
+                        {% trans "Thanks, you're all done here" %}
+                    {% endif %}
+                </h1>
             </div>
         </div>
     </div>
@@ -17,15 +25,9 @@
 
                 <h2 class="thank-you__content-heading">{% trans 'What happens next?' %}</h2>
 
-                <p>
-                    {% blocktrans %}
-                        You&apos;re well on your way to become a Samaritan.
-                    {% endblocktrans %}
-                </p>
+                <p>{% trans "We'll contact your referees and keep you up-to-date with the progress of your application." %}</p>
 
-                {% include 'patterns/molecules/alert/alert.html' with alert="Our training team are volunteers too! Missed training days greatly impacts Samaritans ability to deliver our services to those that need them. But we get it, sometimes things change." contact_url="mailto:"|add:application.recruitment_email %}
-
-                <br>
+                <br />
                 {% include 'patterns/molecules/volunteer_applications/other-ways-to-help-cta/other-ways-to-help-cta.html' %}
             </div>
         </div>

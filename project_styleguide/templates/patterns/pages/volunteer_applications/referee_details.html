@@ -28,13 +28,9 @@
 
         <p class="lead">
             {% blocktrans count counter=application.number_referees_missing with number=application.number_referees_missing|apnumber %}
-            Please provide details of {{ number }} person to provide references
-            to support your application. We will only use these details for the
-            purposes of considering your application. They should:
+                Please provide details of a person to provide references to support your application. We will only use these details for the purposes of considering your application. They should:
             {% plural %}
-            Please provide details of {{ number }} people to provide references
-            to support your application. We will only use these details for the
-            purposes of considering your application. They should:
+                Please provide details of {{ number }} people to provide references to support your application. We will only use these details for the purposes of considering your application. They should:
             {% endblocktrans %}
         </p>
         <ul class="list list--bullets">

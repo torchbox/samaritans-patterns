@@ -16,13 +16,13 @@ $day-padding--medium: 5px;
 
     &_transitionContainer {
         overflow: unset;
-        @include media-query(desktop) {
+        @include media-query(tablet-landscape) {
             overflow: hidden;
         }
     }
 
     > div > div:first-child {
-        @include media-query(desktop) {
+        @include media-query(tablet-landscape) {
             border: 1.5px solid $grey-light;
             border-radius: 5px;
             background-color: $white;
