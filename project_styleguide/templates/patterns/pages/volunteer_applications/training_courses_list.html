@@ -13,136 +13,143 @@
     <div class="content">
         <div class="content__inner content__inner--overlap-top content__inner--overlap-bottom">
             <div>
-                <p class="lead">
-                    {% blocktrans with branch_name=branch.title %}
-                    You have chosen to volunteer in {{ branch_name }}, but you can choose
-                    where and when you do your training. Our training courses are a mix of
-                    in person and online content.
-                    {% endblocktrans %}
-                </p>
+                {% if training_course_form_dict.items %}
+                    <p class="lead">
+                        {% blocktrans with branch_name=branch.title %}
+                        You have chosen to volunteer in {{ branch_name }}, but you can choose
+                        where and when you do your training. Our training courses are a mix of
+                        in person and online content.
+                        {% endblocktrans %}
+                    </p>
 
-                <h2 class="full-width__content-heading">{% trans 'Pick where you&apos;d like to do your training' %}</h2>
-                {% if form.non_field_errors %}
-                    <div class="form_errors">
-                        {% for error in form.non_field_errors %}
-                            <p>{{ error }}</p>
-                        {% endfor %}
-                    </div>
-                {% endif %}
+                    <h2 class="full-width__content-heading">{% trans 'Pick where you&apos;d like to do your training' %}</h2>
 
-                {% for training_course, training_course_form in training_course_form_dict.items %}
+                    {% if form.non_field_errors %}
+                        <div class="form_errors">
+                            {% for error in form.non_field_errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
 
-                    <div class="accordion accordion--training js-accordion" data-training-course>
-                        <a
-                            href=""
-                            class="accordion__heading js-accordion-question"
-                            role="tab"
-                            aria-controls="answer-{{ index }}"
-                            aria-expanded="false"
-                            aria-selected="false"
-                            tabindex="0"
-                            id="question-{{ index }}"
-                        >
-                            <div class="accordion__header-wrapper">
-                                <div class="accordion__column--left">
-                                    <h2 class="accordion__location" data-course-venue>{{ training_course.venue_name }}</h2>
-                                    <p class="accordion__details" data-course-date>{{ training_course.start_date|date:'D j M Y' }} - {{ training_course.end_date|date:'D j M Y' }}</p>
+                    {% for training_course, training_course_form in training_course_form_dict.items %}
+
+                        <div class="accordion accordion--training js-accordion" data-training-course>
+                            <a
+                                href=""
+                                class="accordion__heading js-accordion-question"
+                                role="tab"
+                                aria-controls="answer-{{ index }}"
+                                aria-expanded="false"
+                                aria-selected="false"
+                                tabindex="0"
+                                id="question-{{ index }}"
+                            >
+                                <div class="accordion__header-wrapper">
+                                    <div class="accordion__column--left">
+                                        <h2 class="accordion__location" data-course-venue>{{ training_course.venue_name }}</h2>
+                                        <p class="accordion__details" data-course-date>{{ training_course.start_date|date:'D j M Y' }} - {{ training_course.end_date|date:'D j M Y' }}</p>
+                                    </div>
+
+                                    <div class="accordion__column--right">
+                                        <p class="accordion__details accordion__details--label{% if not training_course.intensive %} invisible" aria-hidden="true" tabindex="-1"{% else %}"{% endif %}>{% trans 'Intensive' %}</p>
+
+                                        <p class="accordion__details accordion__details--label{% if not training_course.online %} invisible" aria-hidden="true" tabindex="-1"{% else %}"{% endif %}>{% trans 'Online' %}</p>
+                                    </div>
                                 </div>
 
-                                <div class="accordion__column--right">
-                                    <p class="accordion__details accordion__details--label{% if not training_course.intensive %} invisible" aria-hidden="true" tabindex="-1"{% else %}"{% endif %}>{% trans 'Intensive' %}</p>
+                                <div class="accordion__icon-wrapper">
+                                    {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="accordion__icon" aria_hide="true" %}
+                                </div>
+                            </a>
 
-                                    <p class="accordion__details accordion__details--label{% if not training_course.online %} invisible" aria-hidden="true" tabindex="-1"{% else %}"{% endif %}>{% trans 'Online' %}</p>
+                            <div
+                                class="accordion__content js-accordion-answer"
+                                id="answer-{{ index }}"
+                                role="tabpanel"
+                                aria-labelledby="question-{{ index }}"
+                                aria-hidden="false"
+                            >
+
+                                <ul class="training-dates">
+                                    {% for slot in training_course.in_person_slots %}
+                                    <li class="training-dates__session">
+                                        <div>
+                                            <p class="training-dates__text training-dates__text--week">{% blocktrans with module_no=forloop.counter %}Module {{ module_no }}{% endblocktrans %}</p>
+                                            <p class="training-dates__text training-dates__text--title">{{ slot.name }}</p>
+                                        </div>
+                                        <div class="training-dates__right-column">
+                                            <p class="training-dates__text">{{ slot.date|date:'D j M Y' }}</p>
+                                            <p class="training-dates__text training-dates__text--time">{{ slot.start_time|time }}-{{ slot.end_time|time }}</p>
+                                        </div>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+
+                                <div class="accordion__content-footer">
+                                    {% if training_course.online %}
+                                        <p class="accordion__footer-text">
+                                            We&apos;ll send you some details by email to access your online modules.
+                                        </p>
+                                    {% else %}
+                                        <h3 class="accordion__footer-heading">{% trans 'Training location:' %}</h3>
+                                        <p class="accordion__footer-text">{{ training_course.venue_address }}</p>
+                                        <p class="accordion__footer-text accordion__footer-text--small">{{ training_course.accessibility_info }}</p>
+                                    {% endif %}
+
+                                    <div class="accordion__footer-button">
+                                        {% include "patterns/atoms/buttons/button--button.html" with classes='button--alt' data_attr='data-open-training-modal' type='submit' label='Book this course' %}
+                                    </div>
+
+                                    <form method="post" class="form form--training-course" data-js-disable-button-after-submit>
+                                        {% csrf_token %}
+                                        {% render_form_field training_course_form.training_course_id %}
+
+                                        <div class="modal__buttons">
+                                            {% include "patterns/atoms/buttons/button--button.html" with classes='button--group button--alt' type='submit' label='Confirm booking' data_attr="data-long-wait" %}
+                                            <a href="#" class="modal__link" data-micromodal-close>Find another course</a>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
+                        </div>
+                    {% endfor %}
 
-                            <div class="accordion__icon-wrapper">
-                                {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="accordion__icon" aria_hide="true" %}
-                            </div>
-                        </a>
+                    <!-- Training course modal -->
+                    <div class="modal" id="training-course-modal" aria-hidden="true">
+                        <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+                            <div class="modal__container" role="dialog" aria-modal="true">
+                                <button class="modal__close" aria-label="Close modal" data-micromodal-close>
+                                    {% include "patterns/atoms/svg/icons/icon-close.html" with classes="modal__close-icon" %}
+                                </button>
+                                <div class="modal__content">
+                                    <h2 class="modal__title">Before you confirm&hellip;</h2>
 
-                        <div
-                            class="accordion__content js-accordion-answer"
-                            id="answer-{{ index }}"
-                            role="tabpanel"
-                            aria-labelledby="question-{{ index }}"
-                            aria-hidden="false"
-                        >
+                                    <p>You're booking a training course in <b data-venue-slot></b> running from <b data-date-slot></b>. We look forward to meeting you at the training.</p>
 
-                            <ul class="training-dates">
-                                {% for slot in training_course.in_person_slots %}
-                                <li class="training-dates__session">
-                                    <div>
-                                        <p class="training-dates__text training-dates__text--week">{% blocktrans with module_no=forloop.counter %}Module {{ module_no }}{% endblocktrans %}</p>
-                                        <p class="training-dates__text training-dates__text--title">{{ slot.name }}</p>
-                                    </div>
-                                    <div class="training-dates__right-column">
-                                        <p class="training-dates__text">{{ slot.date|date:'D j M Y' }}</p>
-                                        <p class="training-dates__text training-dates__text--time">{{ slot.start_time|time }}-{{ slot.end_time|time }}</p>
-                                    </div>
-                                </li>
-                                {% endfor %}
-                            </ul>
+                                    {% include 'patterns/molecules/alert/alert.html' with alert="Our training team are volunteers too, and missed training days greatly impacts our ability to deliver our service to those who need it most. Please ensure that you are able to attend all sessions before you confirm your booking." %}
 
-                            <div class="accordion__content-footer">
-                                {% if training_course.online %}
-                                    <p class="accordion__footer-text">
-                                        We&apos;ll send you some details by email to access your online modules.
-                                    </p>
-                                {% else %}
-                                    <h3 class="accordion__footer-heading">{% trans 'Training location:' %}</h3>
-                                    <p class="accordion__footer-text">{{ training_course.venue_address }}</p>
-                                    <p class="accordion__footer-text accordion__footer-text--small">{{ training_course.accessibility_info }}</p>
-                                {% endif %}
+                                    <p>{% trans 'We&apos;ll send more information to your email address after you confirm.' %}</p>
 
-                                <div class="accordion__footer-button">
-                                    {% include "patterns/atoms/buttons/button--button.html" with classes='button--alt' data_attr='data-open-training-modal' type='submit' label='Book this course' %}
+                                    <div data-form-slot aria-live="polite"></div>
+
+                                    <div class="modal__connectors" aria-hidden="true"></div>
                                 </div>
-
-                                <form method="post" class="form form--training-course" data-js-disable-button-after-submit>
-                                    {% csrf_token %}
-                                    {% render_form_field training_course_form.training_course_id %}
-
-                                    <div class="modal__buttons">
-                                        {% include "patterns/atoms/buttons/button--button.html" with classes='button--group button--alt' type='submit' label='Confirm booking' data_attr="data-long-wait" %}
-                                        <a href="#" class="modal__link" data-micromodal-close>Find another course</a>
-                                    </div>
-                                </form>
                             </div>
                         </div>
                     </div>
-                {% endfor %}
+                {% else %}
+                    <h2 class="full-width__content-heading">{% trans 'We’re really sorry that there are no training courses available to book at the moment.' %}</h2>
+                {% endif %}
 
-                {% include "patterns/molecules/cta-card/cta-card.html" with heading="Can’t find a training date or location that suits you?" text="If there are no training dates, or you can’t find a training date or location that suits you? New dates and locations are added every week. Check back soon for new dates." %}
+                {% include "patterns/molecules/cta-card/cta-card.html" with heading="Can’t find a training date or location that suits you?" text="We’re sorry you can’t find any suitable training. These are the only dates that are available at the moment but do let us know you haven’t been able to book any training. Our recruitment email address is in the email we sent to you." %}
             </div>
         </div>
     </div>
-
-<!-- Training course modal -->
-<div class="modal" id="training-course-modal" aria-hidden="true">
-    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-        <div class="modal__container" role="dialog" aria-modal="true">
-            <button class="modal__close" aria-label="Close modal" data-micromodal-close>
-                {% include "patterns/atoms/svg/icons/icon-close.html" with classes="modal__close-icon" %}
-            </button>
-            <div class="modal__content">
-                <h2 class="modal__title">Before you confirm&hellip;</h2>
-
-                <p>You've booked a training course in <b data-venue-slot></b> running from <b data-date-slot></b>. We're excited for you to join us!</p>
-
-                {% include 'patterns/molecules/alert/alert.html' with alert="We have a waiting list of people waiting for an inteview. Missing your appointment greatly impacts Samaritans ability to deliver our services to those that need them so please ensure this time is right for you." %}
-
-                <p>{% trans 'We&apos;ll send more information to your email address after you confirm.' %}</p>
-
-                <div data-form-slot aria-live="polite"></div>
-
-                <div class="modal__connectors" aria-hidden="true"></div>
-            </div>
-        </div>
-    </div>
-</div>
 {% endblock %}
 
 {% block footer %}
-    {% include "patterns/molecules/volunteer_applications/dashboard-footer/dashboard-footer.html" with get_in_touch_email=application.recruitment_email %}
+    {% if training_course_form_dict.items %}
+        {% include "patterns/molecules/volunteer_applications/dashboard-footer/dashboard-footer.html" with get_in_touch_email=application.recruitment_email %}
+    {% endif %}
 {% endblock %}
