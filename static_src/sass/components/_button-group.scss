@@ -15,6 +15,10 @@
         background-color: $teal;
         color: $white;
 
+        .hero-widget--slider & {
+            width: 50%;
+        }
+
         #{hover} {
             color: $white;
             cursor: default;

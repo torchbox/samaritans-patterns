@@ -1,7 +1,15 @@
 .hero-widget {
     $root: &;
 
-    @include corner($lime, top, left, $width: 60%, $height: 160px, $offset: 7px, $selector: '&__corner');
+    @include corner(
+        $lime,
+        top,
+        left,
+        $width: 60%,
+        $height: 160px,
+        $offset: 7px,
+        $selector: '&__corner'
+    );
     max-width: 533px;
     margin: 0 auto $gutter-medium;
 
@@ -10,7 +18,15 @@
     }
 
     @include media-query(mob-landscape) {
-        @include corner($lime, top, left, $width: 60%, $height: 170px, $offset: 10px, $selector: '&__corner');
+        @include corner(
+            $lime,
+            top,
+            left,
+            $width: 60%,
+            $height: 170px,
+            $offset: 10px,
+            $selector: '&__corner'
+        );
     }
 
     @include media-query(tablet-portrait) {
@@ -141,7 +157,7 @@
         }
 
         &::before {
-            content: "";
+            content: '';
             display: block;
             width: 69px;
             height: 64px;
@@ -152,6 +168,12 @@
             background-size: 100%;
             transform: scale(1);
             transition: transform $transition;
+        }
+    }
+
+    &--slider {
+        @include media-query(tablet-landscape) {
+            width: calc(65% - #{$gutter-xxl * 2}); //
         }
     }
 }

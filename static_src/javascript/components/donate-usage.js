@@ -9,6 +9,11 @@ class DonateUsage {
         this.donateSlot = this.node.querySelector('.js-donation-usage-slot');
         this.mobileCTA = this.node.querySelector('[data-mobile-cta]');
 
+        
+        // Bailout if calls counter not found.
+        if (!this.donateSlot) {
+            return;
+        }
         // update value on page load
         this.calculateValue(this.donateInput.value);
 

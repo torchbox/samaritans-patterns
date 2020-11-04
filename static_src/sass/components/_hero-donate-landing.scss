@@ -55,28 +55,53 @@
                 @include font-size(xl);
                 margin-right: 10px;
             }
-            
+
             &--euro {
                 @include input--currency;
                 padding: 10px 15px;
-    
+
                 #{$input--string} {
                     font-size: 22px;
                 }
-                
+
                 &::before {
                     @include font-size(xl);
                     margin-right: 10px;
                     content: "€";
                 }
             }
-            
+
         }
 
         &--monthly .form-item__wrapper::after { // sass-lint:disable-line force-element-nesting
             content: 'per month';
             display: inline-block;
             margin-left: 10px;
+        }
+
+        .hero-widget--slider & {
+            // We need to override
+            // without altering models as part of a A/B test
+            background-color: transparent;
+
+            .form-item__label {
+                display: none;
+            }
+
+            .form-item__wrapper {
+                background-color: #f4f7f8;
+                border-bottom: 3px solid $teal;
+                border-radius: 0;
+                margin-top: 5px;
+                padding-left: 10px;
+                padding-bottom: 5px;
+            }
+
+            input:not([type="checkbox"]):not([type="radio"]),
+            textarea,
+            select {
+                background-color: transparent;
+            }
         }
     }
 
