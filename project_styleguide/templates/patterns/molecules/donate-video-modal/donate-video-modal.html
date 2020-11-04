@@ -1,0 +1,28 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="hero-widget__video-container" data-video-modal>
+    <a href="#" class="hero-widget__video-link" data-modal-open>
+        <span class="hero-widget__video-copy">
+           <h3>{{ value.hero_video_cta }}</h3>
+        </span>
+    </a>
+    <div data-modal-window class="video-modal video-modal--donate" aria-live="polite">
+        <div class="video-modal__container">
+            <div class="video-modal__inner">
+                <a data-modal-close class="video-modal__close" aria-label="Close video">
+                    {% include "patterns/atoms/svg/icons/icon-close.html" with classes="video-modal__close-icon" %}
+                </a>
+                <span class="video-modal__connectors"></span>
+                <div style="padding-bottom: 56.25%;" class="responsive-object">
+                  <iframe width="480" height="270" src="{{ value.hero_video }}" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen>
+                  </iframe>
+                  <div class="video-modal__corner"></div>
+                </div>
+                <a data-modal-close class="video-modal__container-close" aria-label="Close video">
+                    {% include "patterns/atoms/svg/icons/icon-close.html" with classes="video-modal__container-close-icon" %}
+                    Back to make a donation
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

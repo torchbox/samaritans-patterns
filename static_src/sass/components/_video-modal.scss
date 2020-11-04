@@ -34,7 +34,7 @@
 
     &__button-icon {
         transform: scale(1);
-        transition: $transition;
+        transition: transform $transition;
 
         &:hover {
             transform: scale(1.1);

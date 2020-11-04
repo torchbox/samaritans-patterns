@@ -17,34 +17,9 @@
         <h1 class="donate-landing-hero__title">{{ page.title }}</h1>
 
         <div class="hero__inner hero__inner--video wrapper wrapper--large wrapper--padding">
-            <div class="hero-widget__video-container" data-video-modal>
-            {% if page.hero_video_cta %}
-                <a href="/" class="hero-widget__video-link" data-modal-open>
-                    <span class="hero-widget__video-copy">
-                       {% if page.hero_video_cta %}<h3>{{ page.hero_video_cta }}</h3>{% endif %}
-                    </span>
-                </a>
-                <div data-modal-window class="video-modal video-modal--donate" aria-live="polite">
-                    <div class="video-modal__container">
-                        <div class="video-modal__inner">
-                            <a data-modal-close class="video-modal__close" aria-label="Close video">
-                                {% include "patterns/atoms/svg/icons/icon-close.html" with classes="video-modal__close-icon" %}
-                            </a>
-                            <span class="video-modal__connectors"></span>
-                            <div style="padding-bottom: 56.25%;" class="responsive-object">
-                              <iframe width="480" height="270" src="{{ page.hero_video }}" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen>
-                              </iframe>
-                              <div class="video-modal__corner"></div>
-                            </div>
-                            <a data-modal-close class="video-modal__container-close" aria-label="Close video">
-                                {% include "patterns/atoms/svg/icons/icon-close.html" with classes="video-modal__container-close-icon" %}
-                                Back to make a donation
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-            </div>
+            {% if page.hero_video_cta and page.hero_video %}
+                {% include "patterns/molecules/donate-video-modal/donate-video-modal.html" with value=page %}
+            {% endif %}
 
             <div class="hero-widget hero-widget--donate-landing{% if page.show_donate_slider %} hero-widget--slider{% endif %}">
                 <div class="hero-widget__corner"></div>
@@ -140,7 +115,8 @@
                             {% include "patterns/atoms/buttons/button--button.html" with label=page.donate_button_text large=True classes="button--secondary donate-landing-hero__donate-button" %}
                             {% if not is_euro %}
                                 <div class="donate-landing__mobile-cta" aria-live="polite" data-mobile-cta>
-                                    <a href="sms://70470;?&body=LISTEN5">Text LISTEN5 to 70470 to start donating £5 a month</a>
+                                    <a class="donate-landing__mobile-cta--link" href="sms://70470;?&body=LISTEN5">Text LISTEN5 to 70470 to start donating £5 a month*</a>
+                                    <p class="donate-landing__mobile-cta--text">Texts cost £5 plus two standard rate messages*</p>
                                 </div>
                             {% endif %}
                             {% include "patterns/molecules/payments/payment-icons--monthly.html" %}

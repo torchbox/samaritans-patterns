@@ -39,15 +39,25 @@
 
     &__mobile-cta {
         display: none;
-        @include link;
-        padding: $gutter 0;
-        font-size: $base-font-size;
-        transition: color $transition;
-        font-weight: $weight--bold;
+        padding-top: $gutter;
 
         &.is-active {
             display: block;
         }
+        
+        &--text {
+            font-size: $base-font-size;
+            padding-top: $gutter / 2;
+        }
+
+        &--link {
+            @include link;
+            padding: $gutter 0;
+            font-size: $base-font-size;
+            transition: color $transition;
+            font-weight: $weight--bold;
+        }
+
     }
 
     @include media-query--takes-value($breakpoint-tablet-portrait) {

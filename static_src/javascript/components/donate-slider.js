@@ -47,7 +47,7 @@ class DonateAmountSlider {
 
         noUiSlider.create(donateSlider, {
             connect: true,
-            behaviour: 'tap-drag',
+            behaviour: 'tap',
             start: this.config.start,
             range: this.config.range,
             pips: {

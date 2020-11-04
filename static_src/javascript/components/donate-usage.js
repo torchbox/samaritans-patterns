@@ -10,10 +10,6 @@ class DonateUsage {
         this.mobileCTA = this.node.querySelector('[data-mobile-cta]');
 
         
-        // Bailout if calls counter not found.
-        if (!this.donateSlot) {
-            return;
-        }
         // update value on page load
         this.calculateValue(this.donateInput.value);
 
@@ -29,12 +25,14 @@ class DonateUsage {
         // work out how many calls will be answered
         const result = Math.floor(Number(value) / 4.75);
 
-        // show the value to the user if number of calls > 1
-        if (result >= 1 ){
-            this.donateSlot.innerHTML = `<b>${result}</b> call${result === 1 ? '' : 's'}`;
-        }
-        else {
-            this.donateSlot.innerHTML = 'a call';
+        if (this.donateSlot) {
+            // show the value to the user if number of calls > 1
+            if (result >= 1 ){
+                this.donateSlot.innerHTML = `<b>${result}</b> call${result === 1 ? '' : 's'}`;
+            }
+            else {
+                this.donateSlot.innerHTML = 'a call';
+            }
         }
         
         if(this.mobileCTA) {
