@@ -88,19 +88,20 @@ class DonateAmountSlider {
 
             // Bailout if we're not at a defined pricepoint
             let pricePointFlag = false;
-            const sliderPricePoint = parseFloat(sliderAmount).toFixed(2);
+            const sliderPricePoint = sliderAmount.toString();
 
 
             pipValues.forEach((element) => {
-                if (sliderPricePoint == parseFloat(element).toFixed(2));{
+                if (parseFloat(sliderPricePoint).toFixed(2) == parseFloat(element).toFixed(2));{
                     pricePointFlag = true;
                 }
             });
             if (!pricePointFlag) {
                 return;
             }
-
-            let index = pipValues.indexOf(sliderPricePoint);
+            
+            let formattedAmount = formatAmount(Number(sliderPricePoint));
+            let index = pipValues.indexOf(formattedAmount.toString());
 
             text.innerHTML = textValues[index];
             icon.innerHTML = iconValues[index];
