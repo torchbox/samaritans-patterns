@@ -100,8 +100,8 @@ class DonateAmountSlider {
                 return;
             }
             
-            let formattedAmount = formatAmount(Number(sliderPricePoint));
-            let index = pipValues.indexOf(formattedAmount.toString());
+            let formattedAmount = Number(sliderPricePoint).toFixed(2);
+            let index = pipValues.indexOf(formattedAmount);
 
             text.innerHTML = textValues[index];
             icon.innerHTML = iconValues[index];
