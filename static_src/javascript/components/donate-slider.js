@@ -79,44 +79,48 @@ class DonateAmountSlider {
         const pips = donateSlider.querySelectorAll('.noUi-value');
         donateSlider.noUiSlider.on('update', function (values, handle) {
             // Update the input value when the slider is updated
-            const sliderAmount = Number(values[handle]);
+            const sliderAmount = formatAmount(values[handle]);
             const node = amount;
-            node.value = formatAmount(sliderAmount);
+            node.value = sliderAmount;
 
             // Trigger input event to update donation usage counters
             node.dispatchEvent(new Event('input'));
 
-            // Bailout if we're not at a defined pricepoint
+            
             let pricePointFlag = false;
-            const sliderPricePoint = sliderAmount.toString();
+            const sliderPricePoint = formatAmount(sliderAmount);
 
+            let index = 0;
 
             pipValues.forEach((element) => {
-                if (parseFloat(sliderPricePoint).toFixed(2) == parseFloat(element).toFixed(2));{
+                // Handle comparison between integers or decimals by forcing decimal representation
+                if (Number(sliderPricePoint) == Number(element)) {
                     pricePointFlag = true;
+                    index = pipValues.indexOf(element);
                 }
             });
+            // Bailout if we're not at a defined price point
             if (!pricePointFlag) {
                 return;
             }
             
-            let formattedAmount = Number(sliderPricePoint).toFixed(2);
-            let index = pipValues.indexOf(formattedAmount);
 
             text.innerHTML = textValues[index];
             icon.innerHTML = iconValues[index];
+
+            // Style the active pip
             for (let i = 0; i < pips.length; i++) {
                 const node = pips[i];
                 node.classList.remove('active');
             }
-            donateSlider
-                .querySelector(`.noUi-value[data-value='${sliderAmount}']`)
-                .classList.add('active');
+
+            pips[index].classList.add('active');
+
 
             if (mobileCTA) {
                 // Determine if mobile CTA should be visible
                 // CTA should only be visible when the amount to donate is 5
-                const mobileCTAVisible = sliderAmount === 5;
+                const mobileCTAVisible = Number(sliderAmount) === 5;
                 mobileCTA.style.display = mobileCTAVisible ? 'block' : 'none';
             }
         });
@@ -156,7 +160,7 @@ function parseDonationValues(values) {
     const text = [];
 
     values.forEach((element, index) => {
-        amounts[index] = element['amount'];
+        amounts[index] = formatAmount(element['amount']);
         icons[index] = element['icon'];
         text[index] = element['text'];
     });
@@ -165,7 +169,7 @@ function parseDonationValues(values) {
 }
 
 function formatAmount(pricePoint){
-    const amount = pricePoint.toFixed(2).toString();
+    const amount = parseFloat(pricePoint).toFixed(2);
 
     // Handle decimals that can be integers
     if (amount.charAt((amount.length - 2)) == '0' && amount.charAt((amount.length - 1)) == '0') {
@@ -175,23 +179,35 @@ function formatAmount(pricePoint){
     return amount;
 }
 
+function getIndex(arr, amount) {
+    let index = -1;
+
+    arr.forEach((element) => {
+        // Handle comparison between integers or decimals by forcing decimal representation
+        if (Number(amount) == Number(element)) {
+            index = arr.indexOf(element);
+        }
+    });
+    return index;
+}
+
 function initDonationSliders() {
     // localise currency
     let currency = '£';
     
-    let monthly_values = document.getElementById('monthly_slider_values');
+    let monthlyValues = document.getElementById('monthly_slider_values');
     
-    let single_values = document.getElementById('single_slider_values');
+    let singleValues = document.getElementById('single_slider_values');
 
     // There will always be at least one amount input.
     const single_call_counter = document.querySelectorAll('[name="amount"]')[0];
     let monthly_call_counter = document.querySelectorAll('[name="amount"]')[0];
 
     // If both sliders are enabled, there will be two
-    if(monthly_values && single_values) {
+    if(monthlyValues && singleValues) {
         monthly_call_counter = document.querySelectorAll('[name="amount"]')[1];
     } 
-    else if (!(monthly_values || single_values)) {
+    else if (!(monthlyValues || singleValues)) {
         // Bail if we cannot find either
         return;
     }
@@ -202,20 +218,22 @@ function initDonationSliders() {
     
     // Set up recurring donations slider
     if (document.getElementById('monthly_slider_values')) {
-        monthly_values = JSON.parse(monthly_values.textContent);
-        const monthly_suggested_amount = document.getElementById('donate_slider--monthly').dataset.suggestedAmount;
+        monthlyValues = JSON.parse(monthlyValues.textContent);
         
+        const monthlySuggestedAmount = formatAmount(document.getElementById('donate_slider--monthly').dataset.suggestedAmount);
+
         const [
             monthlyAmounts,
             monthlyIcons,
-            monthlyText ] = parseDonationValues(monthly_values);
+            monthlyText ] = parseDonationValues(monthlyValues);
         
         const sliderMonthlyRange = getSliderSteps(monthlyAmounts);
-        
+        const monthlyAmountStartIndex = getIndex(monthlyAmounts, monthlySuggestedAmount);
+
         new DonateAmountSlider(document.getElementById('donate_slider--monthly'), {
             pipValues: monthlyAmounts,
             currency: currency,
-            start: monthlyAmounts[monthlyAmounts.indexOf(monthly_suggested_amount)],
+            start: monthlyAmounts[monthlyAmountStartIndex],
             range: sliderMonthlyRange,
             icon: document.getElementById('donate_slider--monthly-icon'),
             iconValues: monthlyIcons,
@@ -227,20 +245,22 @@ function initDonationSliders() {
 
     // Set up single donation values
     if (document.getElementById('single_slider_values')) {
-        single_values = JSON.parse(single_values.textContent);
+        singleValues = JSON.parse(singleValues.textContent);
 
-        const single_suggested_amount = document.getElementById('donate_slider--one_off').dataset.suggestedAmount;
+        const singleSuggestedAmount = formatAmount(document.getElementById('donate_slider--one_off').dataset.suggestedAmount);
+        
         const [
             singleAmounts,
             singleIcons,
-            singleText ] = parseDonationValues(single_values);
+            singleText ] = parseDonationValues(singleValues);
             
         const sliderSingleRange = getSliderSteps(singleAmounts);
+        const SingleAmountStartIndex = getIndex(singleAmounts, singleSuggestedAmount);
 
         new DonateAmountSlider(document.getElementById('donate_slider--one_off'), {
             pipValues: singleAmounts,
             currency: currency,
-            start: singleAmounts[singleAmounts.indexOf(single_suggested_amount)],
+            start: singleAmounts[SingleAmountStartIndex],
             range: sliderSingleRange,
             icon: document.getElementById('donate_slider--single-icon'),
             iconValues: singleIcons,
