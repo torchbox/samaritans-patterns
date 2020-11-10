@@ -1,11 +1,8 @@
 tags:
   render_form_field:
-    form.prefs_updates:
+    form.prefs_fun_vw:
       raw: |
-        <p>prefs_updates field</p>
-    form.prefs_fundraising:
-      raw: |
-        <p>prefs_fundraising field</p>
+        <p>prefs_fun_vw field</p>
     form.prefs_volunteering:
       raw: |
         <p>prefs_volunteering field</p>

@@ -36,6 +36,7 @@ import TrainingCourse from './components/training-course';
 import {disableFormAfterSubmit} from './components/disable-button-after-submit';
 import './components/referee-details';
 import GenderReveal from './components/gender-reveal';
+import GdprFields from './components/gdpr-fields';
 
 document.addEventListener('DOMContentLoaded', function () {
     new CookieWarning();
@@ -110,6 +111,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     for (const gallery of document.querySelectorAll(Gallery.selector())) {
         new Gallery(gallery);
+    }
+
+    for (const gdprField of document.querySelectorAll(GdprFields.selector())) {
+        new GdprFields(gdprField);
     }
 
     for (const inputblock of document.querySelectorAll(

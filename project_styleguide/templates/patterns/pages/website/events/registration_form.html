@@ -2,7 +2,7 @@
 {% if page.introduction %}
     <p class="intro">{{ page.introduction }}</p>
 {% endif %}
-<form action="{% pageurl page %}" method="post" class="form">
+<form action="{% pageurl page %}" method="post" class="form" id="gdpr-form">
     <div class="form__container">
         {% csrf_token %}
 

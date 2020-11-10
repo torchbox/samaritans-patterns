@@ -155,6 +155,12 @@
 
     &__wrapper {
         max-width: $input-max-width;
+        
+        &--error {
+            padding: $gutter;
+            margin-bottom: $gutter;
+            border: 1px dotted red;
+        }
 
         #{$root}__tooltip-wrapper & {
             width: 100%;

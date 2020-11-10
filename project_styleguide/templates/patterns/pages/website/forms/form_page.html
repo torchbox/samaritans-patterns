@@ -9,7 +9,7 @@
 
     {{ page.body|richtext }}
 
-    <form action="{% pageurl page %}" method="post" class="form form--after-body">
+    <form action="{% pageurl page %}" method="post" class="form form--after-body"{% if page.include_gdpr_fields %} id="gdpr-form"{% endif %}>
         <div class="form__container">
             {% csrf_token %}
 

@@ -1,26 +1,33 @@
 {% load form_tags helper_tags i18n icon_tags %}
 
-<section class="section section--donate-marketing streamfield--dark-bg">
+<section class="section section--donate-marketing streamfield--dark-bg" data-gdpr-fields>
     <div class="section__connectors--extra"></div>
     <h2>{% trans "Stay in touch" %}</h2>
     <div class="donate__marketing-intro">
-        <p class="donate__marketing-meta">{% trans "We’d like to keep you updated about our work and fundraising campaigns by post. Samaritans volunteers work around the clock to be there for anyone who needs us. But we can’t do it on our own." %}</p>
+        <p class="donate__marketing-meta">{% trans "Samaritans volunteers are there 24/7, 365 days a year for anyone struggling to cope. But we can't do it alone, which is why we'd like to keep in touch about our vital work and show you how, together, we can ensure fewer people die by suicide." %}</p>
         {% render_icon "icon-color-envelope-open" "" %}
     </div>
-
-    <div class="js-select-all-checkbox-toggle">
-        <div class="form-item-wrapper form-item-wrapper--group" id="donate__contact-prefs">
-            {% render_form_field form.prefs_updates %}
-            {% render_form_field form.prefs_fundraising %}
-            {% render_form_field form.prefs_volunteering %}
+        <div class="js-select-all-checkbox-toggle">
+            <div class="form-item-wrapper form-item-wrapper--group{% if form.contact_prefs_error %} form-item__wrapper--error{% endif %}" id="donate__contact-prefs">
+                {% if form.contact_prefs_error %}
+                    <p class="form-item__errors">{{ form.contact_prefs_error }}</p>
+                {% endif %}
+                <div class="js-select-all-checkbox-toggle">
+                    {% render_form_field form.prefs_fun_vw %}
+                    {% render_form_field form.prefs_volunteering %}
+                    <a class="donate__marketing-select-all js-select-all" id="donate__select-all-contact-prefs" href="#donate__contact-prefs">Or check all</a>
+                </p>
+            </div>
         </div>
-        <p><a class="donate__marketing-select-all js-select-all" id="donate__select-all-contact-prefs" href="#donate__contact-prefs">Or check all</a></p>
     </div>
 
-    <h3>{% trans "How would you like to be updated?" %}</h3>
-    <p class="donate__marketing-meta">{% trans "We will keep in touch with you by post, but we’d also like to keep in touch in these other ways, if you are happy for us to." %}</p>
+    <h3>{% trans "How would you like to hear from us?" %}</h3>
+    <p class="donate__marketing-meta">{% trans "Would you like us to stay in touch by:" %}</p>
 
-    <div class="form-item-wrapper form-item-wrapper--radio-select-inline">
+    <div class="form-item-wrapper form-item-wrapper--radio-select-inline{% if form.contact_methods_error %} form-item__wrapper--error{% endif %}">
+        {% if form.contact_methods_error %}
+            <p class="form-item__errors">{{ form.contact_methods_error }}</p>
+        {% endif %}
         {% render_form_field form.prefs_phone %}
         {% render_form_field form.prefs_sms %}
         {% if form.mobile_number %}
