@@ -84,9 +84,14 @@ class DonateAmountSlider {
             node.value = sliderAmount;
 
             // Trigger input event to update donation usage counters
-            node.dispatchEvent(new Event('input'));
+            let event;
+            if (typeof (Event) === 'function') {
+                node.dispatchEvent(new Event('input'));
+            } else {
+                event = document.createEvent('Event');
+                event.initEvent('input', true, true);
+            }
 
-            
             let pricePointFlag = false;
             const sliderPricePoint = formatAmount(sliderAmount);
 
