@@ -288,6 +288,7 @@
 
     &--homepage,
     &--donate-landing {
+        padding-top: 0;
         padding-bottom: $gutter;
 
         @include media-query(tablet-portrait) {

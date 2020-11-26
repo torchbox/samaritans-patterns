@@ -81,7 +81,11 @@
 
         #{$root}--donate & {
             background-color: $color--white;
-            padding: $gutter-large $gutter-large 0;
+            padding: $gutter $gutter 0;
+
+            @include media-query(mob-landscape) {
+                padding: $gutter-large $gutter-large 0;
+            }
 
             @include media-query(tablet-portrait) {
                 padding: $gutter-xxl $gutter-xxl 0;
@@ -131,6 +135,14 @@
         right: $gutter;
 
         #{$root}--donate & {
+            top: -15px;
+            right: -10px;
+
+            @include media-query(tablet-portrait) {
+                top: $gutter;
+                right: $gutter;
+            }
+
             &:hover {
                 #{$root}__close-icon {
                     background-color: $color--link;

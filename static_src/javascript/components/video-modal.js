@@ -21,6 +21,7 @@ class VideoModal {
         this.modalOpen = this.modal.querySelector('[data-modal-open]');
         this.modalWindow = this.modal.querySelector('[data-modal-window]');
         this.modalClose = this.modal.querySelectorAll('[data-modal-close]');
+        this.donateHero = document.querySelector('[data-hero-donate-landing]');
         this.iframe = this.modal.querySelector('iframe');
         this.src = this.iframe.getAttribute('src');
         this.bindEvents();
@@ -29,10 +30,8 @@ class VideoModal {
     scrollToggle() {
         if(this.body.classList.contains('no-scroll')) {
             this.body.classList.remove('no-scroll');
-            console.log('remove scroll');
         } else {
             this.body.classList.add('no-scroll');
-            console.log('add scroll');
         }
     }
 
@@ -40,9 +39,15 @@ class VideoModal {
         this.modalOpen.addEventListener('click', (e) => {
             e.preventDefault();
             this.scrollToggle();
+            // ensure video in donate hero sits above everything when open
+            // setting this in css disrupts the page stacking
+            if (this.donateHero) {
+                this.donateHero.style.zIndex = '27';
+            }
             this.modalWindow.classList.add('open');
             if (!this.iframe.getAttribute('src').length) {
                 this.iframe.setAttribute('src', this.src);
+
             }
         });
 
@@ -50,6 +55,9 @@ class VideoModal {
             value.addEventListener('click', (e) => {
                 e.preventDefault();
                 this.scrollToggle();
+                if (this.donateHero) {
+                    this.donateHero.style.zIndex = 'auto';
+                }
                 this.modalWindow.classList.remove('open');
                 // stops video playing when window is closed
                 this.iframe.setAttribute('src', '');
