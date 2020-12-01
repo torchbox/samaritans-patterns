@@ -13,6 +13,7 @@ context:
 
     support_image: fake
     support_headline: Support headline
+    support_description: Support description text goes here
     support_us_links:
       all:
       - link: "#"
@@ -69,10 +70,6 @@ context:
           specific:
             title: Card Title
             listing_summary: Summary
-      - more_info_pages:
-          specific:
-            title: Card Title
-            listing_summary: Summary
 
     cta_title: CTA title (can't be too short)
     cta_description: CTA description
@@ -80,6 +77,16 @@ context:
     cta_link:
       url: "#"
     cta_link_text: Link text
+
+    support_donation_page:
+      allow_monthly_donation: true
+      allow_one_off_donation: true
+      donate_button_text: Donate now
+      default_to_monthly: True
+      donate_form_heading: Make a donation
+      suggested_one_off_donation: 5
+      suggested_monthly_donation: 50
+
 
 
 tags:
@@ -96,6 +103,10 @@ tags:
       target_var: support_image
       raw:
         url: http://via.placeholder.com/1300x1300
+    page.support_image fill-1100x600 as support_image:
+      target_var: support_image
+      raw:
+        url: http://via.placeholder.com/1100x600
     page.volunteer_image width-1300 as volunteer_image:
       target_var: volunteer_image
       raw:
@@ -103,3 +114,43 @@ tags:
   pageurl:
     page.hero_cta_link:
       raw: "#"
+  render_form_field:
+    monthly_form.campaign_id:
+      raw: ""
+    monthly_form.frequency:
+      raw: ""
+    monthly_form.amount:
+      raw: |
+        <div class="form-item form-item--decimal_field form-item--number_input">
+        <label for="id_amount" class=" form-item__label required">
+        Amount <span class="form-item__required">*</span>
+        </label>
+        <div class="form-item__wrapper">
+            <input type="number" name="amount" value="5" min="0.01" step="0.01" required="" id="id_amount">
+        </div>
+        </div>
+    monthly_form.currency:
+      raw: ""
+    one_off_form.campaign_id:
+      raw: ""
+    one_off_form.frequency:
+      raw: ""
+    one_off_form.currency:
+      raw: ""
+    one_off_form.amount:
+      raw: |
+        <div class="form-item form-item--decimal_field form-item--number_input">
+        <label for="id_amount" class=" form-item__label required">
+        Amount <span class="form-item__required">*</span>
+        </label>
+        <div class="form-item__wrapper">
+            <input type="number" name="amount" value="5" min="0.01" step="0.01" required="" id="id_amount">
+        </div>
+        </div>
+  include_block:
+    value.embed:
+      raw: |
+        <div style="padding-bottom: 56.25%;" class="responsive-object">
+          <iframe width="480" height="270" src="https://www.youtube.com/embed/1PWTqCBVjjU?feature=oembed" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen>
+          </iframe>
+        </div>

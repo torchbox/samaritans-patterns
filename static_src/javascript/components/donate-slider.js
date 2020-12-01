@@ -47,7 +47,7 @@ class DonateAmountSlider {
 
         noUiSlider.create(donateSlider, {
             connect: true,
-            behaviour: 'tap',
+            behaviour: 'tap-drag',
             start: this.config.start,
             range: this.config.range,
             pips: {
@@ -220,7 +220,7 @@ function initDonationSliders() {
     if (currencyCode && currencyCode.value == 'EUR'){
         currency = '€';
     }
-    
+
     // Set up recurring donations slider
     if (document.getElementById('monthly_slider_values')) {
         monthlyValues = JSON.parse(monthlyValues.textContent);

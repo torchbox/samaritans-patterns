@@ -6,6 +6,13 @@
     align-items: center;
     margin: calc(#{$gutter-medium} - #{$spacer}) -#{$spacer} -#{$spacer};
 
+    .homepage-donate-slider & {
+        @include media-query(tablet-landscape) {
+            margin: 0 0 0 20px;
+            flex: 1;
+        }
+    }
+
     @include media-query(mob-landscape) {
         margin-top: $gutter-large - $spacer;
     }
@@ -41,7 +48,7 @@
         }
 
         &--paypal {
-            width: 95px;
+            width: 80px;
             position: relative;
             top: 2px;
         }

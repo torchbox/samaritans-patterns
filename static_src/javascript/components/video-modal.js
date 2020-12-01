@@ -28,7 +28,7 @@ class VideoModal {
     }
 
     scrollToggle() {
-        if(this.body.classList.contains('no-scroll')) {
+        if (this.body.classList.contains('no-scroll')) {
             this.body.classList.remove('no-scroll');
         } else {
             this.body.classList.add('no-scroll');

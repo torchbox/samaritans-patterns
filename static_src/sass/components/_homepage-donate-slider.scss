@@ -1,0 +1,163 @@
+.homepage-donate-slider {
+    $root: &;
+
+    @mixin card-corner($color, $position-1: top, $position-2: left) {
+        @include media-query(tablet-portrait) {
+            @include corner($color, $position-1, $position-2, $width: 200px, $height: 50%, $offset: 10px);
+
+            &::before {
+                z-index: -1;
+            }
+
+            #{$root}__connectors {
+                @include connectors($color, $position-1, $position-2, medium);
+            }
+        }
+    }
+
+    @include media-query(desktop) {
+        margin-top: -140px;
+        // contains a video modal so needs a high value
+        z-index: z($z-elements, modal);
+    }
+
+    &__wrapper {
+        @include card-corner($plum);
+        background-color: $color--white;
+        padding: 15px;
+        position: relative;
+
+        @include media-query(mob-landscape) {
+            padding: 30px;
+        }
+
+        @include media-query(tablet-portrait) {
+            padding: 60px;
+        }
+    }
+
+    &__heading {
+        text-align: center;
+        margin-bottom: $gutter;
+
+        @include media-query(tablet-portrait) {
+            padding-bottom: $gutter-medium;
+        }
+    }
+
+    &__introduction {
+        color: $color--default;
+        margin-bottom: $gutter;
+        text-align: center;
+
+        @include media-query(tablet-portrait) {
+            padding-bottom: $gutter-medium;
+        }
+    }
+
+    &__inner {
+        background-color: $color--white;
+
+        @include media-query(desktop) {
+            display: flex;
+            align-items: center;
+            flex-direction: row-reverse;
+            justify-content: stretch;
+        }
+    }
+
+    &__poster {
+        background-position: center;
+        background-size: cover;
+        flex-shrink: 0;
+        width: 100%;
+        padding-bottom: 56.25%;
+        position: relative;
+
+        @include media-query(desktop) {
+            width: 45%;
+            height: 300px;
+            padding-bottom: 0;
+        }
+    }
+
+    &__image {
+        @include media-query(desktop) {
+            width: 50%;
+            height: 300px;
+        }
+    }
+
+    &__container {
+        background-color: $white;
+        z-index: auto;
+        padding: $gutter-x-large $gutter;
+
+        @include media-query(desktop) {
+            width: 100%;
+            padding: 0 $gutter-x-large 0 0;
+        }
+
+        @include target-ie11 {
+            .rich-text {
+                width: 100%;
+            }
+        }
+    }
+
+    &__link {
+        @include link($color--link, $color--link-hover-subtle);
+        @include underline($element: #{$root}__link-text);
+        display: flex;
+        align-items: center;
+        font-weight: $weight--bold;
+
+        #{$hover} {
+            #{$root}__link-chevron {
+                transform: translateX(50%);
+            }
+        }
+    }
+
+    // this needs to be wrapped in a span because the parent is displayed flex
+    &__link-text {
+        #{$root}--homepage-volunteer & {
+            margin-bottom: 0;
+        }
+    }
+
+    &__link-chevron {
+        #{$root}--homepage-volunteer & {
+            @include link-chevron--underline-link;
+            height: $base-font-size;
+            margin-left: 0;
+            margin-right: 15px;
+        }
+    }
+
+    &__open-video {
+        position: absolute;
+        display: block;
+        height: 100px;
+        width: 100px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+
+        &:hover {
+            #{$root}__open-video-icon {
+                transform: scale(1.15);
+            }
+        }
+    }
+
+    &__open-video-icon {
+        display: block;
+        fill: $color--white;
+        height: 100px;
+        width: 100px;
+        position: absolute;
+        transform: scale(1);
+        transition: transform $transition;
+    }
+}

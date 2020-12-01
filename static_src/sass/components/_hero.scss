@@ -285,8 +285,18 @@
         min-height: 0;
     }
 
+    &--homepage {
+        padding: $gutter-medium 0;
 
-    &--homepage,
+        @include media-query(mob-landscape) {
+            padding-bottom: $gutter-xxl;
+        }
+
+        @include media-query(tablet-landscape) {
+            padding: $gutter-xxl 0 $section-overlap;
+        }
+    }
+
     &--donate-landing {
         padding-top: 0;
         padding-bottom: $gutter;

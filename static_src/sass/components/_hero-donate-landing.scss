@@ -73,12 +73,6 @@
 
         }
 
-        &--monthly .form-item__wrapper::after { // sass-lint:disable-line force-element-nesting
-            content: 'per month';
-            display: inline-block;
-            margin-left: 10px;
-        }
-
         .hero-widget--slider & {
             // We need to override
             // without altering models as part of a A/B test
@@ -150,5 +144,18 @@
         @include underline;
         margin-left: 1em;
         font-weight: $weight--bold;
+    }
+
+    .homepage-donate-slider & {
+        &__form-input {
+            .form-item__wrapper {
+                padding-right: 0;
+
+                #{$input--string} {
+                    font-size: 27px;
+                    font-weight: $weight--bold;
+                }
+            }
+        }
     }
 }

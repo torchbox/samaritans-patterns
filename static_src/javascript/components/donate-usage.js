@@ -9,7 +9,6 @@ class DonateUsage {
         this.donateSlot = this.node.querySelector('.js-donation-usage-slot');
         this.mobileCTA = this.node.querySelector('[data-mobile-cta]');
 
-        
         // update value on page load
         this.calculateValue(this.donateInput.value);
 
@@ -18,7 +17,7 @@ class DonateUsage {
 
     bindEventListeners() {
         // listen for updates to the input
-        this.donateInput.oninput = e => this.calculateValue(e.target.value);
+        this.donateInput.oninput = (e) => this.calculateValue(e.target.value);
     }
 
     calculateValue(value) {
@@ -27,19 +26,19 @@ class DonateUsage {
 
         if (this.donateSlot) {
             // show the value to the user if number of calls > 1
-            if (result >= 1 ){
-                this.donateSlot.innerHTML = `<b>${result}</b> call${result === 1 ? '' : 's'}`;
-            }
-            else {
+            if (result >= 1) {
+                this.donateSlot.innerHTML = `<b>${result}</b> call${
+                    result === 1 ? '' : 's'
+                }`;
+            } else {
                 this.donateSlot.innerHTML = 'a call';
             }
         }
-        
-        if(this.mobileCTA) {
-            if (value == 5){
+
+        if (this.mobileCTA) {
+            if (value == 5) {
                 this.mobileCTA.classList.add('is-active');
-            }
-            else {
+            } else {
                 this.mobileCTA.classList.remove('is-active');
             }
         }

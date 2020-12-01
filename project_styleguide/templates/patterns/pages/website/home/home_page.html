@@ -1,9 +1,9 @@
 {% extends "patterns/base_page.html" %}
-{% load  wagtailcore_tags wagtailimages_tags icon_tags donate_tags static %}
+{% load wagtailcore_tags wagtailimages_tags icon_tags donate_tags static %}
 
 {% block content %}
 
-    <div class="hero hero--homepage">
+    <div id="homepage" class="hero hero--homepage">
 
         {% image page.hero_image fill-3800x2500 jpegquality-40 as hero_image %}
         <div class="donate-landing-hero__image--desktop" style="background-image: url({{ hero_image.url}});"></div>
@@ -50,6 +50,79 @@
         </div>
     </div>
 
+    {# Donate slider #}
+    <section class="section section--page-padding homepage-donate-slider">
+        <div class="wrapper wrapper--large wrapper--padding-page">
+            <div class="homepage-donate-slider__wrapper">
+                <div class="wrapper wrapper--small {% if page.support_donation_page %}homepage-donate-slider__heading{% endif %}">
+                    <h2 class="heading-secondary heading-secondary--large">
+                        {{ page.secondary_headline }}
+                    </h2>
+                    <p class="website-homepage__text website-homepage__text--top-section">
+                        {{ page.secondary_description }}
+                    </p>
+                </div>
+                {% if page.support_donation_page %}
+                    <div class="homepage-donate-slider__inner">
+                        {% image page.support_image fill-1100x600 as support_image %}
+                        {% if page.support_donation_page.hero_video %}
+                            <div class="homepage-donate-slider__poster" style="background-image: url({{ support_image.url }});" data-video-modal>
+                                <a href="#" class="homepage-donate-slider__open-video" data-modal-open>
+                                    {% include "patterns/atoms/svg/icons/icon-play-circle.html" with classes="homepage-donate-slider__open-video-icon" %}
+                                </a>
+
+                                {# this should be refactored to use donate-video-modal.html #}
+                                <div data-modal-window class="video-modal video-modal--donate video-modal--home" aria-live="polite">
+                                    <div class="video-modal__container">
+                                        <div class="video-modal__inner">
+                                            <a href="#" data-modal-close class="video-modal__close" aria-label="Close video">
+                                                {% include "patterns/atoms/svg/icons/icon-close.html" with classes="video-modal__close-icon" %}
+                                            </a>
+                                            <span class="video-modal__connectors"></span>
+                                            <div style="padding-bottom: 56.25%;" class="responsive-object">
+                                                <iframe width="480" height="270" src="{{ page.support_donation_page.hero_video }}" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen>
+                                                </iframe>
+                                            </div>
+                                            <div class="video-modal__corner"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% else %}
+                            <img class="homepage-donate-slider__image" src="{{ support_image.url }}" alt="{{ support_image.alt }}" />
+                        {% endif %}
+
+                        <div class="homepage-donate-slider__container">
+                            {% include "patterns/organisms/donate/donation_form_with_slider.html" with donate_page=page.support_donation_page %}
+                        </div>
+                    </div>
+                    <span class="homepage-donate-slider__connectors"></span>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <section class="section section--page-padding">
+        <div class="wrapper wrapper--small">
+            <h2 class="heading-secondary heading-secondary--stats">
+                {{ page.support_headline }}
+            </h2>
+            {% if page.support_description %}
+            <p class="website-homepage__text website-homepage__text--top-section">
+                {{ page.support_description }}
+            </p>
+            {% endif %}
+        </div>
+
+        <div class="wrapper wrapper--large">
+            <div class="grid grid--3col">
+                {% for support_us_link in page.support_us_links.all %}
+                    {% include "patterns/molecules/cards/related-card.html" with value=support_us_link.link.specific title_override=support_us_link.link_text body_override=support_us_link.summary classes="card-new--dark" %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
     <section class="section section--page-padding section--stats is-hidden">
         <div class="wrapper wrapper--small">
             <h2 class="heading-secondary heading-secondary--stats">
@@ -75,11 +148,11 @@
         <div>
     </section>
 
-    {% include "patterns/molecules/mission-statement/mission-statement.html" with heading=page.secondary_headline description=page.secondary_description classes="section--website-homepage-top" %}
+    {% include "patterns/molecules/mission-statement/mission-statement.html" with heading=page.secondary_headline description=page.secondary_description classes="section--website-homepage-top section is-hidden" %}
 
     <div class="wrapper wrapper--large wrapper--padding-for-page-tablet-portrait">
 
-        <section class="horizontal-card horizontal-card--homepage-support">
+        <section class="horizontal-card horizontal-card--homepage-support section is-hidden">
             <div class="horizontal-card__inner">
                 {% if page.support_image %} {# if statement can be removed after these are added in the db. these fields are required, but the page breaks when the change is first made. #}
                 {% image page.support_image fill-1300x1300 as support_image %}
@@ -90,6 +163,9 @@
                     <h2 class="horizontal-card__heading">
                         {{ page.support_headline }}
                     </h2>
+
+                    {% include "patterns/organisms/donate/donation_form_with_slider.html" %}
+
                     <ul class="grid grid--homepage-support nav--homepage-support">
                         {% for support_link in page.support_us_links.all %}
                             <li class="nav__item nav__heading nav__heading--homepage-support" role="presentation">
@@ -97,6 +173,7 @@
                             </li>
                         {% endfor %}
                     </ul>
+
                 </div>
             </div>
 
@@ -243,4 +320,13 @@
         </div>
     </section>
 
+{% endblock %}
+
+{% block extra_js %}
+    {% if single_slider_values %}
+        {{ single_slider_values|json_script:"single_slider_values" }}
+    {% endif %}
+    {% if monthly_slider_values %}
+        {{ monthly_slider_values|json_script:"monthly_slider_values" }}
+    {% endif %}
 {% endblock %}

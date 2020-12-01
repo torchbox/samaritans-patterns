@@ -80,7 +80,6 @@
         background-color: $color--white;
 
         #{$root}--donate & {
-            background-color: $color--white;
             padding: $gutter $gutter 0;
 
             @include media-query(mob-landscape) {
@@ -89,6 +88,18 @@
 
             @include media-query(tablet-portrait) {
                 padding: $gutter-xxl $gutter-xxl 0;
+            }
+        }
+
+        #{$root}--home & {
+            padding: $gutter;
+
+            @include media-query(mob-landscape) {
+                padding: $gutter-large;
+            }
+
+            @include media-query(tablet-portrait) {
+                padding: $gutter-xxl;
             }
         }
     }
@@ -156,6 +167,7 @@
         height: 48px;
         width: 48px;
         color: $color--black;
+        pointer-events: none;
 
         #{$root}--donate & {
             background-color: $color--tertiary;

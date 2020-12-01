@@ -32,6 +32,11 @@
             border-radius: 0 14px 14px 0;
         }
 
+        &:only-child {
+            border-radius: 14px;
+            cursor: default;
+        }
+
         &:not([disabled]) {
             @include link($color--link--on-off-white, $color--link-hover, #{$root}__button-text);
             @include underline($element: #{$root}__button-text);
@@ -46,5 +51,13 @@
 
     &--centered {
         justify-content: center;
+    }
+
+    .homepage-donate-slider & {
+        margin-bottom: 30px;
+
+        #{$root}__button {
+            width: 100%;
+        }
     }
 }

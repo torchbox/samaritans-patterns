@@ -1,0 +1,26 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+<div class="video-modal__wrapper" data-video-modal>
+    {% image value.video_preview width-600 as video_preview %}
+    <div class="video-modal__preview" style="background-image: url('{{ video_preview.file.url }}')">
+        <a class="video-modal__button" aria-label="Open video" data-modal-open>
+            <svg class="video-modal__button-icon" width="65" height="65">
+                <use xlink:href="#play" />
+            </svg>
+        </a>
+    </div>
+    {% if value.caption %}
+        <div class="video-modal__caption">
+            {{ value.caption|richtext }}
+        </div>
+    {% endif %}
+    <div data-modal-window class="video-modal" aria-live="polite">
+        <a data-modal-close class="video-modal__close" aria-label="Close video">
+            <svg class="video-modal__close-icon" width="48" height="48">
+                <use xlink:href="#close" />
+            </svg>
+        </a>
+        <div class="video-modal__container">
+            {% include_block value.embed %}
+        </div>
+    </div>
+</div>
