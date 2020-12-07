@@ -56,7 +56,7 @@ class VideoModal {
                 e.preventDefault();
                 this.scrollToggle();
                 if (this.donateHero) {
-                    this.donateHero.style.zIndex = 'auto';
+                    this.donateHero.style.zIndex = '10';
                 }
                 this.modalWindow.classList.remove('open');
                 // stops video playing when window is closed

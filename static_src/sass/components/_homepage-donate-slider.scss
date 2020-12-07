@@ -17,8 +17,7 @@
 
     @include media-query(desktop) {
         margin-top: -140px;
-        // contains a video modal so needs a high value
-        z-index: z($z-elements, modal);
+        z-index: 10;
     }
 
     &__wrapper {
