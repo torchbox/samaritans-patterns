@@ -323,9 +323,12 @@
     </div>
 
     {% include "patterns/molecules/related-pages/related-pages--large.html" with heading=page.more_info_heading related_pages=page.more_info_links pattern="diamonds" classes="related-large--donate-landing" %}
-
 </article>
 {% endblock content %}
+
+{% block footer %}
+    {% include 'patterns/organisms/footer/footer.html' %}
+{% endblock footer %}
 
 {% block extra_js %}
     <script src="{% static 'js/donate.js' %}"></script>
