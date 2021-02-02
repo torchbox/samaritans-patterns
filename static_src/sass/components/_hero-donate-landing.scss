@@ -67,10 +67,9 @@
                 &::before {
                     @include font-size(xl);
                     margin-right: 10px;
-                    content: "€";
+                    content: '€';
                 }
             }
-
         }
 
         .hero-widget--slider & {
@@ -91,7 +90,7 @@
                 padding-bottom: 5px;
             }
 
-            input:not([type="checkbox"]):not([type="radio"]),
+            input:not([type='checkbox']):not([type='radio']),
             textarea,
             select {
                 background-color: transparent;
@@ -135,7 +134,7 @@
 
         @include media-query(tablet-landscape) {
             padding: 0;
-            height:         80px;
+            height: 80px;
             margin-bottom: -80px;
         }
     }

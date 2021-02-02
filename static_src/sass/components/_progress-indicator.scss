@@ -58,7 +58,7 @@ $blob-size-large: 40px;
             position: relative;
 
             &::after {
-                content: "";
+                content: '';
                 width: $blob-size-small;
                 height: $blob-size-small;
                 background: transparent;

@@ -54,7 +54,7 @@
         height: 152px;
     }
 
-    select:not([multiple="multiple"]) {
+    select:not([multiple='multiple']) {
         @include dropdown-select;
         height: 52px;
         width: 100%;
@@ -88,7 +88,7 @@
         }
     }
 
-    input[type="checkbox"] {
+    input[type='checkbox'] {
         border-radius: 3px;
 
         @include media-query(mob-landscape) {
@@ -96,7 +96,7 @@
         }
     }
 
-    input[type="radio"] {
+    input[type='radio'] {
         border-radius: 50%;
 
         .form--alt & {
@@ -155,7 +155,7 @@
 
     &__wrapper {
         max-width: $input-max-width;
-        
+
         &--error {
             padding: $gutter;
             margin-bottom: $gutter;
@@ -192,7 +192,7 @@
 
             &::before {
                 line-height: 30px;
-                content: "€";
+                content: '€';
             }
         }
     }

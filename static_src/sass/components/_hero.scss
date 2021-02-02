@@ -1,8 +1,8 @@
 .hero {
     $root: &;
     $hero-image-offset--tablet-landscape: $gutter-medium;
-    $hero-image-offset--desktop:          $gutter-xxl;
-    $hero-image-offset--desktop-medium:   $section-overlap;
+    $hero-image-offset--desktop: $gutter-xxl;
+    $hero-image-offset--desktop-medium: $section-overlap;
 
     background-color: $teal;
     position: relative;
@@ -218,16 +218,24 @@
                 }
 
                 // At this point, the page width is constant rather than being based on the viewpoint width, so the offset is from the center of the page.
-                @include media-query--takes-value($breakpoint-desktop - $gutter-large) {
-                    left: calc(50% + #{$pattern-offset--from-center + $hero-image-offset--tablet-landscape});
+                @include media-query--takes-value(
+                    $breakpoint-desktop - $gutter-large
+                ) {
+                    left: calc(
+                        50% + #{$pattern-offset--from-center + $hero-image-offset--tablet-landscape}
+                    );
                 }
 
                 @include media-query(desktop) {
-                    left: calc(50% + #{$pattern-offset--from-center + $hero-image-offset--desktop});
+                    left: calc(
+                        50% + #{$pattern-offset--from-center + $hero-image-offset--desktop}
+                    );
                 }
 
                 @include media-query(desktop-medium) {
-                    left: calc(50% + #{$pattern-offset--from-center + $hero-image-offset--desktop-medium});
+                    left: calc(
+                        50% + #{$pattern-offset--from-center + $hero-image-offset--desktop-medium}
+                    );
                 }
             }
 
@@ -297,6 +305,7 @@
         }
     }
 
+    // see also shared styles with &--homepage
     &--donate-landing {
         padding-top: 0;
         padding-bottom: $gutter;
@@ -304,10 +313,7 @@
         @include media-query(tablet-portrait) {
             padding: $gutter-xxl 0;
         }
-    }
 
-    // see also shared styles with &--homepage
-    &--donate-landing {
         @include media-query(tablet-landscape) {
             padding-top: $section-overlap;
             padding-bottom: $section-overlap + $gutter-xxl;

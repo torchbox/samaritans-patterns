@@ -2,7 +2,14 @@
     $root: &;
 
     @mixin card-corner($color, $offset: 7px, $size: card) {
-        @include corner($color, top, left, $offset: $offset, $selector: '#{$root}__corner::before', $z-index: auto);
+        @include corner(
+            $color,
+            top,
+            left,
+            $offset: $offset,
+            $selector: '#{$root}__corner::before',
+            $z-index: auto
+        );
 
         #{$root}__connectors {
             @include connectors($color, top, left, $size: $size);
@@ -10,7 +17,14 @@
     }
 
     @mixin card-corner-bottom($color, $offset: 7px, $size: card) {
-        @include corner($color, bottom, right, $offset: $offset, $selector: '#{$root}__corner::after', $z-index: auto);
+        @include corner(
+            $color,
+            bottom,
+            right,
+            $offset: $offset,
+            $selector: '#{$root}__corner::after',
+            $z-index: auto
+        );
 
         #{$root}__connectors--extra {
             @include connectors($color, bottom, right, $size: $size);
@@ -29,7 +43,6 @@
     }
 
     #{$hover} {
-
         #{$root},
         .chevron-link {
             &__chevron {
@@ -42,7 +55,7 @@
         }
     }
 
-    &--hidden{
+    &--hidden {
         display: none;
     }
 
@@ -273,7 +286,6 @@
             &__container {
                 background-color: $teal;
             }
-
         }
     }
 
@@ -333,7 +345,6 @@
     }
 
     &--listening-service {
-
         &--full {
             &:first-child {
                 @include card-corner($lime, 10px, medium);
@@ -349,18 +360,18 @@
         }
 
         &--short {
-            &:nth-child(6n+1),
-            &:nth-child(6n+5) {
+            &:nth-child(6n + 1),
+            &:nth-child(6n + 5) {
                 @include card-corner($amethyst);
             }
 
-            &:nth-child(6n+2),
-            &:nth-child(6n+6) {
+            &:nth-child(6n + 2),
+            &:nth-child(6n + 6) {
                 @include card-corner($lime);
             }
 
-            &:nth-child(6n+3),
-            &:nth-child(6n+5) {
+            &:nth-child(6n + 3),
+            &:nth-child(6n + 5) {
                 @include card-corner($sunflower);
             }
         }
@@ -370,7 +381,8 @@
         .block-text,
         .block-chat,
         .block-address,
-        .block-find_a_branch { // sass-lint:disable-line class-name-format
+        .block-find_a_branch {
+            // sass-lint:disable-line class-name-format
             width: 100%;
         }
     }
