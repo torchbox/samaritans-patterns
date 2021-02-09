@@ -37,19 +37,19 @@
     {% endwith %}
     {% endif %}
 
-    {% get_search_promotions search_query as search_picks %}
-    {% if search_picks or search_results %}
+    {% if search_results %}
         <ul class="news-list">
             {% with classes="listing-item--website" search_result=True %}
-                {% for value in search_picks %}
-                    <li>
-                        {% include "patterns/molecules/listing-item/listing-item.html" with value=value.specific %}
-                    </li>
-                {% endfor %}
                 {% for value in search_results %}
+                    {% if value.description %}
+                    <li>
+                        {% include "patterns/molecules/listing-item/listing-item.html" with value=value.specific description=value.description %}
+                    </li>
+                    {% else %}
                     <li>
                         {% include "patterns/molecules/listing-item/listing-item.html" with value=value.specific %}
                     </li>
+                    {% endif %}
                 {% endfor %}
             {% endwith %}
         </ul>

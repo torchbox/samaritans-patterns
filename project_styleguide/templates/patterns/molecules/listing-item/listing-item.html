@@ -1,5 +1,4 @@
 {% load wagtailcore_tags wagtailimages_tags %}
-
 <a href="{% pageurl value %}"  class="listing-item{% if classes %} {{ classes }}{% endif %}">
     {% if value.listing_image %}
         {% image value.listing_image fill-480x320 class="listing-item__image" %}
@@ -12,8 +11,8 @@
                 {{ value.listing_title|default:value.title }}
             </span>
         </h2>
-        {% if value.listing_summary or value.introduction %}
-            <p class="listing-item__summary">{% firstof value.listing_summary value.introduction %}</p>
+        {% if value.listing_summary or value.introduction or description %}
+            <p class="listing-item__summary">{% firstof description value.listing_summary value.introduction %}</p>
         {% endif %}
         <ul class="list-inline-bulleted">
             {% if value.start_date %}
