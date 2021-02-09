@@ -29,6 +29,9 @@
                     {{ page.title }}
                 {% endif %}
             </h1>
+            {% if page.charity_registered_name %}
+                <h2 class="hero__title">{{ page.charity_registered_name }}</h2>
+            {% endif %}
 
             {% language_switcher %}
         </div>

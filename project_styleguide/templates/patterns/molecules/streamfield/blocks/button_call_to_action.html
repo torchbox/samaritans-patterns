@@ -1,0 +1,7 @@
+<a class="button button-large button--streamfield" href="{% if value.email %}mailto:{{ value.email }}{% elif value.phone_number %}tel:{{ value.phone_number }}{% elif value.external_link %}{{ value.external_link }}{% else %}{{ value.page.url }}{% endif %}"{% if value.external_link %}target="_blank" rel="noopener noreferrer"{% endif %}>
+    <div class="button__shadow"></div>
+    <div class="button__inner">
+        <p>{{ value.button_title }}</p>
+        {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="icon button__icon" %}
+    </div>
+</a>

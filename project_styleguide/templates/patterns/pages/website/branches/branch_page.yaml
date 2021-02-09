@@ -8,6 +8,7 @@ context:
     city: Bristol
     postcode: BS1 5AP
     get_country_display: UK
+    where_we_work: Bristol, South west, another place
     branch_opening_hours:
       all:
         - get_weekday_display: Monday
@@ -31,6 +32,7 @@ context:
     introduction: test introduction
     volunteer_link: https://www.example.com
     donate_link: https://www.example.com
+    donate_button_icon: icon-color-coins
     registered_charity_details: Registered charity details
 
 tags:

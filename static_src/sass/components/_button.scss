@@ -175,6 +175,10 @@
         }
     }
 
+    &--streamfield {
+        margin-bottom: $gutter;
+    }
+
     &--large {
         @include button--large;
     }
