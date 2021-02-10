@@ -9,7 +9,7 @@
     <section class="section section--donate">
 
         <div class="payments__complete">
-            <div>
+            <div class="payments__message">
                 <h1>{% blocktrans with name=completed_transaction_details.first_name %}Thank you, {{ name }}{% endblocktrans %}</h1>
                 <p>{{ page.thank_you_summary }}</p>
                 {% include "patterns/pages/donate/partials/social_block.html" with values=social_share_settings %}

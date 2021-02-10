@@ -25,6 +25,7 @@
 
         @include media-query(tablet-portrait) {
             max-width: 45%;
+            min-width: 350px;
             margin-left: $gutter-large;
         }
 
@@ -49,6 +50,12 @@
     &__paypal-button {
         max-width: 150px;
         min-height: 50px;
+    }
+
+    &__message {
+        @include media-query(tablet-portrait) {
+            flex: 0 1 100%;
+        }
     }
 }
 
