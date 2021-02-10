@@ -145,4 +145,20 @@
             }
         }
     }
+
+    .streamfield--landing-page & {
+        #{$root} {
+            &__text,
+            &__link {
+                transition: color $transition;
+                color: $color--white;
+            }
+        }
+
+        #{$hover} {
+            #{$root}__link {
+                color: rgba(white, 0.6);
+            }
+        }
+    }
 }
