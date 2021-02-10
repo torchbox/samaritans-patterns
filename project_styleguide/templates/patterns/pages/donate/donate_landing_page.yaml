@@ -14,53 +14,53 @@ context:
     key_info_description: Every 6 seconds, someone contacts us. Our team of trained volunteers are available 24 hours a day, 365 days a year
     donate_button_text: Donate now
     key_info_cards:
-    - value: |
-        <p>In 2017, there were <b>6,213</b> suicides in the UK and Republic of Ireland</p>
-    - value: |
-        <p>In 2017, there were <b>6,213</b> suicides in the UK and Republic of Ireland</p>
-    - value: |
-        <p>In 2017, there were <b>6,213</b> suicides in the UK and Republic of Ireland</p>
+      - value: |
+          <p>In 2017, there were <b>6,213</b> suicides in the UK and Republic of Ireland</p>
+      - value: |
+          <p>In 2017, there were <b>6,213</b> suicides in the UK and Republic of Ireland</p>
+      - value: |
+          <p>In 2017, there were <b>6,213</b> suicides in the UK and Republic of Ireland</p>
     more_info_heading: Other ways to support us
     more_info_links:
-    - value:
-        listing_title: If you're worried about someone else
-        listing_summary: We can give you advice and information
-    - value:
-        listing_title: Understanding emotional health
-        listing_summary: We can give you advice and information
-    - value:
-        listing_title: Chat to a Samaritan
-        listing_summary: We can give you advice and information
+      - value:
+          listing_title: If you're worried about someone else
+          listing_summary: We can give you advice and information
+      - value:
+          listing_title: Understanding emotional health
+          listing_summary: We can give you advice and information
+      - value:
+          listing_title: Chat to a Samaritan
+          listing_summary: We can give you advice and information
     donate_form_heading: Your donation will help us answer more calls for help
     suggested_one_off_donation: 5
     suggested_monthly_donation: 50
     donation_examples_heading: How your money can help us
     donation_examples_one_off:
-    - value:
-        icon: icon-color-mobile
-        amount: 15
-        description: could cover the cost of two calls
-    - value:
-        icon: icon-color-mobile
-        amount: 15
-        description: could cover the cost of two calls
-    - value:
-        icon: icon-color-mobile
-        amount: 15
-        description: could cover the cost of two calls
+      - value:
+          icon: icon-color-mobile
+          amount: 15
+          description: could cover the cost of two calls
+      - value:
+          icon: icon-color-mobile
+          amount: 15
+          description: could cover the cost of two calls
+      - value:
+          icon: icon-color-mobile
+          amount: 15
+          description: could cover the cost of two calls
     donation_examples_monthly:
-    - value:
-        icon: icon-color-mobile
-        amount: 15
-        description: could cover the cost of two calls
-    - value:
-        icon: icon-color-mobile
-        amount: 15
-        description: could cover the cost of two calls
-    - value:
-        icon: icon-color-mobile
-        amount: 15
-        description: could cover the cost of two calls
+      - value:
+          icon: icon-color-mobile
+          amount: 15
+          description: could cover the cost of two calls
+      - value:
+          icon: icon-color-mobile
+          amount: 15
+          description: could cover the cost of two calls
+      - value:
+          icon: icon-color-mobile
+          amount: 15
+          description: could cover the cost of two calls
     story_cta: |
       <div class="block-story">
       <blockquote class="story-call-to-action-block">
@@ -89,19 +89,19 @@ context:
 
 tags:
   image:
-    page.hero_image fill-3800x2500 jpegquality-40 as hero_image:
+    page.hero_image fill-1900x1250 jpegquality-40 as hero_image:
       target_var: hero_image
       raw:
-        url: http://via.placeholder.com/3800x2500
+        url: http://via.placeholder.com/1900x1250
     page.hero_image fill-768x500 jpegquality-40 as hero_image_mobile:
       target_var: hero_image_mobile
       raw:
         url: http://via.placeholder.com/768x500
   render_form_field:
     monthly_form.campaign_id:
-      raw: ""
+      raw: ''
     monthly_form.frequency:
-      raw: ""
+      raw: ''
     monthly_form.amount:
       raw: |
         <div class="form-item form-item--decimal_field form-item--number_input">
@@ -113,9 +113,9 @@ tags:
         </div>
         </div>
     one_off_form.campaign_id:
-      raw: ""
+      raw: ''
     one_off_form.frequency:
-      raw: ""
+      raw: ''
     one_off_form.amount:
       raw: |
         <div class="form-item form-item--decimal_field form-item--number_input">

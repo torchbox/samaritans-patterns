@@ -41,7 +41,7 @@ $darker-grey-text: #717171;
 
 // Brand
 $twitter-blue: #00acee;
-$facebook-blue:  #3b5998;
+$facebook-blue: #3b5998;
 
 // Color usage
 $color--primary: $lime;
@@ -59,9 +59,18 @@ $color--link-hover-subtle: darken($color--link, 5%);
 
 // Button colours
 $button-colours: (
-    primary:    (bg: $color--primary, color: $white),
-    secondary:  (bg: $color--secondary, color: $ink),
-    tertiary:   (bg: $color--tertiary, color: $ink),
+    primary: (
+        bg: $color--primary,
+        color: $white,
+    ),
+    secondary: (
+        bg: $color--secondary,
+        color: $ink,
+    ),
+    tertiary: (
+        bg: $color--tertiary,
+        color: $ink,
+    ),
 );
 
 // Fonts
@@ -76,16 +85,16 @@ $weight--light: 200;
 $base-font-size: 20px;
 $base-line-height: 1.5;
 $font-sizes: (
-    default:    $base-font-size,
-    xxxxl:      55px,
-    xxxl:       45px,
-    xxl:        32px,
-    xl:         28px,
-    l:          26px,
-    m:          24px,
-    s:          18px,
-    xs:         16px,
-    xxs:        14px
+    default: $base-font-size,
+    xxxxl: 55px,
+    xxxl: 45px,
+    xxl: 32px,
+    xl: 28px,
+    l: 26px,
+    m: 24px,
+    s: 18px,
+    xs: 16px,
+    xxs: 14px,
 );
 
 // Icon sizes
@@ -130,18 +139,18 @@ $gutter-x-large: 50px;
 $gutter-xxl: 60px;
 
 //spacings
-$section-overlap: 2 * $gutter-xxl;                          // 120px
-$section-overlap--hero-with-image: $gutter-xxl + $gutter;   //  80px
+$section-overlap: 2 * $gutter-xxl; // 120px
+$section-overlap--hero-with-image: $gutter-xxl + $gutter; //  80px
 $body-padding--website: 10px;
 $margin--main-after: $gutter-xxl;
 
-$page-padding-vertical-base:               $gutter;
-$page-padding-horizontal-base:             $gutter - $body-padding--website;
-$page-padding-vertical-mob-landscape:      $gutter-medium;
-$page-padding-horizontal-mob-landscape:    $gutter-medium - $body-padding--website;
-$page-padding-vertical-tablet-portrait:    $gutter-large;
-$page-padding-horizontal-tablet-portrait:  $gutter-large - $body-padding--website;
-$page-padding-vertical-tablet-landscape:   $gutter-xxl;
+$page-padding-vertical-base: $gutter;
+$page-padding-horizontal-base: $gutter - $body-padding--website;
+$page-padding-vertical-mob-landscape: $gutter-medium;
+$page-padding-horizontal-mob-landscape: $gutter-medium - $body-padding--website;
+$page-padding-vertical-tablet-portrait: $gutter-large;
+$page-padding-horizontal-tablet-portrait: $gutter-large - $body-padding--website;
+$page-padding-vertical-tablet-landscape: $gutter-xxl;
 $page-padding-horizontal-tablet-landscape: $gutter-xxl;
 
 // component sizes
@@ -155,32 +164,33 @@ $ink-border-thick: 7px solid $ink;
 
 // Breakpoints
 
-$breakpoint-mob-portrait:       320px;
-$breakpoint-mob-landscape:      480px;
-$breakpoint-tablet-portrait:    768px;
-$breakpoint-tablet-landscape:  1024px;
-$breakpoint-desktop:           1280px;
-$breakpoint-desktop-medium:    1500px;
-$breakpoint-desktop-wide:      2556px;
+$breakpoint-mob-portrait: 320px;
+$breakpoint-mob-landscape: 480px;
+$breakpoint-tablet-portrait: 768px;
+$breakpoint-tablet-landscape: 1024px;
+$breakpoint-desktop: 1280px;
+$breakpoint-desktop-medium: 1500px;
+$breakpoint-desktop-wide: 2556px;
 
 $breakpoints: (
-    'mob-portrait'      '(min-width: #{$breakpoint-mob-portrait    })',
-    'mob-landscape'     '(min-width: #{$breakpoint-mob-landscape   })',
-    'tablet-portrait'   '(min-width: #{$breakpoint-tablet-portrait })',
-    'tablet-landscape'  '(min-width: #{$breakpoint-tablet-landscape})',
-    'desktop'           '(min-width: #{$breakpoint-desktop         })',
-    'desktop-medium'    '(min-width: #{$breakpoint-desktop-medium  })',
-    'desktop-wide'      '(min-width: #{$breakpoint-desktop-wide    })'
+    'mob-portrait' '(min-width: #{$breakpoint-mob-portrait    })',
+    'mob-landscape' '(min-width: #{$breakpoint-mob-landscape   })',
+    'tablet-portrait' '(min-width: #{$breakpoint-tablet-portrait })',
+    'tablet-landscape' '(min-width: #{$breakpoint-tablet-landscape})',
+    'desktop' '(min-width: #{$breakpoint-desktop         })',
+    'desktop-medium' '(min-width: #{$breakpoint-desktop-medium  })',
+    'desktop-wide' '(min-width: #{$breakpoint-desktop-wide    })'
 );
 
 $menu-breakpoint: 'tablet-landscape';
 $page-connectors-breakpoint: 'tablet-landscape';
 $listing-item-breakpoint: 570px;
 
-
 // Wrappers
-$site-width: $breakpoint-desktop - (2 * $page-padding-horizontal-tablet-portrait); // 1220px
-$wrapper--medium: $breakpoint-tablet-landscape - (2 * $page-padding-horizontal-tablet-portrait); // 964px
+$site-width: $breakpoint-desktop -
+    (2 * $page-padding-horizontal-tablet-portrait); // 1220px
+$wrapper--medium: $breakpoint-tablet-landscape -
+    (2 * $page-padding-horizontal-tablet-portrait); // 964px
 $wrapper--small: 850px;
 $wrapper--smaller: 800px; // can probably be combined with $wrapper--small on tablet-size review but 800px was specifically requested
 $wrapper--wide: 1060px;

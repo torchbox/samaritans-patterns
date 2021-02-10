@@ -16,25 +16,25 @@ context:
     support_description: Support description text goes here
     support_us_links:
       all:
-      - link: "#"
-        link_text: Link text
-        summary: Link summary
-      - link: "#"
-        link_text: Link text
-        summary: Link summary
-      - link: "#"
-        link_text: Link text
-        summary: Link summary
-      - link: "#"
-        link_text: Link text
-        summary: Link summary
+        - link: '#'
+          link_text: Link text
+          summary: Link summary
+        - link: '#'
+          link_text: Link text
+          summary: Link summary
+        - link: '#'
+          link_text: Link text
+          summary: Link summary
+        - link: '#'
+          link_text: Link text
+          summary: Link summary
 
     volunteer_image: fake
     volunteer_icon: icon-color-people
     volunteer_headline: Volunteer headline
     volunteer_description: Volunteer description
     volunteer_link:
-      url: "#"
+      url: '#'
     volunteer_link_text: Volunteer link text
 
     get_nation_specific_news:
@@ -58,24 +58,24 @@ context:
     more_info_description: More info description
     more_info_pages:
       get_object_list:
-      - more_info_pages:
-          specific:
-            title: Card Title
-            listing_summary: Summary
-      - more_info_pages:
-          specific:
-            title: Card Title
-            listing_summary: Summary
-      - more_info_pages:
-          specific:
-            title: Card Title
-            listing_summary: Summary
+        - more_info_pages:
+            specific:
+              title: Card Title
+              listing_summary: Summary
+        - more_info_pages:
+            specific:
+              title: Card Title
+              listing_summary: Summary
+        - more_info_pages:
+            specific:
+              title: Card Title
+              listing_summary: Summary
 
     cta_title: CTA title (can't be too short)
     cta_description: CTA description
     cta_icon: icon-color-trainers
     cta_link:
-      url: "#"
+      url: '#'
     cta_link_text: Link text
 
     support_donation_page:
@@ -87,14 +87,12 @@ context:
       suggested_one_off_donation: 5
       suggested_monthly_donation: 50
 
-
-
 tags:
   image:
-    page.hero_image fill-3800x2500 jpegquality-40 as hero_image:
+    page.hero_image fill-1900x1250 jpegquality-40 as hero_image:
       target_var: hero_image
       raw:
-        url: http://via.placeholder.com/3800x2500
+        url: http://via.placeholder.com/1900x1250
     page.hero_image fill-768x500 jpegquality-40 as hero_image_mobile:
       target_var: hero_image_mobile
       raw:
@@ -113,12 +111,12 @@ tags:
         url: http://via.placeholder.com/1300x1300
   pageurl:
     page.hero_cta_link:
-      raw: "#"
+      raw: '#'
   render_form_field:
     monthly_form.campaign_id:
-      raw: ""
+      raw: ''
     monthly_form.frequency:
-      raw: ""
+      raw: ''
     monthly_form.amount:
       raw: |
         <div class="form-item form-item--decimal_field form-item--number_input">
@@ -130,13 +128,13 @@ tags:
         </div>
         </div>
     monthly_form.currency:
-      raw: ""
+      raw: ''
     one_off_form.campaign_id:
-      raw: ""
+      raw: ''
     one_off_form.frequency:
-      raw: ""
+      raw: ''
     one_off_form.currency:
-      raw: ""
+      raw: ''
     one_off_form.amount:
       raw: |
         <div class="form-item form-item--decimal_field form-item--number_input">
