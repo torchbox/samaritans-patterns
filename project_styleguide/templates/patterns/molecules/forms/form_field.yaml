@@ -1,8 +1,0 @@
-context:
-  field:
-    !!python/object:django.forms.fields.CharField
-    field:
-      !!python/object:django.forms.fields.CharField
-      widget: !!python/object:django.forms.widgets.Textarea
-        attrs: {cols: '40', rows: '10'}
-        is_required: false
