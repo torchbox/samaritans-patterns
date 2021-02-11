@@ -1,6 +1,12 @@
 {% extends "patterns/base_page.html" %}
 {% load wagtailcore_tags wagtailimages_tags icon_tags donate_tags static %}
 
+{% block meta_tags %}
+    {{ block.super }}
+    {# Facebook IOS - 14 domain verification #}
+    <meta name="facebook-domain-verification" content="ix21956ga2ydohpr5jwe16s15awpzs" />
+{% endblock meta_tags %}
+
 {% block content %}
 
     <div id="homepage" class="hero hero--homepage">
