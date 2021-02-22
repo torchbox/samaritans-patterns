@@ -31,8 +31,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (query.length) {
             geocoder.geocode(
                 {
-                    address: query,
-                    region: 'GB',
+                    'address': query,
+                    'region': 'GB',
+                    'componentRestrictions': {
+                        country: 'gb',
+                    },
+                    'bounds': new google.maps.LatLngBounds({lat: 55.3781, lng: 3.4360}) // eslint-disable-line no-undef
                 },
                 function(results, status) {
                     resetUI();
