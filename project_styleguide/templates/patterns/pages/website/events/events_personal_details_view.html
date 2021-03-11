@@ -1,5 +1,6 @@
 {% extends "patterns/templates/donate-form-page.html" %}
-{% load i18n form_tags helper_tags icon_tags loqate_tags static wagtailimages_tags to_euro %}
+{% load i18n form_tags helper_tags icon_tags loqate_tags static wagtailimages_tags to_euro wagtailcore_tags %}
+{% wagtail_site as current_site %}
 
 {% block title %}{% trans "Your information | Event registration payment" %}{% endblock %}
 
@@ -14,7 +15,7 @@
     <div class="donate__bar">
         <p class="donate__bar-text"><span class="donate__bar-standout">{% trans "Event" %}:</span> {{ event_page.title }}</p>
         <p class="donate__bar-text" id="event__form__gbp" data-amount="{{ payment_amount|floatformat:"-2" }}"><span class="donate__bar-standout">{% trans "Registration fee" %}:</span> £{{ payment_amount|floatformat:"-2" }}</p>
-        <p class="donate__bar-text" hidden="true" id="event__form__euro" data-amount="{{ payment_amount|to_euro:request.site }}"><span class="donate__bar-standout">{% trans "Registration fee" %}:</span> €{{ payment_amount|to_euro:request.site|floatformat:"-2" }}</p>
+        <p class="donate__bar-text" hidden="true" id="event__form__euro" data-amount="{{ payment_amount|to_euro:current_site }}"><span class="donate__bar-standout">{% trans "Registration fee" %}:</span> €{{ payment_amount|to_euro:current_site|floatformat:"-2" }}</p>
     </div>
 
     {% if payment_allowed %}

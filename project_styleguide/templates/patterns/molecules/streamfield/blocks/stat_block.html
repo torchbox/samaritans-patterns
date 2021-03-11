@@ -1,4 +1,5 @@
-{% load donate_tags i18n icon_tags humanize wagtailsettings_tags to_euro %}
+{% load donate_tags i18n icon_tags humanize wagtailsettings_tags to_euro wagtailcore_tags %}
+{% wagtail_site as current_site %}
 
 {% if link %}
     {% if not is_euro %}
@@ -15,7 +16,7 @@
             </span>
         </a>
     {% else %}
-        {% with amount=value.amount|to_euro:request.site|floatformat:"-2"|intcomma %}
+        {% with amount=value.amount|to_euro:current_site|floatformat:"-2"|intcomma %}
         <a class="stat-block__block stat-block__block--link" href="{% donate_url campaign_id=page.pk frequency=frequency amount=amount currency=currency %}">
             {% include "patterns/molecules/streamfield/partials/stat-block-inner.html" with amount=amount is_euro=is_euro currency=currency %}
             <span class="stat-block__link" >
