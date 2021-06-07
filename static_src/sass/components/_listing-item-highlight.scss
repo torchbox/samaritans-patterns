@@ -1,0 +1,21 @@
+.listing-item-highlight {
+    @include corner($lime, bottom, right, 150px, 150px, 7px, '&::before', 0);
+    position: relative;
+    margin: $gutter-xxl 0;
+
+    @include media-query(tablet-portrait) {
+        @include corner($lime, bottom, right, 360px, 190px, 7px, '&::before', 0);
+    }
+
+    &--reverse {
+        @include corner($lime, bottom, left, 150px, 150px, 7px, '&::before', 0);
+
+        @include media-query(tablet-portrait) {
+            @include corner($lime, bottom, left, 360px, 190px, 7px, '&::before', 0);
+        }
+    }
+
+    .news-list & {
+        padding: 0;
+    }
+}

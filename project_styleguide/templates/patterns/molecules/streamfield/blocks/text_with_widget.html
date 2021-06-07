@@ -1,0 +1,17 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+<div class="text-with-widget text-with-widget--{{ widget }} text-with-widget--align-{{ value.text_alignment }}">
+    <div class="text-with-widget__column text-with-widget__column--first">
+        {# Currently only caters for image, but there could be a check for an embed or quote here #}
+        <figure class="text-with-widget__figure figure">
+            {% image value.image fill-350x260 class="text-with-widget__image" alt=value.alternative_text %}
+            {% if value.caption %}
+                <figcaption class="figure__caption">
+                    <p>{{ value.caption }}</p>
+                </figcaption>
+            {% endif %}
+        </figure>
+    </div>
+    <div class="text-with-widget__column text-with-widget__column--second">
+        <div class="text-with-widget__text">{{ value.text|richtext }}</div>
+    </div>
+</div>

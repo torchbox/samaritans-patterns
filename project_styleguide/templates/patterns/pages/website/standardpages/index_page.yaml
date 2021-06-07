@@ -2,6 +2,7 @@ context:
   page:
     title: Test listing page
     introduction: Test intro for this listing page 123
+    top_story_cta: true
     story_cta: true
     related_pages:
       all:
@@ -17,6 +18,7 @@ context:
             specific:
               listing_title: Chat to a Samaritan
               listing_summary: We can give you advice and information
+    listing_heading: Browse events by type
   subpages:
     - title: Test sub page
       listing_image: fake
@@ -47,4 +49,6 @@ tags:
         <img src="http://via.placeholder.com/450x300" width="450" height="300" alt="Some alt">
   include_block:
     page.story_cta:
-      template_name: "patterns/molecules/streamfield/blocks/story_call_to_action_block.html"
+      template_name: "patterns/molecules/streamfield/blocks/cta_block.html"
+    page.top_story_cta:
+      template_name: "patterns/molecules/streamfield/blocks/cta_block.html"

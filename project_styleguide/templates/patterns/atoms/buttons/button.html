@@ -1,3 +1,3 @@
-<a href="{{ href }}" class="button{% if large %} button--large{% endif %}{% if classes %} {{ classes }}{% endif %}">
+<a href="{{ href }}" class="button{% if large %} button--large{% endif %}{% if classes %} {{ classes }}{% endif %}" {% if external_link %}target="_blank" rel="noopener noreferrer"{% endif %}>
     {% include "patterns/atoms/buttons/_inner.html" %}
 </a>

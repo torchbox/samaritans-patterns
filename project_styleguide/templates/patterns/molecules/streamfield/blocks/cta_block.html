@@ -1,6 +1,11 @@
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
-<div class="page-teaser {% if classes %}{{ classes }}{% endif %}">
+<div class="page-teaser {% if classes %}{{ classes }}{% endif %} {% if value.image %}page-teaser--with-image{% endif %}">
+    {% if value.image %}
+        <div class="page-teaser__image-wrap">
+            {% image value.image fill-300x300 class="page-teaser__image" %}
+        </div>
+    {% endif %}
     <div class="page-teaser__content">
         <div class="page-teaser__content-inner">
             <h2 class="page-teaser__title">{{ value.title }}</h2>

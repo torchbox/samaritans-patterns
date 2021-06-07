@@ -33,8 +33,10 @@
             {% include 'patterns/molecules/meta-bar/meta-bar__item.html' with icon="bullets" text=value.news_topics.all|join:", "|title %}
         {% endif %}
     {% endif %}
-    {% if value.distance_number %}
-        {% include 'patterns/molecules/meta-bar/meta-bar__item.html' with icon="zebra-crossing" text=value.distance_number|stringformat:"s"|add:" "|add:value.distance_unit %}
+    {% if value.event_distances.first %}
+        {% with event_distance=value.event_distances.first.event_distance %}
+            {% include 'patterns/molecules/meta-bar/meta-bar__item.html' with icon="zebra-crossing" text=event_distance.distance|stringformat:"s"|add:" "|add:event_distance.unit %}
+        {% endwith%}
     {% endif %}
     {% if apply_button %}
         <li class="meta-bar__item meta-bar__item--button-wrapper">

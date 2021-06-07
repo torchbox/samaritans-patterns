@@ -1,11 +1,18 @@
 context:
   value:
-    cta_title: Title
-    summary: Check out our awesome stub content
+    title: Brew Monday
+    description: Stay connected with a virtual cuppa and raise money for Samaritans. Because now more than ever, it's about reaching out, checking in and staying connected.
     get_link_text: Click here
     get_link_url: "#"
-    button_text: Test event
+    button_text: Find out more about Brew Monday
     button_link:
       - block_type: page
         value:
           url: /
+    image: true
+
+tags:
+  image:
+    value.image fill-300x300 class="page-teaser__image":
+      raw: |
+        <img src="https://source.unsplash.com/random/300" width="300" height="300" alt="Some alt" class="page-teaser__image">

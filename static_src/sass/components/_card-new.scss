@@ -376,15 +376,16 @@
             }
         }
 
+        // sass-lint:disable class-name-format
         .block-phone,
         .block-email,
         .block-text,
         .block-chat,
         .block-address,
         .block-find_a_branch {
-            // sass-lint:disable-line class-name-format
             width: 100%;
         }
+        // sass-lint:enddisable
     }
 
     &--with-icon {

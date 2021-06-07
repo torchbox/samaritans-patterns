@@ -192,6 +192,13 @@
                                     {% endif %}
                                 {% endif %}
 
+                                {# Fundraising Checkbox here #}
+                                {% if page.show_donate_pay_in_button %}
+                                    <div class="form-item">
+                                        <label for="pay-in" class="form-item__label--checkbox_input"><input type="checkbox" id="pay-in" name="pay-in">Are you paying in money from fundraising?</label>
+                                    </div>
+                                {% endif %}
+
                                 {% render_form_field one_off_form.campaign_id %}
                                 {% render_form_field one_off_form.frequency %}
                                 {% render_form_field one_off_form.currency %}
@@ -201,13 +208,6 @@
                         {% endif %}
                     </div> {# /.hero-widget__content #}
                 </div> {# /.hero-widget__inner #}
-
-                {% if page.is_default %}
-                    <a href="{% pay_in_url currency=currency %}" class="donate-landing-hero__pay-in-link">
-                        {% render_icon "icon-color-piggy-bank" "icon icon--large" %}
-                        <span class="donate-landing-hero__pay-in-text">Fundraised? Pay your money in</span>
-                    </a>
-                {% endif %}
             </div> {# /.hero-widget #}
         </div>
     </div> {# /.hero--donate-landing #}

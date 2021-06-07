@@ -1,1 +1,13 @@
-{% include "patterns/molecules/highlight/highlight.html" %}
+{% load wagtailcore_tags icon_tags %}
+
+<div class="highlight highlight--{{ highlight_type }}">
+    {% render_icon value.icon "highlight__icon" %}
+
+    <div class="highlight__content">{{ value.content|richtext }}</div>
+
+    {% if value.button_title %}
+        {% include "patterns/atoms/buttons/button.html" with classes="highlight__button" label=value.button_title href=href external_link=value.external_link %}
+    {% endif %}
+
+    <span class="highlight__connectors"></span>
+</div>

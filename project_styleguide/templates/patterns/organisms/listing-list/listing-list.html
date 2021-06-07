@@ -1,7 +1,15 @@
 <ul class="news-list">
     {% for listing in listings %}
-        <li>
-            {% include "patterns/molecules/listing-item/listing-item.html" with value=listing classes="listing-item--website" %}
+        <li {% if listing.featured %}class="listing-item-highlight {% if forloop.counter|divisibleby:2 %}listing-item-highlight--reverse{% endif %}"{% endif %}>
+            {% if listing.featured %}
+                {% if forloop.counter0|divisibleby:2 %}
+                    {% include "patterns/molecules/listing-item/listing-item.html" with value=listing classes="listing-item--website listing-item--highlight" %}
+                {% else %}
+                    {% include "patterns/molecules/listing-item/listing-item.html" with value=listing classes="listing-item--website listing-item--highlight listing-item--reverse" %}
+                {% endif %}
+            {% else %}
+                {% include "patterns/molecules/listing-item/listing-item.html" with value=listing classes="listing-item--website" %}
+            {% endif %}
         </li>
     {% endfor %}
 </ul>

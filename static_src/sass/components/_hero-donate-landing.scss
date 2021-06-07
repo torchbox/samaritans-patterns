@@ -9,7 +9,7 @@
 
         &--desktop {
             @media only screen and (max-width: 767px) {
-                background-image: none !important;
+                background-image: none !important; // sass-lint:disable-line no-important
                 display: none;
             }
         }
@@ -124,25 +124,6 @@
         @include media-query(mob-landscape) {
             margin-top: $gutter;
         }
-    }
-
-    &__pay-in-link {
-        @include link($white, rgba($white, 0.7));
-        padding: $gutter 0;
-        display: flex;
-        align-items: center;
-
-        @include media-query(tablet-landscape) {
-            padding: 0;
-            height: 80px;
-            margin-bottom: -80px;
-        }
-    }
-
-    &__pay-in-text {
-        @include underline;
-        margin-left: 1em;
-        font-weight: $weight--bold;
     }
 
     .homepage-donate-slider & {

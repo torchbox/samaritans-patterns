@@ -1,4 +1,13 @@
 context:
   value:
-    highlight_type: warning
-    content: blah
+    highlight_type: cta
+    content: >
+      <h3>Here are a few ideas to inspire these new ways of fundraising:</h3>
+      <ol>
+        <li>Walk, run, or cycle together virtually - whether you're set to do a walk, run or cycle, why not try it on your own. That way you still get some fresh air, exercise and the feel-good factor of completing your challenge! Try Strava or MapMyFitness to track your progress.</li>
+        <li>Virtual workout challenge - reach out to your local HIIT, yoga, or pilates instructor & see if they’ll host a virtual workout challenge to support Samaritans.</li>
+        <li>Virtual trivia or quiz night - keep your social lives on track by hosting a virtual quiz night from the comfort of your own home. Set an “entrance” donation fee, set yourself up on Tiltify & invite everyone you know.</li>
+        <li>Virtual gaming/music challenge - from charity video gaming (did someone say a Mario Kart marathon?) to streaming your own gig from your living room, you can bring everyone together on a live streaming platform.</li>
+        <li>Virtual Brew Monday - <a href="#">get your friends together</a> in a video call, <b>so you can still</b> socialise safely, and ask them to donate what they would've given for a slice of cake for the pleasure of your virtual company instead.</li>
+      </ol>
+      <p>Whatever you've chosen to do to support us, let us know what you're planning and join <b>#TeamSamaritans</b>.</p>

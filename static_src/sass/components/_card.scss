@@ -352,4 +352,11 @@
             @include font-size(xxl);
         }
     }
+
+    // compensate for grid-gap in ie
+    @include target-ie11 {
+        .grid & {
+            margin-bottom: ($gutter * 2);
+        }
+    }
 }

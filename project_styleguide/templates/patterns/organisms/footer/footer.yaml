@@ -1,3 +1,9 @@
+context:
+  settings:
+    navigation:
+      NavigationSettings:
+        footer_ctas:
+          -
 tags:
   footernav:
     "":
@@ -5,3 +11,6 @@ tags:
   footerlinks:
     "":
       template_name: patterns/molecules/navigation/footerlinks.html
+  include_block:
+    cta:
+      template_name: patterns/molecules/navigation/blocks/footer_additional_cta_block.html

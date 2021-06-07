@@ -1,5 +1,18 @@
 {% load wagtailcore_tags %}
+{% if title %}
+    <div class="stat-block-heading">
+        <h2 class="heading-text">{{ title }}</h2>
+    </div>
+{% endif %}
+
+{% if streamfield_container %}
+    <div class="stat-block stat-block--sf">
+{% endif %}
 
 {% for stat in value %}
     {% include_block stat %}
 {% endfor %}
+
+{% if streamfield_container %}
+    </div>
+{% endif %}

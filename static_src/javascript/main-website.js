@@ -39,6 +39,7 @@ import {disableFormAfterSubmit} from './components/disable-button-after-submit';
 import './components/referee-details';
 import GenderReveal from './components/gender-reveal';
 import GdprFields from './components/gdpr-fields';
+import { formErrorScroll } from './components/form-error-scroll';
 
 document.addEventListener('DOMContentLoaded', function () {
     new CookieWarning();
@@ -183,6 +184,8 @@ document.addEventListener('DOMContentLoaded', function () {
         new GenderReveal(genderreveal);
     }
     initInterviewPicker();
+
+    formErrorScroll();
 
     Array.from(
         document.querySelectorAll('form[data-js-disable-button-after-submit]')

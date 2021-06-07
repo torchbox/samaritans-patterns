@@ -1,7 +1,9 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 <a href="{% pageurl value %}"  class="listing-item{% if classes %} {{ classes }}{% endif %}">
     {% if value.listing_image %}
-        {% image value.listing_image fill-480x320 class="listing-item__image" %}
+        <div class="listing-item__image-wrap">
+            {% image value.listing_image fill-480x320 class="listing-item__image" %}
+        </div>
     {% else %}
         <div class="listing-item__image"></div>
     {% endif %}

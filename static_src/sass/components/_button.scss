@@ -306,9 +306,11 @@
         @include font-size(m);
     }
 
-    + p.submit-help-text {
-        margin-top: 5px;
-        font-weight: $weight--bold;
+    + p {
+        &.submit-help-text {
+            margin-top: 5px;
+            font-weight: $weight--bold;
+        }
     }
 }
 

@@ -1,0 +1,15 @@
+context:
+  value:
+    text_alignment: right
+    text: >
+      <ul>
+        <li>It's time to think outside the box about how we connect with family, friends and colleagues online.</li>
+        <li>Technology is our friend and getting people together on a group audio/video chat has never been easier. Here are a few options to get you started: Skype, WhatsApp and Facebook messenger.</li>
+      </ul>
+    caption: A photo caption
+
+tags:
+  image:
+    value.image fill-350x260 class="text-with-widget__image":
+      raw: |
+        <img src="http://via.placeholder.com/350x260" width="350" height="260" alt="Some alt" class="figure__image">

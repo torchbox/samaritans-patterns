@@ -19,10 +19,21 @@
                 {% if page.introduction %}
                     <p class="intro">{{ page.introduction }}</p>
                 {% endif %}
+
+                {# Top CTA #}
+                {% if page.top_story_cta %}
+                    {% include_block page.top_story_cta %}
+                {% endif %}
+
                 {% if subpages %}
-                    <div class="grid grid--no-margin grid--3col">
+
+                    {% if page.listing_heading %}
+                        <h2>{{ page.listing_heading }}</h2>
+                    {% endif %}
+
+                    <div class="grid grid--3col">
                         {% for card in subpages %}
-                            {% if card == subpages.first and page.highlight_first_child_page %} 
+                            {% if card == subpages.first and page.highlight_first_child_page %}
                                 {% include "patterns/molecules/cards/card-without-image.html" with card_light=True %}
                             {% elif page.highlight_first_child_page %}
                                 {% include "patterns/molecules/cards/card-without-image.html" %}
@@ -32,11 +43,12 @@
                         {% endfor %}
                     </div>
                 {% endif %}
+
+                {# Bottom CTA #}
                 {% if page.story_cta %}
-                    <div class="index__story-wrapper">
-                        {% include_block page.story_cta %}
-                    </div>
+                    {% include_block page.story_cta %}
                 {% endif %}
+
                 {% if page.show_page_teasers %}
                     {% include "patterns/atoms/corners/corners.html" with size="page" %}
                 {% endif %}

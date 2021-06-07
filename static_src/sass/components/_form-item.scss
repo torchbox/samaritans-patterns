@@ -301,4 +301,20 @@
             }
         }
     }
+
+    // When used inside the donation widget
+    .hero-widget--donate-landing & {
+        input[type='checkbox'] {
+            border: 3px solid $teal;
+            margin-right: 8px;
+        }
+
+        #{$root}__label--checkbox_input {
+            // font-size: 20px;
+
+            @include media-query(tablet-portrait) {
+                font-size: 20px;
+            }
+        }
+    }
 }

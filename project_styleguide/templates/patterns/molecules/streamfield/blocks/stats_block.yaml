@@ -3,6 +3,8 @@ context:
     - stub
     - stub
     - stub
+  streamfield_container: True
+  title: How your money can help us
 
 tags:
   include_block:

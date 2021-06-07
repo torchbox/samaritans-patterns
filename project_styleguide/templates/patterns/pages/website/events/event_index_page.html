@@ -6,7 +6,18 @@
 {% endblock %}
 
 {% block filters %}
-    {% include "patterns/molecules/filters/filter.html" with title="All types of events" name="event_type" options=event_types %}
+    {% if page.show_type %}
+        {% include "patterns/molecules/filters/filter.html" with title="All types of events" name="event_type" options=event_type_filters %}
+    {% endif %}
+    {% if page.show_distance_filter %}
+        {% include "patterns/molecules/filters/filter.html" with title="Anywhere" name="event_region" options=event_region_filters %}
+    {% endif %}
+    {% if page.show_region_filter %}
+        {% include "patterns/molecules/filters/filter.html" with title="Any distance" name="event_distance" options=event_distance_filters %}
+    {% endif %}
+    {% if page.show_date_filters %}
+        {% include "patterns/molecules/filters/filter.html" with title="Anytime" name="event_date" options=event_date_filters %}
+    {% endif %}
 {% endblock %}
 
 {% block listings %}

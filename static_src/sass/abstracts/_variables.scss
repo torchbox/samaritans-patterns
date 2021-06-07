@@ -187,10 +187,12 @@ $page-connectors-breakpoint: 'tablet-landscape';
 $listing-item-breakpoint: 570px;
 
 // Wrappers
+// sass-lint:disable indentation
 $site-width: $breakpoint-desktop -
     (2 * $page-padding-horizontal-tablet-portrait); // 1220px
 $wrapper--medium: $breakpoint-tablet-landscape -
     (2 * $page-padding-horizontal-tablet-portrait); // 964px
+// sass-lint:enddisable
 $wrapper--small: 850px;
 $wrapper--smaller: 800px; // can probably be combined with $wrapper--small on tablet-size review but 800px was specifically requested
 $wrapper--wide: 1060px;
