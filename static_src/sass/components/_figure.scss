@@ -4,7 +4,6 @@
     margin-right: 0;
     max-width: 728px;
 
-
     &__image {
         width: 100%;
         display: block;
@@ -23,6 +22,11 @@
 
         > p:last-child {
             margin: 0;
+        }
+
+        // reduce width of caption when inside SF
+        .text-with-widget & {
+            max-width: 350px;
         }
     }
 }

@@ -5,7 +5,6 @@
     @include media-query(tablet-portrait) {
         display: flex;
         justify-content: space-between;
-        grid-gap: ($gutter * 2);
     }
 
     &--align-right {
@@ -13,10 +12,8 @@
         #{$root}__column--first {
             @include media-query(tablet-portrait) {
                 order: -1;
-            }
-
-            @include target-ie11() {
                 margin-right: ($gutter * 2);
+                margin-left: 0;
             }
         }
     }
@@ -29,9 +26,6 @@
                 flex-shrink: 0;
                 margin-bottom: 0;
                 order: 1;
-            }
-
-            @include target-ie11() {
                 margin-left: ($gutter * 2);
             }
         }
