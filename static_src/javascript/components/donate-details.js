@@ -63,6 +63,15 @@ function donateDetails() {
         saveAmountButton.addEventListener('click', function(){
             var newAmount = parseFloat(editBox.querySelector('input').value).toFixed(2);
 
+            // it's possible to alter the amound by typing it in rather than 
+            // using the dial buttons. If an amount is entered is less than one 
+            // make it equal to one as the selected value and the value shown
+            // in the amount box.
+            if (newAmount < 1) {
+                newAmount = parseFloat('1').toFixed(2);
+                editBox.querySelector('input').value = newAmount;
+            }
+
             displayedAmountSpan.textContent = Utilities.number_format(newAmount, 2, '.', ',');
             
             var currentCurrency = currencyGbpSymbol;
