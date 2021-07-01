@@ -184,4 +184,49 @@
             width: calc(65% - #{$gutter-xxl * 2}); //
         }
     }
+
+    &--thankyou {
+        height: 100%;
+        width: 80%;
+        max-width: 80%;
+        margin: 0 auto;
+        z-index: 1;
+
+        @include media-query(tablet-landscape) {
+            width: 90%;
+            max-width: 90%;
+        }
+
+        @include media-query(desktop) {
+            max-width: 1200px;
+        }
+
+        #{$root}__video-link {
+            padding: 40px 10px 10px;
+            border-left: 5px solid rgba($color--white, 0.5);
+            background-color: transparent;
+
+            @include media-query(tablet-landscape) {
+                justify-content: flex-start;
+                border-bottom: 5px solid rgba($color--white, 0.5);
+            }
+        }
+
+        #{$root}__video-copy {
+            max-width: 400px;
+        }
+
+        #{$root}__video-container {
+            height: 100%;
+
+            @include media-query(tablet-landscape) {
+                height: 360px;
+            }
+
+            @include media-query(desktop) {
+                height: 500px;
+                justify-content: flex-start;
+            }
+        }
+    }
 }

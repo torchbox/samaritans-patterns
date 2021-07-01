@@ -35,11 +35,12 @@ import initDonationSliders from './components/donate-slider';
 import { initInterviewPicker } from './components/InterviewPicker/InterviewPicker';
 import initialiseHideIfCheckedElement from './components/hide-if-checked';
 import TrainingCourse from './components/training-course';
-import {disableFormAfterSubmit} from './components/disable-button-after-submit';
+import { disableFormAfterSubmit } from './components/disable-button-after-submit';
 import './components/referee-details';
 import GenderReveal from './components/gender-reveal';
 import GdprFields from './components/gdpr-fields';
 import { formErrorScroll } from './components/form-error-scroll';
+import DonateDynamicButton from './components/donate-dynamic-button';
 
 document.addEventListener('DOMContentLoaded', function () {
     new CookieWarning();
@@ -49,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     for (const autocomplete of document.querySelectorAll(
-        Autocomplete.selector()
+        Autocomplete.selector(),
     )) {
         new Autocomplete(autocomplete);
     }
@@ -59,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     for (const trainingcourse of document.querySelectorAll(
-        TrainingCourse.selector()
+        TrainingCourse.selector(),
     )) {
         new TrainingCourse(trainingcourse);
     }
@@ -77,19 +78,19 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     for (const mobilesubmenu of document.querySelectorAll(
-        MobileSubMenu.selector()
+        MobileSubMenu.selector(),
     )) {
         new MobileSubMenu(mobilesubmenu);
     }
 
     for (const progressbar of document.querySelectorAll(
-        ProgressBar.selector()
+        ProgressBar.selector(),
     )) {
         new ProgressBar(progressbar);
     }
 
     for (const regionfield of document.querySelectorAll(
-        RegionField.selector()
+        RegionField.selector(),
     )) {
         new RegionField(regionfield);
     }
@@ -99,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     for (const tabccordion of document.querySelectorAll(
-        Tabccordion.selector()
+        Tabccordion.selector(),
     )) {
         new Tabccordion(tabccordion);
     }
@@ -121,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     for (const inputblock of document.querySelectorAll(
-        SelectAllCheckboxToggle.selector()
+        SelectAllCheckboxToggle.selector(),
     )) {
         new SelectAllCheckboxToggle(inputblock);
     }
@@ -131,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     for (const donateusage of document.querySelectorAll(
-        DonateUsage.selector()
+        DonateUsage.selector(),
     )) {
         new DonateUsage(donateusage);
     }
@@ -152,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     for (const considerations of document.querySelectorAll(
-        Considerations.selector()
+        Considerations.selector(),
     )) {
         new Considerations(considerations);
     }
@@ -163,13 +164,13 @@ document.addEventListener('DOMContentLoaded', function () {
     sendTagManagerEvents();
 
     for (const hideIfCheckedElement of document.querySelectorAll(
-        '.js-hide-if-checked'
+        '.js-hide-if-checked',
     )) {
         const hideCheckbox = document.querySelector(
-            hideIfCheckedElement.dataset.targetToWatchForHiding
+            hideIfCheckedElement.dataset.targetToWatchForHiding,
         );
         const showCheckbox = document.querySelector(
-            hideIfCheckedElement.dataset.targetToWatchForShowing
+            hideIfCheckedElement.dataset.targetToWatchForShowing,
         );
         initialiseHideIfCheckedElement({
             element: hideIfCheckedElement,
@@ -179,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     for (const genderreveal of document.querySelectorAll(
-        GenderReveal.selector()
+        GenderReveal.selector(),
     )) {
         new GenderReveal(genderreveal);
     }
@@ -188,6 +189,12 @@ document.addEventListener('DOMContentLoaded', function () {
     formErrorScroll();
 
     Array.from(
-        document.querySelectorAll('form[data-js-disable-button-after-submit]')
+        document.querySelectorAll('form[data-js-disable-button-after-submit]'),
     ).forEach((formElement) => disableFormAfterSubmit(formElement));
+
+    for (const donatedynamicbutton of document.querySelectorAll(
+        DonateDynamicButton.selector(),
+    )) {
+        new DonateDynamicButton(donatedynamicbutton);
+    }
 });

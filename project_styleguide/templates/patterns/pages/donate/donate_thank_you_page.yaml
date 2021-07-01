@@ -2,6 +2,8 @@ context:
   page:
     title: Thank you
     thank_you_summary: This is the thank you summary
+    hero_video_cta: watch how your donation can make a difference
+    hero_video: https://www.youtube.com/embed/5qap5aO4i9A
   completed_transaction_details:
     first_name: Fname
   social_share_settings:
@@ -10,7 +12,6 @@ context:
     text: <p>By sharing Bob and Sophie's story with your family and friends, you could help <strong>raise &pound;11.46 more</strong>. This could fund an additional two calls from people in crisis this Christmas.</p>
     default_tweet_text:  Samaritans volunteers will be working tirelessly this Christmas to provide support to the thousands of people who will be calling for help. Read Sophie and Bob's story to learn more about how you could make a difference
     url: https://www.samaritans.org/support-us/sophie-and-bob/
-
 tags:
   include_block:
     page.body:

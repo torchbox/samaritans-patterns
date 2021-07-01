@@ -1,0 +1,19 @@
+.currency-list {
+    ul {
+        display: flex;
+    }
+
+    li {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+
+        &:not(:last-of-type) {
+            margin-right: 25px;
+        }
+    }
+
+    label {
+        margin-right: 5px;
+    }
+}

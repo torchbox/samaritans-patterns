@@ -33,7 +33,7 @@ function donateDetails() {
     const
         currencyGbpSymbol = '£',
         currencyEurSymbol = '€';
-    
+
     var toggleDonateAmountEditor = function() {
         if(editBox.hasAttribute('hidden')) {
             editBox.removeAttribute('hidden');
@@ -73,7 +73,7 @@ function donateDetails() {
             }
 
             displayedAmountSpan.textContent = Utilities.number_format(newAmount, 2, '.', ',');
-            
+
             var currentCurrency = currencyGbpSymbol;
 
             if (currencyToggleEUR.checked) {
@@ -81,7 +81,7 @@ function donateDetails() {
             }
 
             currencySymbol.innerHTML =  currentCurrency + '<span id="donate__amount__display">' + newAmount + '</span>';
-            
+
             amountInput.value = newAmount;
             toggleDonateAmountEditor();
         });
@@ -112,6 +112,7 @@ function donateDetails() {
             }
             frequencyInput.value = 'monthly';
             changeFrequencyButton.toggleAttribute('hidden', true);
+            document.getElementById('donate__personal-details-wrapper').querySelector('h1').innerHTML = 'Your monthly donation';
         });
     }
 
@@ -125,7 +126,7 @@ function donateDetails() {
     var isAmountHidden = amountInput.getAttribute('type') == 'hidden',
         buttonClickedFlag = ((currencyToggleEUR.checked) ? currencyEurSymbol : currencyGbpSymbol);
     currencyToggle.addEventListener('click', function() {
-        // Toggle between Euros and GBP 
+        // Toggle between Euros and GBP
         // Donate one-off and monthly
         if (isAmountHidden){
 
@@ -165,7 +166,7 @@ function donateDetails() {
             }
         }
         else {
-            // Toggle between Euros and GBP 
+            // Toggle between Euros and GBP
             // Pay-in
             if (currencyToggleEUR.checked){
                 // Toggle the amount field class for Euro

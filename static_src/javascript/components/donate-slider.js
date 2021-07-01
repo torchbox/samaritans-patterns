@@ -108,7 +108,7 @@ class DonateAmountSlider {
             if (!pricePointFlag) {
                 return;
             }
-            
+
 
             text.innerHTML = textValues[index];
             icon.innerHTML = iconValues[index];
@@ -199,9 +199,9 @@ function getIndex(arr, amount) {
 function initDonationSliders() {
     // localise currency
     let currency = '£';
-    
+
     let monthlyValues = document.getElementById('monthly_slider_values');
-    
+
     let singleValues = document.getElementById('single_slider_values');
 
     // There will always be at least one amount input.
@@ -211,7 +211,7 @@ function initDonationSliders() {
     // If both sliders are enabled, there will be two
     if(monthlyValues && singleValues) {
         monthly_call_counter = document.querySelectorAll('[name="amount"]')[1];
-    } 
+    }
     else if (!(monthlyValues || singleValues)) {
         // Bail if we cannot find either
         return;
@@ -222,16 +222,16 @@ function initDonationSliders() {
     }
 
     // Set up recurring donations slider
-    if (document.getElementById('monthly_slider_values')) {
+    if (document.getElementById('monthly_slider_values') && document.getElementById('donate_slider--monthly')) {
         monthlyValues = JSON.parse(monthlyValues.textContent);
-        
+
         const monthlySuggestedAmount = formatAmount(document.getElementById('donate_slider--monthly').dataset.suggestedAmount);
 
         const [
             monthlyAmounts,
             monthlyIcons,
             monthlyText ] = parseDonationValues(monthlyValues);
-        
+
         const sliderMonthlyRange = getSliderSteps(monthlyAmounts);
         const monthlyAmountStartIndex = getIndex(monthlyAmounts, monthlySuggestedAmount);
 
@@ -249,16 +249,16 @@ function initDonationSliders() {
     }
 
     // Set up single donation values
-    if (document.getElementById('single_slider_values')) {
+    if (document.getElementById('single_slider_values') && document.getElementById('donate_slider--one_off')) {
         singleValues = JSON.parse(singleValues.textContent);
 
         const singleSuggestedAmount = formatAmount(document.getElementById('donate_slider--one_off').dataset.suggestedAmount);
-        
+
         const [
             singleAmounts,
             singleIcons,
             singleText ] = parseDonationValues(singleValues);
-            
+
         const sliderSingleRange = getSliderSteps(singleAmounts);
         const SingleAmountStartIndex = getIndex(singleAmounts, singleSuggestedAmount);
 

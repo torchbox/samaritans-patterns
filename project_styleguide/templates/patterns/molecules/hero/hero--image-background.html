@@ -6,7 +6,14 @@
     {% image hero_test_image fill-1900x1250 jpegquality-40 as hero_image %}
 {% endif %}
 
-<div class="hero hero--image-background{% if classes %} {{ classes }}{% endif %}" {% if hero_image %}style="background-image: url({{ hero_image.url }})"{% endif %}>
+<div class="hero hero--image-background{% if class %} {{class}}{% endif %}" {% if hero_image %}style="background-image: url({{ hero_image.url }})"{% endif %}>
+
+    {% if value.hero_video %}
+        <div class="hero-widget hero-widget--thankyou">
+            {% include "patterns/molecules/donate-video-modal/donate-video-modal.html" with class="thank-you" value=value back_label="Back to thank you page" %}
+        </div>
+    {% endif %}
+
     <div class="hero__pattern-wrapper {% if pattern_bottom %}hero__pattern-wrapper--bottom{% endif %}">
         {% if pattern == "dots" %}
             {% include "patterns/atoms/svg/patterns/pattern-dots.html" with classes="pattern" %}

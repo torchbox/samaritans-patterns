@@ -47,8 +47,10 @@ class VideoModal {
             this.modalWindow.classList.add('open');
             if (!this.iframe.getAttribute('src').length) {
                 this.iframe.setAttribute('src', this.src);
-
             }
+
+            // Ensure modal stacks on top of all other UI when open
+            document.querySelectorAll('.hero')[0].classList.add('stack-on-top');
         });
 
         this.modalClose.forEach((value) => {
@@ -61,6 +63,9 @@ class VideoModal {
                 this.modalWindow.classList.remove('open');
                 // stops video playing when window is closed
                 this.iframe.setAttribute('src', '');
+
+                // Return stacking to previous state
+                document.querySelectorAll('.hero')[0].classList.remove('stack-on-top');
             });
         });
     }

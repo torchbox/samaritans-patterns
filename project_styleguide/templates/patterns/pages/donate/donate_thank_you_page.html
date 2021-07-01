@@ -3,11 +3,10 @@
 
 {% block content %}
 
-{% include "patterns/molecules/hero/hero--image-background.html" with pattern="diamonds" %}
+{% include "patterns/molecules/hero/hero--image-background.html" with pattern="diamonds" value=page class="thankyou" %}
 
 <div class="wrapper wrapper--large wrapper--padding-for-page">
     <section class="section section--donate">
-
         <div class="payments__complete">
             <div class="payments__message">
                 <h1>{% blocktrans with name=completed_transaction_details.first_name %}Thank you, {{ name }}{% endblocktrans %}</h1>

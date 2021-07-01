@@ -1,5 +1,5 @@
 {% extends "patterns/base_page.html" %}
-{% load wagtailcore_tags wagtailimages_tags icon_tags donate_tags static %}
+{% load wagtailcore_tags wagtailimages_tags icon_tags donate_tags static to_euro %}
 
 {% block meta_tags %}
     {{ block.super }}
@@ -335,4 +335,13 @@
     {% if monthly_slider_values %}
         {{ monthly_slider_values|json_script:"monthly_slider_values" }}
     {% endif %}
+    <script type="text/javascript">
+        donateConfig = {
+            'monthlyGiving': '{{ page.support_donation_page.allow_monthly_donation }}',
+            'singleGiving' : '{{ page.support_donation_page.allow_one_off_donation }}',
+            'monthlyAmount': '{% if is_euro %}{{ monthly_form.amount.value|to_euro:current_site }}{% else %}{{ monthly_form.amount.value }}{% endif %}',
+            'singleAmount': '{{ single_suggested_amount }}',
+            'isEuro' : '{{ is_euro }}'
+        };
+    </script>
 {% endblock %}

@@ -11,7 +11,7 @@ href="{{ item_url }}"
 
     {% firstof title page.title as link_title %}
 
-    {% if has_children or description or structure == 'alternate_structure_item' %}
+    {% if has_children or description or structure == 'alternate_structure_item' or has_chevron %}
         {% include "patterns/molecules/chevron-link/chevron-link.html" with title=link_title chevron_classes="nav__icon nav__icon--chevron" %}
     {% else %}
         <span>{{ link_title }}</span>

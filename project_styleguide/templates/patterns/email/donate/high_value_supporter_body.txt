@@ -1,0 +1,10 @@
+Hello,
+
+A high-value donation has been made of {{ currency_symbol }}{{ amount }} on {{ created_at }}, with a transaction ID of: {{ transaction_id }}.
+
+This supporter has chosen the following communication preferences:
+ - Contact via phone: {% if prefs_phone %}Yes{% else %}No{% endif %}
+ - Contact via SMS: {% if prefs_sms %}Yes{% else %}No{% endif %}
+ - Contact via email: {% if prefs_email %}Yes{% else %}No{% endif %}
+ - Contacted about volunteering: {% if prefs_volunteering %}Yes{% else %}No{% endif %}
+ - Contacted about fundraising: {% if prefs_fun_vw %}Yes{% else %}No{% endif %}

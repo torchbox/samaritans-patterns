@@ -20,7 +20,7 @@
 
 	{# Monthly #}
 	{% if donate_page.allow_monthly_donation %}
-		<form method="get" action="{% url 'donate:personal_details' %}" id="donate_form--monthly" {% if donate_page.default_to_single %}hidden{% endif %} class="js-donate-usage">
+		<form method="get" action="{% url 'donate:personal_details' %}" id="donate_form--monthly" {% if donate_page.default_to_single %}hidden{% endif %} class="js-donate-usage js-donate-button-wrapper">
 			{# Show slider if an editor has enabled it #}
 			{% if donate_page.show_donate_slider %}
 				<div class="donate-slider__container">
@@ -60,7 +60,7 @@
 			{% render_form_field monthly_form.currency %}
 
 			<div class="donate-slider__button-icons-wrap">
-				{% include "patterns/atoms/buttons/button--button.html" with label=donate_page.donate_button_text large=True classes="button--secondary donate-landing-hero__donate-button" %}
+				{% include "patterns/atoms/buttons/button--button.html" with label="Donate Now" large=True classes="button--secondary donate-landing-hero__donate-button" %}
 				{% include "patterns/molecules/payments/payment-icons--monthly.html" %}
 			</div>
 		</form>
@@ -68,7 +68,7 @@
 
 	{# One off #}
 	{% if donate_page.allow_one_off_donation %}
-		<form method="get" action="{% url 'donate:personal_details' %}" id="donate_form--single" {% if donate_page.default_to_monthly %}hidden{% endif %} class="js-donate-usage">
+		<form method="get" action="{% url 'donate:personal_details' %}" id="donate_form--single" {% if donate_page.default_to_monthly %}hidden{% endif %} class="js-donate-usage js-donate-button-wrapper">
 		    <div class="donate-slider__container">
 	    		<div id="donate_slider--single-icon" class="donate-slider--icon">
 	    			{# Child element injected here, if supplied #}
@@ -105,7 +105,7 @@
 			{% render_form_field one_off_form.currency %}
 
 			<div class="donate-slider__button-icons-wrap">
-				{% include "patterns/atoms/buttons/button--button.html" with label=donate_page.donate_button_text large=True classes="button--secondary donate-landing-hero__donate-button" %}
+				{% include "patterns/atoms/buttons/button--button.html" with label="Donate Now" large=True classes="button--secondary donate-landing-hero__donate-button" %}
 				{% include "patterns/molecules/payments/payment-icons--single.html" %}
 			</div>
 		</form>

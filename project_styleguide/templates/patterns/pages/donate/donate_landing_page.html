@@ -20,7 +20,7 @@
 
         <div class="hero__inner hero__inner--video wrapper wrapper--large wrapper--padding">
             {% if page.hero_video_cta and page.hero_video %}
-                {% include "patterns/molecules/donate-video-modal/donate-video-modal.html" with value=page %}
+                {% include "patterns/molecules/donate-video-modal/donate-video-modal.html" with value=page back_label="Back to make a donation" %}
             {% endif %}
 
             <div class="hero-widget hero-widget--donate-landing{% if page.show_donate_slider %} hero-widget--slider{% endif %}">
@@ -111,21 +111,22 @@
                                         <div class="donate-landing-hero__form-input donate-landing-hero__form-input--monthly">
                                             {% render_form_field monthly_form.amount %}
                                         </div>
+                                        <div class="donate-landing__usage">
+                                            {% include "patterns/atoms/svg/colour-icons/icon-color-speechbubble-green.html" with aria_hide=True %}
+                                            <p>Could fund <span class="js-donation-usage-slot"><b>1</b> call</span> for help every month</p>
+                                        </div>
                                     {% endif %}
-
-                                    <div class="donate-landing__usage">
-                                        {% include "patterns/atoms/svg/colour-icons/icon-color-speechbubble-green.html" with aria_hide=True %}
-                                        <p>Could fund <span class="js-donation-usage-slot"><b>1</b> call</span> for help every month</p>
-                                    </div>
                                 {% endif %}
 
                             {% render_form_field monthly_form.campaign_id %}
                             {% render_form_field monthly_form.frequency %}
                             {% render_form_field monthly_form.currency %}
 
-                            {% include "patterns/atoms/buttons/button--button.html" with label=page.donate_button_text large=True classes="button--secondary donate-landing-hero__donate-button" %}
+                            <div class="js-donate-button-wrapper">
+                                {% include "patterns/atoms/buttons/button--button.html" with label="Donate Now" large=True classes="button--secondary donate-landing-hero__donate-button" %}
+                            </div>
 
-                            {% if not is_euro %}
+                            {% if not is_euro and page.show_text_to_donate_cta %}
                                 <div class="donate-landing__mobile-cta" aria-live="polite" data-mobile-cta>
                                     <a class="donate-landing__mobile-cta--link" href="sms://70470;?&body=LISTEN5">Text LISTEN5 to 70470 to start donating £5 a month*</a>
                                     <p class="donate-landing__mobile-cta--text">Texts cost £5 plus two standard rate messages*</p>
@@ -137,7 +138,7 @@
                         {% endif %}
 
                         {% if page.allow_one_off_donation %}
-                            <form method="get" action="{% url 'donate:personal_details' %}" id="donate_form--single" {% if page.default_to_monthly %}hidden{% endif %} class="js-donate-usage">
+                            <form method="get" action="{% url 'donate:personal_details' %}" id="donate_form--single" {% if page.default_to_monthly %}hidden{% endif %} class="js-donate-usage js-donate-button-wrapper">
                                 {% if page.show_donate_slider %}
                                     <div class="donate-slider__container">
                                         <div id="donate_slider--single-icon" class="donate-slider--icon">
@@ -202,7 +203,7 @@
                                 {% render_form_field one_off_form.campaign_id %}
                                 {% render_form_field one_off_form.frequency %}
                                 {% render_form_field one_off_form.currency %}
-                                {% include "patterns/atoms/buttons/button--button.html" with label=page.donate_button_text large=True classes="button--secondary donate-landing-hero__donate-button" %}
+                                {% include "patterns/atoms/buttons/button--button.html" with label="Donate Now" large=True classes="button--secondary donate-landing-hero__donate-button" %}
                                 {% include "patterns/molecules/payments/payment-icons--single.html" %}
                             </form>
                         {% endif %}
@@ -336,4 +337,13 @@
     {% if monthly_slider_values and page.allow_monthly_donation %}
         {{ monthly_slider_values|json_script:"monthly_slider_values" }}
     {% endif %}
+    <script type="text/javascript">
+        donateConfig = {
+            'monthlyGiving': '{{ page.allow_monthly_donation }}',
+            'singleGiving' : '{{ page.allow_one_off_donation }}',
+            'monthlyAmount': '{% if is_euro %}{{ monthly_form.amount.value|to_euro:current_site }}{% else %}{{ monthly_form.amount.value }}{% endif %}',
+            'singleAmount': '{{ single_suggested_amount }}',
+            'isEuro' : '{{ is_euro }}',
+        };
+    </script>
 {% endblock %}

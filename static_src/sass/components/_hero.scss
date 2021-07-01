@@ -287,6 +287,23 @@
             fill: $white;
             opacity: 0.2;
         }
+
+        &.thankyou {
+            height: 295px;
+            padding-bottom: 0;
+
+            @include media-query(tablet-landscape) {
+                height: 170px + $section-overlap;
+            }
+
+            @include media-query(desktop) {
+                height: 800px;
+            }
+        }
+
+        &.stack-on-top {
+            z-index: 14;
+        }
     }
 
     &--search {

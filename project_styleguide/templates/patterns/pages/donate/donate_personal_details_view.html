@@ -14,7 +14,13 @@
     {% if is_pay_in %}
     <h1>{% trans "Your payment" %}</h1>
     {% else %}
-    <h1>{% trans "Your donation" %}</h1>
+    <h1>
+        {% if payment_frequency == 'monthly' %}
+            {% trans "Your monthly donation" %}
+        {% else %}
+            {% trans "Your donation" %}
+        {% endif %}
+    </h1>
     {% endif %}
 
     {% if not is_pay_in %}
@@ -72,8 +78,10 @@
                     <div class="form__errors">{{form.captcha.errors}}</div>
                 {% endif %}
                 {{ form.captcha }}
-                
-                {% render_form_field form.currency %}
+
+                <div class="currency-list">
+                    {% render_form_field form.currency %}
+                </div>
 
                 {% if form.amount %}
                     <div id="amount_form_field" class="{% if is_euro %}form__euro-field-wrapper{% else %}form__gbp-field-wrapper{% endif %}">

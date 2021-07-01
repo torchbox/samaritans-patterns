@@ -42,7 +42,7 @@
                 <button value="{% blocktrans with amount=payment_amount|floatformat:"-2" %}Donate £{{ amount }}{% endblocktrans %}" class="button button--large" type="submit" id="donate__gocardless-submit">
                     <div class="button__shadow"></div>
                     <div class="button__inner">
-                            {% blocktrans with amount=payment_amount|floatformat:"-2" %}Donate £{{ amount }}{% endblocktrans %}
+                            {% blocktrans with amount=payment_amount|floatformat:"-2" %}Donate £{{ amount }} a month{% endblocktrans %}
                         {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="icon button__icon" %}
                     </div>
                 </button>
