@@ -91,7 +91,9 @@
 
 
                 {% if is_pay_in %}
-                    <div class="js-autocomplete" data-autocomplete-list="#payment_origin_options">
+                    {% render_form_field form.supporter_id %}
+                    {% render_form_field form.payment_origin_choice %}
+                    <div id="payment_origin_other_field" class="js-autocomplete" data-autocomplete-list="#payment_origin_options">
                         {% render_form_field form.payment_origin %}
                     </div>
                 {% endif %}

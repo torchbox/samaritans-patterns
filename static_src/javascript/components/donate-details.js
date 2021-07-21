@@ -28,7 +28,10 @@ function donateDetails() {
         inMemoryInput = document.getElementById('id_in_memory'),
         inMemoryFields = document.getElementById('donate__form__in_memory_fields'),
         currencyStep = document.getElementById('currency-step'),
-        amountField = document.getElementById('amount_form_field');
+        amountField = document.getElementById('amount_form_field'),
+        originChoice = document.getElementById('id_payment_origin_choice'),
+        originOther = document.getElementById('id_payment_origin'),
+        originOtherWrapper = document.getElementById('payment_origin_other_field');
 
     const
         currencyGbpSymbol = '£',
@@ -113,6 +116,31 @@ function donateDetails() {
             frequencyInput.value = 'monthly';
             changeFrequencyButton.toggleAttribute('hidden', true);
             document.getElementById('donate__personal-details-wrapper').querySelector('h1').innerHTML = 'Your monthly donation';
+        });
+    }
+
+    // Only show (and require) the 'Please tell us the name of your event' field if the 'Other' option 
+    // is selected for 'What did you fundraise for?'
+    if(originChoice) {
+        // Set correct state on load
+        if (originChoice.options[originChoice.options.length-1].selected) {
+            originOther.toggleAttribute('required', true);
+        }
+        else {
+            originOtherWrapper.toggleAttribute('hidden', true);
+            originOther.toggleAttribute('required', false);
+        }
+        // Set correct state on changes to 'What did you fundraise for?'
+        originChoice.addEventListener('change', function(e){
+            e.preventDefault();
+            if (originChoice.options[originChoice.options.length-1].selected) {
+                originOtherWrapper.toggleAttribute('hidden', false);
+                originOther.toggleAttribute('required', true);
+            }
+            else {
+                originOtherWrapper.toggleAttribute('hidden', true);
+                originOther.toggleAttribute('required', false);
+            }
         });
     }
 
