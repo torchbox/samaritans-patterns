@@ -21,7 +21,7 @@ function setupPaymentMonthly() {
         targetElement.innerHTML = msg;
     }
 
-    function initPaypal() {
+    function initPayPal() {
         client.create(
             {authorization: token},
             function (clientErr, clientInstance) {
@@ -44,6 +44,14 @@ function setupPaymentMonthly() {
                         window.paypal.Button.render({
                             env: braintreeParams.use_sandbox ? 'sandbox' : 'production',
                             commit: true,
+                            style: {
+                                color: 'gold',
+                                shape: 'rect',
+                                tagline: 'false',
+                                label: 'paypal',
+                                size: 'responsive',
+                                height: 50,
+                            },
 
                             payment: function () {
                                 return paypalCheckoutInstance.createPayment({
@@ -65,7 +73,7 @@ function setupPaymentMonthly() {
                             },
 
                             onCancel: function () {
-                                showErrorMessage('Payment cancelled');
+                                showErrorMessage('PayPal payment cancelled');
                             },
 
                             onError: function () {
@@ -82,7 +90,7 @@ function setupPaymentMonthly() {
         );
     }
 
-    initPaypal();
+    initPayPal();
 }
 
 export default setupPaymentMonthly;

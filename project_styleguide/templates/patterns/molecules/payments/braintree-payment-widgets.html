@@ -2,33 +2,52 @@
 <div class="tabccordion tabccordion--light-bg tabccordion--payments js-tabccordion">
     <nav>
         <ul class="tabccordion__nav js-tabccordion-nav">
+
+            {# Card payment #}
             <li>
-                <a href="#tab1" class="tabccordion__nav-item {% if active_payment_mode == 'card' %}is-active{% endif %}">{% trans 'Credit or debit card' %}</a>
+                <a href="#tab1" class="tabccordion__nav-item tabccordion__nav-item--card-payment {% if active_payment_mode == 'card' %}is-active{% endif %}">
+                    <svg class="" width="27" height="19">
+                        <use xlink:href="#credit-card" />
+                    </svg>
+                    {% trans 'Credit or debit card' %}
+                </a>
             </li>
+
+            {# PayPal #}
             <li>
-                <a href="#tab2" class="tabccordion__nav-item {% if active_payment_mode == 'paypal' %}is-active{% endif %}">{% trans 'Paypal' %}</a>
+                <span class="hidden">{% trans 'PayPal' %}</span>
+                <div class="payments__button payments__paypal-button"></div>
             </li>
+
+            {# Google Pay #}
             <li class="js-google-pay-tab" hidden>
-                <a href="#tab3" class="tabccordion__nav-item {% if active_payment_mode == 'googlepay' %}is-active{% endif %}">{% trans 'Google Pay' %}</a>
+                <span class="hidden">{% trans 'Google Pay' %}</span>
+                <div class="payments__button payments__googlepay-button payments__googlepay-button-desktop"></div>
             </li>
-            {% comment %}
-            Apple Pay temporarily disabled
+
+            {# Apple Pay #}
             <li class="js-apple-pay-tab" hidden>
-                <a href="#tab4" class="tabccordion__nav-item {% if active_payment_mode == 'applepay' %}is-active{% endif %}">{% trans 'Apple Pay' %}</a>
+                <span class="hidden">{% trans 'Apple Pay' %}</span>
+                <button class="apple-pay-button js-apple-pay-button"></button>
             </li>
-            {% endcomment %}
         </ul>
     </nav>
 
     {% if form.non_field_errors %}<div id="payments__braintree-errors-form" class="payments__braintree-error">{{ form.non_field_errors }}</div>{% endif %}
 
-    <section id="tab1" class="accordion accordion--tabccordion tabccordion__panel js-tabccordion-panel {% if active_payment_mode == 'card' %}is-active{% endif %}">
+    <div class="payments__error-wrapper">
+        <span id="payments__braintree-errors-paypal" class="payments__braintree-error" hidden></span>
+        <span id="payments__braintree-errors-googlepay" class="payments__braintree-error" hidden></span>
+        <span id="payments__braintree-errors-applepay" class="payments__braintree-error" hidden></span>
+    </div>
 
-        <a class="accordion__heading" href="#tab1">
-            <h3 class="accordion__heading-text">
-                Credit or debit card
-            </h3>
-            {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="accordion__icon" aria_hide="true" %}
+    <section id="tab1" class="accordion accordion--tabccordion accordion--no-border accordion--credit-card tabccordion__panel js-tabccordion-panel {% if active_payment_mode == 'card' %}is-active{% endif %}">
+
+        <a href="#tab1" class="tabccordion__nav-item tabccordion__nav-item--card-payment tabccordion__nav-item--card-payment-content {% if active_payment_mode == 'card' %}is-active{% endif %}">
+            <svg class="" width="27" height="19">
+                <use xlink:href="#credit-card" />
+            </svg>
+            {% trans 'Credit or debit card' %}
         </a>
 
         <div class="accordion__content tabccordion__content">
@@ -67,51 +86,16 @@
         </div>
     </section>
 
-    <section id="tab2" class="accordion accordion--tabccordion tabccordion__panel js-tabccordion-panel {% if active_payment_mode == 'paypal' %}is-active{% endif %}">
+    <div class="payments__wrapper">
+        <span class="hidden">{% trans 'PayPal' %}</span>
+        <div class="payments__button payments__paypal-button"></div>
 
-        <a class="accordion__heading" href="#tab2">
-            <h3 class="accordion__heading-text">
-                Paypal
-            </h3>
-            {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="accordion__icon" aria_hide="true" %}
-        </a>
+        <span class="hidden">{% trans 'Google Pay' %}</span>
+        <div class="payments__button payments__googlepay-button payments__googlepay-button-mobile"></div>
 
-        <div class="accordion__content tabccordion__content">
-            <div id="payments__braintree-errors-paypal" class="payments__braintree-error" hidden></div>
-            <div id="payments__paypal-button" class="payments__paypal-button"></div>
-        </div>
-    </section>
-
-    <section id="tab3" class="accordion accordion--tabccordion tabccordion__panel js-tabccordion-panel js-google-pay-tab {% if active_payment_mode == 'googlepay' %}is-active{% endif %}" hidden>
-        <a class="accordion__heading" href="#tab3">
-            <h3 class="accordion__heading-text">
-                Google Pay
-            </h3>
-            {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="accordion__icon" aria_hide="true" %}
-        </a>
-
-        <div class="accordion__content tabccordion__content">
-            <div id="payments__braintree-errors-googlepay" class="payments__braintree-error" hidden></div>
-            <div id="payments__googlepay-button"></div>
-        </div>
-    </section>
-
-    {% comment %}
-    Apple Pay temporarily disabled
-    <section id="tab4" class="accordion accordion--tabccordion tabccordion__panel js-tabccordion-panel js-apple-pay-tab {% if active_payment_mode == 'applepay' %}is-active{% endif %}" hidden>
-        <a class="accordion__heading" href="#tab4">
-            <h3 class="accordion__heading-text">
-                Apple Pay
-            </h3>
-            {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="accordion__icon" aria_hide="true" %}
-        </a>
-
-        <div class="accordion__content tabccordion__content">
-            <div id="payments__braintree-errors-applepay" class="payments__braintree-error" hidden></div>
-            <button id="payments__applepay-button" class="apple-pay-button"></button>
-        </div>
-    </section>
-    {% endcomment %}
+        <span class="hidden">{% trans 'Apple Pay' %}</span>
+        <button class="payments__button apple-pay-button js-apple-pay-button"></button>
+    </div>
 </div>
 
 {{ braintree_params|json_script:"payments__braintree-params" }}

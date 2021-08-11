@@ -84,20 +84,20 @@
                     </div>
                 {% endif %}
 
-                {% if page.branch_activities.all %}
-                <div class="branch-top__section">
-                    <h2>How we can help</h2>
-                    <div class="branch-top__activities">
-                        {% for activity in page.branch_activities.all %}
-                            <div class="branch-top__activity">
-                                {{ activity.activity_type }}
-                                {% if activity.information %}
-                                    {% include "patterns/molecules/tooltip/tooltip.html" with tooltip=activity.information tooltip_classes="tooltip--branch" %}
-                                {% endif %}
-                            </div>
-                        {% endfor %}
+                {% if page.get_branch_activities.exists %}
+                    <div class="branch-top__section">
+                        <h2>How we can help</h2>
+                        <div class="branch-top__activities">
+                            {% for activity in page.get_branch_activities.all %}
+                                <div class="branch-top__activity">
+                                    {{ activity.activity_type }}
+                                    {% if activity.information %}
+                                        {% include "patterns/molecules/tooltip/tooltip.html" with tooltip=activity.information tooltip_classes="tooltip--branch" %}
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
                     </div>
-                </div>
                 {% endif %}
 
                 <div class="streamfield streamfield--dark-bg" role="tablist" aria-multiselectable="true">

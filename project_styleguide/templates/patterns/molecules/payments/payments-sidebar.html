@@ -32,10 +32,7 @@
 
     <div id="donate__methods--single" {% if payment_frequency == 'monthly' %}hidden{% endif %}>
         <h4 class="hidden">
-            We accept all major cards, PayPal and Google Pay
-            {% comment %} Apple Pay temporarily disabled
-            We accept all major cards, PayPal, Google Pay, and Apple Pay
-            {% endcomment %}
+            We accept all major cards, PayPal, Google Pay, and Apple Pay.
         </h4>
         {% include "patterns/molecules/payments/payment-icons--single.html" %}
     </div>

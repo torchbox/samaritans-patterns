@@ -23,7 +23,9 @@ context:
     accessible_toilets: true
     wheelchair_accessible: false
     accessibility_notes: Test note about accessibility
-    branch_activities:
+    get_branch_activities:
+      exists:
+        True
       all:
         - activity_type: Activity 1
           information: information about activity

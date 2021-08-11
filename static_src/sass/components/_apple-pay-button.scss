@@ -3,22 +3,19 @@
 
     display: block;
     height: 50px;
-    width: 140px;
+    width: 100%;
+
+    @include media-query(tablet-portrait) {
+        width: 140px;
+    }
 
     @supports (-webkit-appearance: -apple-pay-button) {
         -webkit-appearance: -apple-pay-button;
-        -apple-pay-button-type: donate;
+        -apple-pay-button-type: plain;
         -apple-pay-button-style: black;
     }
 
     @supports not (-webkit-appearance: -apple-pay-button) {
-        box-sizing: border-box;
-        padding: 0;
-        border-radius: 5px;
-        background-color: black;
-        background-image: -webkit-named-image(apple-pay-logo-white);
-        background-size: 100% 60%;
-        background-repeat: no-repeat;
-        background-position: 50% 50%;
+        display: none;
     }
 }

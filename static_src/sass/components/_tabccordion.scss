@@ -119,6 +119,84 @@
                 background-color: $tabs-on-white-color;
             }
         }
+
+        &--card-payment {
+            background: $color--white;
+            color: $teal-dark;
+            padding: 11px 17px;
+            border: 2px solid $ocean;
+            font-size: 16px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            justify-content: center;
+
+            @include media-query(tablet-portrait) {
+                margin-bottom: 0;
+                justify-content: flex-start;
+            }
+
+            &::after {
+                left: calc(50% - 12px);
+                border-left: 12px solid transparent;
+                border-right: 12px solid transparent;
+                top: calc(100% + 2px);
+                border-top: 12px solid $color--white;
+            }
+
+            svg {
+                margin-right: 8px;
+                fill: $ocean;
+                transition: fill $transition;
+            }
+
+            #{$hover} {
+                background-color: $ocean;
+
+                svg {
+                    fill: $color--white;
+                }
+            }
+
+            &,
+            .tabccordion--light-bg & {
+                &.is-active {
+                    &,
+                    #{$hover} {
+                        background-color: $ocean;
+                        color: $color--white;
+
+                        &::after {
+                            border-top-color: $ocean;
+                        }
+
+                        svg {
+                            fill: $color--white;
+                        }
+                    }
+                }
+            }
+
+            .is-active & {
+                background-color: $ocean;
+                color: $color--white;
+
+                &::after {
+                    border-top-color: $ocean;
+                }
+
+                svg {
+                    fill: $color--white;
+                }
+            }
+        }
+
+        &--card-payment-content {
+            @include media-query(tablet-portrait) {
+                display: none;
+            }
+        }
     }
 
     &__nav-heading {
@@ -262,6 +340,7 @@
 
         #{$root}--payments & {
             display: none;
+            padding-left: 0;
         }
 
         .is-active--mobile & {

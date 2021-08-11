@@ -2,6 +2,22 @@
     $root: &;
     border-top: $grey-border;
 
+    &--no-border {
+        border-top: 0;
+    }
+
+    &--credit-card {
+        display: block;
+
+        @include media-query(tablet-portrait) {
+            display: none;
+        }
+
+        &.is-active {
+            display: block;
+        }
+    }
+
     &:last-child {
         border-bottom: $grey-border;
     }

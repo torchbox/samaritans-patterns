@@ -1,9 +1,14 @@
 .payments {
     &__braintree-error {
-        margin: 10px 0;
-        padding: 10px;
         background-color: $hot-pink;
         color: $white;
+        padding: 13px 17px;
+        font-size: 16px;
+        font-weight: bold;
+        z-index: 100;
+        position: relative;
+        text-align: center;
+        margin-bottom: 20px;
     }
 
     &__braintree-hosted-field {
@@ -47,14 +52,45 @@
         }
     }
 
-    &__paypal-button {
-        max-width: 150px;
-        min-height: 50px;
-    }
-
     &__message {
         @include media-query(tablet-portrait) {
             flex: 0 1 100%;
+        }
+    }
+
+    &__wrapper {
+        @include media-query(tablet-portrait) {
+            display: none;
+        }
+    }
+
+    &__error-wrapper {
+        padding-top: 30px;
+        display: flex;
+        flex-direction: column;
+
+        @include media-query(tablet-portrait) {
+            margin-bottom: 0;
+            display: block;
+        }
+    }
+
+    &__button {
+        &:not(:last-child) {
+            margin-bottom: 20px;
+        }
+    }
+
+    &__googlepay-button {
+        button {
+            // Only way to beat Google's inline style
+            // sass-lint:disable no-important
+            width: 100% !important;
+
+            @include media-query(tablet-portrait) {
+                width: auto;
+                min-width: 150px;
+            }
         }
     }
 }
@@ -64,6 +100,3 @@
 .braintree-hosted-fields-invalid {
     border: 1px solid $hot-pink;
 }
-
-// .braintree-hosted-fields-valid {
-// }

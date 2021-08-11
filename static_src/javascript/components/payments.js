@@ -1,6 +1,6 @@
 import client from 'braintree-web/client';
 import hostedFields from 'braintree-web/hosted-fields';
-import { create as paypalCreate } from 'braintree-web/paypal-checkout';
+import { create as payPalCreate } from 'braintree-web/paypal-checkout';
 import googlePayment from 'braintree-web/google-payment';
 import ApplePay from 'braintree-web/apple-pay';
 
@@ -33,6 +33,13 @@ function setupPayment() {
         var targetElement = document.getElementById('payments__braintree-errors-' + target);
         targetElement.toggleAttribute('hidden', true);
         targetElement.innerHTML = '';
+    }
+
+    function clearAllErrorMessages(){
+        document.querySelectorAll('.payments__error-wrapper span').forEach(function(error_msg) {
+            error_msg.toggleAttribute('hidden', true);
+            error_msg.innerHTML = '';
+        });
     }
 
     function showFieldError(container) {
@@ -90,6 +97,7 @@ function setupPayment() {
                     });
 
                     submitButton.addEventListener('click', function(e){
+                        clearAllErrorMessages();
                         e.preventDefault();
                         var state = hostedFieldsInstance.getState(),
                             formValid = Object.keys(state.fields).every(function (key) {
@@ -123,7 +131,7 @@ function setupPayment() {
         );
     }
 
-    function initPaypal() {
+    function initPayPal() {
         client.create(
             {authorization: token},
             function (clientErr, clientInstance) {
@@ -133,53 +141,59 @@ function setupPayment() {
                     return;
                 }
 
-                paypalCreate(
+                payPalCreate(
                     {client: clientInstance},
-                    function (paypalCheckoutErr, paypalCheckoutInstance) {
-                        if (paypalCheckoutErr) {
-                            console.error(paypalCheckoutErr);
+                    function (payPalCheckoutErr, payPalCheckoutInstance) {
+                        if (payPalCheckoutErr) {
+                            console.error(payPalCheckoutErr);
                             showErrorMessage('paypal', loadingErrorMsg);
                             return;
                         }
 
                         // Set up PayPal with the checkout.js library
-                        window.paypal.Button.render({
-                            env: braintreeParams.use_sandbox ? 'sandbox' : 'production',
-                            commit: true,
+                        document.querySelectorAll('.payments__paypal-button').forEach(function(item) {
+                            window.paypal.Button.render({
+                                env: braintreeParams.use_sandbox ? 'sandbox' : 'production',
+                                commit: true,
+                                style: {
+                                    color: 'gold',
+                                    shape: 'rect',
+                                    tagline: 'false',
+                                    label: 'paypal',
+                                    size: 'responsive',
+                                    height: 50,
+                                },
 
-                            payment: function () {
-                                return paypalCheckoutInstance.createPayment({
-                                    flow: 'checkout',
-                                    amount: paymentAmount,
-                                    currency: paymentCurrency,
-                                    enableShippingAddress: false,
-                                });
-                            },
+                                payment: function () {
+                                    return payPalCheckoutInstance.createPayment({
+                                        flow: 'checkout',
+                                        amount: paymentAmount,
+                                        currency: paymentCurrency,
+                                        enableShippingAddress: false,
+                                    });
+                                },
 
-                            onAuthorize: function (data) {
-                                return paypalCheckoutInstance.tokenizePayment(data, function (err, payload) {
-                                    if(err) {
-                                        showErrorMessage('paypal', 'There was an error processing your payment. Please try again.');
-                                        return;
-                                    }
+                                onAuthorize: function (data) {
+                                    return payPalCheckoutInstance.tokenizePayment(data, function (err, payload) {
+                                        if(err) {
+                                            showErrorMessage('paypal', 'There was an error processing your payment. Please try again.');
+                                            return;
+                                        }
 
-                                    nonceInput.value = payload.nonce;
-                                    paymentModeInput.value = 'paypal';
-                                    paymentForm.submit();
-                                });
-                            },
+                                        nonceInput.value = payload.nonce;
+                                        paymentModeInput.value = 'paypal';
+                                        paymentForm.submit();
+                                    });
+                                },
 
-                            onCancel: function () {
-                                showErrorMessage('paypal', 'Payment cancelled');
-                            },
+                                onCancel: function () {
+                                    showErrorMessage('paypal', 'PayPal payment cancelled');
+                                },
 
-                            onError: function () {
-                                showErrorMessage('paypal', 'There was an error processing your payment. Please try again.');
-                            }
-                        }, '#payments__paypal-button').then(function () {
-                            // The PayPal button will be rendered in an html element with the id
-                            // `paypal-button`. This function will be called when the PayPal button
-                            // is set up and ready to be used.
+                                onError: function () {
+                                    showErrorMessage('paypal', 'There was an error processing your payment. Please try again.');
+                                }
+                            }, item);
                         });
                     }
                 );
@@ -227,8 +241,10 @@ function setupPayment() {
                                 });
                                 const button = paymentsClient.createButton({
                                     buttonColor: 'black',
-                                    buttonType: 'short',
+                                    buttonType: 'plain',
+                                    buttonSizeMode: 'fill',
                                     onClick: () => {
+                                        clearAllErrorMessages();
                                         var paymentDataRequest = googlePaymentInstance.createPaymentDataRequest({
                                             transactionInfo: {
                                                 currencyCode: paymentCurrency,
@@ -257,7 +273,7 @@ function setupPayment() {
                                             }
                                         ).catch(function (err) {
                                             if(err.statusCode == 'CANCELED') {
-                                                showErrorMessage('googlepay', 'Payment cancelled');
+                                                showErrorMessage('googlepay', 'Google Pay payment cancelled');
                                             }
                                             else {
                                                 // This is a DEVELOPER_ERROR
@@ -266,7 +282,16 @@ function setupPayment() {
                                         });
                                     }
                                 });
-                                document.getElementById('payments__googlepay-button').appendChild(button);
+
+                                if (window.innerWidth > 768) {
+                                    if (!document.querySelector('.payments__googlepay-button-desktop').hasChildNodes()) {
+                                        document.querySelector('.payments__googlepay-button-desktop').appendChild(button);
+                                    }
+                                } else {
+                                    if (!document.querySelector('.payments__googlepay-button-mobile').hasChildNodes()) {
+                                        document.querySelector('.payments__googlepay-button-mobile').appendChild(button);
+                                    }
+                                }
                             }
                         }).catch(function (exc) {
                             // This is a DEVELOPER_ERROR
@@ -279,10 +304,18 @@ function setupPayment() {
         );
     }
 
-    function initApplePay() {   // eslint-disable-line no-unused-vars
-        if (!window.ApplePaySession || !window.ApplePaySession.canMakePayments()) {
-            // Apple pay is not supported, so bail
+    function initApplePay() { 
+        // console.log("window.ApplePaySession", window.ApplePaySession);
+        // if(window.ApplePaySession) {
+        //     console.log("window.ApplePaySession.supportsVersion(3)", window.ApplePaySession.supportsVersion(3));
+        //     console.log("window.ApplePaySession.canMakePayments()", window.ApplePaySession.canMakePayments());
+        // }
+
+        if (!(window.ApplePaySession && window.ApplePaySession.supportsVersion(3) && window.ApplePaySession.canMakePayments())) {
+            // console.log("Apple Pay is NOT supported");
             return;
+        } else {
+            // console.log("Apple Pay is supported");
         }
 
         client.create(
@@ -302,51 +335,72 @@ function setupPayment() {
 
                     var promise = window.ApplePaySession.canMakePaymentsWithActiveCard(applePayInstance.merchantIdentifier);
                     promise.then(function (canMakePaymentsWithActiveCard) {
+                        // console.log("canMakePaymentsWithActiveCard", canMakePaymentsWithActiveCard);
                         if (canMakePaymentsWithActiveCard) {
-                            // Show the tab for Apple Pay
                             Array.from(document.getElementsByClassName('js-apple-pay-tab')).forEach(applePayTab => {
                                 applePayTab.toggleAttribute('hidden', false);
                             });
-                            var payButton = document.getElementById('payments__applepay-button');
-                            payButton.addEventListener('click', function(){
-                                var paymentRequest = applePayInstance.createPaymentRequest({
-                                    total: {
-                                        amount: paymentAmount,
-                                        type: 'final'
-                                    },
 
-                                    requiredBillingContactFields: ['postalAddress']
+                            const applePayButtons = document.querySelectorAll('.js-apple-pay-button');
+                            applePayButtons.forEach(button => {
+                                button.addEventListener('click', function() {
+                                    clearAllErrorMessages();
+
+                                    var paymentRequest = applePayInstance.createPaymentRequest({
+                                        total: {
+                                            amount: paymentAmount,
+                                            type: 'final',
+                                            label: 'Samaritans',
+                                        },
+                                        currencyCode: paymentCurrency,
+                                        requiredBillingContactFields: ['postalAddress']
+                                    });
+
+                                    var session = new window.ApplePaySession(3, paymentRequest);
+
+                                    session.onvalidatemerchant = function (event) {
+                                        // console.log("session.onvalidatemerchant() - start");
+                                        applePayInstance.performValidation({
+                                            validationURL: event.validationURL,
+                                            displayName: 'Samaritans'
+                                        }, function (validationErr, validationData) {
+                                            if (validationErr) {
+                                                console.error(validationErr);
+                                                session.abort();
+                                                showErrorMessage('applepay', loadingErrorMsg);
+                                                return;
+                                            }
+                                            session.completeMerchantValidation(validationData);
+                                        });
+                                        // console.log("session.onvalidatemerchant() - done");
+                                    };
+
+                                    session.onpaymentauthorized = function (event) {
+                                        // console.log("session.onpaymentauthorized() - start");
+                                        applePayInstance.tokenize({
+                                            token: event.payment.token
+                                        }, function (tokenizeErr, payload) {
+                                            if (tokenizeErr) {
+                                                showErrorMessage('applepay', 'There was an error processing your payment. Please try again.');
+                                                session.completePayment(window.ApplePaySession.STATUS_FAILURE);
+                                                return;
+                                            }
+                                            session.completePayment(window.ApplePaySession.STATUS_SUCCESS);
+                                            nonceInput.value = payload.nonce;
+                                            paymentModeInput.value = 'applepay';
+                                            paymentForm.submit();
+                                        });
+                                        // console.log("session.onpaymentauthorized() - done");
+                                    };
+
+                                    session.oncancel = function () {
+                                        // console.log("session.oncancel() - start");
+                                        showErrorMessage('applepay', 'Apple Pay payment cancelled');
+                                        // console.log("session.oncancel() - done");
+                                    };
+
+                                    session.begin();
                                 });
-
-                                var session = new window.ApplePaySession(3, paymentRequest);
-
-                                session.onvalidatemerchant = function (event) {
-                                    applePayInstance.performValidation({
-                                        validationURL: event.validationURL,
-                                        displayName: 'Samaritans'
-                                    }, function (err, merchantSession) {
-                                        if (err) {
-                                            showErrorMessage('applepay', loadingErrorMsg);
-                                        }
-                                        session.completeMerchantValidation(merchantSession);
-                                    });
-                                };
-
-                                session.onpaymentauthorized = function (event) {
-                                    applePayInstance.tokenize({
-                                        token: event.payment.token
-                                    }, function (tokenizeErr, payload) {
-                                        if (tokenizeErr) {
-                                            showErrorMessage('applepay', 'There was an error processing your payment. Please try again.');
-                                            session.completePayment(window.ApplePaySession.STATUS_FAILURE);
-                                            return;
-                                        }
-                                        session.completePayment(window.ApplePaySession.STATUS_SUCCESS);
-                                        nonceInput.value = payload.nonce;
-                                        paymentModeInput.value = 'applepay';
-                                        paymentForm.submit();
-                                    });
-                                };
                             });
                         }
                     });
@@ -355,11 +409,12 @@ function setupPayment() {
         );
     }
 
-    // Initialise both payment modes now so that they're ready when the user picks one
+    // Initialise all payment modes now so that they're ready when the user picks one
     initCard();
-    initPaypal();
+    initPayPal();
     initGooglePay();
-    // initApplePay();
+    window.addEventListener('resize', initGooglePay, false);
+    initApplePay();
 }
 
 export default setupPayment;
