@@ -43,7 +43,7 @@
     {% endif %}
 </div>
 
-{% if not is_pay_in%}
+{% if not is_pay_in %}
     <div class="donate__options">
         {% if allow_monthly_donation and not payment_frequency == 'monthly' %}
             <p class="donate__frequency"><a id="donate__change-frequency" href="#">{% trans "Switch to a monthly donation" %}</a></p>
@@ -140,6 +140,14 @@
                 </div>
 
                 {% render_form_field form.is_corporate %}
+                {% if payment_frequency == 'single' and is_branch_donations %}
+                <div id="donate__form__branch_donation">
+                        {% render_form_field form.is_branch_donation %}
+                    <div id="donate__form__branch_donation_selection" {% if form.is_branch_donation %}hidden{% endif %}>
+                        {% include 'patterns/molecules/forms/form_field.html' with field=form.branch_donation tooltip="We'll use your selection to send this donation directly to your branch." required=True %}
+                    </div>
+                </div>
+                {% endif %}
             </div>
 
             <div class="form__section form__section--full-width">

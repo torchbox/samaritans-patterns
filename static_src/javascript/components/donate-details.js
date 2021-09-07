@@ -27,6 +27,9 @@ function donateDetails() {
         displayedAmountSpan = document.getElementById('donate__amount__display'),
         inMemoryInput = document.getElementById('id_in_memory'),
         inMemoryFields = document.getElementById('donate__form__in_memory_fields'),
+        branchDonationToggle = document.getElementById('id_is_branch_donation'),
+        branchDonationField = document.getElementById('donate__form__branch_donation_selection'),
+        branchDonationGroup = document.getElementById('donate__form__branch_donation'),
         currencyStep = document.getElementById('currency-step'),
         amountField = document.getElementById('amount_form_field'),
         originChoice = document.getElementById('id_payment_origin_choice'),
@@ -105,14 +108,22 @@ function donateDetails() {
     if(changeFrequencyButton) {
         changeFrequencyButton.addEventListener('click', function(e){
             e.preventDefault();
+            // Frequency
             singlePaymentHeading.toggleAttribute('hidden', true);
             monthlyPaymentHeading.toggleAttribute('hidden', false);
             singlePaymentMethods.toggleAttribute('hidden', true);
+            
+            // Currency 
             if (currencyToggleEUR.checked) {
                 monthlyPaymentMethodsEur.toggleAttribute('hidden', false);
             } else {
                 monthlyPaymentMethodsGbp.toggleAttribute('hidden', false);
             }
+            // Remove branch selection
+            // It's not available on monthly
+            branchDonationGroup.remove();
+
+
             frequencyInput.value = 'monthly';
             changeFrequencyButton.toggleAttribute('hidden', true);
             document.getElementById('donate__personal-details-wrapper').querySelector('h1').innerHTML = 'Your monthly donation';
@@ -150,6 +161,15 @@ function donateDetails() {
         inMemoryInput.addEventListener('change', function(e){
             inMemoryFields.toggleAttribute('hidden', !e.target.checked);
         });
+    }
+    if(branchDonationToggle) {
+        branchDonationToggle.addEventListener('change', function(e){
+            branchDonationField.toggleAttribute('hidden', !e.target.checked);
+        });
+        // On failed submission, show the dropdown
+        if(branchDonationToggle.checked){
+            branchDonationField.toggleAttribute('hidden', false);
+        }
     }
     var isAmountHidden = amountInput.getAttribute('type') == 'hidden',
         buttonClickedFlag = ((currencyToggleEUR.checked) ? currencyEurSymbol : currencyGbpSymbol);
