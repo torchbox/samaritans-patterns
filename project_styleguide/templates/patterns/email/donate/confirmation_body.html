@@ -1,53 +1,36 @@
-{% extends "patterns/email/base.html" %}
-{% load i18n wagtailcore_tags humanize %}
-
-{% block preheader %}{% if is_pay_in %}{% trans "Thank you for your payment" %}{% else %}{% trans "Thank you for your donation" %}{% endif %}{% endblock %}
+{% extends "patterns/email/base.txt" %}
+{% load i18n humanize %}
 
 {% block content %}
-    <h2>{% blocktrans with name=first_name %}Dear {{ first_name }},{% endblocktrans %}</h2>
+{% blocktrans with name=first_name %}Thank you, {{ first_name }}{% endblocktrans %}
 
-    <p>
-    {% if payment_frequency == 'single' %}
-        {% if is_pay_in %}
-            {% blocktrans with amount=amount|floatformat:"2"|intcomma %}Thank you for paying in your fundraising of {{ currency_symbol }}{{ amount }}.{% endblocktrans %}
-        {% else %}
-            {% if gift_aid and currency != "EUR" %}
-                {% blocktrans with amount=amount|floatformat:"2"|intcomma amount_plus_gift_aid=amount_plus_gift_aid|floatformat:"2"|intcomma calls_funded=calls_funded|default:"" %}
-                Thank you for your generous donation of {{ currency_symbol }}{{ amount }} with Gift Aid, taking your total donation amount to {{ currency_symbol }}{{ amount_plus_gift_aid }}. Your donation could help Samaritans answer {{ calls_funded }} more potentially life-saving calls for help.
-                {% endblocktrans %}
-            {% else %}
-                {% blocktrans with amount=amount|floatformat:"2"|intcomma calls_funded=calls_funded|default:"" %}
-                Thank you for your generous donation of {{ currency_symbol }}{{ amount }} which could help Samaritans answer {{ calls_funded }} more potentially life-saving calls for help.
-                {% endblocktrans %}
-            {% endif %}
-        {% endif %}
+{% spaceless %}
+{% if payment_frequency == 'single' %}
+    {% if is_pay_in %}
+        {% blocktrans with amount=amount|floatformat:"2"|intcomma %}Thank you for paying in your fundraising of {{ currency_symbol }}{{ amount }}{{ branch_donation }}.{% endblocktrans %}
     {% else %}
         {% if gift_aid and currency != "EUR" %}
-            {% blocktrans with amount=amount|floatformat:"2"|intcomma amount_plus_gift_aid=amount_plus_gift_aid|floatformat:"2"|intcomma calls_funded=calls_funded|default:"" %}
-            Thank you for your generous monthly donation of {{ currency_symbol }}{{ amount }} with Gift Aid, taking your total donation amount to {{ currency_symbol }}{{ amount_plus_gift_aid }}. Your donation could help Samaritans answer {{ calls_funded }} more potentially life-saving calls for help every month.
-            {% endblocktrans %}
+            {% blocktrans with amount=amount|floatformat:"2"|intcomma amount_plus_gift_aid=amount_plus_gift_aid|floatformat:"2"|intcomma calls_funded=calls_funded|default:"" %}Thank you for your generous donation of {{ currency_symbol }}{{ amount }}{{ branch_donation }} with Gift Aid, taking your total donation amount to {{ currency_symbol }}{{ amount_plus_gift_aid }}. Your donation could help Samaritans answer {{ calls_funded }} more potentially life-saving calls for help.{% endblocktrans %}
         {% else %}
-            {% blocktrans with amount=amount|floatformat:"2"|intcomma amount_plus_gift_aid=amount_plus_gift_aid|floatformat:"2"|intcomma calls_funded=calls_funded|default:"" %}
-            Thank you for your generous monthly donation of {{ currency_symbol }}{{ amount }}, which could help Samaritans answer {{ calls_funded }} more potentially life-saving calls for help every month.
-            {% endblocktrans %}
+            {% blocktrans with amount=amount|floatformat:"2"|intcomma calls_funded=calls_funded|default:"" %}Thank you for your generous donation of {{ currency_symbol }}{{ amount }}{{ branch_donation }} which could help Samaritans answer {{ calls_funded }} more potentially life-saving calls for help.{% endblocktrans %}
         {% endif %}
     {% endif %}
-    </p>
-
-    {% if not gift_aid and gift_aid_allowed and currency != "EUR" %}
-        <p>
-            {% blocktrans with amount=amount|floatformat:"2"|intcomma amount_plus_gift_aid=amount_plus_gift_aid|floatformat:"2"|intcomma %}By adding Gift Aid you could increase your donation of {{ currency_symbol }}{{ amount }} to {{ currency_symbol }}{{ amount_plus_gift_aid }} at no extra cost to you, helping to fund even more potentially life-saving calls.{% endblocktrans %}
-        </p>
-        <table style="margin-bottom: 13px;">
-            <tr>
-                <td>
-                    <a href="{{ gift_aid_declaration_url }}?utm_source=samaritans.org&utm_medium=email&utm_campaign=gift_aid_email&utm_content={{ payment_frequency }}-donation" style="display:inline-block; background-color:#0083a9; color:#fff; padding:9px 13px; font-size:17px; font-weight:normal; border-radius: 3px;">{% blocktrans with amount_plus_gift_aid=amount_plus_gift_aid|floatformat:"2"|intcomma %}Increase my gift to {{ currency_symbol }}{{ amount_plus_gift_aid }}{% endblocktrans %}</a>
-                </td>
-            </tr>
-        </table>
+{% else %}
+    {% if gift_aid and currency != "EUR" %}
+        {% blocktrans with amount=amount|floatformat:"2"|intcomma amount_plus_gift_aid=amount_plus_gift_aid|floatformat:"2"|intcomma calls_funded=calls_funded|default:"" %}Thank you for your generous monthly donation of {{ currency_symbol }}{{ amount }}{{ branch_donation }} with Gift Aid, taking your total donation amount to {{ currency_symbol }}{{ amount_plus_gift_aid }}. Your donation could help Samaritans answer {{ calls_funded }} more potentially life-saving calls for help every month.{% endblocktrans %}
+    {% else %}
+        {% blocktrans with amount=amount|floatformat:"2"|intcomma amount_plus_gift_aid=amount_plus_gift_aid|floatformat:"2"|intcomma calls_funded=calls_funded|default:"" %}Thank you for your generous monthly donation of {{ currency_symbol }}{{ amount }}{{ branch_donation }}, which could help Samaritans answer {{ calls_funded }} more potentially life-saving calls for help every month.{% endblocktrans %}
     {% endif %}
+{% endif %}
+{% endspaceless %}
 
-    {{ confirmation_email_content|richtext }}
+{% if not gift_aid and gift_aid_allowed and currency != "EUR" %}
+    {% blocktrans with amount=amount|floatformat:"2"|intcomma amount_plus_gift_aid=amount_plus_gift_aid|floatformat:"2"|intcomma %}By adding Gift Aid you could increase your donation of {{ currency_symbol }}{{ amount }} to {{ currency_symbol }}{{ amount_plus_gift_aid }} at no extra cost to you, helping to fund even more potentially life-saving calls.{% endblocktrans %}
+    {% blocktrans with amount_plus_gift_aid=amount_plus_gift_aid|floatformat:"2"|intcomma %}Increase my gift to {{ currency_symbol }}{{ amount_plus_gift_aid }}{% endblocktrans %}
+    {{ gift_aid_declaration_url }}?utm_source=samaritans.org&utm_medium=email&utm_campaign=gift_aid_email&utm_content={{ payment_frequency }}-donation">
+{% endif %}
 
-    <p>{% blocktrans with ref=transaction_id %}Your transaction reference is: {{ ref }}{% endblocktrans %}</p>
+{{ confirmation_email_content|striptags }}
+
+{% blocktrans with ref=transaction_id %}Your transaction reference is: {{ ref }}{% endblocktrans %}
 {% endblock %}

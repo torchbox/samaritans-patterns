@@ -7,19 +7,19 @@
 {% spaceless %}
 {% if payment_frequency == 'single' %}
     {% if is_pay_in %}
-        {% blocktrans with amount=amount|floatformat:"2"|intcomma %}Thank you for paying in your fundraising of {{ currency_symbol }}{{ amount }}.{% endblocktrans %}
+        {% blocktrans with amount=amount|floatformat:"2"|intcomma %}Thank you for paying in your fundraising of {{ currency_symbol }}{{ amount }}{{ branch_donation }}.{% endblocktrans %}
     {% else %}
         {% if gift_aid and currency != "EUR" %}
-            {% blocktrans with amount=amount|floatformat:"2"|intcomma amount_plus_gift_aid=amount_plus_gift_aid|floatformat:"2"|intcomma calls_funded=calls_funded|default:"" %}Thank you for your generous donation of {{ currency_symbol }}{{ amount }} with Gift Aid, taking your total donation amount to {{ currency_symbol }}{{ amount_plus_gift_aid }}. Your donation could help Samaritans answer {{ calls_funded }} more potentially life-saving calls for help.{% endblocktrans %}
+            {% blocktrans with amount=amount|floatformat:"2"|intcomma amount_plus_gift_aid=amount_plus_gift_aid|floatformat:"2"|intcomma calls_funded=calls_funded|default:"" %}Thank you for your generous donation of {{ currency_symbol }}{{ amount }}{{ branch_donation }} with Gift Aid, taking your total donation amount to {{ currency_symbol }}{{ amount_plus_gift_aid }}. Your donation could help Samaritans answer {{ calls_funded }} more potentially life-saving calls for help.{% endblocktrans %}
         {% else %}
-            {% blocktrans with amount=amount|floatformat:"2"|intcomma calls_funded=calls_funded|default:"" %}Thank you for your generous donation of {{ currency_symbol }}{{ amount }} which could help Samaritans answer {{ calls_funded }} more potentially life-saving calls for help.{% endblocktrans %}
+            {% blocktrans with amount=amount|floatformat:"2"|intcomma calls_funded=calls_funded|default:"" %}Thank you for your generous donation of {{ currency_symbol }}{{ amount }}{{ branch_donation }} which could help Samaritans answer {{ calls_funded }} more potentially life-saving calls for help.{% endblocktrans %}
         {% endif %}
     {% endif %}
 {% else %}
     {% if gift_aid and currency != "EUR" %}
-        {% blocktrans with amount=amount|floatformat:"2"|intcomma amount_plus_gift_aid=amount_plus_gift_aid|floatformat:"2"|intcomma calls_funded=calls_funded|default:"" %}Thank you for your generous monthly donation of {{ currency_symbol }}{{ amount }} with Gift Aid, taking your total donation amount to {{ currency_symbol }}{{ amount_plus_gift_aid }}. Your donation could help Samaritans answer {{ calls_funded }} more potentially life-saving calls for help every month.{% endblocktrans %}
+        {% blocktrans with amount=amount|floatformat:"2"|intcomma amount_plus_gift_aid=amount_plus_gift_aid|floatformat:"2"|intcomma calls_funded=calls_funded|default:"" %}Thank you for your generous monthly donation of {{ currency_symbol }}{{ amount }}{{ branch_donation }} with Gift Aid, taking your total donation amount to {{ currency_symbol }}{{ amount_plus_gift_aid }}. Your donation could help Samaritans answer {{ calls_funded }} more potentially life-saving calls for help every month.{% endblocktrans %}
     {% else %}
-        {% blocktrans with amount=amount|floatformat:"2"|intcomma amount_plus_gift_aid=amount_plus_gift_aid|floatformat:"2"|intcomma calls_funded=calls_funded|default:"" %}Thank you for your generous monthly donation of {{ currency_symbol }}{{ amount }}, which could help Samaritans answer {{ calls_funded }} more potentially life-saving calls for help every month.{% endblocktrans %}
+        {% blocktrans with amount=amount|floatformat:"2"|intcomma amount_plus_gift_aid=amount_plus_gift_aid|floatformat:"2"|intcomma calls_funded=calls_funded|default:"" %}Thank you for your generous monthly donation of {{ currency_symbol }}{{ amount }}{{ branch_donation }}, which could help Samaritans answer {{ calls_funded }} more potentially life-saving calls for help every month.{% endblocktrans %}
     {% endif %}
 {% endif %}
 {% endspaceless %}

@@ -46,7 +46,8 @@
 
     #{$input--string},
     textarea,
-    select {
+    select,
+    &__data-list {
         @include input-style;
     }
 
@@ -54,7 +55,8 @@
         height: 152px;
     }
 
-    select:not([multiple='multiple']) {
+    select:not([multiple='multiple']),
+    &__data-list {
         @include dropdown-select;
         height: 52px;
         width: 100%;
@@ -171,7 +173,8 @@
         }
 
         #{$root}--select &,
-        #{$root}--lazy_select & {
+        #{$root}--lazy_select &,
+        #{$root}--data-list & {
             @include dropdown-wrapper($root);
         }
 

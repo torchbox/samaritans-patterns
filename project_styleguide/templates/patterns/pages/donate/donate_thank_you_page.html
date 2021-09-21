@@ -19,23 +19,23 @@
                 <h4>
                     {% if is_pay_in %}
                         {% if completed_transaction_details.payment_method == 'card' %}
-                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your {{ currency_symbol }}{{ amount }} payment through credit card has been successful.{% endblocktrans %}
+                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your {{ currency_symbol }}{{ amount }} payment{{ branch_donation }}through credit card has been successful.{% endblocktrans %}
                         {% elif completed_transaction_details.payment_method == 'paypal' %}
-                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your {{ currency_symbol }}{{ amount }} payment through PayPal has been successful.{% endblocktrans %}
+                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your {{ currency_symbol }}{{ amount }} payment{{ branch_donation }}through PayPal has been successful.{% endblocktrans %}
                         {% elif completed_transaction_details.payment_method == 'googlepay' %}
-                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your {{ currency_symbol }}{{ amount }} payment through Google Pay has been successful.{% endblocktrans %}
+                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your {{ currency_symbol }}{{ amount }} payment{{ branch_donation }}through Google Pay has been successful.{% endblocktrans %}
                         {% elif completed_transaction_details.payment_method == 'applepay' %}
-                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your {{ currency_symbol }}{{ amount }} payment through Apple Pay has been successful.{% endblocktrans %}
+                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your {{ currency_symbol }}{{ amount }} payment{{ branch_donation }}through Apple Pay has been successful.{% endblocktrans %}
                         {% endif %}
                     {% else %}
                         {% if completed_transaction_details.payment_method == 'card' %}
-                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your {{ currency_symbol }}{{ amount }} donation through credit card has been successful.{% endblocktrans %}
+                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your {{ currency_symbol }}{{ amount }} donation{{ branch_donation }}through credit card has been successful.{% endblocktrans %}
                         {% elif completed_transaction_details.payment_method == 'paypal' %}
-                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your {{ currency_symbol }}{{ amount }} donation through PayPal has been successful.{% endblocktrans %}
+                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your {{ currency_symbol }}{{ amount }} donation{{ branch_donation }}through PayPal has been successful.{% endblocktrans %}
                         {% elif completed_transaction_details.payment_method == 'googlepay' %}
-                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your {{ currency_symbol }}{{ amount }} donation through Google Pay has been successful.{% endblocktrans %}
+                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your {{ currency_symbol }}{{ amount }} donation{{ branch_donation }}through Google Pay has been successful.{% endblocktrans %}
                         {% elif completed_transaction_details.payment_method == 'applepay' %}
-                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your {{ currency_symbol }}{{ amount }} donation through Apple Pay has been successful.{% endblocktrans %}
+                            {% blocktrans with amount=completed_transaction_details.amount|floatformat:"2"|intcomma %}Your {{ currency_symbol }}{{ amount }} donation{{ branch_donation }}through Apple Pay has been successful.{% endblocktrans %}
                         {% endif %}
                     {% endif %}
                 </h4>
