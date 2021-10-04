@@ -7,10 +7,10 @@
     {% include "patterns/molecules/forms/_label.html" %}
     <div class="form-item__tooltip-wrapper">
         <div class="form-item__wrapper">
-        <input class="form-item__data-list" name="{{ field.name }}" list="_{{ field.name }}" id="{{ field.name }}"/>
+        <input autocomplete="off" class="form-item__data-list" name="{{ field.name }}" list="_{{ field.name }}" id="{{ field.name }}"/>
             <datalist id="_{{ field.name }}">
             {% for value, title in field.field.choices %}
-                <option value={{ value }}>
+                <option value="{{ value }}">
             {% endfor %}
             </datalist>
             <div class="form-item__select-icon-wrapper">
