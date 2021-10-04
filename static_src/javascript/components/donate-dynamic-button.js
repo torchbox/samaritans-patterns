@@ -13,20 +13,26 @@ class DonateDynamicButton {
         this.monthlyAmount = window.donateConfig.monthlyAmount;
         this.singleAmount = window.donateConfig.singleAmount;
 
+        // Set donation frequency
+        this.defaultFrequency = 'single';
+
         // Declare vars for monthly and single giving modes
         if (this.monthlyEnabled) {
             this.monthlyInput = document.getElementById('donate_form--monthly').querySelector('input');
             this.monthlyButton = document.getElementById('donate__form__toggle-monthly');
+            // Set donation frequency
+            this.defaultFrequency = document.getElementById('donate__form__toggle-monthly').disabled ? 'monthly' : 'single';
         }
 
         if (this.singleEnabled) {
             this.singleInput = document.getElementById('donate_form--single').querySelector('input');
             this.singleButton = document.getElementById('donate__form__toggle-single');
+            // Set donation frequency
+            this.defaultFrequency = document.getElementById('donate__form__toggle-single').disabled ? 'single' : 'monthly';
+
         }
 
-        // Set donation frequency
-        this.defaultFrequency = this.monthlyEnabled || this.monthlyEnabled && this.singleEnabled ? 'monthly' : 'single';
-
+        
         // Set currency
         this.currency = ((window.donateConfig.isEuro === 'True') ? '€' : '£');
 
@@ -105,7 +111,7 @@ class DonateDynamicButton {
     setInitialButtonState() {
         // When both monthly and single giving are enabled, the
         // monthly toggle is active by default
-        if (this.monthlyEnabled || this.monthlyEnabled && this.singleEnabled) {
+        if (this.state.frequency == 'monthly') {
             this.updateButton(this.toCurrencyValue(this.monthlyAmount));
         } else {
             this.updateButton(this.toCurrencyValue(this.singleAmount));

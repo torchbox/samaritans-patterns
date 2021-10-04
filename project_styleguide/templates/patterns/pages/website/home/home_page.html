@@ -339,7 +339,7 @@
         donateConfig = {
             'monthlyGiving': '{{ page.support_donation_page.allow_monthly_donation }}',
             'singleGiving' : '{{ page.support_donation_page.allow_one_off_donation }}',
-            'monthlyAmount': '{% if is_euro %}{{ monthly_form.amount.value|to_euro:current_site }}{% else %}{{ monthly_form.amount.value }}{% endif %}',
+            'monthlyAmount': '{{ monthly_suggested_amount }}',
             'singleAmount': '{{ single_suggested_amount }}',
             'isEuro' : '{{ is_euro }}'
         };
