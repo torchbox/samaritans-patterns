@@ -1,0 +1,8 @@
+tags:
+  render_form_field:
+    form.has_twitter:
+      raw: |
+        <p>has_twitter field</p>
+    form.twitter_handle:
+      raw: |
+        <p>twitter_handle field</p>

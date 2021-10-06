@@ -1,0 +1,17 @@
+tags:
+  render_form_field:
+    form.company_fundraising:
+      raw: |
+        <p>company_fundraising field</p>
+    form.company_name:
+      raw: |
+        <p>company_name field</p>
+    form.company_role:
+      raw: |
+        <p>company_role field</p>
+    form.company_matched_funding:
+      raw: |
+        <p>company_matched_funding field</p>
+    form.where_heard:
+      raw: |
+        <p>where_heard field</p>

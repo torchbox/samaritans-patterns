@@ -1,0 +1,13 @@
+{% load form_tags %}
+<section class="section">
+    <div class="form-item-wrapper form-item-wrapper--radio-select-inline">
+        {% render_form_field form.is_in_memory %}
+        <div class="js-hide-if-checked"
+             data-target-to-watch-for-showing="#{{ form.is_in_memory.subwidgets.0.id_for_label }}"
+             data-target-to-watch-for-hiding="#{{ form.is_in_memory.subwidgets.1.id_for_label }}"
+        >
+             {% render_form_field form.in_memory_name %}
+             {% render_form_field form.in_memory_relationship %}
+        </div>
+    </div>
+</section>

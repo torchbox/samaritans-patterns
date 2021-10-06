@@ -1,0 +1,8 @@
+tags:
+  render_form_field:
+    form.has_reason:
+      raw: |
+        <p>has_reason field</p>
+    form.reason:
+      raw: |
+        <p>reason field</p>

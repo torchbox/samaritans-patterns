@@ -33,6 +33,26 @@
             {% render_form_field form.fundraising_target %}
         </div>
 
+        {% if page.include_company_fields %}
+            {% include "patterns/molecules/forms/conditional-fields/company-fields.html" %}
+        {% endif %}
+
+        {% if page.include_twitter_fields %}
+            {% include "patterns/molecules/forms/conditional-fields/twitter-fields.html" %}
+        {% endif %}
+
+        {% if page.include_share_story_fields %}
+            {% include "patterns/molecules/forms/conditional-fields/share-story-fields.html" %}
+        {% endif %}
+
+        {% if page.include_memory_fields %}
+            {% include "patterns/molecules/forms/conditional-fields/memory-fields.html" %}
+        {% endif %}
+
+        {% if page.include_reason_fields %}
+            {% include "patterns/molecules/forms/conditional-fields/reason-fields.html" %}
+        {% endif %}
+
         {# Custom fields #}
         {% for field in form %}
             {% if not field.name in hard_coded_fields and not field.name == 'wagtailcaptcha' %}

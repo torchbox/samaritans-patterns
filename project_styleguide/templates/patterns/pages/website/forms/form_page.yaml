@@ -2,6 +2,12 @@ context:
   page:
     title: Some form
     introduction: Some intro
+    include_company_fields: True
+    include_twitter_fields: True
+    include_share_story_fields: True
+    include_memory_fields: True
+    include_reason_fields: True
+    include_gdpr_fields: True
 
 tags:
   pageurl:

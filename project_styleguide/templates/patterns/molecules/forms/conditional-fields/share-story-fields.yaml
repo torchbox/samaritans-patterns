@@ -1,0 +1,8 @@
+tags:
+  render_form_field:
+    form.share_story:
+      raw: |
+        <p>share_story field</p>
+    form.story:
+      raw: |
+        <p>story field</p>

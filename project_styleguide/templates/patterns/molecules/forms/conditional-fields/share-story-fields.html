@@ -1,0 +1,12 @@
+{% load form_tags %}
+<section class="section">
+    <div class="form-item-wrapper form-item-wrapper--radio-select-inline">
+        {% render_form_field form.share_story %}
+        <div class="js-hide-if-checked"
+             data-target-to-watch-for-showing="#{{ form.share_story.subwidgets.0.id_for_label }}"
+             data-target-to-watch-for-hiding="#{{ form.share_story.subwidgets.1.id_for_label }}"
+        >
+             {% render_form_field form.story %}
+        </div>
+    </div>
+</section>

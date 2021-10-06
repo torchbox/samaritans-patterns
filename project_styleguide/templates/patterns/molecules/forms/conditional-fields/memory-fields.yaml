@@ -1,0 +1,11 @@
+tags:
+  render_form_field:
+    form.is_in_memory:
+      raw: |
+        <p>is_in_memory field</p>
+    form.in_memory_name:
+      raw: |
+        <p>in_memory_name field</p>
+    form.in_memory_relationship:
+      raw: |
+        <p>in_memory_relationship field</p>
