@@ -10,7 +10,9 @@
         <div class="payments__complete">
             <div class="payments__message">
                 <h1>{% blocktrans with name=completed_transaction_details.first_name %}Thank you, {{ name }}{% endblocktrans %}</h1>
-                <p>{{ page.thank_you_summary }}</p>
+                 {% if page.thank_you_summary %}
+                    {{ page.thank_you_summary|richtext }}
+                {% endif %}
                 {% include "patterns/pages/donate/partials/social_block.html" with values=social_share_settings %}
             </div>
             <div class="payments__amount-box">

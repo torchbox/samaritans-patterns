@@ -79,9 +79,24 @@
         }
     }
 
+    &__heading-wrapper {
+        display: flex;
+        justify-content: space-between;
+
+        img {
+            align-self: flex-start;
+            max-width: 100px;
+
+            @include media-query(tablet-landscape) {
+                max-width: 100%;
+            }
+        }
+    }
+
     &__heading {
         @include font-size(xl);
         margin-bottom: $gutter-small;
+        margin-right: $gutter;
 
         @include media-query(tablet-landscape) {
             line-height: 44px;

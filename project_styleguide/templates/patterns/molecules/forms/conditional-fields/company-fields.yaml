@@ -12,6 +12,3 @@ tags:
     form.company_matched_funding:
       raw: |
         <p>company_matched_funding field</p>
-    form.where_heard:
-      raw: |
-        <p>where_heard field</p>

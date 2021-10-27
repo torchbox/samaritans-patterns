@@ -20,19 +20,31 @@ class DonateDynamicButton {
         if (this.monthlyEnabled) {
             this.monthlyInput = document.getElementById('donate_form--monthly').querySelector('input');
             this.monthlyButton = document.getElementById('donate__form__toggle-monthly');
+
             // Set donation frequency
-            this.defaultFrequency = document.getElementById('donate__form__toggle-monthly').disabled ? 'monthly' : 'single';
+            if (document.getElementById('donate__form__toggle-monthly')) {
+
+                // Catch cases where editor has set a default donation frequency
+                this.defaultFrequency = document.getElementById('donate__form__toggle-monthly').disabled ? 'monthly' : 'single';
+            } else {
+                this.defaultFrequency = this.monthlyEnabled || this.monthlyEnabled && this.singleEnabled ? 'monthly' : 'single';
+            }
         }
 
         if (this.singleEnabled) {
             this.singleInput = document.getElementById('donate_form--single').querySelector('input');
             this.singleButton = document.getElementById('donate__form__toggle-single');
-            // Set donation frequency
-            this.defaultFrequency = document.getElementById('donate__form__toggle-single').disabled ? 'single' : 'monthly';
 
+            // Set donation frequency
+            if (document.getElementById('donate__form__toggle-single')) {
+
+                // Catch cases where editor has set a default donation frequency
+                this.defaultFrequency = document.getElementById('donate__form__toggle-single').disabled ? 'single' : 'monthly';
+            } else {
+                this.defaultFrequency = this.monthlyEnabled || this.monthlyEnabled && this.singleEnabled ? 'monthly' : 'single';
+            }
         }
 
-        
         // Set currency
         this.currency = ((window.donateConfig.isEuro === 'True') ? '€' : '£');
 

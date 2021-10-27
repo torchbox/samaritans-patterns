@@ -1,7 +1,7 @@
 context:
   page:
     title: Thank you
-    thank_you_summary: This is the thank you summary
+    thank_you_summary: <p>This is the thank you summary</p>
     hero_video_cta: watch how your donation can make a difference
     hero_video: https://www.youtube.com/embed/5qap5aO4i9A
   completed_transaction_details:

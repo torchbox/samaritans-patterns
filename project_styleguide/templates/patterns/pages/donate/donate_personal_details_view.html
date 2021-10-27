@@ -148,8 +148,12 @@
                     </div>
                 </div>
                 {% endif %}
-            </div>
 
+            {# Hide the chooser, if there's no teams #}
+            {% if form.totaliser_team.field.choices %}
+                {% render_form_field form.totaliser_team %}
+            {% endif %}
+            </div>
             <div class="form__section form__section--full-width">
 
                 {% include "patterns/molecules/gdpr/gdpr_marketing_form_fields.html" %}

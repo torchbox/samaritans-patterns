@@ -1,0 +1,181 @@
+.leaderboard {
+    @include media-query(tablet-portrait) {
+        padding: 0 $gutter-small;
+    }
+
+    &__heading {
+        text-align: center;
+    }
+
+    &__sub-heading {
+        @include font-size(m);
+        color: $emerald;
+        font-weight: $weight--bold;
+        text-align: center;
+    }
+}
+
+.leaderboard-table {
+    $root: &;
+    width: 100%;
+    border-spacing: 0;
+    margin: 10px 0 $gutter;
+
+    @include media-query(tablet-portrait) {
+        padding: 0 $gutter-small;
+        margin: 10px 0 $gutter-x-large;
+    }
+
+    &__caption {
+        @include hidden();
+    }
+
+    &__head {
+        @include rem-font-size(10px);
+
+        @include media-query(tablet-portrait) {
+            @include rem-font-size(15px);
+        }
+    }
+
+    &__th {
+        padding-bottom: 15px;
+
+        @include media-query(tablet-portrait) {
+            padding-bottom: 25px;
+        }
+    }
+
+    &__row {
+        @include font-size(xxs);
+        line-height: 18px;
+        background-color: $color--white;
+        transition: background-color, opacity, $transition;
+
+        @include media-query(tablet-portrait) {
+            @include font-size(s);
+            line-height: 21px;
+        }
+
+        &:nth-child(2n+2) {
+            background-color: $off-white;
+        }
+
+        &--leader {
+            background-color: $emerald;
+            color: $color--white;
+            font-weight: $weight--bold;
+
+            #{$root}__icon {
+                &::before {
+                    position: absolute;
+                    top: -17px;
+                    width: 48px;
+                    height: 44px;
+
+                    @include media-query(tablet-portrait) {
+                        top: -23px;
+                        width: 59px;
+                        height: 54px;
+                    }
+                }
+            }
+        }
+
+        &[data-leaderboard-hidden-row] {
+            display: none;
+            opacity: 0;
+        }
+
+        &.display {
+            display: table-row;
+        }
+
+        &.opacity {
+            opacity: 1;
+        }
+    }
+
+    &__icon-outer {
+        width: 10%;
+
+        @include media-query(tablet-portrait) {
+            width: 5%;
+        }
+    }
+
+    &__position {
+        padding: 2px;
+        width: 3%;
+
+        @include media-query(tablet-portrait) {
+            width: 12%;
+            padding: 5px 10px 4px;
+        }
+    }
+
+    &__team {
+        padding: 5px 10px 4px;
+        width: 62%;
+
+        @include media-query(tablet-portrait) {
+            width: 63%;
+        }
+    }
+
+    &__amount {
+        text-align: right;
+        padding: 5px 10px 4px;
+        width: 25%;
+
+        @include media-query(tablet-portrait) {
+            padding-right: 30px;
+            width: 20%;
+        }
+    }
+
+    &__position,
+    &__team {
+        text-align: left;
+    }
+
+    &__icon {
+        position: relative;
+        display: grid;
+        height: 20px;
+
+        &::before {
+            content: '';
+            width: 22px;
+            height: 20px;
+            margin: auto;
+            background-image: url('../images/christmas-star.png');
+            background-size: cover;
+        }
+    }
+}
+
+.leaderboard-toggle {
+    @include font-size(xs);
+    color: $cerulean;
+    text-decoration: underline;
+    margin: 0 auto $gutter;
+    display: block;
+
+    @include media-query(tablet-portrait) {
+        @include font-size(s);
+    }
+}
+
+.leaderboard-divider {
+    border: 0;
+    width: 100%;
+    max-width: 900px;
+    height: 1px;
+    background-color: $grey-divider;
+    margin: $gutter-large auto;
+
+    @include media-query(tablet-portrait) {
+        margin: $gutter-x-large auto;
+    }
+}

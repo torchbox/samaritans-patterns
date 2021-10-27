@@ -6,6 +6,13 @@
 
 <article id="donate__landing">
 
+    {% if page.totaliser %}
+        {# Christmas star #}
+        <div class="wrapper wrapper--large wrapper--padding-for-page donate-hero-icon">
+            <div class="donate-hero-icon__graphic"></div>
+        </div>
+    {% endif %}
+
     <div id="hero" class="hero hero--donate-landing" data-hero-donate-landing>
 
         {% image page.hero_image fill-1900x1250 jpegquality-40 as hero_image %}
@@ -25,11 +32,16 @@
 
             <div class="hero-widget hero-widget--donate-landing{% if page.show_donate_slider %} hero-widget--slider{% endif %}">
                 <div class="hero-widget__corner"></div>
+
                 <div class="hero-widget__inner">
                     <span class="hero-widget__connectors"></span>
                     <span class="hero-widget__connectors--extra"></span>
 
                     <h2 class="hero-widget__heading">{{ page.donate_form_heading }}</h2>
+
+                    {% if page.totaliser %}
+                        {% include "patterns/molecules/totaliser/totaliser.html" with target=page.totaliser.target_amount total=page.totaliser.total_amount %}
+                    {% endif %}
 
                     <p class="hero-widget__summary">{{ page.hero_summary }}</p>
 
@@ -220,6 +232,9 @@
             <section class="section section--donate-landing">
                 {% include "patterns/atoms/corners/corners.html" with size="page" %}
 
+                {# Leaderboard #}
+                {# {% include "patterns/molecules/leaderboard/leaderboard.html" %} #}
+
                 <div class="donate-landing__examples-heading">
                     <h2 class="heading-secondary">{{ page.donation_examples_heading }}</h2>
                 </div>
@@ -338,12 +353,16 @@
         {{ monthly_slider_values|json_script:"monthly_slider_values" }}
     {% endif %}
     <script type="text/javascript">
-        donateConfig = {
+        window.donateConfig = {
             'monthlyGiving': '{{ page.allow_monthly_donation }}',
             'singleGiving' : '{{ page.allow_one_off_donation }}',
             'monthlyAmount': '{{ monthly_suggested_amount }}',
             'singleAmount': '{{ single_suggested_amount }}',
             'isEuro' : '{{ is_euro }}',
+        };
+        window.totaliserConfig = {
+            'targetValue': '{% if is_euro %}{{ page.totaliser.target_amount|floatformat|to_euro:current_site }}{% else %}{{ page.totaliser.target_amount|floatformat }}{% endif %}',
+            'raisedValue': '{% if is_euro %}{{ page.totaliser.total_amount|floatformat|to_euro:current_site }}{% else %}{{ page.totaliser.total_amount|floatformat }}{% endif %}',
         };
     </script>
 {% endblock %}

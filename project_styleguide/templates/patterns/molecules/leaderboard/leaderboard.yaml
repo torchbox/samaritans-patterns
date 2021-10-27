@@ -1,0 +1,79 @@
+context:
+  title: Teams leaderboard
+  total: £446,958
+  teams:
+    - position: 1
+      name: Gibson
+      value: £100,232
+    - position: 2
+      name: Fender
+      value: £98,148
+    - position: 3
+      name: Ibanez
+      value: £90,949
+    - position: 4
+      name: Schecter
+      value: £85,200
+    - position: 5
+      name: PRS
+      value: £82,265
+    - position: 6
+      name: Gretsch
+      value: £75,310
+    - position: 7
+      name: Music Man
+      value: £71,899
+    - position: 8
+      name: ESP
+      value: £64,555
+    - position: 9
+      name: Takamine
+      value: £60,100
+    - position: 10
+      name: Kiesel
+      value: £59,205
+    - position: 11
+      name: Danelectro
+      value: £53,892
+    - position: 12
+      name: Epiphone
+      value: £47,391
+    - position: 13
+      name: Charvel
+      value: £46,920
+    - position: 14
+      name: Rickenbacker
+      value: £44,201
+    - position: 15
+      name: Kramer
+      value: £38,102
+    - position: 16
+      name: Suhr
+      value: £29,111
+    - position: 17
+      name: Vox
+      value: £22,921
+    - position: 18
+      name: Orange
+      value: £21,977
+    - position: 19
+      name: Peavey
+      value: £17,070
+    - position: 20
+      name: Marshall
+      value: £15,491
+    - position: 21
+      name: Laney
+      value: £10,232
+    - position: 22
+      name: Randall
+      value: £5,000
+    - position: 23
+      name: Mesa Boogie
+      value: 0
+    - position: 24
+      name: Line 6
+      value: 0
+    - position: 25
+      name: Behringer
+      value: 0

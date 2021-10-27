@@ -1,0 +1,55 @@
+<div class="leaderboard">
+    <h2 class="heading-secondary leaderboard__heading">{{ title }}</h2>
+    <h3 class="leaderboard__sub-heading">{% if is_euro %}€{% else %}£{% endif %}{{ total }} total raised</h3>
+
+    <table class="leaderboard-table">
+        <caption class="leaderboard-table__caption">{{ title }} table</caption>
+        <thead>
+            <tr class="leaderboard-table__head">
+                <th class="leaderboard-table__th leaderboard-table__icon-outer">&nbsp;</th>
+                <th class="leaderboard-table__th leaderboard-table__position">Position</th>
+                <th class="leaderboard-table__th leaderboard-table__team">Team name</th>
+                <th class="leaderboard-table__th leaderboard-table__amount">Amount raised</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for team in teams %}
+                <tr class="leaderboard-table__row {% if forloop.counter == 1 and team.total_raised %}leaderboard-table__row--leader{% endif %}"
+                    {% if forloop.counter > 10 %} data-leaderboard-hidden-row {% endif %}
+                >
+
+                    {# Snowflake icon #}
+                    <td aria-hidden="true"><div class="leaderboard-table__icon"></div></td>
+
+                    {# Rank #}
+                    <td class="leaderboard-table__position">
+                        {% if team.total_raised %}
+                            {{ team.rank }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+
+                    {# Team name #}
+                    <td class="leaderboard-table__team">{{ team.team_name }}</td>
+
+                    {# Amount raised so far #}
+                    <td class="leaderboard-table__amount">
+                        {% if team.total_raised %}
+                            {% if is_euro %}€{% else %}£{% endif %}{{ team.total_raised }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% if teams|length > 10 %}
+        <button class="leaderboard-toggle" data-leaderboard-toggle>
+            View all {{ teams|length }} teams
+        </button>
+    {% endif %}
+    <hr class="leaderboard-divider">
+</div>

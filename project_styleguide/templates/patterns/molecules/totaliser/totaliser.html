@@ -1,0 +1,33 @@
+<div class="totaliser" data-totaliser>
+    <p class="totaliser__sr-label">{% if is_euro %}&#128;{% else %}&#163;{% endif %}{{ target }} raised towards {% if is_euro %}&#128;{% else %}&#163;{% endif %}{{ total }} target</p>
+    <div class="totaliser__meta" aria-hidden="true">
+        <p class="totaliser__value">
+            <span>{% if is_euro %}&#128;{% else %}&#163;{% endif %}</span>
+            <span data-totaliser-raised>0</span>
+            <span class="totaliser__value-label">raised</span>
+        </p>
+        <p class="totaliser__value">
+            <span>Target: {% if is_euro %}&#128;{% else %}&#163;{% endif %}</span>
+            <span data-totaliser-target></span>
+        </p>
+    </div>
+    <div class="totaliser-bar" aria-hidden="true">
+        <div class="totaliser-bar__bg"></div>
+        <div class="totaliser-bar__progress" data-totaliser-progress></div>
+        <p class="totaliser-bar__percentage" data-totaliser-percentage-position>
+            <span data-totaliser-percentage-value>0</span>
+            <span>%</span>
+        </p>
+
+    </div>
+</div>
+
+{% block extra_js %}
+    {# These static values will ultimately be replaced by BE #}
+    <script type="text/javascript">
+        window.totaliserConfig = {
+            'targetValue': '10000',
+            'raisedValue': '5388',
+        };
+    </script>
+{% endblock %}

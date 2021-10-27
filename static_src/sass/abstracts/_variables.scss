@@ -39,6 +39,7 @@ $grey-on-photo: #d8d8d8;
 $grey-text: #9b9b9b;
 $grey-dark: #717171;
 $darker-grey-text: #717171;
+$grey-divider: #ccc;
 
 // Brand
 $twitter-blue: #00acee;
@@ -113,6 +114,7 @@ $z-elements: (
     related,
     page-behind,
     hero,
+    hero-icon,
     pattern,
     hero-inner,
     page,
@@ -122,11 +124,12 @@ $z-elements: (
     card-foreground,
     tooltip,
     header-menu-overlay,
-    header-menu,
     menu,
+    header-menu,
     sticky-cta,
     page-borders,
     banner,
+    confetti,
     modal,
     cookie-banner
 );

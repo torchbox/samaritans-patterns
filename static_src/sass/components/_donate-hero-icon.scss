@@ -1,0 +1,29 @@
+.donate-hero-icon {
+    position: relative;
+    z-index: z($z-elements, hero-icon);
+
+    &__graphic {
+        position: absolute;
+        top: 0;
+        right: $gutter-small;
+        background-image: url('../images/christmas-star-hanging.png');
+        background-size: cover;
+        width: 115px;
+        height: 125px;
+
+        @include media-query(tablet-portrait) {
+            width: 222px;
+            height: 235px;
+            right: $gutter;
+        }
+
+        @include media-query(desktop) {
+            width: 290px;
+            height: 300px;
+        }
+
+        @include media-query(desktop-medium) {
+            right: -50px;
+        }
+    }
+}

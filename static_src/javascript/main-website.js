@@ -41,6 +41,9 @@ import GenderReveal from './components/gender-reveal';
 import GdprFields from './components/gdpr-fields';
 import { formErrorScroll } from './components/form-error-scroll';
 import DonateDynamicButton from './components/donate-dynamic-button';
+import Totaliser from './components/totaliser/totaliser';
+import { toggleLeaderboard } from './components/leaderboard';
+
 
 document.addEventListener('DOMContentLoaded', function () {
     new CookieWarning();
@@ -197,4 +200,12 @@ document.addEventListener('DOMContentLoaded', function () {
     )) {
         new DonateDynamicButton(donatedynamicbutton);
     }
+
+    for (const totaliser of document.querySelectorAll(
+        Totaliser.selector(),
+    )) {
+        new Totaliser(totaliser);
+    }
+
+    toggleLeaderboard(document.querySelector('[data-leaderboard-toggle]'))
 });

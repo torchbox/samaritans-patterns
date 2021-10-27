@@ -1,0 +1,183 @@
+{% extends "patterns/base_page.html" %}
+{% load donate_tags form_tags i18n icon_tags static wagtailcore_tags wagtailimages_tags to_euro %}
+{% wagtail_site as current_site %}
+
+{% block content %}
+
+<article id="donate__landing">
+
+    {% if page.totaliser %}
+        {# Christmas star #}
+        <div class="wrapper wrapper--large wrapper--padding-for-page donate-hero-icon">
+            <div class="donate-hero-icon__graphic"></div>
+        </div>
+    {% endif %}
+
+    <div id="hero" class="hero hero--donate-landing" data-hero-donate-landing>
+
+        {% image page.hero_image fill-1900x1250 jpegquality-40 as hero_image %}
+        <div class="donate-landing-hero__image--desktop" style="background-image: url({{ hero_image.url}});"></div>
+
+        {% image page.hero_image fill-768x500 jpegquality-40 as hero_image_mobile %}
+        <div class="donate-landing-hero__image--mobile">
+            <img src="{{ hero_image_mobile.url}}" alt="{{ hero_image_mobile.alt }}" />
+        </div>
+
+        <h1 class="donate-landing-hero__title">{{ page.title }}</h1>
+
+        <div class="hero__inner hero__inner--video wrapper wrapper--large wrapper--padding">
+            {% if page.hero_video_cta and page.hero_video %}
+                {% include "patterns/molecules/donate-video-modal/donate-video-modal.html" with value=page back_label="Back to make a donation" %}
+            {% endif %}
+
+            <div class="hero-widget hero-widget--donate-landing">
+                <div class="hero-widget__corner"></div>
+                <div class="hero-widget__inner">
+                    <span class="hero-widget__connectors"></span>
+                    <span class="hero-widget__connectors--extra"></span>
+
+                    <div class="hero-widget__heading-wrapper">
+                        <h2 class="hero-widget__heading">{{ page.donate_form_heading }}</h2>
+                        {% image page.logo_image max-157x93 %}
+                    </div>
+
+                    {% if page.totaliser %}
+                        {% include "patterns/molecules/totaliser/totaliser.html" with target=page.totaliser.target_amount total=page.totaliser.total_amount %}
+                    {% endif %}
+
+                    <p class="hero-widget__summary">{{ page.hero_summary }}</p>
+
+                    <div class="hero-widget__content">
+
+                            <form method="get" action="{% url 'donate:personal_details' %}" id="donate_form--single" {% if page.default_to_monthly %}hidden{% endif %} class="js-donate-usage js-donate-button-wrapper">
+
+                                    {% if is_euro %}
+                                        <div class="donate-landing-hero__form-input donate-landing-hero__form-input">
+                                            <div class="form-item form-item--decimal_field form-item--number_input donate-landing-hero__form-input">
+                                                <label for="{{ one_off_form.amount.id_for_label }}">{{ one_off_form.amount.label }}</label>
+                                                <div class="form-item__wrapper--euro">
+                                                    {{ one_off_form.amount.errors }}
+                                                    <input type="number" id="id_amount" name="amount" value="{{ one_off_form.amount.value|to_euro:current_site }}" min="0.01" step="0.01" required="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% else %}
+                                        <div class="donate-landing-hero__form-input donate-landing-hero__form-input donate-landing-hero__form-input--slider">
+                                            {% render_form_field one_off_form.amount %}
+                                        </div>
+                                    {% endif %}
+
+                                {% render_form_field one_off_form.campaign_id %}
+                                {% render_form_field one_off_form.frequency %}
+                                {% render_form_field one_off_form.currency %}
+                                {% include "patterns/atoms/buttons/button--button.html" with label="Donate today" large=True classes="button--secondary donate-landing-hero__donate-button" %}
+                                {% include "patterns/molecules/payments/payment-icons--single.html" %}
+                            </form>
+                    </div> {# /.hero-widget__content #}
+                </div> {# /.hero-widget__inner #}
+            </div> {# /.hero-widget #}
+        </div>
+    </div> {# /.hero--donate-landing #}
+
+    <div class="wrapper wrapper--donate-landing">
+
+        <div class="wrapper wrapper--large wrapper--padding-for-page">
+
+
+            <section class="section section--donate-landing">
+                {% include "patterns/atoms/corners/corners.html" with size="page" %}
+
+                {# Totaliser leader board #}
+                {% if page.totaliser.sorted_teams %}
+                    {% include 'patterns/molecules/leaderboard/leaderboard.html' with teams=page.totaliser.sorted_teams title="Teams Leaderboard" total=page.totaliser.total_amount is_euro=is_euro %}
+                {% endif %}
+                <div class="donate-landing__examples-heading">
+                    <h2 class="heading-secondary">{{ page.donation_examples_heading }}</h2>
+                </div>
+
+
+                <div class="donate-landing__examples" id="donate__examples--single">
+                    <div class="stat-block stat-block--donate-landing">
+                        {% for example in page.donation_examples_one_off %}
+                            {% include "patterns/molecules/streamfield/blocks/stat_block.html" with value=example.value frequency="single" link=True currency=currency %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                {# Call to donate #}
+                <aside class="js-sticky-cta">
+                    <a href="#hero" class="donate-landing__call-to-donate js-smooth-scroll">
+                        <span class="donate-landing__call-to-donate__sticky-text">{{ page.call_to_donate }}</span>
+                        <span class="donate-landing__call-to-donate__sticky-link">Donate today</span>
+                    </a>
+                </aside>
+
+            </section> {# /.section--donate-landing #}
+
+            <div class="donate-landing__key-info-text donate-landing__key-info-text--alt">
+                <div class="section section--page-padding">
+                    <h2 class="heading-secondary">{{ page.where_money_goes_heading }}</h2>
+                    <div class="donate-landing__text-with-icon">
+                        {% render_icon page.where_money_goes_icon "icon icon--x-large" %}
+                        <p>{{ page.where_money_goes_description }}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div> {# /.wrapper--large #}
+
+    </div> {# /.wrapper--donate-landing #}
+
+    <div class="donate-landing__key-info-text">
+        <div class="section section--page-padding">
+            <div class="wrapper wrapper--small">
+                <h2 class="heading-secondary">{{ page.key_info_heading }}</h2>
+                {% if page.key_info_heading %}
+                    <p>{{ page.key_info_description }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="donate-landing__key-info-cards">
+        <div class="wrapper wrapper--large wrapper--padding-large">
+            <div class="donate-landing__key-info-cards__grid">
+                {% for card in page.key_info_cards %}
+                    <div class="donate-landing__key-info-cards__card">
+                        {{ card.value|richtext }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper wrapper--donate-landing-cta">
+        <div class="wrapper--small">
+            {# Story CTA #}
+            <div class="donate-landing__story-cta">
+                {{ page.story_cta }}
+            </div>
+        </div>
+    </div>
+
+    {% include "patterns/molecules/related-pages/related-pages--large.html" with heading=page.more_info_heading related_pages=page.more_info_links pattern="diamonds" classes="related-large--donate-landing" %}
+
+</article>
+{% endblock content %}
+
+{% block extra_js %}
+    <script src="{% static 'js/donate.js' %}"></script>
+    <script type="text/javascript">
+        window.donateConfig = {
+            'monthlyGiving': 'False',
+            'singleGiving' : '{{ page.allow_one_off_donation }}',
+            'singleAmount': '{{ single_suggested_amount }}',
+            'isEuro' : '{{ is_euro }}',
+        };
+        window.totaliserConfig = {
+            'targetValue': '{% if is_euro %}{{ page.totaliser.target_amount|floatformat|to_euro:current_site }}{% else %}{{ page.totaliser.target_amount|floatformat }}{% endif %}',
+            'raisedValue': '{% if is_euro %}{{ page.totaliser.total_amount|floatformat|to_euro:current_site }}{% else %}{{ page.totaliser.total_amount|floatformat }}{% endif %}',
+        };
+    </script>
+{% endblock %}
+

@@ -31,6 +31,10 @@
 
     &__examples-heading {
         padding: $gutter 0;
+
+        &--flush {
+            padding: 0;
+        }
     }
 
     &__examples {
