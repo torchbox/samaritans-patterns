@@ -174,10 +174,12 @@
             'singleAmount': '{{ single_suggested_amount }}',
             'isEuro' : '{{ is_euro }}',
         };
-        window.totaliserConfig = {
-            'targetValue': '{% if is_euro %}{{ page.totaliser.target_amount|floatformat|to_euro:current_site }}{% else %}{{ page.totaliser.target_amount|floatformat }}{% endif %}',
-            'raisedValue': '{% if is_euro %}{{ page.totaliser.total_amount|floatformat|to_euro:current_site }}{% else %}{{ page.totaliser.total_amount|floatformat }}{% endif %}',
-        };
+        {% if page.totaliser %}
+            window.totaliserConfig = {
+                'targetValue': '{% if is_euro %}{{ page.totaliser.target_amount|floatformat|to_euro:current_site }}{% else %}{{ page.totaliser.target_amount|floatformat }}{% endif %}',
+                'raisedValue': '{% if is_euro %}{{ page.totaliser.total_amount|floatformat|to_euro:current_site }}{% else %}{{ page.totaliser.total_amount|floatformat }}{% endif %}',
+            };
+        {% endif %}
     </script>
 {% endblock %}
 
