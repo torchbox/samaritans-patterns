@@ -14,7 +14,7 @@
         </thead>
         <tbody>
             {% for team in teams %}
-                <tr class="leaderboard-table__row {% if forloop.counter == 1 and team.total_raised %}leaderboard-table__row--leader{% endif %}"
+                <tr class="leaderboard-table__row {% if forloop.counter == 1 and team.total_raised and teams.0.rank != teams.1.rank %}leaderboard-table__row--leader{% endif %}"
                     {% if forloop.counter > 10 %} data-leaderboard-hidden-row {% endif %}
                 >
 
