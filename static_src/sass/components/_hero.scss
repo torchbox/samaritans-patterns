@@ -301,8 +301,12 @@
             }
         }
 
+    }
+
+    &--donate-landing,
+    &--image-background {
         &.stack-on-top {
-            z-index: 14;
+            z-index: z($z-elements, modal);
         }
     }
 
