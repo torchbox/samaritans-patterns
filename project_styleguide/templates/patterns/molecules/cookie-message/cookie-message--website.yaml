@@ -1,0 +1,11 @@
+context:
+  settings:
+    cookie_banner_text: By continuing to use our site, you agree to our use of cookies.
+    cookie_banner_accept_button_text: OK, I agree
+    cookie_banner_more_info_button_text: I'd like to learn more
+    cookie_banner_accepted_text: Thank you!
+
+tags:
+  pageurl:
+    settings.cookie_banner_more_info_link:
+      raw: '#'

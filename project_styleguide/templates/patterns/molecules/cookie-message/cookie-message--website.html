@@ -1,0 +1,33 @@
+{% load wagtailcore_tags %}
+<div id="js-cookie" class="cookie-banner">
+    <div id="js-cookie__message-initial">
+        <div>
+            {{ settings.cookie_banner_text }}
+        </div>
+        <div>
+            <button href="#" id="js-cookie__accept" class="cookie-banner__link cookie-banner__link--button">
+                {{ settings.cookie_banner_accept_button_text }}
+            </button>
+            <a href="{% pageurl settings.cookie_banner_more_info_link %}" class="cookie-banner__link cookie-banner__link--button">
+                {{ settings.cookie_banner_more_info_button_text }}
+            </a>
+        </div>
+    </div>
+    <div id="js-cookie__message-accepted" hidden>
+        <div>
+            {{ settings.cookie_banner_accepted_text }}
+            You can now
+            <button href="#" id="js-cookie__dismiss-link" class="cookie-banner__link cookie-banner__link--button">
+                hide this message
+            </button>
+            or
+            <a href="{% pageurl settings.cookie_banner_more_info_link %}" class="cookie-banner__link">
+                find out more about cookies
+            </a>.
+        </div>
+    </div>
+
+    <button aria-label="Close" href="#" id="cookie-banner__close" class="cookie-banner__close js-cookie__dismiss-button">
+        {% include "patterns/atoms/svg/icons/icon-close.html" with classes="cookie-banner__icon" %}
+    </button>
+</div>

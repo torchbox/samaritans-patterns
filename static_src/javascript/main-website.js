@@ -5,6 +5,7 @@ import './polyfills/remove-polyfill';
 import Autocomplete from './components/autocomplete';
 import MobileMenu from './components/mobile-menu';
 import MobileSubMenu from './components/mobile-sub-menu';
+import CookieWarning from './components/cookie-message--website';
 import Accordion from './components/accordion';
 import Carousel from './components/carousel';
 import GoogleMap from './components/map';
@@ -45,6 +46,8 @@ import { toggleLeaderboard } from './components/leaderboard';
 
 
 document.addEventListener('DOMContentLoaded', function () {
+    new CookieWarning();
+
     for (const accordion of document.querySelectorAll(Accordion.selector())) {
         new Accordion(accordion);
     }
