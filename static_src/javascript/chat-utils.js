@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
         el.style.display = '';
     });
 
+
     var api_url = JSON.parse(
         document.getElementById('webchat_api_url').textContent
     );
@@ -44,6 +45,17 @@ document.addEventListener('DOMContentLoaded', function () {
     var otherCtas = document.querySelectorAll(
         '[data-listening-cta-type="chat"], [data-tabccordion-cta-type="chat"], [data-service-cta-type="chat"]'
     );
+    const getChatUnavailableCtas = () => document.querySelectorAll('[data-cta-type="chat_unavailable"]')
+    const showChatUnavailableCtas = () => {
+        getChatUnavailableCtas().forEach(el => {
+            el.classList.remove(hiddenClass);
+        });
+    }
+    const hideChatUnavailableCtas = () => {
+        getChatUnavailableCtas().forEach(el => {
+            el.classList.add(hiddenClass);
+        });
+    }
 
     const hideOtherCTAs = () => {
         for (var cta of otherCtas) {
@@ -75,6 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (data['active']) {
                     showCustomChatElements();
 
+                    hideChatUnavailableCtas();
                     // Ensure the small is visible and the large is hidden
                     largeCTA && hideListeningCTA(largeCTA);
                     smallCTA && showListeningCTA(smallCTA);
@@ -117,6 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     }
                 } else {
+                    showChatUnavailableCtas();
                     hideCustomChatElements();
                     chatCTA && hideListeningCTA(chatCTA);
                     // hideOtherCTAs();

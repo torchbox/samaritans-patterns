@@ -25,22 +25,32 @@
 
             <div class="listening-cta-grid listening-cta-grid--stretch">
                 {% for block in page.contact_calls_to_action %}
-                    {% if forloop.counter <= 2 %}
-                        {% include_block block %}
-                    {% endif %}
-                    {% comment %}
-                        The webchat CTA will hide itself if the chat service is not
-                        open. In  the case where it is not open, we want to promote the
-                        third (small) element into the second spot as a large element
-                    {% endcomment %}
-                    {% if forloop.counter == 3 %}
-                        {% include_block block with class='card-new--hidden' %}
-                        </div>
-                        <div class="grid grid--3col">
-                        {% include_block block with type='short' %}
-                    {% endif %}
-                    {% if forloop.counter > 3 %}
-                        {% include_block block with type='short' %}
+                        {% if block.value.call_to_action.0.block_type == "chat_unavailable" %}
+                            {% if forloop.counter > 3 %}
+                                {% include_block block with class='card-new--hidden' type='short' %}
+                            {% else %}
+                                {% include_block block with class='card-new--hidden' %}
+                            {% endif %}
+                        {% else %}
+
+                        {% if forloop.counter <= 2 %}
+                            {% include_block block %}
+                        {% endif %}
+                        {% comment %}
+                            The webchat CTA will hide itself if the chat service is not
+                            open. In  the case where it is not open, we want to promote the
+                            third (small) element into the second spot as a large element
+                        {% endcomment %}
+                        {% if forloop.counter == 3 %}
+                            {% include_block block with class='card-new--hidden' %}
+                            </div>
+                            <div class="grid grid--3col">
+                            {% include_block block with type='short' %}
+                        {% endif %}
+                        {% if forloop.counter > 3 %}
+                            {% include_block block with type='short' %}
+                        {% endif %}
+
                     {% endif %}
                 {% endfor %}
             </div>

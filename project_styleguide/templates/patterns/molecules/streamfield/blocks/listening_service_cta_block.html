@@ -26,6 +26,7 @@
             <h2 class="card-new__title">
                 {{ value.title }}
             </h2>
+
             <p class="card-new__text">{{ value.description }}</p>
             {% include_block value.call_to_action with type='hero_cta' %}
             <a class="card-new__link" href="{% pageurl value.link.page %}">{{ value.link.title|default:value.link.page.title }}</a>
