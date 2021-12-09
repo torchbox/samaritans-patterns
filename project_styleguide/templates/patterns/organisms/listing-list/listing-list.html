@@ -2,6 +2,10 @@
     {% for listing in listings %}
         <li {% if listing.featured %}class="listing-item-highlight {% if forloop.counter|divisibleby:2 %}listing-item-highlight--reverse{% endif %}"{% endif %}>
             {% if listing.featured %}
+                {% include "patterns/atoms/svg/icons/icon-star.html" with classes="listing-item-highlight__icon listing-item-highlight__icon--background" aria_hide="true" %}
+                {% include "patterns/atoms/svg/icons/icon-star.html" with classes="listing-item-highlight__icon" aria_hide="true" %}
+            {% endif %}
+            {% if listing.featured %}
                 {% if forloop.counter0|divisibleby:2 %}
                     {% include "patterns/molecules/listing-item/listing-item.html" with value=listing classes="listing-item--website listing-item--highlight" %}
                 {% else %}

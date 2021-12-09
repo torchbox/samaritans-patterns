@@ -1,17 +1,86 @@
 .listing-item-highlight {
+    $root: &;
     @include corner($lime, bottom, right, 150px, 150px, 7px, '&::before', 0);
     position: relative;
     margin: $gutter-xxl 0;
 
     @include media-query(tablet-portrait) {
-        @include corner($lime, bottom, right, 360px, 190px, 7px, '&::before', 0);
+        @include corner(
+            $lime,
+            bottom,
+            right,
+            360px,
+            190px,
+            7px,
+            '&::before',
+            0
+        );
     }
 
     &--reverse {
         @include corner($lime, bottom, left, 150px, 150px, 7px, '&::before', 0);
 
         @include media-query(tablet-portrait) {
-            @include corner($lime, bottom, left, 360px, 190px, 7px, '&::before', 0);
+            @include corner(
+                $lime,
+                bottom,
+                left,
+                360px,
+                190px,
+                7px,
+                '&::before',
+                0
+            );
+        }
+
+        #{$root}__icon {
+            right: 7px;
+            left: auto;
+            transform: translate3d(50%, -50%, 0);
+
+            @include media-query(mob-landscape) {
+                right: 0;
+            }
+
+            &--background {
+                transform: translate3d(50%, -50%, 0) scale(1.2);
+                right: 9px;
+
+                @include media-query(mob-landscape) {
+                    right: 2px;
+                }
+            }
+        }
+    }
+
+    &__icon {
+        width: 42px;
+        height: 32px;
+        fill: $sunflower;
+        position: absolute;
+        top: 0;
+        left: 7px;
+        z-index: z($z-elements, card-foreground);
+        transform: translate3d(-50%, -50%, 0);
+
+        @include media-query(mob-landscape) {
+            left: 0;
+        }
+
+        @include media-query(tablet-portrait) {
+            width: 62px;
+            height: 52px;
+        }
+
+        &--background {
+            fill: $color--white;
+            transform: translate3d(-50%, -50%, 0) scale(1.2);
+            top: 1px;
+            left: 9px;
+
+            @include media-query(mob-landscape) {
+                left: 2px;
+            }
         }
     }
 
