@@ -17,6 +17,12 @@ context:
               listing_title: Chat to a Samaritan
               listing_summary: We can give you advice and information
     hero_image: true
+    key_info_heading: Why we need your support
+    key_info_description: This Christmas will be as busy as ever. Last Christmas Day, Samaritans responded to over 10,000 calls for help
+    key_info_cards:
+        - value: This has been a year like no other. Many people will be feeling even more isolated this Christmas due to social distancing. They may have lost a loved one to coronavirus or feel anxious about the economic crisis
+        - value: For many people struggling to cope, we will be one of the only helplines open when many other services are closed. The only chance they have to share their story and their pain
+        - value: Every call for help we answer could be the one that saves or changes someone’s life. The call that ends with someone finding the strength to carry on. And it begins with you
 
 tags:
   include_block:

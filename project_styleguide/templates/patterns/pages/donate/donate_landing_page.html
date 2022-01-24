@@ -300,28 +300,7 @@
 
     </div> {# /.wrapper--donate-landing #}
 
-    <div class="donate-landing__key-info-text">
-        <div class="section section--page-padding">
-            <div class="wrapper wrapper--small">
-                <h2 class="heading-secondary">{{ page.key_info_heading }}</h2>
-                {% if page.key_info_heading %}
-                    <p>{{ page.key_info_description }}</p>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-
-    <div class="donate-landing__key-info-cards">
-        <div class="wrapper wrapper--large wrapper--padding-large">
-            <div class="donate-landing__key-info-cards__grid">
-                {% for card in page.key_info_cards %}
-                    <div class="donate-landing__key-info-cards__card">
-                        {{ card.value|richtext }}
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
+    {% include "patterns/molecules/info-panel/info-panel.html" with classes="info-panel--standout" value=page %}
 
     {% comment %}
         For cleaner code, we should be able to make this use a different template.

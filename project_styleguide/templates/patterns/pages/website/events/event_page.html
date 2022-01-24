@@ -38,7 +38,9 @@
                 </div>
             {% endif %}
 
-            {% include "patterns/molecules/gallery/gallery.html" with title=page.gallery_title gallery=page.gallery_items|slice:":6" %}
+            {% if page.gallery_items %}
+                {% include "patterns/molecules/gallery/gallery.html" with title=page.gallery_title gallery=page.gallery_items|slice:":6" %}
+            {% endif %}
 
             {% include_block page.body %}
 
@@ -48,7 +50,7 @@
         {% if page.applications_tab_count %}
             <section class="section section--website-event-after apply" id="apply">
                 <div class="apply__column apply__column--small">
-                    <h1 class="apply__heading" id="apply-section">Apply Now</h1>
+                    <h1 class="apply__heading" id="apply-section">{{ page.application_heading }}</h1>
                     {% include "patterns/atoms/svg/colour-icons/icon-color-trainers.html" with classes="apply__icon" %}
                 </div>
                 <div class="apply__column apply__column--large">

@@ -1,0 +1,35 @@
+{% load wagtailcore_tags %}
+
+{% if value.key_info_heading or value.key_info_description or value.key_info_cards %}
+    <div class="info-panel {% if classes %}{{ classes }}{% endif %}">
+
+        {# Heading and description #}
+        {% if value.key_info_heading or value.key_info_description %}
+            <div class="info-panel__text">
+                <div class="wrapper wrapper--large wrapper--padding-large">
+                    {% if value.key_info_heading %}
+                        <h2 class="info-panel__heading heading-secondary">{{ value.key_info_heading }}</h2>
+                    {% endif %}
+                    {% if value.key_info_description %}
+                        <p class="info-panel__description">{{ value.key_info_description }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+
+        {# Key info cards #}
+        {% if value.key_info_cards %}
+            <div class="info-panel__cards">
+                <div class="wrapper wrapper--large wrapper--padding-large">
+                    <div class="info-panel__grid">
+                        {% for card in value.key_info_cards %}
+                            <div class="info-panel__card">
+                                {{ card.value|richtext }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endif %}

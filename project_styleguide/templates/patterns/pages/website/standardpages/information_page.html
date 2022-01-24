@@ -38,6 +38,8 @@
         </div>
     {% endif %}
 
+    {% include "patterns/molecules/info-panel/info-panel.html" with classes="info-panel--overlap" value=page %}
+
     {% include "patterns/molecules/related-pages/related-pages--large.html" with related_pages=page.related_pages.all %}
 
 {% endblock %}

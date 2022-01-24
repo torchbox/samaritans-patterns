@@ -74,8 +74,6 @@
         }
     }
 
-
-
     &__call-to-donate {
         $local-root: &;
 
@@ -129,78 +127,6 @@
             }
         }
     }
-
-    &__key-info-cards {
-        background-color: $teal;
-
-        &__grid {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        &__card {
-            padding: $gutter;
-            background-color: $white;
-            width: 100%;
-            margin-bottom: $gutter;
-
-            &:nth-of-type(2) {
-                @include font-size(s);
-                order: -1;
-            }
-
-            @include media-query(mob-landscape) {
-                width: column-width(2, $gutter);
-
-                &:nth-of-type(2) {
-                    @include font-size(m);
-                    width: 100%;
-                    padding: $gutter-medium;
-                }
-            }
-
-            @include media-query(tablet-portrait) {
-                width: column-width(3, $gutter-medium);
-                padding: $gutter-medium;
-                margin-bottom: 80px; // on cards 1 and 3 to make the height variation
-
-                &:nth-of-type(2) {
-                    width: column-width(3, $gutter-medium);
-                    margin-bottom: 0;
-                    order: 0;
-                }
-            }
-
-            @include media-query(tablet-landscape) {
-                @include font-size(m);
-                width: column-width(3, $gutter-large);
-
-                &:nth-of-type(2) {
-                    @include font-size(xl);
-                    width: column-width(3, $gutter-large);
-                }
-            }
-
-            @include media-query(desktop) {
-                padding: $gutter-large;
-
-                &:nth-of-type(2) {
-                    padding: $gutter-large;
-                }
-            }
-        }
-
-        .rich-text {
-            @include clear-child-margins;
-        }
-
-        b,
-        strong {
-            color: $amethyst;
-        }
-    }
-
     &__text-with-icon {
         align-items: center;
         display: flex;

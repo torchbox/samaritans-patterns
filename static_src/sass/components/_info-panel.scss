@@ -1,0 +1,143 @@
+.info-panel {
+    $root: &;
+    background-color: $ink;
+
+    &--overlap {
+        @include media-query(tablet-landscape) {
+            margin-top: -80px;
+            padding-top: 70px;
+        }
+    }
+
+    &--standout {
+        background-color: $teal;
+
+        #{$root}__grid {
+            justify-content: space-between;
+        }
+
+        #{$root}__text {
+            text-align: center;
+        }
+
+        #{$root}__card {
+            @include font-size(s);
+
+            @include media-query(tablet-portrait) {
+                @include font-size(m);
+                margin-bottom: 80px; // on cards 1 and 3 to make the height variation
+            }
+
+            &:nth-of-type(2) {
+                @include media-query(tablet-portrait) {
+                    @include font-size(xl);
+                    margin-bottom: 0;
+                }
+            }
+        }
+
+        #{$root}__heading {
+            margin: 0 auto $gutter;
+        }
+
+        #{$root}__description {
+            margin: 0 auto;
+        }
+    }
+
+    &__text {
+        @include font-size(m);
+        padding: $gutter-xxl 0;
+        color: $white;
+
+        @include media-query(tablet-portrait) {
+            padding: ($gutter-xxl * 2) 0 $gutter-xxl;
+        }
+
+        &--alt {
+            background-color: transparent;
+            padding-bottom: $gutter-xxl;
+
+            @include media-query(tablet-landscape) {
+                padding-bottom: 0;
+            }
+        }
+
+        + #{$root}__cards {
+            padding-top: 0;
+        }
+    }
+
+    &__grid {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    &__cards {
+        padding: $gutter-xxl 0;
+
+        @include media-query(tablet-portrait) {
+            padding: ($gutter-xxl * 2) 0;
+        }
+
+        .rich-text {
+            @include clear-child-margins;
+        }
+
+        b,
+        strong {
+            color: $amethyst;
+        }
+    }
+
+    &__card {
+        padding: $gutter $gutter $gutter-medium;
+        background-color: $white;
+        width: 100%;
+        margin-bottom: $gutter;
+
+        &:nth-of-type(2) {
+            order: -1;
+        }
+
+        @include media-query(tablet-portrait) {
+            width: column-width(3, $gutter-medium);
+            padding: $gutter-medium $gutter-medium $gutter-large;
+
+            &:not(:last-child) {
+                margin-right: $gutter;
+            }
+
+            &:nth-of-type(2) {
+                width: column-width(3, $gutter-medium);
+                order: 0;
+            }
+        }
+
+        @include media-query(tablet-landscape) {
+            width: column-width(3, $gutter-large);
+
+            &:not(:last-child) {
+                margin-right: $gutter-large;
+            }
+
+            &:nth-of-type(2) {
+                width: column-width(3, $gutter-large);
+            }
+        }
+
+        @include media-query(desktop) {
+            padding: $gutter-large $gutter-large ($gutter-xxl * 2);
+
+            &:nth-of-type(2) {
+                padding: $gutter-large;
+            }
+        }
+    }
+
+    &__heading,
+    &__description {
+        max-width: 850px;
+    }
+}

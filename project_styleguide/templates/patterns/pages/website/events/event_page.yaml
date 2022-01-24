@@ -32,6 +32,7 @@ context:
       call_to_action_description: Samaritans have a limited number of places avaliable to give to our supports. If you would like one of these positions please make an application and we'll get in touch.
       registration_fee: 50
       fundraising_target: 400
+    application_heading : Apply Now
     own_place_journey:
       call_to_action: Call to action
       call_to_action_description: description
