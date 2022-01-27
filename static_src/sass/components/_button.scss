@@ -312,6 +312,26 @@
             font-weight: $weight--bold;
         }
     }
+
+    // the onetrust cookie button class has some styles that need
+    // overriding (the js is tied to the class so we can't remove it)
+    // sass-lint:disable-block no-important
+    &--onetrust-settings {
+        border: 0 !important;
+        color: $white !important;
+        display: flex;
+        justify-content: space-between;
+        padding: 15px 20px !important;
+        font-weight: 700;
+        background: $emerald;
+        transition: background $transition;
+        font-size: 18px !important;
+        margin: 30px 0;
+
+        &:hover {
+            background-color: $teal !important;
+        }
+    }
 }
 
 .button-menu-toggle {
