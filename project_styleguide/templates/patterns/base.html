@@ -11,6 +11,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {% if noindex %}<meta name="robots" content="noindex"> {% endif %}
 
+        <!-- OneTrust Cookies Consent Notice start for samaritans.org -->
+        <script src="https://cdn-apac.onetrust.com/scripttemplates/otSDKStub.js"  type="text/javascript" charset="UTF-8" data-domain-script="0a5bb920-9967-47b7-8e06-2f6741e0a1aa" ></script>
+        <script type="text/javascript">
+        function OptanonWrapper() { }
+        </script>
+        <!-- OneTrust Cookies Consent Notice end for samaritans.org -->
+
         {% block main_css %}
             <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
         {% endblock main_css %}
