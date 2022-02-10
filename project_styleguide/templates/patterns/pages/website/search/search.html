@@ -19,11 +19,11 @@
 
 {% block filters_bar %}
     <form action="{% url 'search' %}" method="get" role="search" class="form search search--page search--website">
-        <label class="hidden" for="search_page">Search</label>
-        <input class="search__input" id="search_page" type="text" placeholder="Search…" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
+        <label class="hidden" for="search_page">Search our website</label>
+        <input class="search__input" id="search_page" type="text" placeholder="Search our website" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
         <button class="search__button search__button--with-text button button--search" type="submit">
             <span class="search__button-text">Search</span>
-            {% include "patterns/atoms/svg/icons/icon-search.html" with classes="icon button__icon search__icon" title="Search" %}
+            {% include "patterns/atoms/svg/icons/icon-search.html" with classes="icon button__icon search__icon" %}
         </button>
     </form>
 {% endblock %}
