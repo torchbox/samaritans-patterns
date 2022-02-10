@@ -6,7 +6,7 @@
         <div class="footer-cta__heading">
             {% render_icon value.icon "footer-cta__icon" %}
             <h2 class="footer-cta__heading-text">
-                <a href="tel:{{ value.phone_number|slugify }}" class="footer-cta__link">
+                <a href="tel:{{ value.phone_number|slugify }}" class="footer-cta__link" aria-label="Call us on 116 123">
                     {{ value.phone_number }}
                 </a>
             </h2>

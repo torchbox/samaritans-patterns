@@ -1,6 +1,6 @@
 {% load icon_tags wagtailcore_tags %}
 
-<a href="{% if value.cta_page %}{% pageurl value.cta_page %}{% else %}{{ value.cta_url }}{% endif %}" class="footer-cta footer-cta--link footer-cta--additional">
+<a href="{% if value.cta_page %}{% pageurl value.cta_page %}{% else %}{{ value.cta_url }}{% endif %}" class="footer-cta footer-cta--link footer-cta--additional" aria-label="{{ value.title }}">
     <div class="footer-cta__inner">
         <div class="footer-cta__heading">
             <h2 class="footer-cta__heading-text">

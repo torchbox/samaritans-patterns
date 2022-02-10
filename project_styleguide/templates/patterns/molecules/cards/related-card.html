@@ -1,4 +1,4 @@
-<a class="card-new {% if classes %}{{ classes }}{% else %}card-new--related{% endif %}" href="{{ value.url }}">
+<a class="card-new {% if classes %}{{ classes }}{% else %}card-new--related{% endif %}" href="{{ value.url }}" aria-label="{% firstof title_override value.listing_title value.title %}">
     <span class="card-new__corner"></span>
     <div class="card-new__inner">
         <div class="card-new__container">
