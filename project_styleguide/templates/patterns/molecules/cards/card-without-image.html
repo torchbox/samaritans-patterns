@@ -1,16 +1,26 @@
-<a class="card card--with-image" href="{% if card.url %}{{ card.url }}{% endif %}">
-<div class="card-new card-new--information {% if card_light %}card-new--light{% endif %}">
-    <span class="card-new__corner"></span>
-    <div class="card-new__inner">
-        <div class="card-new__container">
-            <h2 class="card-new__title">
-                {% firstof card.listing_title card.title %}
-            </h2>
-            {% if card.listing_summary or card.introduction or card.description %}
-                <p class="card-new__text">{% firstof card.listing_summary card.introduction card.description %}</p>
-            {% endif %}
+{% if card.url %}
+    <a class="card card--with-image" href="{{ card.url }}">
+{% else %}
+    <div class="card card--with-image">
+{% endif %}
+
+    <div class="card-new card-new--information {% if card_light %}card-new--light{% endif %}">
+        <span class="card-new__corner"></span>
+        <div class="card-new__inner">
+            <div class="card-new__container">
+                <h2 class="card-new__title">
+                    {% firstof card.listing_title card.title %}
+                </h2>
+                {% if card.listing_summary or card.introduction or card.description %}
+                    <p class="card-new__text">{% firstof card.listing_summary card.introduction card.description %}</p>
+                {% endif %}
+            </div>
         </div>
+        <span class="card-new__connectors"></span>
     </div>
-    <span class="card-new__connectors"></span>
-</div>
-</a>
+
+{% if card.url %}
+    </a>
+{% else %}
+    </div>
+{% endif %}
