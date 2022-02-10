@@ -1,9 +1,7 @@
 .breadcrumb {
     $root: &;
     $breadcrumb-primary--on-dark: $white;
-    $breadcrumb-secondary-on-dark: $meadow;
     $breadcrumb-primary--on-light: $color--default;
-    $breadcrumb-secondary--on-light: $color--primary;
 
     display: none;
 
@@ -31,13 +29,10 @@
         padding: 4px 0;
         font-size: 14px;
         color: $breadcrumb-primary--on-dark;
+        font-weight: $weight--bold;
 
         #{$root}--on-light & {
             color: $breadcrumb-primary--on-light;
-        }
-
-        @include media-query(tablet-portrait) {
-            font-size: 15px;
         }
 
         .hero--landing-page & {
@@ -46,21 +41,17 @@
     }
 
     &__link {
-        @include underline(transparent, $breadcrumb-secondary-on-dark);
+        @include underline(transparent, $breadcrumb-primary--on-dark);
 
         #{$root}--on-light & {
-            @include underline(transparent, $breadcrumb-secondary--on-light);
-        }
-
-        &--home {
-            @include underline(transparent, transparent);
+            @include underline(transparent, $breadcrumb-primary--on-light);
         }
 
         #{$hover} {
-            color: lighten($breadcrumb-secondary-on-dark, 5);
+            color: currentColor;
 
             #{$root}--on-light & {
-                color: $breadcrumb-secondary--on-light;
+                color: currentColor;
             }
         }
     }
@@ -74,7 +65,7 @@
             fill: $breadcrumb-primary--on-dark;
 
             #{$root}--on-light & {
-                fill: $breadcrumb-secondary--on-light;
+                fill: $breadcrumb-primary--on-light;
             }
 
             .hero--landing-page & {
@@ -89,6 +80,7 @@
             vertical-align: sub;
             margin: 0;
             transition: fill $transition;
+            margin-right: 10px;
         }
     }
 

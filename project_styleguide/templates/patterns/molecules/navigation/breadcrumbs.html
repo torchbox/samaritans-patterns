@@ -6,7 +6,7 @@
             <li class="breadcrumb__item">
                 <a class="breadcrumb__link breadcrumb__link--home" href="/" title="Home">
                     {% include "../../atoms/svg/icons/icon-home.html" with classes="breadcrumb__icon breadcrumb__icon--home" %}
-                    <span class="hidden">Home</span>
+                    <span>Home</span>
                 </a>
             </li>
             {% for ancestor_page in page.get_ancestors|slice:"2:" %}
