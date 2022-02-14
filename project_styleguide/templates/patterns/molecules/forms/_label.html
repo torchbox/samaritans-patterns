@@ -6,7 +6,7 @@ form-item__label
 ">
     {{ field.label }}
     {% if field.field.required or required or field.field.label_suffix == '*' %}
-        <span class="form-item__required">*</span>
+        (required)
     {% endif %}
     {% if show_help_text and field.help_text %}
         <p><small>{{ field.help_text }}</small></p>

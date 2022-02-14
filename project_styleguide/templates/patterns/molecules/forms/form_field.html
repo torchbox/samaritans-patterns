@@ -27,7 +27,7 @@ form-item
             <legend class="form-item__legend">
                 {{ field.label }}
                 {% if field.field.required or required %}
-                    <span class="form-item__required">*</span>
+                    (required)
                 {% endif %}
             </legend>
             {% include "patterns/molecules/forms/_field-wrapper.html" %}

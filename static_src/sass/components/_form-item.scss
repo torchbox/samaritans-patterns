@@ -134,7 +134,9 @@
     }
 
     &__required {
-        color: $bubblegum;
+        @include font-size(default);
+        color: $warning;
+        font-weight: $weight--bold;
     }
 
     &__errors {
