@@ -3,7 +3,7 @@
 {% block content %}
     {% include "patterns/molecules/hero/hero.html" with hero_color="emerald" pattern="dots" hero_short="true" %}
 
-    <div class="wrapper wrapper--large wrapper--padding-for-page">
+    <div class="wrapper wrapper--large wrapper--padding-for-page" id="main-content">
         <section class="section section--iframe-page section--overlap">
             <iframe align="left" frameborder="0" height="2200" iframe="" onload="window.parent.scrollTo(0,0)" scrolling="no" src="{{ page.iframe_source_url }}" width="100%"></iframe>
             {% include "patterns/atoms/corners/corners.html" with size="page" %}

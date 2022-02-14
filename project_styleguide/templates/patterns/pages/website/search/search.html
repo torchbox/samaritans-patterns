@@ -6,7 +6,7 @@
 {% block title %}{% if search_query %}Search results for &ldquo;{{ search_query }}&rdquo;{% else %}Search{% endif %}{% endblock %}
 
 {% block hero %}
-    {% include "patterns/molecules/hero/hero.html" with hero_color="emerald" pattern="alt" hero_short=True hero_title="Search" %}
+    {% include "patterns/molecules/hero/hero.html" with hero_color="emerald" pattern="alt" hero_short=True hero_title="Search" hero_title_id="main-content" %}
 {% endblock %}
 
 {% block wrapper_classes %}{% endblock %}

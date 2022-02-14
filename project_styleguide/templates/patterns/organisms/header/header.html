@@ -1,6 +1,7 @@
 {% load cache i18n wagtailcore_tags navigation_tags icon_tags %}
 {% get_current_language as LANGUAGE_CODE %}
 <header>
+    {% include "patterns/molecules/skip-link/skip-link.html" %}
     <div class="header header--website">
         <div class="header__inner wrapper wrapper--large wrapper--padding-for-page">
 

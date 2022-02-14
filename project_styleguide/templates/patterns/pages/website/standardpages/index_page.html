@@ -5,12 +5,11 @@
 
     <article class="wrapper--flex">
     {% if page.show_hero_pattern %}
-        {% include "patterns/molecules/hero/hero.html" with hero_color="emerald" pattern="egg" hero_short="true" %}
+        {% include "patterns/molecules/hero/hero.html" with hero_color="emerald" pattern="egg" hero_short="true" hero_title_id="main-content" %}
     {% else %}
-        {% include "patterns/molecules/hero/hero.html" with hero_color="emerald" pattern="none" hero_short="true" %}
+        {% include "patterns/molecules/hero/hero.html" with hero_color="emerald" pattern="none" hero_short="true" hero_title_id="main-content" %}
     {% endif %}
-        <div class="
-            wrapper wrapper--large wrapper--padding-for-page
+        <div class="wrapper wrapper--large wrapper--padding-for-page
             {% if page.related_pages.all|length == 0 %}
                 wrapper--index-pattern
             {% endif %}

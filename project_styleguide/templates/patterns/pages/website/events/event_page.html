@@ -15,7 +15,7 @@
         <section class="section section--website-event">
             {% include "patterns/molecules/navigation/breadcrumbs.html" with on_light=True %}
 
-            <h1>{{ page.title }}</h1>
+            <h1 id="main-content">{{ page.title }}</h1>
 
             {% include 'patterns/molecules/meta-bar/meta-bar.html' with value=page modifier="event" apply_button=page.applications_tab_count %}
 
