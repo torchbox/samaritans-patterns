@@ -56,7 +56,7 @@
         {# Custom fields #}
         {% for field in form %}
             {% if not field.name in hard_coded_fields and not field.name == 'wagtailcaptcha' %}
-                {% include 'patterns/molecules/forms/form_field.html' with field=field %}
+                {% include 'patterns/molecules/forms/form_field.html' with field=field show_help_text=True %}
             {% endif %}
         {% endfor %}
 

@@ -44,6 +44,12 @@
         }
     }
 
+    &__legend {
+        &--with-help-text {
+            margin-bottom: 0;
+        }
+    }
+
     #{$input--string},
     textarea,
     select,

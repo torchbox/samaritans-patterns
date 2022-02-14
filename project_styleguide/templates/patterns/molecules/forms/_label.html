@@ -9,6 +9,6 @@ form-item__label
         (required)
     {% endif %}
     {% if show_help_text and field.help_text %}
-        <p><small>{{ field.help_text }}</small></p>
+        <p class="form-item__hint">{{ field.help_text }}</p>
     {% endif %}
 </label>

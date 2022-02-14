@@ -18,29 +18,44 @@ form-item
         </div>
     {% endif %}
 
-    {% if not widget_type == "checkbox_input" and not widget_type == "re_captcha" and not widget_type == "split_date_widget" %}
+    {% if not widget_type == "checkbox_input" and not widget_type == "re_captcha" and not widget_type == "date_selector_widget" and not widget_type == "split_date_widget" and not widget_type == "radio_select" %}
         {% include "patterns/molecules/forms/_label.html" %}
     {% endif %}
 
-    {% if widget_type == "split_date_widget" %}
+    {% if widget_type == "date_selector_widget" or widget_type == "split_date_widget" %}
         <fieldset class="form-item__fieldset">
-            <legend class="form-item__legend">
+            <legend class="form-item__legend {% if field.help_text %}form-item__legend--with-help-text{% endif %}">
                 {{ field.label }}
                 {% if field.field.required or required %}
                     (required)
                 {% endif %}
             </legend>
+            {% if field.help_text %}
+                <p class="form-item__hint">{{ field.help_text }}</p>
+            {% endif %}
             {% include "patterns/molecules/forms/_field-wrapper.html" %}
         </fieldset>
     {% elif widget_type == 'radio_select' %}
-        <ul id="{{ field.auto_id }}" class="form-item__list">
-            {% for subfield in field %}
-                <li class="form-item__radio-checkbox">
-                    <input id="{{ subfield.id_for_label }}" type="{{ subfield.data.type }}" name="{{ subfield.data.name }}" value="{{ subfield.data.value }}" {% if subfield.data.attrs.required %}required{% endif %} {% if subfield.data.selected %}checked{% endif %}>
-                    <label for="{{ subfield.id_for_label }}" class="form-item__label">{{ subfield.data.label }}</label>
-                </li>
-            {% endfor %}
-        </ul>
+        <fieldset class="form-item__fieldset">
+            <legend class="form-item__legend {% if field.help_text %}form-item__legend--with-help-text{% endif %}">
+                {{ field.label }}
+                {% if field.field.required or required %}
+                    (required)
+                {% endif %}
+            </legend>
+            {% if field.help_text %}
+                <p class="form-item__hint">{{ field.help_text }}</p>
+            {% endif %}
+            <ul id="{{ field.auto_id }}" class="form-item__list">
+                {% for subfield in field %}
+                    <li class="form-item__radio-checkbox">
+                        <input id="{{ subfield.id_for_label }}" type="{{ subfield.data.type }}" name="{{ subfield.data.name }}" value="{{ subfield.data.value }}" {% if subfield.data.attrs.required %}required{% endif %} {% if subfield.data.selected %}checked{% endif %}>
+                        <label for="{{ subfield.id_for_label }}" class="form-item__label">{{ subfield.data.label }}</label>
+                    </li>
+                {% endfor %}
+            </ul>
+        </fieldset>
+
     {% else %}
         {% include "patterns/molecules/forms/_field-wrapper.html" %}
     {% endif %}
