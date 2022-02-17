@@ -13,6 +13,8 @@
             <p class="intro">{{ page.introduction }}</p>
         {% endif %}
 
+        <p><b>We're currently experiencing issues with our branch locator. Please try again later.</b></p>
+
         <form id="branch-form" role="search" class="form search search--page search--website">
             <label class="hidden" for="branch-input">Search by town or postcode</label>
             <input class="search__input" id="branch-input" type="text" placeholder="Search by town or postcode" name="query" {% if search_query %}value="{{ search_query }}{% endif %}">
