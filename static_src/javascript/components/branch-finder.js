@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function () {
         if (query.length) {
             geocoder.geocode({
                 'address': query + ', Western Europe', // Append to better limit the search area
-                'region': '155', // Western Europe
                 'bounds': {north: 61.058285, east: 1.977539, south: 49.822037, west: -10.942383} // eslint-disable-line no-undef
             }, function (results, status) {
                 if (status === 'OK') {
