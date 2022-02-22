@@ -1,0 +1,30 @@
+.character-countdown {
+    max-width: 430px;
+
+    textarea {
+        @include font-size(s);
+        width: 100%;
+        min-height: 150px;
+        padding: $gutter;
+        color: $teal-dark;
+        border-radius: 5px;
+        background-color: $off-white;
+        border: 2px solid $ocean;
+        resize: vertical;
+    }
+
+    &__count {
+        @include rem-font-size(12px);
+        text-align: right;
+        color: $teal-dark;
+        display: none;
+
+        &--show {
+            display: block;
+        }
+    }
+
+    &__label {
+        @include hidden();
+    }
+}

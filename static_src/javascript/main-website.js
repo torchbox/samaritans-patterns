@@ -36,13 +36,15 @@ import initialiseHideIfCheckedElement from './components/hide-if-checked';
 import TrainingCourse from './components/training-course';
 import { disableFormAfterSubmit } from './components/disable-button-after-submit';
 import './components/referee-details';
-import GenderReveal from './components/gender-reveal';
+import SelfDescribeReveal from './components/self-describe-reveal';
 import GdprFields from './components/gdpr-fields';
 import { formErrorScroll } from './components/form-error-scroll';
 import DonateDynamicButton from './components/donate-dynamic-button';
 import Totaliser from './components/totaliser/totaliser';
+import CharacterCountdown from './components/character-countdown';
 import { toggleLeaderboard } from './components/leaderboard';
-
+import FormFieldExpand from './components/form-field-expand';
+import TermsAndConditions from './components/terms-and-conditions';
 
 document.addEventListener('DOMContentLoaded', function () {
     for (const accordion of document.querySelectorAll(Accordion.selector())) {
@@ -179,10 +181,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    for (const genderreveal of document.querySelectorAll(
-        GenderReveal.selector(),
+    for (const selfDescribeReveal of document.querySelectorAll(
+        SelfDescribeReveal.selector(),
     )) {
-        new GenderReveal(genderreveal);
+        new SelfDescribeReveal(selfDescribeReveal);
     }
     initInterviewPicker();
 
@@ -198,11 +200,27 @@ document.addEventListener('DOMContentLoaded', function () {
         new DonateDynamicButton(donatedynamicbutton);
     }
 
-    for (const totaliser of document.querySelectorAll(
-        Totaliser.selector(),
-    )) {
+    for (const totaliser of document.querySelectorAll(Totaliser.selector())) {
         new Totaliser(totaliser);
     }
 
-    toggleLeaderboard(document.querySelector('[data-leaderboard-toggle]'))
+    for (const characterCountdown of document.querySelectorAll(
+        CharacterCountdown.selector(),
+    )) {
+        new CharacterCountdown(characterCountdown);
+    }
+
+    for (const formFieldExpand of document.querySelectorAll(
+        FormFieldExpand.selector(),
+    )) {
+        new FormFieldExpand(formFieldExpand);
+    }
+
+    for (const tcTcs of document.querySelectorAll(
+        TermsAndConditions.selector(),
+    )) {
+        new TermsAndConditions(tcTcs);
+    }
+
+    toggleLeaderboard(document.querySelector('[data-leaderboard-toggle]'));
 });

@@ -6,6 +6,11 @@
     @include font-size(s);
     margin-bottom: $gutter-medium;
 
+    // When used with character count
+    .character-countdown & {
+        margin-bottom: 0;
+    }
+
     .page-teaser__giftaid-field & {
         margin-bottom: 0;
 
@@ -102,6 +107,12 @@
         @include media-query(mob-landscape) {
             border-radius: 5px;
         }
+
+        &:disabled,
+        &.inactive {
+            border-color: $off-white;
+            background-color: $off-white;
+        }
     }
 
     input[type='radio'] {
@@ -161,6 +172,10 @@
     &__tooltip-wrapper {
         display: flex;
         align-items: center;
+
+        &--spaced {
+            margin-bottom: $gutter-medium;
+        }
     }
 
     &__wrapper {
@@ -254,6 +269,33 @@
 
     &__select-icon {
         @include dropdown-select-icon;
+    }
+
+    // expand a form field
+    &__expand {
+        text-decoration: underline;
+        margin-bottom: $gutter-medium;
+
+        .open & {
+            text-decoration: none;
+        }
+    }
+
+    &__expanded {
+        display: none;
+
+        .open & {
+            display: block;
+        }
+    }
+
+    &__expand-icon {
+        width: 25px;
+        height: 25px;
+        transform: rotate(90deg);
+        fill: #009bc8;
+        pointer-events: none;
+        margin-left: 5px;
     }
 
     &-wrapper {

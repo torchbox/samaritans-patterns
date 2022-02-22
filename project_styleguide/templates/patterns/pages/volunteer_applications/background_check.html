@@ -31,7 +31,7 @@
         {% include "patterns/molecules/accordion/accordion-item.html" with index=0 heading="What's involved in a background check?" description="Samaritans actively promotes equality of opportunity for all and welcomes applications from a wide range of applicants.<br/><br/>Samaritans recognises the contribution that people with criminal records make as employees and volunteers and welcomes applications from those with a criminal record. A criminal record will not normally prevent an applicant from being appointed as a volunteer. <br/><br/>We will judge each case on its merits and not discriminate unfairly against any applicant on the basis of a conviction or criminal record information disclosed to us." classes="accordion--hide-tablet-landscape" %}
     </div>
 
-    <form method="post" data-js-disable-button-after-submit>
+    <form method="post" data-js-disable-button-after-submit novalidate>
         <div class="form__container">
             {% csrf_token %}
             {% render_form_field form.dbs_update_service %}

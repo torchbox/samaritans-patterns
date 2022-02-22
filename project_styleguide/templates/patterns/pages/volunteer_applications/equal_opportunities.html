@@ -17,7 +17,7 @@
 
             {% include "patterns/molecules/volunteer_applications/selected-branch/selected-branch.html" with branch_name=selected_branch.title link_text="Change branch" link_url=branch_selection_url %}
 
-            <form method="post" data-js-disable-button-after-submit>
+            <form method="post" data-js-disable-button-after-submit novalidate>
                 <div class="form__container">
                     {% csrf_token %}
 
@@ -45,24 +45,45 @@
                     <h2>{% trans 'Equal opportunities' %}</h2>
                     <p>
                         {% blocktrans %}
-                        We are committed to increasing diversity among our volunteers.
-                        If you&apos;d like to tell us about your background and
-                        identity then we&apos;ll use this information to track how
-                        we&apos;re doing.
+                        As part of our equity, diversity and inclusion
+                        commitment to be representative of the societies we
+                        serve, we'd like to capture some equal opportunities
+                        information. This information will be used to track
+                        how we're doing and will be held safely and
+                        confidentially.
                         {% endblocktrans %}
                     </p>
                     <p>
-                        {% blocktrans %}
-                        <strong>This is entirely optional and has
-                        no effect on your application.</strong>
-                        {% endblocktrans %}
+                        <strong>
+                            {% blocktrans %}
+                            This section is entirely optional and will have no effect on your application.
+                            {% endblocktrans %}
+                        </strong>
                     </p>
-                    {% render_form_field form.age_range %}
-                    <div class="form-item form-item--gender-reveal" data-gender-reveal>
-                        {% render_form_field form.gender %}
+                    {% render_form_field form.gender %}
+                    <div data-self-describe-section="gender_self_describe">
                         {% render_form_field form.gender_self_describe %}
                     </div>
-                    {% render_form_field form.ethnic_group %}
+                    {% render_form_field form.trans %}
+
+                    {% render_form_field form.sexual_orientation %}
+                    <div data-self-describe-section="sexual_orientation_self_describe">
+                        {% render_form_field form.sexual_orientation_self_describe %}
+                    </div>
+
+                    {% render_form_field form.disability %}
+
+                    {% render_form_field form.speak_welsh %}
+
+                    {% render_form_field form.ethnicity %}
+                    <div data-self-describe-section="ethnicity_self_describe">
+                        {% render_form_field form.ethnicity_self_describe %}
+                    </div>
+
+                    {% render_form_field form.religion_and_belief %}
+                    <div data-self-describe-section="religion_and_belief_self_describe">
+                        {% render_form_field form.religion_and_belief_self_describe %}
+                    </div>
 
                     {% include "patterns/atoms/buttons/button--button.html" with classes="form__submit button" label="Submit" data_attr="data-long-wait" %}
 

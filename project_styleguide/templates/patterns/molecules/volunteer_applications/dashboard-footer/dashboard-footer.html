@@ -1,14 +1,32 @@
-<section class="dashboard-footer">
+{% load i18n helper_tags %}
+{# hide_email option hides the questions and concerns for first pages of the form #}
+
+{% privacy_statement_url as default_privacy_statement_url %}
+
+<footer class="dashboard-footer">
     <div class="dashboard-footer__wrapper">
-        <h2 class="dashboard-footer__heading">Any questions?</h2>
-        <div class="dashboard-footer__content">
-            <div class="dashboard-footer__icon">
-                {% include "patterns/atoms/svg/icons/icon-color-envelope-closed.html" with aria_hide=True %}
-            </div>
-            <div class="dashboard-footer__information">
-                <p class="dashboard-footer__text">If you have any questions or concerns about any part of becoming a Samaritan, please get in touch.</p>
-                <p><a class="dashboard-footer__link" href="mailto:{{ get_in_touch_email }}">Get in touch</a></p>
-            </div>
+        <div class="dashboard-footer__left">
+            {% if not hide_email%}
+                <h2 class="dashboard-footer__heading">Any questions?</h2>
+                <div class="dashboard-footer__content">
+                    <div class="dashboard-footer__icon">
+                        {% include "patterns/atoms/svg/icons/icon-color-envelope-closed.html" with aria_hide=True %}
+                    </div>
+                    <div class="dashboard-footer__information">
+                        <p class="dashboard-footer__text">If you have any questions or concerns about any part of becoming a Samaritan, please get in touch.</p>
+                        <p><a class="dashboard-footer__link" href="mailto:{{ get_in_touch_email }}">Get in touch</a></p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        <div class="dashboard-footer__right">
+            {% if default_privacy_statement_url %}
+                <p>
+                    <a target="__blank" rel="noopener noreferrer" class="dashboard-footer__link" href="{{ default_privacy_statement_url }}">
+                        {% trans "Privacy Statement" %}
+                    </a>
+                </p>
+            {% endif %}
         </div>
     </div>
-</section>
+</footer>

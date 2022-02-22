@@ -33,7 +33,7 @@
         </div>
     {% endif %}
 
-    <form method="post" data-js-disable-button-after-submit>
+    <form method="post" data-js-disable-button-after-submit novalidate>
         <div class="form__container">
             {% csrf_token %}
             {% render_form_field form.first_name %}

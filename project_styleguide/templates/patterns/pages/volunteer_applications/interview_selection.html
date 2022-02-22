@@ -60,7 +60,7 @@
         {% endif %}
 
         {% for object, interview_form in interview_form_dict.items %}
-            <form method="post">
+            <form method="post" novalidate>
                 <div class="form__container">
                     {% csrf_token %}
 

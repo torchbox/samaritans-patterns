@@ -1,6 +1,6 @@
 import 'react-dates/initialize';
 import ReactDOM from 'react-dom';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import ReactModal from 'react-modal';
 import { ModalProvider, useModal } from 'react-modal-hook';
 import PropTypes from 'prop-types';
@@ -115,6 +115,9 @@ const InterviewPicker = ({ interviews, onSubmit, filterTitle }) => {
     const interviewTypeActive = (interviewType) => {
         return !!filters.includes(typesOfInterview[interviewType].key);
     };
+    const availableInterviewTypes = useMemo(() => {
+        return new Set(interviews.map(({ interview_type }) => interview_type))
+    }, [interviews]);
 
     const visibleInterviews = () => {
         if (!selectedDate) {
@@ -165,7 +168,7 @@ const InterviewPicker = ({ interviews, onSubmit, filterTitle }) => {
                     className="form-item-wrapper form-item-wrapper--group interview-filter"
                     id="donate__contact-prefs"
                 >
-                    {Object.values(typesOfInterview).map((interviewType) => [
+                    {Object.values(typesOfInterview).filter(({ name }) => availableInterviewTypes.has(name)).map((interviewType) => [
                         <div
                             className="form-item form-item--boolean_field form-item--checkbox_input"
                             key={interviewType.key}
@@ -220,6 +223,7 @@ const InterviewPicker = ({ interviews, onSubmit, filterTitle }) => {
                             showModal();
                         }}
                         selectedSlot={selectedSlot}
+                        visibleInterviewTypes={availableInterviewTypes}
                     />
                 </div>
                 <div className="u-hide u-block@tablet-landscape" />

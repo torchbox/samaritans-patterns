@@ -45,6 +45,40 @@
         }
     }
 
+    &__callout {
+        margin-bottom: $gutter;
+
+        // normally abosulutely positioned, but aligned using flex
+        // when the next form field needs to clear the callout
+        @include media-query(tablet-landscape) {
+            position: absolute;
+            right: -$gutter-medium;
+            top: 0;
+            margin-bottom: 0;
+        }
+
+        #{$root}__callout-wrapper--clear & {
+            @include media-query(tablet-landscape) {
+                position: relative;
+                right: auto;
+                top: auto;
+                order: 2;
+            }
+        }
+    }
+
+    &__callout-wrapper {
+        position: relative;
+
+        &--clear {
+            // should wrap form field as well as form__callout in this case
+            @include media-query(tablet-landscape) {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+    }
+
     &__errors {
         @include font-size(s); // was font-size(epsilon)
         padding: $gutter;

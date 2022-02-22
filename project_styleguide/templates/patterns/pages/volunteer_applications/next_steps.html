@@ -1,5 +1,5 @@
 {% extends "patterns/pages/volunteer_applications/layouts/volunteer-full-width/volunteer_full_width.html" %}
-{% load humanize form_tags i18n %}
+{% load humanize form_tags i18n helper_tags %}
 
 {% block title %}{% trans 'Next steps' %}{% endblock %}
 
@@ -114,6 +114,38 @@
                     {% endif %}
                 </div>
 
+                <div class="check-block">
+                    <h2>{% trans 'Your volunteer experience' %}</h2>
+                    {% if application.volunteer_agreement_read %}
+
+                        {% include "patterns/molecules/check-block-complete/check-block-complete.html" %}
+                        <p>
+                            {% blocktrans %}
+                            Thanks for reading the volunteer agreement.
+                            {% endblocktrans %}
+                        </p>
+                    {% else %}
+                        <p>
+                            {% blocktrans %}
+                            We value your volunteering with us and will do the
+                            best we can to make your volunteer experience with
+                            us enjoyable and rewarding. The Volunteer
+                            Agreement sets out our offer to you and the
+                            expectations of you as a Samaritans volunteer.
+                            {% endblocktrans %}
+                        </p>
+                        <p>
+                            {% blocktrans %}
+                            Please take the time to read and understand the
+                            Volunteer Agreement as it is important that you
+                            are aware of your responsibilities as a volunteer
+                            with us.
+                            {% endblocktrans %}
+                        </p>
+                        {% include "patterns/atoms/buttons/button.html" with href=volunteer_agreement_url label="Read Volunteer Agreement" classes="check-block__button" %}
+                    {% endif %}
+                </div>
+
                 {% if application.training_course_selection_enabled %}
                     <div class="check-block">
                         <h2>{% trans 'Book your training course' %}</h2>
@@ -148,4 +180,4 @@
 
 {% block footer %}
     {% include "patterns/molecules/volunteer_applications/dashboard-footer/dashboard-footer.html" with get_in_touch_email=application.recruitment_email %}
-    {% endblock %}
+{% endblock %}

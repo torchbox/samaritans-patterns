@@ -1,0 +1,36 @@
+.callout-form {
+    background-color: $page-bg;
+    padding: $gutter;
+    position: relative;
+
+    @include media-query(tablet-landscape) {
+        max-width: 350px;
+        padding: $gutter $gutter-large;
+    }
+
+    &__icon-wrapper {
+        display: none;
+
+        @include media-query(tablet-landscape) {
+            display: block;
+            position: absolute;
+            top: $gutter-small;
+            left: -$gutter-small;
+        }
+    }
+
+    &__icon {
+        width: 48px;
+        height: 39px;
+    }
+
+    &__heading {
+        @include font-size(s);
+        text-transform: uppercase;
+    }
+
+    &__content {
+        @include font-size(xs);
+        margin: 0;
+    }
+}

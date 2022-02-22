@@ -13,7 +13,6 @@
     <div class="js-select-all-checkbox-toggle">
         <div class="form-item-wrapper form-item-wrapper--group" id="donate__contact-prefs">
             {% render_form_field form.prefs_updates %}
-            {% render_form_field form.prefs_fundraising %}
             {% render_form_field form.prefs_volunteering %}
         </div>
         <p><a class="donate__marketing-select-all js-select-all" id="donate__select-all-contact-prefs"
@@ -27,8 +26,8 @@
 
     <div class="form-item-wrapper form-item-wrapper--radio-select-inline">
         {% render_form_field form.prefs_phone %}
-        {% render_form_field form.prefs_email %}
         {% render_form_field form.prefs_sms %}
+        {% render_form_field form.prefs_email %}
     </div>
 
     <small class="donate__marketing-meta donate__marketing-meta--small">

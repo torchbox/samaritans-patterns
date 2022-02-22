@@ -28,16 +28,29 @@
     <div class="branch-list">
         {% for object in object_list %}
             <form class="card card--with-button is-hidden" method="post" data-branch data-branch-id="{{ object.branch_id }}">
-                <div class="card__inner">
+                <div class="card__inner volunteer-branch-services">
                     {% csrf_token %}
                     <h3 class="card__heading">{{ object.title }}</h3>
                     <p class="card__copy">{{ object.street_address_1 }}, {{ object.city }} {{ object.postcode }}</p>
                     {% if object.wheelchair_accessible %}
-                        <p class="card__copy card__copy--meta">Wheelchair accessible</p>
+                        <p class="card__copy card__copy--meta">{% trans 'Wheelchair accessible' %}</p>
+                    {% endif %}
+                    {% if object.accessible_toilets %}
+                        <p class="card__copy card__copy--meta">{% trans 'Accessible toilets' %}</p>
                     {% endif %}
                     {% if object.accessibility_notes %}
                         <p class="card__copy card__copy--meta">{{ object.accessibility_notes }}</p>
                     {% endif %}
+                    {% with activities=object.branch_activities.all %}
+                        {% if activities %}
+                            <h4 class="volunteer-branch-services__heading">{% trans 'Services at this branch' %}</h4>
+                            <ul class="tags">
+                                {% for activity in activities %}
+                                    <li class="tags__tag">{{ activity.activity_type.title }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    {% endwith %}
                     <input type="hidden" name="branch_id" value="{{ object.branch_id }}" />
                 </div>
 

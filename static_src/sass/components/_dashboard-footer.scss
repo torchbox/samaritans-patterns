@@ -7,6 +7,9 @@
     &__wrapper {
         padding: ($gutter + 60) 0 ($gutter * 2);
         margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
 
         @include media-query(tablet-portrait) {
             max-width: $wrapper--wide;
@@ -14,8 +17,19 @@
         }
 
         .template-full-width & {
-            max-width: $wrapper--small;
+            padding-top: (($gutter * 4) + 60);
         }
+    }
+
+    &__left {
+        flex-basis: 50%;
+        max-width: 50%;
+    }
+
+    &__right {
+        flex-basis: 30%;
+        max-width: 30%;
+        text-align: right;
     }
 
     &__heading {

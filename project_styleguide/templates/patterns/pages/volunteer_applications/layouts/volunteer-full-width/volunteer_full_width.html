@@ -1,9 +1,13 @@
 {% extends "patterns/base_page.html" %}
 
+{% load helper_tags i18n %}
+
 {% block header %}
     {% include "patterns/organisms/header/header--volunteer.html" %}
 {% endblock header %}
 
-{% block footer %}{% endblock %}
+{% block footer %}
+    {% include "patterns/molecules/volunteer_applications/dashboard-footer/dashboard-footer.html" with hide_email=True %}
+{% endblock %}
 
 {% block body_class %}template-full-width template-volunteer{% endblock %}

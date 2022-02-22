@@ -1,5 +1,5 @@
 {% extends "patterns/pages/volunteer_applications/layouts/volunteer-full-width/volunteer_full_width.html" %}
-{% load wagtailcore_tags static form_tags i18n loqate_tags %}
+{% load wagtailcore_tags static form_tags i18n loqate_tags helper_tags %}
 
 {% block title %}
     {% include "patterns/atoms/volunteer-page-title/page-title.html" %}
@@ -20,7 +20,7 @@
     <div class="content">
         <div class="content__inner content__inner--overlap-top">
             {% include "patterns/molecules/volunteer_applications/progress-indicator/progress-indicator.html" with current_step=1  %}
-            <form method="post" data-js-disable-button-after-submit>
+            <form method="post" data-js-disable-button-after-submit novalidate>
                 <div class="form__container">
                     {% csrf_token %}
 
@@ -33,12 +33,65 @@
                         </div>
                     {% endif %}
 
-                    <h2>{% trans 'Full name' %}</h2>
+                    <h2>{% trans 'Legal name' %}</h2>
+                    <div class="form-item__tooltip-wrapper form-item__tooltip-wrapper--spaced">
+                        {% blocktrans %}
+                        Please use your legal name, as shown on your passport or driving license
+                        {% endblocktrans %}
+                    </div>
+                    <div class="form__callout-wrapper">
+                        <div class="form__callout">
+                            {% blocktranslate asvar legal_name_heading %}
+                                Why we need your legal name
+                            {% endblocktranslate %}
+                            {% blocktranslate asvar legal_name_explanation %}
+                                To safeguard our volunteers and callers we
+                                have to keep accurate records of who our
+                                volunteers are, and we use legal names for
+                                criminal record checks, where they are
+                                required.
+                            {% endblocktranslate %}
+                            {% include "patterns/molecules/callout-form/callout-form.html" with heading=legal_name_heading content=legal_name_explanation %}
+                        </div>
+                    </div>
+
                     {% render_form_field form.first_name %}
+                    {% render_form_field form.middle_names %}
                     {% render_form_field form.last_name %}
 
+                    <div class="js-form-field-expand">
+                        <button type="button" class="button-link form-item__expand js-form-field-expand-opener">
+                            If you prefer to be known by another name let us know {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="form-item__expand-icon" aria_hide="true" %}
+                        </button>
+                        <div class="js-form-field-expand-opened form-item__expanded" aria-expanded="false">
+                        <h2>{% trans 'What should we call you?' %}</h2>
+                        <p>{% trans 'For example, when we contact you by phone or email' %}</p>
+                        {% render_form_field form.known_as %}
+                        </div>
+                    </div>
+
+                    <h2>{% trans 'Date of birth' %}</h2>
+                    <div class="form__callout-wrapper">
+                        <div class="form__callout">
+                            {% blocktranslate asvar dob_heading %}
+                                Why we need your date of birth
+                            {% endblocktranslate %}
+                            {% blocktranslate asvar dob_explanation %}
+                                Samaritans Central Office and your branch may
+                                use your date of birth to confirm your identity
+                                and to process your criminal record check (if
+                                needed for your role). Your date of birth
+                                should match official documents like your
+                                passport or driving licence and may be
+                                verified against these.
+                            {% endblocktranslate %}
+                            {% include "patterns/molecules/callout-form/callout-form.html" with heading=dob_heading content=dob_explanation %}
+                        </div>
+                    </div>
+                    {% render_form_field form.date_of_birth %}
+
                     <h2>{% trans 'Contact details' %}</h2>
-                    {% render_form_field form.mobile_number %}
+                    {% render_form_field form.contact_number %}
                     {% render_form_field form.email_address %}
 
                     <h2>{% trans 'Your address' %}</h2>
@@ -48,8 +101,28 @@
                     {% render_form_field form.postcode %}
                     {% render_form_field form.country %}
 
-                    <div class="form__section form__section--full-width">
-                        {% include "patterns/molecules/volunteer_applications/gdpr/gdpr_marketing_form_fields.html" %}
+                    <h2>{% trans "Terms and Conditions" %}</h2>
+
+                    <div class="form__callout-wrapper form__callout-wrapper--clear">
+                        {# id matches up with aria-describedby attributed on the checkbox - see forms.py #}
+                        <div class="form__callout" id="tcs-and-cs-explanation">
+                            {% blocktranslate asvar legal_name_heading %}
+                                Reading our terms and conditions
+                            {% endblocktranslate %}
+                            {% blocktranslate asvar legal_name_explanation %}
+                                As a volunteer with us you will get access to
+                                systems and information that are sensitive and
+                                confidential. To protect you we need you to
+                                read and acknowledge our terms and conditions.
+                                <br><br>
+                                The link will open in a new tab. The checkbox
+                                to confirm you have read them will become
+                                active once you have opened them.
+                            {% endblocktranslate %}
+                            {% include "patterns/molecules/callout-form/callout-form.html" with heading=legal_name_heading content=legal_name_explanation|safe %}
+                        </div>
+
+                        {% render_form_field form.terms_and_conditions className="js-terms" %}
                     </div>
 
                     <h2>{% trans 'How we&apos;ll use your details' %}</h2>
@@ -62,12 +135,13 @@
                         benefit.
                         {% endblocktrans %}
                     </p>
+
                     <p>
-                        {% slugurl 'privacy-statement' as privacy_statement_url %}
+                        {% privacy_statement_url  as privacy_statement_url %}
                         {% blocktrans with privacy_statement_url=privacy_statement_url %}
                         We have branches across the United Kingdom, the Republic of
                         Ireland, the Channel Islands and the Isle of Man, some of which
-                        are regsitered as independent charities. To find out more about
+                        are registered as independent charities. To find out more about
                         how we handle and protect your personal information, see our
                         <a
                             target="__blank"
@@ -76,10 +150,17 @@
                         >
                             privacy statement
                         </a>.{% endblocktrans %}
+
                     </p>
 
-                    {% include "patterns/atoms/buttons/button--button.html" with classes='form__submit button' label="Submit" %}
                 </div>
+
+                <div class="form__section form__section--full-width">
+                    {% include "patterns/molecules/volunteer_applications/gdpr/gdpr_marketing_form_fields.html" %}
+                </div>
+
+                {% include "patterns/atoms/buttons/button--button.html" with classes='form__submit button' label="Submit" %}
+
             </form>
         </div>
      </div>

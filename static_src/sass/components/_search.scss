@@ -67,9 +67,13 @@
         }
 
         .template-volunteer & {
-            margin-left: 15px;
+            margin-top: $gutter;
             position: relative;
             width: auto;
+
+            @include media-query(tablet-portrait) {
+                margin-left: $gutter-small;
+            }
         }
 
         &--with-text {
@@ -144,7 +148,7 @@
         max-width: none;
         display: flex;
         height: 55px;
-        }
+    }
 
     &--page {
         max-width: none;

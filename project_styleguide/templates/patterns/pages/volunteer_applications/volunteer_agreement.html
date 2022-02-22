@@ -1,0 +1,36 @@
+{% extends "patterns/pages/volunteer_applications/layouts/volunteer-with-sidebar/volunteer_with_sidebar.html" %}
+{% load static form_tags i18n wagtailcore_tags %}
+
+{% block title %}{% trans 'Volunteer Agreement' %}{% endblock %}
+{% block body_class %}template-with-sidebar template-volunteer{% endblock %}
+
+{% block content %}
+<div class="wrapper wrapper--large">
+
+    {% include "patterns/atoms/volunteer-breadcrumb/breadcrumb.html" with text="Next steps" href=next_steps_url %}
+
+    <h1>{% trans 'Volunteer Agreement' %}</h1>
+
+    {{ content|richtext }}
+
+    <form method="post" data-js-disable-button-after-submit novalidate>
+        <div class="form__container">
+            {% csrf_token %}
+            {% render_form_field form.read_and_understood %}
+
+            <button class="form__submit button" type="submit" data-long-wait>
+                <div class="button__shadow"></div>
+                <div class="button__inner">
+                    {% trans 'Submit' %}
+                    {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="icon button__icon" title="Select" aria_hide=True %}
+                </div>
+            </button>
+        </div>
+    </form>
+
+</div>
+{% endblock %}
+
+{% block footer %}
+    {% include "patterns/molecules/volunteer_applications/dashboard-footer/dashboard-footer.html" with get_in_touch_email=application.recruitment_email %}
+{% endblock %}

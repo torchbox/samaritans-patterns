@@ -15,6 +15,7 @@ const SlotPicker = ({
     onSelect,
     children,
     filters,
+    visibleInterviewTypes,
 }) => {
     if (!date) {
         return <div className="slotpicker slotpicker__empty" />;
@@ -35,7 +36,7 @@ const SlotPicker = ({
             <div className="slotpicker__date">
                 {date.format("Do MMMM")} interview slots
             </div>
-            {Object.values(typesOfInterview).map((interviewType) => {
+            {Object.values(typesOfInterview).filter(({ name }) => visibleInterviewTypes.has(name)).map((interviewType) => {
                 if (!showAllFilters && !filters.includes(interviewType.key)) {
                     return <Fragment key={interviewType.key}></Fragment>;
                 }

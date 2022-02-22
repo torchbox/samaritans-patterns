@@ -101,7 +101,7 @@
                                         {% include "patterns/atoms/buttons/button--button.html" with classes='button--alt' data_attr='data-open-training-modal' type='submit' label='Book this course' %}
                                     </div>
 
-                                    <form method="post" class="form form--training-course" data-js-disable-button-after-submit>
+                                    <form method="post" class="form form--training-course" data-js-disable-button-after-submit novalidate>
                                         {% csrf_token %}
                                         {% render_form_field training_course_form.training_course_id %}
 

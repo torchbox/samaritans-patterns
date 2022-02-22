@@ -35,7 +35,6 @@
     }
 
     #{$hover} {
-
         #{$root},
         .chevron-link {
             &__chevron {
@@ -49,8 +48,11 @@
     }
 
     &--with-button {
+        display: flex;
+        flex-direction: column;
+
         @include media-query(mob-landscape) {
-            display: flex;
+            flex-direction: row;
             align-items: center;
             justify-content: space-between;
         }
@@ -293,7 +295,6 @@
             &__container {
                 background-color: $teal;
             }
-
         }
     }
 

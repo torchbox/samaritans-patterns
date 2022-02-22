@@ -29,7 +29,7 @@
                 {% trans "<b>In order to reschedule, we first need to cancel your existing interview date.</b> As soon as you click the button below your existing interview will be cancelled and you will be able to select a new interview date/time." %}
             </p>
 
-            <form method="post" data-js-disable-button-after-submit>
+            <form method="post" data-js-disable-button-after-submit novalidate>
                 {% csrf_token %}
                 <button class="form__submit button" type="submit">
                     <div class="button__shadow"></div>

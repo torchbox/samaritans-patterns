@@ -35,11 +35,20 @@
 
             <h2>{% trans "About the applicant" %}</h2>
 
-            <form class="form form--alt" method="post" data-js-disable-button-after-submit>
+            <form class="form form--alt" method="post" data-js-disable-button-after-submit novalidate>
                 <div class="form__container">
                     {% csrf_token %}
-                    {% render_form_field_with_help_text form.relationship %}
-                    {% render_form_field_with_help_text form.relationship_length %}
+
+                    <div class="character-countdown" data-character-countdown>
+                        {% render_form_field_with_help_text form.relationship %}
+                        <p class="character-countdown__count" data-character-countdown-value></p>
+                    </div>
+
+                    <div class="character-countdown" data-character-countdown>
+                        {% render_form_field_with_help_text form.relationship_length %}
+                        <p class="character-countdown__count" data-character-countdown-value></p>
+                    </div>
+
                     <p>
                         {% blocktrans %}
                         Samaritans service relies on our volunteers having key qualities. Please let us know how you feel the applicant meets these qualities?

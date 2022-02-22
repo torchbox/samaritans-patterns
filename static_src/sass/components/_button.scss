@@ -332,6 +332,16 @@
             background-color: $teal !important;
         }
     }
+
+    // display block when inside a card - used on volunteering branch finder
+    .card--with-button & {
+        display: block;
+        margin-top: $gutter;
+
+        @include media-query(tablet-portrait) {
+            margin-top: 0;
+        }
+    }
 }
 
 .button-menu-toggle {
@@ -399,4 +409,9 @@
             }
         }
     }
+}
+
+.button-link {
+    @include link;
+    text-align: left;
 }
