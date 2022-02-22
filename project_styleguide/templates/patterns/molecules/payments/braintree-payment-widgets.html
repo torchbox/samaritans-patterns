@@ -33,8 +33,9 @@
         </ul>
     </nav>
 
+    {% if form.non_field_errors %}<div id="payments__braintree-errors-form" class="payments__braintree-error">{{ form.non_field_errors }}</div>{% endif %}
+
     <div class="payments__error-wrapper">
-        <span id="payments__braintree-errors-card" class="payments__braintree-error" hidden></span>
         <span id="payments__braintree-errors-paypal" class="payments__braintree-error" hidden></span>
         <span id="payments__braintree-errors-googlepay" class="payments__braintree-error" hidden></span>
         <span id="payments__braintree-errors-applepay" class="payments__braintree-error" hidden></span>
@@ -50,6 +51,8 @@
         </a>
 
         <div class="accordion__content tabccordion__content">
+
+            <div id="payments__braintree-errors-card" hidden></div>
 
             <div class="form-item">
                 <label for="card-number">Card number</label>
@@ -73,9 +76,9 @@
                 <div class="button__shadow"></div>
                 <div class="button__inner">
                     {% if is_pay_in or is_event_payment %}
-                        {% blocktrans %}Pay {{ currency_symbol }}{{ amount }}{% endblocktrans %}
+                        {% blocktrans with amount=payment_amount|floatformat:"2"|intcomma %}Pay {{ currency_symbol }}{{ amount }}{% endblocktrans %}
                     {% else %}
-                        {% blocktrans %}Donate {{ currency_symbol }}{{ amount }} today{% endblocktrans %}
+                        {% blocktrans with amount=payment_amount|floatformat:"2"|intcomma %}Donate {{ currency_symbol }}{{ amount }} today{% endblocktrans %}
                     {% endif %}
                     {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="icon button__icon" %}
                 </div>
@@ -95,5 +98,4 @@
     </div>
 </div>
 
-{{ braintree_settings|json_script:"payments__braintree-settings" }}
-{{ personal_details|json_script:"payments__personal-details" }}
+{{ braintree_params|json_script:"payments__braintree-params" }}

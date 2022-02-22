@@ -1,59 +1,41 @@
-const braintree = require('braintree-web');
+import client from 'braintree-web/client';
+import hostedFields from 'braintree-web/hosted-fields';
+import { create as payPalCreate } from 'braintree-web/paypal-checkout';
+import googlePayment from 'braintree-web/google-payment';
+import ApplePay from 'braintree-web/apple-pay';
 
 function setupPayment() {
-    if(!document.getElementById('payments__payment-wrapper')) {
+
+    if(!document.getElementById('payments__payment-wrapper')){
         // We're not on the payment page.
         return;
     }
 
-    const paymentForm = document.getElementById('payments__braintree-form');
-    const nonceInput = document.getElementById('id_braintree_nonce');
-    const paymentModeInput = document.getElementById('id_payment_mode');
-    const submitButton = document.getElementById('payments__payment-submit');
-    const paymentCurrency = paymentForm.getAttribute('currency');
+    var paymentForm = document.getElementById('payments__braintree-form'),
+        nonceInput = document.getElementById('id_braintree_nonce'),
+        paymentModeInput = document.getElementById('id_payment_mode'),
+        submitButton = document.getElementById('payments__payment-submit'),
+        cardInputDiv = document.getElementById('payments__braintree-card'),
+        token = paymentForm.getAttribute('data-token'),
+        loadingErrorMsg = 'There was an error loading this payment option. Please reload the page or try again later.',
+        paymentAmount = paymentForm.getAttribute('data-amount'),
+        paymentCurrency = paymentForm.getAttribute('currency');
 
-    const braintreeSettings = JSON.parse(document.getElementById('payments__braintree-settings').textContent);
-    const personalDetails = JSON.parse(document.getElementById('payments__personal-details').textContent);
+    var braintreeParams = JSON.parse(document.getElementById('payments__braintree-params').textContent);
 
-    function getPaymentMethodLabel(payment_method) {
-        let payment_method_label;
-
-        switch (payment_method) {
-            case 'applepay':
-                payment_method_label = 'Apple Pay';
-                break;
-
-            case 'googlepay':
-                payment_method_label = 'Google Pay';
-                break;
-
-            case 'card':
-                payment_method_label = 'card';
-                break;
-
-            case 'paypal':
-                payment_method_label = 'PayPal';
-                break;
-
-        }
-
-        return payment_method_label;
-    }
-
-    function showPaymentErrorMsg(payment_method) {
-        return showErrorMessage(
-            payment_method,
-            `There was an error processing your ${getPaymentMethodLabel(payment_method)} payment - please check your details and try again.`
-        );
-    }
-
-    function showErrorMessage(target, msg) {
-        const targetElement = document.getElementById('payments__braintree-errors-' + target);
+    function showErrorMessage(target, msg){
+        var targetElement = document.getElementById('payments__braintree-errors-' + target);
         targetElement.toggleAttribute('hidden', false);
         targetElement.innerHTML = msg;
     }
 
-    function clearAllErrorMessages() {
+    function clearErrorMessage(target){
+        var targetElement = document.getElementById('payments__braintree-errors-' + target);
+        targetElement.toggleAttribute('hidden', true);
+        targetElement.innerHTML = '';
+    }
+
+    function clearAllErrorMessages(){
         document.querySelectorAll('.payments__error-wrapper span').forEach(function(error_msg) {
             error_msg.toggleAttribute('hidden', true);
             error_msg.innerHTML = '';
@@ -69,13 +51,18 @@ function setupPayment() {
     }
 
     function initCard() {
-        let hf;
-        let threeDS;
+        client.create(
+            {authorization: token},
+            function (clientErr, clientInstance) {
+                if (clientErr) {
+                    showErrorMessage('card', loadingErrorMsg);
+                    cardInputDiv.toggleAttribute('hidden', true);
+                    return;
+                }
 
-        function setupComponents(clientToken) {
-            return Promise.all([
-                braintree.hostedFields.create({
-                    authorization: clientToken,
+                var options = {
+                    client: clientInstance,
+                    styles: {},
                     fields: {
                         number: {
                             selector: '#card-number',
@@ -87,114 +74,86 @@ function setupPayment() {
                             selector: '#expiration-date',
                         }
                     }
-                }),
-                braintree.threeDSecure.create({
-                    authorization: clientToken,
-                    version: 2
-                })
-            ]);
-        }
+                };
 
-        function enablePayNow() {
-            if(submitButton.dataset.originalText) {
-                submitButton.querySelector('.button__inner').innerHTML = submitButton.dataset.originalText;
-            }
-
-            submitButton.removeAttribute('disabled');
-        }
-
-        submitButton.addEventListener('click', function(event) {
-            event.preventDefault();
-            clearAllErrorMessages();
-
-            submitButton.dataset.originalText = this.querySelector('.button__inner').innerHTML;
-            submitButton.querySelector('.button__inner').innerHTML = 'Processing…';
-
-            submitButton.setAttribute('disabled', 'disabled');
-
-            hf.tokenize().then(function(payload) {
-                return threeDS.verifyCard({
-                    onLookupComplete: function (data, next) {
-                        next();
-                    },
-                    amount: personalDetails.amount,
-                    nonce: payload.nonce,
-                    bin: payload.details.bin,
-                    email: personalDetails.email,
-                    billingAddress: {
-                        givenName: personalDetails.first_name, // ASCII-printable characters required, else will throw a validation error
-                        surname: personalDetails.last_name, // ASCII-printable characters required, else will throw a validation error
-                        phoneNumber: personalDetails.phone_number,
-                        streetAddress: personalDetails.address_line_1,
-                        extendedAddress: personalDetails.address_line_2,
-                        locality: personalDetails.town,
-                        // region: '',
-                        postalCode: personalDetails.post_code,
-                        countryCodeAlpha2: personalDetails.country
+                hostedFields.create(options, function (hostedFieldsErr, hostedFieldsInstance) {
+                    if (hostedFieldsErr) {
+                        console.error(hostedFieldsErr);
+                        showErrorMessage('card', loadingErrorMsg);
+                        cardInputDiv.toggleAttribute('hidden', true);
+                        return;
                     }
+
+                    submitButton.removeAttribute('disabled');
+
+                    hostedFieldsInstance.on('validityChange', function(event) {
+                        var field = event.fields[event.emittedBy];
+
+                        if (field.isValid || field.isPotentiallyValid) {
+                            clearFieldError(field.container);
+                        } else {
+                            showFieldError(field.container);
+                        }
+                    });
+
+                    submitButton.addEventListener('click', function(e){
+                        clearAllErrorMessages();
+                        e.preventDefault();
+                        var state = hostedFieldsInstance.getState(),
+                            formValid = Object.keys(state.fields).every(function (key) {
+                                var isValid = state.fields[key].isValid;
+                                if(!isValid) {
+                                    showFieldError(state.fields[key].container);
+                                }
+                                return isValid;
+                            });
+
+                        if(formValid){
+                            clearErrorMessage('card');
+                            hostedFieldsInstance.tokenize(function(tokenizeErr, payload){
+                                if(tokenizeErr) {
+                                    // console.error(tokenizeErr);
+                                    showErrorMessage('card', 'There was an error processing your payment. Please try again.');
+                                    return;
+                                }
+
+                                nonceInput.value = payload.nonce;
+                                paymentModeInput.value = 'card';
+                                paymentForm.submit();
+                            });
+                        }
+                        else {
+                            showErrorMessage('card', 'Some of the fields below are invalid. Please correct the invalid fields and try again.');
+                        }
+                    });
                 });
-            }).then(function(payload) {
-                if (!payload.liabilityShifted) {
-                    showPaymentErrorMsg('card');
-                    enablePayNow();
-                    return;
-                }
-
-                nonceInput.value = payload.nonce;
-                paymentModeInput.value = 'card';
-                paymentForm.submit();
-            }).catch(function(err) {
-                console.error(err);
-                showPaymentErrorMsg('card');
-                enablePayNow();
-            });
-        });
-
-        setupComponents(braintreeSettings.client_token).then(function(instances) { 
-            hf = instances[0];
-            threeDS = instances[1];
-
-            hf.on('validityChange', function(event) {
-                var field = event.fields[event.emittedBy];
-
-                if (field.isValid || field.isPotentiallyValid) {
-                    clearFieldError(field.container);
-                } else {
-                    showFieldError(field.container);
-                }
-            });
-
-            enablePayNow();
-        }).catch(function(err) {
-            console.error('component error:', err);
-        });
+            }
+        );
     }
 
     function initPayPal() {
-        braintree.client.create(
-            {
-                authorization: braintreeSettings.client_token
-            },
+        client.create(
+            {authorization: token},
             function (clientErr, clientInstance) {
                 if (clientErr) {
                     console.error(clientErr);
+                    showErrorMessage('paypal', loadingErrorMsg);
                     return;
                 }
 
-                braintree.paypalCheckout.create(
-                    {
-                        client: clientInstance
-                    },
+                payPalCreate(
+                    {client: clientInstance},
                     function (payPalCheckoutErr, payPalCheckoutInstance) {
                         if (payPalCheckoutErr) {
                             console.error(payPalCheckoutErr);
+                            showErrorMessage('paypal', loadingErrorMsg);
                             return;
                         }
 
                         // Set up PayPal with the checkout.js library
                         document.querySelectorAll('.payments__paypal-button').forEach(function(item) {
                             window.paypal.Button.render({
-                                env: braintreeSettings.use_sandbox ? 'sandbox' : 'production',
+                                env: braintreeParams.use_sandbox ? 'sandbox' : 'production',
                                 commit: true,
                                 style: {
                                     color: 'gold',
@@ -208,7 +167,7 @@ function setupPayment() {
                                 payment: function () {
                                     return payPalCheckoutInstance.createPayment({
                                         flow: 'checkout',
-                                        amount: personalDetails.amount,
+                                        amount: paymentAmount,
                                         currency: paymentCurrency,
                                         enableShippingAddress: false,
                                     });
@@ -217,7 +176,7 @@ function setupPayment() {
                                 onAuthorize: function (data) {
                                     return payPalCheckoutInstance.tokenizePayment(data, function (err, payload) {
                                         if(err) {
-                                            showPaymentErrorMsg('paypal');
+                                            showErrorMessage('paypal', 'There was an error processing your payment. Please try again.');
                                             return;
                                         }
 
@@ -232,7 +191,7 @@ function setupPayment() {
                                 },
 
                                 onError: function () {
-                                    showPaymentErrorMsg('paypal');
+                                    showErrorMessage('paypal', 'There was an error processing your payment. Please try again.');
                                 }
                             }, item);
                         });
@@ -243,17 +202,12 @@ function setupPayment() {
     }
 
     function initGooglePay() {
-        // TODO: Make 3DS work for google pay
-        // https://developer.paypal.com/braintree/docs/guides/3d-secure/client-side#custom-ui
-
         var paymentsClient = new window.google.payments.api.PaymentsClient({
-            environment: braintreeSettings.use_sandbox ? 'TEST' : 'PRODUCTION'
+            environment: braintreeParams.use_sandbox ? 'TEST' : 'PRODUCTION'
         });
 
-        braintree.client.create(
-            {
-                authorization: braintreeSettings.client_token
-            },
+        client.create(
+            {authorization: token},
             function (clientErr, clientInstance) {
                 if (clientErr) {
                     console.error(clientErr);
@@ -265,10 +219,10 @@ function setupPayment() {
                     googlePayVersion: 2
                 };
                 // googleMerchantId is required only in production
-                if(!braintreeSettings.use_sandbox) {
-                    googlePaymentConfig.googleMerchantId = braintreeSettings.google_merchant_id;
+                if(!braintreeParams.use_sandbox) {
+                    googlePaymentConfig.googleMerchantId = braintreeParams.google_merchant_id;
                 }
-                braintree.googlePayment.create(
+                googlePayment.create(
                     googlePaymentConfig,
                     function (googlePaymentErr, googlePaymentInstance) {
                         if (googlePaymentErr) {
@@ -291,16 +245,15 @@ function setupPayment() {
                                     buttonSizeMode: 'fill',
                                     onClick: () => {
                                         clearAllErrorMessages();
-
-                                        const paymentDataRequest = googlePaymentInstance.createPaymentDataRequest({
+                                        var paymentDataRequest = googlePaymentInstance.createPaymentDataRequest({
                                             transactionInfo: {
                                                 currencyCode: paymentCurrency,
                                                 totalPriceStatus: 'FINAL',
-                                                totalPrice: personalDetails.amount
+                                                totalPrice: paymentAmount
                                             }
                                         });
-                                        const cardPaymentMethod = paymentDataRequest.allowedPaymentMethods[0];
-                                        
+
+                                        var cardPaymentMethod = paymentDataRequest.allowedPaymentMethods[0];
                                         cardPaymentMethod.parameters.billingAddressRequired = false;
                                         cardPaymentMethod.parameters.billingAddressParameters = {
                                             format: 'MIN',
@@ -311,22 +264,22 @@ function setupPayment() {
                                                 googlePaymentInstance.parseResponse(paymentData, function (err, result) {
                                                     if (err) {
                                                         // Handle parsing error
-                                                        showPaymentErrorMsg('googlepay');
                                                     }
 
                                                     nonceInput.value = result.nonce;
                                                     paymentModeInput.value = 'googlepay';
                                                     paymentForm.submit();
-                                                }).catch(function (err) {
-                                                    if (err.statusCode == 'CANCELED') {
-                                                        showErrorMessage('googlepay', 'Google Pay payment cancelled');
-                                                    } else {
-                                                        // This is probably a DEVELOPER_ERROR
-                                                        showPaymentErrorMsg('googlepay');
-                                                    }
                                                 });
                                             }
-                                        );
+                                        ).catch(function (err) {
+                                            if(err.statusCode == 'CANCELED') {
+                                                showErrorMessage('googlepay', 'Google Pay payment cancelled');
+                                            }
+                                            else {
+                                                // This is a DEVELOPER_ERROR
+                                                showErrorMessage('googlepay', 'There was an error processing your payment. Please try again.');
+                                            }
+                                        });
                                     }
                                 });
 
@@ -343,6 +296,7 @@ function setupPayment() {
                         }).catch(function (exc) {
                             // This is a DEVELOPER_ERROR
                             console.error(exc);
+                            showErrorMessage('googlepay', 'There was an error processing your payment. Please try again.');
                         });
                     }
                 );
@@ -364,14 +318,14 @@ function setupPayment() {
             // console.log("Apple Pay is supported");
         }
 
-        braintree.client.create(
-            {authorization: braintreeSettings.client_token},
+        client.create(
+            {authorization: token},
             function (clientErr, clientInstance) {
                 if (clientErr) {
                     console.error(clientErr);
                     return;
                 }
-                braintree.pplePay.create({
+                ApplePay.create({
                     client: clientInstance
                 }, function (applePayErr, applePayInstance) {
                     if (applePayErr) {
@@ -394,7 +348,7 @@ function setupPayment() {
 
                                     var paymentRequest = applePayInstance.createPaymentRequest({
                                         total: {
-                                            amount: personalDetails.amount,
+                                            amount: paymentAmount,
                                             type: 'final',
                                             label: 'Samaritans',
                                         },
@@ -413,6 +367,7 @@ function setupPayment() {
                                             if (validationErr) {
                                                 console.error(validationErr);
                                                 session.abort();
+                                                showErrorMessage('applepay', loadingErrorMsg);
                                                 return;
                                             }
                                             session.completeMerchantValidation(validationData);
@@ -426,7 +381,7 @@ function setupPayment() {
                                             token: event.payment.token
                                         }, function (tokenizeErr, payload) {
                                             if (tokenizeErr) {
-                                                showPaymentErrorMsg('applepay');
+                                                showErrorMessage('applepay', 'There was an error processing your payment. Please try again.');
                                                 session.completePayment(window.ApplePaySession.STATUS_FAILURE);
                                                 return;
                                             }

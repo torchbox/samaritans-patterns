@@ -1,5 +1,5 @@
 {% extends "patterns/templates/donate-form-page.html" %}
-{% load i18n form_tags static wagtailimages_tags humanize %}
+{% load i18n form_tags static wagtailimages_tags %}
 
 {% block title %}{% trans "Payment details | Event registration payment" %}{% endblock %}
 
@@ -8,21 +8,21 @@
 {% endblock %}
 
 {% block content_inner %}
-    <div id="payments__payment-wrapper">
-        <h1 class="wrapper--small-width">{% blocktrans with amount=personal_details.amount|floatformat:"2"|intcomma %}You're making a payment of {{ currency_symbol }}{{ amount }}{% endblocktrans %}</h1>
+<div id="payments__payment-wrapper">
+    <h1 class="wrapper--small-width">{% blocktrans with amount=payment_amount|floatformat:"-2" %}You're making a payment of {{ currency_symbol }}{{ amount }}{% endblocktrans %}</h1>
 
-        <form class="form" id="payments__braintree-form" method="post" currency="{{ currency }}">
-            {% csrf_token %}
+    <form class="form" id="payments__braintree-form" method="post" data-token="{{ braintree_tokenization_key }}" data-amount="{{ payment_amount|floatformat }}" currency="{{ currency }}">
+        {% csrf_token %}
 
-            {% render_form_field form.braintree_nonce %}
-            {% render_form_field form.payment_mode %}
-        </form>
+        {% render_form_field form.braintree_nonce %}
+        {% render_form_field form.payment_mode %}
+    </form>
 
 
-        <h2 class="heading-block">{% trans "Pay with" %}</h2>
+    <h2 class="heading-block">{% trans "Pay with" %}</h2>
 
-        {% include "patterns/molecules/payments/braintree-payment-widgets.html" with is_event_payment=True %}
-    </div>
+    {% include "patterns/molecules/payments/braintree-payment-widgets.html" with is_event_payment=True %}
+</div>
 {% endblock %}
 
 {% block extra_js %}
