@@ -13,7 +13,7 @@ function setupPaymentMonthly() {
         token = paymentForm.getAttribute('data-token'),
         loadingErrorMsg = 'There was an error loading this payment option. Please reload the page or try again later.';
 
-    var braintreeParams = JSON.parse(document.getElementById('payments__braintree-params').textContent);
+    var braintreeSettings = JSON.parse(document.getElementById('payments__braintree-settings').textContent);
 
     function showErrorMessage(msg){
         var targetElement = document.getElementById('donate__braintree-errors');
@@ -42,7 +42,7 @@ function setupPaymentMonthly() {
 
                         // Set up PayPal with the checkout.js library
                         window.paypal.Button.render({
-                            env: braintreeParams.use_sandbox ? 'sandbox' : 'production',
+                            env: braintreeSettings.use_sandbox ? 'sandbox' : 'production',
                             commit: true,
                             style: {
                                 color: 'gold',
@@ -56,7 +56,7 @@ function setupPaymentMonthly() {
                             payment: function () {
                                 return paypalCheckoutInstance.createPayment({
                                     flow: 'vault',
-                                    billingAgreementDescription: braintreeParams.billingAgreement,
+                                    billingAgreementDescription: braintreeSettings.billingAgreement,
                                     enableShippingAddress: false,
                                 });
                             },
