@@ -110,7 +110,7 @@
                 {% else %}
                     {% include 'patterns/molecules/forms/form_field.html' with field=form.email tooltip="We'll use this to send you an email confirmation when you've made your donation, and we'll use it to keep you up-to-date if you choose to keep in touch." %}
                 {% endif %}
-                <h2>{% trans "Your address" %}</h2>
+                <h2>{% trans "Your billing address" %}</h2>
 
                 {% render_form_field form.address_line_1 %}
                 {% render_form_field form.address_line_2 %}

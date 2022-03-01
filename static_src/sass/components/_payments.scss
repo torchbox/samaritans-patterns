@@ -7,8 +7,11 @@
         font-weight: bold;
         z-index: 100;
         position: relative;
-        text-align: center;
-        margin-bottom: 20px;
+        margin: 10px 0;
+
+        &:not([hidden]) {
+            display: inline-block;
+        }
     }
 
     &__braintree-hosted-field {
@@ -65,7 +68,6 @@
     }
 
     &__error-wrapper {
-        padding-top: 30px;
         display: flex;
         flex-direction: column;
 

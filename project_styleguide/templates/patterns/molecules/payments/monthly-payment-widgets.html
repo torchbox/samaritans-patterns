@@ -1,93 +1,98 @@
-{% load form_tags i18n helper_tags %}
+{% load form_tags i18n helper_tags humanize %}
 
-<div class="tabccordion tabccordion--light-bg tabccordion--payments js-tabccordion">
-    <nav>
-        <ul class="tabccordion__nav js-tabccordion-nav">
-        {% comment %}
-        Hide GoCardless option for Euros.
-        {% endcomment%}
+{% with amount=payment_amount|floatformat:"2"|intcomma %}
+
+    <div class="tabccordion tabccordion--light-bg tabccordion--payments js-tabccordion">
+        <nav>
+            <ul class="tabccordion__nav js-tabccordion-nav">
+            {% comment %}
+            Hide GoCardless option for Euros.
+            {% endcomment%}
+            {% if currency == "GBP" %}
+                <li>
+                    <a href="#tab1" class="tabccordion__nav-item tabccordion__nav-item--card-payment">
+                        <svg class="" width="27" height="19">
+                            <use xlink:href="#credit-card" />
+                        </svg>
+                        {% trans 'Direct Debit' %}
+                    </a>
+                </li>
+            {% endif %}
+                <li>
+                    <a href="#tab2" class="tabccordion__nav-item tabccordion__nav-item--card-payment">{% trans 'PayPal' %}</a>
+                </li>
+            </ul>
+        </nav>
         {% if currency == "GBP" %}
-            <li>
-                <a href="#tab1" class="tabccordion__nav-item tabccordion__nav-item--card-payment">
+            <!-- Direct Debit tab -->
+            <section id="tab1" class="accordion accordion--tabccordion accordion--no-border accordion--credit-card tabccordion__panel js-tabccordion-panel">
+
+                <a href="#tab1" class="tabccordion__nav-item tabccordion__nav-item--card-payment tabccordion__nav-item--card-payment-content">
                     <svg class="" width="27" height="19">
                         <use xlink:href="#credit-card" />
                     </svg>
-                    {% trans 'Direct Debit' %}
+                    {% trans 'Direct debit' %}
                 </a>
-            </li>
-        {% endif %}
-            <li>
-                <a href="#tab2" class="tabccordion__nav-item tabccordion__nav-item--card-payment">{% trans 'PayPal' %}</a>
-            </li>
-        </ul>
-    </nav>
-    {% if currency == "GBP" %}
-    <!-- Direct Debit tab -->
-    <section id="tab1" class="accordion accordion--tabccordion accordion--no-border accordion--credit-card tabccordion__panel js-tabccordion-panel">
 
-        <a href="#tab1" class="tabccordion__nav-item tabccordion__nav-item--card-payment tabccordion__nav-item--card-payment-content">
-            <svg class="" width="27" height="19">
-                <use xlink:href="#credit-card" />
-            </svg>
-            {% trans 'Direct debit' %}
-        </a>
+                <div class="accordion__content tabccordion__content">
+                    <form action="{% url 'donate:payment_monthly_gocardless' %}" class="form" id="donate__gocardless-form" method="post" currency="{{ currency_code }}">
+                        {% csrf_token %}
+                        {{ gocardless_form.gift_aid.as_hidden }}
 
-        <div class="accordion__content tabccordion__content">
-            <form action="{% url 'donate:payment_monthly_gocardless' %}" class="form" id="donate__gocardless-form" method="post" currency="{{ currency_code }}">
-                {% csrf_token %}
-                {{ gocardless_form.gift_aid.as_hidden }}
+                        <div class="donate__direct-debit-fields light-bg">
+                            {% render_form_field gocardless_form.debit_date %}
+                            {% render_form_field gocardless_form.account_holder_name %}
+                            {% render_form_field gocardless_form.branch_code %}
+                            {% render_form_field gocardless_form.account_number %}
+                            {% render_form_field gocardless_form.authorisation %}
+                        </div>
 
-                <div class="donate__direct-debit-fields light-bg">
-                    {% render_form_field gocardless_form.debit_date %}
-                    {% render_form_field gocardless_form.account_holder_name %}
-                    {% render_form_field gocardless_form.branch_code %}
-                    {% render_form_field gocardless_form.account_number %}
-                    {% render_form_field gocardless_form.authorisation %}
+                        <button value="{% blocktrans %}Donate £{{ amount }}{% endblocktrans %}" class="button button--large" type="submit" id="donate__gocardless-submit">
+                            <div class="button__shadow"></div>
+                            <div class="button__inner">
+                                {% blocktrans %}Donate £{{ amount }} a month{% endblocktrans %}
+                                {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="icon button__icon" %}
+                            </div>
+                        </button>
+                    </form>
+
+                    {% include "patterns/molecules/donate/direct-debit-guarantee.html" %}
+
+                    {% include "patterns/molecules/donate/payments-by-gocardless.html" %}
                 </div>
+            </section>
+        {% endif %}
 
-                <button value="{% blocktrans with amount=payment_amount|floatformat:"-2" %}Donate £{{ amount }}{% endblocktrans %}" class="button button--large" type="submit" id="donate__gocardless-submit">
-                    <div class="button__shadow"></div>
-                    <div class="button__inner">
-                            {% blocktrans with amount=payment_amount|floatformat:"-2" %}Donate £{{ amount }} a month{% endblocktrans %}
-                        {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="icon button__icon" %}
-                    </div>
-                </button>
-            </form>
+        <!-- PayPal tab -->
+        <section id="tab2" class="accordion accordion--tabccordion tabccordion__panel js-tabccordion-panel {% if active_payment_mode == 'paypal' %}is-active{% endif %}">
 
-            {% include "patterns/molecules/donate/direct-debit-guarantee.html" %}
+            <a href="#tab2" class="tabccordion__nav-item tabccordion__nav-item--card-payment tabccordion__nav-item--card-payment-content">
+                {% trans 'PayPal' %}
+            </a>
 
-            {% include "patterns/molecules/donate/payments-by-gocardless.html" %}
-        </div>
-    </section>
-    {% endif %}
+            <div class="accordion__content tabccordion__content">
 
-    <!-- PayPal tab -->
-    <section id="tab2" class="accordion accordion--tabccordion tabccordion__panel js-tabccordion-panel {% if active_payment_mode == 'paypal' %}is-active{% endif %}">
+                <form action="{% url 'donate:payment_monthly_braintree' %}" class="form" id="donate__braintree-form" method="post" data-token="{{ braintree_tokenization_key }}">
+                    {% csrf_token %}
+                    {{ braintree_form.gift_aid.as_hidden }}
 
-        <a href="#tab2" class="tabccordion__nav-item tabccordion__nav-item--card-payment tabccordion__nav-item--card-payment-content">
-            {% trans 'PayPal' %}
-        </a>
+                    <div class="donate__braintree-fields light-bg">
+                        {% render_form_field braintree_form.billing_day %}
+                        {% render_form_field braintree_form.payment_method_nonce %}
+                    <div>
 
-        <div class="accordion__content tabccordion__content">
+                    <p>Checkout with PayPal to complete the process</p>
 
-            {{ braintree_params|json_script:"payments__braintree-params" }}
+                    <div id="donate__braintree-errors" class="donate__braintree-error" hidden></div>
+                    <div id="donate__paypal-button" class="donate__paypal-button"></div>
 
-            <form action="{% url 'donate:payment_monthly_braintree' %}" class="form" id="donate__braintree-form" method="post" data-token="{{ braintree_tokenization_key }}">
-                {% csrf_token %}
-                {{ braintree_form.gift_aid.as_hidden }}
+                </form>
 
-                <div class="donate__braintree-fields light-bg">
-                    {% render_form_field braintree_form.billing_day %}
-                    {% render_form_field braintree_form.payment_method_nonce %}
-                <div>
+            </div>
+        </section>
+    </div>
 
-                <p>Checkout with PayPal to complete the process</p>
+    {{ braintree_settings|json_script:"payments__braintree-settings" }}
+    {{ personal_details|json_script:"payments__personal-details" }}
 
-                <div id="donate__braintree-errors" class="donate__braintree-error" hidden></div>
-                <div id="donate__paypal-button" class="donate__paypal-button"></div>
-
-            </form>
-
-        </div>
-    </section>
-</div>
+{% endwith %}
