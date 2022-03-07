@@ -107,6 +107,10 @@ ol {
     list-style: none;
 }
 
+main {
+    @include hide-when-mob-nav-open;
+}
+
 .hidden {
     @include hidden;
 }

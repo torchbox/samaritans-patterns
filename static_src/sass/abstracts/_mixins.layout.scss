@@ -223,3 +223,14 @@
         max-width: 1060px;
     }
 }
+
+// hide elements from mobile screen readers when the mob menu is open
+@mixin hide-when-mob-nav-open($behaviour: block) {
+    .mob-nav-open & {
+        display: none;
+
+        @include media-query($menu-breakpoint) {
+            display: $behaviour;
+        }
+    }
+}

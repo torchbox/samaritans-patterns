@@ -9,11 +9,12 @@
                 <a class="header__home-link" href="/" aria-labelledby="logo-desktop">
                     {% include "patterns/atoms/svg/logos/logo.html" with classes="header__logo" title="Samaritans homepage" id="logo-desktop" %}
                 </a>
-                {% if show_nav %}
 
-                <button class="header__menu-toggle header__menu-toggle--burger js-mobile-menu-toggle">
-                    {% render_icon "icon-color-burger-menu" "header__menu-toggle__icon" %}
-                </button>
+                {% if show_nav %}
+                    <button class="header__menu-toggle header__menu-toggle--burger js-mobile-menu-toggle js-open-mobile-menu" aria-label="Open the menu">
+                        <span class="header__menu-toggle-text">Menu</span>
+                        {% render_icon "icon-color-burger-menu" "header__menu-toggle__icon" %}
+                    </button>
                 {% endif %}
             </div>
 
@@ -34,12 +35,11 @@
                 <a class="header__home-link" href="/" aria-labelledby="logo-mobile">
                     {% include "patterns/atoms/svg/logos/logo.html" with classes="header__logo" title="Samaritans homepage" id="logo-mobile" %}
                 </a>
-                <button class="header__menu-toggle header__menu-toggle--close js-mobile-menu-toggle">
-                    {% include "patterns/atoms/svg/icons/icon-close.html" with classes="header__menu-toggle__icon js-mobile-menu-toggle" title="Close" %}
+                <button class="header__menu-toggle header__menu-toggle--close js-mobile-menu-toggle js-close-mobile-menu" aria-label="Close the menu" aria-expanded="false">
+                    <span class="header__menu-toggle-text">Close</span>
+                    {% include "patterns/atoms/svg/icons/icon-close.html" with classes="header__menu-toggle__icon" %}
                 </button>
-
             </div>
-
 
             {% cache 900 primarynav LANGUAGE_CODE %}
             {% primarynav %}

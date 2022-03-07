@@ -15,6 +15,11 @@
     height: 100%;
     overflow-x: scroll;
 
+    // removed and re-added in mobile-menu.js to prevent flash on window resize
+    &.js-header-nav--is-animated {
+        transition: transform $transition;
+    }
+
     @include media-query($menu-breakpoint) {
         position: relative;
         background-color: $teal;
@@ -26,11 +31,6 @@
 
     .mob-nav-open & {
         transform: translate3d(0, 0, 0);
-    }
-
-    // removed and re-added in mobile-menu.js to prevent flash on window resize
-    &.js-header-nav--is-animated {
-        transition: transform $transition;
     }
 
     &__inner {

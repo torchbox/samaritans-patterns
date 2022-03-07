@@ -1,5 +1,6 @@
 .header {
     $root: &;
+    @include hide-when-mob-nav-open;
     background-color: $white;
 
     &--website {
@@ -188,6 +189,8 @@
 
     &__menu-toggle {
         padding: 5px;
+        display: flex;
+        align-items: center;
 
         @include media-query($menu-breakpoint) {
             display: none;
@@ -206,6 +209,16 @@
             height: 25px;
             fill: currentColor;
             pointer-events: none;
+        }
+    }
+
+    &__menu-toggle-text {
+        @include font-size(xs);
+        margin-right: 5px;
+
+        @include media-query(mob-landscape) {
+            @include font-size(s);
+            margin-right: 10px;
         }
     }
 

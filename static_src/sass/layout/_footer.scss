@@ -1,4 +1,5 @@
 .footer {
+    @include hide-when-mob-nav-open;
     padding: $gutter-large 0;
     background-color: $white;
     position: relative;

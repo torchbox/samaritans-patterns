@@ -1,4 +1,5 @@
 .call-to-action {
+    @include hide-when-mob-nav-open;
     position: relative;
     padding: 1rem 0;
     margin: 1rem 0;
