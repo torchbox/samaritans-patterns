@@ -40,7 +40,7 @@
 
     &__form-input {
         .form-item__required {
-            display: none;
+            @include hidden();
         }
 
         .form-item__wrapper {

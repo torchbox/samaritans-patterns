@@ -1,6 +1,6 @@
 {% load icon_tags %}
 
-<div class="payment-icons {{ payment_icons_classes }}">
+<div class="payment-icons payment-icons--monthly {{ payment_icons_classes }}">
     {% if not is_euro %}
         {% render_icon "icon-color-direct-debit" "payment-icons__icon payment-icons__icon--direct-debit" %}
     {% endif %}

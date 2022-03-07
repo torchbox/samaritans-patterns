@@ -53,6 +53,10 @@
         &--with-help-text {
             margin-bottom: 0;
         }
+
+        #{$root}__required {
+            margin-left: 5px;
+        }
     }
 
     #{$input--string},
@@ -148,12 +152,6 @@
                 }
             }
         }
-    }
-
-    &__required {
-        @include font-size(default);
-        color: $warning;
-        font-weight: $weight--bold;
     }
 
     &__errors {

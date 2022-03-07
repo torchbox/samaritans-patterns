@@ -7,9 +7,15 @@
     margin: calc(#{$gutter-medium} - #{$spacer}) -#{$spacer} -#{$spacer};
 
     .homepage-donate-slider & {
-        @include media-query(tablet-landscape) {
+        @include media-query(desktop) {
             margin: 0 0 0 20px;
             flex: 1;
+        }
+
+        &--single {
+            @include media-query(desktop) {
+                display: grid;
+            }
         }
     }
 

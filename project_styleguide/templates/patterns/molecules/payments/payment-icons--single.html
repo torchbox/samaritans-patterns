@@ -1,9 +1,15 @@
 {% load icon_tags %}
 
-<div class="payment-icons {{ payment_icons_classes }}">
-    {% render_icon "icon-color-visa" "payment-icons__icon payment-icons__icon--visa" %}
-    {% render_icon "icon-color-mastercard" "payment-icons__icon payment-icons__icon--mastercard" %}
-    {% render_icon "icon-color-google-pay" "payment-icons__icon payment-icons__icon--google-pay" %}
-    {% render_icon "icon-color-apple-pay" "payment-icons__icon payment-icons__icon--apple-pay" %}
-    {% render_icon "icon-color-paypal" "payment-icons__icon payment-icons__icon--paypal" %}
+<div class="payment-icons payment-icons--single {{ payment_icons_classes }}">
+    <div class="payment-icons__group">
+        {% render_icon "icon-color-visa" "payment-icons__icon payment-icons__icon--visa" %}
+        {% render_icon "icon-color-mastercard" "payment-icons__icon payment-icons__icon--mastercard" %}
+    </div>
+    <div class="payment-icons__group">
+        {% render_icon "icon-color-google-pay" "payment-icons__icon payment-icons__icon--google-pay" %}
+        {% render_icon "icon-color-apple-pay" "payment-icons__icon payment-icons__icon--apple-pay" %}
+    </div>
+    <div class="payment-icons__group">
+        {% render_icon "icon-color-paypal" "payment-icons__icon payment-icons__icon--paypal" %}
+    </div>
 </div>

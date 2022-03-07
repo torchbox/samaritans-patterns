@@ -28,7 +28,7 @@ form-item
             <legend class="form-item__legend {% if field.help_text %}form-item__legend--with-help-text{% endif %}">
                 {{ field.label }}
                 {% if field.field.required or required %}
-                    (required)
+                    <span class="form-item__required">(required)</span>
                 {% endif %}
             </legend>
             {% if field.help_text %}
@@ -41,7 +41,7 @@ form-item
             <legend class="form-item__legend {% if field.help_text %}form-item__legend--with-help-text{% endif %}">
                 {{ field.label }}
                 {% if field.field.required or required %}
-                    (required)
+                    <span class="form-item__required">(required)</span>
                 {% endif %}
             </legend>
             {% if field.help_text %}
