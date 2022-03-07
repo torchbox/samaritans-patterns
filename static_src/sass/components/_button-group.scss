@@ -16,6 +16,7 @@
         color: $white;
 
         .hero-widget--slider & {
+            @include font-size(s);
             width: 50%;
         }
 

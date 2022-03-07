@@ -5,14 +5,14 @@
 	{# Monthly / One-off tabs #}
 	{% if donate_page.allow_monthly_donation and donate_page.allow_one_off_donation %}
 		<div class="button-group">
-			<button class="button-group__button" id="donate__form__toggle-monthly" {% if donate_page.default_to_monthly %}disabled{% endif %}>
+			<button class="button-group__button" id="donate__form__toggle-monthly" {% if donate_page.default_to_monthly %}disabled aria-pressed="true"{% endif %} {% if not donate_page.default_to_monthly %}aria-pressed="false"{% endif %}>
             	<span class="button-group__button-text">
-            	    {% trans "Monthly" %}
+            	    {% trans "Monthly donation" %}
         	    </span>
 			</button>
-			<button class="button-group__button" id="donate__form__toggle-single" {% if donate_page.default_to_single %}disabled{% endif %}>
+			<button class="button-group__button" id="donate__form__toggle-single" {% if donate_page.default_to_single %}disabled aria-pressed="true"{% endif %} {% if not donate_page.default_to_single %}aria-pressed="false"{% endif %}>
             	<span class="button-group__button-text">
-		            {% trans "One-off" %}
+		            {% trans "One-off donation" %}
             	</span>
 			</button>
 		</div>

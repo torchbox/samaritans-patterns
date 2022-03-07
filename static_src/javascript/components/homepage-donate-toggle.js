@@ -17,6 +17,8 @@ function homepageDonateToggle() {
             donateFormSingleToggle.toggleAttribute('disabled', false);
             donateFormMonthly.toggleAttribute('hidden', false);
             donateFormSingle.toggleAttribute('hidden', true);
+            donateFormMonthlyToggle.setAttribute('aria-pressed', true);
+            donateFormSingleToggle.setAttribute('aria-pressed', false);
         }
     }
 
@@ -26,6 +28,8 @@ function homepageDonateToggle() {
             donateFormMonthlyToggle.toggleAttribute('disabled', false);
             donateFormSingle.toggleAttribute('hidden', false);
             donateFormMonthly.toggleAttribute('hidden', true);
+            donateFormMonthlyToggle.setAttribute('aria-pressed', false);
+            donateFormSingleToggle.setAttribute('aria-pressed', true);
         }
     }
 

@@ -26,6 +26,8 @@ function donateLanding() {
             donateExamplesSingleToggle.toggleAttribute('disabled', false);
             donateExamplesMonthly.toggleAttribute('hidden', false);
             donateExamplesSingle.toggleAttribute('hidden', true);
+            donateExamplesMonthlyToggle.setAttribute('aria-pressed', true);
+            donateExamplesSingleToggle.setAttribute('aria-pressed', false);
         }
     }
 
@@ -35,6 +37,8 @@ function donateLanding() {
             donateExamplesMonthlyToggle.toggleAttribute('disabled', false);
             donateExamplesSingle.toggleAttribute('hidden', false);
             donateExamplesMonthly.toggleAttribute('hidden', true);
+            donateExamplesMonthlyToggle.setAttribute('aria-pressed', false);
+            donateExamplesSingleToggle.setAttribute('aria-pressed', true);
         }
     }
 
@@ -44,6 +48,8 @@ function donateLanding() {
             donateFormSingleToggle.toggleAttribute('disabled', false);
             donateFormMonthly.toggleAttribute('hidden', false);
             donateFormSingle.toggleAttribute('hidden', true);
+            donateFormMonthlyToggle.setAttribute('aria-pressed', true);
+            donateFormSingleToggle.setAttribute('aria-pressed', false);
         }
     }
 
@@ -53,6 +59,8 @@ function donateLanding() {
             donateFormMonthlyToggle.toggleAttribute('disabled', false);
             donateFormSingle.toggleAttribute('hidden', false);
             donateFormMonthly.toggleAttribute('hidden', true);
+            donateFormMonthlyToggle.setAttribute('aria-pressed', false);
+            donateFormSingleToggle.setAttribute('aria-pressed', true);
         }
     }
 

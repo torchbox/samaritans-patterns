@@ -101,7 +101,7 @@
     "micromodal": "^0.3.2",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.31",
-    "nouislider": "^14.6.2",
+    "nouislider": "^15.5.1",
     "react": "^16.8.6",
     "react-dates": "20.2.0",
     "react-dom": "^16.8.6",

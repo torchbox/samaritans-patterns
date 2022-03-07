@@ -62,6 +62,9 @@ class DonateAmountSlider {
             callToActionSvg: this.config.callToActionSvg,
             callToActionText: this.config.callToActionText,
             callCounter: this.config.callCounter,
+            handleAttributes: [
+                { 'aria-label': 'Use the slider to choose an amount to donate' },
+            ],
         });
     }
 

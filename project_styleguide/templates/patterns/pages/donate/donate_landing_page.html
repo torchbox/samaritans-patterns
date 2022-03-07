@@ -52,20 +52,22 @@
                                 <button
                                     class="button-group__button"
                                     id="donate__form__toggle-monthly"
-                                    {% if page.default_to_monthly %}disabled{% endif %}
+                                    {% if page.default_to_monthly %}disabled aria-pressed="true"{% endif %}
+                                    {% if not page.default_to_monthly %}aria-pressed="false"{% endif %}
                                 >
                                     <span class="button-group__button-text">
-                                        {% trans "Monthly" %}
+                                        {% trans "Monthly donation" %}
                                     </span>
                                 </button>
 
                                 <button
                                     class="button-group__button"
                                     id="donate__form__toggle-single"
-                                    {% if page.default_to_single %}disabled{% endif %}
+                                    {% if page.default_to_single %}disabled aria-pressed="true"{% endif %}
+                                    {% if not page.default_to_single %}aria-pressed="false"{% endif %}
                                 >
                                     <span class="button-group__button-text">
-                                        {% trans "One-off" %}
+                                        {% trans "One-off donation" %}
                                     </span>
                                 </button>
                             </div>
@@ -242,15 +244,17 @@
                 {% if page.allow_monthly_donation and page.allow_one_off_donation %}
                     <div class="button-group button-group--centered">
                         <button class="button-group__button" id="donate__examples__toggle-monthly"
-                        {% if page.default_to_monthly %}disabled{% endif %}>
+                        {% if page.default_to_monthly %}disabled aria-pressed="true"{% endif %}
+                        {% if not page.default_to_monthly %}aria-pressed="false"{% endif %}>
                             <span class="button-group__button-text">
-                                {% trans "Monthly" %}
+                                {% trans "Monthly donation" %}
                             </span>
                         </button>
                         <button class="button-group__button" id="donate__examples__toggle-single"
-                        {% if page.default_to_single %}disabled{% endif %}>
+                        {% if page.default_to_single %}disabled aria-pressed="true"{% endif %}
+                        {% if not page.default_to_single %}aria-pressed="false"{% endif %}>
                             <span class="button-group__button-text">
-                                {% trans "One-off" %}
+                                {% trans "One-off donation" %}
                             </span>
                         </button>
                     </div>
