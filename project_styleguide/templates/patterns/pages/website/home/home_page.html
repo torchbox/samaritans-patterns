@@ -73,7 +73,7 @@
                         {% image page.support_image fill-1100x600 as support_image %}
                         {% if page.support_donation_page.hero_video %}
                             <div class="homepage-donate-slider__poster" style="background-image: url({{ support_image.url }});" data-video-modal>
-                                <a href="#" class="homepage-donate-slider__open-video" data-modal-open>
+                                <a href="#" class="homepage-donate-slider__open-video" aria-haspopup="true" aria-label="Open the video" data-modal-open>
                                     {% include "patterns/atoms/svg/icons/icon-play-circle.html" with classes="homepage-donate-slider__open-video-icon" %}
                                 </a>
 
