@@ -39,6 +39,7 @@ function donateDetails() {
     const
         currencyGbpSymbol = '£',
         currencyEurSymbol = '€';
+    const donationMaxAmount = Number(editBox.querySelector('input').getAttribute('max'));
 
     var toggleDonateAmountEditor = function() {
         if(editBox.hasAttribute('hidden')) {
@@ -76,9 +77,11 @@ function donateDetails() {
             if (newAmount < 1) {
                 newAmount = parseFloat('1').toFixed(2);
                 editBox.querySelector('input').value = newAmount;
+            } else if (newAmount > donationMaxAmount) {
+                newAmount = parseFloat(donationMaxAmount.toString()).toFixed(2);
             }
 
-            displayedAmountSpan.textContent = Utilities.number_format(newAmount, 2, '.', ',');
+            newAmount = Utilities.number_format(newAmount, 2, '.', ',');
 
             var currentCurrency = currencyGbpSymbol;
 

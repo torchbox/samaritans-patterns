@@ -36,7 +36,8 @@
         </div>
 
         <div class="donate__bar-edit" id="donate__amount-edit" hidden>
-            <span id="donate_amount-currency" class="form__input__prefix" data-conversion-rate={{ settings.utils.GBPToEuroConversionSettings.conversion_rate }}>{% if is_euro %}€{% else %}£{% endif %}</span> <input type="number" value="{{ form.amount.value }}" step="0.01" min="1">
+            <span id="donate_amount-currency" class="form__input__prefix" data-conversion-rate={{ settings.utils.GBPToEuroConversionSettings.conversion_rate }}>{% if is_euro %}€{% else %}£{% endif %}</span>
+            <input type="number" value="{{ form.amount.value }}" step="0.01" min="1" max="{{ donation_max_amount }}">
             <button class="button" id="donate__amount__save">{% trans 'Confirm' %}</button>
         </div>
     </div>

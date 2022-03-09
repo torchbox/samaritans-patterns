@@ -43,7 +43,7 @@
 								<label for="{{ monthly_form.amount.id_for_label }}">{{ monthly_form.amount.label }}</label>
 								<div class="form-item__wrapper--euro">
 									{{ monthly_form.amount.errors }}
-									<input type="number" id="id_amount" name="amount" value="{{ monthly_form.amount.value|to_euro:current_site }}" min="0.01" step="0.01" required="">
+									<input type="number" id="id_amount" name="amount" value="{{ monthly_form.amount.value|to_euro:current_site }}" min="0.01" step="0.01" required="" max="{{ donation_max_amount }}">
 								</div>
 							</div>
 						</div>
@@ -89,7 +89,7 @@
 							<label for="{{ one_off_form.amount.id_for_label }}">{{ one_off_form.amount.label }}</label>
 							<div class="form-item__wrapper--euro">
 								{{ one_off_form.amount.errors }}
-								<input type="number" id="id_amount" name="amount" value="{{ one_off_form.amount.value|to_euro:current_site }}" min="0.01" step="0.01" required="">
+								<input type="number" id="id_amount" name="amount" value="{{ one_off_form.amount.value|to_euro:current_site }}" min="0.01" step="0.01" required="" max="{{ donation_max_amount }}">
 							</div>
 						</div>
 					</div>
