@@ -1,0 +1,8 @@
+// Lazyframe overrides (https://github.com/vb/lazyframe)
+.lazyframe {
+    &[data-vendor="youtube"],
+    &[data-vendor="youtube_nocookie"] {
+        // remove default red background that ships with lazyframe youtube brand
+        background-color: $white;
+    }
+}

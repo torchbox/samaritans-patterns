@@ -13,11 +13,18 @@
                     {% include "patterns/atoms/svg/icons/icon-close.html" with classes="video-modal__close-icon" %}
                 </a>
                 <span class="video-modal__connectors"></span>
-                <div style="padding-bottom: 56.25%;" class="responsive-object">
-                  <iframe width="480" height="270" src="{{ value.hero_video }}" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen>
-                  </iframe>
-                  <div class="video-modal__corner"></div>
-                </div>
+                {# Lazyload iFrame #}
+                <div
+                    width="480"
+                    height="270"
+                    class="lazyframe"
+                    data-vendor="youtube"
+                    data-src="{{ value.hero_video }}"
+                    frameborder="0"
+                    gesture="media"
+                    allow="encrypted-media"
+                    allowfullscreen
+                ></div>
                 <a href="#" data-modal-close class="video-modal__container-close" aria-label="Close video">
                     {% include "patterns/atoms/svg/icons/icon-close.html" with classes="video-modal__container-close-icon" %}
                     {{ back_label }}

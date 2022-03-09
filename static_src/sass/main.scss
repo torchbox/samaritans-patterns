@@ -4,6 +4,7 @@
 @import 'vendor/muchloved';
 @import 'node_modules/@glidejs/glide/src/assets/sass/glide.core';
 @import 'node_modules/nouislider/dist/nouislider';
+@import 'node_modules/lazyframe/src/scss/lazyframe';
 
 // Abstracts
 @import 'abstracts/fonts';
@@ -78,6 +79,7 @@
 @import 'components/impact-block';
 @import 'components/info-panel';
 @import 'components/intro';
+@import 'components/lazyframe';
 @import 'components/list';
 @import 'components/list-inline-bulleted';
 @import 'components/list-pull-out-block';

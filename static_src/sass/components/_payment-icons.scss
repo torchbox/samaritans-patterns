@@ -59,4 +59,11 @@
             top: 2px;
         }
     }
+
+    &__group {
+        @include media-query(desktop) {
+            display: flex;
+            flex-wrap: nowrap;
+        }
+    }
 }

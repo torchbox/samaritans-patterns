@@ -85,17 +85,23 @@
                                                 {% include "patterns/atoms/svg/icons/icon-close.html" with classes="video-modal__close-icon" %}
                                             </a>
                                             <span class="video-modal__connectors"></span>
-                                            <div style="padding-bottom: 56.25%;" class="responsive-object">
-                                                <iframe width="480" height="270" src="{{ page.support_donation_page.hero_video }}" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen>
-                                                </iframe>
-                                            </div>
-                                            <div class="video-modal__corner"></div>
+                                            {# Lazyload iFrame #}
+                                            <div
+                                                width="480"
+                                                height="270"
+                                                class="lazyframe"
+                                                data-vendor="youtube"
+                                                data-src="{{ page.support_donation_page.hero_video }}"
+                                                gesture="media"
+                                                allow="encrypted-media"
+                                                allowfullscreen
+                                            ></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         {% else %}
-                            <img class="homepage-donate-slider__image" src="{{ support_image.url }}" alt="{{ support_image.alt }}" />
+                            <img class="homepage-donate-slider__image" src="{{ support_image.url }}" alt="{{ support_image.alt }}" width="{{ support_image.width }}" height="{{ support_image.height }}" />
                         {% endif %}
 
                         <div class="homepage-donate-slider__container">
