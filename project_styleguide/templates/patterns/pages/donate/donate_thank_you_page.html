@@ -73,7 +73,9 @@
 
 
 {% block extra_js %}
-    {{ tag_manager_events|json_script:"tag_manager_events" }}
+    {% if not donation_cookie_set %}
+        {{ tag_manager_events|json_script:"tag_manager_events" }}
+    {% endif %}
 {% endblock %}
 
 <!-- Overide footer so footer CTA does not display -->
