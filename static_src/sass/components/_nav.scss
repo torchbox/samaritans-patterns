@@ -232,6 +232,10 @@ $menu-breakpoint: 'tablet-landscape';
                 margin-right: $gutter;
                 border-right: 1px solid rgba($white, 0.2);
             }
+
+            &:only-child {
+                border-right: 0;
+            }
         }
 
         #{$root}--secondary-mobile & {
