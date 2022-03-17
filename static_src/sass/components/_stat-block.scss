@@ -29,6 +29,10 @@
     }
 
     &--sf {
+        .template-donate-landing-page & {
+            @include margin-streamfield-block;
+        }
+
         #{$root}__block {
             text-align: center;
             padding: $gutter;
@@ -40,6 +44,14 @@
             }
 
             &:not(:last-child) {
+                margin-bottom: 80px;
+
+                @include media-query(tablet-landscape) {
+                    margin-bottom: 0;
+                }
+            }
+
+            .template-donate-landing-page & {
                 margin-bottom: 80px;
 
                 @include media-query(tablet-landscape) {

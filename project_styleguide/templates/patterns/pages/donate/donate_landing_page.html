@@ -15,12 +15,12 @@
 
     <div id="hero" class="hero hero--donate-landing" data-hero-donate-landing>
 
-        {% image page.hero_image fill-1900x1250 jpegquality-40 as hero_image %}
-        <div class="donate-landing-hero__image--desktop" style="background-image: url({{ hero_image.url}});"></div>
+        {% image page.desktop_hero_image fill-1900x1250 jpegquality-40 as hero_image %}
+        <div class="donate-landing-hero__image--desktop" style="background-image: url({{ hero_image.url }});"></div>
 
-        {% image page.hero_image fill-768x500 jpegquality-40 as hero_image_mobile %}
+        {% image page.mobile_hero_image fill-768x500 jpegquality-40 as hero_image_mobile %}
         <div class="donate-landing-hero__image--mobile">
-            <img src="{{ hero_image_mobile.url}}" alt="{{ hero_image_mobile.alt }}" />
+            <img src="{{ hero_image_mobile.url }}" alt="{{ hero_image_mobile.alt }}" />
         </div>
 
         <h1 class="donate-landing-hero__title" id="main-content">{{ page.title }}</h1>
@@ -233,9 +233,12 @@
 
             <section class="section section--donate-landing">
                 {% include "patterns/atoms/corners/corners.html" with size="page" %}
-
-                {# Leaderboard #}
-                {# {% include "patterns/molecules/leaderboard/leaderboard.html" %} #}
+                
+                {% if page.body %}
+                    <div class="donate-landing__rich-text">
+                        {% include_block page.body %}
+                    </div>
+                {% endif %}
 
                 <div class="donate-landing__examples-heading">
                     <h2 class="heading-secondary">{{ page.donation_examples_heading }}</h2>
