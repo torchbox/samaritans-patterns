@@ -2,7 +2,7 @@
 
 {% if type == 'short' %}
 
-<a href="{% pageurl value.link.page %}" class="card-new card-new--listening-service card-new--listening-service--short {{ class }}" data-cta-block-small data-beta-check data-cta-type="{{ value.call_to_action.0.block.name }}">
+<a href="{% pageurl value.link.page %}" class="card-new card-new--listening-service card-new--listening-service--short {{ class }}" data-cta-block-small data-beta-check data-cta-type="{{ value.call_to_action.0.block.name }}"{% if value.webchat_skill %} data-cta-skill="{{ value.webchat_skill }}"{% endif %}>
     <span class="card-new__corner"></span>
     <div class="card-new__inner">
         <div class="card-new__container">
@@ -18,7 +18,7 @@
 
 {% else %}
 
-<div class="card-new card-new--listening-service card-new--listening-service--full {{ class }}" data-cta-block-large data-beta-check data-cta-type="{{ value.call_to_action.0.block.name }}">
+<div class="card-new card-new--listening-service card-new--listening-service--full {{ class }}" data-cta-block-large data-beta-check data-cta-type="{{ value.call_to_action.0.block.name }}"{% if value.webchat_skill %} data-cta-skill="{{ value.webchat_skill }}"{% endif %}>
     <span class="card-new__corner"></span>
     <div class="card-new__inner">
         <div class="card-new__container">

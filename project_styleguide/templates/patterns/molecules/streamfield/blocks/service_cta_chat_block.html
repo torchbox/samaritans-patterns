@@ -2,7 +2,7 @@
 
 {% if type == 'hero_cta' %}
 
-<a data-href="{{ value.call_to_action_url }}" class="listening-cta listening-cta--primary listening-cta--link" data-listening-cta-type="chat">
+<a data-href="{{ value.call_to_action_url }}" class="listening-cta listening-cta--primary listening-cta--link" data-listening-cta-type="chat"{% if value.webchat_skill %} data-cta-skill="{{ value.webchat_skill }}"{% endif %}>
     <span class="listening-cta__corner"></span>
     <div class="listening-cta__inner">
         <div class="listening-cta__container">
@@ -36,7 +36,7 @@
 </a>
 </div>
 
-<a data-href="{{ value.call_to_action_url }}" class="service-block service-block--sticky service-block--link" data-service-cta-type="chat">
+<a data-href="{{ value.call_to_action_url }}" class="service-block service-block--sticky service-block--link" data-service-cta-type="chat"{% if value.webchat_skill %} data-cta-skill="{{ value.webchat_skill }}"{% endif %}>
     {% if page.icon %}
     {% render_icon page.icon "service-block__icon" %}
     {% endif %}

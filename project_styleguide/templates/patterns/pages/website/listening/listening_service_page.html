@@ -83,24 +83,30 @@
         </div>
     </div>
 
-    <div class="wrapper wrapper--teal-background">
-        <div class="wrapper wrapper--large wrapper--padding-for-page">
-            <section class="section section--page-padding">
-                <h2 id="listening-services" class="heading-block heading-block--services heading-block--dark-background">{% trans "Find the service that's right for you..." %}</h2>
+    {% with related_pages=page.related_pages.all %}
+        {% if related_pages or all_listening_service_pages %}
+            <div class="wrapper wrapper--teal-background">
+                <div class="wrapper wrapper--large wrapper--padding-for-page">
+                    <section class="section section--page-padding">
+                        {% if all_listening_service_pages %}
+                            <h2 id="listening-services" class="heading-block heading-block--services heading-block--dark-background">{% trans "Find the service that's right for you..." %}</h2>
 
-                {% include "patterns/molecules/tabccordion/tabccordion.html" with tabs=all_listening_service_pages id="listening-services" classes="tabccordion--streamfield tabccordion--dark-bg" %}
+                            {% include "patterns/molecules/tabccordion/tabccordion.html" with tabs=all_listening_service_pages id="listening-services" classes="tabccordion--streamfield tabccordion--dark-bg" %}
+                        {% endif %}
 
-                {% if page.related_pages.all|length > 0 %}
-                    <h2 class="heading-block heading-block--dark-background heading-block--related">{% trans "You might also be interested in..." %}</h2>
-                    <div class="grid grid--no-margin grid--3col grid--large-gutters">
-                        {% for card in page.related_pages.all %}
-                            {% include "patterns/molecules/cards/related-card.html" with value=card.page.specific %}
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            </section>
-        </div>
-    </div>
+                        {% if related_pages|length > 0 %}
+                            <h2 class="heading-block heading-block--dark-background heading-block--related">{% trans "You might also be interested in..." %}</h2>
+                            <div class="grid grid--no-margin grid--3col grid--large-gutters">
+                                {% for card in related_pages %}
+                                    {% include "patterns/molecules/cards/related-card.html" with value=card.page.specific %}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </section>
+                </div>
+            </div>
+        {% endif %}
+    {% endwith %}
 
 {% endblock %}
 
