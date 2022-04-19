@@ -94,7 +94,7 @@
   "dependencies": {
     "@glidejs/glide": "^3.2.3",
     "awesomplete": "^1.1.4",
-    "braintree-web": "^3.67.0",
+    "braintree-web": "^3.85.2",
     "canvas-confetti": "^1.4.0",
     "focus-trap": "^6.7.2",
     "lazyframe": "^2.2.7",

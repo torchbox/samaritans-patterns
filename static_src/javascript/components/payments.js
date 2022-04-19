@@ -243,8 +243,71 @@ function setupPayment() {
     }
 
     function initGooglePay() {
-        // TODO: Make 3DS work for google pay
-        // https://developer.paypal.com/braintree/docs/guides/3d-secure/client-side#custom-ui
+        var threeDSecure;
+
+        function setup3DSecure(clientInstance) {
+            braintree.threeDSecure.create({
+                version: 2, // Will use 3DS2 whenever possible
+                client: clientInstance
+            }, function (threeDSecureErr, threeDSecureInstance) {
+                if (threeDSecureErr) {
+                    // Handle error in 3D Secure component creation
+                    return;
+                }
+                threeDSecure = threeDSecureInstance;
+            });
+        }
+
+        function get3DSecureArgs() {
+            return {
+                amount: personalDetails.amount,
+                email: personalDetails.email,
+                billingAddress: {
+                    givenName: personalDetails.first_name, // ASCII-printable characters required, else will throw a validation error
+                    surname: personalDetails.last_name, // ASCII-printable characters required, else will throw a validation error
+                    phoneNumber: personalDetails.phone_number,
+                    streetAddress: personalDetails.address_line_1,
+                    extendedAddress: personalDetails.address_line_2,
+                    locality: personalDetails.town,
+                    // region: '',
+                    postalCode: personalDetails.post_code,
+                    countryCodeAlpha2: personalDetails.country
+                },
+            };
+        }
+
+        function handle3DSecureVerification(clientInstance, nonce, bin) {
+            var threeDSecureArgs = get3DSecureArgs();
+            threeDSecureArgs['nonce'] = nonce;
+            threeDSecureArgs['bin'] = bin;
+            threeDSecureArgs['onLookupComplete'] = function (data, next) {
+                if (data.paymentMethod.threeDSecureInfo.liabilityShiftPossible) {
+                    next();
+                }
+            };
+            // eligible for 3DS 
+            threeDSecure.verifyCard(
+                threeDSecureArgs
+            ).then(function (response) {
+                if (response.liabilityShifted === false) {
+                    threeDSecure.cancelVerifyCard(function (err) {
+                        if (err) {
+                            // Handle error
+                            console.error(err.message); // No verification payload available
+                            return;
+                        }
+                        setup3DSecure(clientInstance);
+                    });
+                    showPaymentErrorMsg('googlepay');
+                }
+                else {
+                    nonceInput.value = response.nonce;
+                    paymentModeInput.value = 'googlepay';
+                    paymentForm.submit();
+                }
+            });        
+            
+        }
 
         var paymentsClient = new window.google.payments.api.PaymentsClient({
             environment: braintreeSettings.use_sandbox ? 'TEST' : 'PRODUCTION'
@@ -264,6 +327,9 @@ function setupPayment() {
                     client: clientInstance,
                     googlePayVersion: 2
                 };
+
+                setup3DSecure(clientInstance);
+
                 // googleMerchantId is required only in production
                 if(!braintreeSettings.use_sandbox) {
                     googlePaymentConfig.googleMerchantId = braintreeSettings.google_merchant_id;
@@ -310,23 +376,31 @@ function setupPayment() {
                                             function(paymentData) {
                                                 googlePaymentInstance.parseResponse(paymentData, function (err, result) {
                                                     if (err) {
-                                                        // Handle parsing error
                                                         showPaymentErrorMsg('googlepay');
                                                     }
-
-                                                    nonceInput.value = result.nonce;
-                                                    paymentModeInput.value = 'googlepay';
-                                                    paymentForm.submit();
-                                                }).catch(function (err) {
-                                                    if (err.statusCode == 'CANCELED') {
-                                                        showErrorMessage('googlepay', 'Google Pay payment cancelled');
-                                                    } else {
-                                                        // This is probably a DEVELOPER_ERROR
-                                                        showPaymentErrorMsg('googlepay');
+                                                    
+                                                    // Cards that are network-tokenized can't be verified with 3D Secure:
+                                                    // we assume here that the extra protection for tokenized cards is
+                                                    // enough to still process the transaction
+                                                    if (result.details.isNetworkTokenized === true) {
+                                                        nonceInput.value = result.nonce;
+                                                        paymentModeInput.value = 'googlepay';
+                                                        paymentForm.submit();
+                                                    }
+                                                    // Otherwise, prompt for 3D Secure verification
+                                                    else {
+                                                        handle3DSecureVerification(clientInstance, result.nonce, result.details.bin);
                                                     }
                                                 });
                                             }
-                                        );
+                                        ).catch(function (err) {
+                                            if (err.statusCode == 'CANCELED') {
+                                                showErrorMessage('googlepay', 'Google Pay payment cancelled');
+                                            } else {
+                                                // This is probably a DEVELOPER_ERROR
+                                                showPaymentErrorMsg('googlepay');
+                                            }
+                                        });
                                     }
                                 });
 
