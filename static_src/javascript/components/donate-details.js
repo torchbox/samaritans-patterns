@@ -124,7 +124,9 @@ function donateDetails() {
             }
             // Remove branch selection
             // It's not available on monthly
-            branchDonationGroup.remove();
+            if (branchDonationGroup) {
+                branchDonationGroup.remove();
+            }
 
 
             frequencyInput.value = 'monthly';
