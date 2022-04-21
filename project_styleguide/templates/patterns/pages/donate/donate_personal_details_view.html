@@ -109,7 +109,7 @@
                 {% if fake_forms %}
                     {{ form.email }}
                 {% else %}
-                    {% include 'patterns/molecules/forms/form_field.html' with field=form.email tooltip="We'll use this to send you an email confirmation when you've made your donation, and we'll use it to keep you up-to-date if you choose to keep in touch." %}
+                    {% include 'patterns/molecules/forms/form_field.html' with field=form.email help_text="We'll use this to send you an email confirmation when you've made your donation, and we'll use it to keep you up-to-date if you choose to keep in touch." %}
                 {% endif %}
                 <h2>{% trans "Your billing address" %}</h2>
 
@@ -126,7 +126,7 @@
                 {% if fake_forms %}
                     {{ form.phone_number }}
                 {% else %}
-                    {% include 'patterns/molecules/forms/form_field.html' with field=form.phone_number tooltip="We'll only use this if you ask to be kept up-to-date by phone." %}
+                    {% include 'patterns/molecules/forms/form_field.html' with field=form.phone_number help_text="We'll only use this if you ask to be kept up-to-date by phone." %}
                 {% endif %}
 
                 {% render_form_field form.in_memory %}

@@ -8,6 +8,18 @@
         padding: $gutter $gutter-large;
     }
 
+    &--narrow {
+        padding: 15px;
+        margin-top: 20px;
+        max-width: 430px;
+
+        @include media-query(tablet-portrait) {
+            margin: 0 0 0 40px;
+            max-width: 280px;
+            padding: $gutter $gutter-large;
+        }
+    }
+
     &__icon-wrapper {
         display: none;
 

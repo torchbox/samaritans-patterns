@@ -1,7 +1,13 @@
 {% if tooltip %}
     <div class="form-item__tooltip-wrapper">
         {% include "patterns/molecules/forms/_field.html" %}
-        {% include "patterns/molecules/tooltip/tooltip.html" with tooltip_classes="tooltip--form" %}
+
+        {% if use_tooltip %}
+            {% include "patterns/molecules/tooltip/tooltip.html" with tooltip_classes="tooltip--form" %}
+        {% else %}
+            {% include "patterns/molecules/callout-form/callout-form.html" with content=tooltip classes="callout-form--narrow" %}
+        {% endif %}
+
     </div>
 {% else %}
     {% include "patterns/molecules/forms/_field.html" %}

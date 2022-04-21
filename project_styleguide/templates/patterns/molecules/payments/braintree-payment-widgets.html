@@ -52,20 +52,20 @@
         <div class="accordion__content tabccordion__content">
 
             <div class="form-item">
-                <label for="card-number">Card number</label>
+                <label for="card-number" class="form-item__label">Card number</label>
                 <div class="form-item__wrapper payments__braintree-hosted-field" id="card-number"></div>
             </div>
 
             <div class="form-item">
-                <label for="cvv">Card security code</label>
-                <div class="form-item__tooltip-wrapper">
-                    <div class="form-item__wrapper payments__braintree-hosted-field" id="cvv"></div>
-                    {% include "patterns/molecules/tooltip/tooltip.html" with tooltip_classes="tooltip--form" tooltip="The last three digits on the back of the card" %}
-                </div>
+                <label for="cvv" class="form-item__label">
+                    Card security code
+                    <p class="form-item__hint">The last three digits on the back of the card</p>
+                </label>
+                <div class="form-item__wrapper payments__braintree-hosted-field" id="cvv"></div>
             </div>
 
             <div class="form-item">
-                <label for="expiration-date">Expiration date</label>
+                <label for="expiration-date" class="form-item__label">Expiration date</label>
                 <div class="form-item__wrapper payments__braintree-hosted-field" id="expiration-date"></div>
             </div>
 

@@ -18,7 +18,7 @@
             {% render_form_field form.last_name %}
         </div>
 
-        {% include 'patterns/molecules/forms/form_field.html' with field=form.email tooltip="We'll use this to contact you about your application." %}
+        {% include 'patterns/molecules/forms/form_field.html' with field=form.email help_text="We'll use this to contact you about your application." %}
         <h2>{% trans "Your address" %}</h2>
 
         {% render_form_field form.address_line_1 %}
@@ -26,7 +26,7 @@
         {% render_form_field form.town %}
         {% render_form_field form.post_code %}
         {% render_form_field form.country %}
-        {% include 'patterns/molecules/forms/form_field.html' with field=form.phone_number tooltip="We'll use this to contact you about your application." %}
+        {% include 'patterns/molecules/forms/form_field.html' with field=form.phone_number help_text="We'll use this to contact you about your application." %}
 
         <h2>{% trans "Additional information" %}</h2>
         <div class="form__gbp-field-wrapper">

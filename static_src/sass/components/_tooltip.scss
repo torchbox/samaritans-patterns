@@ -15,7 +15,54 @@
     }
 
     &--branch {
-        display: inline-block;
+        width: auto;
+        height: auto;
+        margin-left: 0;
+        cursor: default;
+
+        @include media-query(tablet-landscape) {
+            width: 30px;
+            height: 30px;
+            margin-left: $gutter-small;
+        }
+
+        // show the tooltips on mobile
+        #{$root}__content {
+            opacity: 1;
+            visibility: visible;
+            position: relative;
+            bottom: 0;
+            margin: 0;
+            width: auto;
+            left: auto;
+            background: transparent;
+            color: $white;
+            padding: 0;
+            text-align: left;
+
+            @include media-query(tablet-landscape) {
+                @include tooltip-triangle(10px, bottom, $off-white);
+                background-color: $off-white;
+                color: $color--default;
+                opacity: 0;
+                visibility: hidden;
+                position: absolute;
+                padding: $gutter-small;
+                width: 260px;
+                bottom: calc(100% + 17px);
+                left: 50%;
+                margin-left: -130px; // width / 2
+                text-align: center;
+            }
+        }
+
+        #{$root}__icon {
+            display: none;
+
+            @include media-query(tablet-landscape) {
+                display: block;
+            }
+        }
     }
 
     &--beta {
@@ -92,12 +139,6 @@
         z-index: z($z-elements, tooltip);
         line-height: 1.4;
 
-        #{$root}--branch & {
-            @include tooltip-triangle(10px, bottom, $off-white);
-            background-color: $off-white;
-            color: $color--default;
-        }
-
         #{$root}--beta & {
             @include tooltip-triangle(10px, bottom, $ink);
             background-color: $ink;
@@ -149,6 +190,7 @@
             margin: 0;
         }
 
+        #{$root}:focus &,
         #{$root}:hover & {
             opacity: 1;
             visibility: visible;

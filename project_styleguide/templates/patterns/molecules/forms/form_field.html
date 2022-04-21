@@ -31,8 +31,8 @@ form-item
                     <span class="form-item__required">(required)</span>
                 {% endif %}
             </legend>
-            {% if field.help_text %}
-                <p class="form-item__hint">{{ field.help_text }}</p>
+            {% if field.help_text or help_text %}
+                <p class="form-item__hint">{% firstof field.help_text help_text %}</p>
             {% endif %}
             {% include "patterns/molecules/forms/_field-wrapper.html" %}
         </fieldset>
@@ -44,8 +44,8 @@ form-item
                     <span class="form-item__required">(required)</span>
                 {% endif %}
             </legend>
-            {% if field.help_text %}
-                <p class="form-item__hint">{{ field.help_text }}</p>
+            {% if field.help_text or help_text %}
+                <p class="form-item__hint">{% firstof field.help_text help_text %}</p>
             {% endif %}
             <ul id="{{ field.auto_id }}" class="form-item__list">
                 {% for subfield in field %}

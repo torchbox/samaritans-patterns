@@ -87,6 +87,16 @@
         @include media-query(tablet-portrait) {
             margin-bottom: $gutter-small;
         }
+
+        &--with-tooltip {
+            flex-direction: column;
+            align-items: flex-start;
+
+            @include media-query(tablet-landscape) {
+                flex-direction: row;
+                align-items: center;
+            }
+        }
     }
 
     &__contact-method {

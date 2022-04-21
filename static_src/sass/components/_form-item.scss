@@ -168,8 +168,10 @@
     }
 
     &__tooltip-wrapper {
-        display: flex;
-        align-items: center;
+        @include media-query(tablet-portrait) {
+            display: flex;
+            align-items: flex-start;
+        }
 
         &--spaced {
             margin-bottom: $gutter-medium;

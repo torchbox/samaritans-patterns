@@ -89,7 +89,7 @@
                         <h2>How we can help</h2>
                         <div class="branch-top__activities">
                             {% for activity in page.get_branch_activities.all %}
-                                <div class="branch-top__activity">
+                                <div class="branch-top__activity {% if activity.information %}branch-top__activity--with-tooltip{% endif %}">
                                     {{ activity.activity_type }}
                                     {% if activity.information %}
                                         {% include "patterns/molecules/tooltip/tooltip.html" with tooltip=activity.information tooltip_classes="tooltip--branch" %}
