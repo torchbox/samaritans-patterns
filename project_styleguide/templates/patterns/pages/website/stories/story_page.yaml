@@ -1,0 +1,37 @@
+context:
+  page:
+    get_verbose_name: story-page
+    title: Sam's Story
+    body: True
+    hero_image: True
+    hero_quote:
+      quote: I'd say from the ages of around 18 - 25 I experienced some challenges with my own mental health and wellbeing
+    introduction: Sam, 32, is a grower and wholesaler of field vegetables from Selby, Yorkshire.
+    related_pages_heading: More stories like this
+    related_pages:
+      all:
+        - page:
+            specific:
+              listing_title: Sam's story
+              listing_summary: Sam, 32, is a grower and wholesaler of field vegetables from Selby, Yorkshire.
+              listing_image: True
+        - page:
+            specific:
+              listing_title: Understanding emotional health can give you advice and information
+              listing_summary: We can give you advice and information
+              listing_image: True
+        - page:
+            specific:
+              listing_title: Chat to a Samaritan
+              listing_summary: We can give you advice and information
+              listing_image: True
+
+tags:
+  image:
+    page.hero_image fill-1260x830 as bg_image:
+      target_var: bg_image
+      raw:
+        url: http://via.placeholder.com/1260x830
+  include_block:
+    page.body:
+      template_name: "patterns/molecules/streamfield/stream_block.html"

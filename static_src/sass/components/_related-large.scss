@@ -32,6 +32,7 @@
         color: $white;
         margin-bottom: $gutter-medium;
 
+        #{$root}--story &,
         #{$root}--donate-landing & {
             text-align: center;
             font-weight: $weight--bold;
@@ -39,6 +40,42 @@
 
         #{$root}--overlap-large & {
             font-weight: $weight--bold;
+        }
+
+        #{$root}--story & {
+            @include media-query(desktop) {
+                max-width: 780px;
+                margin: 0 auto ($gutter-medium * 2);
+            }
+        }
+    }
+
+    &__grid {
+        display: flex;
+        flex-direction: column;
+
+        @include media-query(mob-landscape) {
+            flex-direction: row;
+            align-items: stretch;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    }
+
+    &__card {
+        max-width: 365px;
+        margin-bottom: 40px;
+
+        @include media-query(tablet-portrait) {
+            flex-basis: calc(50% - 30px);
+            margin: 0 15px 40px;
+            max-width: none;
+            padding: 0;
+        }
+
+        @include media-query(tablet-landscape) {
+            flex-basis: calc(33.3% - 40px);
+            margin: 0 15px;
         }
     }
 
@@ -62,6 +99,16 @@
 
         @include media-query(tablet-landscape) {
             margin-top: -($section-overlap + 60px);
+            padding-top: 1.5 * $section-overlap;
+            padding-bottom: $section-overlap;
+        }
+    }
+
+    &--story {
+        background-color: $plum;
+        padding: $gutter-medium $gutter;
+
+        @include media-query(tablet-portrait) {
             padding-top: 1.5 * $section-overlap;
             padding-bottom: $section-overlap;
         }

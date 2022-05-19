@@ -1,12 +1,12 @@
 {% load wagtailcore_tags wagtailimages_tags %}
-<a href="{% pageurl value %}"  class="listing-item{% if classes %} {{ classes }}{% endif %}">
-    {% if value.listing_image %}
-        <div class="listing-item__image-wrap">
+<a href="{% pageurl value %}"  class="listing-item{% if classes %} {{ classes }}{% endif %}" aria-label="{% firstof value.listing_title value.title %}">
+    <div class="listing-item__image-wrap">
+        {% if value.listing_image %}
             {% image value.listing_image fill-480x320 class="listing-item__image" %}
-        </div>
-    {% else %}
-        <div class="listing-item__image"></div>
-    {% endif %}
+        {% else %}
+            <div class="listing-item__image"></div>
+        {% endif %}
+    </div>
     <div class="listing-item__content">
         <h2 class="listing-item__title">
             <span class="listing-item__title-text">

@@ -57,11 +57,11 @@
             }
 
             @include media-query--takes-value(650px) {
-                height: 250px;
+                height: 290px;
             }
 
             @include media-query--takes-value(870px) {
-                height: 190px;
+                height: 200px;
             }
         }
     }
@@ -84,6 +84,15 @@
         }
     }
 
+    &--plum {
+        @include connectors($grey-on-photo, bottom, right);
+        background-color: $plum;
+
+        &.listing-item--reverse {
+            @include connectors($grey-on-photo, bottom, left);
+        }
+    }
+
     &__image {
         display: none;
 
@@ -98,6 +107,8 @@
             background-size: 40%;
             filter: brightness(100%);
             transition: filter $transition;
+            height: 100%;
+            min-height: 160px;
         }
     }
 

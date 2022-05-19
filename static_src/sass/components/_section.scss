@@ -115,6 +115,10 @@
         @include page(top-right, bottom-right, $width: medium);
     }
 
+    &--story-page {
+        @include page(top-right, bottom-right, $width: full);
+    }
+
     &--guide-page {
         @include page(top-right, $width: medium);
     }
@@ -129,6 +133,15 @@
         }
     }
 
+    &--story-page-with-hero-image {
+        @include page(top-left, bottom-right, $width: full);
+
+        &#{$root}--overlap {
+            @include media-query(tablet-landscape) {
+                margin-top: -($section-overlap--hero-with-image - $gutter-xxl);
+            }
+        }
+    }
 
     &--index-website {
         @include page(top-right, bottom-left);

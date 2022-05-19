@@ -158,4 +158,18 @@
             margin-right: $gutter;
         }
     }
+
+    .template-story-page & {
+        &__inner {
+            background-color: $plum;
+        }
+
+        &__corner {
+            background-color: $emerald;
+        }
+
+        &__connectors {
+            @include connectors($emerald, top, left);
+        }
+    }
 }

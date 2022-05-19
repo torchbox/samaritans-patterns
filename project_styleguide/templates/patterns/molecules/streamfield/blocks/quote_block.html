@@ -14,7 +14,11 @@
         <div class="quote-block__quotation-wrapper">
             {% include "patterns/atoms/svg/icons/icon-quote-open.html" with classes="quote-block__quotation-mark quote-block__quotation-mark--open" %}
             <p class="quote-block__quotation">
-                {{ value.quote }}
+                {% if value.quote %}
+                    {{ value.quote }}
+                {% else %}
+                    {{ value }}
+                {% endif %}
             </p>
             {% include "patterns/atoms/svg/icons/icon-quote-close.html" with classes="quote-block__quotation-mark quote-block__quotation-mark--close" %}
         </div>

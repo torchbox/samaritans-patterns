@@ -1,10 +1,8 @@
 {% if related_pages %}
+    <section class="related-large {{ classes }}">
+        {% firstof pattern "dots" as pattern %}
+        {% include "../../atoms/svg/patterns/pattern-"|add:pattern|add:".html" with classes="pattern" %}
 
-<section class="related-large {{ classes }}">
-    {% firstof pattern "dots" as pattern %}
-    {% include "../../atoms/svg/patterns/pattern-"|add:pattern|add:".html" with classes="pattern" %}
-
-    {% if related_pages %}
         <div class="wrapper wrapper--large wrapper--padding-for-page">
             {% if heading %}
                 <h2 class="related-large__heading">{{ heading }}</h2>
@@ -20,8 +18,5 @@
                 {% endfor %}
             </div>
         </div>
-    {% endif %}
-
-</section>
-
+    </section>
 {% endif %}

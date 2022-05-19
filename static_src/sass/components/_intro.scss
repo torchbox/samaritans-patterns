@@ -1,9 +1,11 @@
 .intro {
     @mixin font-size--intro {
         font-size: 21px;
+
         @include media-query(tablet-portrait) {
             @include font-size(l);
         }
+
         @include media-query(tablet-landscape) {
             @include font-size(xl);
         }
@@ -15,7 +17,6 @@
     margin-bottom: $gutter-xxl;
     max-width: $wrapper--small;
 
-
     &--heading-margin {
         margin-bottom: $gutter-medium;
     }
@@ -24,12 +25,17 @@
         margin-bottom: 10px;
     }
 
-    &--margin {
-        margin: $gutter-xxl 0;
-    }
-
     &--margin-small {
         margin: $gutter-medium 0;
+    }
+
+    &--story {
+        max-width: 100%;
+        margin-bottom: $gutter-medium;
+
+        @include media-query(desktop) {
+            @include font-size(xxl);
+        }
     }
 
     &__info {
@@ -39,6 +45,5 @@
         p {
             margin-bottom: 0;
         }
-
     }
 }

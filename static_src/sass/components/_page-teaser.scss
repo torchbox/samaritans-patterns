@@ -168,4 +168,17 @@
             }
         }
     }
+
+    .template-story-page & {
+        @include corner($emerald, bottom, right, 150px, 150px, 7px, '&::before', 0);
+
+        @include media-query(tablet-portrait) {
+            @include corner($emerald, bottom, right, 360px, 190px, 7px, '&::before', 0);
+        }
+
+        &__content {
+            @include connectors($emerald, bottom, right);
+            background-color: $plum;
+        }
+    }
 }

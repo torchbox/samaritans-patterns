@@ -15,6 +15,23 @@
     }
 
     &--report,
+    &--story {
+        background-color: $plum;
+        margin: 0;
+        padding-top: 40px;
+
+        #{$root}__list {
+            margin-left: 30px;
+
+            @include media-query(tablet-landscape) {
+                margin: 0 auto;
+                max-width: $site-width;
+                padding-left: $page-padding-horizontal-tablet-landscape;
+                padding-right: $page-padding-horizontal-tablet-landscape;
+            }
+        }
+    }
+
     .hero--landing-page & {
         margin-bottom: $gutter;
     }

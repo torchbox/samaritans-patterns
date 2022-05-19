@@ -15,6 +15,37 @@
         color: inherit;
     }
 
+    &--story {
+        margin-top: 20px;
+        margin-bottom: 0;
+        padding-bottom: 40px;
+
+        @include media-query(tablet-landscape) {
+            margin: 0 60px 0 -10px;
+            padding-bottom: 0;
+        }
+
+        @include media-query(desktop) {
+            margin: 0 60px 0 -70px;
+        }
+
+        #{$root}__quotation,
+        #{$root}__quotation-wrapper {
+            margin: 0;
+        }
+    }
+
+    &--with-media {
+        background-color: $plum;
+        color: $white;
+    }
+
+    &--narrow {
+        @include media-query(tablet-landscape) {
+            max-width: 60%;
+        }
+    }
+
     &__quotation-wrapper {
         position: relative;
         margin-bottom: $gutter;
@@ -37,6 +68,10 @@
                 padding: 0 (2 * $gutter-large);
                 min-height: none;
             }
+        }
+
+        #{$root}--story & {
+            display: none;
         }
     }
 
@@ -70,6 +105,14 @@
                     top: auto;
                 }
             }
+
+            #{$root}--quote & {
+                transform: translateY(-100%);
+
+                @include media-query(tablet-portrait) {
+                    transform: translateY(0);
+                }
+            }
         }
     }
 
@@ -81,6 +124,12 @@
                 margin: $gutter-large $gutter-large 0;
             }
         }
+
+        #{$root}--story & {
+            @include media-query(tablet-portrait) {
+                margin: 0 $gutter-medium 0;
+            }
+        }
     }
 
     &__attribution {
@@ -88,6 +137,127 @@
 
         #{$root}--quote & {
             @include font-size(xs);
+        }
+    }
+
+    .template-story-page & {
+        &__quotation-mark {
+            fill: $plum;
+            opacity: 1;
+        }
+
+        &--story {
+            #{$root}__quotation-mark {
+                fill: $color--white;
+                width: 30px;
+                height: 40px;
+
+                &--close {
+                    top: calc(100% + 40px);
+
+                    @include media-query(tablet-portrait) {
+                        top: auto;
+                    }
+                }
+            }
+        }
+    }
+
+    // When used inside media with quote - full width iteration
+    .media-with-quote--full & {
+        padding: $gutter;
+
+        @include media-query(desktop) {
+            padding: 40px 80px 40px 40px;
+        }
+
+        &__quotation-wrapper {
+            @include media-query(desktop) {
+                display: flex;
+            }
+        }
+
+        &__quotation {
+            @include media-query(desktop) {
+                margin: 0 $gutter-large;
+            }
+        }
+
+        &__quotation-mark {
+            fill: $white;
+            opacity: 1;
+            flex-shrink: 0;
+            width: 20px;
+
+            @include media-query(desktop) {
+                width: 30px;
+                height: 40px;
+            }
+        }
+
+        &__attribution  {
+            @include media-query(desktop) {
+                margin-left: 65px;
+            }
+        }
+
+        &__connectors {
+            @include media-query(desktop) {
+                @include connectors($white, bottom, right, medium);
+            }
+        }
+    }
+
+    // When used inside media with quote - media on left iteration
+    .media-with-quote--right & {
+        @include corner($emerald, bottom, right, $width: 40%, $height: 30%);
+        position: relative;
+        padding: $gutter;
+        width: 100%;
+
+        @include media-query(desktop) {
+            padding: 40px 80px 80px 120px;
+            margin-left: -80px;
+        }
+
+        &__quotation-mark {
+            fill: $white;
+            opacity: 1;
+            flex-shrink: 0;
+            width: 20px;
+
+            @include media-query(desktop) {
+                width: 30px;
+                height: 40px;
+            }
+        }
+
+        &__connectors {
+            @include connectors($emerald, bottom, right, medium);
+        }
+    }
+
+    .media-with-quote--left & {
+        background-color: $white;
+        color: $teal-dark;
+        width: 100%;
+
+        @include media-query(desktop) {
+            margin: 60px -80px 0 0;
+            padding-right: 50px;
+            position: relative;
+        }
+
+        &__quotation-mark {
+            fill: $plum;
+            opacity: 1;
+            flex-shrink: 0;
+            width: 20px;
+
+            @include media-query(desktop) {
+                width: 30px;
+                height: 40px;
+            }
         }
     }
 }

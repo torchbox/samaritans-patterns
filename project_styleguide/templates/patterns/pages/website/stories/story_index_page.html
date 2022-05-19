@@ -1,0 +1,44 @@
+{% extends "patterns/templates/index_page/listing_template_website.html" %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block hero %}
+    {% include "patterns/molecules/hero/hero.html" with hero_color="plum" pattern="alt" hero_short=True hero_title_id="main-content" %}
+{% endblock %}
+
+{% block filters_bar %}
+    {% if page.introduction %}
+        <p class="intro">{{ page.introduction }}</p>
+    {% endif %}
+{% endblock %}
+
+{% block listings %}
+    {% if stories %}
+        <ul class="news-list">
+            {% if stories.number == 1 %}
+                {% for listing in featured_stories %}
+                    <li class="listing-item-highlight {% if forloop.counter|divisibleby:2 %}listing-item-highlight--reverse{% endif %} listing-item-highlight--plum">
+                        {% if forloop.counter0|divisibleby:2 %}
+                            {% include "patterns/molecules/listing-item/listing-item.html" with value=listing classes="listing-item--website listing-item--highlight listing-item--plum" %}
+                        {% else %}
+                            {% include "patterns/molecules/listing-item/listing-item.html" with value=listing classes="listing-item--website listing-item--highlight listing-item--reverse listing-item--plum" %}
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            {% endif %}
+            {% for listing in stories %}
+                <li>
+                    {% include "patterns/molecules/listing-item/listing-item.html" with value=listing classes="listing-item--website" %}
+                </li>
+            {% endfor %}
+        </ul>
+        {% include "patterns/molecules/pagination/pagination.html" with paginator_page=stories %}
+    {% else %}
+        No matching stories
+    {% endif %}
+{% endblock %}
+
+
+<!-- Overide footer so footer CTA does not display -->
+{% block footer %}
+    {% include 'patterns/organisms/footer/footer.html' %}
+{% endblock footer %}

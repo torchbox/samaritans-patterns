@@ -32,6 +32,10 @@
         background: $emerald;
     }
 
+    &--plum {
+        background: $plum;
+    }
+
     &--services {
         @include media-query(tablet-landscape) {
             padding-bottom: $gutter-xxl;
@@ -64,6 +68,13 @@
         #{$root}--with-image & {
             @include media-query(tablet-landscape) {
                 padding-bottom: $section-overlap--hero-with-image;
+            }
+        }
+
+        #{$root}--story & {
+            @include media-query(tablet-landscape) {
+                padding-bottom: 0;
+                flex: 1;
             }
         }
 
@@ -141,6 +152,18 @@
             height: calc(100% - #{$gutter-large - $gutter});
             margin-right: -$hero-image-offset--desktop-medium;
         }
+
+        &--story {
+            @include media-query(tablet-landscape) {
+                flex: 0 0 60%;
+                max-height: initial;
+                height: 415px;
+            }
+
+            @include media-query(desktop-medium) {
+                margin: 0 -70px 0 0;
+            }
+        }
     }
 
     &__search {
@@ -163,6 +186,7 @@
         width: 70%;
         max-width: 212px;
         right: -5px;
+        pointer-events: none;
 
         @include media-query(mob-landscape) {
             width: 45%;
@@ -179,6 +203,17 @@
             @include pattern($opacity: 1);
             position: absolute;
             z-index: z($z-elements, hero);
+        }
+
+        #{$root}--story & {
+            top: 20px;
+            width: 273px;
+
+            @include media-query(tablet-landscape) {
+                overflow: visible;
+                top: 0;
+                width: 45%;
+            }
         }
 
         .pattern {
@@ -244,6 +279,32 @@
                     top: auto;
                     bottom: -380px;
                 }
+            }
+
+            #{$root}--story & {
+                fill: $grey-on-photo;
+                left: auto;
+                right: 0;
+                opacity: 0.2;
+                bottom: -140px;
+                max-width: 300px;
+
+                @include media-query(mob-landscape) {
+                    bottom: -155px;
+                }
+
+                @include media-query(tablet-portrait) {
+                    bottom: -170px;
+                }
+
+                @include media-query(tablet-landscape) {
+                    bottom: -270px;
+                    max-width: 600px;
+                }
+            }
+
+            #{$root}--plum & {
+                fill: $grey-on-photo;
             }
         }
 
@@ -374,6 +435,29 @@
 
         #{$root}__pattern-wrapper {
             display: none;
+        }
+    }
+
+    &--story {
+        min-height: auto;
+        padding: $gutter-large 0 $gutter-x-large;
+        z-index: 9; // ensure pattern displays over content
+
+        @include media-query(mob-landscape) {
+            padding: $gutter-large 0 100px;
+        }
+
+        @include media-query(tablet-landscape) {
+            padding: $gutter-large 0 160px;
+            z-index: z($z-elements, hero);
+        }
+
+        &#{$root}--with-image {
+            padding: $gutter-large 0 0;
+
+            @include media-query(tablet-landscape) {
+                padding: $gutter-large 0 160px;
+            }
         }
     }
 }

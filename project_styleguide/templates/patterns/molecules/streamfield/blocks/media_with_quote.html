@@ -1,0 +1,48 @@
+{% load wagtailimages_tags %}
+
+{% comment %}
+    This component has 3 layout iterations:
+    - Full width (image or embed on top, quote underneath)
+    - Image or embed on left, quote on right
+    - Image on right, quote on left (embed on right is not allowed in admin as the quote overlaps video controls)
+{% endcomment %}
+
+<div class="media-with-quote media-with-quote--{% if align_left %}left{% elif align_right %}right{% elif full %}full{% endif %}">
+    {% if value.image %}
+        {% if align_left %}
+            <div class="media-with-quote__image-wrap">
+                {% image value.image fill-580x340 class="media-with-quote__image" %}
+            </div>
+        {% elif align_right %}
+            {% image value.image fill-460x350 class="media-with-quote__image" %}
+        {% else %}
+            {% image value.image fill-940x500 class="media-with-quote__image" %}
+        {% endif %}
+    {% endif %}
+
+    {% if value.embed %}
+        <figure class="figure figure--embed">
+            {{ value.embed }}
+        </figure>
+    {% endif %}
+
+    {% if value.quote %}
+        <blockquote class="quote-block quote-block--with-media">
+            <div class="quote-block__quotation-wrapper">
+                {% include "patterns/atoms/svg/icons/icon-quote-open.html" with classes="quote-block__quotation-mark quote-block__quotation-mark--open" %}
+                <p class="quote-block__quotation">
+                    {{ value.quote }}
+                </p>
+                {% include "patterns/atoms/svg/icons/icon-quote-close.html" with classes="quote-block__quotation-mark quote-block__quotation-mark--close" %}
+            </div>
+            <div class="quote-block__information-wrapper">
+                {% if value.attribution %}
+                    <p class="quote-block__attribution">
+                        {{ value.attribution }}
+                    </p>
+                {% endif %}
+            </div>
+            <span class="quote-block__connectors"></span>
+        </blockquote>
+    {% endif %}
+</div>

@@ -33,6 +33,15 @@
         }
     }
 
+    &--wide {
+        width: 100%;
+
+        @include media-query(tablet-landscape) {
+            max-width: $wrapper--wide;
+            margin: 0 auto;
+        }
+    }
+
     &--padding,
     &--padding-large,
     &--main {
@@ -170,5 +179,9 @@
             @include corner--box-left();
             margin-bottom: $gutter-xxl;
         }
+    }
+
+    &--no-related {
+        padding-bottom: 2rem;
     }
 }

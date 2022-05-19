@@ -53,6 +53,23 @@
         }
     }
 
+    &--plum {
+        @include corner($grey-on-photo, bottom, right, 150px, 150px, 7px, '&::before', 0);
+
+        @include media-query(tablet-portrait) {
+            @include corner(
+                $grey-on-photo,
+                bottom,
+                right,
+                360px,
+                190px,
+                7px,
+                '&::before',
+                0
+            );
+        }
+    }
+
     &__icon {
         width: 42px;
         height: 32px;

@@ -29,4 +29,25 @@
             max-width: 350px;
         }
     }
+
+    // When used inside media with quote - full width iteration
+    .media-with-quote--full & {
+        max-width: 100%;
+        margin: 0;
+    }
+
+    // Quote on the right iteration
+    .media-with-quote--right & {
+        max-width: 100%;
+        margin: 0;
+
+        @include media-query(desktop) {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            margin: -40px 0 0;
+            flex-shrink: 0;
+            max-width: 500px;
+        }
+    }
 }
