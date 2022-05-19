@@ -1,0 +1,137 @@
+{% extends "patterns/base_page.html" %}
+{% load wagtailcore_tags wagtailimages_tags navigation_tags static %}
+
+{% block content %}
+    {% include "patterns/molecules/progress-bar/progress-bar.html" %}
+
+    <div class="report">
+        <div class="report__hero-wrap">
+            {% include "patterns/molecules/hero/hero--image-background.html" with pattern="alt" class="hero--report" hero_image=parent_page.hero_image %}
+            <div class="wrapper wrapper--large wrapper--offset-right">
+                <section class="section section--report">
+                    {% include "patterns/molecules/navigation/breadcrumbs.html" with on_light=True classes="breadcrumb--report" %}
+
+                    <h1 class="report__title" id="main-content">{{ page.title }}</h1>
+
+                    <div class="section__connectors"></div>
+
+                    {% if parent_page.first_published_at or parent_page.reading_time_minutes or parent_page.report_download_url %}
+                        {% include "patterns/pages/website/reports/includes/report_meta_bar.html" with page=parent_page %}
+                    {% endif %}
+
+                </section>
+            </div>
+        </div>
+
+        <div class="wrapper wrapper--large wrapper--offset-right">
+
+            <div class="chapter-bar" data-chapter-bar>
+                <div class="chapter-bar__inner">
+                    <h2 class="chapter-bar__text">
+
+                        <span class="chapter-bar__number">
+                            Chapter
+                            {% for child in page.get_siblings.live.public %}
+                                {% if page.title == child.title %}{{ forloop.counter }}:{% endif %}
+                            {% endfor %}
+                        </span>
+                        <span class="chapter-bar__title">{{ page.title }}</span>
+                    </h2>
+
+                    {% if page.get_siblings.live.public %}
+                        <label for="chapter-select" class="hidden">Choose a chapter:</label>
+                        <select class="chapter-bar__select" id="chapter-select" data-chapter-bar-select>
+                            <option>Chapters</option>
+                            {% for child in page.get_siblings.live.public %}
+                                <option value="{% pageurl child %}">{{ forloop.counter }}. {{ child.title }}</option>
+                            {% endfor %}
+                        </select>
+                    {% endif %}
+
+                </div>
+            </div>
+
+            <section class="section section--main section--full-width">
+
+                {% if page.body %}
+                    {% include_block page.body %}
+                {% endif %}
+
+                {% if request.is_preview %}
+
+                    {% if page.get_prev_sibling or page.get_next_sibling %}
+
+                        <div class="page-navigation">
+                            {% if page.get_prev_sibling %}
+                                <div class="page-navigation__item page-navigation__item--previous">
+                                    <div>
+                                        <b class="page-navigation__direction">Previous: </b>
+                                        <a class="page-navigation__link" href="{% pageurl page.get_prev_sibling %}">
+                                            <p class="page-navigation__text">{{ page.get_prev_sibling.title }}<p>
+                                        </a>
+                                    </div>
+                                    {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="page-navigation__icon page-navigation__icon--previous" aria_hide="true" %}
+                                </div>
+                            {% endif %}
+
+                            {% if page.get_next_sibling %}
+                                <div class="page-navigation__item page-navigation__item--next">
+                                    <div>
+                                        <b class="page-navigation__direction">Next: </b>
+                                        <a class="page-navigation__link" href="{% pageurl page.get_next_sibling %}">
+                                            <p class="page-navigation__text">{{ page.get_next_sibling.title }}<p>
+                                        </a>
+                                    </div>
+                                    {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="page-navigation__icon page-navigation__icon--next" aria_hide="true" %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                    {% endif %}
+
+                {% else %}
+
+                    {% if page.prev_guide_chapter or page.next_guide_chapter %}
+
+                        <div class="page-navigation">
+                            {% if page.prev_guide_chapter %}
+                                <div class="page-navigation__item page-navigation__item--previous">
+                                    <div>
+                                        <b class="page-navigation__direction">Previous: </b>
+                                        <a class="page-navigation__link" href="{% pageurl page.prev_guide_chapter %}">
+                                            <p class="page-navigation__text">{{ page.prev_guide_chapter.title }}<p>
+                                        </a>
+                                    </div>
+                                    {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="page-navigation__icon page-navigation__icon--previous" aria_hide="true" %}
+                                </div>
+                            {% endif %}
+
+                            {% if page.next_guide_chapter %}
+                                <div class="page-navigation__item page-navigation__item--next">
+                                    <div>
+                                        <b class="page-navigation__direction">Next: </b>
+                                        <a class="page-navigation__link" href="{% pageurl page.next_guide_chapter %}">
+                                            <p class="page-navigation__text">{{ page.next_guide_chapter.title }}<p>
+                                        </a>
+                                    </div>
+                                    {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="page-navigation__icon page-navigation__icon--next" aria_hide="true" %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                    {% endif %}
+                {% endif %}
+
+                {% if parent_page.authors %}
+                    {% include "patterns/molecules/authors/authors.html" with page=parent_page %}
+                {% endif %}
+
+                <div class="section__connectors--extra"></div>
+            </section>
+        </div>
+
+        {% if parent_page.related_pages.all %}
+            {% include "patterns/molecules/related-pages/related-pages--large.html" with heading=parent_page.related_pages_heading related_pages=parent_page.related_pages.all pattern="dots" classes="related-large--overlap-large" heading_level="h3" %}
+        {% endif %}
+    </div>
+{% endblock %}

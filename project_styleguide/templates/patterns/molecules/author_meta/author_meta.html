@@ -1,0 +1,11 @@
+{% load wagtailimages_tags %}
+<div class="report-meta">
+    {% for author in authors %}
+    <div class="report-meta__author">
+        {% image author.image fill-50x50 jpegquality-40 as author_profile_image %}
+        <div>
+            <img src="{{ author_profile_image.url}}" alt="{{ author_profile_image.alt }}" />
+        </div>
+        <p class="report-meta__title">{{ author.name }}</p>
+    {% endfor %}
+</div>

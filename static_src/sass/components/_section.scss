@@ -343,4 +343,19 @@
         text-align: center;
         margin: $gutter-xxl $gutter;
     }
+
+    &--report {
+        background-color: rgba($white, 0.9);
+        padding: $gutter $gutter 0;
+
+        @include media-query(tablet-landscape) {
+            @include corner($lime, top, left, $width: 325px, $height: 145px);
+            padding: 50px 60px 0;
+
+            #{$root}__connectors {
+                @include connectors($lime, top, left, page);
+                left: 0;
+            }
+        }
+    }
 }

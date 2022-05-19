@@ -36,6 +36,10 @@
             text-align: center;
             font-weight: $weight--bold;
         }
+
+        #{$root}--overlap-large & {
+            font-weight: $weight--bold;
+        }
     }
 
     &--donate-landing {
@@ -49,6 +53,17 @@
             .pattern {
                 bottom: 0;
             }
+        }
+    }
+
+    &--overlap-large {
+        padding: 30px 20px;
+        margin: 0;
+
+        @include media-query(tablet-landscape) {
+            margin-top: -($section-overlap + 60px);
+            padding-top: 1.5 * $section-overlap;
+            padding-bottom: $section-overlap;
         }
     }
 

@@ -1,0 +1,15 @@
+.author {
+    display: flex;
+    align-items: center;
+
+    &__image {
+        border-radius: 50%;
+        flex-shrink: 0;
+        margin-right: 10px;
+    }
+
+    &__text {
+        @include font-size(s)
+        margin-bottom: 0;
+    }
+}

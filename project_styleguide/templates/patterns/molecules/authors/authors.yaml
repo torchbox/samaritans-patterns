@@ -1,0 +1,15 @@
+context:
+  page:
+    authors:
+      - name: Marv
+        job_title: Head of reports
+      - name: Joe
+        job_title: Head of reports
+      - name: Sarah
+        job_title: Head of reports
+
+tags:
+  image:
+    author.image fill-50x50 class="author__image":
+      raw: |
+        <img src="http://via.placeholder.com/50x50" width="50" height="50" alt="Some alt" class="author__image">

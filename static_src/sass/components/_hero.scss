@@ -363,4 +363,17 @@
             }
         }
     }
+
+    &--report {
+        @include media-query(tablet-landscape) {
+            top: 0;
+            z-index: -1;
+            position: absolute;
+            height: 800px;
+        }
+
+        #{$root}__pattern-wrapper {
+            display: none;
+        }
+    }
 }

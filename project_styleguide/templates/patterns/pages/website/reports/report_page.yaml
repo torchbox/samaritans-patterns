@@ -1,0 +1,47 @@
+context:
+  page:
+    get_verbose_name: report-page
+    title: This is the title of the report
+    first_guide_chapter:
+      title: This is the title of the first chapter
+    first_published_at: !!timestamp '2022-06-13 13:00:00'
+    category: Policy section
+    reading_time_minutes: 5
+    report_document:
+      url: '#'
+    body: True
+    chapter_title: This is the title of the chapter
+    get_children:
+      live:
+        public:
+          - title: Chapter 1
+          - title: Chapter 2
+          - title: This is the title of a really long chapter
+          - title: Chapter 4
+          - title: Chapter 5
+    related_pages_heading: Also of interest
+    related_pages:
+      all:
+        - page:
+            specific:
+              listing_title: Sam's story
+              listing_summary: Sam, 32, is a grower and wholesaler of field vegetables from Selby, Yorkshire.
+              listing_image: True
+        - page:
+            specific:
+              listing_title: Understanding emotional health can give you advice and information
+              listing_summary: We can give you advice and information
+              listing_image: True
+        - page:
+            specific:
+              listing_title: Chat to a Samaritan
+              listing_summary: We can give you advice and information
+              listing_image: True
+
+tags:
+  include_block:
+    page.body:
+      template_name: 'patterns/molecules/streamfield/stream_block.html'
+  pageurl:
+    child:
+      raw: "#"

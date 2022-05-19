@@ -2,10 +2,10 @@
     <span class="card-new__corner"></span>
     <div class="card-new__inner">
         <div class="card-new__container">
-            <h2 class="card-new__title">
+            <{% if heading_level %}{{ heading_level }}{% else %}h2{% endif %} class="card-new__title">
                 {% firstof title_override value.listing_title value.title as card_title %}
                 {% include "patterns/molecules/chevron-link/chevron-link.html" with title=card_title hide_svg_title="true" %}
-            </h2>
+            </{% if heading_level %}{{ heading_level }}{% else %}h2{% endif %}>
             <p class="card-new__text">
                 {% if body_override %}
                     {{ body_override }}

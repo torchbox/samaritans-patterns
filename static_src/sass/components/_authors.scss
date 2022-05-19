@@ -1,0 +1,36 @@
+.authors {
+    border-top: 2px solid $grey-light;
+    padding: 35px 0;
+    margin-top: 30px;
+
+    @include media-query(mob-landscape) {
+        margin-top: 40px;
+        padding: 50px 0 100px;
+    }
+
+    &__heading {
+        @include font-size(m);
+    }
+
+    &__grid {
+        display: grid;
+        gap: 20px;
+
+        @include media-query(mob-landscape) {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @include media-query(tablet-landscape) {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        @include target-ie11() {
+            display: flex;
+            flex-wrap: wrap;
+
+            > li {
+                margin: 0 20px 20px 0;
+            }
+        }
+    }
+}

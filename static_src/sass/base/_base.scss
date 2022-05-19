@@ -60,6 +60,14 @@ body {
             content: none;
         }
     }
+
+    // enables position:sticky to work
+    &.template-report-page,
+    &.template-report-chapter-page {
+        height: auto;
+        overflow-x: initial; // fallback for browsers that don't support clip
+        overflow-x: clip;
+    }
 }
 
 // Prevent empty space below images appearing

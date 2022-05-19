@@ -45,6 +45,7 @@ import CharacterCountdown from './components/character-countdown';
 import { toggleLeaderboard } from './components/leaderboard';
 import FormFieldExpand from './components/form-field-expand';
 import TermsAndConditions from './components/terms-and-conditions';
+import ChapterBar from './components/chapter-bar';
 
 document.addEventListener('DOMContentLoaded', function () {
     for (const accordion of document.querySelectorAll(Accordion.selector())) {
@@ -223,4 +224,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     toggleLeaderboard(document.querySelector('[data-leaderboard-toggle]'));
+
+    for (const chapterbar of document.querySelectorAll(ChapterBar.selector())) {
+        new ChapterBar(chapterbar);
+    }
 });

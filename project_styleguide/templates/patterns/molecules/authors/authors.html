@@ -1,0 +1,19 @@
+{% load wagtailimages_tags %}
+
+<div class="authors">
+    <h2 class="authors__heading">Authors</h2>
+    <ul class="authors__grid">
+        {% for author in page.authors %}
+            <li class="author">
+                {% image author.image fill-50x50 class="author__image" %}
+                <div class="author__meta">
+                    <p class="author__text">{{ author.name }}</p>
+
+                    {% if author.job_title %}
+                        <p class="author__text">{{ author.job_title }}</p>
+                    {% endif %}
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

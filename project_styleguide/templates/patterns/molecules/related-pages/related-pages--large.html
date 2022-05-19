@@ -13,9 +13,9 @@
             <div class="grid grid--no-margin grid--3col grid--large-gutters">
                 {% for card in related_pages %}
                     {% if card.value %}
-                        {% include "patterns/molecules/cards/related-card.html" with value=card.value only %}
+                        {% include "patterns/molecules/cards/related-card.html" with value=card.value heading_level=heading_level only %}
                     {% else %}
-                        {% include "patterns/molecules/cards/related-card.html" with value=card.page.specific only %}
+                        {% include "patterns/molecules/cards/related-card.html" with value=card.page.specific heading_level=heading_level only %}
                     {% endif %}
                 {% endfor %}
             </div>

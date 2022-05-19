@@ -26,6 +26,13 @@
         }
     }
 
+    &--offset-right {
+        @include media-query(tablet-landscape) {
+            padding-left:  $page-padding-horizontal-tablet-landscape;
+            padding-right: 250px;
+        }
+    }
+
     &--padding,
     &--padding-large,
     &--main {
