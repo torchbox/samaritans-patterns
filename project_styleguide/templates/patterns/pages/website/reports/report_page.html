@@ -35,7 +35,7 @@
                         <select class="chapter-bar__select" id="chapter-select" data-chapter-bar-select>
                             <option>Chapters</option>
                             {% for child in page.get_children.live.public %}
-                                <option value="{% pageurl child %}">{{ forloop.counter }}. {{ child.title }}</option>
+                                <option value="{% pageurl child %}">{{ forloop.counter }}: {{ child.title }}</option>
                             {% endfor %}
                         </select>
                     {% endif %}
