@@ -36,8 +36,8 @@
         margin: 0;
     }
 
-    // Quote on the right iteration
-    .media-with-quote--right & {
+    // Embed on the left iteration
+    .media-with-quote--left & {
         max-width: 100%;
         margin: 0;
 
@@ -49,5 +49,11 @@
             flex-shrink: 0;
             max-width: 500px;
         }
+    }
+
+    // Embed on the right iteration
+    .media-with-quote--right & {
+        max-width: 100%;
+        margin: 0;
     }
 }
