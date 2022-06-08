@@ -1,6 +1,6 @@
 context:
   value:
-    quote: "You may think that all ice is the same, but if you have contaminated ice, you and your family could be risking your health."
+    quote: 'You may think that all ice is the same, but if you have contaminated ice, you and your family could be risking your health.'
     attribution: Karen, caller
     image: fake
     button_link: '#'

@@ -218,8 +218,8 @@
                 text-transform: uppercase;
                 font-weight: $weight--bold;
                 line-height: 1;
-                padding: ($gutter-small / 2) $gutter-small;
-                margin: ($gutter / 2) 0 auto;
+                padding: ($gutter-small * 0.5) $gutter-small;
+                margin: ($gutter * 0.5) 0 auto;
 
                 @include media-query(tablet-portrait) {
                     margin-top: 0;
@@ -232,7 +232,7 @@
         }
 
         #{$root}__icon-wrapper {
-            margin: ($gutter-small / 2) 0 auto;
+            margin: ($gutter-small * 0.5) 0 auto;
         }
 
         #{$root}__content {
@@ -268,6 +268,17 @@
             &--link {
                 color: $ink;
             }
+        }
+    }
+
+    // use dark text on yellow background to pass colour contrast
+    .section--website-event-after & {
+        &__heading {
+            color: $ink;
+        }
+
+        &__icon {
+            fill: $ink;
         }
     }
 }

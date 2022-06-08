@@ -4,6 +4,7 @@
     display: flex;
 
     &__item {
+        @include font-size(m);
         display: flex;
 
         &:not(:last-child)::after {
@@ -18,7 +19,7 @@
     }
 
     &__link {
-        @include link(currentColor, $meadow);
+        @include link(currentColor, $white);
         @include underline(transparent, currentColor);
     }
 }

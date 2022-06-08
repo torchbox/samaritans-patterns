@@ -12,10 +12,12 @@
     }
 
     &__heading-link {
+        @include link($ocean, $ink);
         @include underline($element: #{$root}__heading-link-inner);
         padding-left: $gutter-medium;
         border-left: 1px dashed $grey-text;
         margin-left: $gutter-medium;
+        font-weight: $weight--bold;
 
         #{$root}--homepage & {
             @include link($color--link--on-off-white);

@@ -31,14 +31,19 @@ class ProgressBar {
         };
 
         // Check browser supports progress element
-        if('max' in document.createElement('progress')){
-
+        if ('max' in document.createElement('progress')) {
             // Set the max attr for the first time
             this.node.setAttribute('max', getMax());
 
-            document.addEventListener('scroll', Utilities.throttle(scrollListener, 100));
+            document.addEventListener(
+                'scroll',
+                Utilities.throttle(scrollListener, 100),
+            );
 
-            window.addEventListener('resize', Utilities.throttle(windowListener, 100));
+            window.addEventListener(
+                'resize',
+                Utilities.throttle(windowListener, 100),
+            );
         }
     }
 }

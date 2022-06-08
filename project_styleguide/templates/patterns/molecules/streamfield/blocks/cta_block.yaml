@@ -3,7 +3,7 @@ context:
     title: Brew Monday
     description: Stay connected with a virtual cuppa and raise money for Samaritans. Because now more than ever, it's about reaching out, checking in and staying connected.
     get_link_text: Click here
-    get_link_url: "#"
+    get_link_url: '#'
     button_text: Find out more about Brew Monday
     button_link:
       - block_type: page

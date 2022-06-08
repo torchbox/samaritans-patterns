@@ -12,10 +12,9 @@ context:
         - Something
         - Another
 
-
 tags:
   pageurl:
-    "value":
+    'value':
       raw: '#'
   image:
     value.listing_image fill-1064x400 class="listing-item-featured__image":

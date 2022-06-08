@@ -3,8 +3,8 @@ context:
     title: Events Listing Page Test
     intro: Events Listing Intro
   event_types:
-  - ['type1', "Type 1"]
-  - ['type2', "Type 2"]
+    - ['type1', 'Type 1']
+    - ['type2', 'Type 2']
   events:
     - title: Edinburgh 10K 2021
       listing_image: fake
@@ -99,9 +99,9 @@ context:
 tags:
   pageurl:
     subpage:
-      raw: "#"
+      raw: '#'
     page:
-      raw: "#"
+      raw: '#'
   image:
     subpage.listing_image fill-450x300:
       raw: |

@@ -44,4 +44,4 @@ tags:
       template_name: 'patterns/molecules/streamfield/stream_block.html'
   pageurl:
     child:
-      raw: "#"
+      raw: '#'

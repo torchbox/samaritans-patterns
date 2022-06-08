@@ -33,7 +33,13 @@
     align-items: stretch;
 
     &--secondary {
-        @include corner($lime, bottom, right, $selector: '#{$root}__corner', $z-index: auto);
+        @include corner(
+            $lime,
+            bottom,
+            right,
+            $selector: '#{$root}__corner',
+            $z-index: auto
+        );
 
         #{$root}__connectors {
             @include connectors($lime, bottom, right);
@@ -41,7 +47,13 @@
     }
 
     &--primary {
-        @include corner($lime, top, left, $selector: '#{$root}__corner', $z-index: auto);
+        @include corner(
+            $lime,
+            top,
+            left,
+            $selector: '#{$root}__corner',
+            $z-index: auto
+        );
 
         #{$root}__connectors {
             @include connectors($lime, top, left);
@@ -82,7 +94,6 @@
             @include media-query(mob-landscape) {
                 flex-wrap: nowrap;
             }
-
         }
 
         #{$root}--secondary & {

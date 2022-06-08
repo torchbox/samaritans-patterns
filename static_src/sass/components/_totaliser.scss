@@ -53,7 +53,7 @@ $totaliser-slow-transition: 1400ms cubic-bezier(0.645, 0.045, 0.355, 1);
         height: 100%;
         background-color: transparent;
         transition: width $totaliser-default-transition,
-        background-color $totaliser-slow-transition;
+            background-color $totaliser-slow-transition;
 
         &::after {
             content: '';
@@ -62,7 +62,7 @@ $totaliser-slow-transition: 1400ms cubic-bezier(0.645, 0.045, 0.355, 1);
             right: -15px;
             width: 32px;
             height: 30px;
-            background-image: url('../images/totaliser-star.png');
+            background-image: url('../images/cssBackgrounds/totaliser-star.png');
             background-size: cover;
         }
     }

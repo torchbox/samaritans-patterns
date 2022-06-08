@@ -4,7 +4,8 @@
     iframe,
     object,
     embed,
-    .fb_iframe_widget { // sass-lint:disable-line class-name-format
+    .fb_iframe_widget {
+        // sass-lint:disable-line class-name-format
         position: absolute;
         top: 0;
         left: 0;

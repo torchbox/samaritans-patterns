@@ -2,7 +2,7 @@
     @include font-size(xs);
     z-index: z($z-elements, banner);
     position: fixed;
-    padding: ($gutter / 2) $gutter-small;
+    padding: ($gutter * 0.5) $gutter-small;
     left: 0;
     right: 0;
     bottom: 0;

@@ -6,7 +6,6 @@ class MobileSubMenu {
     constructor(node) {
         this.node = node;
         this.bindEventListeners();
-        
     }
 
     bindEventListeners() {

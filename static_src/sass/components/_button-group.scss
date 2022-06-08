@@ -39,12 +39,20 @@
         }
 
         &:not([disabled]) {
-            @include link($color--link--on-off-white, $color--link-hover, #{$root}__button-text);
+            @include link(
+                $color--link--on-off-white,
+                $color--link-hover,
+                #{$root}__button-text
+            );
             @include underline($element: #{$root}__button-text);
             background-color: $off-white;
 
             #{$root}--white & {
-                @include link($color--link, $color--link-hover, #{$root}__button-text);
+                @include link(
+                    $color--link,
+                    $color--link-hover,
+                    #{$root}__button-text
+                );
                 background-color: $white;
             }
         }

@@ -1,8 +1,8 @@
 context:
   value:
-    title: "Some title"
+    title: 'Some title'
     document:
-      title: "Document title"
-      url: "#"
+      title: 'Document title'
+      url: '#'
       file_extension: pdf
       get_file_size: 43565768

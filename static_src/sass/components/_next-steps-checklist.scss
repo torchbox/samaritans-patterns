@@ -15,7 +15,7 @@
     }
 
     &__item-text {
-        margin-bottom: $gutter / 2;
+        margin-bottom: $gutter * 0.5;
     }
 
     &__item {
@@ -49,7 +49,7 @@
 
             &::before {
                 content: '';
-                background-image: url('../images/tick.svg');
+                background-image: url('../images/cssBackgrounds/tick.svg');
                 background-repeat: no-repeat;
                 background-position: center;
             }

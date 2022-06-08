@@ -26,14 +26,14 @@ context:
               listing_title: Understanding emotional health
               listing_summary: We can give you advice and information
   service_cards:
-  - title: A volunteer will answer
-    introduction: If you phone us, we answer with something like Samaritans, can I help you?
-  - title: You talk, we listen
-    introduction: We listen to you and help you talk through your concerns, worries and troubles.
-  - title: We give you space to be yourself
-    introduction: Well focus on your thoughts and feelings, and may ask questions to help explore how you feel.
-  - title: We wont tell you what you should do
-    introduction: We wont make decisions for you, our advice or opinions are not important for the call.
+    - title: A volunteer will answer
+      introduction: If you phone us, we answer with something like Samaritans, can I help you?
+    - title: You talk, we listen
+      introduction: We listen to you and help you talk through your concerns, worries and troubles.
+    - title: We give you space to be yourself
+      introduction: Well focus on your thoughts and feelings, and may ask questions to help explore how you feel.
+    - title: We wont tell you what you should do
+      introduction: We wont make decisions for you, our advice or opinions are not important for the call.
   all_listening_service_pages:
     - proposition: Call us
       short_description: Call us - Whatever you're going through, can call us free any time, on any phone, on 116 123
@@ -48,7 +48,7 @@ context:
           - Benefit
           - Benefit
       service_call_to_action:
-        template_name: "patterns/molecules/streamfield/blocks/service_cta_phone_block.html"
+        template_name: 'patterns/molecules/streamfield/blocks/service_cta_phone_block.html'
     - proposition: Chat online
       short_description: Chat online - Whatever you're going through, can call us free any time, on any phone, on 116 123
       benefits:

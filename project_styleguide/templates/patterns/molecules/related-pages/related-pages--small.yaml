@@ -14,7 +14,6 @@ context:
           title: Page title (has listing title too)
           listing_title: Listing title (has page title too)
 
-
 tags:
   pageurl:
     specific_related_page:

@@ -42,13 +42,13 @@ context:
 tags:
   pageurl:
     subpage:
-      raw: "#"
+      raw: '#'
   image:
     subpage.listing_image fill-450x300:
       raw: |
         <img src="http://via.placeholder.com/450x300" width="450" height="300" alt="Some alt">
   include_block:
     page.story_cta:
-      template_name: "patterns/molecules/streamfield/blocks/cta_block.html"
+      template_name: 'patterns/molecules/streamfield/blocks/cta_block.html'
     page.top_story_cta:
-      template_name: "patterns/molecules/streamfield/blocks/cta_block.html"
+      template_name: 'patterns/molecules/streamfield/blocks/cta_block.html'

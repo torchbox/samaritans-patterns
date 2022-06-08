@@ -47,7 +47,9 @@ export const typesOfInterview = {
  **/
 const InterviewPicker = ({ interviews, onSubmit, filterTitle }) => {
     const [selectedDate, setDate] = useState(null);
-    const [filters, setFilters] = useState(Object.values(typesOfInterview).map(v => v.key));
+    const [filters, setFilters] = useState(
+        Object.values(typesOfInterview).map((v) => v.key),
+    );
     const [selectedSlot, setSelectedSlot] = useState(null);
     const [showModal, hideModal] = useModal(
         () => (
@@ -116,7 +118,7 @@ const InterviewPicker = ({ interviews, onSubmit, filterTitle }) => {
         return !!filters.includes(typesOfInterview[interviewType].key);
     };
     const availableInterviewTypes = useMemo(() => {
-        return new Set(interviews.map(({ interview_type }) => interview_type))
+        return new Set(interviews.map(({ interview_type }) => interview_type));
     }, [interviews]);
 
     const visibleInterviews = () => {
@@ -168,31 +170,33 @@ const InterviewPicker = ({ interviews, onSubmit, filterTitle }) => {
                     className="form-item-wrapper form-item-wrapper--group interview-filter"
                     id="donate__contact-prefs"
                 >
-                    {Object.values(typesOfInterview).filter(({ name }) => availableInterviewTypes.has(name)).map((interviewType) => [
-                        <div
-                            className="form-item form-item--boolean_field form-item--checkbox_input"
-                            key={interviewType.key}
-                        >
-                            <div className="form-item__wrapper">
-                                <input
-                                    type="checkbox"
-                                    name={interviewType.key}
-                                    id={`id_${interviewType.key}`}
-                                    onChange={handleChange}
-                                    checked={interviewTypeActive(
-                                        interviewType.name,
-                                    )}
-                                />
+                    {Object.values(typesOfInterview)
+                        .filter(({ name }) => availableInterviewTypes.has(name))
+                        .map((interviewType) => [
+                            <div
+                                className="form-item form-item--boolean_field form-item--checkbox_input"
+                                key={interviewType.key}
+                            >
+                                <div className="form-item__wrapper">
+                                    <input
+                                        type="checkbox"
+                                        name={interviewType.key}
+                                        id={`id_${interviewType.key}`}
+                                        onChange={handleChange}
+                                        checked={interviewTypeActive(
+                                            interviewType.name,
+                                        )}
+                                    />
 
-                                <label
-                                    htmlFor={`id_${interviewType.key}`}
-                                    className="form-item__label form-item__label--checkbox_input"
-                                >
-                                    {interviewType.shortDisplay}
-                                </label>
-                            </div>
-                        </div>,
-                    ])}
+                                    <label
+                                        htmlFor={`id_${interviewType.key}`}
+                                        className="form-item__label form-item__label--checkbox_input"
+                                    >
+                                        {interviewType.shortDisplay}
+                                    </label>
+                                </div>
+                            </div>,
+                        ])}
                 </div>
             </div>
             <div
@@ -269,9 +273,8 @@ export const initInterviewPicker = () => {
         const datetimeField = wrapperElement.querySelector(
             '#id_interview_datetime',
         );
-        const interviewTypeField = wrapperElement.querySelector(
-            '#id_interview_type',
-        );
+        const interviewTypeField =
+            wrapperElement.querySelector('#id_interview_type');
         const filterTitle = document.querySelector(
             '[data-interview-picker-filter-title]',
         ).dataset.interviewPickerFilterTitle;

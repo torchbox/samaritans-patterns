@@ -51,7 +51,7 @@
 
         &--text {
             font-size: $base-font-size;
-            padding-top: $gutter / 2;
+            padding-top: $gutter * 0.5;
         }
 
         &--link {
@@ -61,7 +61,6 @@
             transition: color $transition;
             font-weight: $weight--bold;
         }
-
     }
 
     @include media-query--takes-value($breakpoint-tablet-portrait) {
@@ -152,7 +151,6 @@
     }
 
     &__slider {
-
         &.is-hidden {
             display: none;
         }

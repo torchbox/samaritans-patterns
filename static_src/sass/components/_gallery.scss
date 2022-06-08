@@ -40,7 +40,7 @@
         }
 
         // only show the first six on the grid
-        &:nth-child(-n+6) {
+        &:nth-child(-n + 6) {
             #{$root}__grid & {
                 display: block;
             }
@@ -59,7 +59,6 @@
         background-color: $white;
         color: $color--link;
         transition: background-color $transition;
-
     }
 
     &__icon {
@@ -70,13 +69,10 @@
     }
 
     &__browse-button {
+        @include link($ocean, $ink);
+        @include underline($ocean, $ink);
+        font-weight: $weight--bold;
         margin-bottom: $gutter;
-        color: $color--link;
-        text-decoration: underline;
-
-        #{$hover} {
-            color: $color--link-hover;
-        }
     }
 
     &__nav {

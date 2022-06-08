@@ -19,11 +19,9 @@
         }
     }
 
-
     // TODO: make this less hacky
     .sticky-cta & {
         display: none;
-
     }
 
     &--sticky {
@@ -50,7 +48,6 @@
         }
     }
     // end hacky section
-
 
     &__icon {
         display: none;

@@ -104,7 +104,9 @@ a {
     @include link;
 
     .rich-text & {
-        @include underline(transparent, currentColor);
+        @include link($ocean, $ink);
+        @include underline($ocean, currentColor);
+        font-weight: $weight--bold;
     }
 }
 

@@ -7,5 +7,5 @@ context:
 
 tags:
   pageurl:
-    "link.value":
-      raw: "#"
+    'link.value':
+      raw: '#'

@@ -8,7 +8,6 @@
     background-color: $aubergine;
     color: $off-white;
 
-
     #{$root}__connectors {
         @include connectors(white, bottom, right, page);
     }
@@ -33,5 +32,4 @@
         border-radius: 50%;
         padding-right: $gutter * 0.25;
     }
-
 }

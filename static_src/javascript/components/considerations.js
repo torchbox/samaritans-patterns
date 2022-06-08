@@ -5,13 +5,15 @@ class Considerations {
 
     constructor(node) {
         this.node = node;
-        this.allConsiderationButtons = this.node.querySelectorAll('.js-consideration-button');
+        this.allConsiderationButtons = this.node.querySelectorAll(
+            '.js-consideration-button',
+        );
 
         this.bindEvents();
     }
 
     bindEvents() {
-        this.allConsiderationButtons.forEach(button => {
+        this.allConsiderationButtons.forEach((button) => {
             button.addEventListener('click', (e) => {
                 e.preventDefault();
                 this.handleNextConsideration(e.target);
@@ -20,8 +22,6 @@ class Considerations {
     }
 
     handleNextConsideration(button) {
-
-
         // complete current consideration
         const current = button.closest('.js-consideration');
         current.classList.add('is-complete');

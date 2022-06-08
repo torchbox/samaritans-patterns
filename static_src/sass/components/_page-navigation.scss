@@ -31,6 +31,9 @@
     }
 
     &__link {
+        @include link($ocean, $ink);
+        @include underline($ocean, currentColor);
+        font-weight: $weight--bold;
         text-decoration: underline;
     }
 

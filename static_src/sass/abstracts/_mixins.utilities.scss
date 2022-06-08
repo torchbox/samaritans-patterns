@@ -7,7 +7,7 @@
     } @else {
         @each $query in $queries {
             @each $breakpoint in $breakpoints {
-                $name:        nth($breakpoint, 1);
+                $name: nth($breakpoint, 1);
                 $declaration: nth($breakpoint, 2);
 
                 @if $query == $name and $declaration {
@@ -26,7 +26,6 @@
     }
 }
 
-
 /* ============================================
   Hide text
 */
@@ -38,7 +37,6 @@
     clip: rect(1px, 1px, 1px, 1px);
 }
 
-
 /* ============================================
   iOS Native vertical scroll
 */
@@ -48,21 +46,19 @@
     -webkit-overflow-scrolling: touch; // sass-lint:disable-line no-misspelled-properties no-vendor-prefixes
 }
 
-
 /* ============================================
     Output a rem and px fallback value for the given property
 */
 @mixin rem($property, $values) {
-
-    $px:  ();
+    $px: ();
     $rem: ();
 
     @each $value in $values {
         @if $value == 0 or $value == auto or $value == inherit {
-            $px:  append($px, $value);
+            $px: append($px, $value);
             $rem: append($rem, $value);
         } @else {
-            $px:  append($px, $value);
+            $px: append($px, $value);
             $rem: append($rem, rem(strip-unit($value)));
         }
     }
@@ -72,14 +68,12 @@
     // sass-lint:enddisable
 }
 
-
 /* ============================================
     Output a `font-size: [x]rem;` declaration for the given px value
 */
 @mixin rem-font-size($font-size) {
     @include rem(font-size, $font-size);
 }
-
 
 /* ============================================
     Font sizes
@@ -108,7 +102,8 @@
     IE11 specific styles
 */
 @mixin target-ie11 {
-    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) { // sass-lint:disable-line no-vendor-prefixes
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+        // sass-lint:disable-line no-vendor-prefixes
         @content;
     }
 }

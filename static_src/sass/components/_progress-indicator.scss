@@ -18,7 +18,7 @@ $blob-size-large: 40px;
     &__step {
         display: flex;
         align-items: center;
-        margin-right: ($gutter / 2);
+        margin-right: ($gutter * 0.5);
         flex-direction: column;
 
         @include media-query(mob-landscape) {
@@ -36,8 +36,8 @@ $blob-size-large: 40px;
 
     &__blob {
         @include font-size(s);
-        width: ($blob-size-small + ($gutter / 2));
-        height: ($blob-size-small + ($gutter / 2));
+        width: ($blob-size-small + ($gutter * 0.5));
+        height: ($blob-size-small + ($gutter * 0.5));
         background-color: $teal;
         color: $color--white;
         border-radius: 50%;
@@ -48,10 +48,10 @@ $blob-size-large: 40px;
         margin-bottom: ($gutter * 0.25);
 
         @include media-query(tablet-portrait) {
-            margin-right: ($gutter / 2);
+            margin-right: ($gutter * 0.5);
             margin-bottom: 0;
-            width: ($blob-size-large + ($gutter / 2));
-            height: ($blob-size-large + ($gutter / 2));
+            width: ($blob-size-large + ($gutter * 0.5));
+            height: ($blob-size-large + ($gutter * 0.5));
         }
 
         #{$root}__step--active & {

@@ -140,7 +140,8 @@
             flex: 0 0 50%;
             height: calc(100% + #{$gutter-small});
             max-height: 380px;
-            margin: 0 (-$hero-image-offset--tablet-landscape) (-$gutter-small) $gutter;
+            margin: 0 (-$hero-image-offset--tablet-landscape) (-$gutter-small)
+                $gutter;
         }
 
         @include media-query(desktop) {
@@ -242,13 +243,16 @@
             #{$root}--with-image & {
                 // These offsets would put the pattern in the right place if the right-hand edge of the image were aligned with the right-hand edge of $wrapper-large. They are then adjusted at each breakpoint by the amount that the image is offset from that position.
                 $pattern-offset--from-right: 130px;
-                $pattern-offset--from-center: (0.5 * $site-width) - $pattern-offset--from-right;
+                $pattern-offset--from-center: (0.5 * $site-width) -
+                    $pattern-offset--from-right;
 
                 @include media-query(tablet-landscape) {
                     top: auto;
                     right: auto;
                     bottom: -330px;
-                    left: calc(100% - #{$pattern-offset--from-right} + #{$hero-image-offset--tablet-landscape});
+                    left: calc(
+                        100% - #{$pattern-offset--from-right} + #{$hero-image-offset--tablet-landscape}
+                    );
                     width: 500px;
                 }
 
@@ -257,19 +261,22 @@
                     $breakpoint-desktop - $gutter-large
                 ) {
                     left: calc(
-                        50% + #{$pattern-offset--from-center + $hero-image-offset--tablet-landscape}
+                        50% + #{$pattern-offset--from-center +
+                            $hero-image-offset--tablet-landscape}
                     );
                 }
 
                 @include media-query(desktop) {
                     left: calc(
-                        50% + #{$pattern-offset--from-center + $hero-image-offset--desktop}
+                        50% + #{$pattern-offset--from-center +
+                            $hero-image-offset--desktop}
                     );
                 }
 
                 @include media-query(desktop-medium) {
                     left: calc(
-                        50% + #{$pattern-offset--from-center + $hero-image-offset--desktop-medium}
+                        50% + #{$pattern-offset--from-center +
+                            $hero-image-offset--desktop-medium}
                     );
                 }
             }
@@ -361,7 +368,6 @@
                 height: 800px;
             }
         }
-
     }
 
     &--donate-landing,

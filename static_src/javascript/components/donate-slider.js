@@ -1,11 +1,11 @@
 import noUiSlider from 'nouislider';
 
 const currencyCode = document.getElementById('id_currency');
-const toNumbers = arr => arr.map(Number);
-const differenceBetween = (numberOne, numberTwo) => Number(numberOne) - Number(numberTwo);
+const toNumbers = (arr) => arr.map(Number);
+const differenceBetween = (numberOne, numberTwo) =>
+    Number(numberOne) - Number(numberTwo);
 
-
-function getSliderSteps(sliderStepValues){
+function getSliderSteps(sliderStepValues) {
     var stepsDict = {};
 
     // Cast to numbers
@@ -15,15 +15,31 @@ function getSliderSteps(sliderStepValues){
         // The first and last values need a slightly different syntax
         // see: https://refreshless.com/nouislider/slider-values/
         if (index === 0) {
-            stepsDict['min'] = [sliderStepValues[0], differenceBetween(sliderStepValues[index + 1], sliderStepValues[0])];
-        }
-        else if (index == sliderStepValues.length - 1){
-            stepsDict['max'] = [sliderStepValues[index], differenceBetween(sliderStepValues[index], sliderStepValues[index - 1])];
-        }
-        else {
+            stepsDict['min'] = [
+                sliderStepValues[0],
+                differenceBetween(
+                    sliderStepValues[index + 1],
+                    sliderStepValues[0],
+                ),
+            ];
+        } else if (index == sliderStepValues.length - 1) {
+            stepsDict['max'] = [
+                sliderStepValues[index],
+                differenceBetween(
+                    sliderStepValues[index],
+                    sliderStepValues[index - 1],
+                ),
+            ];
+        } else {
             // Calculate % ratio for placement of point
-            stepValue = (index / (sliderStepValues.length - 1) * 100);
-            stepsDict[String(stepValue)] = [sliderStepValues[index], differenceBetween(sliderStepValues[index + 1], sliderStepValues[index])];
+            stepValue = (index / (sliderStepValues.length - 1)) * 100;
+            stepsDict[String(stepValue)] = [
+                sliderStepValues[index],
+                differenceBetween(
+                    sliderStepValues[index + 1],
+                    sliderStepValues[index],
+                ),
+            ];
         }
     });
 
@@ -63,7 +79,10 @@ class DonateAmountSlider {
             callToActionText: this.config.callToActionText,
             callCounter: this.config.callCounter,
             handleAttributes: [
-                { 'aria-label': 'Use the slider to choose an amount to donate' },
+                {
+                    'aria-label':
+                        'Use the slider to choose an amount to donate',
+                },
             ],
         });
     }
@@ -88,7 +107,7 @@ class DonateAmountSlider {
 
             // Trigger input event to update donation usage counters
             let event;
-            if (typeof (Event) === 'function') {
+            if (typeof Event === 'function') {
                 node.dispatchEvent(new Event('input'));
             } else {
                 event = document.createEvent('Event');
@@ -112,7 +131,6 @@ class DonateAmountSlider {
                 return;
             }
 
-
             text.innerHTML = textValues[index];
             icon.innerHTML = iconValues[index];
 
@@ -123,7 +141,6 @@ class DonateAmountSlider {
             }
 
             pips[index].classList.add('active');
-
 
             if (mobileCTA) {
                 // Determine if mobile CTA should be visible
@@ -152,7 +169,7 @@ class DonateAmountSlider {
         });
         // Delete the uimarkers from the DOM in the Donate slider only
         const ticks = donateSlider.querySelectorAll(
-            '.noUi-marker.noUi-marker-horizontal.noUi-marker-normal, .noUi-marker.noUi-marker-horizontal.noUi-marker-large'
+            '.noUi-marker.noUi-marker-horizontal.noUi-marker-normal, .noUi-marker.noUi-marker-horizontal.noUi-marker-large',
         );
         for (let i = 0; i < ticks.length; i++) {
             const node = ticks[i];
@@ -176,11 +193,14 @@ function parseDonationValues(values) {
     return [amounts, icons, text];
 }
 
-function formatAmount(pricePoint){
+function formatAmount(pricePoint) {
     const amount = parseFloat(pricePoint).toFixed(2);
 
     // Handle decimals that can be integers
-    if (amount.charAt((amount.length - 2)) == '0' && amount.charAt((amount.length - 1)) == '0') {
+    if (
+        amount.charAt(amount.length - 2) == '0' &&
+        amount.charAt(amount.length - 1) == '0'
+    ) {
         return pricePoint;
     }
 
@@ -212,70 +232,89 @@ function initDonationSliders() {
     let monthly_call_counter = document.querySelectorAll('[name="amount"]')[0];
 
     // If both sliders are enabled, there will be two
-    if(monthlyValues && singleValues) {
+    if (monthlyValues && singleValues) {
         monthly_call_counter = document.querySelectorAll('[name="amount"]')[1];
-    }
-    else if (!(monthlyValues || singleValues)) {
+    } else if (!(monthlyValues || singleValues)) {
         // Bail if we cannot find either
         return;
     }
 
-    if (currencyCode && currencyCode.value == 'EUR'){
+    if (currencyCode && currencyCode.value == 'EUR') {
         currency = '€';
     }
 
     // Set up recurring donations slider
-    if (document.getElementById('monthly_slider_values') && document.getElementById('donate_slider--monthly')) {
+    if (
+        document.getElementById('monthly_slider_values') &&
+        document.getElementById('donate_slider--monthly')
+    ) {
         monthlyValues = JSON.parse(monthlyValues.textContent);
 
-        const monthlySuggestedAmount = formatAmount(document.getElementById('donate_slider--monthly').dataset.suggestedAmount);
+        const monthlySuggestedAmount = formatAmount(
+            document.getElementById('donate_slider--monthly').dataset
+                .suggestedAmount,
+        );
 
-        const [
-            monthlyAmounts,
-            monthlyIcons,
-            monthlyText ] = parseDonationValues(monthlyValues);
+        const [monthlyAmounts, monthlyIcons, monthlyText] =
+            parseDonationValues(monthlyValues);
 
         const sliderMonthlyRange = getSliderSteps(monthlyAmounts);
-        const monthlyAmountStartIndex = getIndex(monthlyAmounts, monthlySuggestedAmount);
+        const monthlyAmountStartIndex = getIndex(
+            monthlyAmounts,
+            monthlySuggestedAmount,
+        );
 
-        new DonateAmountSlider(document.getElementById('donate_slider--monthly'), {
-            pipValues: monthlyAmounts,
-            currency: currency,
-            start: monthlyAmounts[monthlyAmountStartIndex],
-            range: sliderMonthlyRange,
-            icon: document.getElementById('donate_slider--monthly-icon'),
-            iconValues: monthlyIcons,
-            text: document.getElementById('donate_slider--monthly-text'),
-            textValues: monthlyText,
-            callCounter: single_call_counter,
-        });
+        new DonateAmountSlider(
+            document.getElementById('donate_slider--monthly'),
+            {
+                pipValues: monthlyAmounts,
+                currency: currency,
+                start: monthlyAmounts[monthlyAmountStartIndex],
+                range: sliderMonthlyRange,
+                icon: document.getElementById('donate_slider--monthly-icon'),
+                iconValues: monthlyIcons,
+                text: document.getElementById('donate_slider--monthly-text'),
+                textValues: monthlyText,
+                callCounter: single_call_counter,
+            },
+        );
     }
 
     // Set up single donation values
-    if (document.getElementById('single_slider_values') && document.getElementById('donate_slider--one_off')) {
+    if (
+        document.getElementById('single_slider_values') &&
+        document.getElementById('donate_slider--one_off')
+    ) {
         singleValues = JSON.parse(singleValues.textContent);
 
-        const singleSuggestedAmount = formatAmount(document.getElementById('donate_slider--one_off').dataset.suggestedAmount);
+        const singleSuggestedAmount = formatAmount(
+            document.getElementById('donate_slider--one_off').dataset
+                .suggestedAmount,
+        );
 
-        const [
-            singleAmounts,
-            singleIcons,
-            singleText ] = parseDonationValues(singleValues);
+        const [singleAmounts, singleIcons, singleText] =
+            parseDonationValues(singleValues);
 
         const sliderSingleRange = getSliderSteps(singleAmounts);
-        const SingleAmountStartIndex = getIndex(singleAmounts, singleSuggestedAmount);
+        const SingleAmountStartIndex = getIndex(
+            singleAmounts,
+            singleSuggestedAmount,
+        );
 
-        new DonateAmountSlider(document.getElementById('donate_slider--one_off'), {
-            pipValues: singleAmounts,
-            currency: currency,
-            start: singleAmounts[SingleAmountStartIndex],
-            range: sliderSingleRange,
-            icon: document.getElementById('donate_slider--single-icon'),
-            iconValues: singleIcons,
-            text: document.getElementById('donate_slider--single-text'),
-            textValues: singleText,
-            callCounter: monthly_call_counter,
-        });
+        new DonateAmountSlider(
+            document.getElementById('donate_slider--one_off'),
+            {
+                pipValues: singleAmounts,
+                currency: currency,
+                start: singleAmounts[SingleAmountStartIndex],
+                range: sliderSingleRange,
+                icon: document.getElementById('donate_slider--single-icon'),
+                iconValues: singleIcons,
+                text: document.getElementById('donate_slider--single-text'),
+                textValues: singleText,
+                callCounter: monthly_call_counter,
+            },
+        );
     }
 }
 

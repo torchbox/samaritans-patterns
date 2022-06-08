@@ -10,7 +10,7 @@ context:
     heading: Boost your impact at no extra cost
     icon: patterns/atoms/svg/colour-icons/icon-color-snowflake-4.html
     text: <p>By sharing Bob and Sophie's story with your family and friends, you could help <strong>raise &pound;11.46 more</strong>. This could fund an additional two calls from people in crisis this Christmas.</p>
-    default_tweet_text:  Samaritans volunteers will be working tirelessly this Christmas to provide support to the thousands of people who will be calling for help. Read Sophie and Bob's story to learn more about how you could make a difference
+    default_tweet_text: Samaritans volunteers will be working tirelessly this Christmas to provide support to the thousands of people who will be calling for help. Read Sophie and Bob's story to learn more about how you could make a difference
     url: https://www.samaritans.org/support-us/sophie-and-bob/
 tags:
   include_block:

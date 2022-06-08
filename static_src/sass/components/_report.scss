@@ -11,13 +11,13 @@
     }
 
     &__title {
-        @include rem-font-size(30px)
+        @include rem-font-size(30px);
         max-width: 515px;
         margin-bottom: 20px;
         line-height: 33px;
 
         @include media-query(tablet-landscape) {
-            @include rem-font-size(60px)
+            @include rem-font-size(60px);
             line-height: 63px;
             margin-bottom: 30px;
         }
@@ -124,7 +124,8 @@
             border: 1px solid $holly;
             background-color: $holly;
             color: $white;
-            transition: background-color $transition, border $transition, color $transition;
+            transition: background-color $transition, border $transition,
+                color $transition;
         }
     }
 

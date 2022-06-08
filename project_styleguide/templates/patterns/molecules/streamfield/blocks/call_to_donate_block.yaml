@@ -6,6 +6,6 @@ context:
 
 tags:
   pageurl:
-    "value.button_link as href":
+    'value.button_link as href':
       target_var: href
       raw: '#'

@@ -4,7 +4,7 @@
     background-color: $off-white;
     display: flex;
     flex-wrap: wrap;
-    padding: ($gutter-small / 2) $gutter-small;
+    padding: ($gutter-small * 0.5) $gutter-small;
     margin-bottom: $gutter-xxl;
 
     @include media-query(tablet-landscape) {
@@ -21,7 +21,7 @@
 
     &__item {
         @include font-size(xs);
-        margin: ($gutter-small / 2) $gutter ($gutter-small / 2) 0;
+        margin: ($gutter-small * 0.5) $gutter ($gutter-small * 0.5) 0;
         display: flex;
         align-items: center;
 
@@ -47,15 +47,19 @@
     &__button {
         padding: (0.5 * $gutter-small) $gutter-small;
         display: flex;
-        flex-wrap: no-wrap;
+        flex-wrap: nowrap;
         align-items: center;
-        background-color: $color--link;
-        color: white;
+        background-color: $teal-dark;
+        color: $white;
         transition: color $transition, background-color $transition;
 
         #{$hover} {
-            background-color: $color--link-hover;
+            background-color: $teal-dark;
             color: $white;
+
+            #{$root}__icon {
+                transform: translate3d(0, 5px, 0);
+            }
         }
 
         @include media-query(tablet-landscape) {
@@ -73,7 +77,7 @@
         &--chevron {
             fill: currentColor;
             opacity: 0.5;
-            transition: fill $transition;
+            transition: fill $transition, transform $transition;
         }
     }
 

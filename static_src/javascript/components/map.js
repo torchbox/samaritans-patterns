@@ -4,11 +4,10 @@ class GoogleMap {
     }
 
     constructor(node) {
-
         this.node = node;
         this.location = {
-            lat : parseFloat(this.node.dataset.latitude),
-            lng : parseFloat(this.node.dataset.longitude),
+            lat: parseFloat(this.node.dataset.latitude),
+            lng: parseFloat(this.node.dataset.longitude),
         };
         this.zoom = parseInt(this.node.dataset.zoomLevel);
 
@@ -17,11 +16,11 @@ class GoogleMap {
         this.marker = null;
 
         this.mapLoad();
-
     }
 
     mapLoad() {
-        this.googleMap = new google.maps.Map(this.node, { // eslint-disable-line no-undef
+        this.googleMap = new google.maps.Map(this.node, {
+            // eslint-disable-line no-undef
             zoom: this.zoom,
             scrollwheel: false,
             streetViewControl: false,
@@ -29,7 +28,8 @@ class GoogleMap {
             fullscreenControl: true,
             center: this.location,
         });
-        this.marker = new google.maps.Marker({ // eslint-disable-line no-undef
+        this.marker = new google.maps.Marker({
+            // eslint-disable-line no-undef
             position: this.location,
             map: this.googleMap,
         });

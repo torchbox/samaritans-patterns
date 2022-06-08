@@ -1,9 +1,9 @@
 tags:
   render_form_field:
     monthly_form.campaign_id:
-      raw: ""
+      raw: ''
     monthly_form.frequency:
-      raw: ""
+      raw: ''
     monthly_form.amount:
       raw: |
         <div class="form-item form-item--decimal_field form-item--number_input">
@@ -15,13 +15,13 @@ tags:
         </div>
         </div>
     monthly_form.currency:
-      raw: ""
+      raw: ''
     one_off_form.campaign_id:
-      raw: ""
+      raw: ''
     one_off_form.frequency:
-      raw: ""
+      raw: ''
     one_off_form.currency:
-      raw: ""
+      raw: ''
     one_off_form.amount:
       raw: |
         <div class="form-item form-item--decimal_field form-item--number_input">

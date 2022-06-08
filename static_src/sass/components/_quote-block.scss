@@ -195,7 +195,7 @@
             }
         }
 
-        &__attribution  {
+        &__attribution {
             @include media-query(desktop) {
                 margin-left: 65px;
             }

@@ -8,9 +8,13 @@
     }
 
     &__link {
+        font-weight: $weight--bold;
+        @include link($ocean, $ink);
+        @include underline(transparent, currentColor);
+
         &--active {
-            color: $ink;
-            font-weight: $weight--bold;
+            @include underline($ocean, $ink);
+            color: $ocean;
         }
     }
 }

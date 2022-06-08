@@ -12,7 +12,7 @@ class SelectAllCheckboxToggle {
     bindEvents() {
         this.toggleAnchor.addEventListener('click', (e) => {
             e.preventDefault();
-            this.node.querySelectorAll('input').forEach(function(input){
+            this.node.querySelectorAll('input').forEach(function (input) {
                 input.checked = true;
             });
         });

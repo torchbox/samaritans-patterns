@@ -3,7 +3,9 @@ export function toggleLeaderboard(button) {
         return;
     }
 
-    const hiddenRows = document.querySelectorAll('[data-leaderboard-hidden-row]');
+    const hiddenRows = document.querySelectorAll(
+        '[data-leaderboard-hidden-row]',
+    );
     const speed = 50;
 
     button.addEventListener('click', () => {

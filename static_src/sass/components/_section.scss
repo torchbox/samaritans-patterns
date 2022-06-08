@@ -79,7 +79,6 @@
         position: relative;
     }
 
-
     &--page-padding-vertical {
         @include page-padding--vertical(top);
         @include page-padding--vertical(bottom);
@@ -163,9 +162,8 @@
 
         @include media-query($page-connectors-breakpoint) {
             // sass-lint:disable-block indentation
-            box-shadow:
-                  $section-overlap      0 0 $sunflower,
-                (-$section-overlap)     0 0 $sunflower,
+            box-shadow: $section-overlap 0 0 $sunflower,
+                (-$section-overlap) 0 0 $sunflower,
                 (-3 * $section-overlap) 0 0 $sunflower;
             margin-bottom: $margin--main-after;
         }
@@ -211,7 +209,14 @@
         }
 
         @include media-query(tablet-landscape) {
-            @include corner($lime, right, bottom, $width: 235px, $height: 195px, $offset: 10px);
+            @include corner(
+                $lime,
+                right,
+                bottom,
+                $width: 235px,
+                $height: 195px,
+                $offset: 10px
+            );
             margin: $gutter-x-large 0;
         }
 
@@ -257,7 +262,6 @@
         @include media-query(tablet-landscape) {
             background-color: $white;
         }
-
     }
 
     &--page-end-cta {
@@ -265,7 +269,6 @@
         @include section--after-page;
         background-color: $amethyst;
         color: $white;
-
     }
 
     &--landing-page {
@@ -319,7 +322,13 @@
 
     &--branch-page-top {
         @include section--page(corners);
-        @include connectors--transparent(page, top-left, null, $teal, $page-connectors-breakpoint);
+        @include connectors--transparent(
+            page,
+            top-left,
+            null,
+            $teal,
+            $page-connectors-breakpoint
+        );
         background-color: $teal;
         color: $white;
 

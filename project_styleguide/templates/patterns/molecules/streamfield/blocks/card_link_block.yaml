@@ -5,6 +5,6 @@ context:
 
 tags:
   pageurl:
-    "value.page as href":
+    'value.page as href':
       target_var: href
       raw: '#'

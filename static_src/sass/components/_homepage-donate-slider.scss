@@ -3,7 +3,14 @@
 
     @mixin card-corner($color, $position-1: top, $position-2: left) {
         @include media-query(tablet-portrait) {
-            @include corner($color, $position-1, $position-2, $width: 200px, $height: 50%, $offset: 10px);
+            @include corner(
+                $color,
+                $position-1,
+                $position-2,
+                $width: 200px,
+                $height: 50%,
+                $offset: 10px
+            );
 
             &::before {
                 z-index: -1;

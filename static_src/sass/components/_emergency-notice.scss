@@ -1,10 +1,38 @@
 .emergency-notice {
-    @include corner($pumpkin, top, left, $width: 40%, $height: 40%, $selector: '&__corner');
-    @include corner($pumpkin, bottom, right, $selector: '&::after',  $width: 40%, $height: 40%);
+    @include corner(
+        $pumpkin,
+        top,
+        left,
+        $width: 40%,
+        $height: 40%,
+        $selector: '&__corner'
+    );
+    @include corner(
+        $pumpkin,
+        bottom,
+        right,
+        $selector: '&::after',
+        $width: 40%,
+        $height: 40%
+    );
 
     @include media-query(tablet-landscape) {
-        @include corner($pumpkin, top, left, $width: 15%, $height: 90%, $selector: '&__corner');
-        @include corner($pumpkin, bottom, right, $selector: '&::after',  $width: 15%, $height: 90%);
+        @include corner(
+            $pumpkin,
+            top,
+            left,
+            $width: 15%,
+            $height: 90%,
+            $selector: '&__corner'
+        );
+        @include corner(
+            $pumpkin,
+            bottom,
+            right,
+            $selector: '&::after',
+            $width: 15%,
+            $height: 90%
+        );
     }
 
     max-width: $wrapper--medium;
@@ -51,12 +79,9 @@
         @include connectors($pumpkin, bottom, right, medium);
     }
 
-
     &__connectors {
         @include connectors($pumpkin, top, left, medium);
     }
-
-
 
     &__url {
         margin: $gutter-small;
@@ -65,5 +90,4 @@
     &__highlight-section {
         color: $pumpkin;
     }
-
 }

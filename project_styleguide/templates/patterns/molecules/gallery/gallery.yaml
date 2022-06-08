@@ -1,22 +1,22 @@
 context:
   title: Gallery Title
   gallery:
-  - item:
-      block_type: image
-      value:
-        image: fake
-  - item:
-      block_type: image
-      value:
-        image: fake
-  - item:
-      block_type: image
-      value:
-        image: fake
-  - item:
-      block_type: image
-      value:
-        image: fake
+    - item:
+        block_type: image
+        value:
+          image: fake
+    - item:
+        block_type: image
+        value:
+          image: fake
+    - item:
+        block_type: image
+        value:
+          image: fake
+    - item:
+        block_type: image
+        value:
+          image: fake
 
 tags:
   image:

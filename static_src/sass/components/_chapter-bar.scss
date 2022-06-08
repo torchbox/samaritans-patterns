@@ -131,7 +131,8 @@
 
         @include target-ie11() {
             // hide arrow in ie11
-            &::-ms-expand { // sass-lint:disable-line no-vendor-prefixes
+            &::-ms-expand {
+                // sass-lint:disable-line no-vendor-prefixes
                 display: none;
             }
         }

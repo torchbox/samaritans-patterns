@@ -44,7 +44,8 @@
             position: relative;
         }
 
-        #{$root} .is-toggle-active & { // sass-lint:disable-line force-element-nesting
+        #{$root} .is-toggle-active & {
+            // sass-lint:disable-line force-element-nesting
             display: block;
 
             &--active {

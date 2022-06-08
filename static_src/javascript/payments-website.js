@@ -1,5 +1,5 @@
 import setupPayment from './components/payments';
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     setupPayment();
 });

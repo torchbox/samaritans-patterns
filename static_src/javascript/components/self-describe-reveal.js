@@ -10,7 +10,9 @@ class SelfDescribeReveal {
             return;
         }
         const { selfDescribeField } = this.node.dataset;
-        this.selfDescribeSection = document.querySelector(`[data-self-describe-section="${selfDescribeField}"]`);
+        this.selfDescribeSection = document.querySelector(
+            `[data-self-describe-section="${selfDescribeField}"]`,
+        );
         if (!this.selfDescribeSection) {
             return;
         }
@@ -23,9 +25,7 @@ class SelfDescribeReveal {
 
     bindEvents() {
         this.node.addEventListener('change', (event) => {
-            if (
-                event.target.value === this.selfDescribeChoice
-            ) {
+            if (event.target.value === this.selfDescribeChoice) {
                 this.selfDescribeSection.style.display = '';
             } else {
                 this.selfDescribeSection.style.display = 'none';

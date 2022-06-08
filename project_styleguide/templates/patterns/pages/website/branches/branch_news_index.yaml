@@ -43,15 +43,15 @@ context:
           - Type
           - Another type
   news_types:
-  - ['press_release', "Press Release"]
-  - ['media_coverage', "Media coverage"]
+    - ['press_release', 'Press Release']
+    - ['media_coverage', 'Media coverage']
   topics:
-  - ['topic1', "Topic 1"]
-  - ['topic2', "Topic 2`"]
+    - ['topic1', 'Topic 1']
+    - ['topic2', 'Topic 2`']
 
 tags:
   pageurl:
-    "n":
+    'n':
       raw: '#'
     featured:
       raw: '#'

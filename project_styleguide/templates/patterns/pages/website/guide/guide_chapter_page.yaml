@@ -11,16 +11,16 @@ context:
     prev_guide_chapter:
       title: Second Section
     next_guide_chapter:
-        title: Third Section
-          
+      title: Third Section
+
 tags:
   pageurl:
     sibling:
-      raw: "#"
+      raw: '#'
     page.next_guide_chapter:
       raw: '#'
     page.prev_guide_chapter:
       raw: '#'
   include_block:
     page.body:
-      template_name: "patterns/_pattern_library_only/streamfield/story_container.html"
+      template_name: 'patterns/_pattern_library_only/streamfield/story_container.html'

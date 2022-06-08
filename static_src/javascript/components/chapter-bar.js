@@ -7,7 +7,9 @@ class ChapterBar {
 
     constructor(node) {
         this.node = node;
-        this.chapterSelect = this.node.querySelector('[data-chapter-bar-select]');
+        this.chapterSelect = this.node.querySelector(
+            '[data-chapter-bar-select]',
+        );
 
         this.bindEvents();
     }
@@ -19,9 +21,9 @@ class ChapterBar {
             Utilities.throttle(() => {
                 this.node.classList.toggle(
                     'is-sticky',
-                    this.node.offsetTop <= window.scrollY
+                    this.node.offsetTop <= window.scrollY,
                 );
-            }, 50)
+            }, 50),
         );
 
         // navgiate to chapter on select change

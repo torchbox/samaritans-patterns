@@ -4,10 +4,9 @@
     margin-left: 0;
     border: 1px solid $grey-light;
 
-
     &__list-item {
         display: flex;
-        margin-bottom: $gutter / 2;
+        margin-bottom: $gutter * 0.5;
     }
 
     &__icon {
@@ -15,7 +14,7 @@
         height: $icon-size--medium;
         width: $icon-size--medium;
         margin-right: $gutter;
-        margin-top: $gutter / 4;
+        margin-top: $gutter * 0.25;
     }
 
     // ensure the icon doesn't get squashed

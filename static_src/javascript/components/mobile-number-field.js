@@ -18,12 +18,12 @@ function initMobileNumberField(radioYes, radioNo, mobileNumberField) {
 }
 
 export default () => {
-
     const elements = document.querySelectorAll(
-        'input[data-mobile-number-field-shown]'
+        'input[data-mobile-number-field-shown]',
     );
     for (const mobileNumberField of elements) {
-        const [showRadioYesId,showRadioNoId] = mobileNumberField.dataset.mobileNumberFieldShown.split(',');
+        const [showRadioYesId, showRadioNoId] =
+            mobileNumberField.dataset.mobileNumberFieldShown.split(',');
         if (!showRadioYesId || !showRadioNoId) {
             continue;
         }

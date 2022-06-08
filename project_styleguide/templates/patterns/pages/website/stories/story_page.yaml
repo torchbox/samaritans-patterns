@@ -34,4 +34,4 @@ tags:
         url: http://via.placeholder.com/1260x830
   include_block:
     page.body:
-      template_name: "patterns/molecules/streamfield/stream_block.html"
+      template_name: 'patterns/molecules/streamfield/stream_block.html'

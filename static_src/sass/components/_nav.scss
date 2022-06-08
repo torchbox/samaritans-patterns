@@ -65,7 +65,8 @@ $menu-breakpoint: 'tablet-landscape';
             opacity: 0;
             pointer-events: none;
             visibility: hidden;
-            transition: top $transition, opacity $transition, visibility $transition;
+            transition: top $transition, opacity $transition,
+                visibility $transition;
 
             .is-open--header-menu & {
                 pointer-events: auto;
@@ -98,7 +99,8 @@ $menu-breakpoint: 'tablet-landscape';
             padding: $gutter-large $gutter-x-large $gutter-x-large;
             background: $ink;
             opacity: 0;
-            transition: top $transition, opacity $transition, visibility $transition;
+            transition: top $transition, opacity $transition,
+                visibility $transition;
             pointer-events: none;
             visibility: hidden;
 
@@ -151,7 +153,9 @@ $menu-breakpoint: 'tablet-landscape';
             }
         }
 
-        @include media-query--takes-value($breakpoint-tablet-landscape + $gutter-xxl) {
+        @include media-query--takes-value(
+            $breakpoint-tablet-landscape + $gutter-xxl
+        ) {
             flex-wrap: wrap;
             justify-content: space-between;
 
@@ -297,7 +301,11 @@ $menu-breakpoint: 'tablet-landscape';
     }
 
     &__link {
-        @include link($color--link, $color--link-hover-subtle, '#{$root}__link-summary');
+        @include link(
+            $color--link,
+            $color--link-hover-subtle,
+            '#{$root}__link-summary'
+        );
         color: $white;
         border-bottom: 1px solid transparent;
         transition: color $transition, border $transition;
@@ -561,7 +569,6 @@ $menu-breakpoint: 'tablet-landscape';
                 width: 15px;
                 height: 15px;
                 fill: $color--link;
-
             }
         }
     }

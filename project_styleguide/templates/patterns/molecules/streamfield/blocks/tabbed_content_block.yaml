@@ -11,6 +11,6 @@ context:
 
 tags:
   pageurl:
-    "tab.value.link as href":
+    'tab.value.link as href':
       target_var: href
-      raw: "#"
+      raw: '#'

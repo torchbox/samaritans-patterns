@@ -10,7 +10,6 @@ context:
     #     </iframe>
     #   </div>
 
-
 tags:
   image:
     value.image fill-460x350 class="media-with-quote__image":

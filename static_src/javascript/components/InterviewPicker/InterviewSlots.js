@@ -10,9 +10,7 @@ import Button from './Button/Button';
  */
 const Slots = ({ slots, isSelected, onSelect }) => {
     return slots.map((slot) => {
-        const label = moment(slot.datetime)
-            .tz(window.timezone)
-            .format('H:mm');
+        const label = moment(slot.datetime).tz(window.timezone).format('H:mm');
         return (
             <Button
                 key={`${slot.interview_type}-${slot.datetime}-${slot.location_name}`}
@@ -49,7 +47,8 @@ const InterviewSlots = ({ title, slots, groupBy, onSelect, isSelected }) => {
                     <span className="slotpicker__interview-type">{title}</span>
                 </span>
             </legend>
-            {slots.length === 0 && 'We do not have any interviews for this date.'}
+            {slots.length === 0 &&
+                'We do not have any interviews for this date.'}
             {Object.keys(grouped).map((group, i) => {
                 const groupData = grouped[group][i];
                 return (

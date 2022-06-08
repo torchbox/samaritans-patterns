@@ -14,7 +14,7 @@ class Carousel {
             startAt: 0,
             perView: 1,
             peek: 0,
-            autoplay: false
+            autoplay: false,
             // hoverpause: true, // keep this for accessibility if using autoplay
         });
 
@@ -32,7 +32,9 @@ class Carousel {
 
     // sets aria-hidden on inactive slides
     updateAriaRoles() {
-        for (const slide of this.node.querySelectorAll('.glide__slide:not(.glide__slide--active)')) {
+        for (const slide of this.node.querySelectorAll(
+            '.glide__slide:not(.glide__slide--active)',
+        )) {
             slide.setAttribute('aria-hidden', 'true');
             slide.setAttribute('tab-index', 0);
         }
@@ -54,7 +56,8 @@ class Carousel {
 
     // Update the live region that announces the next slide.
     updateLiveRegion() {
-        this.node.querySelector('.js-liveregion').textContent = 'Item ' + this.carousel.index + ' of ' + this.slideTotal;
+        this.node.querySelector('.js-liveregion').textContent =
+            'Item ' + this.carousel.index + ' of ' + this.slideTotal;
     }
 }
 

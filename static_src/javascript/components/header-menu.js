@@ -7,7 +7,9 @@ class HeaderMenu {
         this.node = node;
         this.activeClass = 'is-open--header-menu';
         this.navLink = this.node.querySelector('.js-open-header-menu');
-        this.allNavItems = Array.from(document.querySelectorAll('.js-header-menu'));
+        this.allNavItems = Array.from(
+            document.querySelectorAll('.js-header-menu'),
+        );
         this.overlay = document.querySelector('.js-header-menu-overlay');
 
         this.bindEventListeners();
@@ -29,7 +31,7 @@ class HeaderMenu {
     }
 
     closeMenus() {
-        this.allNavItems.forEach(navItem => {
+        this.allNavItems.forEach((navItem) => {
             if (navItem.classList.contains(this.activeClass)) {
                 navItem.classList.remove(this.activeClass);
                 this.overlay.classList.remove(this.activeClass);
@@ -38,7 +40,9 @@ class HeaderMenu {
     }
 
     toggle() {
-        this.node.classList.contains(this.activeClass) ? this.close() : this.open();
+        this.node.classList.contains(this.activeClass)
+            ? this.close()
+            : this.open();
     }
 
     open() {

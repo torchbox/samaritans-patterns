@@ -75,7 +75,7 @@
     }
 
     &--homepage-widget {
-        @include link($color--link, $color--link-hover-subtle, #{$root}__link);
+        @include link($ink, $ink, #{$root}__link);
         @include underline(transparent, transparent, $element: #{$root}__link);
 
         margin: 0;

@@ -15,14 +15,16 @@ class Tabccordion {
         this.tabLinks = Array.from(this.tabs.querySelectorAll('a'));
 
         // the tab content panels
-        this.tabPanels = Array.from(this.node.querySelectorAll('.js-tabccordion-panel'));
+        this.tabPanels = Array.from(
+            this.node.querySelectorAll('.js-tabccordion-panel'),
+        );
 
         this.bindEventListeners();
     }
 
     bindEventListeners() {
         // start
-        this.tabLinks.forEach(tabLink => {
+        this.tabLinks.forEach((tabLink) => {
             tabLink.addEventListener('click', (e) => {
                 e.preventDefault();
 
@@ -33,9 +35,13 @@ class Tabccordion {
                 this.updateActiveTab(e.target.getAttribute('href'));
             });
         });
-        this.tabPanels.forEach(tabPanel => {
+        this.tabPanels.forEach((tabPanel) => {
             tabPanel.firstElementChild.addEventListener('click', (e) => {
-                if (e.target.parentElement.classList.contains(this.activeClassMobile)) {
+                if (
+                    e.target.parentElement.classList.contains(
+                        this.activeClassMobile,
+                    )
+                ) {
                     e.preventDefault();
                 }
 
@@ -44,10 +50,9 @@ class Tabccordion {
         });
     }
 
-
     // update the <nav> <a>'s
     updateNav(clickedItem) {
-        this.tabLinks.forEach(tabLink => {
+        this.tabLinks.forEach((tabLink) => {
             tabLink.classList.remove(this.activeClass);
         });
 
@@ -56,7 +61,7 @@ class Tabccordion {
 
     // update the active tab content
     updateActiveTab(href) {
-        this.tabPanels.forEach(panel => {
+        this.tabPanels.forEach((panel) => {
             panel.classList.remove(this.activeClass);
             if (`#${panel.id}` === href) {
                 panel.classList.add(this.activeClass);
@@ -65,30 +70,34 @@ class Tabccordion {
     }
 
     // update accordions content - mobile
-    updateAccordions(clickedItem){
-        this.tabPanels.forEach(panel => {
+    updateAccordions(clickedItem) {
+        this.tabPanels.forEach((panel) => {
             panel.classList.remove(this.activeClass);
         });
 
-        this.tabLinks.forEach(tabLink => {
+        this.tabLinks.forEach((tabLink) => {
             tabLink.classList.remove(this.activeClass);
 
             // keep the tab <nav> in sync with the active accordion
-            if (tabLink.getAttribute('href') === `#${clickedItem.parentElement.id}`) {
+            if (
+                tabLink.getAttribute('href') ===
+                `#${clickedItem.parentElement.id}`
+            ) {
                 tabLink.classList.add(this.activeClass);
             }
         });
         clickedItem.parentElement.classList.add(this.activeClass);
 
-        if (clickedItem.parentElement.classList.contains(this.activeClassMobile)) {
+        if (
+            clickedItem.parentElement.classList.contains(this.activeClassMobile)
+        ) {
             clickedItem.parentElement.classList.remove(this.activeClassMobile);
         } else {
-            this.tabPanels.forEach(panel => {
+            this.tabPanels.forEach((panel) => {
                 panel.classList.remove(this.activeClassMobile);
             });
             clickedItem.parentElement.classList.add(this.activeClassMobile);
         }
-
     }
 }
 

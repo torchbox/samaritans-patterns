@@ -15,7 +15,6 @@
         #{$root}__container {
             animation: mmslideIn 0.35s ease-in;
         }
-
     }
 
     &[aria-hidden='true'] {
@@ -70,7 +69,14 @@
         }
 
         @include media-query(tablet-portrait) {
-            @include corner($lime, bottom, left, $width: 40%, $height: 30%, $offset: 16px);
+            @include corner(
+                $lime,
+                bottom,
+                left,
+                $width: 40%,
+                $height: 30%,
+                $offset: 16px
+            );
             padding: $gutter-large;
         }
 
@@ -130,7 +136,6 @@
         }
     }
 }
-
 
 /**************************\
   Demo Animation Style

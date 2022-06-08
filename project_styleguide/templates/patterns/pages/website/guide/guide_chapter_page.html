@@ -10,11 +10,11 @@
                 <h2 class="contents__title">Sections</h2>
                 {% if request.is_preview %}
                     {% for sibling in page.get_siblings %}
-                        <p class="contents__item"><a href="{% pageurl sibling %}" {% if sibling.path == page.path %}class="contents__link contents__link--active"{% endif %}>{{ forloop.counter }}. {{ sibling.title }}</a></p>
+                        <p class="contents__item"><a href="{% pageurl sibling %}" class="contents__link {% if sibling.path == page.path %}contents__link--active{% endif %}">{{ forloop.counter }}. {{ sibling.title }}</a></p>
                     {% endfor %}
                 {% else %}
                     {% for sibling in page.get_siblings.live.public %}
-                        <p class="contents__item"><a href="{% pageurl sibling %}" {% if sibling.path == page.path %}class="contents__link contents__link--active"{% endif %}>{{ forloop.counter }}. {{ sibling.title }}</a></p>
+                        <p class="contents__item"><a href="{% pageurl sibling %}" class="contents__link {% if sibling.path == page.path %}contents__link--active{% endif %}">{{ forloop.counter }}. {{ sibling.title }}</a></p>
                     {% endfor %}
                 {% endif %}
             </div>

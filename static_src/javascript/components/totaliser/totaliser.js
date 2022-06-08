@@ -1,4 +1,8 @@
-import { currencyWithCommas, raisedValueAsPercentage, confettiAnimation } from './utils';
+import {
+    currencyWithCommas,
+    raisedValueAsPercentage,
+    confettiAnimation,
+} from './utils';
 
 class Totaliser {
     static selector() {
@@ -14,8 +18,12 @@ class Totaliser {
 
         // DOM nodes
         this.progressBar = this.node.querySelector('[data-totaliser-progress]');
-        this.percentageValue = this.node.querySelector('[data-totaliser-percentage-value]');
-        this.percentagePosition = this.node.querySelector('[data-totaliser-percentage-position]');
+        this.percentageValue = this.node.querySelector(
+            '[data-totaliser-percentage-value]',
+        );
+        this.percentagePosition = this.node.querySelector(
+            '[data-totaliser-percentage-position]',
+        );
         this.UIraisedValue = this.node.querySelector('[data-totaliser-raised]');
         this.UItargetValue = this.node.querySelector('[data-totaliser-target]');
 
@@ -35,11 +43,18 @@ class Totaliser {
         const step = (timestamp) => {
             if (!startTimestamp) startTimestamp = timestamp;
 
-            const progressValue = Math.min((timestamp - startTimestamp) / duration, 1);
-            const incrementValue = Math.floor(progressValue * (endValue - startValue) + startValue);
+            const progressValue = Math.min(
+                (timestamp - startTimestamp) / duration,
+                1,
+            );
+            const incrementValue = Math.floor(
+                progressValue * (endValue - startValue) + startValue,
+            );
 
             // If currency value, format accordingly
-            element.innerHTML = currency ? currencyWithCommas(incrementValue) : incrementValue;
+            element.innerHTML = currency
+                ? currencyWithCommas(incrementValue)
+                : incrementValue;
 
             if (progressValue < 1) {
                 window.requestAnimationFrame(step);
@@ -51,7 +66,8 @@ class Totaliser {
 
     progressBarUI() {
         // Don't allow width to exceed 100%
-        let width = raisedValueAsPercentage() > 100 ? 100 : raisedValueAsPercentage();
+        let width =
+            raisedValueAsPercentage() > 100 ? 100 : raisedValueAsPercentage();
         this.progressBar.style.width = width + '%';
         this.progressBar.style.backgroundColor = this.progressBarColour;
 
@@ -65,14 +81,17 @@ class Totaliser {
 
     percentageUI() {
         // Don't allow offset to exceed 100%
-        let offset = raisedValueAsPercentage() > 100 ? 100 : raisedValueAsPercentage();
+        let offset =
+            raisedValueAsPercentage() > 100 ? 100 : raisedValueAsPercentage();
         this.percentagePosition.style.left = offset + '%';
         this.percentagePosition.style.opacity = '100%';
     }
 
     // Format target value
     targetUI() {
-        this.UItargetValue.innerHTML = currencyWithCommas(window.totaliserConfig.targetValue);
+        this.UItargetValue.innerHTML = currencyWithCommas(
+            window.totaliserConfig.targetValue,
+        );
     }
 
     bindEventListeners() {
@@ -83,9 +102,20 @@ class Totaliser {
             this.targetUI();
 
             // Animate and increment percentage/raised values
-            this.countUpValue(this.percentageValue, 0, raisedValueAsPercentage(), this.animationSpeed, false);
-            this.countUpValue(this.UIraisedValue, 0, this.configRaisedValue, this.animationSpeed, true);
-
+            this.countUpValue(
+                this.percentageValue,
+                0,
+                raisedValueAsPercentage(),
+                this.animationSpeed,
+                false,
+            );
+            this.countUpValue(
+                this.UIraisedValue,
+                0,
+                this.configRaisedValue,
+                this.animationSpeed,
+                true,
+            );
         }, this.delay);
     }
 }

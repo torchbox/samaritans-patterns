@@ -23,7 +23,7 @@
 
     &__column {
         &--first {
-            padding-right: $gutter / 2;
+            padding-right: $gutter * 0.5;
 
             @include media-query(mob-landscape) {
                 padding-right: $gutter;
@@ -81,7 +81,7 @@
 
     &__button {
         position: absolute;
-        right: $gutter-small / 2;
+        right: $gutter-small * 0.5;
         bottom: -$gutter;
 
         @include media-query(mob-landscape) {

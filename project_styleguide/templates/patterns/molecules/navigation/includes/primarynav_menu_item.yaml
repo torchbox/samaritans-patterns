@@ -2,31 +2,31 @@ context:
   item:
     value:
       children:
-      - link:
-          page: fake
-          title: Link title
-        description: Link dscription
-      - link:
-          page: fake
-          title: Link title
-        description: Link dscription
-      - link:
-          page: fake
-          title: Link title
-        description: Link dscription
-      - link:
-          page: fake
-          title: Link title
-        description: Link dscription
+        - link:
+            page: fake
+            title: Link title
+          description: Link dscription
+        - link:
+            page: fake
+            title: Link title
+          description: Link dscription
+        - link:
+            page: fake
+            title: Link title
+          description: Link dscription
+        - link:
+            page: fake
+            title: Link title
+          description: Link dscription
       icon_links:
-      - title: Link title
-        summary: link summary
-        icon: icon-color-cup
-      - title: Link title
-        summary: link summary
-        icon: icon-color-cup
+        - title: Link title
+          summary: link summary
+          icon: icon-color-cup
+        - title: Link title
+          summary: link summary
+          icon: icon-color-cup
 
 tags:
   include_block:
     item.value.link:
-      template_name: "patterns/molecules/navigation/blocks/menu_item.html"
+      template_name: 'patterns/molecules/navigation/blocks/menu_item.html'

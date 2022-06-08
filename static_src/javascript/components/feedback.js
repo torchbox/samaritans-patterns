@@ -17,15 +17,19 @@ class Feedback {
     }
 
     bindEventListeners() {
-        this.node.querySelector('.js-feedback-yes').addEventListener('click', () => {
-            this.open();
-            this.selectYes();
-        });
+        this.node
+            .querySelector('.js-feedback-yes')
+            .addEventListener('click', () => {
+                this.open();
+                this.selectYes();
+            });
 
-        this.node.querySelector('.js-feedback-no').addEventListener('click', () => {
-            this.open();
-            this.selectNo();
-        });
+        this.node
+            .querySelector('.js-feedback-no')
+            .addEventListener('click', () => {
+                this.open();
+                this.selectNo();
+            });
     }
 
     open() {

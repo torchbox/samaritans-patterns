@@ -44,7 +44,7 @@
         justify-content: center;
         flex: 1;
         color: $white;
-        padding: ($gutter / 2) 0;
+        padding: ($gutter * 0.5) 0;
         text-transform: uppercase;
         font-weight: $weight--bold;
         transition: background-color $transition;
@@ -54,7 +54,7 @@
         }
 
         &:first-child {
-            margin-bottom: $gutter / 2;
+            margin-bottom: $gutter * 0.5;
 
             @include media-query(mob-landscape) {
                 margin-right: $gutter;
@@ -82,7 +82,7 @@
     &__button-icon {
         width: 20px;
         height: 20px;
-        margin-right: ($gutter / 2);
+        margin-right: ($gutter * 0.5);
 
         #{$root}__button--facebook & {
             fill: $facebook-blue;

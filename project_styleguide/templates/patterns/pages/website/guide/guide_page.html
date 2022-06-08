@@ -11,7 +11,7 @@
                 <div class="contents streamfield">
                     <h2 class="contents__title">Sections</h2>
                     {% for child in page.get_children %}
-                        <p class="contents__item"><a href="{% pageurl child %}" {% if page.first_guide_chapter.title == child.title %}class="contents__link contents__link--active"{% endif %}>{{ forloop.counter }}. {{ child.title }}</a></p>
+                        <p class="contents__item"><a href="{% pageurl child %}" class="contents__link {% if page.first_guide_chapter.title == child.title %}contents__link--active{% endif %}">{{ forloop.counter }}. {{ child.title }}</a></p>
                     {% endfor %}
                 </div>
 
@@ -36,7 +36,7 @@
                 <div class="contents streamfield">
                     <h2 class="contents__title">Sections</h2>
                     {% for child in page.get_children.live.public %}
-                        <p class="contents__title"><a href="{% pageurl child %}" {% if page.first_guide_chapter.title == child.title %}class="contents__link contents__link--active"{% endif %}>{{ forloop.counter }}. {{ child.title }}</a></p>
+                        <p class="contents__title"><a href="{% pageurl child %}" class="contents__link {% if page.first_guide_chapter.title == child.title %}contents__link--active{% endif %}">{{ forloop.counter }}. {{ child.title }}</a></p>
                     {% endfor %}
                 </div>
 

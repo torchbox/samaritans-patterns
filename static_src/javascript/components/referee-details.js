@@ -1,6 +1,6 @@
 import MicroModal from 'micromodal';
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     if (!document.getElementById('referee-modal')) {
         // We're not on the referee details page
         return;
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
         allInputs.forEach((input) => {
             let labelText = input.id;
             if (input.labels.length > 0) {
-                labelText = input.labels[0].textContent.replace("*", "").trim();
+                labelText = input.labels[0].textContent.replace('*', '').trim();
             }
             details[labelText] = input.value.trim();
             if (input.value && !hasAddedInfo) {
@@ -52,9 +52,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function createMarkup(details) {
         const markup = `
             <div class="referees__item">
-                ${Object.entries(details).map(([k, v]) => {
-                    return `<p class="referees__text">${k}: ${v.trim()}</p>`;
-                }).join("")}
+                ${Object.entries(details)
+                    .map(([k, v]) => {
+                        return `<p class="referees__text">${k}: ${v.trim()}</p>`;
+                    })
+                    .join('')}
             </div>
         `;
 

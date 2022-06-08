@@ -1,5 +1,4 @@
 .donate {
-
     // Donate bor
     &__bar {
         @include font-size(s);
@@ -85,7 +84,12 @@
 
     &__frequency {
         @include font-size(s);
-        text-decoration: underline;
+    }
+
+    &__frequency-link {
+        @include link($ocean, $ink);
+        @include underline($ocean, currentColor);
+        font-weight: $weight--bold;
     }
 
     &__currency {
@@ -443,4 +447,3 @@
         color: $lime;
     }
 }
-

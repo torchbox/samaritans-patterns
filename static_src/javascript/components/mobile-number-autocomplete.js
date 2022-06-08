@@ -26,7 +26,7 @@ function retypePhoneNumberIfItsMobile(value, mobileNumberField) {
 
 function initPhoneToMobileAutcomplete(phoneNumberField, mobileNumberField) {
     retypePhoneNumberIfItsMobile(phoneNumberField.value, mobileNumberField);
-    phoneNumberField.addEventListener('change', ev => {
+    phoneNumberField.addEventListener('change', (ev) => {
         const value = ev.target.value;
         retypePhoneNumberIfItsMobile(value, mobileNumberField);
     });
@@ -34,10 +34,11 @@ function initPhoneToMobileAutcomplete(phoneNumberField, mobileNumberField) {
 
 export default () => {
     const elements = document.querySelectorAll(
-        'input[data-mobile-number-autocomplete-from-phone-number]'
+        'input[data-mobile-number-autocomplete-from-phone-number]',
     );
     for (const mobileNumberField of elements) {
-        const phoneNumberFieldId = mobileNumberField.dataset.mobileNumberAutocompleteFromPhoneNumber;
+        const phoneNumberFieldId =
+            mobileNumberField.dataset.mobileNumberAutocompleteFromPhoneNumber;
         if (!phoneNumberFieldId) {
             continue;
         }

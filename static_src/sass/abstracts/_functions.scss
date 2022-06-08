@@ -2,19 +2,19 @@
     Strip the unit from the given value and return the value
 */
 
-@function strip-unit($value) {
-    @return $value / ($value * 0 + 1);
-}
+@use 'sass:math';
 
+@function strip-unit($value) {
+    @return math.div($value, $value * 0 + 1);
+}
 
 /* ============================================
     Return an em unit based on the pixel value and context
 */
 
 @function rem($px, $context: $base-font-size) {
-    @return #{strip-unit($px / strip-unit($context))}rem;
+    @return #{strip-unit(math.div($px, strip-unit($context)))}rem;
 }
-
 
 /* ============================================
     Z-index function: Use this to keep track of z-indices
@@ -31,7 +31,6 @@
     @return null;
 }
 
-
 /* ============================================
     Widths for flex columns
 */
@@ -42,13 +41,13 @@
         so each gutter will be 3/2 * the amount subtracted.
         to compensate for this, we can multiply the gutter-width by 2/3. */
 
-    @return ($columns - 1) / $columns;
+    @return math.div($columns - 1, $columns);
 }
 
 @function column-width($columns, $gutter-width: 0) {
     // the base width of a column in an n-column grid is (100% / n)
     // e.g. 50% in a 2-column grid
-    $percent: 100% / $columns;
+    $percent: math.div(100%, $columns);
 
     // we subtract (n-1)/n times the gutter width, since there are n-1 gutters
     $share-of-gutter: gutter-factor($columns) * $gutter-width;

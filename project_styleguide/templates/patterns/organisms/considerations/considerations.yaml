@@ -1,5 +1,5 @@
 context:
-  cta_link: "http://samaritans.org/"
+  cta_link: 'http://samaritans.org/'
   cta_button_text: Enquire now
   cta_text: |
     It's great you feel you're right for the role.

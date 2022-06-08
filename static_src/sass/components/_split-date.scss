@@ -9,7 +9,8 @@
         }
     }
 
-    label { // needs this specificity
+    label {
+        // needs this specificity
         @include font-size(xs);
         margin-bottom: 5px;
     }

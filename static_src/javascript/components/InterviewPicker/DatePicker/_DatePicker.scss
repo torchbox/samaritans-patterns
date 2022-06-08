@@ -1,6 +1,6 @@
 /* stylelint-disable selector-class-pattern */
 // https://github.com/airbnb/react-dates#overriding-styles
-@import 'node_modules/react-dates/lib/css/_datepicker';
+@import './vendor_date_picker';
 
 /**
 * The styles of react-dates are generally hard to override beyond simple theming, due to some sizes being calculated in JS code.

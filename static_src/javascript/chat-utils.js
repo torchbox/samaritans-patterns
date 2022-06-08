@@ -1,35 +1,46 @@
 document.addEventListener('DOMContentLoaded', function () {
     const hiddenClass = 'card-new--hidden';
-    const hideListeningCTA = (element) => element && element.classList.add(hiddenClass);
-    const showListeningCTA = (element) => element && element.classList.remove(hiddenClass);
+    const hideListeningCTA = (element) =>
+        element && element.classList.add(hiddenClass);
+    const showListeningCTA = (element) =>
+        element && element.classList.remove(hiddenClass);
 
-    const hideCustomChatElements = () => document.querySelectorAll('[data-hidden-if-chat-unavailable]').forEach(el => {
-        el.style.display = 'none';
-    });
-    const showCustomChatElements = () => document.querySelectorAll('[data-shown-if-chat-available]').forEach(el => {
-        el.style.display = '';
-    });
+    const hideCustomChatElements = () =>
+        document
+            .querySelectorAll('[data-hidden-if-chat-unavailable]')
+            .forEach((el) => {
+                el.style.display = 'none';
+            });
+    const showCustomChatElements = () =>
+        document
+            .querySelectorAll('[data-shown-if-chat-available]')
+            .forEach((el) => {
+                el.style.display = '';
+            });
 
     const rawApiUrl = JSON.parse(
-        document.getElementById('webchat_api_url').textContent
+        document.getElementById('webchat_api_url').textContent,
     );
     const apiUrl = rawApiUrl ? new URL(rawApiUrl) : null;
 
     const chatCTA = document.querySelector(
-        '[data-cta-block-large][data-cta-type="chat"]'
+        '[data-cta-block-large][data-cta-type="chat"]',
     );
     const smallChatCTA = document.querySelector(
-        '[data-cta-block-small][data-cta-type="chat"]'
+        '[data-cta-block-small][data-cta-type="chat"]',
     );
 
     // There can be several chat CTAs on the same page - primary, sticky, and tabccordion
     const otherCtas = document.querySelectorAll(
-        '[data-listening-cta-type="chat"], [data-tabccordion-cta-type="chat"], [data-service-cta-type="chat"]'
+        '[data-listening-cta-type="chat"], [data-tabccordion-cta-type="chat"], [data-service-cta-type="chat"]',
     );
     if (apiUrl) {
         // Find the first CTA that has a skill set (if any have it) and assume
         // that all other CTAs on the page are related to this webchat skill.
-        const ctaSkill = [chatCTA, smallChatCTA, ...otherCtas].filter(Boolean).map(element => element.dataset.ctaSkill).find(Boolean);
+        const ctaSkill = [chatCTA, smallChatCTA, ...otherCtas]
+            .filter(Boolean)
+            .map((element) => element.dataset.ctaSkill)
+            .find(Boolean);
         if (ctaSkill) {
             apiUrl.searchParams.set('skill', ctaSkill);
         }
@@ -53,17 +64,18 @@ document.addEventListener('DOMContentLoaded', function () {
         largeCTA && showListeningCTA(largeCTA);
     };
 
-    const getChatUnavailableCtas = () => document.querySelectorAll('[data-cta-type="chat_unavailable"]')
+    const getChatUnavailableCtas = () =>
+        document.querySelectorAll('[data-cta-type="chat_unavailable"]');
     const showChatUnavailableCtas = () => {
-        getChatUnavailableCtas().forEach(el => {
+        getChatUnavailableCtas().forEach((el) => {
             el.classList.remove(hiddenClass);
         });
-    }
+    };
     const hideChatUnavailableCtas = () => {
-        getChatUnavailableCtas().forEach(el => {
+        getChatUnavailableCtas().forEach((el) => {
             el.classList.add(hiddenClass);
         });
-    }
+    };
 
     const hideOtherCTAs = () => {
         for (var cta of otherCtas) {
@@ -112,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     showOtherCTAs();
                     for (var cta of otherCtas) {
                         for (var waitTimeNode of cta.querySelectorAll(
-                            '[data-chat-wait-time]'
+                            '[data-chat-wait-time]',
                         )) {
                             waitTimeNode.innerText = status;
                         }
@@ -124,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             }
                         }
                         for (var chevron of cta.querySelectorAll(
-                            '.listening-cta__chevron'
+                            '.listening-cta__chevron',
                         )) {
                             chevron.style.display = 'inline-block';
                         }
@@ -150,5 +162,4 @@ document.addEventListener('DOMContentLoaded', function () {
     xhr.open('GET', apiUrl.href);
     xhr.timeout = 2000;
     xhr.send();
-
 });

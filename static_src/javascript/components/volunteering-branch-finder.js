@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     if (!document.getElementById('volunteering-branch-form')) {
         // We're not on the volunteering branch listing page
         return;
@@ -11,7 +11,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const branches = JSON.parse(
         document.getElementById('branches_json').textContent,
     ).branches;
-    const branchElements = Array.from(document.querySelectorAll('[data-branch]'));
+    const branchElements = Array.from(
+        document.querySelectorAll('[data-branch]'),
+    );
     const resultsHeading = document.querySelector(
         '[data-branches-results-heading]',
     );
@@ -20,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
     branchInput.focus();
 
     // listen for the form submit
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', function (e) {
         e.preventDefault();
         init(branchInput.value);
     });
@@ -31,10 +33,15 @@ document.addEventListener('DOMContentLoaded', function() {
         if (query.length) {
             geocoder.geocode(
                 {
-                    'address': query + ', Western Europe', // Append to better limit the search area,
-                    'bounds': {north: 61.058285, east: 1.977539, south: 49.822037, west: -10.942383} // eslint-disable-line no-undef
+                    address: query + ', Western Europe', // Append to better limit the search area,
+                    bounds: {
+                        north: 61.058285,
+                        east: 1.977539,
+                        south: 49.822037,
+                        west: -10.942383,
+                    }, // eslint-disable-line no-undef
                 },
-                function(results, status) {
+                function (results, status) {
                     resetUI();
                     if (status === 'OK') {
                         resultsHeading.hidden = false;
@@ -55,10 +62,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const distance = branches.map((branch) => {
             const branchLatlng = new google.maps.LatLng(...branch.latlng); // eslint-disable-line no-undef
             // eslint-disable-next-line no-undef
-            branch.distance = google.maps.geometry.spherical.computeDistanceBetween(
-                place.geometry.location,
-                branchLatlng,
-            );
+            branch.distance =
+                google.maps.geometry.spherical.computeDistanceBetween(
+                    place.geometry.location,
+                    branchLatlng,
+                );
             return branch;
         });
 

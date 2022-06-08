@@ -74,4 +74,4 @@ context:
 tags:
   include_block:
     tab.service_call_to_action:
-      template_name: "patterns/molecules/streamfield/blocks/service_cta_phone_block.html"
+      template_name: 'patterns/molecules/streamfield/blocks/service_cta_phone_block.html'

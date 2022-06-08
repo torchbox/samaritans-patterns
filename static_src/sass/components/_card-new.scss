@@ -426,7 +426,7 @@
         #{$root}__title {
             @include font-size(xl);
             color: $white;
-            margin-bottom: ($gutter / 2);
+            margin-bottom: ($gutter * 0.5);
         }
 
         #{$root}__text {

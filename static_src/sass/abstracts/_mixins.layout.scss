@@ -10,7 +10,6 @@
     }
 }
 
-
 /* ============================================
     Default streamfield block spacing
 */
@@ -28,8 +27,6 @@
 /* ============================================
     Default section padding for page types of sections (e.g. section--main)
 */
-
-
 
 @mixin page-padding--horizontal($location) {
     padding-#{$location}: $page-padding-horizontal-base;
@@ -95,43 +92,38 @@
     }
 }
 
-
-
 @mixin section--page($style: null, $padding: normal) {
     width: 100%;
     position: relative;
     z-index: z($z-elements, page);
 
     @if $padding == large {
-
-        padding-top:      $page-padding-vertical-base + 10px;
-        padding-bottom:   $page-padding-vertical-base + 10px;
-        padding-left:   $page-padding-horizontal-base + 10px;
-        padding-right:  $page-padding-horizontal-base + 10px;
+        padding-top: $page-padding-vertical-base + 10px;
+        padding-bottom: $page-padding-vertical-base + 10px;
+        padding-left: $page-padding-horizontal-base + 10px;
+        padding-right: $page-padding-horizontal-base + 10px;
 
         @include media-query(mob-landscape) {
-            padding-top:      $page-padding-vertical-mob-landscape + 10px;
-            padding-bottom:   $page-padding-vertical-mob-landscape + 10px;
-            padding-left:   $page-padding-horizontal-mob-landscape + 10px;
-            padding-right:  $page-padding-horizontal-mob-landscape + 10px;
+            padding-top: $page-padding-vertical-mob-landscape + 10px;
+            padding-bottom: $page-padding-vertical-mob-landscape + 10px;
+            padding-left: $page-padding-horizontal-mob-landscape + 10px;
+            padding-right: $page-padding-horizontal-mob-landscape + 10px;
         }
 
         @include media-query(tablet-portrait) {
-            padding-top:      $page-padding-vertical-tablet-portrait + 10px;
-            padding-bottom:   $page-padding-vertical-tablet-portrait + 10px;
-            padding-left:   $page-padding-horizontal-tablet-portrait + 10px;
-            padding-right:  $page-padding-horizontal-tablet-portrait + 10px;
+            padding-top: $page-padding-vertical-tablet-portrait + 10px;
+            padding-bottom: $page-padding-vertical-tablet-portrait + 10px;
+            padding-left: $page-padding-horizontal-tablet-portrait + 10px;
+            padding-right: $page-padding-horizontal-tablet-portrait + 10px;
         }
 
         @include media-query(tablet-landscape) {
-            padding-top:      $page-padding-vertical-tablet-landscape;
-            padding-bottom:   $page-padding-vertical-tablet-landscape;
-            padding-left:   $page-padding-horizontal-tablet-landscape;
-            padding-right:  $page-padding-horizontal-tablet-landscape;
+            padding-top: $page-padding-vertical-tablet-landscape;
+            padding-bottom: $page-padding-vertical-tablet-landscape;
+            padding-left: $page-padding-horizontal-tablet-landscape;
+            padding-right: $page-padding-horizontal-tablet-landscape;
         }
-
     } @else {
-
         @include page-padding--vertical(top);
         @include page-padding--vertical(bottom);
         @include page-padding--horizontal(left);
@@ -139,7 +131,6 @@
     }
 
     @if $style == corners {
-
         @include media-query(tablet-landscape) {
             width: auto;
             padding: 0;
@@ -166,7 +157,6 @@
     }
 }
 
-
 /* ============================================
     Basic page with transparent connectors
     Add the following include inside the element that gets this:
@@ -175,22 +165,29 @@
 
 @mixin page($location-1: null, $location-2: null, $width: full) {
     @include section--page(corners);
-    @include connectors--transparent(page, $location-1, $location-2, $white, $page-connectors-breakpoint);
+    @include connectors--transparent(
+        page,
+        $location-1,
+        $location-2,
+        $white,
+        $page-connectors-breakpoint
+    );
     background-color: $white;
 
     @if $width == medium {
         @include media-query($page-connectors-breakpoint) {
-            max-width: $wrapper--medium - (2 * $page-padding-horizontal-tablet-landscape);
+            max-width: $wrapper--medium -
+                (2 * $page-padding-horizontal-tablet-landscape);
         }
     }
 
     @if $width == small {
         @include media-query($page-connectors-breakpoint) {
-            max-width: $wrapper--small - (2 * $page-padding-horizontal-tablet-landscape);
+            max-width: $wrapper--small -
+                (2 * $page-padding-horizontal-tablet-landscape);
         }
     }
 }
-
 
 /* ============================================
     Remove margins on first and last children

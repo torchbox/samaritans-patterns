@@ -2,12 +2,12 @@ context:
   classes: breadcrumb--on-light
   page:
     get_ancestors:
-    - title: fake
-    - title: fake
-    - title: Category
-    - title: Subcategory
+      - title: fake
+      - title: fake
+      - title: Category
+      - title: Subcategory
 
 tags:
   pageurl:
     ancestor_page:
-      raw: "#"
+      raw: '#'

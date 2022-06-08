@@ -3,12 +3,12 @@ context:
     title: Test event
     introduction: Event intro text
     get_ancestors:
-    - is_root: true
-      depth: 2
-      title: Home
-    - is_root: false
-      depth: 3
-      title: Events
+      - is_root: true
+        depth: 2
+        title: Home
+      - is_root: false
+        depth: 3
+        title: Events
     start_date: !!timestamp '2018-12-13'
     start_time: !!timestamp '2018-12-13 2:00:00'
     end_date: !!timestamp '2018-12-15'
@@ -32,7 +32,7 @@ context:
       call_to_action_description: Samaritans have a limited number of places avaliable to give to our supports. If you would like one of these positions please make an application and we'll get in touch.
       registration_fee: 50
       fundraising_target: 400
-    application_heading : Apply Now
+    application_heading: Apply Now
     own_place_journey:
       call_to_action: Call to action
       call_to_action_description: description
@@ -53,9 +53,7 @@ context:
         value:
           image: fake
 
-
-
 tags:
   include_block:
     page.body:
-      template_name: "patterns/molecules/streamfield/stream_block.html"
+      template_name: 'patterns/molecules/streamfield/stream_block.html'

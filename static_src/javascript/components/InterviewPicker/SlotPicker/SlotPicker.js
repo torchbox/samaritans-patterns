@@ -1,8 +1,8 @@
-import React, { Fragment } from "react";
-import PropTypes from "prop-types";
+import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 
-import { typesOfInterview } from "../InterviewPicker";
-import InterviewSlots from "../InterviewSlots";
+import { typesOfInterview } from '../InterviewPicker';
+import InterviewSlots from '../InterviewSlots';
 
 /**
  * Widget to display a list of interview slots ordered by type,
@@ -34,62 +34,67 @@ const SlotPicker = ({
     return (
         <div className="slotpicker">
             <div className="slotpicker__date">
-                {date.format("Do MMMM")} interview slots
+                {date.format('Do MMMM')} interview slots
             </div>
-            {Object.values(typesOfInterview).filter(({ name }) => visibleInterviewTypes.has(name)).map((interviewType) => {
-                if (!showAllFilters && !filters.includes(interviewType.key)) {
-                    return <Fragment key={interviewType.key}></Fragment>;
-                }
-                const interviews = groupedByType[interviewType.name] || [];
-                switch (interviewType.key) {
-                    case typesOfInterview["Face-To-Face Interview"].key:
-                        return (
-                            <InterviewSlots
-                                key={interviewType.key}
-                                slots={interviews}
-                                groupBy="location_name"
-                                title={interviewType.display}
-                                onSelect={(slot) =>
-                                    onSelect({
-                                        ...slot,
-                                        location: slot.location_name,
-                                    })
-                                }
-                                selectedSlot={selectedSlot}
-                                isSelected={(slot) =>
-                                    selectedSlot &&
-                                    slot.interview_type ===
-                                        selectedSlot.interview_type &&
-                                    slot.location_name ===
-                                        selectedSlot.location &&
-                                    slot.datetime === selectedSlot.datetime
-                                }
-                            />
-                        );
-                    default:
-                        return (
-                            <InterviewSlots
-                                key={interviewType.key}
-                                slots={interviews}
-                                title={interviewType.display}
-                                onSelect={(slot) =>
-                                    onSelect({
-                                        ...slot,
-                                        location: null,
-                                    })
-                                }
-                                selectedSlot={selectedSlot}
-                                isSelected={(slot) =>
-                                    selectedSlot &&
-                                    slot.interview_type ===
-                                        selectedSlot.interview_type &&
-                                    selectedSlot.location === null &&
-                                    slot.datetime === selectedSlot.datetime
-                                }
-                            />
-                        );
-                }
-            })}
+            {Object.values(typesOfInterview)
+                .filter(({ name }) => visibleInterviewTypes.has(name))
+                .map((interviewType) => {
+                    if (
+                        !showAllFilters &&
+                        !filters.includes(interviewType.key)
+                    ) {
+                        return <Fragment key={interviewType.key}></Fragment>;
+                    }
+                    const interviews = groupedByType[interviewType.name] || [];
+                    switch (interviewType.key) {
+                        case typesOfInterview['Face-To-Face Interview'].key:
+                            return (
+                                <InterviewSlots
+                                    key={interviewType.key}
+                                    slots={interviews}
+                                    groupBy="location_name"
+                                    title={interviewType.display}
+                                    onSelect={(slot) =>
+                                        onSelect({
+                                            ...slot,
+                                            location: slot.location_name,
+                                        })
+                                    }
+                                    selectedSlot={selectedSlot}
+                                    isSelected={(slot) =>
+                                        selectedSlot &&
+                                        slot.interview_type ===
+                                            selectedSlot.interview_type &&
+                                        slot.location_name ===
+                                            selectedSlot.location &&
+                                        slot.datetime === selectedSlot.datetime
+                                    }
+                                />
+                            );
+                        default:
+                            return (
+                                <InterviewSlots
+                                    key={interviewType.key}
+                                    slots={interviews}
+                                    title={interviewType.display}
+                                    onSelect={(slot) =>
+                                        onSelect({
+                                            ...slot,
+                                            location: null,
+                                        })
+                                    }
+                                    selectedSlot={selectedSlot}
+                                    isSelected={(slot) =>
+                                        selectedSlot &&
+                                        slot.interview_type ===
+                                            selectedSlot.interview_type &&
+                                        selectedSlot.location === null &&
+                                        slot.datetime === selectedSlot.datetime
+                                    }
+                                />
+                            );
+                    }
+                })}
             {children}
         </div>
     );

@@ -1,6 +1,6 @@
 if (!Element.prototype.toggleAttribute) {
-    Element.prototype.toggleAttribute = function(name, force) {
-        if(force !== void 0) {
+    Element.prototype.toggleAttribute = function (name, force) {
+        if (force !== void 0) {
             force = !!force;
         }
 

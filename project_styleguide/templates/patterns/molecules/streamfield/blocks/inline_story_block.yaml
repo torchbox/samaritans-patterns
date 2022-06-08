@@ -6,9 +6,8 @@ context:
     name_description: Samaritans volunteer
     video: <iframe width="500" height="450" src="https://www.youtube.com/embed/DG_xT6DloV4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-
 tags:
   image:
     value.head_shot fill-90x90 class="inline-story-block__headshot":
       raw: |
-         <img src="http://via.placeholder.com/90" class="inline-story-block__headshot" width="90" height="90" alt="Some alt">
+        <img src="http://via.placeholder.com/90" class="inline-story-block__headshot" width="90" height="90" alt="Some alt">

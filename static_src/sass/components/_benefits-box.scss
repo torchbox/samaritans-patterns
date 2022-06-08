@@ -6,8 +6,7 @@
         margin: $gutter-large 0;
     }
 
-    @supports(display: grid) {
-
+    @supports (display: grid) {
         @include media-query(tablet-portrait) {
             grid-gap: $gutter;
             display: grid;

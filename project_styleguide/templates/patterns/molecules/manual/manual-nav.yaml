@@ -3,14 +3,14 @@ context:
     get_children:
       live:
         public:
-          - title: "Module 1: Facilitation and Observation Practice"
-          - title: "Module 2: Facilitation and Observation Skills"
-          - title: "Module 3: Interview Skills"
-          - title: "Module 4: Interview Practice"
-          - title: "Module 5: Feedback Skills"
-          - title: "Module 6: Feedback Practice"
+          - title: 'Module 1: Facilitation and Observation Practice'
+          - title: 'Module 2: Facilitation and Observation Skills'
+          - title: 'Module 3: Interview Skills'
+          - title: 'Module 4: Interview Practice'
+          - title: 'Module 5: Feedback Skills'
+          - title: 'Module 6: Feedback Practice'
 
 tags:
   pageurl:
-    "child":
+    'child':
       raw: '#'

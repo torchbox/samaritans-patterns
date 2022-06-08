@@ -2,9 +2,9 @@ context:
   value:
     title: What to do when someone is in crisis...
     list_items:
-      - An item 
-      - Another item 
-      - Another item 
+      - An item
+      - Another item
+      - Another item
       - Final item
     link_url: https://www.torchbox.com
     link_title: What to do when someone is in ...

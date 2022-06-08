@@ -27,7 +27,9 @@ class VideoModal {
         this.iframe = this.modal.querySelector('iframe');
         this.src = this.iframe ? this.iframe.getAttribute('src') : null;
         this.lazyIframe = this.modal.querySelector('.lazyframe');
-        this.lazyIframeSrc = this.lazyIframe ? this.lazyIframe.getAttribute('data-src') : null;
+        this.lazyIframeSrc = this.lazyIframe
+            ? this.lazyIframe.getAttribute('data-src')
+            : null;
         this.bindEvents();
     }
 
@@ -55,7 +57,9 @@ class VideoModal {
             // there won't be an iframe the first time the modal is opened
             if (this.modal.querySelector('iframe')) {
                 // re-instate the iframe src as it was removed on modal close
-                this.modal.querySelector('iframe').setAttribute('src', this.lazyIframeSrc);
+                this.modal
+                    .querySelector('iframe')
+                    .setAttribute('src', this.lazyIframeSrc);
             }
         });
 

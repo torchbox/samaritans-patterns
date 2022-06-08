@@ -7,15 +7,15 @@ context:
     search_description: Search description
     depth: 6
     get_ancestors:
-    - is_root: false
-      depth: 3
-      title: Some category
-    - is_root: false
-      depth: 4
-      title: Some sub category
-    - is_root: false
-      depth: 5
-      title: We need to go deeper
+      - is_root: false
+        depth: 3
+        title: Some category
+      - is_root: false
+        depth: 4
+        title: Some sub category
+      - is_root: false
+        depth: 5
+        title: We need to go deeper
 
 tags:
   pageurl:

@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 .header {
     $root: &;
     @include hide-when-mob-nav-open;
@@ -265,7 +267,7 @@
         @include font-size(s);
         color: $color--white;
         font-weight: $weight--bold;
-        margin: $gutter / 2 0 $gutter / 3;
+        margin: $gutter * 0.5 0 math.div($gutter, 3);
 
         @include media-query(tablet-portrait) {
             @include font-size(m);

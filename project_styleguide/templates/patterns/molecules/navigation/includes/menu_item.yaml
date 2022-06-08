@@ -4,6 +4,6 @@ context:
 
 tags:
   pageurl:
-    "page as item_url":
+    'page as item_url':
       target_var: item_url
-      raw: "#"
+      raw: '#'

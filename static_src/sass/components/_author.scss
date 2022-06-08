@@ -9,7 +9,7 @@
     }
 
     &__text {
-        @include font-size(s)
+        @include font-size(s);
         margin-bottom: 0;
     }
 }

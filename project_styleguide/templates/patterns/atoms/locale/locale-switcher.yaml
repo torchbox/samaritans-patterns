@@ -1,12 +1,8 @@
 context:
   choices:
     items:
-      -
-        - 'slug'
-        -
-          name_local: England
+      - - 'slug'
+        - name_local: England
           is_active: True
-      -
-        - 'slug'
-        -
-          name_local: Scotland
+      - - 'slug'
+        - name_local: Scotland

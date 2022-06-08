@@ -22,7 +22,8 @@
             position: absolute;
             left: 0;
             bottom: $gutter-large;
-            padding: $gutter-small ($gutter-xxl - $corner-offset + 5px) $gutter-small $gutter-xxl;
+            padding: $gutter-small ($gutter-xxl - $corner-offset + 5px)
+                $gutter-small $gutter-xxl;
             background-color: $background-color;
         }
     }

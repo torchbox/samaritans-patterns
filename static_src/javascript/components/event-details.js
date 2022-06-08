@@ -1,6 +1,5 @@
 function eventDetails() {
-
-    if(!document.getElementById('events__personal-details-wrapper')){
+    if (!document.getElementById('events__personal-details-wrapper')) {
         // We're not on the events details page.
         return;
     }
@@ -8,7 +7,7 @@ function eventDetails() {
     var eventFormEuro = document.getElementById('event__form__euro'),
         eventFormGbp = document.getElementById('event__form__gbp'),
         eventFormCurrency = document.getElementById('id_currency'),
-        eventFormAmount  = document.getElementById('id_amount'),
+        eventFormAmount = document.getElementById('id_amount'),
         currencyToggleEUR = document.getElementById('id_currency_1'),
         currencyStep = document.getElementById('currency-step');
 
@@ -36,12 +35,11 @@ function eventDetails() {
         currencyStep.innerText = '£';
     }
 
-    eventFormCurrency.addEventListener('click', function() {
-        if (currencyToggleEUR.checked){
+    eventFormCurrency.addEventListener('click', function () {
+        if (currencyToggleEUR.checked) {
             toggleEurosOn();
             toggleCurrencyAmountEuro();
-        }
-        else {
+        } else {
             toggleEurosOff();
             toggleCurrencyAmountGbp();
         }

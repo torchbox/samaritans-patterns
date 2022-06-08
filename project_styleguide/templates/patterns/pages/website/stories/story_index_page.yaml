@@ -28,7 +28,7 @@ context:
       publication_date: !!timestamp '2018-12-13'
 tags:
   pageurl:
-    "n":
+    'n':
       raw: '#'
     featured:
       raw: '#'

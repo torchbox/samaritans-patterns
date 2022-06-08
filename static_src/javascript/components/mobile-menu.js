@@ -50,7 +50,6 @@ class MobileMenu {
             this.fistMenuItem.focus();
         }, 260);
 
-
         // activate focus trap
         this.focusTrap.activate();
     }

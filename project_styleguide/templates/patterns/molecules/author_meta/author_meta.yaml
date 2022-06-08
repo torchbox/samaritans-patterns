@@ -1,9 +1,9 @@
 context:
   authors:
-  - name: "John Doe"
-    image: true
-  - name: "Jane Doe"
-    image: true
+    - name: 'John Doe'
+      image: true
+    - name: 'Jane Doe'
+      image: true
 
 tags:
   image:

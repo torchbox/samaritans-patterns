@@ -21,7 +21,6 @@
             color: $ink;
             background-color: $meadow;
         }
-
     }
 
     &__connectors {
@@ -80,7 +79,16 @@
 
     &--phone {
         @include media-query(mob-portrait) {
-            @include corner($meadow, top, left, 170px, 170px, 15px, #{$root}__corner, auto);
+            @include corner(
+                $meadow,
+                top,
+                left,
+                170px,
+                170px,
+                15px,
+                #{$root}__corner,
+                auto
+            );
 
             #{$root}__corner {
                 left: -100px;

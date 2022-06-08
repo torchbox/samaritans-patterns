@@ -24,7 +24,6 @@
         padding: $gutter-large $gutter-medium;
         margin: $gutter-medium 0 0;
 
-
         @include media-query(tablet-landscape) {
             margin: 0 0 0 $gutter-x-large;
             flex-basis: 320px;

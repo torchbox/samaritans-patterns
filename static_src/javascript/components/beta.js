@@ -13,7 +13,7 @@ class Beta {
 
     init() {
         // check cards on contact a samaritan page
-        this.cards.forEach(card => {
+        this.cards.forEach((card) => {
             if (card.getElementsByClassName('block-chat').length) {
                 card.classList.add(this.activeClass);
             }

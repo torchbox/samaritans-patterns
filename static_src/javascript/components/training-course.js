@@ -1,4 +1,4 @@
-import {disableFormAfterSubmit} from './disable-button-after-submit';
+import { disableFormAfterSubmit } from './disable-button-after-submit';
 import MicroModal from 'micromodal';
 
 class TrainingCourse {
@@ -13,9 +13,14 @@ class TrainingCourse {
         this.venueSlot = document.querySelector('[data-venue-slot]');
         this.button = document.querySelector('[data-confirm-course]');
         this.modal = document.getElementById('training-course-modal');
-        this.courseDate = this.node.querySelector('[data-course-date]').textContent;
-        this.courseVenue = this.node.querySelector('[data-course-venue]').textContent;
-        this.openModalButton = this.node.querySelector('[data-open-training-modal]');
+        this.courseDate =
+            this.node.querySelector('[data-course-date]').textContent;
+        this.courseVenue = this.node.querySelector(
+            '[data-course-venue]',
+        ).textContent;
+        this.openModalButton = this.node.querySelector(
+            '[data-open-training-modal]',
+        );
 
         this.bindEventListeners();
     }
@@ -24,7 +29,9 @@ class TrainingCourse {
         this.openModalButton.addEventListener('click', (e) => {
             e.preventDefault();
             this.openModal();
-            this.addFormMarkup(this.openModalButton.parentNode.nextElementSibling);
+            this.addFormMarkup(
+                this.openModalButton.parentNode.nextElementSibling,
+            );
         });
     }
 

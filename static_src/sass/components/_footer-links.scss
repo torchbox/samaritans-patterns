@@ -24,7 +24,6 @@
 
         @include media-query(tablet-portrait) {
             justify-content: flex-start;
-
         }
 
         #{$root}--website & {
@@ -51,7 +50,11 @@
 
     &__link {
         #{$root}__list--default & {
-            @include link($color--link--on-off-white, $color--link-hover, '> span');
+            @include link(
+                $color--link--on-off-white,
+                $color--link-hover,
+                '> span'
+            );
             @include underline(transparent, currentColor, '> span');
             padding: $gutter-small;
         }

@@ -5,12 +5,12 @@ context:
     last_name: Doe
     photo: fake
     job_title: Stub person
-    website: "https://example.com"
-    email: "test@example.com"
+    website: 'https://example.com'
+    email: 'test@example.com'
     social_media_profile:
       all:
-      - profile_url: "https://example.com/"
-      - profile_url: "https://example.com/2"
+        - profile_url: 'https://example.com/'
+        - profile_url: 'https://example.com/2'
     phone_numbers:
       all:
         - phone_number: 12345678
@@ -18,8 +18,8 @@ context:
     introduction: Some intro text for this peroson
     person_types:
       all:
-      - Staff
-      - Director
+        - Staff
+        - Director
 
 tags:
   image:
@@ -28,4 +28,4 @@ tags:
         <img src="http://via.placeholder.com/200x190" width="200" height="190" alt="Some alt">
   include_block:
     page.biography:
-      template_name: "patterns/molecules/streamfield/stream_block.html"
+      template_name: 'patterns/molecules/streamfield/stream_block.html'

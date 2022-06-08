@@ -1,7 +1,7 @@
 context:
   value:
     cta:
-      button_link_url: "http://samaritans.org/"
+      button_link_url: 'http://samaritans.org/'
       button_text: Enquire now
       description: |
         It's great you feel you're right for the role.

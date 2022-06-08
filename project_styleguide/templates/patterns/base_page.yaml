@@ -1,16 +1,16 @@
 tags:
   slugurl:
     "'home'":
-      raw: "#"
+      raw: '#'
   primarynav:
-    "":
-      template_name: "patterns/molecules/navigation/primarynav.html"
+    '':
+      template_name: 'patterns/molecules/navigation/primarynav.html'
   secondarynav:
-    "":
-      template_name: "patterns/molecules/navigation/secondarynav.html"
+    '':
+      template_name: 'patterns/molecules/navigation/secondarynav.html'
   footernav:
-    "":
-      template_name: "patterns/molecules/navigation/footernav.html"
+    '':
+      template_name: 'patterns/molecules/navigation/footernav.html'
   footerlinks:
-    "":
-      template_name: "patterns/molecules/navigation/footerlinks.html"
+    '':
+      template_name: 'patterns/molecules/navigation/footerlinks.html'

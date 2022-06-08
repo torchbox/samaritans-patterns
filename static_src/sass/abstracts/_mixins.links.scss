@@ -5,7 +5,11 @@
     Use the mixin on the parent whose hover state controls the color change.
 */
 
-@mixin link($color--initial: $color--link, $color--hover: $color--link-hover, $element: self) {
+@mixin link(
+    $color--initial: $color--link,
+    $color--hover: $color--link-hover,
+    $element: self
+) {
     @if $element == self {
         color: $color--initial;
         transition: color $transition, border-color $transition;
@@ -31,7 +35,6 @@
     }
 }
 
-
 // Undo link mixin
 @mixin link--undo($element: self) {
     @if $element == self {
@@ -55,7 +58,6 @@
     }
 }
 
-
 /* ============================================
     Thick underlines
 
@@ -69,7 +71,11 @@
       - Pass (transparent, $color) if the link color decreases in contrast on hover
       - Pass (transparent, currentColor) otherise
 */
-@mixin underline($color--initial: currentColor, $color--hover: currentColor, $element: self) {
+@mixin underline(
+    $color--initial: currentColor,
+    $color--hover: currentColor,
+    $element: self
+) {
     @if $element == self {
         box-shadow: inset 0 -2px $color--initial;
         transition: color $transition, box-shadow $transition;

@@ -3,7 +3,7 @@
     margin-bottom: $gutter-large;
     font-size: 21px;
 
-    @include media-query (mob-landscape) {
+    @include media-query(mob-landscape) {
         border-bottom: $grey-border;
         padding-bottom: $gutter-large;
     }

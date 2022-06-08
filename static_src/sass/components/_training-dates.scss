@@ -1,7 +1,7 @@
 .training-dates {
     &__session {
         border-bottom: $grey-border;
-        padding: ($gutter / 2) 0;
+        padding: ($gutter * 0.5) 0;
 
         @include media-query(tablet-portrait) {
             display: flex;
@@ -27,7 +27,7 @@
 
     &__right-column {
         min-width: 200px;
-        margin-top: $gutter / 2;
+        margin-top: $gutter * 0.5;
 
         @include media-query(tablet-portrait) {
             text-align: right;

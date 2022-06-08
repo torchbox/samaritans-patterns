@@ -1,4 +1,4 @@
-.mc-field-group  {
+.mc-field-group {
     // sass-lint:disable-block class-name-format
 
     $root: &;
@@ -14,7 +14,6 @@
         }
     }
 
-
     // for date widget
     &__fieldset {
         padding: 0;
@@ -23,7 +22,8 @@
     }
 
     label, // labels inside form fields
-    &__legend { // legend for date widget
+    &__legend {
+        // legend for date widget
         display: flex;
         margin-bottom: $gutter-small;
 
@@ -157,7 +157,7 @@
 
     &-wrapper {
         &--two-col {
-            @supports(display: grid) {
+            @supports (display: grid) {
                 @include media-query(mob-landscape) {
                     display: grid;
                     grid-gap: $gutter-medium;

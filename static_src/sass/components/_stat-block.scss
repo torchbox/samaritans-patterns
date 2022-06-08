@@ -93,7 +93,7 @@
 
         @include media-query(mob-landscape) {
             flex-basis: calc(50% - 30px);
-            margin-left:  15px;
+            margin-left: 15px;
             margin-right: 15px;
             max-width: none;
             padding: 0;
@@ -117,8 +117,8 @@
         }
 
         &--link {
-            @include link($color--default, $color--link-hover);
-            @include link($color--link, $color--link-hover, #{$root}__link);
+            @include link($ink, $ink);
+            @include link($ocean, $ink, #{$root}__link);
             @include underline($element: #{$root}__link);
             padding: $gutter $gutter-small;
             transition: color $transition, background-color $transition;
@@ -133,6 +133,10 @@
                 #{$root}__icon {
                     filter: brightness(90%);
                 }
+            }
+
+            #{$root}__link {
+                font-weight: $weight--bold;
             }
         }
     }

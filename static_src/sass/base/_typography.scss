@@ -5,20 +5,32 @@
 /* ============================================
     Base font
 */
+@use 'sass:math';
+
 html {
-    font-size: ($base-font-size / 16px) * 100%;
+    font-size: math.div($base-font-size, 16px) * 100%;
     line-height: $base-line-height;
     color: $color--default;
 }
 
 // sass-lint:disable single-line-per-selector
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     margin: 0 0 $gutter;
 }
 // sass-lint:enddisable
 
 // sass-lint:disable single-line-per-selector
-h1, h2, h3, h4, h5, h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
 .heading-text {
     @include heading-text;
 }
@@ -70,7 +82,9 @@ h3 {
     }
 }
 
-h4, h5, h6 {
+h4,
+h5,
+h6 {
     @include font-size(default);
 }
 
@@ -83,7 +97,8 @@ p {
     margin-bottom: $gutter;
 }
 
-b, strong {
+b,
+strong {
     font-weight: $weight--bold;
 }
 

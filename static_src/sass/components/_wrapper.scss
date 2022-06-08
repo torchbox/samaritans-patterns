@@ -28,7 +28,7 @@
 
     &--offset-right {
         @include media-query(tablet-landscape) {
-            padding-left:  $page-padding-horizontal-tablet-landscape;
+            padding-left: $page-padding-horizontal-tablet-landscape;
             padding-right: 250px;
         }
     }
@@ -62,7 +62,7 @@
 
     &--padding-for-page-tablet-portrait {
         @include media-query(tablet-portrait) {
-            padding-left:  $page-padding-horizontal-tablet-portrait;
+            padding-left: $page-padding-horizontal-tablet-portrait;
             padding-right: $page-padding-horizontal-tablet-portrait;
         }
     }
@@ -70,7 +70,7 @@
     &--padding-for-page-tablet-portrait,
     &--padding-for-page {
         @include media-query(tablet-landscape) {
-            padding-left:  $page-padding-horizontal-tablet-landscape;
+            padding-left: $page-padding-horizontal-tablet-landscape;
             padding-right: $page-padding-horizontal-tablet-landscape;
         }
     }
@@ -174,7 +174,6 @@
     }
 
     &--index-pattern {
-
         @include media-query($page-connectors-breakpoint) {
             @include corner--box-left();
             margin-bottom: $gutter-xxl;

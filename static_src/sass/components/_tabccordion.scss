@@ -417,7 +417,9 @@
     }
 
     &__cta-more {
-        text-decoration: underline;
+        @include link($ocean, $ink);
+        @include underline($ocean, currentColor);
+        font-weight: $weight--bold;
     }
 
     // For actions tabccordion

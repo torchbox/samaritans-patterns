@@ -12,7 +12,6 @@ context:
     in_memory_relationship: |
       <p>in_memory_relationship field</p>
 
-
 tags:
   render_form_field:
     form.amount:

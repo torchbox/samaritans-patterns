@@ -10,7 +10,9 @@ class Autocomplete {
 
         this.input = this.node.getElementsByTagName('input')[0];
         this.listSelector = this.node.dataset.autocompleteList;
-        this.list = JSON.parse(document.querySelectorAll(this.listSelector)[0].textContent);
+        this.list = JSON.parse(
+            document.querySelectorAll(this.listSelector)[0].textContent,
+        );
 
         this.init();
     }

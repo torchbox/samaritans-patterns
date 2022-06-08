@@ -6,11 +6,10 @@ context:
       title: 'Call us now to talk'
       page: 'Phone'
 
-
 tags:
   pageurl:
-    "value.link.page":
-      raw: "#"
+    'value.link.page':
+      raw: '#'
   include_block:
     value.call_to_action:
-      template_name: "patterns/molecules/streamfield/blocks/service_cta_phone_block.html"
+      template_name: 'patterns/molecules/streamfield/blocks/service_cta_phone_block.html'

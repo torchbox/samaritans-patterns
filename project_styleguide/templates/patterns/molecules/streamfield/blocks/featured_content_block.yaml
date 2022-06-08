@@ -9,7 +9,7 @@ context:
 
 tags:
   pageurl:
-    "block.link as href":
+    'block.link as href':
       target_var: href
       raw: '#'
   image:

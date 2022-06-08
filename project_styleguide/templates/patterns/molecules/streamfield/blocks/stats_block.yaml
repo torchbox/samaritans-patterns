@@ -9,4 +9,4 @@ context:
 tags:
   include_block:
     stat:
-      template_name: "patterns/molecules/streamfield/blocks/stat_block.html"
+      template_name: 'patterns/molecules/streamfield/blocks/stat_block.html'

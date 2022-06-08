@@ -1,11 +1,7 @@
 context:
   choices:
-    -
-      - 'English'
-      -
-        slug: 'slug'
+    - - 'English'
+      - slug: 'slug'
         is_active: True
-    -
-      - 'Cymraeg'
-      -
-        slug: 'slug'
+    - - 'Cymraeg'
+      - slug: 'slug'

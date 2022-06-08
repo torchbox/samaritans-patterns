@@ -1,14 +1,13 @@
 // Common utility functions
 
 class Utilities {
-
     // throttle function
     // example usage with a function called 'callback'
     // window.addEventListener('scroll', throttle(callback, 1000));
     static throttle(fn, wait) {
         var time = Date.now();
-        return function() {
-            if ((time + wait - Date.now()) < 0) {
+        return function () {
+            if (time + wait - Date.now() < 0) {
                 fn();
                 time = Date.now();
             }
@@ -18,14 +17,16 @@ class Utilities {
     static number_format(number, decimals, dec_point, thousands_sep) {
         var n = !isFinite(+number) ? 0 : +number,
             prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
-            sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
-            dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+            sep = typeof thousands_sep === 'undefined' ? ',' : thousands_sep,
+            dec = typeof dec_point === 'undefined' ? '.' : dec_point,
             toFixedFix = function (n, prec) {
                 // Fix for IE parseFloat(0.55).toFixed(0) = 0;
                 var k = Math.pow(10, prec);
                 return Math.round(n * k) / k;
             },
-            s = (prec ? toFixedFix(n, prec) : Math.round(n)).toString().split('.');
+            s = (prec ? toFixedFix(n, prec) : Math.round(n))
+                .toString()
+                .split('.');
         if (s[0].length > 3) {
             s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
         }

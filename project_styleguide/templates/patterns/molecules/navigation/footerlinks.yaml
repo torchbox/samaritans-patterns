@@ -1,10 +1,10 @@
 context:
   footerlinks:
-  - dummy
-  - dummy
-  - dummy
+    - dummy
+    - dummy
+    - dummy
 
 tags:
   include_block:
     'link with classes="footer-links__link"':
-      template_name: "patterns/molecules/navigation/blocks/menu_item.html"
+      template_name: 'patterns/molecules/navigation/blocks/menu_item.html'

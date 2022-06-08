@@ -47,6 +47,8 @@ import FormFieldExpand from './components/form-field-expand';
 import TermsAndConditions from './components/terms-and-conditions';
 import ChapterBar from './components/chapter-bar';
 
+import '../sass/main.scss';
+
 document.addEventListener('DOMContentLoaded', function () {
     for (const accordion of document.querySelectorAll(Accordion.selector())) {
         new Accordion(accordion);
