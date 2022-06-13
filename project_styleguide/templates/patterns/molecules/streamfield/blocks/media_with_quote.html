@@ -1,4 +1,4 @@
-{% load wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
 {% comment %}
     This component has 3 layout iterations:
@@ -42,7 +42,8 @@
                     </p>
                 {% endif %}
             </div>
-            <span class="quote-block__connectors"></span>
+            <span class="quote-block__connectors"></span>        
         </blockquote>
     {% endif %}
+
 </div>

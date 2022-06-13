@@ -1,0 +1,123 @@
+.simple-media-with-quote {
+    $root: &;
+    display: flex;
+    flex-direction: column;
+    margin: 80px 0;
+
+    @include media-query(tablet-landscape) {
+        display: flex;
+        flex-direction: row;
+        justify-content: stretch;
+        max-height: 450px;
+        overflow: hidden;
+    }
+
+    &--right {
+        @include media-query(tablet-landscape) {
+            flex-direction: row-reverse;
+        }
+    }
+
+    &__media-wrapper {
+        @include media-query(tablet-landscape) {
+            width: 50%;
+        }
+
+        img, figure {
+            height: 100%;
+            max-height: 735px;
+            object-fit: cover;
+            width: 100%;
+
+            @include media-query(tablet-landscape) {
+                max-height: unset;
+            }
+        }
+
+        figure {
+            margin-bottom: 0;
+            margin-left: auto;
+            margin-right: auto;
+
+            @include media-query(tablet-landscape) {
+                margin-bottom: initial;
+            }
+        }
+    }
+
+    &__quote-wrapper {
+        background-color: $plum;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 40px;
+        position: relative;
+
+        @include media-query(tablet-landscape) {
+            width: 50%;
+        }
+        
+        @include media-query(desktop) {
+            padding: 90px;
+        }
+
+        #{$root}--left & {
+            @include corner($emerald, bottom, right, $width: 40%, $height: 30%);
+        }
+
+        #{$root}--right & {
+            @include corner($emerald, bottom, left, $width: 40%, $height: 30%);
+        }
+    }
+
+    &__blockquote {
+        position: relative;
+    }
+
+    &__quote {
+        color: $white;
+        font-size: 26px;
+        font-weight: 700;
+        line-height: 39px;
+    }
+
+    &__attribution {
+        color: $white;
+        font-weight: $weight--bold;
+    }
+
+    &__quote-icon {
+        fill: $white;
+        height: 40px;
+        position: absolute;
+        width: 30px;
+
+        &--open {
+            left: -56px;
+            top: -40px;
+        }
+
+        &--close {
+            bottom: -36px;
+            right: -46px;
+        }
+    }
+
+    &__connectors {
+        #{$root}--right & {
+            @include connectors($emerald, bottom, left, medium);
+
+            @include media-query(tablet-landscape) {
+                @include connectors($page-bg, bottom, left, medium);
+            }
+        }
+
+        #{$root}--left & {
+            @include connectors($emerald, bottom, right, medium);
+
+            @include media-query(tablet-landscape) {
+                @include connectors($page-bg, bottom, right, medium);
+            }
+        }
+    }
+}

@@ -56,4 +56,12 @@
         max-width: 100%;
         margin: 0;
     }
+
+    .simple-media-with-quote & {
+        margin-top: 0;
+
+        div {
+           height: 100%; 
+        }
+    }
 }

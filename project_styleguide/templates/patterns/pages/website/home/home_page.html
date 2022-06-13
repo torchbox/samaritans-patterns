@@ -115,6 +115,11 @@
     </section>
 
     <section class="section section--page-padding">
+        {% if page.story_highlight %}
+            <div class="wrapper wrapper--large">
+                {% include_block page.story_highlight %}
+            </div>
+        {% endif %}
         <div class="wrapper wrapper--small">
             <h2 class="heading-secondary heading-secondary--stats">
                 {{ page.support_headline }}

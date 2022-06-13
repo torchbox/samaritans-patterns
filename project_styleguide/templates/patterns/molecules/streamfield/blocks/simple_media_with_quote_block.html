@@ -1,0 +1,44 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="simple-media-with-quote simple-media-with-quote{% if align_left %}--left{% else %}--right{% endif %}">
+    <div class="simple-media-with-quote__media-wrapper">
+        {% if value.image %}
+            {% image value.image fill-1300x1300 %}
+        {% else %}
+            <figure class="figure figure--embed">
+                {{ value.embed }}
+            </figure>    
+        {% endif %}
+    </div>
+    
+    <div class="simple-media-with-quote__quote-wrapper">
+        <blockquote>
+            <div class="simple-media-with-quote__blockquote">
+                {% include "patterns/atoms/svg/icons/icon-quote-open.html" with classes="simple-media-with-quote__quote-icon simple-media-with-quote__quote-icon--open" %}
+
+                <p class="simple-media-with-quote__quote">
+                    {{ value.quote }}
+                </p>
+                
+                {% include "patterns/atoms/svg/icons/icon-quote-close.html" with classes="simple-media-with-quote__quote-icon simple-media-with-quote__quote-icon--close" %}
+            </div>
+
+            {% if value.attribution %}
+                <p class="simple-media-with-quote__attribution">
+                    {{ value.attribution }}
+                </p>
+            {% endif %}
+
+            {% if value.button_text %}
+            <a class="button button--large button--streamfield" href="{{ button_link }}">
+                <div class="button__shadow"></div>
+                <div class="button__inner button__inner--no-icon">
+                    {{ value.button_text }}
+                </div>
+            </a>
+            {% endif %}
+        </blockquote>
+
+        <span class="simple-media-with-quote__connectors"></span>
+    </div>
+</div>

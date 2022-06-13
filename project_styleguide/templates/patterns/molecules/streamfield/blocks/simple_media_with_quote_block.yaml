@@ -1,0 +1,18 @@
+context:
+  value:
+    alignment: Left
+    quote: I'd say from the ages of around 18 - 25 I experienced some challenges with my own mental health and wellbeing
+    image: True
+    button_text: 'Read his story'
+    # embed: |
+    #   <div style="padding-bottom: 56.25%;" class="responsive-object">
+    #     <iframe width="480" height="270" src="https://www.youtube.com/embed/1PWTqCBVjjU?feature=oembed" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen>
+    #     </iframe>
+    #   </div>
+
+
+tags:
+  image:
+    value.image fill-1300x1300 :
+      raw: |
+        <img src="http://via.placeholder.com/1300x1300">
