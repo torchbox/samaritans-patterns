@@ -9,13 +9,13 @@
             {% include "patterns/molecules/hero/hero--image-background.html" with pattern="alt" class="hero--report" hero_image=parent_page.hero_image %}
             <div class="wrapper wrapper--large wrapper--offset-right">
                 <section class="section section--report">
-                    {% include "patterns/molecules/navigation/breadcrumbs.html" with on_light=True classes="breadcrumb--report" %}
+                    {% include "patterns/molecules/navigation/breadcrumbs.html" with on_light=True %}
 
                     <h1 class="report__title" id="main-content">{{ page.title }}</h1>
 
                     <div class="section__connectors"></div>
 
-                    {% if parent_page.first_published_at or parent_page.reading_time_minutes or parent_page.report_download_url %}
+                    {% if parent_page.last_published_at or parent_page.reading_time_minutes or parent_page.report_download_url %}
                         {% include "patterns/pages/website/reports/includes/report_meta_bar.html" with page=parent_page %}
                     {% endif %}
 

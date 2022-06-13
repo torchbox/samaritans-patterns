@@ -5,14 +5,13 @@
         @include media-query(tablet-landscape) {
             display: flex;
             flex-direction: column;
-            height: 800px;
+            height: 600px;
             justify-content: flex-end;
         }
     }
 
     &__title {
         @include rem-font-size(30px);
-        max-width: 515px;
         margin-bottom: 20px;
         line-height: 33px;
 

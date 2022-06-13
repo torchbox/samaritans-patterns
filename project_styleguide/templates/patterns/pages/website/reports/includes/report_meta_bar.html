@@ -1,9 +1,9 @@
 <div class="report__meta-bar">
-    {% if page.first_published_at %}
+    {% if page.last_published_at %}
         <div class="report__meta-bar-item">
             {% include "patterns/atoms/svg/colour-icons/icon-color-diary.html" with classes="report__meta-bar-icon" %}
             <div class="report__meta-bar-date">
-                <p class="report__meta-bar-text">{{ page.first_published_at|date:"l, j F Y" }}</p>
+                <p class="report__meta-bar-text">{{ page.last_published_at|date:"l j F Y" }}</p>
 
                 {% if page.category %}
                     <p class="report__meta-bar-category-text">in</p>
@@ -26,7 +26,7 @@
 
     {% if page.report_document %}
         <a href="{{ page.report_document.url }}" class="report__meta-bar-download" aria-label="Download the full report" download>
-            Full report
+            Download
             {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="report__meta-bar-download-icon" aria_hide="true" %}
         </a>
     {% endif %}
