@@ -37,7 +37,7 @@
     }
 
     // Embed on the left iteration
-    .media-with-quote--left & {
+    .media-with-quote--right & {
         max-width: 100%;
         margin: 0;
 
@@ -52,7 +52,7 @@
     }
 
     // Embed on the right iteration
-    .media-with-quote--right & {
+    .media-with-quote--left & {
         max-width: 100%;
         margin: 0;
     }
