@@ -7,7 +7,7 @@
         @include media-query(desktop) {
             display: flex;
             align-items: flex-start;
-            margin: 80px -100px;
+            margin: 80px -100px 60px -100px;
         }
 
         #{$root}__image {
@@ -29,7 +29,7 @@
 
         @include media-query(desktop) {
             flex-direction: row-reverse;
-            margin: 80px -100px 80px 0;
+            margin: 80px -100px 60px 0;
         }
 
         #{$root}__image {
