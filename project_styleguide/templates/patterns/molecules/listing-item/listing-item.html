@@ -43,6 +43,13 @@
             {% if value.topic %}
                 <li class="list-inline-bulleted__item">{{ value.topic|capfirst }}</li>
             {% endif %}
+
+            {% for type, icon in value.activity_taxonomies %}
+                <li class="list-inline-bulleted__item-with-icon">
+                    {% include "patterns/atoms/svg/colour-icons/icon-color-"|add:icon|add:".html" with title=icon classes="list-inline-bulleted__icon" %}
+                    {{ type|capfirst }}
+                </li>
+            {% endfor %}
         </ul>
     </div>
 </a>

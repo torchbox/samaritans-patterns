@@ -16,7 +16,7 @@
 
             {% include "../navigation/breadcrumbs.html"%}
 
-            <h1 class="hero__title" {% if hero_title_id %}id="{{ hero_title_id }}"{% endif %}>
+            <h1 class="hero__title {% if hero_intro %}hero__title--with-intro{% endif %}" {% if hero_title_id %}id="{{ hero_title_id }}"{% endif %}>
                 {% if hero_title %}
                     {{ hero_title }}
                 {% elif manual_page %}
@@ -31,6 +31,10 @@
             </h1>
             {% if page.charity_registered_name %}
                 <h2 class="hero__title">{{ page.charity_registered_name }}</h2>
+            {% endif %}
+
+            {% if hero_intro %}
+                <p class="hero__intro">{{ hero_intro }}</p>
             {% endif %}
 
             {% language_switcher %}
@@ -88,6 +92,8 @@
             {% include "patterns/atoms/svg/patterns/pattern-dots.html" with classes="pattern" %}
         {% elif pattern == "egg" %}
             {% include "patterns/atoms/svg/patterns/pattern-eggs.html" with classes="pattern" %}
+        {% elif pattern == "diamond" %}
+            {% include "patterns/atoms/svg/patterns/pattern-diamonds.html" with classes="pattern" %}
         {% elif pattern == "none" %}
 
         {% else %}

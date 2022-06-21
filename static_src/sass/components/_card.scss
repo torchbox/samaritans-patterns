@@ -103,6 +103,20 @@
             line-height: 1.3;
         }
 
+        &--activity {
+            color: $ink;
+            margin-bottom: 10px;
+
+            p {
+                margin-bottom: 0;
+            }
+
+            // Make any bold text purple. Editor is aware via help text.
+            b {
+                color: $plum;
+            }
+        }
+
         .template-home-page & {
             font-size: 21px;
         }
@@ -145,6 +159,10 @@
     &__link {
         @include font-size(s);
         margin-top: 20px;
+    }
+
+    &__description {
+        width: 100%;
     }
 
     // modifiers
@@ -235,6 +253,7 @@
         }
     }
 
+    &--activity,
     &--information {
         @include card-corner($lime);
         max-width: 416px;
@@ -264,6 +283,18 @@
             @include media-query(tablet-portrait) {
                 margin-bottom: $gutter-xxl;
                 max-width: 530px;
+            }
+        }
+    }
+
+    &--activity {
+        #{$root}__title {
+            @include rem-font-size(27px);
+            line-height: 35px;
+
+            @include media-query(tablet-landscape) {
+                @include rem-font-size(40px);
+                line-height: 44px;
             }
         }
     }

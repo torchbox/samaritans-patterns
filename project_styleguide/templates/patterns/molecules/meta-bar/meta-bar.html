@@ -1,6 +1,6 @@
 {% load wagtailcore_tags %}
 
-<ul class="meta-bar{% if apply_button %} meta-bar--apply-button{% endif %}{% if modifier %} meta-bar--{{ modifier }}{% endif %}">
+<ul class="meta-bar{% if apply_button or external_apply_button %} meta-bar--apply-button{% endif %}{% if modifier %} meta-bar--{{ modifier }}{% endif %}">
     {% if value.news_types.all|length > 0 %}
         {% include 'patterns/molecules/meta-bar/meta-bar__item.html' with icon="pen" text=value.news_types.all|join:", "|title %}
     {% endif %}
@@ -38,6 +38,60 @@
             {% include 'patterns/molecules/meta-bar/meta-bar__item.html' with icon="zebra-crossing" text=event_distance.distance|stringformat:"s"|add:" "|add:event_distance.unit %}
         {% endwith%}
     {% endif %}
+
+    {# Activity taxonomies #}
+    {% if value.activity_duration %}
+        <li class="meta-bar__item meta-bar__item--no-shrink">
+            {% include "patterns/atoms/svg/colour-icons/icon-color-stopwatch.html" with classes="meta-bar__icon" %}
+            <span class="meta-bar__text">
+                {{ value.activity_duration }}
+            </span>
+        </li>
+    {% endif %}
+
+    {% if value.activity_who_with %}
+        <li class="meta-bar__item meta-bar__item--no-shrink">
+            {% include "patterns/atoms/svg/colour-icons/icon-color-people.html" with classes="meta-bar__icon" %}
+            <span class="meta-bar__text">
+                {{ value.activity_who_with }}
+            </span>
+        </li>
+    {% endif %}
+
+    {% if value.activity_type %}
+        <li class="meta-bar__item meta-bar__item--no-shrink">
+            {% include "patterns/atoms/svg/colour-icons/icon-color-trainers.html" with classes="meta-bar__icon" %}
+            <span class="meta-bar__text">
+                {{ value.activity_type }}
+            </span>
+        </li>
+    {% endif %}
+
+    {% if show_activity_date %}
+        <li class="meta-bar__item meta-bar__item--no-shrink">
+            {% include "patterns/atoms/svg/colour-icons/icon-color-diary.html" with classes="meta-bar__icon" %}
+            <span class="meta-bar__text">
+                {% firstof value.activity_date|date:"j F Y" 'Anytime' %}
+            </span>
+        </li>
+    {% endif %}
+
+    {% if value.activity_location %}
+        <li class="meta-bar__item meta-bar__item--no-shrink">
+            {% include "patterns/atoms/svg/colour-icons/icon-color-globe.html" with classes="meta-bar__icon" %}
+            <span class="meta-bar__text">
+                {{ value.activity_location }}
+            </span>
+        </li>
+    {% endif %}
+
+    {% if external_apply_button %}
+        <li class="meta-bar__item meta-bar__item--button-wrapper">
+            <a class="meta-bar__button" href="{{ value.apply_now_link_url }}">{{ value.apply_now_link_text }}</a>
+        </li>
+    {% endif %}
+    {# End Activity taxonomies #}
+
     {% if apply_button %}
         <li class="meta-bar__item meta-bar__item--button-wrapper">
             <a href="#apply-section" class="meta-bar__button js-smooth-scroll">

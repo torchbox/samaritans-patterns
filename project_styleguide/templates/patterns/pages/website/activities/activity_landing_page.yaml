@@ -1,0 +1,33 @@
+context:
+  page:
+    heading_title: <p>Make a difference in as <b>little as 10 minutes</b>.</p>
+    heading_introduction: Take action now to help Samaritans make change that saves lives.
+    heading_anchor_link_text: Find an activity
+    hero_image: fake
+    activity_finder_title: Samaritans answer a call for help every 10 seconds.
+    activity_finder_introduction: However you choose to get involved, you're helping us make sure there's always someone there to listen when people need it most. You can help in lots of different ways. From raising awareness and learning new skills to organising a fundraiser or challenging yourself with a sporting event, every action you take makes a difference.
+    activity_finder_form_title: Find the best activity for you
+    activity_finder_form_introduction: Let's narrow it down...
+
+    activity_finder_links:
+      - value:
+          title: Not sure what you want to do?
+          text: <p>There are so many activities you can choose to take part in, no matter your circumstance. Answer this <b>1-minute quiz</b> to find the right action for you.</p>
+          link_text: Take the Activity Finder quiz
+          link_url: '#'
+      - value:
+          title: Browse all activities
+          text: <p>We are constantly coming up with ways to encourage participation. View all of the ways you can help our cause.</p>
+          link_text: Show all opportunities
+          link_url: '#'
+
+tags:
+  image:
+    page.hero_image fill-1900x1250 jpegquality-40 as hero_image:
+      target_var: hero_image
+      raw:
+        url: http://via.placeholder.com/1900x1250
+    page.hero_image fill-600x700 jpegquality-40 as hero_image_mobile:
+      target_var: hero_image_mobile
+      raw:
+        url: http://via.placeholder.com/600x700

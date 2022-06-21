@@ -91,13 +91,43 @@
     }
 
     // Modifiers ----------------------------------------------------------------
-    &--event {
+    &--event,
+    &--activity {
         background-color: $sunflower;
     }
 
     &--apply-button {
         @include media-query(tablet-landscape) {
             justify-content: space-between;
+        }
+    }
+
+    &--activity {
+        @include target-ie11() {
+            min-height: auto;
+        }
+
+        #{$root}__text {
+            @include rem-font-size(15px);
+        }
+
+        #{$root}__button {
+            @include rem-font-size(19px);
+            font-weight: $weight--bold;
+            background-color: $ocean;
+
+            #{$hover} {
+                background-color: $teal-dark;
+                color: $white;
+            }
+        }
+
+        #{$root}__item--button-wrapper {
+            width: 100%;
+
+            @include media-query(mob-landscape) {
+                width: auto;
+            }
         }
     }
 }

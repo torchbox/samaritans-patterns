@@ -370,4 +370,40 @@
             }
         }
     }
+
+    .form--activity-finder & {
+        margin-bottom: 15px;
+
+        &:last-of-type {
+            margin-bottom: 30px;
+        }
+
+        &__legend,
+        &__label {
+            font-weight: $weight--bold;
+
+            @include media-query(tablet-landscape) {
+                @include rem-font-size(20px);
+                line-height: 30px;
+            }
+        }
+
+        &__radio-checkbox {
+            display: flex;
+            margin-right: $gutter;
+
+            #{$root}__label {
+                font-weight: $weight--normal;
+            }
+        }
+
+        &__list {
+            display: flex;
+        }
+
+        select {
+            padding: 5px 65px 5px 10px;
+            height: 40px;
+        }
+    }
 }

@@ -144,4 +144,16 @@
             }
         }
     }
+
+    .template-activity-index-page & {
+        &__title {
+            @include font-size(l);
+        }
+
+        &__image {
+            display: block;
+            margin-bottom: 25px;
+            object-fit: cover;
+        }
+    }
 }

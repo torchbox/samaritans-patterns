@@ -22,6 +22,25 @@
         }
     }
 
+    &__item-with-icon {
+        @include font-size(xxs);
+        font-weight: $weight--bold;
+        display: flex;
+        margin-bottom: 15px;
+        width: 100%;
+
+        @include media-query(mob-landscape) {
+            margin-right: 15px;
+            width: auto;
+        }
+    }
+
+    &__icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+    }
+
     &--featured-listing {
         @include font-size(s);
     }

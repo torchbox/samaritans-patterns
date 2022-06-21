@@ -1,6 +1,12 @@
 {% load helper_tags %}
 <div class="filters__filter-wrapper">
-    <select name="{{ name }}" class="filters__select">
+    {% if icon %}
+        {% include "patterns/atoms/svg/colour-icons/icon-color-"|add:icon|add:".html" with title=icon classes="filters__icon" aria_hide=True %}
+    {% endif %}
+    {% if select_id and label_text %}
+        <label class="hidden" for="{{ select_id }}">{{ label_text }}</label>
+    {% endif %}
+    <select name="{{ name }}" class="filters__select" {% if select_id %}id="{{ select_id }}"{% endif %}>
         <option value="">{{ title }}</option>
         {% for option in options %}
             {% key_value request.GET name as get_param %}

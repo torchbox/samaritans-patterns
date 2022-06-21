@@ -106,6 +106,10 @@
             @include media-query(tablet-portrait) {
                 margin-bottom: $gutter-large;
             }
+
+            &--with-intro {
+                margin-bottom: 10px;
+            }
         }
 
         #{$root}--services & {
@@ -326,6 +330,17 @@
         }
     }
 
+    &__intro {
+        max-width: 800px;
+        color: $white;
+        margin-bottom: 20px;
+
+        @include media-query(tablet-landscape) {
+            @include font-size(l);
+            margin-bottom: 70px;
+        }
+    }
+
     &--with-image {
         padding-bottom: 0;
         display: flex;
@@ -427,6 +442,33 @@
         @include target-ie11 {
             h1 {
                 width: 100%;
+            }
+        }
+    }
+
+    &--activity-landing-page {
+        @include pattern($white, visible, 0.2);
+        background-color: $ink;
+        padding-bottom: 30px;
+        overflow: hidden;
+
+        #{$root}__inner {
+            margin-top: -125px;
+
+            @include media-query(tablet-portrait) {
+                margin-top: 0;
+            }
+        }
+
+        .pattern {
+            display: none;
+            max-width: 580px;
+            top: 280px;
+            z-index: z($z-elements, pattern);
+            right: -200px;
+
+            @include media-query(tablet-portrait) {
+                display: block;
             }
         }
     }

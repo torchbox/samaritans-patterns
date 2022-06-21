@@ -1,0 +1,35 @@
+{% extends "patterns/base.html" %}
+{% load wagtailcore_tags %}
+
+{% block header %}
+    {% include "patterns/organisms/header/header.html" with show_nav=True transparent_nav=True %}
+{% endblock header %}
+
+{% block content %}
+<div class="wrapper wrapper--flex">
+    {% include "patterns/molecules/hero/hero--image-background.html" with pattern="alt" %}
+
+    <div class="wrapper wrapper--large wrapper--padding-for-page">
+        <section class="section section--activity">
+            {% include "patterns/molecules/navigation/breadcrumbs.html" with on_light=True %}
+
+            <h1 id="main-content">{{ page.title }}</h1>
+
+            {% include 'patterns/molecules/meta-bar/meta-bar.html' with value=page modifier="activity" show_activity_date=True external_apply_button=True %}
+
+            {% if page.introduction %}
+                <p class="intro intro--margin-small">{{ page.introduction }}</p>
+            {% endif %}
+
+            {% include_block page.body %}
+
+            {% include "patterns/atoms/corners/corners.html" with size="page" %}
+        </section>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+    {% include "patterns/molecules/banner-cta/banner-cta.html" with page=page %}
+    {% include 'patterns/organisms/footer/footer.html' %}
+{% endblock footer %}

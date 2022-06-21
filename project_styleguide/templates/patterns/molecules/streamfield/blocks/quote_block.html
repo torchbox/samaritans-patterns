@@ -8,8 +8,13 @@
     {% else %}
         quote-block--quote
     {% endif %}
+    {% if value.image %}quote-block--with-image{% endif %}
     {% if classes %}{{ classes }}{% endif %}
     ">
+    {% if value.image %}
+        {% image value.image width-365 class="quote-block__image quote-block__image--desktop" %}
+        {% image value.image fill-890x890 class="quote-block__image quote-block__image--mobile" %}
+    {% endif %}
     <div class="quote-block">
         <div class="quote-block__quotation-wrapper">
             {% include "patterns/atoms/svg/icons/icon-quote-open.html" with classes="quote-block__quotation-mark quote-block__quotation-mark--open" %}

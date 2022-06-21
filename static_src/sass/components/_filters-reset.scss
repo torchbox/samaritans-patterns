@@ -1,0 +1,17 @@
+.filters-reset {
+    text-align: center;
+    border-bottom: $grey-border;
+    padding-bottom: $gutter;
+
+    &__link {
+        @include font-size(xs);
+        color: $ink;
+        border-bottom: 1px solid $ink;
+        transition: border-bottom $transition;
+
+        &:focus,
+        &:hover {
+            border-bottom: 3px solid $ink;
+        }
+    }
+}

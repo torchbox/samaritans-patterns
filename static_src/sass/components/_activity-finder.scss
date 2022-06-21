@@ -1,0 +1,103 @@
+.activity-finder {
+    $root: &;
+    background-color: $ink;
+    padding: 20px;
+
+    @include media-query(tablet-landscape) {
+        padding: 100px;
+    }
+
+    &__panels {
+        @include media-query(tablet-landscape) {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 100px;
+            align-items: flex-start;
+        }
+    }
+
+    &__panel {
+        @include connectors($sunflower, bottom, right);
+        position: relative;
+        background-color: $white;
+        margin-bottom: 40px;
+
+        @include media-query(tablet-landscape) {
+            margin-bottom: 0;
+            width: 50%;
+        }
+
+        @include target-ie11() {
+            margin-right: 20px;
+        }
+    }
+
+    &__panel-heading {
+        @include rem-font-size(21px);
+        line-height: 32px;
+        margin-bottom: 5px;
+
+        @include media-query(tablet-landscape) {
+            @include font-size(l);
+            line-height: 39px;
+        }
+    }
+
+    &__panel-text {
+        b {
+            color: $plum;
+        }
+    }
+
+    &__heading {
+        @include rem-font-size(21px);
+        line-height: 32px;
+        color: $white;
+        max-width: 780px;
+
+        @include media-query(tablet-landscape) {
+            @include rem-font-size(34px);
+            line-height: 42px;
+        }
+    }
+
+    &__introduction {
+        color: $white;
+        max-width: 780px;
+
+        @include media-query(tablet-landscape) {
+            margin-bottom: 40px;
+        }
+    }
+
+    &__sub-heading {
+        @include rem-font-size(21px);
+        line-height: 32px;
+        color: $white;
+        font-weight: $weight--bold;
+
+        @include media-query(tablet-landscape) {
+            @include font-size(l);
+            line-height: 39px;
+            margin-bottom: 30px;
+        }
+    }
+
+    &__widget {
+        @include target-ie11() {
+            width: 100%;
+        }
+
+        &:first-child {
+            border-bottom: 1px solid $grey-light;
+            padding-bottom: 35px;
+            margin-bottom: 35px;
+        }
+
+        &:only-child {
+            border-bottom: 0;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+    }
+}

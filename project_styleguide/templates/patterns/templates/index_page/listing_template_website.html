@@ -22,7 +22,7 @@
             {% endblock %}
 
             {% block filters_bar %}
-                <div class="filters">
+                <div class="filters {% block filters_bar_classes %}{% endblock %}">
                     <p>{% block filters_intro %}{% endblock %}</p>
                     <form method="GET" class="filters__form">
                         {% block filters %}{% endblock %}
@@ -32,6 +32,8 @@
                     </form>
                 </div>
             {% endblock %}
+
+            {% block under_filters %}{% endblock %}
 
             {% block listings %}
             {% endblock %}
@@ -44,6 +46,7 @@
 
             {% include "patterns/atoms/corners/corners.html" with size="page" %}
 
+            {% block extra_connectors %}{% endblock %}
         </section>
 
     </div>

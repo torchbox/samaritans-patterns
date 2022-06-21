@@ -1,0 +1,28 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="ways-to-get-involved">
+    {% if value.heading %}
+        <div class="ways-to-get-involved__heading">
+            {{ value.heading|richtext }}
+        </div>
+    {% endif %}
+
+    {% if value.teaser_heading %}
+        <p class="ways-to-get-involved__teaser-heading">{{ value.teaser_heading }}</p>
+    {% endif %}
+
+    {% if value.teasers %}
+        <div class="ways-to-get-involved__teasers">
+            {% for teaser in value.teasers %}
+                <div class="activity-teaser ways-to-get-involved__teaser">
+                    {% image teaser.image fill-440x300 class="activity-teaser__image" %}
+
+                    <div class="activity-teaser__content">
+                        <h2 class="activity-teaser__heading">{{ teaser.heading }}</h2>
+                        <p class="activity-teaser__text">{{ teaser.text }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>

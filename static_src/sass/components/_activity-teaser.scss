@@ -1,0 +1,33 @@
+.activity-teaser {
+    @include target-ie11() {
+        margin-right: 25px;
+    }
+
+    &__content {
+        background-color: $off-white;
+        padding: 20px 10px;
+        text-align: center;
+
+        @include media-query(tablet-portrait) {
+            padding: 25px 30px;
+        }
+    }
+
+    &__heading {
+        @include rem-font-size(21px);
+        font-weight: $weight--bold;
+        color: $amethyst;
+        margin-bottom: 10px;
+        line-height: 25px;
+
+        @include media-query(tablet-portrait) {
+            @include font-size(l);
+            line-height: 31px;
+        }
+    }
+
+    &__text {
+        margin-bottom: 0;
+        line-height: 26px;
+    }
+}
