@@ -8,10 +8,10 @@
     {% else %}
         quote-block--quote
     {% endif %}
-    {% if value.image %}quote-block--with-image{% endif %}
+    {% if value.image and show_image %}quote-block--with-image{% endif %}
     {% if classes %}{{ classes }}{% endif %}
     ">
-    {% if value.image %}
+    {% if value.image and show_image %}
         {% image value.image width-365 class="quote-block__image quote-block__image--desktop" %}
         {% image value.image fill-890x890 class="quote-block__image quote-block__image--mobile" %}
     {% endif %}
