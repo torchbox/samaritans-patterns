@@ -151,6 +151,7 @@
         </div>
     </div>
 
+    {% if page.story_cta %}
     <div class="wrapper wrapper--donate-landing-cta">
         <div class="wrapper--small">
             {# Story CTA #}
@@ -159,6 +160,7 @@
             </div>
         </div>
     </div>
+    {% endif %}
 
     {% include "patterns/molecules/related-pages/related-pages--large.html" with heading=page.more_info_heading related_pages=page.more_info_links pattern="diamonds" classes="related-large--donate-landing" %}
 
