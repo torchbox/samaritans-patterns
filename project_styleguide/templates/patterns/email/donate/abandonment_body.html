@@ -1,0 +1,16 @@
+{% extends "patterns/email/base.html" %}
+
+{% block content %}
+    <p> {{ first_name }}, we’re sorry to see that you were unable to complete your donation. Your support is vital and greatly appreciated by all of us here at Samaritans.</p>
+    <p>You can <a href="{{ url }}">try to complete your donation again here</a> – every penny you donate could allow a Samaritan to be there to pick up the phone and listen to somebody who desperately needs support.</p>
+    <p>It is only with your help that Samaritans volunteers can be there to answer the 10,000 calls for help we receive every single day.</p>
+
+        <a href={{ url }}>Finish making your donation</a>
+        
+        <p class="t t-bold">Having trouble donating online?</p> Don’t worry, our Supporter Care team are here to help you. Simply give them a call on <a href="tel:03709 00 00 32">03709 00 00 32</a> or e-mail <a href="mailto:supportercare@samaritans.org">supportercare@samaritans.org</a>.
+        
+        <p>Thank you for your interest in supporting Samaritans, it is only thanks to incredible individuals like you that we’re able to be here to listen to those in need.</p>
+        <p>Joe Campbell</p>
+        <p>Supporter Care team</p>
+    <a href={{ opt_out_url }}>If you'd like to opt-out of further reminders, click here.</a>
+{% endblock %}

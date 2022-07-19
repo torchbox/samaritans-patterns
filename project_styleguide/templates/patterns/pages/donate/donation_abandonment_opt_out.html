@@ -1,0 +1,29 @@
+{% extends "patterns/base_page.html" %}
+{% load i18n helper_tags static wagtailcore_tags wagtailimages_tags icon_tags humanize %}
+
+{% block content %}
+
+{% include "patterns/molecules/hero/hero--image-background.html" with pattern="diamonds" value=page class="thankyou" %}
+
+<div class="wrapper wrapper--large wrapper--padding-for-page" id="main-content">
+    <section class="section section--donate">
+        <div class="payments__complete">
+            <div class="payments__message">
+                <h1>You've been opted out from donation checkout reminders.</h1>
+            </div>
+        </div>
+
+        <hr class="hr hr--donate-thank-you" />
+
+        {% include "patterns/atoms/corners/corners.html" with size="page" %}
+    </section>
+</div>
+
+
+{% endblock %}
+
+
+<!-- Overide footer so footer CTA does not display -->
+{% block footer %}
+    {% include 'patterns/organisms/footer/footer.html' %}
+{% endblock footer %}
