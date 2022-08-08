@@ -1,6 +1,6 @@
 Hello,
 
-A high-value {% if payment_frequency == 'single' %}single{% else %}monthly{% endif %} donation has been made of {{ currency_symbol }}{{ amount }} on {{ created_at }}, with a transaction ID of: {{ transaction_id }}.
+A high-value {% if payment_frequency == 'single' %}single{% else %}monthly{% endif %} donation has been made of {{ currency_symbol }}{{ amount }} on {{ created_at }}, with a transaction ID of: {{ transaction_id }}, campaign name: {{ campaign_name }}.
 
 This supporter has chosen the following communication preferences:
  - Contact via phone: {% if prefs_phone %}Yes{% else %}No{% endif %}
