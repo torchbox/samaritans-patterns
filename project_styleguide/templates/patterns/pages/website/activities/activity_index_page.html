@@ -47,8 +47,33 @@
 {% block listings %}
     {% if activities %}
         {% include "patterns/organisms/listing-list/listing-list.html" with listings=activities %}
+        {% if page.email_subscription_form %}
+            If none of these activities spark your interest, sign up to hear when new activities become available.
+            <div class="wrapper">
+                <div class="wrapper wrapper--small">
+                    <div class="section section--main section--no-hero mailchimp-form">
+                        {% if page.email_subscription_heading %}
+                            <h2 class="heading-secondary">{{ page.email_subscription_heading }}</h2>
+                        {% endif %}
+                        {{ page.email_subscription_form.embed_code|safe }}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
     {% else %}
-        No matching activities
+        There are no activities that match your criteria. You can update the filters and search
+        again{% if page.email_subscription_form %}, or sign up to hear when new activities become available.
+            <div class="wrapper">
+                <div class="wrapper wrapper--small">
+                    <div class="section section--main section--no-hero mailchimp-form">
+                        {% if page.email_subscription_heading %}
+                            <h2 class="heading-secondary">{{ page.email_subscription_heading }}</h2>
+                        {% endif %}
+                        {{ page.email_subscription_form.embed_code|safe }}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
     {% endif %}
 {% endblock listings %}
 
