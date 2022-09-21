@@ -9,6 +9,7 @@ const sass = require('sass');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const StylelintPlugin = require('stylelint-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const SentryWebpackPlugin = require('@sentry/webpack-plugin');
 const webpack = require('webpack');
 const projectRoot = 'samaritans';
 
@@ -180,6 +181,24 @@ const options = {
 const webpackConfig = (environment, argv) => {
     const isProduction = argv.mode === 'production';
 
+    // Runs on gitlab during the `upload_sourcemaps` job
+    // This uploads JS sourcemaps to Sentry for error debugging
+
+    if (
+        process.env.CI_JOB_STAGE === 'deploy' &&
+        process.env.UPLOAD_SOURCE_MAPS === 'true'
+    ) {
+        options.devtool = 'source-map';
+        options.plugins.push(
+            new SentryWebpackPlugin({
+                include: './static_compiled',
+                ignoreFile: '.sentrycliignore',
+                ignore: ['node_modules', 'webpack.config.js'],
+                configFile: 'sentry.properties',
+                urlPrefix: '~/static',
+            }),
+        );
+    }
     options.mode = isProduction ? 'production' : 'development';
 
     if (!isProduction) {

@@ -23,7 +23,8 @@
         "build": "webpack --mode development --progress",
         "build:prod": "webpack --mode production",
         "start": "webpack --mode development --progress --watch",
-        "start:reload": "webpack-dev-server"
+        "start:reload": "webpack-dev-server",
+        "upload_source_maps_to_sentry": "NODE_env=production npm run build:prod"
     },
     "devDependencies": {
         "@babel/core": "^7.11.6",
@@ -58,6 +59,10 @@
     },
     "dependencies": {
         "@glidejs/glide": "^3.2.3",
+        "@sentry/browser": "^7.2.0",
+        "@sentry/integrations": "^7.12.1",
+        "@sentry/tracing": "^7.2.0",
+        "@sentry/webpack-plugin": "^1.18.9",
         "awesomplete": "^1.1.4",
         "braintree-web": "^3.85.2",
         "canvas-confetti": "^1.4.0",

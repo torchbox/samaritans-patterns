@@ -1,6 +1,7 @@
 import 'babel-polyfill';
 import './polyfills/foreach-polyfill';
 import './polyfills/remove-polyfill';
+import './sentry';
 
 import Autocomplete from './components/autocomplete';
 import MobileMenu from './components/mobile-menu';

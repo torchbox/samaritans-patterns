@@ -1,4 +1,4 @@
-{% load static locale_tags wagtailuserbar wagtailcore_tags wagtailimages_tags navigation_tags util_tags %}
+{% load static locale_tags wagtailuserbar wagtailcore_tags wagtailimages_tags navigation_tags util_tags sentry_tags %}
 {% wagtail_site as current_site %}
 
 <!doctype html>
@@ -63,6 +63,8 @@
         {% block footer %}{% endblock %}
 
         {% block after_footer %}{% endblock %}
+
+        {% sentry_vars %}
 
         {% block main_js %}{% endblock main_js %}
 
