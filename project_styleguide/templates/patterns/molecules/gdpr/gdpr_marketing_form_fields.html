@@ -2,21 +2,20 @@
 
 <section class="section section--donate-marketing streamfield--dark-bg" data-gdpr-fields>
     <div class="section__connectors--extra"></div>
-    <h2>{% trans "Stay in touch" %}</h2>
+    <h2 class="heading-block heading-block--xxl">{% trans "4 Keeping in touch" %}</h2>
     <div class="donate__marketing-intro">
         <p class="donate__marketing-meta">{% trans "Samaritans volunteers are there 24/7, 365 days a year for anyone struggling to cope. But we can't do it alone, which is why we'd like to keep in touch about our vital work and show you how, together, we can ensure fewer people die by suicide." %}</p>
         {% render_icon "icon-color-envelope-open" "" %}
     </div>
-        <div class="js-select-all-checkbox-toggle">
-            <div class="form-item-wrapper form-item-wrapper--group{% if form.contact_prefs_error %} form-item__wrapper--error{% endif %}" id="donate__contact-prefs">
-                {% if form.contact_prefs_error %}
-                    <p class="form-item__errors">{{ form.contact_prefs_error }}</p>
-                {% endif %}
-                <div class="js-select-all-checkbox-toggle">
-                    {% render_form_field form.prefs_fun_vw %}
-                    {% render_form_field form.prefs_volunteering %}
-                    <a class="donate__marketing-select-all js-select-all" id="donate__select-all-contact-prefs" href="#donate__contact-prefs">Or check all</a>
-                </p>
+    <div class="js-select-all-checkbox-toggle">
+        <div class="form-item-wrapper form-item-wrapper--group{% if form.contact_prefs_error %} form-item__wrapper--error{% endif %}" id="donate__contact-prefs">
+            {% if form.contact_prefs_error %}
+                <p class="form-item__errors">{{ form.contact_prefs_error }}</p>
+            {% endif %}
+            <div class="js-select-all-checkbox-toggle">
+                {% render_form_field form.prefs_fun_vw %}
+                {% render_form_field form.prefs_volunteering %}
+                <a class="donate__marketing-select-all js-select-all" id="donate__select-all-contact-prefs" href="#donate__contact-prefs">Or check all</a>
             </div>
         </div>
     </div>

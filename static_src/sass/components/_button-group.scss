@@ -15,7 +15,8 @@
         background-color: $teal;
         color: $white;
 
-        .hero-widget--slider & {
+        .hero-widget--slider &,
+        .hero-widget--buttons & {
             @include font-size(s);
             width: 50%;
         }

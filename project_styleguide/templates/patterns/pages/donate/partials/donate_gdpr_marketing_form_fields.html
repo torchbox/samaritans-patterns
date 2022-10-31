@@ -1,0 +1,55 @@
+{% load wagtailcore_tags form_tags i18n %}
+
+<section class="section section--form-darker-grey" data-gdpr-fields-donate>
+    <h2>
+        <span class="donate__step" id="stay-in-touch-step-number">
+            {% if is_pay_in %}{% trans "2" %}{% else %}{% trans "3" %}{% endif %}
+        </span>
+        {% trans "Stay in touch" %}
+    </h2>
+
+    <div class="donate__marketing-intro">
+        <p class="donate__marketing-meta">{% trans "We'd like to keep in touch about our vital work." %}</p>
+    </div>
+
+
+    <div class="form-item-wrapper form-item-wrapper--group{% if form.contact_prefs_error %} form-item__wrapper--error{% endif %}" data-contact-prefs>
+        {% if form.contact_prefs_error %}
+            <p class="form-item__errors">{{ form.contact_prefs_error }}</p>
+        {% endif %}
+        <div>
+            {% render_form_field form.prefs_fun_vw %}
+            {% render_form_field form.prefs_volunteering %}
+        </div>
+    </div>
+
+    <div
+        class="form-item-wrapper form-item-wrapper--radio-select-inline{% if form.contact_methods_error %} form-item__wrapper--error{% endif %}" data-contact-methods-wrapper
+        {% if form.contact_methods_error or form.prefs_fun_vw.value or form.prefs_volunteering.value %}
+        {% else %}
+            hidden
+        {% endif %}
+        id="contact-methods-wrapper"
+    >
+        {% if form.contact_methods_error %}
+            <p class="form-item__errors">{{ form.contact_methods_error }}</p>
+        {% endif %}
+
+        <div class="form__container form__container--checkboxes">
+            {% render_form_field form.prefs_phone %}
+            {% render_form_field form.prefs_sms %}
+            {% render_form_field form.prefs_email %}
+        </div>
+
+        {% if form.mobile_number %}
+            {% include 'patterns/molecules/forms/form_field.html' with field=form.mobile_number className="js-mobile-wrapper" %}
+        {% endif %}
+    </div>
+
+    <small class="donate__marketing-meta donate__marketing-meta--small donate__marketing-meta--light-bg">
+        <p>For information on how to change your contact preferences, or about how Samaritans handles and protects your personal information, please see our <a href="{% slugurl 'privacy-statement' %}">privacy statement</a>.</p>
+
+        <p><a href="/support-us/donating-faqs/">Donating to Samaritans - FAQs</a></p>
+    </small>
+
+</section>

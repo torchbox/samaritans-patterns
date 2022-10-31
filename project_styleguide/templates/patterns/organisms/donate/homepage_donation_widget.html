@@ -1,0 +1,141 @@
+{# Version of the donate slider or donate buttons used on the home page - this repeats code in pages/donate/donate_landing_page in order to apply slightly different classes and markup  #}
+{% load wagtailcore_tags i18n donate_tags form_tags static to_euro %}
+{% wagtail_site as current_site %}
+
+{# Toggle to switch between monthly and single donations - only shows if both types of donation are allowed #}
+{% if donate_page.allow_monthly_donation and donate_page.allow_one_off_donation %}
+    <div class="button-group">
+        <button class="button-group__button" id="donate__form__toggle-monthly" {% if donate_page.default_to_monthly %}disabled aria-pressed="true"{% endif %} {% if not donate_page.default_to_monthly %}aria-pressed="false"{% endif %}>
+            <span class="button-group__button-text">
+                {% trans "Monthly donation" %}
+            </span>
+        </button>
+        <button class="button-group__button" id="donate__form__toggle-single" {% if donate_page.default_to_single %}disabled aria-pressed="true"{% endif %} {% if not donate_page.default_to_single %}aria-pressed="false"{% endif %}>
+            <span class="button-group__button-text">
+                {% trans "One-off donation" %}
+            </span>
+        </button>
+    </div>
+{% endif %}
+
+{# Monthly #}
+{% if donate_page.allow_monthly_donation %}
+    <form method="get" action="{% url 'donate:redirect' %}" id="donate_form--monthly" {% if donate_page.default_to_single %}hidden{% endif %} class="js-donate-usage">
+        {# Show slider if an editor has enabled it #}
+        {% if donate_page.show_donate_slider %}
+            {# Show slider usage slot if an editor has enabled the slider #}
+            <div class="donate-slider__container">
+                <div id="donate_slider--monthly-icon" class="donate-slider--icon">
+                    {# Child element injected here, if supplied #}
+                </div>
+                <div id="donate_slider--monthly-text" class="donate-slider--text">
+                    {# Child element injected here, if supplied #}
+                </div>
+            </div>
+        {% endif %}
+
+        {# or show the monthly buttons if they've been enabled - slider and buttons won't be shown together #}
+        {% if donate_page.show_donate_buttons %}
+                {% include "patterns/pages/donate/partials/donate_widget_buttons.html" with button_values=monthly_button_values frequency="monthly" %}
+        {% endif %}
+        {% if donate_page.show_donate_slider or donate_page.show_donate_buttons %}
+            <div class="donate-slider__slider-input-wrap">
+
+                {# show the actual slider #}
+                {% if donate_page.show_donate_slider %}
+                    <div id="donate_slider--monthly" class="donate-landing__slider" data-suggested-amount="{{monthly_suggested_amount}}">
+                        {# Child elements (pips) injected here, if supplied #}
+                    </div>
+                {% endif %}
+
+                {% if is_euro %}
+                    <div class="donate-landing-hero__form-input donate-landing-hero__form-input">
+                        <div class="form-item form-item--decimal_field form-item--number_input donate-landing-hero__form-input">
+                            <label for="{{ monthly_form.amount.id_for_label }}">{{ monthly_form.amount.label }}</label>
+                            <div class="form-item__wrapper--euro">
+                                {{ monthly_form.amount.errors }}
+                                <input type="number" id="id_amount" name="amount" value="{{ monthly_form.amount.value|to_euro:current_site }}" min="0.01" step="0.01" required="" max="{{ donation_max_amount|to_euro:current_site }}">
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="donate-landing-hero__form-input donate-landing-hero__form-input--monthly">
+                        {% render_form_field monthly_form.amount %}
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        {% render_form_field monthly_form.campaign_id %}
+        {% render_form_field monthly_form.campaign_name %}
+        {% render_form_field monthly_form.frequency %}
+        {% render_form_field monthly_form.currency %}
+
+        <div class="donate-slider__button-icons-wrap js-donate-button-wrapper">
+            {% include "patterns/atoms/buttons/button--button.html" with label="Donate Now" large=True classes="button--secondary donate-landing-hero__donate-button" %}
+            {% include "patterns/molecules/payments/payment-icons--monthly.html" %}
+        </div>
+    </form>
+{% endif %}
+
+{# One off #}
+{% if donate_page.allow_one_off_donation %}
+    <form method="get" action="{% url 'donate:redirect' %}" id="donate_form--single" {% if donate_page.default_to_monthly %}hidden{% endif %} class="js-donate-usage">
+        {# Show slider if an editor has enabled it #}
+        {% if donate_page.show_donate_slider %}
+            {# Show slider usage slot if an editor has enabled the slider #}
+            <div class="donate-slider__container">
+                <div id="donate_slider--single-icon" class="donate-slider--icon">
+                    {# Child element injected here, if supplied #}
+                </div>
+                <div id="donate_slider--single-text" class="donate-slider--text">
+                    {# Child element injected here, if supplied #}
+                </div>
+            </div>
+        {% endif %}
+
+        {# or show the single buttons if they've been enabled - slider and buttons won't be shown together #}
+        {% if donate_page.show_donate_buttons %}
+                {% include "patterns/pages/donate/partials/donate_widget_buttons.html" with button_values=single_button_values frequency="single" %}
+        {% endif %}
+
+        {% if donate_page.show_donate_slider or donate_page.show_donate_buttons %}
+            <div class="donate-slider__slider-input-wrap">
+
+                {# show the actual slider #}
+                {% if donate_page.show_donate_slider %}
+                    <div id="donate_slider--one_off" class="donate-landing__slider" data-suggested-amount="{{single_suggested_amount}}">
+                        {# Child elements (pips) injected here, if supplied #}
+                    </div>
+                {% endif %}
+
+                {% if is_euro %}
+                    <div class="donate-landing-hero__form-input donate-landing-hero__form-input">
+                        <div class="form-item form-item--decimal_field form-item--number_input donate-landing-hero__form-input">
+                            <label for="{{ one_off_form.amount.id_for_label }}">{{ one_off_form.amount.label }}</label>
+                            <div class="form-item__wrapper--euro">
+                                {{ one_off_form.amount.errors }}
+                                <input type="number" id="id_amount" name="amount" value="{{ one_off_form.amount.value|to_euro:current_site }}" min="0.01" step="0.01" required="" max="{{ donation_max_amount|to_euro:current_site }}">
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="donate-landing-hero__form-input donate-landing-hero__form-input donate-landing-hero__form-input--slider">
+                        {% render_form_field one_off_form.amount %}
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        {% render_form_field one_off_form.campaign_id %}
+        {% render_form_field one_off_form.campaign_name %}
+        {% render_form_field one_off_form.frequency %}
+        {% render_form_field one_off_form.currency %}
+
+        <div class="donate-slider__button-icons-wrap js-donate-button-wrapper">
+            {% include "patterns/atoms/buttons/button--button.html" with label="Donate Now" large=True classes="button--secondary donate-landing-hero__donate-button" %}
+            {% include "patterns/molecules/payments/payment-icons--single.html" %}
+        </div>
+    </form>
+{% endif %}
+

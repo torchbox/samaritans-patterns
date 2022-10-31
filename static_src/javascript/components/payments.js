@@ -1,23 +1,42 @@
+// pca is a window var - tell eslint it's a global so it doesn't complain it is undefined
+/* global pca */
+import DonateValidation from './donate-validation';
+
 const braintree = require('braintree-web');
 
 function setupPayment() {
-    if (!document.getElementById('payments__payment-wrapper')) {
-        // We're not on the payment page.
+    const paymentForm = document.querySelector('[data-donation-form]');
+    if (!paymentForm) {
         return;
     }
 
-    const paymentForm = document.getElementById('payments__braintree-form');
+    const donateValidation = new DonateValidation(paymentForm);
+
     const nonceInput = document.getElementById('id_braintree_nonce');
     const paymentModeInput = document.getElementById('id_payment_mode');
     const submitButton = document.getElementById('payments__payment-submit');
-    const paymentCurrency = paymentForm.getAttribute('currency');
 
     const braintreeSettings = JSON.parse(
         document.getElementById('payments__braintree-settings').textContent,
     );
-    const personalDetails = JSON.parse(
-        document.getElementById('payments__personal-details').textContent,
-    );
+
+    function getFormValues() {
+        const form = new FormData(paymentForm);
+
+        return {
+            currency: form.get('currency'),
+            email: form.get('email'),
+            amount: form.get('amount'),
+            givenName: form.get('first_name'), // ASCII-printable characters required, else will throw a validation error
+            surname: form.get('last_name'), // ASCII-printable characters required, else will throw a validation error
+            phoneNumber: form.get('phone_number'),
+            streetAddress: form.get('address_line_1'),
+            extendedAddress: form.get('address_line_2'),
+            locality: form.get('town'),
+            postalCode: form.get('post_code'),
+            countryCodeAlpha2: form.get('country'),
+        };
+    }
 
     function getPaymentMethodLabel(payment_method) {
         let payment_method_label;
@@ -43,6 +62,14 @@ function setupPayment() {
         return payment_method_label;
     }
 
+    function showErrorMessage(target, msg) {
+        const targetElement = document.getElementById(
+            'payments__braintree-errors-' + target,
+        );
+        targetElement.toggleAttribute('hidden', false);
+        targetElement.innerHTML = msg;
+    }
+
     function showPaymentErrorMsg(payment_method) {
         return showErrorMessage(
             payment_method,
@@ -52,18 +79,10 @@ function setupPayment() {
         );
     }
 
-    function showErrorMessage(target, msg) {
-        const targetElement = document.getElementById(
-            'payments__braintree-errors-' + target,
-        );
-        targetElement.toggleAttribute('hidden', false);
-        targetElement.innerHTML = msg;
-    }
-
     function clearAllErrorMessages() {
         document
             .querySelectorAll('.payments__error-wrapper span')
-            .forEach(function (error_msg) {
+            .forEach((error_msg) => {
                 error_msg.toggleAttribute('hidden', true);
                 error_msg.innerHTML = '';
             });
@@ -113,8 +132,7 @@ function setupPayment() {
             submitButton.removeAttribute('disabled');
         }
 
-        submitButton.addEventListener('click', function (event) {
-            event.preventDefault();
+        submitButton.addEventListener('click', function () {
             clearAllErrorMessages();
 
             submitButton.dataset.originalText =
@@ -125,29 +143,30 @@ function setupPayment() {
             submitButton.setAttribute('disabled', 'disabled');
 
             hf.tokenize()
-                .then(function (payload) {
+                .then((payload) => {
+                    const currentForm = getFormValues();
+
                     return threeDS.verifyCard({
-                        onLookupComplete: function (data, next) {
+                        onLookupComplete: (data, next) => {
                             next();
                         },
-                        amount: personalDetails.amount,
+                        amount: currentForm.amount,
                         nonce: payload.nonce,
                         bin: payload.details.bin,
-                        email: personalDetails.email,
+                        email: currentForm.email,
                         billingAddress: {
-                            givenName: personalDetails.first_name, // ASCII-printable characters required, else will throw a validation error
-                            surname: personalDetails.last_name, // ASCII-printable characters required, else will throw a validation error
-                            phoneNumber: personalDetails.phone_number,
-                            streetAddress: personalDetails.address_line_1,
-                            extendedAddress: personalDetails.address_line_2,
-                            locality: personalDetails.town,
-                            // region: '',
-                            postalCode: personalDetails.post_code,
-                            countryCodeAlpha2: personalDetails.country,
+                            givenName: currentForm.first_name, // ASCII-printable characters required, else will throw a validation error
+                            surname: currentForm.last_name, // ASCII-printable characters required, else will throw a validation error
+                            phoneNumber: currentForm.phone_number,
+                            streetAddress: currentForm.address_line_1,
+                            extendedAddress: currentForm.address_line_2,
+                            locality: currentForm.town,
+                            postalCode: currentForm.post_code,
+                            countryCodeAlpha2: currentForm.country,
                         },
                     });
                 })
-                .then(function (payload) {
+                .then((payload) => {
                     if (!payload.liabilityShifted) {
                         showPaymentErrorMsg('card');
                         enablePayNow();
@@ -158,7 +177,7 @@ function setupPayment() {
                     paymentModeInput.value = 'card';
                     paymentForm.submit();
                 })
-                .catch(function (err) {
+                .catch((err) => {
                     console.error(err);
                     showPaymentErrorMsg('card');
                     enablePayNow();
@@ -166,12 +185,12 @@ function setupPayment() {
         });
 
         setupComponents(braintreeSettings.client_token)
-            .then(function (instances) {
+            .then((instances) => {
                 hf = instances[0];
                 threeDS = instances[1];
 
-                hf.on('validityChange', function (event) {
-                    var field = event.fields[event.emittedBy];
+                hf.on('validityChange', (event) => {
+                    const field = event.fields[event.emittedBy];
 
                     if (field.isValid || field.isPotentiallyValid) {
                         clearFieldError(field.container);
@@ -182,8 +201,8 @@ function setupPayment() {
 
                 enablePayNow();
             })
-            .catch(function (err) {
-                console.error('component error:', err);
+            .catch((err) => {
+                console.error('Component error:', err);
             });
     }
 
@@ -192,7 +211,7 @@ function setupPayment() {
             {
                 authorization: braintreeSettings.client_token,
             },
-            function (clientErr, clientInstance) {
+            (clientErr, clientInstance) => {
                 if (clientErr) {
                     console.error(clientErr);
                     return;
@@ -202,7 +221,7 @@ function setupPayment() {
                     {
                         client: clientInstance,
                     },
-                    function (payPalCheckoutErr, payPalCheckoutInstance) {
+                    (payPalCheckoutErr, payPalCheckoutInstance) => {
                         if (payPalCheckoutErr) {
                             console.error(payPalCheckoutErr);
                             return;
@@ -211,7 +230,7 @@ function setupPayment() {
                         // Set up PayPal with the checkout.js library
                         document
                             .querySelectorAll('.payments__paypal-button')
-                            .forEach(function (item) {
+                            .forEach((item) => {
                                 window.paypal.Button.render(
                                     {
                                         env: braintreeSettings.use_sandbox
@@ -226,22 +245,24 @@ function setupPayment() {
                                             size: 'responsive',
                                             height: 50,
                                         },
-
-                                        payment: function () {
+                                        // What happens when user clicks PayPal button when
+                                        // it is enabled.
+                                        payment: () => {
+                                            const form = getFormValues();
                                             return payPalCheckoutInstance.createPayment(
                                                 {
                                                     flow: 'checkout',
-                                                    amount: personalDetails.amount,
-                                                    currency: paymentCurrency,
+                                                    amount: form.amount,
+                                                    currency: form.currency,
                                                     enableShippingAddress: false,
                                                 },
                                             );
                                         },
-
-                                        onAuthorize: function (data) {
-                                            return payPalCheckoutInstance.tokenizePayment(
+                                        // What happens when user comes back from PayPal.
+                                        onAuthorize: (data) =>
+                                            payPalCheckoutInstance.tokenizePayment(
                                                 data,
-                                                function (err, payload) {
+                                                (err, payload) => {
                                                     if (err) {
                                                         showPaymentErrorMsg(
                                                             'paypal',
@@ -255,18 +276,61 @@ function setupPayment() {
                                                         'paypal';
                                                     paymentForm.submit();
                                                 },
-                                            );
-                                        },
-
-                                        onCancel: function () {
+                                            ),
+                                        // What happens when user cancels the payment.
+                                        onCancel: () => {
                                             showErrorMessage(
                                                 'paypal',
                                                 'PayPal payment cancelled',
                                             );
                                         },
-
-                                        onError: function () {
+                                        // What happens on any errors.
+                                        onError: () => {
                                             showPaymentErrorMsg('paypal');
+                                        },
+                                        validate: (actions) => {
+                                            const runCheckValidity = () => {
+                                                if (
+                                                    // `false` here means that that no error messages
+                                                    // will be displayed.
+                                                    donateValidation.checkValidity(
+                                                        false,
+                                                    )
+                                                ) {
+                                                    actions.enable();
+                                                } else {
+                                                    actions.disable();
+                                                }
+                                            };
+
+                                            // onInit isn't supported so we immediately check first.
+                                            runCheckValidity();
+
+                                            /**
+                                             * To add validation for the PayPal button, we'll need to
+                                             * listen to every time the form changes and then enable
+                                             * or disable the button.
+                                             */
+                                            paymentForm.addEventListener(
+                                                'change',
+                                                runCheckValidity,
+                                            );
+
+                                            // Check validity also when the user clicks on an item in Loqate.
+                                            pca.on(
+                                                'load',
+                                                (type, id, control) => {
+                                                    control.listen(
+                                                        'populate',
+                                                        runCheckValidity,
+                                                    );
+                                                },
+                                            );
+                                        },
+                                        // This runs every time the button is clicked even if
+                                        // it is disabled.
+                                        onClick: () => {
+                                            donateValidation.checkValidity();
                                         },
                                     },
                                     item,
@@ -279,7 +343,7 @@ function setupPayment() {
     }
 
     function initGooglePay() {
-        var threeDSecure;
+        let threeDSecure;
 
         function setup3DSecure(clientInstance) {
             braintree.threeDSecure.create(
@@ -287,7 +351,7 @@ function setupPayment() {
                     version: 2, // Will use 3DS2 whenever possible
                     client: clientInstance,
                 },
-                function (threeDSecureErr, threeDSecureInstance) {
+                (threeDSecureErr, threeDSecureInstance) => {
                     if (threeDSecureErr) {
                         // Handle error in 3D Secure component creation
                         return;
@@ -298,28 +362,29 @@ function setupPayment() {
         }
 
         function get3DSecureArgs() {
+            const currentForm = getFormValues();
             return {
-                amount: personalDetails.amount,
-                email: personalDetails.email,
+                amount: currentForm.amount,
+                email: currentForm.email,
                 billingAddress: {
-                    givenName: personalDetails.first_name, // ASCII-printable characters required, else will throw a validation error
-                    surname: personalDetails.last_name, // ASCII-printable characters required, else will throw a validation error
-                    phoneNumber: personalDetails.phone_number,
-                    streetAddress: personalDetails.address_line_1,
-                    extendedAddress: personalDetails.address_line_2,
-                    locality: personalDetails.town,
+                    givenName: currentForm.first_name, // ASCII-printable characters required, else will throw a validation error
+                    surname: currentForm.last_name, // ASCII-printable characters required, else will throw a validation error
+                    phoneNumber: currentForm.phone_number,
+                    streetAddress: currentForm.address_line_1,
+                    extendedAddress: currentForm.address_line_2,
+                    locality: currentForm.town,
                     // region: '',
-                    postalCode: personalDetails.post_code,
-                    countryCodeAlpha2: personalDetails.country,
+                    postalCode: currentForm.post_code,
+                    countryCodeAlpha2: currentForm.country,
                 },
             };
         }
 
         function handle3DSecureVerification(clientInstance, nonce, bin) {
-            var threeDSecureArgs = get3DSecureArgs();
-            threeDSecureArgs['nonce'] = nonce;
-            threeDSecureArgs['bin'] = bin;
-            threeDSecureArgs['onLookupComplete'] = function (data, next) {
+            const threeDSecureArgs = get3DSecureArgs();
+            threeDSecureArgs.nonce = nonce;
+            threeDSecureArgs.bin = bin;
+            threeDSecureArgs.onLookupComplete = function (data, next) {
                 if (
                     data.paymentMethod.threeDSecureInfo.liabilityShiftPossible
                 ) {
@@ -327,9 +392,9 @@ function setupPayment() {
                 }
             };
             // eligible for 3DS
-            threeDSecure.verifyCard(threeDSecureArgs).then(function (response) {
+            threeDSecure.verifyCard(threeDSecureArgs).then((response) => {
                 if (response.liabilityShifted === false) {
-                    threeDSecure.cancelVerifyCard(function (err) {
+                    threeDSecure.cancelVerifyCard((err) => {
                         if (err) {
                             // Handle error
                             console.error(err.message); // No verification payload available
@@ -346,7 +411,7 @@ function setupPayment() {
             });
         }
 
-        var paymentsClient = new window.google.payments.api.PaymentsClient({
+        const paymentsClient = new window.google.payments.api.PaymentsClient({
             environment: braintreeSettings.use_sandbox ? 'TEST' : 'PRODUCTION',
         });
 
@@ -354,13 +419,13 @@ function setupPayment() {
             {
                 authorization: braintreeSettings.client_token,
             },
-            function (clientErr, clientInstance) {
+            (clientErr, clientInstance) => {
                 if (clientErr) {
                     console.error(clientErr);
                     return;
                 }
 
-                var googlePaymentConfig = {
+                const googlePaymentConfig = {
                     client: clientInstance,
                     googlePayVersion: 2,
                 };
@@ -374,7 +439,7 @@ function setupPayment() {
                 }
                 braintree.googlePayment.create(
                     googlePaymentConfig,
-                    function (googlePaymentErr, googlePaymentInstance) {
+                    (googlePaymentErr, googlePaymentInstance) => {
                         if (googlePaymentErr) {
                             console.error(googlePaymentErr);
                             return;
@@ -388,7 +453,7 @@ function setupPayment() {
                                     googlePaymentInstance.createPaymentDataRequest()
                                         .allowedPaymentMethods,
                             })
-                            .then(function (response) {
+                            .then((response) => {
                                 if (response.result) {
                                     Array.from(
                                         document.getElementsByClassName(
@@ -405,88 +470,94 @@ function setupPayment() {
                                         buttonType: 'plain',
                                         buttonSizeMode: 'fill',
                                         onClick: () => {
-                                            clearAllErrorMessages();
-
-                                            const paymentDataRequest =
-                                                googlePaymentInstance.createPaymentDataRequest(
-                                                    {
-                                                        transactionInfo: {
-                                                            currencyCode:
-                                                                paymentCurrency,
-                                                            totalPriceStatus:
-                                                                'FINAL',
-                                                            totalPrice:
-                                                                personalDetails.amount,
-                                                        },
-                                                    },
-                                                );
-                                            const cardPaymentMethod =
-                                                paymentDataRequest
-                                                    .allowedPaymentMethods[0];
-
-                                            cardPaymentMethod.parameters.billingAddressRequired = false;
-                                            cardPaymentMethod.parameters.billingAddressParameters =
-                                                {
-                                                    format: 'MIN',
-                                                };
-
-                                            paymentsClient
-                                                .loadPaymentData(
-                                                    paymentDataRequest,
-                                                )
-                                                .then(function (paymentData) {
-                                                    googlePaymentInstance.parseResponse(
-                                                        paymentData,
-                                                        function (err, result) {
-                                                            if (err) {
-                                                                showPaymentErrorMsg(
-                                                                    'googlepay',
-                                                                );
-                                                            }
-
-                                                            // Cards that are network-tokenized can't be verified with 3D Secure:
-                                                            // we assume here that the extra protection for tokenized cards is
-                                                            // enough to still process the transaction
-                                                            if (
-                                                                result.details
-                                                                    .isNetworkTokenized ===
-                                                                true
-                                                            ) {
-                                                                nonceInput.value =
-                                                                    result.nonce;
-                                                                paymentModeInput.value =
-                                                                    'googlepay';
-                                                                paymentForm.submit();
-                                                            }
-                                                            // Otherwise, prompt for 3D Secure verification
-                                                            else {
-                                                                handle3DSecureVerification(
-                                                                    clientInstance,
-                                                                    result.nonce,
-                                                                    result
-                                                                        .details
-                                                                        .bin,
-                                                                );
-                                                            }
+                                            if (
+                                                donateValidation.checkValidity()
+                                            ) {
+                                                clearAllErrorMessages();
+                                                const currentForm =
+                                                    getFormValues();
+                                                const paymentDataRequest =
+                                                    googlePaymentInstance.createPaymentDataRequest(
+                                                        {
+                                                            transactionInfo: {
+                                                                currencyCode:
+                                                                    currentForm.currency,
+                                                                totalPriceStatus:
+                                                                    'FINAL',
+                                                                totalPrice:
+                                                                    currentForm.amount,
+                                                            },
                                                         },
                                                     );
-                                                })
-                                                .catch(function (err) {
-                                                    if (
-                                                        err.statusCode ==
-                                                        'CANCELED'
-                                                    ) {
-                                                        showErrorMessage(
-                                                            'googlepay',
-                                                            'Google Pay payment cancelled',
+                                                const cardPaymentMethod =
+                                                    paymentDataRequest
+                                                        .allowedPaymentMethods[0];
+
+                                                cardPaymentMethod.parameters.billingAddressRequired = false;
+                                                cardPaymentMethod.parameters.billingAddressParameters =
+                                                    {
+                                                        format: 'MIN',
+                                                    };
+
+                                                paymentsClient
+                                                    .loadPaymentData(
+                                                        paymentDataRequest,
+                                                    )
+                                                    .then((paymentData) => {
+                                                        googlePaymentInstance.parseResponse(
+                                                            paymentData,
+                                                            (err, result) => {
+                                                                if (err) {
+                                                                    showPaymentErrorMsg(
+                                                                        'googlepay',
+                                                                    );
+                                                                }
+
+                                                                // Cards that are network-tokenized can't be verified with 3D Secure:
+                                                                // we assume here that the extra protection for tokenized cards is
+                                                                // enough to still process the transaction
+                                                                if (
+                                                                    result
+                                                                        .details
+                                                                        .isNetworkTokenized ===
+                                                                    true
+                                                                ) {
+                                                                    nonceInput.value =
+                                                                        result.nonce;
+                                                                    paymentModeInput.value =
+                                                                        'googlepay';
+                                                                    paymentForm.submit();
+                                                                }
+                                                                // Otherwise, prompt for 3D Secure verification
+                                                                else {
+                                                                    handle3DSecureVerification(
+                                                                        clientInstance,
+                                                                        result.nonce,
+                                                                        result
+                                                                            .details
+                                                                            .bin,
+                                                                    );
+                                                                }
+                                                            },
                                                         );
-                                                    } else {
-                                                        // This is probably a DEVELOPER_ERROR
-                                                        showPaymentErrorMsg(
-                                                            'googlepay',
-                                                        );
-                                                    }
-                                                });
+                                                    })
+                                                    .catch((err) => {
+                                                        if (
+                                                            err.statusCode ===
+                                                            'CANCELED'
+                                                        ) {
+                                                            showErrorMessage(
+                                                                'googlepay',
+                                                                'Google Pay payment cancelled',
+                                                            );
+                                                        } else {
+                                                            // This is probably a DEVELOPER_ERROR
+                                                            showPaymentErrorMsg(
+                                                                'googlepay',
+                                                            );
+                                                        }
+                                                    });
+                                            }
                                         },
                                     });
 
@@ -520,10 +591,6 @@ function setupPayment() {
                                         }
                                     }
                                 }
-                            })
-                            .catch(function (exc) {
-                                // This is a DEVELOPER_ERROR
-                                console.error(exc);
                             });
                     },
                 );
@@ -532,12 +599,7 @@ function setupPayment() {
     }
 
     function initApplePay() {
-        // console.log("window.ApplePaySession", window.ApplePaySession);
-        // if(window.ApplePaySession) {
-        //     console.log("window.ApplePaySession.supportsVersion(3)", window.ApplePaySession.supportsVersion(3));
-        //     console.log("window.ApplePaySession.canMakePayments()", window.ApplePaySession.canMakePayments());
-        // }
-
+        // Check if Apple Pay is supported.
         if (
             !(
                 window.ApplePaySession &&
@@ -545,34 +607,31 @@ function setupPayment() {
                 window.ApplePaySession.canMakePayments()
             )
         ) {
-            // console.log("Apple Pay is NOT supported");
             return;
-        } else {
-            // console.log("Apple Pay is supported");
         }
 
         braintree.client.create(
             { authorization: braintreeSettings.client_token },
-            function (clientErr, clientInstance) {
+            (clientErr, clientInstance) => {
                 if (clientErr) {
                     console.error(clientErr);
                     return;
                 }
-                braintree.pplePay.create(
+                braintree.applePay.create(
                     {
                         client: clientInstance,
                     },
-                    function (applePayErr, applePayInstance) {
+                    (applePayErr, applePayInstance) => {
                         if (applePayErr) {
                             console.error(applePayErr);
                             return;
                         }
 
-                        var promise =
+                        const promise =
                             window.ApplePaySession.canMakePaymentsWithActiveCard(
                                 applePayInstance.merchantIdentifier,
                             );
-                        promise.then(function (canMakePaymentsWithActiveCard) {
+                        promise.then((canMakePaymentsWithActiveCard) => {
                             // console.log("canMakePaymentsWithActiveCard", canMakePaymentsWithActiveCard);
                             if (canMakePaymentsWithActiveCard) {
                                 Array.from(
@@ -591,27 +650,26 @@ function setupPayment() {
                                         '.js-apple-pay-button',
                                     );
                                 applePayButtons.forEach((button) => {
-                                    button.addEventListener(
-                                        'click',
-                                        function () {
+                                    button.addEventListener('click', () => {
+                                        if (donateValidation.checkValidity()) {
                                             clearAllErrorMessages();
-
-                                            var paymentRequest =
+                                            const currentForm = getFormValues();
+                                            const paymentRequest =
                                                 applePayInstance.createPaymentRequest(
                                                     {
                                                         total: {
-                                                            amount: personalDetails.amount,
+                                                            amount: currentForm.amount,
                                                             type: 'final',
                                                             label: 'Samaritans',
                                                         },
                                                         currencyCode:
-                                                            paymentCurrency,
+                                                            currentForm.currency,
                                                         requiredBillingContactFields:
                                                             ['postalAddress'],
                                                     },
                                                 );
 
-                                            var session =
+                                            const session =
                                                 new window.ApplePaySession(
                                                     3,
                                                     paymentRequest,
@@ -627,10 +685,10 @@ function setupPayment() {
                                                             displayName:
                                                                 'Samaritans',
                                                         },
-                                                        function (
+                                                        (
                                                             validationErr,
                                                             validationData,
-                                                        ) {
+                                                        ) => {
                                                             if (validationErr) {
                                                                 console.error(
                                                                     validationErr,
@@ -654,10 +712,10 @@ function setupPayment() {
                                                             token: event.payment
                                                                 .token,
                                                         },
-                                                        function (
+                                                        (
                                                             tokenizeErr,
                                                             payload,
-                                                        ) {
+                                                        ) => {
                                                             if (tokenizeErr) {
                                                                 showPaymentErrorMsg(
                                                                     'applepay',
@@ -694,8 +752,8 @@ function setupPayment() {
                                             };
 
                                             session.begin();
-                                        },
-                                    );
+                                        }
+                                    });
                                 });
                             }
                         });

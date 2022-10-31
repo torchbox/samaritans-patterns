@@ -1,3 +1,5 @@
+// Sets the donation usage text when there is no slider and no buttons
+
 class DonateUsage {
     static selector() {
         return '.js-donate-usage';

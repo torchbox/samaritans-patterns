@@ -148,7 +148,11 @@
     }
 }
 
-@mixin section--after-page ($padding-vertical: (2 * $gutter-x-large)) {
+@mixin section--after-page(
+    $padding-vertical: (
+        2 * $gutter-x-large,
+    )
+) {
     @include media-query(tablet-landscape) {
         z-index: z($z-elements, page-behind);
         margin-top: -$section-overlap;

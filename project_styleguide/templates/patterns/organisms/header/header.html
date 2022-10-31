@@ -10,7 +10,7 @@
                     {% include "patterns/atoms/svg/logos/logo.html" with classes="header__logo" title="Samaritans homepage" id="logo-desktop" %}
                 </a>
 
-                {% if show_nav %}
+                {% if show_links and not hide_mobile_menu %}
                     <button class="header__menu-toggle header__menu-toggle--burger js-mobile-menu-toggle js-open-mobile-menu" aria-label="Open the menu">
                         <span class="header__menu-toggle-text">Menu</span>
                         {% render_icon "icon-color-burger-menu" "header__menu-toggle__icon" %}
@@ -18,7 +18,7 @@
                 {% endif %}
             </div>
 
-            {% if show_nav %}
+            {% if show_links %}
                 {% cache 900 secondarynav LANGUAGE_CODE page.pk %}
                 {% secondarynav %}
                 {% endcache %}

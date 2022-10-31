@@ -1,0 +1,12 @@
+{# Show slider usage slot if an editor has enabled the slider #}
+<div class="donate-slider__container">
+    <div id="donate_slider--{{ frequency }}-icon" class="donate-slider--icon">
+        {# Child element injected here, if supplied #}
+    </div>
+    <div id="donate_slider--{{ frequency }}-text" class="donate-slider--text">
+        {# Child element injected here, if supplied #}
+    </div>
+</div>
+
+{# show the actual slider #}
+<div id="donate_slider--{% if frequency == 'single' %}one_off{% else %}{{ frequency }}{% endif %}" class="donate-landing__slider" data-suggested-amount="{{ suggested_amount }}"></div>

@@ -1,0 +1,127 @@
+.donate-bar {
+    // Donate bar - used on event payment form and donations funnel for single or monthly giving (but not pay-in)
+    @include font-size(s);
+    background-color: $plum;
+    margin: 0 0 $gutter-small;
+    padding: $gutter;
+    color: $white;
+    display: flex;
+    min-height: 80px;
+    flex-direction: column;
+    position: relative;
+
+    @include media-query(tablet-portrait) {
+        margin: 0 $gutter-medium $gutter-small (-$gutter-xxl);
+        padding: $gutter $gutter-medium $gutter $gutter-xxl;
+    }
+
+    // Variation used on the event payment form
+    &--event-header {
+        @include media-query(tablet-portrait) {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+
+    p {
+        margin-bottom: 0;
+    }
+
+    &__top {
+        @include media-query(tablet-portrait) {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+        }
+    }
+
+    &__icon {
+        width: 30px;
+        height: 30px;
+        margin-right: $gutter;
+        display: none;
+
+        @include media-query(mob-landscape) {
+            display: inline-block;
+        }
+    }
+
+    &__edit {
+        &:not([hidden]) {
+            @include media-query(tablet-portrait) {
+                margin-top: $gutter-large;
+                display: flex;
+                align-items: flex-start;
+            }
+        }
+    }
+
+    &__edit-wrapper {
+        margin-bottom: $gutter-medium;
+
+        @include media-query(tablet-portrait) {
+            margin-bottom: 0;
+            margin-right: 50px;
+        }
+
+        // hide '(required)' in legend for currency fields
+        .form-item__required {
+            display: none;
+        }
+
+        // remove bottom margin on curreny fields
+        .form-item {
+            margin-bottom: 0;
+        }
+
+        // make legend smaller on currency fields
+        legend {
+            @include font-size('xs');
+            margin-bottom: 5px;
+        }
+
+        // amount input width
+        input[type='number'] {
+            width: 70px;
+        }
+    }
+
+    // matches styling for legend for currency (see above and .currency-list)
+    &__edit-label {
+        @include font-size('xs');
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    &__edit-confirm {
+        text-decoration: underline;
+        @include media-query(tablet-portrait) {
+            position: absolute;
+            bottom: 25px;
+            right: 25px;
+        }
+    }
+
+    &__info {
+        margin-bottom: $gutter-small;
+
+        @include media-query(tablet-portrait) {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0;
+        }
+
+        p:not([hidden]) {
+            display: inline;
+        }
+    }
+
+    &__text {
+        margin-right: 1em;
+    }
+
+    &__standout {
+        font-weight: $weight--bold;
+    }
+}

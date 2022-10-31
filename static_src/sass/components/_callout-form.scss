@@ -45,4 +45,11 @@
         @include font-size(xs);
         margin: 0;
     }
+
+    // variation when the form tooltip is below the field
+    .form-item__tooltip-wrapper--stacked & {
+        margin-left: 0;
+        margin-top: 20px;
+        max-width: 430px;
+    }
 }

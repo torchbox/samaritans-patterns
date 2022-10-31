@@ -1,3 +1,7 @@
+// Donation slider plus dynamically generated usage text linked to the slider
+// Mutually exclusive to the donate buttons
+// disable linting for this file till there is time to tidy up
+/* eslint-disable */
 import noUiSlider from 'nouislider';
 
 const currencyCode = document.getElementById('id_currency');

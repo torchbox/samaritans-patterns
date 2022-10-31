@@ -76,16 +76,6 @@
         #{$root}--nation & {
             z-index: auto;
         }
-
-        &--giftaid {
-            @include connectors($lime, bottom, right, medium);
-            display: block;
-            background-color: $ink;
-
-            @include media-query(tablet-landscape) {
-                padding: $gutter-large 60px;
-            }
-        }
     }
 
     &__image {
@@ -125,39 +115,10 @@
         }
     }
 
-    &__giftaid-copy {
-        @include media-query(tablet-landscape) {
-            width: 70%;
-
-            .form-item {
-                flex-wrap: nowrap;
-                align-items: flex-start;
-            }
-        }
-
-        label {
-            flex: 1;
-        }
-    }
-
-    &__giftaid-field {
-        display: flex;
-        justify-content: space-between;
-    }
-
     &__meta {
         @include font-size(s);
         margin: $gutter 0 0;
         padding: $gutter 0;
-
-        &--giftaid {
-            border-top: 1px solid $white;
-            display: none;
-
-            .show-meta & {
-                display: block;
-            }
-        }
     }
 
     &__icon {

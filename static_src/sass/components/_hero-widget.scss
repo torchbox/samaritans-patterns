@@ -30,7 +30,7 @@
     }
 
     @include media-query(tablet-portrait) {
-        max-width: 365px;
+        //max-width: 365px;
         margin-left: 0;
 
         .hero__inner--video & {
@@ -194,6 +194,51 @@
         }
     }
 
+    &__button-set {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        width: 100%;
+
+        @include media-query(tablet-portrait) {
+            display: grid;
+        }
+
+        // layout variation depending on number of buttons (max 4)
+        // will only take effect when display is grid
+        &--2 {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        &--3 {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        &--4 {
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+        }
+    }
+
+    &__button {
+        background-color: white;
+        color: $ink;
+        padding: 10px;
+        border: 4px solid $grey-light;
+        border-radius: 6px;
+        font-weight: $weight--bold;
+
+        &.selected {
+            color: $white;
+            background-color: $ink;
+        }
+    }
+
+    &__usage {
+        @include font-size('xs');
+        margin-top: $gutter;
+    }
+
+    &--buttons,
     &--slider {
         @include media-query(tablet-landscape) {
             width: calc(65% - #{$gutter-xxl * 2}); //

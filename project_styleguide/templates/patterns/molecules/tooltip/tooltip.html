@@ -1,6 +1,6 @@
 {% load wagtailcore_tags icon_tags %}
 
-<button class="tooltip {{ tooltip_classes }}" aria-label="{{ tooltip }}">
+<button type="button" class="tooltip {{ tooltip_classes }}" aria-label="{{ tooltip }}">
     {% render_icon "icon-color-info-circle" "tooltip__icon" %}
     <div class="tooltip__content">
         <p>{{ tooltip }}</p>

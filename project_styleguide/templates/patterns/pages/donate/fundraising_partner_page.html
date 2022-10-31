@@ -49,7 +49,11 @@
 
                     <div class="hero-widget__content">
 
-                            <form method="get" action="{% url 'donate:personal_details' %}" id="donate_form--single" {% if page.default_to_monthly %}hidden{% endif %} class="js-donate-usage js-donate-button-wrapper">
+                            <form method="get" action="{% url 'donate:redirect' %}" id="donate_form--single" {% if page.default_to_monthly %}hidden{% endif %} class="js-donate-usage">
+
+                                    {% if page.show_donate_buttons %}
+                                        {% include "patterns/pages/donate/partials/donate_widget_buttons.html" with button_values=single_button_values frequency="single" %}
+                                    {% endif %}
 
                                     {% if is_euro %}
                                         <div class="donate-landing-hero__form-input donate-landing-hero__form-input">
@@ -68,6 +72,7 @@
                                     {% endif %}
 
                                 {% render_form_field one_off_form.campaign_id %}
+                                {% render_form_field one_off_form.campaign_name %}
                                 {% render_form_field one_off_form.frequency %}
                                 {% render_form_field one_off_form.currency %}
                                 {% include "patterns/atoms/buttons/button--button.html" with label="Donate today" large=True classes="button--secondary donate-landing-hero__donate-button" %}

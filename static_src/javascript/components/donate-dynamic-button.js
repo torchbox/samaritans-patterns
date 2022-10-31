@@ -1,3 +1,4 @@
+// Donate button with amount set dynamically based on the input text
 class DonateDynamicButton {
     static selector() {
         return '.js-donate-button-wrapper';
@@ -83,11 +84,13 @@ class DonateDynamicButton {
     // Return two decimal places unless it's a whole number
     // 10.00 -> 10
     // 10.01 -> 10.01
+    /* eslint-disable class-methods-use-this */
     toCurrencyValue(value) {
         return (Math.round(value * 100) / 100)
             .toFixed(2)
             .replace(/\.?00+$/, '');
     }
+    /* eslint-enable class-methods-use-this */
 
     bindEventListeners() {
         // Set button's value on load
@@ -151,7 +154,7 @@ class DonateDynamicButton {
     setInitialButtonState() {
         // When both monthly and single giving are enabled, the
         // monthly toggle is active by default
-        if (this.state.frequency == 'monthly') {
+        if (this.state.frequency === 'monthly') {
             this.updateButton(this.toCurrencyValue(this.monthlyAmount));
         } else {
             this.updateButton(this.toCurrencyValue(this.singleAmount));

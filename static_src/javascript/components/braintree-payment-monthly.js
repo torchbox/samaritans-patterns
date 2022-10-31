@@ -2,12 +2,13 @@ import client from 'braintree-web/client';
 import { create as paypalCreate } from 'braintree-web/paypal-checkout';
 
 function setupPaymentMonthly() {
-    if (!document.getElementById('donate__braintree-form')) {
+    if (!document.querySelector('.donate__braintree-form') || document.querySelector('.paypal-button')) {
         // We're not on the monthly payment page.
+        // or the paypal button has already been setup.
         return;
     }
 
-    var paymentForm = document.getElementById('donate__braintree-form'),
+    var paymentForm = document.querySelector('.donate__braintree-form'),
         nonceInput = document.getElementById(
             'id_braintree-payment_method_nonce',
         ),

@@ -22,6 +22,10 @@
         border-radius: 5px;
         width: 100%;
         max-width: 370px;
+
+        .section--form-darker-grey & {
+            background-color: $white;
+        }
     }
 
     &__amount-box {

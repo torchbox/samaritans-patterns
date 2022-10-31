@@ -1,70 +1,4 @@
 .donate {
-    // Donate bor
-    &__bar {
-        @include font-size(s);
-        background-color: $plum;
-        margin: 0 0 $gutter-small;
-        padding: $gutter;
-        color: $white;
-        display: flex;
-        min-height: 80px;
-        flex-direction: column;
-
-        @include media-query(tablet-portrait) {
-            align-items: center;
-            flex-direction: row;
-            margin: 0 $gutter-medium $gutter-small (-$gutter-xxl);
-            padding: $gutter $gutter-medium $gutter $gutter-xxl;
-        }
-
-        p {
-            margin-bottom: 0;
-        }
-    }
-
-    &__bar-icon {
-        width: 30px;
-        height: 30px;
-        margin-right: $gutter;
-        display: none;
-
-        @include media-query(mob-landscape) {
-            display: inline-block;
-        }
-    }
-
-    &__bar-edit {
-        @include media-query(tablet-portrait) {
-            margin-left: auto;
-        }
-
-        input[type='number'] {
-            width: 70px;
-        }
-    }
-
-    &__bar-info {
-        margin-bottom: $gutter-small;
-
-        @include media-query(tablet-portrait) {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0;
-        }
-
-        p:not([hidden]) {
-            display: inline;
-        }
-    }
-
-    &__bar-text {
-        margin-right: 1em;
-    }
-
-    &__bar-standout {
-        font-weight: $weight--bold;
-    }
-
     &__amount {
         @include media-query(tablet-portrait) {
             margin-left: auto;
@@ -149,6 +83,14 @@
                 font-size: 15px;
             }
         }
+
+        &--light-bg {
+            a {
+                @include link($ink, $black);
+                font-weight: bold;
+                text-decoration: underline;
+            }
+        }
     }
 
     // Donate form
@@ -167,6 +109,17 @@
         margin-bottom: 30px;
         background-color: rgba($white, 0.95);
         padding: $gutter-large;
+    }
+
+    &__form__toggle-address {
+        &.hidden {
+            display: none;
+        }
+    }
+
+    &__form__manual-button {
+        @include link($ink, $black);
+        text-decoration: underline;
     }
 
     &__form-payment-info {
@@ -445,5 +398,11 @@
 
     &__gift-aid-figure {
         color: $lime;
+    }
+
+    &__step {
+        @include font-size('xxl');
+        color: $aubergine;
+        margin-right: $gutter-small;
     }
 }

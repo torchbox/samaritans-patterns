@@ -12,10 +12,10 @@
 <div class="payments" id="events__personal-details-wrapper">
     <h1>{% trans "Payment for your place" %}</h1>
 
-    <div class="donate__bar">
-        <p class="donate__bar-text"><span class="donate__bar-standout">{% trans "Event" %}:</span> {{ event_page.title }}</p>
-        <p class="donate__bar-text" id="event__form__gbp" data-amount="{{ payment_amount|floatformat:"-2" }}"><span class="donate__bar-standout">{% trans "Registration fee" %}:</span> £{{ payment_amount|floatformat:"-2" }}</p>
-        <p class="donate__bar-text" hidden="true" id="event__form__euro" data-amount="{{ payment_amount|to_euro:current_site }}"><span class="donate__bar-standout">{% trans "Registration fee" %}:</span> €{{ payment_amount|to_euro:current_site|floatformat:"-2" }}</p>
+    <div class="donate-bar donate-bar--event-header">
+        <p class="donate-bar__text"><span class="donate-bar__standout">{% trans "Event" %}:</span> {{ event_page.title }}</p>
+        <p class="donate-bar__text" id="event__form__gbp" data-amount="{{ payment_amount|floatformat:"-2" }}"><span class="donate-bar__standout">{% trans "Registration fee" %}:</span> £{{ payment_amount|floatformat:"-2" }}</p>
+        <p class="donate-bar__text" hidden="true" id="event__form__euro" data-amount="{{ payment_amount|to_euro:current_site }}"><span class="donate-bar__standout">{% trans "Registration fee" %}:</span> €{{ payment_amount|to_euro:current_site|floatformat:"-2" }}</p>
     </div>
 
     {% if payment_allowed %}
@@ -43,15 +43,17 @@
                         </div>
                     {% endif %}
 
-                    {% render_form_field form.currency %}
+                    <div class="currency-list">
+                        {% render_form_field form.currency %}
+                    </div>
 
                     {% if form.amount %}
                         <div class="form__gbp-field-wrapper">
                             {% render_form_field form.amount %}
                         </div>
                     {% endif %}
-                                
-                    
+
+
                     <div class="form-item-wrapper form-item-wrapper--two-col">
                         {% render_form_field form.first_name %}
                         {% render_form_field form.last_name %}

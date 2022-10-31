@@ -406,6 +406,13 @@
         }
     }
 
+    &--form-darker-grey {
+        width: 100%;
+        background-color: $off-white;
+        padding: $gutter-medium;
+        margin-bottom: $gutter-medium;
+    }
+
     &__extra-connectors {
         &--right {
             @include connectors($off-white, bottom, right, page);

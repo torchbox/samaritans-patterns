@@ -1,0 +1,16 @@
+{# Buttons with amount choices #}
+Select an amount
+<div class="hero-widget__button-set hero-widget__button-set--{{ button_values|length }} js-donate-buttons" data-frequency="{{ frequency }}">
+    {% for value in button_values %}
+        <button class="js-donate-button hero-widget__button {% if forloop.counter == 2 %}selected{% endif %}" type="button" data-value="{{ value.amount }}">
+            {% if is_euro %}€{% else %}£{% endif %}{{ value.amount|floatformat:"0" }}
+        </button>
+    {% endfor %}
+</div>
+
+{# Show buttons usage slot if an editor has enabled the buttons #}
+<div class="donate-slider__container">
+    <div class="js-donate-buttons-usage-slot hero-widget__usage">
+    {# Child element injected here, if supplied #}
+    </div>
+</div>

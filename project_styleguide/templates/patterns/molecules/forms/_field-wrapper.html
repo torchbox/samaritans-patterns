@@ -1,5 +1,5 @@
 {% if tooltip %}
-    <div class="form-item__tooltip-wrapper">
+    <div class="form-item__tooltip-wrapper {% if extra_tooltip_wrapper_classes %}{{ extra_tooltip_wrapper_classes }}{% endif %}">
         {% include "patterns/molecules/forms/_field.html" %}
 
         {% if use_tooltip %}

@@ -83,6 +83,8 @@ tags:
   render_form_field:
     one_off_form.campaign_id:
       raw: ''
+    one_off_form.campaign_name:
+      raw: ''
     one_off_form.frequency:
       raw: ''
     one_off_form.amount:

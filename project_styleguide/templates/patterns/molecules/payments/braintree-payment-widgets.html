@@ -69,14 +69,12 @@
                 <div class="form-item__wrapper payments__braintree-hosted-field" id="expiration-date"></div>
             </div>
 
-            <button class="button button--large button--donate-pay" type="submit" id="payments__payment-submit" disabled>
+            <button id="payments__payment-submit" value="{% trans "Make my donation" %}"
+                class="button button--large button--secondary"
+                type="submit">
                 <div class="button__shadow"></div>
                 <div class="button__inner">
-                    {% if is_pay_in or is_event_payment %}
-                        {% blocktrans %}Pay {{ currency_symbol }}{{ amount }}{% endblocktrans %}
-                    {% else %}
-                        {% blocktrans %}Donate {{ currency_symbol }}{{ amount }} today{% endblocktrans %}
-                    {% endif %}
+                    {% trans "Make my donation" %}
                     {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="icon button__icon" %}
                 </div>
             </button>
@@ -96,4 +94,3 @@
 </div>
 
 {{ braintree_settings|json_script:"payments__braintree-settings" }}
-{{ personal_details|json_script:"payments__personal-details" }}

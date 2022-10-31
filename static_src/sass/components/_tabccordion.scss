@@ -291,6 +291,11 @@
             border-color: rgba($white, 0.3);
             color: $white;
         }
+
+        // donation form uses accordion inside this class for payment fields
+        .section--form-darker-grey & {
+            background-color: transparent;
+        }
     }
 
     &__intro {

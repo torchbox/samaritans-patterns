@@ -30,7 +30,7 @@
                 {% include "patterns/molecules/donate-video-modal/donate-video-modal.html" with value=page back_label="Back to make a donation" %}
             {% endif %}
 
-            <div class="hero-widget hero-widget--donate-landing{% if page.show_donate_slider %} hero-widget--slider{% endif %}">
+            <div class="hero-widget hero-widget--donate-landing {% if page.show_donate_slider %}hero-widget--slider{% endif %} {% if page.show_donate_buttons %}hero-widget--buttons{% endif %}">
                 <div class="hero-widget__corner"></div>
 
                 <div class="hero-widget__inner">
@@ -46,7 +46,8 @@
                     <p class="hero-widget__summary">{{ page.hero_summary }}</p>
 
                     <div class="hero-widget__content">
-
+                        {# Note that organisms/donate/homepage_donation_widget.html has an alternative version of the slider and buttons code with different classes - that version is used on the home page #}
+                        {# Toggle to switch between monthly and single donations - only shows if both types of donation are allowed #}
                         {% if page.allow_monthly_donation and page.allow_one_off_donation %}
                             <div class="hero-widget__button-group button-group button-group--white">
                                 <button
@@ -74,20 +75,18 @@
                         {% endif %}
 
                         {% if page.allow_monthly_donation %}
-                            <form method="get" action="{% url 'donate:personal_details' %}" id="donate_form--monthly" {% if page.default_to_single %}hidden{% endif %} class="js-donate-usage">
+                            <form method="get" action="{% url 'donate:redirect' %}" id="donate_form--monthly" {% if page.default_to_single %}hidden{% endif %} class="js-donate-usage">
                                 {# Show slider if an editor has enabled it #}
                                 {% if page.show_donate_slider %}
-                                    <div class="donate-slider__container">
-                                        <div id="donate_slider--monthly-icon" class="donate-slider--icon">
-                                            {# Child element injected here, if supplied #}
-                                        </div>
-                                        <div id="donate_slider--monthly-text" class="donate-slider--text">
-                                            {# Child element injected here, if supplied #}
-                                        </div>
-                                    </div>
+                                    {% include "patterns/pages/donate/partials/donate_widget_slider.html" with suggested_amount=monthly_suggested_amount frequency="monthly" %}
+                                {% endif %}
 
-                                    <div id="donate_slider--monthly" class="donate-landing__slider" data-suggested-amount="{{monthly_suggested_amount}}"></div>
+                                {# or show the monthly buttons if they've been enabled - slider and buttons won't be shown together #}
+                                {% if page.show_donate_buttons %}
+                                    {% include "patterns/pages/donate/partials/donate_widget_buttons.html" with button_values=monthly_button_values frequency="monthly" %}
+                                {% endif %}
 
+                                {% if page.show_donate_slider or page.show_donate_buttons %}
                                     {% if is_euro %}
                                         <div class="donate-landing-hero__form-input donate-landing-hero__form-input">
                                             <div class="form-item form-item--decimal_field form-item--number_input donate-landing-hero__form-input">
@@ -103,9 +102,8 @@
                                             {% render_form_field monthly_form.amount %}
                                         </div>
                                     {% endif %}
-
                                 {% else %}
-
+                                    {# No slider or button selectors, just a simple input, so show just the input plus default usage text #}
                                     {% if is_euro %}
                                         <div class="donate-landing-hero__form-input donate-landing-hero__form-input">
                                             <div class="form-item form-item--decimal_field form-item--number_input donate-landing-hero__form-input">
@@ -133,7 +131,9 @@
                                 {% endif %}
 
                             {% render_form_field monthly_form.campaign_id %}
+                            {% render_form_field monthly_form.campaign_name %}
                             {% render_form_field monthly_form.frequency %}
+                            {% render_form_field monthly_form.campaign_name %}
                             {% render_form_field monthly_form.currency %}
 
                             <div class="js-donate-button-wrapper">
@@ -152,18 +152,18 @@
                         {% endif %}
 
                         {% if page.allow_one_off_donation %}
-                            <form method="get" action="{% url 'donate:personal_details' %}" id="donate_form--single" {% if page.default_to_monthly %}hidden{% endif %} class="js-donate-usage js-donate-button-wrapper">
+                            <form method="get" action="{% url 'donate:redirect' %}" id="donate_form--single" {% if page.default_to_monthly %}hidden{% endif %} class="js-donate-usage">
+                                {# Show one-off slider #}
                                 {% if page.show_donate_slider %}
-                                    <div class="donate-slider__container">
-                                        <div id="donate_slider--single-icon" class="donate-slider--icon">
-                                            {# Child element injected here, if supplied #}
-                                        </div>
-                                        <div id="donate_slider--single-text" class="donate-slider--text">
-                                            {# Child element injected here, if supplied #}
-                                        </div>
-                                    </div>
+                                    {% include "patterns/pages/donate/partials/donate_widget_slider.html" with suggested_amount=single_suggested_amount frequency="single" %}
+                                {% endif %}
 
-                                    <div id="donate_slider--one_off" class="donate-landing__slider" data-suggested-amount="{{single_suggested_amount}}"></div>
+                                {# or show the single buttons if they've been enabled - slider and buttons won't be shown together #}
+                                {% if page.show_donate_buttons %}
+                                    {% include "patterns/pages/donate/partials/donate_widget_buttons.html" with button_values=single_button_values frequency="single" %}
+                                {% endif %}
+
+                                {% if page.show_donate_slider or page.show_donate_buttons %}
 
                                     {% if is_euro %}
                                         <div class="donate-landing-hero__form-input donate-landing-hero__form-input">
@@ -181,6 +181,7 @@
                                         </div>
                                     {% endif %}
                                 {% else %}
+                                    {# No slider or button selectors, just a simple input, so show just the input plus default usage text #}
                                     {% if is_euro %}
                                         <div class="donate-landing-hero__form-input donate-landing-hero__form-input">
                                             <div class="form-item form-item--decimal_field form-item--number_input donate-landing-hero__form-input">
@@ -215,9 +216,13 @@
                                 {% endif %}
 
                                 {% render_form_field one_off_form.campaign_id %}
+                                {% render_form_field one_off_form.campaign_name %}
                                 {% render_form_field one_off_form.frequency %}
                                 {% render_form_field one_off_form.currency %}
-                                {% include "patterns/atoms/buttons/button--button.html" with label="Donate Now" large=True classes="button--secondary donate-landing-hero__donate-button" %}
+                                <div class="js-donate-button-wrapper">
+                                    {% include "patterns/atoms/buttons/button--button.html" with label="Donate Now" large=True classes="button--secondary donate-landing-hero__donate-button" %}
+                                </div>
+
                                 {% include "patterns/molecules/payments/payment-icons--single.html" %}
                             </form>
                         {% endif %}
@@ -233,7 +238,7 @@
 
             <section class="section section--donate-landing">
                 {% include "patterns/atoms/corners/corners.html" with size="page" %}
-                
+
                 {% if page.body %}
                     <div class="donate-landing__rich-text">
                         {% include_block page.body %}
@@ -316,7 +321,7 @@
         - .button--alt
         - Not to have the margin that the streamfield block provides.
     {% endcomment %}
-    
+
     {% if page.story_cta %}
     <div class="wrapper wrapper--donate-landing-cta">
         <div class="wrapper--small">
@@ -331,15 +336,26 @@
     {% include "patterns/molecules/related-pages/related-pages--large.html" with heading=page.more_info_heading related_pages=page.more_info_links pattern="diamonds" classes="related-large--donate-landing" %}
 
 </article>
+
 {% endblock content %}
 
 {% block extra_js %}
     <script src="{% static 'js/donate.js' %}"></script>
-    {% if single_slider_values and page.allow_one_off_donation %}
-        {{ single_slider_values|json_script:"single_slider_values" }}
+    {% if page.show_donate_slider%}
+        {% if single_slider_values and page.allow_one_off_donation %}
+            {{ single_slider_values|json_script:"single_slider_values" }}
+        {% endif %}
+        {% if monthly_slider_values and page.allow_monthly_donation %}
+            {{ monthly_slider_values|json_script:"monthly_slider_values" }}
+        {% endif %}
     {% endif %}
-    {% if monthly_slider_values and page.allow_monthly_donation %}
-        {{ monthly_slider_values|json_script:"monthly_slider_values" }}
+    {% if page.show_donate_buttons %}
+        {% if single_button_values and page.allow_one_off_donation %}
+            {{ single_button_values|json_script:"single_button_values" }}
+        {% endif %}
+        {% if monthly_button_values and page.allow_monthly_donation %}
+            {{ monthly_button_values|json_script:"monthly_button_values" }}
+        {% endif %}
     {% endif %}
     <script type="text/javascript">
         window.donateConfig = {

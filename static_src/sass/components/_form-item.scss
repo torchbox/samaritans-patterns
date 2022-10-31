@@ -11,11 +11,11 @@
         margin-bottom: 0;
     }
 
-    .page-teaser__giftaid-field & {
+    .gift-aid__field & {
         margin-bottom: 0;
 
         @include media-query(mob-landscape) {
-            max-width: 65%;
+            @include font-size(default);
         }
     }
 
@@ -64,6 +64,10 @@
     select,
     &__data-list {
         @include input-style;
+
+        .section--form-darker-grey & {
+            background-color: $white;
+        }
     }
 
     textarea {
@@ -173,6 +177,10 @@
             align-items: flex-start;
         }
 
+        &--stacked {
+            flex-direction: column;
+        }
+
         &--spaced {
             margin-bottom: $gutter-medium;
         }
@@ -193,6 +201,10 @@
 
         #{$root}--checkbox_input & {
             display: flex;
+
+            .donate__form-wrapper & {
+                max-width: unset;
+            }
         }
 
         #{$root}--select &,

@@ -1,193 +1,134 @@
 {% extends "patterns/templates/donate-form-page.html" %}
 {% load i18n form_tags helper_tags icon_tags loqate_tags static wagtailimages_tags humanize %}
 
-{% block title %}{% if is_pay_in %}{% trans "Your information | Fundraising pay-in" %}{% else %}{% trans "Donate - your information" %}{% endif %}{% endblock %}
-
-{% block progress_bar %}
-    {% include "patterns/pages/donate/partials/progress_bar.html" with classes="first-active" currency=currency %}
-{% endblock %}
+{% block title %}
+    {% if is_pay_in %}
+        {% trans "Your information | Fundraising pay-in" %}
+    {% else %}
+        {% trans "Donate - your information" %}
+    {% endif %}
+{% endblock title %}
 
 {% block content_inner %}
+    <div class="payments donate" id="donate__personal-details-wrapper">
 
-<div class="payments donate" id="donate__personal-details-wrapper">
-
-    {% if is_pay_in %}
-    <h1>{% trans "Your payment" %}</h1>
-    {% else %}
-    <h1>
-        {% if payment_frequency == 'monthly' %}
-            {% trans "Your monthly donation" %}
+        {% if is_pay_in %}
+            <h1>{% trans "Your payment" %}</h1>
         {% else %}
-            {% trans "Your donation" %}
+            <h1>
+                {% if payment_frequency == 'monthly' %}
+                    {% trans "Your monthly donation" %}
+                {% else %}
+                    {% trans "Your donation" %}
+                {% endif %}
+            </h1>
         {% endif %}
-    </h1>
-    {% endif %}
+
+        {% if not is_pay_in %}
+            <div class="donate-bar">
+                <div class="donate-bar__top">
+                    <div class="donate-bar__info">
+                        {% render_icon "icon-color-coins" "donate-bar__icon" %}
+                        <p id="donate__heading--single" {% if not payment_frequency == 'single' %}hidden{% endif %}>{% trans "You're making a single donation of" %}</p>
+                        <p id="donate__heading--monthly" {% if not payment_frequency == 'monthly' %}hidden{% endif %}>{% trans "You're making a monthly donation of" %}</p>
+                        <p id="donate__heading--currency" class="donate__amount-display">{% if is_euro %}€{% else %}£{% endif %}<span id="donate__amount__display">{{ form.amount.value|floatformat:"2"|intcomma }}</span></p>
+                    </div>
+
+                    <div class="donate__amount" id="donate__amount">
+                        <a id="donate__change-amount" href="#donate__amount-edit">Change amount or currency</a>
+                    </div>
+                </div>
+
+                <div class="donate-bar__edit" id="donate__amount-edit" hidden>
+                    <div class="donate-bar__edit-wrapper currency-list">
+                        {# the form attribute here must match the id of the form on line 66 #}
+                        {% include 'patterns/molecules/forms/form_field.html' with field=form.currency form_attr="gdpr-form" %}
+                    </div>
+                    <div class="donate-bar__edit-wrapper">
+                        <label class="donate-bar__edit-label" for="change-amount-input">Amount</label>
+                        <span id="donate_amount-currency" class="form__input__prefix" data-conversion-rate={{ settings.utils.GBPToEuroConversionSettings.conversion_rate }}>{% if is_euro %}€{% else %}£{% endif %}</span>
+                        <input type="number" value="{{ form.amount.value }}" step="0.01" min="1" max="{{ donation_max_amount }}" id="change-amount-input">
+                    </div>
+                    <button class="button donate-bar__edit-confirm" id="donate__amount__save">{% trans 'Confirm changes' %}</button>
+                </div>
+            </div>
+        {% endif %}
+    </div>
 
     {% if not is_pay_in %}
-    <div class="donate__bar">
-        <div class="donate__bar-info">
-            {% render_icon "icon-color-coins" "donate__bar-icon" %}
-            <p id="donate__heading--single" {% if not payment_frequency == 'single' %}hidden{% endif %}>{% trans "You're making a single donation of" %}</p>
-            <p id="donate__heading--monthly" {% if not payment_frequency == 'monthly' %}hidden{% endif %}>{% trans "You're making a monthly donation of" %}</p>
-            <p id="donate__heading--currency" class="donate__amount-display">{% if is_euro %}€{% else %}£{% endif %}<span id="donate__amount__display">{{ form.amount.value|floatformat:"2"|intcomma }}</span></p>
-        </div>
-        <div class="donate__amount" id="donate__amount">
-            <a id="donate__change-amount" href="#donate__amount-edit">Change amount</a>
-        </div>
-
-        <div class="donate__bar-edit" id="donate__amount-edit" hidden>
-            <span id="donate_amount-currency" class="form__input__prefix" data-conversion-rate={{ settings.utils.GBPToEuroConversionSettings.conversion_rate }}>{% if is_euro %}€{% else %}£{% endif %}</span>
-            <input type="number" value="{{ form.amount.value }}" step="0.01" min="1" max="{{ donation_max_amount }}">
-            <button class="button" id="donate__amount__save">{% trans 'Confirm' %}</button>
-        </div>
-    </div>
-    {% endif %}
-</div>
-
-{% if not is_pay_in %}
-    <div class="donate__options">
-        {% if allow_monthly_donation and not payment_frequency == 'monthly' %}
-            <p class="donate__frequency"><a id="donate__change-frequency" href="#" class="donate__frequency-link">{% trans "Switch to a monthly donation" %}</a></p>
-        {% endif %}
-    </div>
-{% endif %}
-<div class="donate__form-wrapper">
-    <form method="post" class="form" id="gdpr-form">
-        <div class="form__container form__container--flex">
-            <div class="form__section form__section--main-column">
-                {% csrf_token %}
-
-                {% if form.non_field_errors %}
-                    {% for error in form.non_field_errors %}
-                    <div class="form__errors">{{ error }}</div>
-                    {% endfor %}
-                {% elif form.errors and not form.captcha.errors %}
-                    <div class="form__errors">
-                        There were some errors with your form. Please amend the fields highlighted below.
-                    </div>
-                {% elif request.session.gateway_address_errors %}
-                    <div class="form__errors">
-                        <p>We were unable to take payment because the payment processor reported an error with your address information:</p>
-                        {% for error in request.session.gateway_address_errors %}
-                        <p><strong>{{ error }}</strong></p>
-                        {% endfor %}
-                        Please correct these errors and try again.
-                    </div>
-                {% endif %}
-
-                {% if form.captcha.errors %}
-                    <div class="form__errors">{{form.captcha.errors}}</div>
-                {% endif %}
-                {{ form.captcha }}
-
-                <div class="currency-list">
-                    {% render_form_field form.currency %}
-                </div>
-
-                {% if form.amount %}
-                    <div id="amount_form_field" class="{% if is_euro %}form__euro-field-wrapper{% else %}form__gbp-field-wrapper{% endif %}">
-                        {% render_form_field form.amount %}
-                    </div>
-                {% endif %}
-
-
-                {% if is_pay_in %}
-                    {% render_form_field form.supporter_id %}
-                    {% render_form_field form.payment_origin_choice %}
-                    <div id="payment_origin_other_field" class="js-autocomplete" data-autocomplete-list="#payment_origin_options">
-                        {% render_form_field form.payment_origin %}
-                    </div>
-                {% endif %}
-
-                {% render_form_field form.frequency %}
-
-                <div class="form-item-wrapper form-item-wrapper--two-col">
-                    {% render_form_field form.first_name %}
-                    {% render_form_field form.last_name %}
-                </div>
-
-                {% if fake_forms %}
-                    {{ form.email }}
-                {% else %}
-                    {% include 'patterns/molecules/forms/form_field.html' with field=form.email help_text="We'll use this to send you an email confirmation when you've made your donation, and we'll use it to keep you up-to-date if you choose to keep in touch." %}
-                {% endif %}
-                <h2>{% trans "Your billing address" %}</h2>
-
-                {% render_form_field form.address_line_1 %}
-                {% render_form_field form.address_line_2 %}
-                {% render_form_field form.town %}
-                {% render_form_field form.post_code %}
-                {% render_form_field form.country %}
-
-                <div id="donate__form__region" class="js-region-field" {% if not form.country.value == 'US' %}hidden{% endif %}>
-                    {% render_form_field form.region %}
-                </div>
-
-                {% if fake_forms %}
-                    {{ form.phone_number }}
-                {% else %}
-                    {% include 'patterns/molecules/forms/form_field.html' with field=form.phone_number help_text="We'll only use this if you ask to be kept up-to-date by phone." %}
-                {% endif %}
-
-                {% render_form_field form.in_memory %}
-                <div id="donate__form__in_memory_fields" {% if not form.in_memory.value %}hidden{% endif %}>
-                    {% if fake_forms %}
-                        {{ form.in_memory_name }}
-                        {{ form.in_memory_relationship }}
-                    {% else %}
-                        {% include 'patterns/molecules/forms/form_field.html' with field=form.in_memory_name tooltip="Who are you giving in memory of?" %}
-                        {% include 'patterns/molecules/forms/form_field.html' with field=form.in_memory_relationship tooltip="If you're comfortable doing so, please let us know your relationship with the person" %}
-                    {% endif %}
-                </div>
-
-                {% render_form_field form.is_corporate %}
-                {% if payment_frequency == 'single' and is_branch_donations %}
-                <div id="donate__form__branch_donation">
-                        {% render_form_field form.is_branch_donation %}
-                    <div id="donate__form__branch_donation_selection" {% if form.is_branch_donation %}hidden{% endif %}>
-                        {% include 'patterns/molecules/forms/data_list_field.html' with field=form.branch_donation tooltip="Start typing and select a branch from the list. If you can't find a branch, please uncheck the box and contact supportercare@samaritans.org to let us know." required=True %}
-                    </div>
-                </div>
-                {% endif %}
-
-            {# Hide the chooser, if there's no teams #}
-            {% if form.totaliser_team.field.choices %}
-                {% render_form_field form.totaliser_team %}
+        <div class="donate__options">
+            {% if allow_monthly_donation and not payment_frequency == 'monthly' %}
+                <p class="donate__frequency">
+                    <a id="donate__change-frequency" href="#" class="donate__frequency-link">{% trans "Switch to a monthly donation" %}</a>
+                </p>
             {% endif %}
+        </div>
+    {% endif %}
+
+    <div class="donate__form-wrapper" id="">
+        {# JS will call reportValidity to hook into default validation as the same time as checking other errors - so we use novalidate here to stop it running separately #}
+        <form method="post" class="form" data-donation-form data-currency={{ form.currency.value }}  id="gdpr-form" novalidate>
+            <div class="form__container form__container--flex">
+                <div class="form__section form__section--main-column">
+
+                    {% csrf_token %}
+
+                    {% if form.non_field_errors %}
+                        {% for error in form.non_field_errors %}
+                            <div class="form__errors">{{ error }}</div>
+                        {% endfor %}
+                    {% elif form.errors and not form.captcha.errors %}
+                        <div class="form__errors">
+                            There were some errors with your form. Please amend the fields highlighted below.
+                        </div>
+                    {% elif request.session.gateway_address_errors %}
+                        <div class="form__errors">
+                            <p>We were unable to take payment because the payment processor reported an error with your address information:</p>
+                            {% for error in request.session.gateway_address_errors %}
+                            <p><strong>{{ error }}</strong></p>
+                            {% endfor %}
+                            Please correct these errors and try again.
+                        </div>
+                    {% endif %}
+
+                    {% if form.captcha.errors %}
+                        <div class="form__errors">{{ form.captcha.errors }}</div>
+                    {% endif %}
+
+                    {{ form.captcha }}
+
+                    {% include "patterns/pages/donate/partials/personal_detail_fields.html" %}
+                </div>
+
+                {# The following fields are full-width #}
+                {% if not is_euro and not is_pay_in %}
+                    {% include "patterns/pages/donate/partials/gift_aid_block.html" %}
+                {% endif %}
+
+                {% include "patterns/pages/donate/partials/donate_gdpr_marketing_form_fields.html" with is_pay_in=is_pay_in %}
+
+                <section class="section section--form-darker-grey">
+                    {% block payment_widgets %}
+                        {% comment %} Payment widgets for Single, Pay-in and monthly are inserted here {% endcomment %}
+                    {% endblock payment_widgets %}
+                </section>
+                {# /.form__section--full-width #}
+                {% include "patterns/molecules/payments/payments-sidebar.html" %}
             </div>
-            <div class="form__section form__section--full-width">
-
-                {% include "patterns/molecules/gdpr/gdpr_marketing_form_fields.html" %}
-
-                <button value="{% trans 'Continue to payment' %}" class="button button--large button--secondary" type="submit">
-                    <div class="button__shadow"></div>
-                    <div class="button__inner">
-                        {% trans 'Continue to payment' %}
-                        {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="icon button__icon" %}
-                    </div>
-                </button>
-
-            </div> {# /.form__section--full-width #}
-
-            {% include "patterns/molecules/payments/payments-sidebar.html" %}
-
-        </div> {# /.form__container--flex #}
-    </form>
-</.div> {# /.donate__form-wrapper #}
-
-{% endblock %}
-
+            {# /.form__container--flex #}
+        </form>
+    </div>
+    {# /.donate__form-wrapper #}
+{% endblock content_inner %}
 
 {% block extra_js %}
-{{ tag_manager_events|json_script:"tag_manager_events" }}
-<script src="{% static 'js/donate.js' %}"></script>
-{% loqate_script %}
-{% if is_pay_in %}
-    {{ fundraising_options|json_script:"payment_origin_options" }}
-{% endif %}
-{% endblock %}
+    {% loqate_script %}
+    {{ tag_manager_events|json_script:"tag_manager_events" }}
+    <script src="{% static 'js/donate.js' %}"></script>
+    {% if is_pay_in %}{{ fundraising_options|json_script:"payment_origin_options" }}{% endif %}
+{% endblock extra_js %}
 
 <!-- Overide footer so footer CTA does not display -->
 {% block footer %}
-    {% include 'patterns/organisms/footer/footer.html' %}
+    {% include "patterns/organisms/footer/footer.html" %}
 {% endblock footer %}

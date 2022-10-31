@@ -3,7 +3,7 @@
 
 {% if link %}
     {% if not is_euro %}
-        <a class="stat-block__block stat-block__block--link" href="{% donate_url campaign_id=page.pk frequency=frequency amount=value.amount currency=currency %}">
+        <a class="stat-block__block stat-block__block--link" href="{% donate_url campaign_id=page.pk campaign_name=page.campaign_name frequency=frequency amount=value.amount currency=currency %}">
             {% include "patterns/molecules/streamfield/partials/stat-block-inner.html" with amount=amount is_euro=is_euro  %}
             <span class="stat-block__link" >
                 {% language "en-gb" %}
@@ -17,7 +17,7 @@
         </a>
     {% else %}
         {% with amount=value.amount|to_euro:current_site|floatformat:"-2"|intcomma %}
-        <a class="stat-block__block stat-block__block--link" href="{% donate_url campaign_id=page.pk frequency=frequency amount=amount currency=currency %}">
+        <a class="stat-block__block stat-block__block--link" href="{% donate_url campaign_id=page.pk campaign_name=page.campaign_name frequency=frequency amount=amount currency=currency %}">
             {% include "patterns/molecules/streamfield/partials/stat-block-inner.html" with amount=amount is_euro=is_euro currency=currency %}
             <span class="stat-block__link" >
                 {% language "en-gb" %}

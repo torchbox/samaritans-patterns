@@ -1,71 +1,89 @@
+// pca is a window var - tell eslint it's a global so it doesn't complain it is undefined
+/* global pca */
+
 import Utilities from '../utilities';
 
-function donateDetails() {
+const donateDetails = () => {
     if (!document.getElementById('donate__personal-details-wrapper')) {
         // We're not on the personal details page page.
         return;
     }
 
-    var editBox = document.getElementById('donate__amount-edit'),
-        displayBox = document.getElementById('donate__amount'),
-        changeAmountButton = document.getElementById('donate__change-amount'),
-        saveAmountButton = document.getElementById('donate__amount__save'),
-        amountInput = document.getElementById('id_amount'),
-        frequencyInput = document.getElementById('id_frequency'),
-        singlePaymentHeading = document.getElementById(
-            'donate__heading--single',
-        ),
-        monthlyPaymentHeading = document.getElementById(
-            'donate__heading--monthly',
-        ),
-        singlePaymentMethods = document.getElementById(
-            'donate__methods--single',
-        ),
-        monthlyPaymentMethodsGbp = document.getElementById(
-            'donate__methods--monthly-gbp',
-        ),
-        monthlyPaymentMethodsEur = document.getElementById(
-            'donate__methods--monthly-eur',
-        ),
-        changeFrequencyButton = document.getElementById(
-            'donate__change-frequency',
-        ),
-        donateAmountCurrency = document.getElementById(
-            'donate_amount-currency',
-        ),
-        currencyToggleEUR = document.getElementById('id_currency_1'),
-        currencyToggleGBP = document.getElementById('id_currency_0'),
-        currencyToggle = document.getElementById('id_currency'),
-        currencySymbol = document.getElementById('donate__heading--currency'),
-        displayedAmountSpan = document.getElementById(
-            'donate__amount__display',
-        ),
-        inMemoryInput = document.getElementById('id_in_memory'),
-        inMemoryFields = document.getElementById(
-            'donate__form__in_memory_fields',
-        ),
-        branchDonationToggle = document.getElementById('id_is_branch_donation'),
-        branchDonationField = document.getElementById(
-            'donate__form__branch_donation_selection',
-        ),
-        branchDonationGroup = document.getElementById(
-            'donate__form__branch_donation',
-        ),
-        currencyStep = document.getElementById('currency-step'),
-        amountField = document.getElementById('amount_form_field'),
-        originChoice = document.getElementById('id_payment_origin_choice'),
-        originOther = document.getElementById('id_payment_origin'),
-        originOtherWrapper = document.getElementById(
-            'payment_origin_other_field',
-        );
+    const editBox = document.getElementById('donate__amount-edit');
 
-    const currencyGbpSymbol = '£',
-        currencyEurSymbol = '€';
-    const donationMaxAmount = Number(
-        editBox.querySelector('input').getAttribute('max'),
+    let changeAmountInput;
+    if (editBox) {
+        changeAmountInput = editBox.querySelector('#change-amount-input');
+    }
+    const displayBox = document.getElementById('donate__amount');
+    const changeAmountButton = document.getElementById('donate__change-amount');
+    const saveAmountButton = document.getElementById('donate__amount__save');
+    const amountInput = document.getElementById('id_amount');
+    const frequencyInput = document.getElementById('id_frequency');
+    const singlePaymentHeading = document.getElementById(
+        'donate__heading--single',
     );
+    const monthlyPaymentHeading = document.getElementById(
+        'donate__heading--monthly',
+    );
+    const singlePaymentMethods = document.getElementById(
+        'donate__methods--single',
+    );
+    const monthlyPaymentMethodsGbp = document.getElementById(
+        'donate__methods--monthly-gbp',
+    );
+    const monthlyPaymentMethodsEur = document.getElementById(
+        'donate__methods--monthly-eur',
+    );
+    const changeFrequencyButton = document.getElementById(
+        'donate__change-frequency',
+    );
+    const donateAmountCurrency = document.getElementById(
+        'donate_amount-currency',
+    );
+    const currencyToggleEUR = document.getElementById('id_currency_1');
+    const currencyToggleGBP = document.getElementById('id_currency_0');
+    const currencyToggle = document.getElementById('id_currency');
+    const currencySymbol = document.getElementById('donate__heading--currency');
+    const displayedAmountSpan = document.getElementById(
+        'donate__amount__display',
+    );
+    const inMemoryInput = document.getElementById('id_in_memory');
+    const inMemoryFields = document.getElementById(
+        'donate__form__in_memory_fields',
+    );
+    const branchDonationToggle = document.getElementById(
+        'id_is_branch_donation',
+    );
+    const branchDonationField = document.getElementById(
+        'donate__form__branch_donation_selection',
+    );
+    const branchDonationGroup = document.getElementById(
+        'donate__form__branch_donation',
+    );
+    const currencyStep = document.getElementById('currency-step');
+    const amountField = document.getElementById('amount_form_field');
+    const originChoice = document.getElementById('id_payment_origin_choice');
+    const originOther = document.getElementById('id_payment_origin');
+    const originOtherWrapper = document.getElementById(
+        'payment_origin_other_field',
+    );
+    const currencyGbpSymbol = '£';
+    const currencyEurSymbol = '€';
 
-    var toggleDonateAmountEditor = function () {
+    let donationMaxAmount;
+    if (changeAmountInput) {
+        donationMaxAmount = Number(changeAmountInput.getAttribute('max'));
+    }
+    const hiddenAddressFields = document.querySelector(
+        '.js-donate-address-toggle',
+    );
+    const enterManualAddressButton = document.querySelector(
+        '.js-donate-manual-address',
+    );
+    const addressLineOneInput = document.querySelector('#id_address_line_1');
+
+    const toggleDonateAmountEditor = () => {
         if (editBox.hasAttribute('hidden')) {
             editBox.removeAttribute('hidden');
             displayBox.setAttribute('hidden', true);
@@ -75,29 +93,24 @@ function donateDetails() {
         }
     };
 
-    var convertCurrency = function (symbol, value) {
+    const convertCurrency = (symbol, value) => {
         if (symbol === currencyEurSymbol) {
             return (
                 value * donateAmountCurrency.dataset.conversionRate
             ).toFixed(2);
-        } else {
-            return (
-                value / donateAmountCurrency.dataset.conversionRate
-            ).toFixed(2);
         }
+        return (value / donateAmountCurrency.dataset.conversionRate).toFixed(2);
     };
 
     // Amount/frequency update bar - only applicable for donations rather than pay-ins
     if (changeAmountButton) {
-        changeAmountButton.addEventListener('click', function (e) {
+        changeAmountButton.addEventListener('click', (e) => {
             e.preventDefault();
             toggleDonateAmountEditor();
         });
 
-        saveAmountButton.addEventListener('click', function () {
-            var newAmount = parseFloat(
-                editBox.querySelector('input').value,
-            ).toFixed(2);
+        saveAmountButton.addEventListener('click', () => {
+            let newAmount = parseFloat(changeAmountInput.value).toFixed(2);
 
             // it's possible to alter the amound by typing it in rather than
             // using the dial buttons. If an amount is entered is less than one
@@ -105,24 +118,23 @@ function donateDetails() {
             // in the amount box.
             if (newAmount < 1) {
                 newAmount = parseFloat('1').toFixed(2);
-                editBox.querySelector('input').value = newAmount;
+                changeAmountInput.value = newAmount;
             } else if (newAmount > donationMaxAmount) {
                 newAmount = parseFloat(donationMaxAmount.toString()).toFixed(2);
             }
 
             newAmount = Utilities.number_format(newAmount, 2, '.', ',');
 
-            var currentCurrency = currencyGbpSymbol;
+            let currentCurrency = currencyGbpSymbol;
 
             if (currencyToggleEUR.checked) {
                 currentCurrency = currencyEurSymbol;
             }
 
-            currencySymbol.innerHTML =
-                currentCurrency +
-                '<span id="donate__amount__display">' +
-                newAmount +
-                '</span>';
+            currencySymbol.innerHTML = `${currentCurrency}
+                <span id="donate__amount__display">
+                ${newAmount}
+                </span>`;
 
             amountInput.value = newAmount;
             toggleDonateAmountEditor();
@@ -138,18 +150,16 @@ function donateDetails() {
         );
 
         // Return key handling
-        editBox
-            .querySelector('input')
-            .addEventListener('keyup', function (event) {
-                if (event.keyCode === 13) {
-                    saveAmountButton.click();
-                }
-            });
+        changeAmountInput.addEventListener('keyup', (event) => {
+            if (event.keyCode === 13) {
+                saveAmountButton.click();
+            }
+        });
     }
 
     // Change to monthly if allowed. Switching from monthly back to single isn't supported.
     if (changeFrequencyButton) {
-        changeFrequencyButton.addEventListener('click', function (e) {
+        changeFrequencyButton.addEventListener('click', (e) => {
             e.preventDefault();
             // Frequency
             singlePaymentHeading.toggleAttribute('hidden', true);
@@ -187,7 +197,7 @@ function donateDetails() {
             originOther.toggleAttribute('required', false);
         }
         // Set correct state on changes to 'What did you fundraise for?'
-        originChoice.addEventListener('change', function (e) {
+        originChoice.addEventListener('change', (e) => {
             e.preventDefault();
             if (
                 originChoice.options[originChoice.options.length - 1].selected
@@ -204,12 +214,12 @@ function donateDetails() {
     // Toggle in memory fields if the user checks this box.
     // Not available for pay-in.
     if (inMemoryInput) {
-        inMemoryInput.addEventListener('change', function (e) {
+        inMemoryInput.addEventListener('change', (e) => {
             inMemoryFields.toggleAttribute('hidden', !e.target.checked);
         });
     }
     if (branchDonationToggle) {
-        branchDonationToggle.addEventListener('change', function (e) {
+        branchDonationToggle.addEventListener('change', (e) => {
             branchDonationField.toggleAttribute('hidden', !e.target.checked);
         });
         // On failed submission, show the dropdown
@@ -217,55 +227,59 @@ function donateDetails() {
             branchDonationField.toggleAttribute('hidden', false);
         }
     }
-    var isAmountHidden = amountInput.getAttribute('type') == 'hidden',
-        buttonClickedFlag = currencyToggleEUR.checked
-            ? currencyEurSymbol
-            : currencyGbpSymbol;
-    currencyToggle.addEventListener('click', function () {
+    // amount input is present but hidden in the normal donation flow,
+    // but visible for pay in
+    const isAmountHidden = amountInput.getAttribute('type') === 'hidden';
+    let buttonClickedFlag = currencyToggleEUR.checked
+        ? currencyEurSymbol
+        : currencyGbpSymbol;
+    currencyToggle.addEventListener('click', () => {
         // Toggle between Euros and GBP
         // Donate one-off and monthly
         if (isAmountHidden) {
-            var newAmount = parseFloat(
-                editBox.querySelector('input').value,
-            ).toFixed(2);
-            var donateAmountInner;
+            let newAmount = parseFloat(changeAmountInput.value).toFixed(2);
+            let donateAmountInner;
 
             if (
                 currencyToggleEUR.checked &&
-                buttonClickedFlag != currencyEurSymbol
+                buttonClickedFlag !== currencyEurSymbol
             ) {
                 newAmount = convertCurrency(currencyEurSymbol, newAmount);
-                donateAmountInner =
-                    '<span id="donate__amount__display">' +
-                    newAmount +
-                    '</span>';
+                donateAmountInner = `<span id="donate__amount__display">
+                    ${newAmount}
+                    </span>`;
                 currencySymbol.innerHTML =
                     currencyEurSymbol + donateAmountInner;
                 donateAmountCurrency.innerText = currencyEurSymbol;
-                currencyStep.innerText = currencyEurSymbol;
+                // currency step will only be present on pages that have the progress bar showing
+                if (currencyStep) {
+                    currencyStep.innerText = currencyEurSymbol;
+                }
                 buttonClickedFlag = currencyEurSymbol;
             } else if (
                 currencyToggleGBP.checked &&
-                buttonClickedFlag != currencyGbpSymbol
+                buttonClickedFlag !== currencyGbpSymbol
             ) {
                 newAmount = convertCurrency(currencyGbpSymbol, newAmount);
-                donateAmountInner =
-                    '<span id="donate__amount__display">' +
-                    newAmount +
-                    '</span>';
+                donateAmountInner = `<span id="donate__amount__display">
+                    ${newAmount}
+                    </span>`;
                 currencySymbol.innerHTML =
                     currencyGbpSymbol + donateAmountInner;
                 donateAmountCurrency.innerText = currencyGbpSymbol;
-                currencyStep.innerText = currencyGbpSymbol;
+                // currency step will only be present on pages that have the progress bar showing
+                if (currencyStep) {
+                    currencyStep.innerText = currencyGbpSymbol;
+                }
                 buttonClickedFlag = currencyGbpSymbol;
             }
 
-            editBox.querySelector('input').value = newAmount;
+            changeAmountInput.value = newAmount;
             amountInput.value = newAmount;
 
             // Toggle payment methods for monthly
             // Single donations have no difference
-            if (frequencyInput.value == 'monthly') {
+            if (frequencyInput.value === 'monthly') {
                 if (currencyToggleEUR.checked) {
                     monthlyPaymentMethodsEur.toggleAttribute('hidden', false);
                     monthlyPaymentMethodsGbp.toggleAttribute('hidden', true);
@@ -275,19 +289,61 @@ function donateDetails() {
                 }
             }
         } else {
+            /* eslint-disable no-lonely-if */
             // Toggle between Euros and GBP
             // Pay-in
             if (currencyToggleEUR.checked) {
                 // Toggle the amount field class for Euro
                 amountField.className = 'form__euro-field-wrapper';
-                currencyStep.innerText = currencyEurSymbol;
+                // currency step will only be present on pages that have the progress bar showing
+                if (currencyStep) {
+                    currencyStep.innerText = currencyEurSymbol;
+                }
             } else {
                 // Toggle the amount field class for GBP
                 amountField.className = 'form__gbp-field-wrapper';
-                currencyStep.innerText = currencyGbpSymbol;
+                // currency step will only be present on pages that have the progress bar showing
+                if (currencyStep) {
+                    currencyStep.innerText = currencyGbpSymbol;
+                }
             }
+            /* eslint-enable no-lonely-if */
         }
     });
-}
+
+    // Show address fields when the user selects an address from loqate
+    pca.on('load', (type, id, control) => {
+        control.listen('populate', () => {
+            hiddenAddressFields.classList.remove('hidden');
+        });
+
+        // These are placed here since we need to be able to disable `control`.
+        // Option to enter address manually - only if the element is present in the form - if the page is reloaded with exisitng address details then it won't be
+        if (enterManualAddressButton) {
+            enterManualAddressButton.addEventListener('click', () => {
+                // Remove address lookup when selecting 'enter address manually'.
+                control.destroy();
+                hiddenAddressFields.classList.remove('hidden');
+            });
+        }
+
+        if (addressLineOneInput) {
+            addressLineOneInput.addEventListener('change', () => {
+                /**
+                 * Remove address lookup when address line one already has an input
+                 * and show all the fields. This can happen when using autocomplete.
+                 * We use setTimeout to handle the case where a user types in their address
+                 * line 1 and then selects on an address in Loqate so we don't immediately
+                 * disable loqate.
+                 */
+                hiddenAddressFields.classList.remove('hidden');
+
+                setTimeout(() => {
+                    control.destroy();
+                }, 2000);
+            });
+        }
+    });
+};
 
 export default donateDetails;

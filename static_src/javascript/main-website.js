@@ -1,4 +1,3 @@
-import 'babel-polyfill';
 import './polyfills/foreach-polyfill';
 import './polyfills/remove-polyfill';
 import './sentry';
@@ -39,6 +38,7 @@ import { disableFormAfterSubmit } from './components/disable-button-after-submit
 import './components/referee-details';
 import SelfDescribeReveal from './components/self-describe-reveal';
 import GdprFields from './components/gdpr-fields';
+import DonateValidation from './components/donate-validation';
 import { formErrorScroll } from './components/form-error-scroll';
 import DonateDynamicButton from './components/donate-dynamic-button';
 import Totaliser from './components/totaliser/totaliser';
@@ -47,10 +47,13 @@ import { toggleLeaderboard } from './components/leaderboard';
 import FormFieldExpand from './components/form-field-expand';
 import TermsAndConditions from './components/terms-and-conditions';
 import ChapterBar from './components/chapter-bar';
+import DonateButtons from './components/donate-buttons';
 
 import '../sass/main.scss';
 
+// eslint-disable-next-line prefer-arrow-callback, func-names
 document.addEventListener('DOMContentLoaded', function () {
+    /* eslint-disable no-new, no-restricted-syntax */
     for (const accordion of document.querySelectorAll(Accordion.selector())) {
         new Accordion(accordion);
     }
@@ -125,6 +128,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     for (const gdprField of document.querySelectorAll(GdprFields.selector())) {
         new GdprFields(gdprField);
+    }
+
+    for (const donateValidation of document.querySelectorAll(
+        DonateValidation.selector(),
+    )) {
+        new DonateValidation(donateValidation);
     }
 
     for (const inputblock of document.querySelectorAll(
@@ -230,5 +239,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     for (const chapterbar of document.querySelectorAll(ChapterBar.selector())) {
         new ChapterBar(chapterbar);
+    }
+
+    for (const donateButtons of document.querySelectorAll(
+        DonateButtons.selector(),
+    )) {
+        new DonateButtons(donateButtons);
     }
 });

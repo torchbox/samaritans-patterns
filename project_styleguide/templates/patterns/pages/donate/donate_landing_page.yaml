@@ -4,6 +4,8 @@ context:
     is_default: True
     allow_monthly_donation: True
     allow_one_off_donation: True
+    show_donate_slider: False # toggle to show / hide slider
+    show_donate_buttons: True # toggle to show / hide buttons (won't be enabled at the same time as the slider)
     default_to_monthly: True
     hero_summary: Today, our volunteers will answer almost 13,000 calls for help. Your donation could help them answer tomorrow's calls
     call_to_donate: Help us continue our lifesaving work
@@ -86,6 +88,57 @@ context:
       </blockquote>
       </blockquote>
       </div>
+  single_slider_values:
+    - amount: '10.00'
+      icon: <svg></svg>
+      text: <p><b>£10</b> could help train and support Samaritans&#x27; volunteers, making sure people are not left to struggle alone this year</p>
+    - amount: '20.00'
+      icon: <svg></svg>
+      text: <p><b>£20</b> could help train and support Samaritans&#x27; volunteers, making sure people are not left to struggle alone this year</p>
+    - amount: '30.00'
+      icon: <svg></svg>
+      text: <p><b>£30</b> could help train and support Samaritans&#x27; volunteers, making sure people are not left to struggle alone this year</p>
+    - amount: '40.00'
+      icon: <svg></svg>
+      text: <p><b>£40</b> could help train and support Samaritans&#x27; volunteers, making sure people are not left to struggle alone this year</p>
+    - amount: '50.00'
+      icon: <svg></svg>
+      text: <p><b>£50</b> could help train and support Samaritans&#x27; volunteers, making sure people are not left to struggle alone this year</p>
+  single_suggested_amount: '50.00'
+  monthly_slider_values:
+    - amount: '10.00'
+      icon: <svg></svg>
+      text: <p><b>£10</b> could help train and support Samaritans&#x27; volunteers, making sure people are not left to struggle alone this year</p>
+    - amount: '20.00'
+      icon: <svg></svg>
+      text: <p><b>£20</b> could help train and support Samaritans&#x27; volunteers, making sure people are not left to struggle alone this year</p>
+    - amount: '30.00'
+      icon: <svg></svg>
+      text: <p><b>£30</b> could help train and support Samaritans&#x27; volunteers, making sure people are not left to struggle alone this year</p>
+    - amount: '40.00'
+      icon: <svg></svg>
+      text: <p><b>£40</b> could help train and support Samaritans&#x27; volunteers, making sure people are not left to struggle alone this year</p>
+    - amount: '50.00'
+      icon: <svg></svg>
+      text: <p><b>£50</b> could help train and support Samaritans&#x27; volunteers, making sure people are not left to struggle alone this year</p>
+  monthly_suggested_amount: '30.00'
+  monthly_button_values:
+    - amount: '10.00'
+      text: <p><b>£10</b> could help train and support Samaritans&#x27; volunteers, making sure people are not left to struggle alone this year</p>
+    - amount: '20.00'
+      text: <p><b>£20</b> could help train and support Samaritans&#x27; volunteers, making sure people are not left to struggle alone this year</p>
+    - amount: '30.00'
+      text: <p><b>£30</b> could help train and support Samaritans&#x27; volunteers, making sure people are not left to struggle alone this year</p>
+  single_button_values:
+    - amount: '10.00'
+      text: <p><b>£10</b> could help train and support Samaritans&#x27; volunteers, making sure people are not left to struggle alone this year</p>
+    - amount: '20.00'
+      text: <p><b>£20</b> could help train and support Samaritans&#x27; volunteers, making sure people are not left to struggle alone this year</p>
+    - amount: '40.00'
+      text: <p><b>£40</b> could help train and support Samaritans&#x27; volunteers, making sure people are not left to struggle alone this year</p>
+    - amount: '50.00'
+      text: <p><b>£50</b> could help train and support Samaritans&#x27; volunteers, making sure people are not left to struggle alone this year</p>
+  donation_max_amount: 1000000
 
 tags:
   image:
@@ -113,6 +166,8 @@ tags:
         </div>
         </div>
     one_off_form.campaign_id:
+      raw: ''
+    one_off_form.campaign_name:
       raw: ''
     one_off_form.frequency:
       raw: ''

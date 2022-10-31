@@ -1,0 +1,102 @@
+{% load i18n form_tags helper_tags loqate_tags %}
+
+<section class="section section--form-darker-grey">
+    <h2><span class="donate__step">{% trans "1" %}</span>{% trans "Your details" %}</h2>
+    {% if is_pay_in %}
+        {# For regular donations the currency switcher is in the header area, but this is not there on a pay-in  #}
+        <div class="currency-list">
+            {% render_form_field form.currency %}
+        </div>
+    {% endif %}
+    {% if form.amount %}
+        <div id="amount_form_field"
+                class="{% if is_euro %}form__euro-field-wrapper{% else %}form__gbp-field-wrapper{% endif %}">
+            {% render_form_field form.amount %}
+        </div>
+    {% endif %}
+
+    {% if is_pay_in %}
+        {% render_form_field form.supporter_id %}
+        {% render_form_field form.payment_origin_choice %}
+        <div id="payment_origin_other_field"
+                class="js-autocomplete"
+                data-autocomplete-list="#payment_origin_options">
+            {% render_form_field form.payment_origin %}
+        </div>
+    {% endif %}
+
+    {% render_form_field form.frequency %}
+
+    <div class="form-item-wrapper form-item-wrapper--two-col">
+        {% render_form_field form.first_name %}
+        {% render_form_field form.last_name %}
+    </div>
+
+    {% if fake_forms %}
+        {{ form.email }}
+    {% else %}
+        {% include 'patterns/molecules/forms/form_field.html' with field=form.email help_text="We'll use this to send you an email confirmation when you've made your donation, and we'll use it to keep you up-to-date if you choose to keep in touch." %}
+    {% endif %}
+
+    {% if form.address_line_1.value or form.address_line_2.value or form.town.value or form.post_code.value or form.errors %}
+        {# If we have an existing value, or any errors, just show all the form fields (country always has a default value) #}
+        {% render_form_field form.address_line_1 %}
+        {% render_form_field form.address_line_2 %}
+        {% render_form_field form.town %}
+        {% render_form_field form.post_code %}
+        {% render_form_field form.country %}
+    {% else %}
+        {# Otherwise only show the first line of the address but give the user the option to start typing manually #}
+        {% include 'patterns/molecules/forms/form_field.html' with field=form.address_line_1 help_text='Start typing your address or <button type="button" class="js-donate-manual-address donate__form__manual-button">enter it manually</button>' %}
+        <div class="
+            js-donate-address-toggle
+            donate__form__toggle-address
+            hidden">
+            {% render_form_field form.address_line_2 %}
+            {% render_form_field form.town %}
+            {% render_form_field form.post_code %}
+            {% render_form_field form.country %}
+        </div>
+    {% endif %}
+
+    <div id="donate__form__region"
+            class="js-region-field"
+            {% if not form.country.value == 'US' %}hidden{% endif %}>
+        {% render_form_field form.region %}
+    </div>
+
+    {% if fake_forms %}
+        {{ form.phone_number }}
+    {% else %}
+        {% include 'patterns/molecules/forms/form_field.html' with field=form.phone_number help_text="We'll only use this if you ask to be kept up-to-date by phone." className="js-phone-wrapper" %}
+    {% endif %}
+    {% render_form_field form.in_memory %}
+
+    <div id="donate__form__in_memory_fields"
+            {% if not form.in_memory.value %}hidden{% endif %}>
+        {% if fake_forms %}
+            {{ form.in_memory_name }}
+            {{ form.in_memory_relationship }}
+        {% else %}
+            {% include 'patterns/molecules/forms/form_field.html' with field=form.in_memory_name tooltip="Who are you giving in memory of?" extra_tooltip_wrapper_classes="form-item__tooltip-wrapper--stacked" %}
+            {% include 'patterns/molecules/forms/form_field.html' with field=form.in_memory_relationship tooltip="If you're comfortable doing so, please let us know your relationship with the person" extra_tooltip_wrapper_classes="form-item__tooltip-wrapper--stacked" %}
+        {% endif %}
+    </div>
+
+    {% render_form_field form.is_corporate %}
+
+    {% if payment_frequency == 'single' and is_branch_donations %}
+        <div id="donate__form__branch_donation">
+            {% render_form_field form.is_branch_donation %}
+            <div id="donate__form__branch_donation_selection"
+                    {% if form.is_branch_donation %}hidden{% endif %}>
+                {% include "patterns/molecules/forms/data_list_field.html" with field=form.branch_donation tooltip="Start typing and select a branch from the list. If you can't find a branch, please uncheck the box and contact supportercare@samaritans.org to let us know." required=True %}
+            </div>
+        </div>
+    {% endif %}
+
+    {# Hide the chooser, if there's no teams #}
+    {% if form.totaliser_team.field.choices %}
+        {% render_form_field form.totaliser_team %}
+    {% endif %}
+</section>

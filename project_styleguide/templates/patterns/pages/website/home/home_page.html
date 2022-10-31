@@ -56,7 +56,7 @@
         </div>
     </div>
 
-    {# Donate slider #}
+    {# Donate slider or buttons #}
     <section class="section section--page-padding homepage-donate-slider" data-hero-donate-landing>
         <div class="wrapper wrapper--large wrapper--padding-page">
             <div class="homepage-donate-slider__wrapper">
@@ -105,7 +105,7 @@
                         {% endif %}
 
                         <div class="homepage-donate-slider__container">
-                            {% include "patterns/organisms/donate/donation_form_with_slider.html" with donate_page=page.support_donation_page %}
+                            {% include "patterns/organisms/donate/homepage_donation_widget.html" with donate_page=page.support_donation_page %}
                         </div>
                     </div>
                     <span class="homepage-donate-slider__connectors"></span>
@@ -160,7 +160,7 @@
         </p>
 
         <div class="website-homepage__donate-button">
-            {% donate_url campaign_id=page.pk frequency="monthly" amount="4.95" as donate_stats_url %}
+            {% donate_url campaign_id=page.pk campaign_name=page.campaign_name frequency="monthly" amount="4.95" as donate_stats_url %}
             {% include "patterns/atoms/buttons/button.html" with label="Donate &pound;4.95 to fund a call" href=donate_stats_url large=True %}
         <div>
     </section>
@@ -181,7 +181,8 @@
                         {{ page.support_headline }}
                     </h2>
 
-                    {% include "patterns/organisms/donate/donation_form_with_slider.html" %}
+                    {% include "patterns/organisms/donate/homepage_donation_widget.html" %}
+
 
                     <ul class="grid grid--homepage-support nav--homepage-support">
                         {% for support_link in page.support_us_links.all %}
@@ -340,12 +341,28 @@
 {% endblock %}
 
 {% block extra_js %}
-    {% if single_slider_values %}
-        {{ single_slider_values|json_script:"single_slider_values" }}
-    {% endif %}
-    {% if monthly_slider_values %}
-        {{ monthly_slider_values|json_script:"monthly_slider_values" }}
-    {% endif %}
+    {# donate js needed for the toggle between monthly and single #}
+    <script src="{% static 'js/donate.js' %}"></script>
+    {% with page.support_donation_page as donate_page %}
+        {# Note that single_slider_values, single_button_values, monthly_slider_values and monthly_button_values are passed into the home page context from the donate page #}
+        {% if donate_page.show_donate_slider %}
+            {% if single_slider_values and donate_page.allow_one_off_donation %}
+                {{ single_slider_values|json_script:"single_slider_values" }}
+            {% endif %}
+            {% if monthly_slider_values and donate_page.allow_monthly_donation %}
+                {{ monthly_slider_values|json_script:"monthly_slider_values" }}
+            {% endif %}
+        {% endif %}
+        {% if donate_page.show_donate_buttons %}
+            {% if single_button_values and donate_page.allow_one_off_donation %}
+                {{ single_button_values|json_script:"single_button_values" }}
+            {% endif %}
+            {% if monthly_button_values and donate_page.allow_monthly_donation %}
+                {{ monthly_button_values|json_script:"monthly_button_values" }}
+            {% endif %}
+        {% endif %}
+    {% endwith %}
+
     <script type="text/javascript">
         donateConfig = {
             'monthlyGiving': '{{ page.support_donation_page.allow_monthly_donation }}',
