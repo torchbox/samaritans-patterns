@@ -226,6 +226,7 @@
         border: 4px solid $grey-light;
         border-radius: 6px;
         font-weight: $weight--bold;
+        flex: 1;
 
         &.selected {
             color: $white;
