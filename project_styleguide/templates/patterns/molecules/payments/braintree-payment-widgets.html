@@ -25,11 +25,13 @@
                 <div class="payments__button payments__googlepay-button payments__googlepay-button-desktop"></div>
             </li>
 
-            {# Apple Pay #}
+            {# Apple Pay - this is currently hidden as there's a bug with Apple Pay. #}
+            {% comment %}
             <li class="js-apple-pay-tab" hidden>
                 <span class="hidden">{% trans 'Apple Pay' %}</span>
                 <button class="apple-pay-button js-apple-pay-button"></button>
             </li>
+            {% endcomment %}
         </ul>
     </nav>
 
@@ -88,8 +90,11 @@
         <span class="hidden">{% trans 'Google Pay' %}</span>
         <div class="payments__button payments__googlepay-button payments__googlepay-button-mobile"></div>
 
+        {# This is currently hidden as there's a bug with Apple Pay. #}
+        {% comment %}
         <span class="hidden">{% trans 'Apple Pay' %}</span>
         <button class="payments__button apple-pay-button js-apple-pay-button"></button>
+        {% endcomment %}
     </div>
 </div>
 

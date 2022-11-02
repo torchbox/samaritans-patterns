@@ -768,7 +768,6 @@ function setupPayment() {
     initPayPal();
     initGooglePay();
     window.addEventListener('resize', initGooglePay, false);
-    initApplePay();
 }
 
 export default setupPayment;
