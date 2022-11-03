@@ -18,6 +18,8 @@ const options = {
         'website': './static_src/javascript/main-website.js',
         'donate': './static_src/javascript/donate-website.js',
         'payments': './static_src/javascript/payments-website.js',
+        'payments_events':
+            './static_src/javascript/payments-events-website.js',
         'payments_monthly':
             './static_src/javascript/payments-monthly-website.js',
         'loqate': './static_src/javascript/loqate.js',

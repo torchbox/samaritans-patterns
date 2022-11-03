@@ -9,12 +9,28 @@
 
 {% block content_inner %}
     <div id="payments__payment-wrapper">
-        <h1 class="wrapper--small-width">Payment for your place</h1>
+        <h1 class="wrapper--small-width">{% blocktrans with amount=personal_details.amount|floatformat:"2"|intcomma %}You're making a payment of {{ currency_symbol }}{{ amount }}{% endblocktrans %}</h1>
 
-        <p>Sorry, we're not able to take event payments online right now.</p>
+        <form class="form" id="payments__braintree-form" method="post" currency="{{ currency }}">
+            {% csrf_token %}
+
+            {% render_form_field form.braintree_nonce %}
+            {% render_form_field form.payment_mode %}
+        </form>
+
+
+        <h2 class="heading-block">{% trans "Pay with" %}</h2>
+
+        {% include "patterns/molecules/payments/braintree-payment-widgets.html" with is_event_payment=True %}
+        {{ personal_details|json_script:"payments__personal-details" }}
     </div>
 {% endblock %}
 
+{% block extra_js %}
+    <script src="{% static 'js/payments_events.js' %}"></script>
+    <script src="https://www.paypalobjects.com/api/checkout.js" data-version-4></script>
+    <script src="https://pay.google.com/gp/p/js/pay.js"></script>
+{% endblock %}
 
 <!-- Overide footer so footer CTA does not display -->
 {% block footer %}
