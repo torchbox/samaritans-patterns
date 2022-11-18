@@ -10,4 +10,4 @@ tags:
   image:
     value.image max-440x440 class="story-call-to-action-block__image":
       raw: |
-        <img src="http://via.placeholder.com/440x440" class="story-call-to-action-block__image">
+        <img src="https://via.placeholder.com/440x440" class="story-call-to-action-block__image">

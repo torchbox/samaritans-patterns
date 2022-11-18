@@ -6,4 +6,4 @@ tags:
   image:
     value.image width-728 class="figure__image":
       raw: |
-        <img src="http://via.placeholder.com/728x410" width="728" height="410" alt="Some alt" class="figure__image">
+        <img src="https://via.placeholder.com/728x410" width="728" height="410" alt="Some alt" class="figure__image">

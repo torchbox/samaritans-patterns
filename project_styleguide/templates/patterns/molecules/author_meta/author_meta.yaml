@@ -10,4 +10,4 @@ tags:
     author.image fill-50x50 jpegquality-40 as author_profile_image:
     target_var: author_profile_image
     raw: |
-      url: http://via.placeholder.com/50x50
+      url: https://via.placeholder.com/50x50

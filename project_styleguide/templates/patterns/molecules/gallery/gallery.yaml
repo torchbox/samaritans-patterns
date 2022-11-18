@@ -23,8 +23,8 @@ tags:
     item.value.image fill-518x292 as gallery_image_thumb:
       target_var: gallery_image_thumb
       raw:
-        url: http://via.placeholder.com/518x292
+        url: https://via.placeholder.com/518x292
     item.value.image fill-1190x790 as gallery_image:
       target_var: gallery_image
       raw:
-        url: http://via.placeholder.com/1190x790
+        url: https://via.placeholder.com/1190x790

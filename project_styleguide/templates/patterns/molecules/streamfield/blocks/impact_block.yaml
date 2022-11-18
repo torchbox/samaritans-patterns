@@ -7,7 +7,7 @@ tags:
   image:
     value.image fill-1300x730:
       raw: |
-        <img src="http://via.placeholder.com/1300x730" alt="Some alt">
+        <img src="https://via.placeholder.com/1300x730" alt="Some alt">
   include_block:
     value.stats:
       template_name: 'patterns/molecules/streamfield/blocks/stats_block.html'

@@ -8,4 +8,4 @@ tags:
   image:
     value.listing_image fill-365x210 class="card-new__image" loading="lazy":
       raw: |
-        <img src="http://via.placeholder.com/365x210" width="365" height="210" alt="Some alt" class="card-new__image" loading="lazy">
+        <img src="https://via.placeholder.com/365x210" width="365" height="210" alt="Some alt" class="card-new__image" loading="lazy">

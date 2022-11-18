@@ -31,7 +31,7 @@ tags:
     page.hero_image fill-1260x830 as bg_image:
       target_var: bg_image
       raw:
-        url: http://via.placeholder.com/1260x830
+        url: https://via.placeholder.com/1260x830
   include_block:
     page.body:
       template_name: 'patterns/molecules/streamfield/stream_block.html'

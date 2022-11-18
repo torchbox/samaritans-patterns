@@ -92,23 +92,23 @@ tags:
     page.hero_image fill-1900x1250 jpegquality-40 as hero_image:
       target_var: hero_image
       raw:
-        url: http://via.placeholder.com/1900x1250
+        url: https://via.placeholder.com/1900x1250
     page.hero_image fill-768x500 jpegquality-40 as hero_image_mobile:
       target_var: hero_image_mobile
       raw:
-        url: http://via.placeholder.com/768x500
+        url: https://via.placeholder.com/768x500
     page.support_image fill-1300x1300 as support_image:
       target_var: support_image
       raw:
-        url: http://via.placeholder.com/1300x1300
+        url: https://via.placeholder.com/1300x1300
     page.support_image fill-1100x600 as support_image:
       target_var: support_image
       raw:
-        url: http://via.placeholder.com/1100x600
+        url: https://via.placeholder.com/1100x600
     page.volunteer_image width-1300 as volunteer_image:
       target_var: volunteer_image
       raw:
-        url: http://via.placeholder.com/1300x1300
+        url: https://via.placeholder.com/1300x1300
   pageurl:
     page.hero_cta_link:
       raw: '#'

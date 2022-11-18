@@ -25,7 +25,7 @@ tags:
   image:
     page.photo max-200x190:
       raw: |
-        <img src="http://via.placeholder.com/200x190" width="200" height="190" alt="Some alt">
+        <img src="https://via.placeholder.com/200x190" width="200" height="190" alt="Some alt">
   include_block:
     page.biography:
       template_name: 'patterns/molecules/streamfield/stream_block.html'

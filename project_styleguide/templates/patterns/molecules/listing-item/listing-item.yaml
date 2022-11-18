@@ -19,4 +19,4 @@ tags:
   image:
     value.listing_image fill-480x320 class="listing-item__image":
       raw: |
-        <img src="http://via.placeholder.com/480x320" width="480" height="320" alt="Some alt" class="listing-item__image">
+        <img src="https://via.placeholder.com/480x320" width="480" height="320" alt="Some alt" class="listing-item__image">

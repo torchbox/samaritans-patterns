@@ -8,4 +8,4 @@ tags:
     page.hero_image fill-1024x574 as bg_image:
       target_var: bg_image
       raw:
-        url: http://via.placeholder.com/1024x574
+        url: https://via.placeholder.com/1024x574

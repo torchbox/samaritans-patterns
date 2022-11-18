@@ -15,4 +15,4 @@ tags:
   image:
     block.image original:
       raw: |
-        <img src="http://via.placeholder.com/320x175" width="320" height="175" alt="Some alt" class="card__image">
+        <img src="https://via.placeholder.com/320x175" width="320" height="175" alt="Some alt" class="card__image">

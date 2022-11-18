@@ -7,4 +7,4 @@ tags:
   image:
     value.image max-850x500:
       raw: |
-        <img src="http://via.placeholder.com/850x500" width="850" height="500" alt="Some alt">
+        <img src="https://via.placeholder.com/850x500" width="850" height="500" alt="Some alt">

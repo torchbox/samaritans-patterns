@@ -14,4 +14,4 @@ tags:
   image:
     value.image fill-1300x1300:
       raw: |
-        <img src="http://via.placeholder.com/1300x1300">
+        <img src="https://via.placeholder.com/1300x1300">

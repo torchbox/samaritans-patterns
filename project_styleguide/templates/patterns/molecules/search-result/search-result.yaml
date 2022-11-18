@@ -24,4 +24,4 @@ tags:
   image:
     result.listing_image fill-450x300:
       raw: |
-        <img src="http://via.placeholder.com/450x300" width="450" height="300" alt="Some alt">
+        <img src="https://via.placeholder.com/450x300" width="450" height="300" alt="Some alt">

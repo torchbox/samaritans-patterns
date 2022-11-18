@@ -14,10 +14,10 @@ tags:
   image:
     value.image fill-460x350 class="media-with-quote__image":
       raw: |
-        <img src="http://via.placeholder.com/460x350" width="460" height="350" alt="Some alt" class="media-with-quote__image">
+        <img src="https://via.placeholder.com/460x350" width="460" height="350" alt="Some alt" class="media-with-quote__image">
     value.image fill-580x340 class="media-with-quote__image":
       raw: |
-        <img src="http://via.placeholder.com/580x340" width="580" height="340" alt="Some alt" class="media-with-quote__image">
+        <img src="https://via.placeholder.com/580x340" width="580" height="340" alt="Some alt" class="media-with-quote__image">
     value.image fill-940x500 class="media-with-quote__image":
       raw: |
-        <img src="http://via.placeholder.com/940x500" width="940" height="500" alt="Some alt" class="media-with-quote__image">
+        <img src="https://via.placeholder.com/940x500" width="940" height="500" alt="Some alt" class="media-with-quote__image">
