@@ -1,0 +1,20 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+ <a class="card-new card-new--related card-new--activity" href="{% pageurl value.page %}" aria-label="{{ value.get_title }}">
+    <span class="card-new__corner"></span>
+    <div class="card-new__inner">
+        {% image value.get_image fill-365x210 as image %}
+        <img src="{{ image.url }}" class="card__image">
+        <div class="card-new__container">
+            <h2 class="card-new__title">
+                {{ value.get_title }}
+                {% include "patterns/molecules/chevron-link/chevron-link.html" with title=card_title hide_svg_title="true" %}
+            </h2>
+            <p class="card-new__text">
+                {{ value.get_subtitle }}
+            </p>
+        </div>
+    </div>
+    <span class="card-new__connectors"></span>
+    <span class="card-new__connectors--extra"></span>
+</a>

@@ -1,0 +1,62 @@
+.impact-quote-block {
+    margin-top: $gutter-xxl;
+    text-align: center;
+
+    @include media-query(tablet-landscape) {
+        text-align: left;
+        margin-top: 80px;
+    }
+
+    &--single {
+        text-align: center;
+        max-width: 735px;
+        margin-top: 60px;
+        margin-bottom: 50px;
+
+        @include media-query(tablet-landscape) {
+            margin: 80px auto $gutter-xxl;
+        }
+    }
+
+    &__quote-icon {
+        width: 55px;
+        height: 41px;
+        opacity: 0.2;
+        margin-bottom: $gutter;
+    }
+
+    &__quote {
+        margin-bottom: 10px;
+    }
+
+    &__attribution {
+        color: $teal-dark;
+        font-weight: $weight--bold;
+        margin-bottom: 10px;
+
+        @include media-query(tablet-landscape) {
+            margin-bottom: 15px;
+        }
+    }
+
+    &__link {
+        @include font-size(xs);
+        line-height: 30px;
+        font-weight: $weight--bold;
+        text-decoration: underline;
+
+        @include media-query(tablet-landscape) {
+            @include rem-font-size(20px);
+        }
+    }
+}
+
+.impact-quote-block-divider {
+    border-bottom: 1px solid $grey-light;
+    margin-bottom: $gutter-x-large;
+
+    @include media-query(tablet-landscape) {
+        padding-top: $gutter;
+        margin-bottom: 75px;
+    }
+}

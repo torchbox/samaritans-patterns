@@ -237,6 +237,18 @@
             }
         }
 
+        &--wide-gap {
+            grid-gap: 65px;
+        }
+
+        &--wide-gap-mobile {
+            grid-gap: $gutter;
+
+            @include media-query(tablet-landscape) {
+                grid-gap: 65px;
+            }
+        }
+
         &--4col {
             grid-gap: $gutter-large;
             grid-template-columns: 1fr;

@@ -6,7 +6,7 @@
     {% endif %}
     {% if value.publication_date or value.start_date %}
         <li class="meta-bar__item meta-bar__item--no-shrink">
-            {% include "patterns/atoms/svg/colour-icons/icon-color-diary.html" with classes="meta-bar__icon" %}
+            {% include "patterns/atoms/svg/colour-icons/icon-color-calendar.html" with classes="meta-bar__icon" %}
             {% if value.start_date %}
                 <span class="meta-bar__text">
                     {{ value.start_time|default:""|date:"fA"|lower }}
@@ -69,7 +69,7 @@
 
     {% if show_activity_date %}
         <li class="meta-bar__item meta-bar__item--no-shrink">
-            {% include "patterns/atoms/svg/colour-icons/icon-color-diary.html" with classes="meta-bar__icon" %}
+            {% include "patterns/atoms/svg/colour-icons/icon-color-calendar.html" with classes="meta-bar__icon" %}
             <span class="meta-bar__text">
                 {% firstof value.activity_date|date:"j F Y" 'Anytime' %}
             </span>

@@ -19,114 +19,72 @@
                     {% include "patterns/molecules/navigation/breadcrumbs.html" %}
                     <h1 class="card__title card__title--activity" id="main-content">{{ page.heading_title|richtext }}</h1>
                     <p class="card__description">{{ page.heading_introduction }}</p>
-                    {% include "patterns/atoms/buttons/button.html" with href="#activity-finder" label=page.heading_anchor_link_text large=True %}
+                    {% if activity_index_page_url %}
+                    {% include "patterns/atoms/buttons/button.html" with href=activity_index_page_url label="View all activities" large=True %}
+                    {% endif %}
                 </div>
             </div>
         </div>
         {% include "patterns/atoms/svg/patterns/pattern-diamonds.html" with classes="pattern" %}
     </div>
 
-    {# Activity Finder #}
-    <div class="activity-finder">
-        <div class="wrapper wrapper--wide">
-            <h2 class="activity-finder__heading">{{ page.activity_finder_title }}</h2>
-            <p class="activity-finder__introduction">{{ page.activity_finder_introduction }}</p>
-        </div>
-
-        <div class="wrapper wrapper--wide">
-            <p class="activity-finder__sub-heading">Here are ways you can get involved:</p>
-        </div>
-
-        <div class="activity-finder__panels wrapper wrapper--wide">
-
-            {# Activity Finder #}
-            <div class="card-new card-new--activity-panel activity-finder__panel" id="activity-finder">
-                <span class="card-new__corner" aria-hidden="true"></span>
-                <div class="card-new__inner">
-                    <div class="card-new__container">
-                        <h3 class="activity-finder__panel-heading">{{ page.activity_finder_form_title }}</h3>
-                        <p class="activity-finder__panel-text">{{ page.activity_finder_form_introduction }}</p>
-
-                        <form method="GET" action="{{ activity_index_page_url }}" class="form form--activity-finder">
-                            <div class="form-item">
-                                <label class="form-item__label" for="activity-time-filter">How much time do you have?</label>
-                                {% include "patterns/molecules/filters/filter.html" with title="Select a time" name="activity_duration" options=duration_filters select_id="activity-time-filter" %}
-                            </div>
-
-                            <div class="form-item">
-                                <label class="form-item__label" for="activity-time-filter">Who are you taking part with?</label>
-                                {% include "patterns/molecules/filters/filter.html" with title="Select who with" name="activity_who_with" options=who_with_filters select_id="activity-who-with-filter" %}
-                            </div>
-
-                            <div class="form-item">
-                                <label class="form-item__label" for="activity-type-filter">What activity are you interested in?</label>
-                                {% include "patterns/molecules/filters/filter.html" with title="Select an activity type" name="activity_type" options=type_filters select_id="activity-type-filter" %}
-                            </div>
-
-                            <div class="form-item">
-                                <label class="form-item__label" for="activity-location-filter">Where would you take part?</label>
-                                {% include "patterns/molecules/filters/filter.html" with title="Select a location" name="activity_location" options=location_filters select_id="activity-location-filter" %}
-                            </div>
-
-                            <div class="form-item">
-                                <label class="form-item__label" for="activity-date-range-filter">When would you take part?</label>
-                                {% include "patterns/molecules/filters/filter.html" with title="Select a date range" name="activity_date" options=date_filters select_id="activity-date-range-filter" %}
-                            </div>
-
-                            {% include "patterns/atoms/buttons/button--button.html" with label="Find activities for you" %}
-                        </form>
-
-                    </div>
-                </div>
-                <span class="card-new__connectors" aria-hidden="true"></span>
-                <span class="card-new__connectors--extra" aria-hidden="true"></span>
-            </div>
-
-            <div class="card-new card-new--activity-panel activity-finder__panel">
-                <span class="card-new__corner" aria-hidden="true"></span>
-                <div class="card-new__inner">
-                    <div class="card-new__container">
-                        {% for block in page.activity_finder_links %}
-                            <div class="activity-finder__widget">
-                                <h3 class="activity-finder__panel-heading">{{ block.value.title }}</h3>
-
-                                <div class="activity-finder__panel-text">{{ block.value.text|richtext }}</div>
-
-                                {% if block.value.link_url %}
-                                    {% include "patterns/atoms/buttons/button.html" with href=block.value.link_url label=block.value.link_text %}
+    {# Support us section #}
+    <div class="activity-landing">
+        <section class="wrapper wrapper--activity-landing">
+            <div class="section section--overlap section--activity-landing">
+                <div class="activity-landing__padded-container">
+                    <h2 class="activity-landing__heading">{{ page.support_us_title }}</h2>
+                    <ul class="activity-landing__icon-list">
+                        {% for block in page.support_us_items %}
+                            <li class="activity-landing__icon-list-item">
+                                <div class="activity-landing__icon-wrapper">
+                                    {% render_icon block.value.icon "activity-landing__icon" %}
+                                </div>
+                                {% if block.value.url %}
+                                    <a href="{{ block.value.url }}">{{ block.value.text }}</a>
                                 {% else %}
-                                    {% pageurl block.value.link_page as link %}
-                                    {% include "patterns/atoms/buttons/button.html" with href=link label=block.value.link_text %}
+                                    <p>{{ block.value.text }}</p>
                                 {% endif %}
-
-                            </div>
+                            </li>
                         {% endfor %}
-                    </div>
+                    </ul>
+                    <span class="activity-landing__connectors"></span>
                 </div>
-                <span class="card-new__connectors" aria-hidden="true"></span>
-                <span class="card-new__connectors--extra" aria-hidden="true"></span>
+                {% include "patterns/atoms/corners/corners.html" with size="page" %}
             </div>
-        </div>
+
+            {# Promoted activities section #}
+            <h2 class="activity-landing__heading activity-landing__heading--white activity-landing__heading--extra-margin">{{ page.activity_promotion_title }}</h2>
+            <div class="grid grid--3col grid--wide-gap">
+                {% for block in page.promoted_activities %}
+                    {% include_block block %}
+                {% endfor %}
+            </div>
+            <div class="activity-landing__button-wrapper">
+                {% if activity_index_page_url %}
+                    {% include "patterns/atoms/buttons/button.html" with href=activity_index_page_url label="View all activities" large=True %}
+                {% endif %}
+                <a class="activity-landing__personalised-finder" href="{{ page.get_activity_promotion_secondary_link_url }}">{{ page.activity_promotion_secondary_link_text }}</a>
+            </div>
+        </section>
     </div>
 
-    <section class="wrapper wrapper--wide">
-        <div class="section section--overlap section--activity-landing">
-            {% if page.ways_to_get_involved_section %}
-                {% include_block page.ways_to_get_involved_section %}
+    <section class="wrapper wrapper--large wrapper--padding">
+        <div class="section section--activity-landing section--overlap section--activity-landing-tabs">
+            {# Streamfield body #}
+            {% if page.body %}
+                {% include_block page.body %}
             {% endif %}
-
-            {% include_block page.story_quote_block with classes="quote-block--activity" show_image=True %}
 
             <div class="icon-cta">
                 {% render_icon page.story_quote_icon "icon-cta__svg" %}
-
                 <div class="icon-cta__content">
                     <p class="icon-cta__heading">{{ page.story_quote_heading }}</p>
-
                     <a class="icon-cta__link" href="{% pageurl page.story_quote_link_page %}">{{ page.story_quote_link_text }}</a>
                 </div>
             </div>
 
+            <span class="activity-landing__connectors-tabs"></span>
             {% include "patterns/atoms/corners/corners.html" with size="page" %}
         </div>
     </section>

@@ -1,0 +1,18 @@
+{% load icon_tags %}
+
+<div class="impact-quote-block__item">
+    {% render_icon "icon-color-speech-double" "impact-quote-block__quote-icon" %}
+
+    {# Quote #}
+    <p class="impact-quote-block__quote">{{ value.quote }}</p>
+
+    {# Attribution #}
+    {% if value.attribution %}
+        <p class="impact-quote-block__attribution">{{ value.attribution }}<p>
+    {% endif %}
+
+    {# Link #}
+    {% if value.link_text %}
+        <a class="impact-quote-block__link" href="{{ value.url }}">{{ value.link_text }}</a>
+    {% endif %}
+</div>

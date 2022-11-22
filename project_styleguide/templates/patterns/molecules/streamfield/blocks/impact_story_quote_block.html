@@ -1,0 +1,8 @@
+{% load wagtailcore_tags %}
+
+<div class="impact-quote-block {% if value|length > 1 %}grid grid--2col grid--wide-gap-mobile{% else %}impact-quote-block--single{% endif %}">
+    {% for block in value %}
+        {% include_block block %}
+    {% endfor %}
+</div>
+<div class="impact-quote-block-divider" aria-hidden="true"></div>

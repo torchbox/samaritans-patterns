@@ -452,6 +452,10 @@
         padding-bottom: 30px;
         overflow: hidden;
 
+        @include media-query(tablet-landscape) {
+            padding-bottom: 130px;
+        }
+
         #{$root}__inner {
             margin-top: -125px;
 

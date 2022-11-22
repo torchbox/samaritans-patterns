@@ -28,7 +28,7 @@
             <div class="filters__row filters__row--bottom">
                 {% include "patterns/molecules/filters/filter.html" with title="Activity type" name="activity_type" options=type_filters select_id="activity-type-filter" label_text="Select an activity type" icon="trainers" %}
                 {% include "patterns/molecules/filters/filter.html" with title="Where" name="activity_location" options=location_filters select_id="location-filter" label_text="Select a location" icon="globe" %}
-                {% include "patterns/molecules/filters/filter.html" with title="When" name="activity_date" options=date_filters select_id="date-range-filter" label_text="Select a date range" icon="diary" %}
+                {% include "patterns/molecules/filters/filter.html" with title="When" name="activity_date" options=date_filters select_id="date-range-filter" label_text="Select a date range" icon="calendar" %}
                 <div class="filters__filter-wrapper">
                     {% include "patterns/atoms/buttons/button--button.html" with label="Filter" classes="button--filter" %}
                 </div>

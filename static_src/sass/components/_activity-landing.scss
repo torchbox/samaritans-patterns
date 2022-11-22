@@ -1,0 +1,217 @@
+.activity-landing {
+    $root: &;
+    background-color: $ink;
+    padding: $gutter-small;
+
+    @include media-query(tablet-landscape) {
+        padding: 85px 100px 210px;
+    }
+
+    &__panels {
+        @include media-query(tablet-landscape) {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 100px;
+            align-items: flex-start;
+        }
+    }
+
+    &__panel {
+        @include connectors($sunflower, bottom, right);
+        position: relative;
+        background-color: $white;
+        margin-bottom: 40px;
+
+        @include media-query(tablet-landscape) {
+            margin-bottom: 0;
+            width: 50%;
+        }
+
+        @include target-ie11() {
+            margin-right: 20px;
+        }
+    }
+
+    &__panel-heading {
+        @include rem-font-size(21px);
+        line-height: 32px;
+        margin-bottom: 5px;
+
+        @include media-query(tablet-landscape) {
+            @include font-size(l);
+            line-height: 39px;
+        }
+    }
+
+    &__panel-text {
+        b {
+            color: $plum;
+        }
+    }
+
+    &__heading {
+        @include rem-font-size(21px);
+        line-height: 32px;
+        max-width: 780px;
+        margin: 0 auto;
+        text-align: center;
+
+        @include media-query(tablet-landscape) {
+            @include rem-font-size(34px);
+            line-height: 42px;
+        }
+
+        &--white {
+            color: $color--white;
+        }
+
+        &--extra-margin {
+            margin: $gutter-x-large auto;
+
+            @include media-query(tablet-landscape) {
+                margin-top: 150px;
+                margin-bottom: $gutter-xxl;
+            }
+        }
+    }
+
+    &__introduction {
+        color: $white;
+        max-width: 780px;
+
+        @include media-query(tablet-landscape) {
+            margin-bottom: 40px;
+        }
+    }
+
+    &__sub-heading {
+        @include rem-font-size(21px);
+        line-height: 32px;
+        color: $white;
+        font-weight: $weight--bold;
+
+        @include media-query(tablet-landscape) {
+            @include font-size(l);
+            line-height: 39px;
+            margin-bottom: 30px;
+        }
+    }
+
+    &__widget {
+        @include target-ie11() {
+            width: 100%;
+        }
+
+        &:first-child {
+            border-bottom: 1px solid $grey-light;
+            padding-bottom: 35px;
+            margin-bottom: 35px;
+        }
+
+        &:only-child {
+            border-bottom: 0;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+    }
+
+    &__icon-list {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: $gutter;
+        margin: $gutter-medium auto 5px;
+        max-width: $wrapper--small;
+
+        @include media-query(tablet-landscape) {
+            grid-template-columns: 1fr 1fr;
+            column-gap: $gutter-large;
+            row-gap: 25px;
+            padding-bottom: $gutter-large;
+            margin-top: $gutter-x-large;
+            margin-bottom: 0;
+        }
+    }
+
+    &__icon-list-item {
+        display: grid;
+        grid-template-columns: 30px 1fr;
+        column-gap: 10px;
+        align-items: center;
+
+        a,
+        p {
+            font-weight: $weight--bold;
+            margin: 0;
+        }
+    }
+
+    &__icon-wrapper {
+        width: 30px;
+        height: 30px;
+    }
+
+    &__icon {
+        max-width: 30px;
+        max-height: 30px;
+    }
+
+    &__button-wrapper {
+        max-width: 700px;
+        margin: $gutter-xxl auto $gutter;
+        text-align: center;
+
+        @include media-query(tablet-landscape) {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            text-align: left;
+        }
+    }
+
+    &__personalised-finder {
+        @include rem-font-size(20px);
+        line-height: 30px;
+        color: $color--white;
+        font-weight: $weight--bold;
+        text-decoration: underline;
+        margin-top: $gutter-medium;
+        display: block;
+
+        #{$hover} {
+            color: $ocean;
+        }
+
+        @include media-query(tablet-landscape) {
+            margin-top: 0;
+            margin-left: $gutter;
+        }
+    }
+
+    &__padded-container {
+        padding: 10px $gutter $gutter-large;
+
+        @include media-query(tablet-portrait) {
+            padding-bottom: $gutter;
+        }
+
+        @include media-query(tablet-landscape) {
+            padding: 0;
+        }
+    }
+
+    &__connectors {
+        @include connectors($ink, bottom, left, medium);
+
+        @include media-query(tablet-landscape) {
+            display: none;
+        }
+    }
+
+    &__connectors-tabs {
+        @include connectors($off-white, bottom, left, medium);
+
+        @include media-query(tablet-landscape) {
+            display: none;
+        }
+    }
+}

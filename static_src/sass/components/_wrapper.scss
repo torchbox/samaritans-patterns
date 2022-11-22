@@ -51,6 +51,19 @@
         padding-right: $gutter-small;
     }
 
+    &--activity-landing {
+        width: 100%;
+
+        @include media-query(tablet-portrait) {
+            max-width: $site-width;
+            margin: 0 auto;
+            @include page-padding--horizontal(left);
+            @include page-padding--horizontal(right);
+            padding-left: $gutter-small;
+            padding-right: $gutter-small;
+        }
+    }
+
     // see also styles with &--padding above
     &--main {
         background-color: $page-bg;

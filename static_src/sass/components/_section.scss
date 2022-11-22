@@ -391,6 +391,43 @@
         @include media-query(tablet-landscape) {
             margin-bottom: 120px;
         }
+
+        @include page(bottom-left, $width: full);
+    }
+
+    // Overrides for activity landing tabccordion
+    &--activity-landing-tabs {
+        margin-top: 50px;
+        margin-bottom: 50px;
+        padding: $gutter $gutter 75px;
+
+        @include media-query(tablet-landscape) {
+            margin-top: 0;
+            margin-bottom: 150px;
+            padding: $gutter;
+        }
+
+        .heading-block {
+            @include rem-font-size(21px);
+            text-align: center;
+            line-height: 32px;
+            max-width: 780px;
+            margin: 0 auto;
+            text-align: center;
+
+            @include media-query(tablet-landscape) {
+                @include rem-font-size(34px);
+                line-height: 42px;
+            }
+        }
+
+        .tabccordion__panel.is-active {
+            @include media-query(tablet-portrait) {
+                padding: 0 $gutter-medium $gutter-medium;
+                background: darken($off-white, 4);
+                border-radius: 5px;
+            }
+        }
     }
 
     &--activity-index {
