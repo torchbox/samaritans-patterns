@@ -1,6 +1,7 @@
 context:
   value:
-    highlight_type: cta
+    icon: icon-color-bulb
+    color_option: purple
     content: >
       <h3>Here are a few ideas to inspire these new ways of fundraising:</h3>
       <ol>

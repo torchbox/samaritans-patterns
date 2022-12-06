@@ -5,9 +5,9 @@
 
     <article class="wrapper--flex">
     {% if page.show_hero_pattern %}
-        {% include "patterns/molecules/hero/hero.html" with hero_color="emerald" pattern="egg" hero_short="true" hero_title_id="main-content" %}
+        {% include "patterns/molecules/hero/hero.html" with hero_color="emerald" pattern="egg" hero_short="true" hero_title_id="main-content" badge_color_option=page.badge_color_option badge_text=page.badge_text %}
     {% else %}
-        {% include "patterns/molecules/hero/hero.html" with hero_color="emerald" pattern="none" hero_short="true" hero_title_id="main-content" %}
+        {% include "patterns/molecules/hero/hero.html" with hero_color="emerald" pattern="none" hero_short="true" hero_title_id="main-content" badge_color_option=page.badge_color_option badge_text=page.badge_text %}
     {% endif %}
         <div class="wrapper wrapper--large wrapper--padding-for-page
             {% if page.related_pages.all|length == 0 %}

@@ -132,6 +132,12 @@
         }
     }
 
+    // adds some extra space below the meta information at the bottom of the page, and prevents
+    // it overlapping with the corner styles
+    &--information-page-with-bottom-meta {
+        padding-bottom: $gutter-small;
+    }
+
     &--story-page-with-hero-image {
         @include page(top-left, bottom-right, $width: full);
 
@@ -305,10 +311,12 @@
         color: $white;
         padding-top: $gutter;
         padding-bottom: $gutter;
+        margin-bottom: $gutter;
 
         @include media-query(mob-landscape) {
             padding-top: $gutter-large;
             padding-bottom: $gutter-large;
+            margin-bottom: $gutter-large;
         }
 
         @include media-query(tablet-landscape) {

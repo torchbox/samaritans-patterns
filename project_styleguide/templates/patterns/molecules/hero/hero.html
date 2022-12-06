@@ -1,5 +1,13 @@
 {% load wagtailcore_tags wagtailimages_tags locale_tags %}
 
+{% if page.get_ancestors|length > 1 %}
+    <div class="hero__breadcrumb-wrapper hero__breadcrumb-wrapper--{{ hero_color }}">
+        <div class="wrapper wrapper--large wrapper--padding">
+            {% include "../navigation/breadcrumbs.html" %}
+        </div>
+    </div>
+{% endif %}
+
 {% firstof page.hero_image page.main_image hero_test_image as hero_image %}
 <div class="hero
     {% if hero_color %} hero--{{ hero_color }} {% endif %}
@@ -14,7 +22,9 @@
                 {% include "patterns/atoms/site-notification/site-notification.html" %}
             {% endif %}
 
-            {% include "../navigation/breadcrumbs.html"%}
+            {% if badge_text and badge_color_option %}
+                {% include "patterns/molecules/badge/badge--simple.html" with badge_color_option=badge_color_option badge_text=badge_text badge_shift=True %}
+            {% endif %}
 
             <h1 class="hero__title {% if hero_intro %}hero__title--with-intro{% endif %}" {% if hero_title_id %}id="{{ hero_title_id }}"{% endif %}>
                 {% if hero_title %}

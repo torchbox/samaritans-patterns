@@ -2,62 +2,13 @@
     $root: &;
     @include margin-streamfield-block;
     position: relative;
-    background: $page-bg;
     padding: $gutter $gutter-medium;
 
     @include media-query(tablet-portrait) {
         padding: $gutter-xxl;
     }
 
-    &--note {
-        @include corner($emerald, bottom, right, 80%, 30%, 10px);
-
-        @include media-query(tablet-portrait) {
-            @include corner($emerald, bottom, right, 430px, 30%, 10px);
-        }
-
-        #{$root}__connectors {
-            @include connectors($emerald, bottom, right, medium);
-        }
-    }
-
-    &--tip {
-        @include corner($sunflower, bottom, right, 80%, 30%, 10px);
-
-        @include media-query(tablet-portrait) {
-            @include corner($sunflower, bottom, right, 430px, 30%, 10px);
-        }
-
-        #{$root}__connectors {
-            @include connectors($sunflower, bottom, right, medium);
-        }
-    }
-
-    &--warning {
-        @include corner($pumpkin, bottom, right, 80%, 30%, 10px);
-
-        @include media-query(tablet-portrait) {
-            @include corner($pumpkin, bottom, right, 430px, 30%, 10px);
-        }
-
-        #{$root} {
-            &__connectors {
-                @include connectors($pumpkin, bottom, right, medium);
-            }
-
-            &__icon {
-                width: 50px;
-                height: 40px;
-
-                @include media-query(tablet-portrait) {
-                    width: 100px;
-                    height: 80px;
-                }
-            }
-        }
-    }
-
-    &--cta {
+    &--purple {
         @include corner($emerald, bottom, right, 80%, 30%, 10px);
         background-color: $amethyst;
 
@@ -89,6 +40,22 @@
         }
     }
 
+    &--grey {
+        background: $off-white;
+
+        // connectors don't show in the grey version
+        #{$root}__connectors {
+            display: none;
+        }
+
+        .rich-text {
+            a {
+                color: $teal-dark;
+                box-shadow: inset 0 -2px currentColor;
+            }
+        }
+    }
+
     &__icon {
         display: none;
         width: 40px;
@@ -96,6 +63,16 @@
         position: absolute;
         top: 5px;
         left: -23px;
+
+        // icon sits bottom right in the grey variant
+        #{$root}--grey & {
+            top: auto;
+            left: auto;
+            bottom: -5px;
+            right: -23px;
+            // ensure that the icon overlays the page corners if the highlight is the last item on the page
+            z-index: 1;
+        }
 
         @include media-query(mob-landscape) {
             display: block;
@@ -105,6 +82,12 @@
             width: 80px;
             height: 100px;
             left: -40px;
+
+            // icon sits bottom right in the grey variant
+            #{$root}--grey & {
+                left: auto;
+                right: -40px;
+            }
         }
     }
 

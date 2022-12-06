@@ -1,0 +1,17 @@
+{% load wagtailimages_tags %}
+<div class="promoted-content">
+    <div class="promoted-content__text-wrapper">
+        <h2 class="promoted-content__title">{{ value.title }}</h2>
+        <p class="promoted-content__text">{{ value.text }}</p>
+        <a href="{{ value.link_url }}" class="button button--large-tablet-portrait">
+            <div class="button__shadow"></div>
+            <div class="button__inner">
+                {{ value.link_text }}
+                {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="icon button__icon" aria_hide=True %}
+            </div>
+        </a>
+    </div>
+    <div class="promoted-content__image-wrapper">
+        {% image value.image fill-727x487 class="promoted-content__image" %}
+    </div>
+</div>

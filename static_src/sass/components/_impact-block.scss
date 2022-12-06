@@ -5,12 +5,6 @@
 
     &__image-section {
         position: relative;
-
-        .section--landing-page-light-bg & {
-            @include page-child-negative-margin--vertical(top);
-            @include page-child-negative-margin--horizontal(left);
-            @include page-child-negative-margin--horizontal(right);
-        }
     }
 
     &__heading {
@@ -44,6 +38,14 @@
             width: 100%;
             background-color: $background-color;
         }
+
+        .streamfield--landing-page-first & {
+            display: none;
+
+            @include media-query(tablet-portrait) {
+                display: block;
+            }
+        }
     }
 
     &__heading-corner {
@@ -53,6 +55,14 @@
         height: $corner-offset;
         width: $corner-offset;
         overflow: hidden;
+
+        .streamfield--landing-page-first & {
+            display: none;
+
+            @include media-query(tablet-portrait) {
+                display: block;
+            }
+        }
     }
 
     &__heading-corner-image {
@@ -74,6 +84,18 @@
 
                 #{$root}__connectors--extra {
                     @include connectors($amethyst, bottom, right, page);
+                }
+            }
+        }
+
+        .streamfield--landing-page-first & {
+            @include media-query($page-connectors-breakpoint) {
+                #{$root}__connectors {
+                    @include connectors($emerald, bottom, left, page);
+                }
+
+                #{$root}__connectors--extra {
+                    @include connectors($emerald, bottom, right, page);
                 }
             }
         }

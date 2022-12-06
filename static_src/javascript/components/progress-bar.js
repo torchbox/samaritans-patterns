@@ -1,5 +1,3 @@
-import Utilities from '../utilities';
-
 class ProgressBar {
     static selector() {
         return '.js-progress';
@@ -7,24 +5,25 @@ class ProgressBar {
 
     constructor(node) {
         this.node = node;
+        this.footer = document.querySelector('footer');
         this.progressBar();
     }
 
     progressBar() {
-        let getMax = () => {
-            return document.documentElement.scrollHeight - window.innerHeight;
-        };
+        // excludes the footer from the calculated max height to scroll
+        const getMax = () =>
+            document.documentElement.scrollHeight -
+            this.footer.clientHeight -
+            window.innerHeight;
 
-        let getValue = () => {
-            return window.pageYOffset;
-        };
+        const getValue = () => window.pageYOffset;
 
-        let scrollListener = () => {
+        const scrollListener = () => {
             // On scroll only the value attr needs to be calculated
             this.node.setAttribute('value', getValue());
         };
 
-        let windowListener = () => {
+        const windowListener = () => {
             // On resize, both max/value attr needs to be calculated
             this.node.setAttribute('max', getMax());
             this.node.setAttribute('value', getValue());
@@ -35,15 +34,13 @@ class ProgressBar {
             // Set the max attr for the first time
             this.node.setAttribute('max', getMax());
 
-            document.addEventListener(
-                'scroll',
-                Utilities.throttle(scrollListener, 100),
-            );
+            document.addEventListener('scroll', scrollListener, {
+                passive: true,
+            });
 
-            window.addEventListener(
-                'resize',
-                Utilities.throttle(windowListener, 100),
-            );
+            window.addEventListener('resize', windowListener, {
+                passive: true,
+            });
         }
     }
 }

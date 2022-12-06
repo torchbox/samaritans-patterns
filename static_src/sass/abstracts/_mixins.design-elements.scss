@@ -5,6 +5,7 @@
     - card
     - medium
     - page
+    - small
 
     There is a similar design pattern used for the impact block title when there is an image on that block, which may be affected by changes here.
 */
@@ -121,6 +122,10 @@
         $length: 24px;
         $width: 8px;
         $offset: $gutter-xxl;
+    } @else if $size == small {
+        $length: 8px;
+        $width: 5px;
+        $offset: $gutter;
     } @else {
         $length: $size;
         $width: ceil(math.div($length, 3.4));

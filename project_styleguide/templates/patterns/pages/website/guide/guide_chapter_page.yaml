@@ -12,6 +12,11 @@ context:
       title: Second Section
     next_guide_chapter:
       title: Third Section
+    get_ancestors:
+      - title: fake
+      - title: fake
+      - title: Category
+      - title: Subcategory
 
 tags:
   pageurl:

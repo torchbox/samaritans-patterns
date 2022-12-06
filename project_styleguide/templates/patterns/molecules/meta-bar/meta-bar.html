@@ -92,6 +92,17 @@
     {% endif %}
     {# End Activity taxonomies #}
 
+    {# Information Page taxonomies #}
+
+    {% if value.show_last_reviewed_at and value.last_reviewed_at %}
+        <li class="meta-bar__item meta-bar__item--no-shrink">
+            {% include "patterns/atoms/svg/colour-icons/icon-color-diary.html" with classes="meta-bar__icon" %}
+            <span class="meta-bar__text">Last reviewed {{ value.last_reviewed_at|date:'jS F Y' }}</span>
+        </li>
+    {% endif %}
+
+    {# End Information Page taxonomies #}
+
     {% if apply_button %}
         <li class="meta-bar__item meta-bar__item--button-wrapper">
             <a href="#apply-section" class="meta-bar__button js-smooth-scroll">

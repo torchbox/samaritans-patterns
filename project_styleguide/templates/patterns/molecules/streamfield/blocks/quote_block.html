@@ -4,17 +4,18 @@
     quote-block
     {% if dark_background %}quote-block--dark{% endif %}
     {% if story_cta %}
+        {# when used in story call to action block (note this class is currently unused but may be useful in the future) #}
         quote-block--story-call-to-action
+    {% elif hero_quote %}
+        {# when used in hero on story page #}
+        quote-block--hero
     {% else %}
+        {# when used as a plain quote block #}
         quote-block--quote
     {% endif %}
-    {% if value.image and show_image %}quote-block--with-image{% endif %}
+    {# see quote-block.scss for other possible variations #}
     {% if classes %}{{ classes }}{% endif %}
     ">
-    {% if value.image and show_image %}
-        {% image value.image width-365 class="quote-block__image quote-block__image--desktop" %}
-        {% image value.image fill-890x890 class="quote-block__image quote-block__image--mobile" %}
-    {% endif %}
     <div class="quote-block">
         <div class="quote-block__quotation-wrapper">
             {% include "patterns/atoms/svg/icons/icon-quote-open.html" with classes="quote-block__quotation-mark quote-block__quotation-mark--open" %}

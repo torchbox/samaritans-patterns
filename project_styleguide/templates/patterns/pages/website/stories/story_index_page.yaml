@@ -1,6 +1,11 @@
 context:
   page:
     title: Latest stories
+    get_ancestors:
+      - title: fake
+      - title: fake
+      - title: Category
+      - title: Subcategory
   stories:
     - title: Page title 1
       introduction: Intro 1

@@ -3,6 +3,11 @@ context:
     hero_image: False
     title: Your ways to get involved
     intro: Thanks for supporting Samaritans. Here are opportunities that match your criteria for getting involved.
+    get_ancestors:
+      - title: fake
+      - title: fake
+      - title: Category
+      - title: Subcategory
   activities:
     - title: Dawn Walk
       listing_image: fake

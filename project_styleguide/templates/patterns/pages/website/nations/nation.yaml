@@ -5,8 +5,3 @@ context:
       - title: fake
       - title: Category
       - title: Subcategory
-
-tags:
-  pageurl:
-    ancestor_page:
-      raw: '#'

@@ -1,0 +1,12 @@
+context:
+  value:
+    title: Helping people you work with
+    text: Talking about online activity is important when supporting people around suicide and self-harm. Learn how you can help people have safe and positive experiences online.
+    link_text: Read our guides
+    get_link_url: '#'
+
+tags:
+  image:
+    value.image fill-727x487 class="promoted-content__image":
+      raw: |
+        <img src="https://via.placeholder.com/727x487" class="promoted-content__image" alt="Some alt">

@@ -1,6 +1,6 @@
 {% load wagtailcore_tags icon_tags %}
 
-<div class="highlight highlight--{{ highlight_type }}">
+<div class="highlight highlight--{{ value.color_option }}">
     {% render_icon value.icon "highlight__icon" %}
 
     <div class="highlight__content">{{ value.content|richtext }}</div>

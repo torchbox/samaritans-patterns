@@ -244,6 +244,11 @@
         &.is-active--mobile {
             #{$hover} {
                 color: inherit;
+
+                // Fix for the landing page, where if the tabbed content is the first item on the page, its immediate parent has white text - meaning text would vanish when hovering over the element due to the inherit rule above
+                .section--landing-page-overlap & {
+                    color: $teal-dark;
+                }
             }
 
             #{$root}--actions & {

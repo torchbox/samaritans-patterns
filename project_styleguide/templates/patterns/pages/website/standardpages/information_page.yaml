@@ -23,6 +23,13 @@ context:
       - value: This has been a year like no other. Many people will be feeling even more isolated this Christmas due to social distancing. They may have lost a loved one to coronavirus or feel anxious about the economic crisis
       - value: For many people struggling to cope, we will be one of the only helplines open when many other services are closed. The only chance they have to share their story and their pain
       - value: Every call for help we answer could be the one that saves or changes someone’s life. The call that ends with someone finding the strength to carry on. And it begins with you
+    # setting get_verbose_name here ensures the body class gets the correct value in the pattern library, which ensures the progres bar will show as there is a body class override to allow it to work
+    get_verbose_name: 'information-page'
+    show_progress_bar: True
+    badge_text: Guidance for practitioners
+    badge_color_option: 'white-on-plum'
+    last_reviewed_at: !!timestamp '2022-11-21'
+    show_last_reviewed_at: True
 
 tags:
   include_block:

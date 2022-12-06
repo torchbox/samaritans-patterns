@@ -2,7 +2,11 @@
 {% load wagtailcore_tags navigation_tags helper_tags static %}
 
 {% block content %}
-    {% include "patterns/molecules/hero/hero.html" with hero_color="emerald" pattern="dots" hero_short=True hero_title_id="main-content" %}
+    {% if page.show_progress_bar %}
+        {% include "patterns/molecules/progress-bar/progress-bar.html" %}
+    {% endif %}
+
+    {% include "patterns/molecules/hero/hero.html" with hero_color="emerald" pattern="dots" hero_short=True hero_title_id="main-content" badge_color_option=page.badge_color_option badge_text=page.badge_text %}
 
     <section class="wrapper wrapper--large wrapper--padding-for-page">
         <div class="
@@ -13,14 +17,23 @@
         {% else %}
             section--information-page
         {% endif %}
+        {% if page.show_last_reviewed_at and page.last_reviewed_at %}
+            section--information-page-with-bottom-meta
+        {% endif %}
         ">
             {% if page.introduction %}
                 <p class="intro">{{ page.introduction }}</p>
             {% endif %}
+
             {% comment %} Used in news template which extends info page {% endcomment %}
             {% block news_meta %}{% endblock %}
 
             {% include_block page.body %}
+
+            {% if page.show_last_reviewed_at and page.last_reviewed_at %}
+                {% include 'patterns/molecules/meta-bar/meta-bar.html' with value=page %}
+            {% endif %}
+
             {% include "patterns/atoms/corners/corners.html" with size="page" %}
         </div>
     </section>

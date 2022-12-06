@@ -1,0 +1,52 @@
+.promoted-content {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 10px;
+
+    .section--landing-page-overlap & {
+        color: $teal-dark;
+    }
+
+    .streamfield--white-bg & {
+        // adds some negative margins so the content is not constrained by the streamfield--white-bg padding at mobile / tablet
+        @include page-child-negative-margin--horizontal(left);
+        @include page-child-negative-margin--horizontal(right);
+        padding: 0;
+    }
+
+    @include media-query(tablet-portrait) {
+        flex-direction: row;
+        padding: $gutter-x-large;
+    }
+
+    @include media-query(tablet-landscape) {
+        .streamfield--white-bg & {
+            // adds a bit of extra space above the page corner connectors to match the design
+            padding: 0 0 $gutter;
+            // reset the negtative margin so we get the streamfield--white-bg padding
+            margin: 0;
+        }
+    }
+
+    &__text-wrapper {
+        margin-top: $gutter-medium;
+        order: 2;
+
+        @include media-query(tablet-portrait) {
+            order: 0;
+            margin-top: 0;
+            padding-right: $gutter-large;
+        }
+    }
+
+    &__image-wrapper {
+        order: 1;
+
+        @include media-query(tablet-portrait) {
+            order: 0;
+            flex-shrink: 0;
+            max-width: 305px;
+        }
+    }
+}

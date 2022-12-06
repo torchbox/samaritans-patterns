@@ -12,9 +12,9 @@
                 </h1>
 
                 {% if page.hero_quote and not page.hero_image %}
-                    {% include "patterns/molecules/streamfield/blocks/quote_block.html" with dark_background=True classes="quote-block--story quote-block--narrow" value=page.hero_quote %}
+                    {% include "patterns/molecules/streamfield/blocks/quote_block.html" with dark_background=True classes="quote-block--narrow" value=page.hero_quote hero_quote=True %}
                 {% elif page.hero_quote %}
-                    {% include "patterns/molecules/streamfield/blocks/quote_block.html" with dark_background=True classes="quote-block--story" value=page.hero_quote %}
+                    {% include "patterns/molecules/streamfield/blocks/quote_block.html" with dark_background=True value=page.hero_quote hero_quote=True %}
                 {% endif %}
             </div>
 

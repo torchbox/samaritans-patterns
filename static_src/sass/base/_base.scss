@@ -61,9 +61,10 @@ body {
         }
     }
 
-    // enables position:sticky to work
+    // enables position:sticky to work and also the progress bar
     &.template-report-page,
-    &.template-report-chapter-page {
+    &.template-report-chapter-page,
+    &.template-information-page {
         height: auto;
         overflow-x: initial; // fallback for browsers that don't support clip
         overflow-x: clip;

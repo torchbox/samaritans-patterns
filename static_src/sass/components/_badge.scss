@@ -1,0 +1,72 @@
+.badge {
+    @include font-size('xxs');
+    font-weight: $weight--bold;
+    display: inline-block;
+    position: relative;
+
+    &--behind-card {
+        padding: $gutter-small $gutter-x-large;
+        left: -7px;
+
+        // at mobile the hero has a negative top margin
+        margin-top: 50px;
+
+        @include media-query('tablet-portrait') {
+            margin-top: 0;
+        }
+    }
+
+    &--simple {
+        padding: $gutter-small $gutter $gutter-small $gutter-small;
+        margin-bottom: $gutter-small;
+    }
+
+    // shift the badge to deal with negative top margin on the hero and the large top margin on the h1 - at mobile
+    // used only in the --simple variant
+    // on the landing page the layout is different so this shift is only needed on the index and information pages
+    &--shift {
+        bottom: -30px;
+        margin-top: 20px;
+
+        @include media-query('tablet-portrait') {
+            margin-top: 0;
+            bottom: 0;
+        }
+    }
+
+    // Used only in the --simple variant
+    &__connectors {
+        @include connectors($emerald, top, right, small);
+    }
+
+    // Color variations
+    &--white-on-plum {
+        color: $white;
+        background-color: $plum;
+    }
+
+    &--plum-on-white {
+        color: $plum;
+        background-color: $white;
+    }
+
+    &--white-on-purple {
+        color: $white;
+        background-color: $amethyst;
+    }
+
+    &--purple-on-white {
+        color: $amethyst;
+        background-color: $white;
+    }
+
+    &--white-on-teal {
+        color: $white;
+        background-color: $teal-dark;
+    }
+
+    &--teal-on-white {
+        color: $teal-dark;
+        background-color: $white;
+    }
+}

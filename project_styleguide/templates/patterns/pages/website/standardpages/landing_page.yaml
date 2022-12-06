@@ -3,6 +3,8 @@ context:
     title: Contact us
     introduction: When life's hard, we're here if you need us. Whoever you are, whatever you're feeling - we won't judge. You do not have to face it alone.
     hero_image: fake
+    badge_text: Guidance for practitioners
+    badge_color_option: white-on-purple
 
 tags:
   sidebar:

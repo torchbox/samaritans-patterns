@@ -1,3 +1,16 @@
+/*
+
+possible modifiers:
+
+--quote - when used as a plain quote block on the page.
+--hero - when used in the hero on a story page
+--narrow - when used in the hero on a story page, with no image
+--dark - when used in the hero on a story page
+--with-media - when used in the media with quote block
+--story-call-to-action - when used in the story call to action block (note this variation is currently unused but has been left in the markup as a useful distinction from the --quote variation)
+
+*/
+
 .quote-block {
     $root: &;
     margin: 0;
@@ -15,7 +28,7 @@
         color: inherit;
     }
 
-    &--story {
+    &--hero {
         margin-top: 20px;
         margin-bottom: 0;
         padding-bottom: 40px;
@@ -38,6 +51,7 @@
     &--with-media {
         background-color: $plum;
         color: $white;
+        padding: $gutter;
     }
 
     &--narrow {
@@ -46,60 +60,12 @@
         }
     }
 
-    &--with-image {
-        display: flex;
-        flex-direction: column;
-
-        @include target-ie11() {
-            display: block;
-        }
-
-        @include media-query(tablet-landscape) {
-            flex-direction: row;
-
-            @include target-ie11() {
-                display: flex;
-            }
-        }
-
-        #{$root} {
-            @include connectors($white, bottom, right, page);
-            background-color: $plum;
-            color: $white;
-            padding: 30px;
-            flex: 1;
-            position: relative;
-        }
-    }
-
-    &--activity {
-        #{$root}__quotation {
-            @include font-size(xs);
-            font-weight: $weight--bold;
-
-            @include media-query(tablet-portrait) {
-                @include font-size(l);
-            }
-        }
-
-        #{$root}__quotation-mark {
-            fill: $white;
-            opacity: 1;
-            flex-shrink: 0;
-            width: 20px;
-
-            @include media-query(desktop) {
-                width: 30px;
-                height: 40px;
-            }
-        }
-    }
-
     &__quotation-wrapper {
         position: relative;
         margin-bottom: $gutter;
 
-        #{$root}--quote & {
+        #{$root}--quote &,
+        #{$root}--hero & {
             @include media-query(tablet-portrait) {
                 display: flex;
             }
@@ -110,7 +76,8 @@
         padding-right: $gutter-large + 10px;
         min-height: 55px;
 
-        #{$root}--quote & {
+        #{$root}--quote &,
+        #{$root}--hero & {
             @include font-size(xs);
 
             @include media-query(tablet-portrait) {
@@ -119,14 +86,8 @@
             }
         }
 
-        #{$root}--story & {
+        #{$root}--hero & {
             display: none;
-        }
-
-        #{$root}--activity & {
-            @include media-query(tablet-portrait) {
-                padding: 0 $gutter-x-large;
-            }
         }
     }
 
@@ -135,12 +96,9 @@
         fill: $lime;
 
         #{$root}--quote & {
+            width: $gutter;
+            flex: 0 0 $gutter;
             opacity: 0.2;
-            flex: 0 0 $gutter-large;
-        }
-
-        #{$root}--activity & {
-            opacity: 0.4;
         }
 
         &--open {
@@ -156,7 +114,8 @@
             right: 0;
             top: calc(100% + #{$gutter});
 
-            #{$root}--quote & {
+            #{$root}--quote &,
+            #{$root}--hero & {
                 @include media-query(tablet-portrait) {
                     align-self: flex-end;
                     position: static;
@@ -165,19 +124,12 @@
                 }
             }
 
-            #{$root}--quote & {
+            #{$root}--quote &,
+            #{$root}--hero & {
                 transform: translateY(-100%);
 
                 @include media-query(tablet-portrait) {
                     transform: translateY(0);
-                }
-            }
-
-            #{$root}--activity & {
-                transform: translate(-25px, 15px);
-
-                @include media-query(tablet-landscape) {
-                    transform: translate(-10px, 100%);
                 }
             }
         }
@@ -188,19 +140,13 @@
 
         #{$root}--quote & {
             @include media-query(tablet-portrait) {
-                margin: $gutter-large $gutter-large 0;
+                margin: 0 $gutter-medium;
             }
         }
 
-        #{$root}--story & {
+        #{$root}--hero & {
             @include media-query(tablet-portrait) {
                 margin: 0 $gutter-medium 0;
-            }
-        }
-
-        #{$root}--activity & {
-            @include media-query(tablet-portrait) {
-                margin: $gutter-large 10px 0;
             }
         }
     }
@@ -208,16 +154,9 @@
     &__attribution {
         font-weight: $weight--bold;
 
-        #{$root}--quote & {
+        #{$root}--quote &,
+        #{$root}--hero & {
             @include font-size(xs);
-        }
-
-        #{$root}--activity & {
-            font-weight: $weight--normal;
-
-            @include media-query(tablet-landscape) {
-                @include rem-font-size(20px);
-            }
         }
     }
 
@@ -245,7 +184,7 @@
             opacity: 1;
         }
 
-        &--story {
+        &--hero {
             #{$root}__quotation-mark {
                 fill: $color--white;
                 width: 30px;
@@ -259,12 +198,6 @@
                     }
                 }
             }
-        }
-    }
-
-    .template-activity-landing-page & {
-        &--with-image {
-            margin-top: 0;
         }
     }
 

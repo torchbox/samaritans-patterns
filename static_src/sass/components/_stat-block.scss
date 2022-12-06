@@ -169,6 +169,12 @@
             }
         }
     }
+
+    p {
+        .streamfield--landing-page-first & {
+            color: $teal-dark;
+        }
+    }
 }
 
 .stat-block-heading {

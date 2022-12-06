@@ -15,7 +15,11 @@
                     <img src="{{ hero_image_mobile.url}}" alt="{{ hero_image_mobile.alt }}" />
                 </div>
                 <div class="hero__inner wrapper wrapper--large wrapper--padding">
-                    <div class="card card--information">
+                    {% if page.badge_text and page.badge_color_option %}
+                        {% include "patterns/molecules/badge/badge--behind-card.html" with badge_color_option=page.badge_color_option badge_text=page.badge_text %}
+                    {% endif %}
+                    {# update highlight colour on card to match the badge #}
+                    <div class="card card--information {% if page.badge_text and page.badge_color_option %} card--information-{{ page.badge_color_option }}{% endif %}">
                         <span class="card__connectors"></span>
                         <div class="card__container">
                             {% include "patterns/molecules/navigation/breadcrumbs.html" %}
@@ -41,6 +45,10 @@
                 <div class="wrapper wrapper--large wrapper--padding">
                     {% include "patterns/molecules/navigation/breadcrumbs.html" %}
 
+                    {% if page.badge_text and page.badge_color_option %}
+                        {% include "patterns/molecules/badge/badge--simple.html" with badge_color_option=page.badge_color_option badge_text=page.badge_text badge_shift=False %}
+                    {% endif %}
+
                     <h1 id="main-content">{{ page.title }}</h1>
 
                     {% if page.introduction %}
@@ -63,8 +71,8 @@
                     </div>
                 </div>
             </section>
-        {% elif forloop.counter == 2 %}
-        <!-- streamfield on a white background with connectors -->
+        {% elif forloop.counter == 2 and block.block_type != 'impact_block' %}
+        <!-- streamfield on a white background with connectors (impact block already has a white background) -->
             <div class="streamfield streamfield--landing-page streamfield--white-bg">
                 <div class="wrapper wrapper--large wrapper--padding-for-page">
                     <section class="section section--landing-page-light-bg">

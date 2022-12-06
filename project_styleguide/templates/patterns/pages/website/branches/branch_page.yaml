@@ -35,6 +35,11 @@ context:
     donate_link: https://www.example.com
     donate_button_icon: icon-color-coins
     registered_charity_details: Registered charity details
+    get_ancestors:
+      - title: fake
+      - title: fake
+      - title: Category
+      - title: Subcategory
 
 tags:
   image:

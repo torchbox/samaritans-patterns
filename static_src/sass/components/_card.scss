@@ -287,6 +287,24 @@
         }
     }
 
+    &--information-white-on-purple {
+        @include card-corner($amethyst);
+    }
+
+    &--information-white-on-teal {
+        @include card-corner($teal-dark);
+    }
+
+    &--information-white-on-plum {
+        @include card-corner($plum);
+    }
+
+    &--information-purple-on-white,
+    &--information-teal-on-white,
+    &--information-plum-on-white {
+        @include card-corner($white);
+    }
+
     &--activity {
         #{$root}__title {
             @include rem-font-size(27px);

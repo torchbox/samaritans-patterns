@@ -19,6 +19,13 @@ context:
               listing_title: Chat to a Samaritan
               listing_summary: We can give you advice and information
     listing_heading: Browse events by type
+    badge_text: Guidance for practitioners
+    badge_color_option: white-on-plum
+    get_ancestors:
+      - title: fake
+      - title: fake
+      - title: Category
+      - title: Subcategory
   subpages:
     - title: Test sub page
       listing_image: fake

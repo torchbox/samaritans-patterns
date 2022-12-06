@@ -16,7 +16,13 @@
     }
 
     &--breadcrumb {
-        padding-top: $gutter-medium;
+        @include media-query(tablet-portrait) {
+            padding-top: $gutter;
+        }
+
+        @include media-query(tablet-landscape) {
+            padding-top: $gutter-large;
+        }
     }
 
     &--short {
@@ -39,6 +45,24 @@
     &--services {
         @include media-query(tablet-landscape) {
             padding-bottom: $gutter-xxl;
+        }
+    }
+
+    &__breadcrumb-wrapper {
+        display: none;
+
+        @include media-query(tablet-portrait) {
+            display: block;
+            padding-top: $gutter-medium;
+            width: 100%;
+
+            &--emerald {
+                background: $emerald;
+            }
+
+            &--plum {
+                background: $plum;
+            }
         }
     }
 

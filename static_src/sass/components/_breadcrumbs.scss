@@ -35,6 +35,10 @@
         margin-bottom: $gutter;
     }
 
+    .hero__breadcrumb-wrapper & {
+        margin-bottom: 0;
+    }
+
     &__list {
         display: flex;
         align-items: center;
