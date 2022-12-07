@@ -13,7 +13,6 @@ window.addEventListener('DOMContentLoaded', () => {
             form.setAttribute('action', window.monthlyDonationUrls.gocardless);
             form.removeAttribute('data-token');
 
-            bindGiftAidCheckboxToHiddenFields();
         });
     });
 
@@ -28,7 +27,6 @@ window.addEventListener('DOMContentLoaded', () => {
             );
             form.classList.add('donate__braintree-form');
 
-            bindGiftAidCheckboxToHiddenFields();
             setupPaymentMonthly();
         });
     });

@@ -37,8 +37,6 @@
                 </a>
 
                 <div class="accordion__content tabccordion__content">
-                    {{ gocardless_form.gift_aid.as_hidden }}
-
                     <div class="donate__direct-debit-fields light-bg">
                         {% render_form_field gocardless_form.debit_date %}
                         {% render_form_field gocardless_form.account_holder_name %}
@@ -70,8 +68,6 @@
             </a>
 
             <div class="accordion__content tabccordion__content">
-                {{ braintree_form.gift_aid.as_hidden }}
-
                 <div class="donate__braintree-fields light-bg">
                     {% render_form_field braintree_form.billing_day %}
                     {% render_form_field braintree_form.payment_method_nonce %}
