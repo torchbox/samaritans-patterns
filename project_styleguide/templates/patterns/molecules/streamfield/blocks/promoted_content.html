@@ -3,7 +3,7 @@
     <div class="promoted-content__text-wrapper">
         <h2 class="promoted-content__title">{{ value.title }}</h2>
         <p class="promoted-content__text">{{ value.text }}</p>
-        <a href="{{ value.link_url }}" class="button button--large-tablet-portrait">
+        <a href="{{ value.get_link_url }}" class="button button--large-tablet-portrait">
             <div class="button__shadow"></div>
             <div class="button__inner">
                 {{ value.link_text }}
