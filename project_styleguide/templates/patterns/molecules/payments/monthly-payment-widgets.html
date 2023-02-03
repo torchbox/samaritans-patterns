@@ -18,11 +18,13 @@
                     </a>
                 </li>
             {% endif %}
+            {% comment %}
                 <li>
                     <a href="#tab2" class="tabccordion__nav-item tabccordion__nav-item--card-payment paypal-selector">
                         {% trans 'PayPal' %}
                     </a>
                 </li>
+            {% endcomment %}
             </ul>
         </nav>
         {% if currency == "GBP" %}
@@ -60,6 +62,7 @@
             </section>
         {% endif %}
 
+        {% comment %}
         <!-- PayPal tab -->
         <section id="tab2" class="accordion accordion--tabccordion tabccordion__panel js-tabccordion-panel {% if active_payment_mode == 'paypal' %}is-active{% endif %}">
 
@@ -79,6 +82,7 @@
                 <div id="donate__paypal-button" class="donate__paypal-button"></div>
             </div>
         </section>
+        {% endcomment %}
     </div>
 
     {{ braintree_settings|json_script:"payments__braintree-settings" }}
