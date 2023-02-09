@@ -10,7 +10,7 @@ function setupPaymentMonthly() {
 
     var paymentForm = document.querySelector('.donate__braintree-form'),
         nonceInput = document.getElementById(
-            'id_braintree-payment_method_nonce',
+            'id_payment_method_nonce',
         ),
         token = paymentForm.getAttribute('data-token'),
         loadingErrorMsg =

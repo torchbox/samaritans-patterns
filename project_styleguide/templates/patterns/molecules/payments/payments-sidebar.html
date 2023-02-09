@@ -17,7 +17,7 @@
     <hr class="hr hr--dashed">
 
     <div id="donate__methods--monthly-gbp" {% if payment_frequency == 'single' or is_euro or event_page %}hidden{% endif %}>
-        <h4>We accept monthly donations through Direct Debit{# and PayPal #}</h4>
+        <h4>We accept monthly donations through Direct Debit and PayPal</h4>
         {% include "patterns/molecules/payments/payment-icons--monthly.html" with is_euro=False %}
     </div>
 
