@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', function () {
         '[data-branches-results-heading]',
     );
 
+    const NUM_CLOSEST_BRANCH_TO_SHOW = 5;
+    const MAX_BRANCH_TO_SHOW = 10;
+
     // focus input on page load
     branchInput.focus();
 
@@ -45,7 +48,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     resetUI();
                     if (status === 'OK') {
                         resultsHeading.hidden = false;
-                        addDistance(results[0]);
+                        findBestBranchMatches(
+                            results[0],
+                            query.trim().toLowerCase(),
+                        );
                     } else if (status === 'ZERO_RESULTS') {
                         helpText.innerHTML = `<p>Sorry, we didn't find anything for <b>${query}</b>.<br> Please try searching again.</p>`;
                     } else {
@@ -57,9 +63,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // add distance between searched location and list of branches
-    function addDistance(place) {
-        const distance = branches.map((branch) => {
+    // Finds the branches that matches the best a user's query.
+    // Branch with the `where_we_work` field matching the query are prioritized.
+    // After that, branches are sorted by distance and the nearest ones are returned.
+    function findBestBranchMatches(place, normalizedQuery) {
+        let promotedResultsCount = 0;
+
+        const branchesWithDistanceAndPriority = branches.map((branch) => {
             const branchLatlng = new google.maps.LatLng(...branch.latlng); // eslint-disable-line no-undef
             // eslint-disable-next-line no-undef
             branch.distance =
@@ -67,25 +77,50 @@ document.addEventListener('DOMContentLoaded', function () {
                     place.geometry.location,
                     branchLatlng,
                 );
+
+            if (
+                branch.where_we_work &&
+                branch.where_we_work.toLowerCase().includes(normalizedQuery)
+            ) {
+                branch.prioritized = true;
+                promotedResultsCount += 1;
+            } else {
+                branch.prioritized = false;
+            }
             return branch;
         });
 
-        distance.sort((next, prev) => next.distance - prev.distance);
-        calcClosestBranches(distance);
+        branchesWithDistanceAndPriority.sort((next, prev) => {
+            // If the branches have the same priority, compare their distance.
+            if (next.prioritized === prev.prioritized) {
+                return next.distance - prev.distance;
+            }
+
+            // Otherwise, return the most prioritized one.
+            return next.prioritized ? -1 : 1;
+        });
+
+        // Show promoted results and `NUM_CLOSEST_BRANCH_TO_SHOW` closest branches
+        const numBranchToShow =
+            promotedResultsCount + NUM_CLOSEST_BRANCH_TO_SHOW;
+        const bestBranchMatches = branchesWithDistanceAndPriority.slice(
+            0,
+            // Limit results when we have more than `MAX_BRANCH_TO_SHOW` matches.
+            numBranchToShow <= MAX_BRANCH_TO_SHOW
+                ? numBranchToShow
+                : MAX_BRANCH_TO_SHOW,
+        );
+        showBestBranchMatches(bestBranchMatches);
     }
 
-    // find the closest five branches
-    function calcClosestBranches(distance) {
-        const closestFiveBranches = distance.slice(0, 5);
-        showClosestBranches(closestFiveBranches);
-    }
-
-    // show them
-    function showClosestBranches(closestFiveBranches) {
-        closestFiveBranches.forEach((branch, index) => {
+    function showBestBranchMatches(bestBranchMatches) {
+        bestBranchMatches.forEach((branch, index) => {
             const match = document.querySelector(
                 `[data-branch-id=${branch.branch_id}]`,
             );
+            if (!match) {
+                return;
+            }
             match.classList.remove(hiddenClass);
             match.style.order = index;
         });

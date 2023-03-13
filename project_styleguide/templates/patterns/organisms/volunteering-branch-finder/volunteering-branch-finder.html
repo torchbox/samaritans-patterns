@@ -41,6 +41,10 @@
                     {% if object.accessibility_notes %}
                         <p class="card__copy card__copy--meta">{{ object.accessibility_notes }}</p>
                     {% endif %}
+                    {% if object.where_we_work %}
+                        <h4 class="volunteer-branch-where-we-work__heading">{% trans 'Where we work' %}</h4>
+                        <p class="volunteer-branch-where-we-work__text">{{ object.formatted_where_we_work }}</p>
+                    {% endif %}
                     {% with activities=object.branch_activities.all %}
                         {% if activities %}
                             <h4 class="volunteer-branch-services__heading">{% trans 'Services at this branch' %}</h4>

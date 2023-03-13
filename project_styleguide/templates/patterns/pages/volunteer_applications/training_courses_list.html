@@ -54,7 +54,11 @@
                                     <div class="accordion__column--right">
                                         <p class="accordion__details accordion__details--label{% if not training_course.intensive %} invisible" aria-hidden="true" tabindex="-1"{% else %}"{% endif %}>{% trans 'Intensive' %}</p>
 
-                                        <p class="accordion__details accordion__details--label{% if not training_course.online %} invisible" aria-hidden="true" tabindex="-1"{% else %}"{% endif %}>{% trans 'Online' %}</p>
+                                        {% if training_course.delivery_methods %}
+                                            <p class="accordion__details accordion__details--label">
+                                                {{ training_course.delivery_methods }}
+                                            </p>
+                                        {% endif %}
                                     </div>
                                 </div>
 
@@ -87,15 +91,18 @@
                                 </ul>
 
                                 <div class="accordion__content-footer">
-                                    {% if training_course.online %}
-                                        <p class="accordion__footer-text">
-                                            We&apos;ll send you some details by email to access your online modules.
-                                        </p>
-                                    {% else %}
-                                        <h3 class="accordion__footer-heading">{% trans 'Training location:' %}</h3>
-                                        <p class="accordion__footer-text">{{ training_course.venue_address }}</p>
-                                        <p class="accordion__footer-text accordion__footer-text--small">{{ training_course.accessibility_info }}</p>
-                                    {% endif %}
+                                    {% with training_course.delivery_methods.lower as delivery_methods %}
+                                        {% if 'in-person' in delivery_methods %}
+                                            <h3 class="accordion__footer-heading">{% trans 'Training location:' %}</h3>
+                                            <p class="accordion__footer-text">{{ training_course.venue_address }}</p>
+                                            <p class="accordion__footer-text accordion__footer-text--small">{{ training_course.accessibility_info }}</p>
+                                        {% endif %}
+                                        {% if 'online' in delivery_methods %}
+                                            <p class="accordion__footer-text">
+                                                We&apos;ll send you some details by email to access your online modules.
+                                            </p>
+                                        {% endif %}
+                                    {% endwith %}
 
                                     <div class="accordion__footer-button">
                                         {% include "patterns/atoms/buttons/button--button.html" with classes='button--alt' data_attr='data-open-training-modal' type='submit' label='Book this course' %}
