@@ -1,0 +1,49 @@
+.icons-with-text {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: $gutter;
+
+    @include media-query(tablet-landscape) {
+        grid-template-columns: repeat(4, 1fr);
+        grid-column-gap: $gutter-large;
+    }
+
+    &__block {
+        align-items: center;
+        background-color: $off-white;
+        display: flex;
+        flex-direction: column;
+        padding: 25px $gutter-small $gutter-small;
+        text-align: center;
+
+        @include media-query(tablet-landscape) {
+            margin: auto;
+            padding: $gutter-large $gutter-medium;
+
+            &:nth-child(even) {
+                padding: $gutter-xxl $gutter-medium;
+            }
+        }
+    }
+
+    &__icon {
+        margin-bottom: $gutter;
+        height: 70px;
+        width: 70px;
+
+        @include media-query(tablet-landscape) {
+            height: 120px;
+            width: 120px;
+        }
+    }
+
+    &__text {
+        @include font-size(s);
+        font-weight: $weight--bold;
+        color: $amethyst;
+
+        @include media-query(tablet-landscape) {
+            @include font-size(l);
+        }
+    }
+}

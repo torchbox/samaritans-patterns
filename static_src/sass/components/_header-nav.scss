@@ -1,4 +1,5 @@
 .header-nav {
+    $root: &;
     background-color: $ink;
     color: $white;
     position: fixed;
@@ -55,6 +56,36 @@
             margin-bottom: -$header-nav-height;
             background-color: rgba($ink, 0.85);
             transition: background-color $transition;
+        }
+    }
+
+    &--marathon {
+        background-color: $teal-dark;
+        position: relative;
+        transform: translate3d(0, 0, 0);
+        height: auto;
+        overflow-x: visible;
+        display: block;
+
+        @include media-query(tablet-landscape) {
+            background-color: rgba($ink, 0.85);
+            margin-bottom: -96px;
+            transition: background-color $transition;
+            z-index: z($z-elements, header-menu);
+
+            .template-information-page &,
+            .template-marathon-index-page & {
+                background-color: $ink;
+                margin-bottom: 0;
+            }
+        }
+
+        #{$root}__inner {
+            padding: 20px 0;
+
+            @include media-query(tablet-landscape) {
+                height: 96px;
+            }
         }
     }
 }

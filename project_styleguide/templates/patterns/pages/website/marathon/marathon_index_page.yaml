@@ -1,0 +1,61 @@
+context:
+  page:
+    title: Test listing page
+    introduction: Test intro for this listing page 123
+    top_story_cta: true
+    story_cta: true
+    related_pages:
+      all:
+        - page:
+            specific:
+              listing_title: If you're worried about someone else
+              listing_summary: We can give you advice and information
+        - page:
+            specific:
+              listing_title: Understanding emotional health
+              listing_summary: We can give you advice and information
+        - page:
+            specific:
+              listing_title: Chat to a Samaritan
+              listing_summary: We can give you advice and information
+    listing_heading: Browse events by type
+    badge_text: Guidance for practitioners
+    badge_color_option: white-on-plum
+    get_ancestors:
+      - title: fake
+      - title: fake
+      - title: Category
+      - title: Subcategory
+  subpages:
+    - title: Test sub page
+      listing_image: fake
+      listing_summary: Listing summary for the sub page
+    - title: Another test sub page
+      listing_image: fake
+      listing_summary: Listing summary for the sub page
+    - title: Yet another test sub page
+      listing_image: fake
+      listing_summary: Listing summary for the sub page
+    - title: Test sub page
+      listing_image: fake
+      listing_summary: Listing summary for the sub page
+    - title: Another test sub page
+      listing_image: fake
+      listing_summary: Listing summary for the sub page
+    - title: Another test sub page
+      listing_image: fake
+      listing_summary: Listing summary for the sub page
+
+tags:
+  pageurl:
+    subpage:
+      raw: '#'
+  image:
+    subpage.listing_image fill-450x300:
+      raw: |
+        <img src="https://via.placeholder.com/450x300" width="450" height="300" alt="Some alt">
+  include_block:
+    page.story_cta:
+      template_name: 'patterns/molecules/streamfield/blocks/cta_block.html'
+    page.top_story_cta:
+      template_name: 'patterns/molecules/streamfield/blocks/cta_block.html'

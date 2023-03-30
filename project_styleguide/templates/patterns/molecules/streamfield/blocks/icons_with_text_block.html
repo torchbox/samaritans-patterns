@@ -1,0 +1,8 @@
+{% load wagtailcore_tags icon_tags %}
+
+
+<div class="streamfield icons-with-text">
+    {% for icon in value %}
+        {% include "patterns/molecules/streamfield/blocks/icon_with_text_block.html" %}
+    {% endfor %}
+</div>

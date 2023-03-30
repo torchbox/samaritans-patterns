@@ -1,0 +1,10 @@
+{% load icon_tags %}
+
+<div class="ways-to-get-involved">
+    {% render_icon value.icon "ways-to-get-involved__icon" %}
+
+    <div class="ways-to-get-involved__content">
+        <p class="ways-to-get-involved__title">{{ value.title }}</p>
+        <a class="ways-to-get-involved__link" href="{{ value.get_link_url }}">{{ value.get_link_text }}</a>        
+    </div>
+</div>

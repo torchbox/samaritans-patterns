@@ -1,6 +1,6 @@
 {% load wagtailcore_tags wagtailimages_tags locale_tags %}
 
-{% if page.get_ancestors|length > 1 %}
+{% if not hide_breadcrumbs and page.get_ancestors|length > 1 %}
     <div class="hero__breadcrumb-wrapper hero__breadcrumb-wrapper--{{ hero_color }}">
         <div class="wrapper wrapper--large wrapper--padding">
             {% include "../navigation/breadcrumbs.html" %}
@@ -14,7 +14,7 @@
     {% if hero_short %} hero--short            {% endif %}
     {% if hero_image %} hero--with-image       {% endif %}
     {% if classes    %} {{ classes }}          {% endif %}
-    {% if page.get_ancestors|length > 1 %}hero--breadcrumb{% endif %}
+    {% if not hide_breadcrumbs and page.get_ancestors|length > 1 %}hero--breadcrumb{% endif %}
     ">
     <div class="hero__wrapper wrapper wrapper--large wrapper--padding wrapper--relative">
         <div class="hero__inner">

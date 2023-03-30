@@ -149,12 +149,21 @@
 }
 
 /* prettier-ignore */
-@mixin section--after-page ($padding-vertical: (2 * $gutter-x-large)) {
-    @include media-query(tablet-landscape) {
-        z-index: z($z-elements, page-behind);
-        margin-top: -$section-overlap;
-        padding-top: $section-overlap + $padding-vertical;
-        padding-bottom: $padding-vertical;
+@mixin section--after-page ($padding-vertical: (2 * $gutter-x-large), $padding: normal) {
+    @if $padding == normal {
+        @include media-query(tablet-landscape) {
+            z-index: z($z-elements, page-behind);
+            margin-top: -$section-overlap;
+            padding-top: $section-overlap + $padding-vertical;
+            padding-bottom: $padding-vertical;
+        }
+    } @else {
+        @include media-query(tablet-landscape) {
+            z-index: z($z-elements, page-behind);
+            margin-top: -$section-overlap;
+            padding-top: $padding-vertical;
+            padding-bottom: $padding-vertical;
+        }
     }
 }
 

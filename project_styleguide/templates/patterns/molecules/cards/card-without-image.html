@@ -1,7 +1,7 @@
 {% if card.url %}
-    <a class="card card--with-image" href="{{ card.url }}">
+    <a class="card card--with-image {% if corner_color %}card--{{ corner_color }}{% endif %}" href="{{ card.url }}">
 {% else %}
-    <div class="card card--with-image">
+    <div class="card card--with-image {% if corner_color %}card--{{ corner_color }}{% endif %}">
 {% endif %}
 
     <div class="card-new card-new--information {% if card_light %}card-new--light{% endif %}">

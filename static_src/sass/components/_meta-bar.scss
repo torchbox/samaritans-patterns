@@ -92,7 +92,8 @@
 
     // Modifiers ----------------------------------------------------------------
     &--event,
-    &--activity {
+    &--activity,
+    &--marathon {
         background-color: $sunflower;
     }
 
@@ -128,6 +129,16 @@
             @include media-query(mob-landscape) {
                 width: auto;
             }
+        }
+    }
+
+    &--marathon {
+        margin-bottom: $gutter * 1.5;
+
+        @include media-query(tablet-landscape) {
+            margin-bottom: 0;
+            margin-right: -$gutter-xxl;
+            padding-right: -$gutter-xxl;
         }
     }
 }

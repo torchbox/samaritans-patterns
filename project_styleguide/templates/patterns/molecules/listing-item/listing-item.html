@@ -3,6 +3,8 @@
     <div class="listing-item__image-wrap">
         {% if value.listing_image %}
             {% image value.listing_image fill-480x320 class="listing-item__image" %}
+        {% elif value.hero_image %}
+            {% image value.hero_image fill-480x320 class="listing-item__image" %}
         {% else %}
             <div class="listing-item__image"></div>
         {% endif %}

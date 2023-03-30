@@ -1,0 +1,63 @@
+.resources {
+    &__title {
+        @include font-size(m);
+        margin-bottom: $gutter;
+
+        @include media-query(tablet-landscape) {
+            @include font-size(xxl);
+            font-weight: $weight--bold;
+            margin-bottom: 10px;
+        }
+    }
+
+    &__subtitle {
+        @include font-size(xs);
+        font-weight: $weight--normal;
+
+        @include media-query(tablet-landscape) {
+            font-size: 20px;
+        }
+    }
+
+    &__cards {
+        display: grid;
+        grid-row-gap: 25px;
+        grid-template-columns: 1fr;
+        margin-top: $gutter;
+
+        @include media-query(tablet-landscape) {
+            grid-template-columns: repeat(3, 1fr);
+            grid-column-gap: 40px;
+            margin-top: $gutter-xxl;
+        }
+
+        &--title {
+            @include font-size(m);
+        }
+
+        &--link {
+            @include font-size(s);
+            font-weight: $weight--bold;
+            text-decoration: underline;
+        }
+    }
+
+    &__cta {
+        margin-top: $gutter-medium;
+        text-align: center;
+
+        @include media-query(tablet-landscape) {
+            margin-top: 60px;
+        }
+
+        &--title {
+            @include font-size(xs);
+            font-weight: $weight--bold;
+            margin-bottom: $gutter / 2;
+
+            @include media-query(tablet-landscape) {
+                font-size: 20px;
+            }
+        }
+    }
+}

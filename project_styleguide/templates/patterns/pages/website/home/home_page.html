@@ -114,6 +114,14 @@
         </div>
     </section>
 
+    {% if page.highlight_call_to_action %}
+    <section class="section section--page-padding">
+        <div class="wrapper wrapper--large">
+            {% include_block page.highlight_call_to_action %}
+        </div>
+    </section>
+    {% endif %}
+
     <section class="section section--page-padding">
         {% if page.story_highlight %}
             <div class="wrapper wrapper--large">

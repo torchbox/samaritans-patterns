@@ -1,0 +1,61 @@
+{% extends "patterns/base_page.html" %}
+{% load wagtailcore_tags wagtailimages_tags icon_tags donate_tags static to_euro %}
+
+{% block header %}
+{% include "patterns/organisms/header/header.html" with show_links=True hide_mobile_menu=True show_marathon_nav=True  %}
+{% endblock header %}
+
+{% block content %}
+<div class="wrapper wrapper--white-background marathon">
+    {# Hero #}
+    <div class="hero hero--marathon hero--marathon-with-card">
+        {% image page.hero_image fill-1900x1250 jpegquality-40 as hero_image %}
+        <div class="marathon__hero-image-container--desktop" style="background-image: linear-gradient(90deg, #000000 4.48%, rgba(0, 0, 0, 0) 95.77%), url({{ hero_image.url}});">
+            <div class="hero__pattern-wrapper">
+                {% include "patterns/atoms/svg/patterns/pattern-diamonds.html" with classes="pattern pattern--rotated pattern--grass" %}
+            </div>
+        </div>
+        {% image page.hero_image fill-768x500 jpegquality-40 as hero_image_mobile %}
+        <div class="marathon__hero-image-container--mobile">
+            <img class="marathon__hero-image" src="{{ hero_image_mobile.url}}" alt="{{ hero_image_mobile.alt }}" height={{ hero_image_mobile.height }} width={{ hero_image_mobile.width }} />
+        </div>
+
+        <div class="hero__inner wrapper wrapper--large wrapper--padding-larger">
+            <div class="card card--marathon">
+                <span class="card__connectors"></span>
+                <div class="card__container">
+                    <h1 class="card__title" id="main-content">{{ page.title }}</h1>
+                    {% if cta_link %}
+                        {% include "patterns/atoms/buttons/button.html" with href=cta_link label=page.cta_link_text %}
+                    {% endif %}
+                    {% if secondary_link %}
+                        <a class="card__secondary-link" href="{{ secondary_link }}">{{ page.secondary_link_text }}</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# Page body #}
+    <section class="section section--overlap-large-desktop-only">
+        <div class="wrapper wrapper--large">
+            <div class="marathon__content-container">
+                <div class="marathon__content">
+                    {% include_block page.body %}
+
+                    {% if page.body_footer_cta %}
+                        <div class="marathon__body-footer-cta">
+                            {{ page.body_footer_cta|richtext }}
+                        </div>
+                    {% endif %}
+
+                    {% include "patterns/molecules/ways_to_get_involved/ways_to_get_involved_section--mobile.html" with ways_to_get_involved_section=page.ways_to_get_involved_section %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# Other ways to get involved #}
+    {% include "patterns/molecules/ways_to_get_involved/ways_to_get_involved_section--desktop.html" with ways_to_get_involved_section=page.ways_to_get_involved_section %}
+</div>
+{% endblock %}

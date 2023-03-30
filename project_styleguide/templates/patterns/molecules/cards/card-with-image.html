@@ -1,6 +1,6 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
-<a class="card card--with-image" href="{% if nation_related_page and card.page %}{% pageurl card.page %}{% else %}{{ card.url }}{% endif %}" aria-label="{% if nation_related_page %}{% firstof card.page_title card.page.listing_title card.page.title %} {% else %}{% firstof card.listing_title card.title %}{% endif %}">
+<a class="card card--with-image {% if corner_color %}card--{{ corner_color }}{% endif %}" href="{% if nation_related_page and card.page %}{% pageurl card.page %}{% else %}{{ card.url }}{% endif %}" aria-label="{% if nation_related_page %}{% firstof card.page_title card.page.listing_title card.page.title %} {% else %}{% firstof card.listing_title card.title %}{% endif %}">
     <span class="card__connectors"></span>
     <span class="card__connectors--extra"></span>
     {% if card.listing_image %}

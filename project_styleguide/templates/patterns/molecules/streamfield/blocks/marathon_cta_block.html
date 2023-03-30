@@ -1,0 +1,13 @@
+{% load wagtailimages_tags %}
+
+<section class="streamfield horizontal-card horizontal-card--marathon{% if align_right %} horizontal-card--with-corner-mobile-only{% else %} horizontal-card--with-corner{% endif %}">
+    <div class="horizontal-card__inner {% if align_right %}horizontal-card__inner--reverse{% endif %}">
+        {% image value.image width-1300 as image %}
+        <div class="horizontal-card__image" style="background-image: url({{ image.url }});"></div>
+
+        <div class="horizontal-card__container horizontal-card__container--teal">
+            {% include "patterns/molecules/streamfield/blocks/quote_block.html" with marathon_cta=True double_quote=True %}
+        </div>
+    </div>
+    <span class="horizontal-card__connectors"></span>
+</section>

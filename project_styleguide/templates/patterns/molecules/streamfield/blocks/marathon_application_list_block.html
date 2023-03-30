@@ -1,0 +1,20 @@
+{% load wagtailcore_tags %}
+
+<div class="streamfield marathon-application-list" id="signup">
+    <h2 class="marathon-application-list__title">{{ value.title }}</h2>
+
+    {% if value.subtitle %}
+        <p class="marathon-application-list__subtitle">{{ value.subtitle }}</p>
+    {% endif %}
+
+    <div class="marathon-application-list__cards">
+        {% for page in value.pages %}
+            {% if forloop.counter|divisibleby:2 %}
+                {% include_block page with corner_color="limegreen-corner" %}
+            {% else %}
+                {% include_block page with corner_color="sunflower-corner" %}
+            {% endif %}
+        {% endfor %}
+        
+    </div>
+</div>

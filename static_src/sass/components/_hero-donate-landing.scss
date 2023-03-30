@@ -31,6 +31,10 @@
             &--mobile {
                 display: none;
             }
+
+            &--no-filter {
+                filter: unset;
+            }
         }
     }
 

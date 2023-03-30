@@ -1,0 +1,47 @@
+.ways-to-get-involved {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    @include media-query(tablet-landscape) {
+        flex-direction: row;
+    }
+
+    &__icon {
+        height: 60px;
+        width: 90px;
+
+        @include media-query(tablet-landscape) {
+            height: 85px;
+            width: 80px;
+        }
+    }
+
+    &__content {
+        margin-top: 25px;
+
+        @include media-query(tablet-landscape) {
+            margin-left: $gutter-medium;
+            margin-top: initial;
+        }
+    }
+
+    &__title {
+        @include font-size(m);
+        color: $white;
+        font-weight: $weight--bold;
+        margin-bottom: 0;
+    }
+
+    &__link {
+        @include font-size(s);
+        color: $white;
+        font-weight: $weight--normal;
+        text-decoration: underline;
+
+        &:hover {
+            color: $grey-text;
+        }
+    }
+}

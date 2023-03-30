@@ -1,0 +1,42 @@
+.marathon-application-list {
+    &__title {
+        @include font-size(m);
+        font-weight: $weight--bold;
+        font-size: 24px;
+        margin-bottom: 0;
+
+        @include media-query(tablet-landscape) {
+            @include font-size(xxxl);
+        }
+    }
+
+    &__subtitle {
+        @include media-query(tablet-landscape) {
+            font-size: 20px;
+            margin-bottom: $gutter-x-large;
+        }
+    }
+
+    &__cards {
+        display: grid;
+        grid-row-gap: $gutter;
+
+        .card__title {
+            color: $teal-dark;
+            font-weight: $weight--bold;
+        }
+
+        @include media-query(tablet-landscape) {
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-column-gap: $gutter-large;
+        }
+    }
+
+    &__meta-description {
+        margin-bottom: 0;
+
+        &:last-of-type {
+            margin-bottom: $gutter;
+        }
+    }
+}

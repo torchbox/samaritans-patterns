@@ -1,17 +1,19 @@
 {% load icon_tags humanize i18n %}
 
 {% render_icon value.icon "stat-block__icon" %}
-<h3 class="stat-block__heading">
-    {% language "en-gb" %}
-        {% if not is_euro %}
-            {% if value.amount %}
-                £{{ value.amount|floatformat:"-2"|intcomma }}
+<div>
+    <h3 class="stat-block__heading">
+        {% language "en-gb" %}
+            {% if not is_euro %}
+                {% if value.amount %}
+                    £{{ value.amount|floatformat:"-2"|intcomma }}
+                {% else %}
+                    {{ value.value }}
+                {% endif %}
             {% else %}
-                {{ value.value }}
+                €{{ amount }}
             {% endif %}
-        {% else %}
-            €{{ amount }}
-        {% endif %}
-    {% endlanguage %}
-</h3>
-<p>{{ value.description }}</p>
+        {% endlanguage %}
+    </h3>
+    <p>{{ value.description }}</p>
+</div>

@@ -6,6 +6,9 @@
     {% if story_cta %}
         {# when used in story call to action block (note this class is currently unused but may be useful in the future) #}
         quote-block--story-call-to-action
+    {% elif marathon_cta %}
+        {# when used in a marathon page #}
+        quote-block--marathon
     {% elif hero_quote %}
         {# when used in hero on story page #}
         quote-block--hero
@@ -18,7 +21,12 @@
     ">
     <div class="quote-block">
         <div class="quote-block__quotation-wrapper">
+            {% if double_quote %}
+                {% include "patterns/atoms/svg/icons/icon-quote-open.html" with classes="quote-block__quotation-mark quote-block__quotation-mark--open quote-block__quotation-mark--open-double" %}
+            {% endif %}
+
             {% include "patterns/atoms/svg/icons/icon-quote-open.html" with classes="quote-block__quotation-mark quote-block__quotation-mark--open" %}
+
             <p class="quote-block__quotation">
                 {% if value.quote %}
                     {{ value.quote }}
@@ -26,7 +34,12 @@
                     {{ value }}
                 {% endif %}
             </p>
+
             {% include "patterns/atoms/svg/icons/icon-quote-close.html" with classes="quote-block__quotation-mark quote-block__quotation-mark--close" %}
+
+            {% if double_quote %}
+                {% include "patterns/atoms/svg/icons/icon-quote-close.html" with classes="quote-block__quotation-mark quote-block__quotation-mark--close quote-block__quotation-mark--close-double" %}
+            {% endif %}
         </div>
         <div class="quote-block__information-wrapper">
             {% if value.attribution %}

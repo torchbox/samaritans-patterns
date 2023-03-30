@@ -51,6 +51,13 @@
         padding-right: $gutter-small;
     }
 
+    &--padding-larger {
+        @include page-padding--horizontal(left);
+        @include page-padding--horizontal(right);
+        padding-left: $gutter-small * 2;
+        padding-right: $gutter-small * 2;
+    }
+
     &--activity-landing {
         width: 100%;
 

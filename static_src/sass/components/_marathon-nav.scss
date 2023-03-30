@@ -1,0 +1,118 @@
+.marathon-nav {
+    padding: 0 5px;
+    display: block;
+
+    @include media-query(tablet-landscape) {
+        display: flex;
+        justify-content: space-between;
+        padding: 0;
+        width: 100%;
+    }
+
+    &__title-link {
+        color: $white;
+
+        &:hover {
+            color: $grey-text;
+        }
+    }
+
+    &__title {
+        font-size: 22px;
+        font-weight: $weight--bold;
+        margin-bottom: 0;
+    }
+
+    &__subtitle {
+        @include font-size(xs);
+        font-weight: $weight--normal;
+        margin-bottom: 0;
+    }
+
+    &__cta-container {
+        align-items: center;
+        display: flex;
+        margin-top: 15px;
+
+        @include media-query(tablet-landscape) {
+            margin-top: 0;
+        }
+    }
+
+    &__signup {
+        @include font-size(xxs);
+        margin-right: 20px;
+
+        @include media-query(mob-landscape) {
+            @include font-size(s);
+        }
+
+        .button__icon {
+            margin-left: 10px;
+            transform: rotate(90deg);
+        }
+
+        .button__inner {
+            padding: 5px 10px;
+            padding-left: 20px;
+        }
+    }
+
+    &__cta {
+        align-items: center;
+        border-left: 1px solid $page-bg;
+        display: flex;
+        padding: 5px 0px 5px 20px;
+
+        @include media-query(tablet-landscape) {
+            padding-right: 0;
+        }
+
+        &--solo {
+            border-left: unset;
+            padding: 5px 0;
+
+            @include media-query(tablet-landscape) {
+                border-left: 1px solid $page-bg;
+                padding: 5px 0px 5px 20px;
+            }
+        }
+    }
+
+    &__icon {
+        display: none;
+
+        @include media-query(tablet-landscape) {
+            display: block;
+            height: 30px;
+        }
+    }
+
+    &__link {
+        @include font-size(xxs);
+        align-items: center;
+        color: $white;
+        display: flex;
+        font-weight: $weight--bold;
+        margin-left: 0;
+
+        &:hover {
+            color: $grey-text;
+        }
+
+        @include media-query(mob-landscape) {
+            @include font-size(s);
+        }
+
+        @include media-query(tablet-landscape) {
+            margin-left: 15px;
+        }
+    }
+
+    &__chevron {
+        fill: $white;
+        height: 15px;
+        margin-left: 10px;
+        width: 10px;
+    }
+}

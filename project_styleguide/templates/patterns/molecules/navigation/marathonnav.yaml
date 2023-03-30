@@ -1,0 +1,4 @@
+context:
+  marathonnav:
+    - dummy
+    - block_type: item

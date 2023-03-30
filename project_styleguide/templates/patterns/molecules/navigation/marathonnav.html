@@ -1,0 +1,36 @@
+{% load wagtailcore_tags icon_tags %}
+{% for item in marathonnav %}
+    {# We'll need to have a page for the navigation. #}
+    {% if item.value.page %}
+    <div class="js-header-nav js-header-nav--is-animated header-nav header-nav--marathon">
+        <div class="wrapper wrapper--large wrapper--padding">
+            <div class="header-nav__inner">
+                <div class="marathon-nav">
+                    <a href="{% pageurl item.value.page %}" class="marathon-nav__title-link">
+                        <p class="marathon-nav__title">{{ item.value.title }}</p>
+                        <p class="marathon-nav__subtitle">{{ item.value.subtitle }}</p>
+                    </a>
+                    
+                    {% if show_signup_anchor or item.value.cta_link %}
+                    <div class="marathon-nav__cta-container">
+                        {% if show_signup_anchor %}
+                        {% include "patterns/atoms/buttons/button.html" with href="#signup" label="Sign up" classes="marathon-nav__signup" %}
+                        {% endif %}
+                        
+                        {% if item.value.cta_link %}
+                        <div class="marathon-nav__cta {% if not show_signup_anchor %}marathon-nav__cta--solo{% endif %}">
+                            {% render_icon item.value.cta_icon "marathon-nav__icon" %}
+                            <a class="marathon-nav__link" href="{% pageurl item.value.cta_link %}">
+                                {{ item.value.cta_text }}
+                                {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="marathon-nav__chevron" aria_hide="true" %}
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endfor %}

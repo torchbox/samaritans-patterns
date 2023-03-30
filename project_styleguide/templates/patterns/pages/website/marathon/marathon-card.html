@@ -1,0 +1,14 @@
+<div class="hero__inner wrapper wrapper--large wrapper--padding-larger">
+    <div class="card card--marathon">
+        <span class="card__connectors"></span>
+        <div class="card__container">
+            <h1 class="card__title" id="main-content">{{ page.title }}</h1>
+            {% if cta_link %}
+                {% include "patterns/atoms/buttons/button.html" with href=cta_link label=page.cta_link_text %}
+            {% endif %}
+            {% if secondary_link %}
+                <a class="card__secondary-link" href="{{ secondary_link }}">{{ page.secondary_link_text }}</a>
+            {% endif %}
+        </div>
+    </div>
+</div>

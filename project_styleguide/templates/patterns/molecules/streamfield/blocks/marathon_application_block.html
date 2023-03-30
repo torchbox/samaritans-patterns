@@ -1,0 +1,28 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="card card--with-image card--{{ corner_color }}">
+    <span class="card__connectors"></span>
+    <span class="card__connectors--extra"></span>
+    
+    <a href="{% pageurl page.page %}">
+        {% image value.get_image fill-320x175 class="card__image" %}
+    </a>
+
+    <div class="card__container">
+        <a href="{% pageurl page.page %}" class="card__title">
+            {{ value.get_title }}
+            {% include "patterns/molecules/chevron-link/chevron-link.html" with title=card_title hide_svg_title="true" %}
+        </a>
+        <div class="card__text">
+            {% if value.get_subtitle %}
+                <p>{{ value.get_subtitle }}</p>
+            {% endif %}
+
+            <p class="marathon-application-list__meta-description"><b>Entry Fee</b>: {{ entry_fee }}</p>
+            <p class="marathon-application-list__meta-description"><b>Fundraising target</b>: {{ fundraising_target }}</p>
+
+            {% pageurl page.page as href %}
+            {% include "patterns/atoms/buttons/button.html" with href=href label="Find out more" %}
+        </div>
+    </div>
+</div>

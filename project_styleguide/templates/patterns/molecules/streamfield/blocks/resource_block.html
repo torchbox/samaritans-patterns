@@ -1,0 +1,20 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+{% with link_item=resource.link.0 %}
+<div class="card card--with-image card--{{ corner_color }}">
+    <span class="card__connectors"></span>
+    <span class="card__connectors--extra"></span>
+    
+    <a href="{% if link_item.block_type == 'page' %}{% pageurl link_item.value %}{% else %}{{ link_item.value }}{% endif %}">
+        {% image resource.image fill-320x175 class="card__image" %}
+    </a>
+
+    <div class="card__container">
+        <h2 class="card__title resources__cards--title">{{ resource.title }}</h2>
+        <div class="card__text">
+            <a class="resources__cards--link" href="{% if link_item.block_type == 'page' %}{% pageurl link_item.value %}{% else %}{{ link_item.value }}{% endif %}">
+                {{ resource.link_text }}    
+            </a>
+        </div>
+    </div>
+</div>
+{% endwith %}

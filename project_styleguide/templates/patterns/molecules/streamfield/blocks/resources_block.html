@@ -1,0 +1,31 @@
+{% load wagtailcore_tags %}
+
+<div class="streamfield resources">
+    <h2 class="resources__title">{{ value.title }}</h2>
+    <h4 class="resources__subtitle">{{ value.subtitle }}</h4>
+
+    <div class="resources__cards">
+        {% for resource in value.resources %}
+            {% if forloop.counter|divisibleby:2 %}
+                {% include "patterns/molecules/streamfield/blocks/resource_block.html" with corner_color="sunflower-corner" %}
+            {% else %}
+                {% include "patterns/molecules/streamfield/blocks/resource_block.html" with corner_color="limegreen-corner" %}
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    {% with cta_link=value.cta_button_link.0 %}
+        {% if cta_link.value %}
+            <div class="resources__cta">
+                <h3 class="resources__cta--title">{{ value.cta_title }}</h3>
+
+                {% if cta_link.block_type == 'page' %}
+                    {% pageurl cta_link.value as href %}
+                    {% include "patterns/atoms/buttons/button.html" with href=href label=value.cta_button_text %}
+                {% else %}
+                    {% include "patterns/atoms/buttons/button.html" with href=cta_link.value label=value.cta_button_text %}
+                {% endif %}
+            </div>
+        {% endif %}
+    {% endwith %}
+</div>

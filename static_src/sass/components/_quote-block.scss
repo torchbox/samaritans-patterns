@@ -8,6 +8,7 @@ possible modifiers:
 --dark - when used in the hero on a story page
 --with-media - when used in the media with quote block
 --story-call-to-action - when used in the story call to action block (note this variation is currently unused but has been left in the markup as a useful distinction from the --quote variation)
+--marathon - when used in a marathon page. This is just like story call to action with a few tweaks.
 
 */
 
@@ -89,6 +90,12 @@ possible modifiers:
         #{$root}--hero & {
             display: none;
         }
+
+        #{$root}--marathon & {
+            @include media-query(tablet-portrait) {
+                padding-left: 10px;
+            }
+        }
     }
 
     &__quotation-mark {
@@ -103,9 +110,18 @@ possible modifiers:
 
         &--open {
             margin-bottom: $gutter;
+            width: 30px;
 
             @include media-query(tablet-portrait) {
                 align-self: flex-start;
+            }
+
+            @include media-query(tablet-landscape) {
+                #{$root}--marathon & {
+                    position: absolute;
+                    left: -25px;
+                    top: -35px;
+                }
             }
         }
 
@@ -132,6 +148,25 @@ possible modifiers:
                     transform: translateY(0);
                 }
             }
+
+            #{$root}--marathon & {
+                top: calc(100% + 20px);
+                width: 30px;
+            }
+        }
+
+        &--open-double {
+            @include media-query(tablet-landscape) {
+                #{$root}--marathon & {
+                    left: -60px;
+                }
+            }
+        }
+
+        &--close-double {
+            #{$root}--marathon & {
+                right: 35px;
+            }
         }
     }
 
@@ -149,6 +184,11 @@ possible modifiers:
                 margin: 0 $gutter-medium 0;
             }
         }
+
+        #{$root}--marathon & {
+            font-weight: $weight--bold;
+            margin-left: 10px;
+        }
     }
 
     &__attribution {
@@ -157,6 +197,10 @@ possible modifiers:
         #{$root}--quote &,
         #{$root}--hero & {
             @include font-size(xs);
+        }
+
+        #{$root}--marathon & {
+            font-weight: $weight--normal;
         }
     }
 

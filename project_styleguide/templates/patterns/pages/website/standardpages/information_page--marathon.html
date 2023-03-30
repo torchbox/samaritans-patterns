@@ -1,0 +1,80 @@
+{% extends "patterns/base_page.html" %}
+{% load wagtailcore_tags navigation_tags helper_tags static %}
+
+{% block header %}
+    {% include "patterns/organisms/header/header.html" with show_links=True show_marathon_nav=True %}
+{% endblock header %}
+
+{% block content %}
+    {% if page.show_progress_bar %}
+        {% include "patterns/molecules/progress-bar/progress-bar.html" %}
+    {% endif %}
+
+    {% include "patterns/molecules/hero/hero.html" with hero_color="sunflower" hero_short=True hero_title_id="main-content" badge_color_option=page.badge_color_option badge_text=page.badge_text %}
+
+    <section class="wrapper wrapper--large wrapper--padding-for-page">
+        <div class="
+        section
+        section--overlap
+        {% if page.hero_image %}
+            section--information-page-with-hero-image-marathon-theme
+        {% else %}
+            section--information-page-marathon-theme
+        {% endif %}
+        {% if page.show_last_reviewed_at and page.last_reviewed_at %}
+            section--information-page-with-bottom-meta
+        {% endif %}
+        ">
+            {% if page.introduction %}
+                <p class="intro">{{ page.introduction }}</p>
+            {% endif %}
+
+            {% comment %} Used in news template which extends info page {% endcomment %}
+            {% block news_meta %}{% endblock %}
+
+            {% include_block page.body %}
+
+            {% if page.show_last_reviewed_at and page.last_reviewed_at %}
+                {% include 'patterns/molecules/meta-bar/meta-bar.html' with value=page %}
+            {% endif %}
+
+            {% include "patterns/atoms/corners/corners.html" with size="page" %}
+        </div>
+    </section>
+
+    {% if page.email_subscription_form %}
+        <div class="wrapper">
+           <div class="wrapper wrapper--large wrapper--padding-for-page">
+                <div class="section section--main section--no-hero mailchimp-form">
+                    {% if page.email_subscription_heading %}
+                        <h2 class="heading-secondary">{{ page.email_subscription_heading }}</h2>
+                    {% endif %}
+                    {{ page.email_subscription_form.embed_code|safe }}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% include "patterns/molecules/info-panel/info-panel.html" with classes="info-panel--overlap" value=page %}
+
+    {% include "patterns/molecules/related-pages/related-pages--large.html" with related_pages=page.related_pages.all %}
+
+{% endblock %}
+
+<!-- Overide footer CTA display -->
+{% block footer %}
+    {% if page.related_pages.all %}
+        {% include "patterns/molecules/banner-cta/banner-cta.html" with page=page %}
+    {% else %}
+        <div class="call-to-action--footer-padding">
+            {% include "patterns/molecules/banner-cta/banner-cta.html" with page=page %}
+        </div>
+    {% endif %}
+
+    {% include 'patterns/organisms/footer/footer.html' %}
+{% endblock footer %}
+
+{% block extra_js %}
+{{ webchat_api_url|json_script:"webchat_api_url" }}
+<script src="{% static 'js/chat-utils.js' %}"></script>
+{% endblock %}

@@ -2,6 +2,7 @@ $white: #fff;
 $black: #000;
 
 $lime: #84bd00;
+$limegreen: #8bbe29;
 $emerald: #00a589;
 $grass: #00a862;
 $meadow: #b6d8a3;
@@ -147,6 +148,7 @@ $gutter-xxl: 60px;
 
 //spacings
 $section-overlap: 2 * $gutter-xxl; // 120px
+$section-overlap-large: 13 * $gutter; // 260px
 $section-overlap--hero-with-image: $gutter-xxl + $gutter; //  80px
 $body-padding--website: 10px;
 $margin--main-after: $gutter-xxl;

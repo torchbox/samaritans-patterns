@@ -1,0 +1,6 @@
+{% load wagtailcore_tags icon_tags %}
+
+<div class="icons-with-text__block">
+    {% render_icon icon.value.icon "icons-with-text__icon" %}
+    <p class="icons-with-text__text">{{ icon.value.text }}</p>
+</div>

@@ -1,0 +1,176 @@
+.marathon {
+    $root: &;
+
+    &__hero-image-container {
+        &--mobile {
+            display: block;
+            position: relative;
+
+            @include media-query(tablet-landscape) {
+                display: none;
+            }
+        }
+
+        &--desktop {
+            display: none;
+
+            @include media-query(tablet-landscape) {
+                display: block;
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                background-color: $color--default;
+                background-position: center;
+                background-size: cover;
+            }
+        }
+    }
+
+    &__hero-image {
+        height: 395px;
+        object-fit: cover;
+        width: 100%;
+    }
+
+    &__hero-card {
+        &--mobile {
+            @include media-query(tablet-landscape) {
+                display: none;
+            }
+        }
+
+        &--desktop {
+            display: none;
+
+            @include media-query(tablet-landscape) {
+                display: block;
+            }
+        }
+    }
+
+    &__title {
+        &--mobile {
+            color: $teal;
+            font-size: 27px;
+
+            @include media-query(tablet-landscape) {
+                display: none;
+            }
+        }
+
+        &--desktop {
+            display: none;
+
+            @include media-query(tablet-landscape) {
+                @include font-size(xxxl);
+                color: $color--white;
+                display: block;
+                font-size: 70px;
+                line-height: 79px;
+                margin-bottom: 90px;
+                width: 50%;
+            }
+        }
+    }
+
+    &__content-container {
+        background-color: $color--white;
+        position: relative;
+        padding-bottom: $gutter-medium;
+
+        @include media-query(tablet-landscape) {
+            @include connectors($teal, bottom, left, $size: page);
+            padding: 0 $gutter-xxl;
+            padding-bottom: $gutter-xxl;
+        }
+
+        // Different paddings for the marathon application page due to the placement
+        // of the card in the hero section for mobile.
+        .template-marathon-application-page & {
+            padding: ($gutter-xxl * 2.5) $gutter-medium;
+
+            @include media-query(mob-landscape) {
+                padding: $gutter-xxl $gutter-medium;
+            }
+
+            @include media-query(tablet-landscape) {
+                padding: 0 $gutter-xxl $gutter-xxl;
+            }
+        }
+    }
+
+    &__content {
+        padding: 0 24px;
+
+        @include media-query(tablet-landscape) {
+            padding: $gutter-xxl 0 0;
+        }
+    }
+
+    &__body-footer-cta {
+        display: none;
+
+        @include media-query(tablet-landscape) {
+            border-top: 1px solid $page-bg;
+            display: block;
+            font-size: 20px;
+            padding-top: 50px;
+            text-align: center;
+
+            .rich-text {
+                max-width: unset;
+
+                a {
+                    font-weight: $weight--normal;
+                }
+            }
+        }
+    }
+
+    &__other-ways-to-get-involved {
+        &--mobile {
+            background-color: $teal;
+            text-align: center;
+            padding: $gutter-x-large 25px;
+
+            @include media-query(tablet-landscape) {
+                display: none;
+            }
+        }
+
+        &--desktop {
+            display: none;
+
+            @include media-query(tablet-landscape) {
+                display: grid;
+                grid-template-columns: repeat(1fr, 3);
+                grid-column-gap: $gutter-xxl;
+            }
+        }
+
+        &--title {
+            @include font-size(m);
+            color: $white;
+            font-weight: $weight--bold;
+            margin-bottom: $gutter-medium;
+
+            @include media-query(tablet-landscape) {
+                font-size: 34px;
+                font-weight: $weight--bold;
+                margin-bottom: $gutter-xxl;
+            }
+        }
+
+        &--snippets {
+            display: grid;
+            grid-row-gap: $gutter-medium;
+
+            @include media-query(tablet-landscape) {
+                grid-template-columns: repeat(3, 1fr);
+                grid-column-gap: $gutter-xxl;
+            }
+        }
+    }
+}

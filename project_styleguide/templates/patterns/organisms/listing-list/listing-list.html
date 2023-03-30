@@ -1,16 +1,25 @@
 <ul class="news-list">
     {% for listing in listings %}
-        <li {% if listing.featured %}class="listing-item-highlight {% if forloop.counter|divisibleby:2 %}listing-item-highlight--reverse{% endif %}"{% endif %}>
-            {% if listing.featured %}
+        <li {% if listing.highlight_featured or listing.featured %}class="listing-item-highlight {% if forloop.counter|divisibleby:2 %}listing-item-highlight--reverse{% endif %}"{% endif %}>
+            {% if listing.highlight_featured or listing.featured %}
                 {% include "patterns/atoms/svg/icons/icon-star.html" with classes="listing-item-highlight__icon listing-item-highlight__icon--background" aria_hide="true" %}
                 {% include "patterns/atoms/svg/icons/icon-star.html" with classes="listing-item-highlight__icon" aria_hide="true" %}
             {% endif %}
-            {% if listing.featured %}
+            {# Highlight featured will have a sunflower background. This is currently just used for marathon landing pages. #}
+            {% if listing.highlight_featured %}
+                {% if forloop.counter0|divisibleby:2 %}
+                    {% include "patterns/molecules/listing-item/listing-item.html" with value=listing classes="listing-item--website listing-item--highlight-featured" %}
+                {% else %}
+                    {% include "patterns/molecules/listing-item/listing-item.html" with value=listing classes="listing-item--website listing-item--highlight-featured listing-item--reverse" %}
+                {% endif %}
+            {# Featured will have a teal background. #}
+            {% elif listing.featured %}
                 {% if forloop.counter0|divisibleby:2 %}
                     {% include "patterns/molecules/listing-item/listing-item.html" with value=listing classes="listing-item--website listing-item--highlight" %}
                 {% else %}
                     {% include "patterns/molecules/listing-item/listing-item.html" with value=listing classes="listing-item--website listing-item--highlight listing-item--reverse" %}
                 {% endif %}
+            {# Regular ones will have a white background. #}
             {% else %}
                 {% include "patterns/molecules/listing-item/listing-item.html" with value=listing classes="listing-item--website" %}
             {% endif %}

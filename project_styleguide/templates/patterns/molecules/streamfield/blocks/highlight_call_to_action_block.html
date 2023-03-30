@@ -1,0 +1,19 @@
+{% load wagtailimages_tags %}
+
+<section class="streamfield horizontal-card horizontal-card--homepage-highlight">
+    <div class="horizontal-card__inner">
+        {% image value.image width-1300 as image %}
+        <div class="horizontal-card__image" style="background-image: url({{ image.url }});"></div>
+
+        <div class="horizontal-card__container horizontal-card__container--yellow">
+            <p class="website-homepage__cta__title">{{ value.title }}</p>
+            <h2 class="heading-secondary">
+                {{ value.headline }}
+            </h2>
+            <p class="website-homepage__cta__text website-homepage__cta__text--no-padding">{{ value.description }}</p>
+
+            {% include "patterns/atoms/buttons/button.html" with label=value.link_text href=value.link.url %}
+        </div>
+    </div>
+    <span class="horizontal-card__connectors"></span>
+</section>

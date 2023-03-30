@@ -66,6 +66,59 @@
         }
     }
 
+    &--highlight-featured {
+        @include connectors($lime, bottom, right);
+        position: relative;
+        z-index: z($z-elements, card);
+        padding: 0;
+        background: $sunflower;
+        color: $ink;
+
+        #{$hover} {
+            color: $ink;
+
+            #{$root}__title {
+                color: $ink;
+            }
+        }
+
+        #{$root}__title-text {
+            color: $ink;
+        }
+
+        #{$root}__content {
+            padding: $gutter;
+
+            @include media-query--takes-value($listing-item-breakpoint) {
+                padding: 15px $gutter $gutter 0;
+            }
+        }
+
+        #{$root}__image {
+            object-fit: cover;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        #{$root}__image-wrap {
+            position: relative;
+
+            @include media-query--takes-value($listing-item-breakpoint) {
+                height: 370px;
+                margin-right: $gutter;
+            }
+
+            @include media-query--takes-value(650px) {
+                height: 290px;
+            }
+
+            @include media-query--takes-value(870px) {
+                height: 200px;
+            }
+        }
+    }
+
     &--reverse {
         @include connectors($lime, bottom, left);
 

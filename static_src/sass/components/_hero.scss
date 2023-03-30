@@ -38,6 +38,10 @@
         background: $emerald;
     }
 
+    &--sunflower {
+        background: $sunflower;
+    }
+
     &--plum {
         background: $plum;
     }
@@ -62,6 +66,10 @@
 
             &--plum {
                 background: $plum;
+            }
+
+            &--sunflower {
+                background: $sunflower;
             }
         }
     }
@@ -140,6 +148,10 @@
             @include media-query(tablet-portrait) {
                 margin-bottom: $gutter;
             }
+        }
+
+        #{$root}--sunflower & {
+            color: $teal-dark;
         }
     }
 
@@ -266,6 +278,16 @@
                 right: -12px;
                 bottom: auto;
                 left: auto;
+            }
+
+            &--rotated {
+                top: 15%;
+                right: -300px;
+                transform: rotate(45deg);
+            }
+
+            &--grass {
+                fill: $grass;
             }
 
             #{$root}--with-image & {
@@ -498,6 +520,46 @@
             @include media-query(tablet-portrait) {
                 display: block;
             }
+        }
+    }
+
+    &--marathon {
+        padding: 0;
+        height: 395px;
+
+        @include media-query(tablet-landscape) {
+            height: 805px;
+
+            #{$root}__inner {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -60%);
+            }
+        }
+    }
+
+    &--marathon-with-card {
+        background-color: $color--white;
+        padding: 0;
+
+        @include media-query(tablet-landscape) {
+            padding: $gutter-xxl 0 $section-overlap;
+        }
+
+        #{$root}__inner {
+            margin-top: $gutter * -10;
+
+            @include media-query(tablet-landscape) {
+                margin-top: initial;
+            }
+        }
+    }
+
+    &--marathon-index-page {
+        @include media-query(tablet-landscape) {
+            padding-top: 70px;
+            padding-bottom: 150px;
         }
     }
 

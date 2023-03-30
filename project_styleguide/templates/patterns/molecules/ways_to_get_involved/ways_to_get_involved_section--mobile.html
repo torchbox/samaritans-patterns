@@ -1,0 +1,11 @@
+{% load wagtailcore_tags %}
+
+<div class="marathon__other-ways-to-get-involved--mobile">
+    <h2 class="marathon__other-ways-to-get-involved--title">Other ways to get involved</h2>
+
+    <div class="marathon__other-ways-to-get-involved--snippets">
+        {% for block in ways_to_get_involved_section %}
+            {% include_block block %}
+        {% endfor %}
+    </div>
+</div>

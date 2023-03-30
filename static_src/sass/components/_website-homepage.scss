@@ -24,6 +24,12 @@
     &__cta {
         text-align: center;
 
+        &__title {
+            font-size: 21px;
+            font-weight: $weight--bold;
+            margin-bottom: $gutter;
+        }
+
         &__heading {
             margin-bottom: $gutter-large;
 
@@ -63,6 +69,11 @@
             @include media-query(tablet-portrait) {
                 margin-bottom: $gutter-x-large;
                 padding: 0 $gutter-xxl;
+            }
+
+            &--no-padding {
+                margin-bottom: $gutter;
+                padding: 0;
             }
         }
     }

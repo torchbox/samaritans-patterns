@@ -56,7 +56,8 @@
             color: $breadcrumb-primary--on-light;
         }
 
-        .hero--landing-page & {
+        .hero--landing-page &,
+        .hero__breadcrumb-wrapper--sunflower & {
             color: $ink;
         }
     }
@@ -90,6 +91,10 @@
 
             .hero--landing-page & {
                 fill: $lime;
+            }
+
+            .hero__breadcrumb-wrapper--sunflower & {
+                fill: $ink;
             }
         }
 

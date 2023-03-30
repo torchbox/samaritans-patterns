@@ -10,11 +10,11 @@
             {% if value.start_date %}
                 <span class="meta-bar__text">
                     {{ value.start_time|default:""|date:"fA"|lower }}
-                    {{ value.start_date|date:"l jS F" }}
+                    {% if display_year %}{{ value.start_date|date:"l jS F Y" }}{% else %}{{ value.start_date|date:"l jS F" }}{% endif %}
                     {% if value.end_date %}
                         – <br/>
                         {{ value.end_time|default:""|date:"fA"|lower }}
-                        {{ value.end_date|default:""|date:"l jS F" }}
+                        {% if display_year %}{{ value.end_date|date:"l jS F Y" }}{% else %}{{ value.end_date|date:"l jS F" }}{% endif %}
                     {% endif %}
                 </span>
             {% elif value.publication_date %}

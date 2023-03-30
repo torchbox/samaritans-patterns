@@ -1,0 +1,23 @@
+{% load wagtailcore_tags icon_tags %}
+
+<div class="streamfield">
+    <div class="fundraising-details__details-container">
+        {% render_icon fundraising_icon "fundraising-details__icon" %}
+        
+        <div class="fundraising-details__details">
+            <p><b>Entry fee:</b> {{ entry_fee }}</p>
+            <p><b>Fundraising target:</b> {{ fundraising_target }}</p>
+        </div>
+    </div>
+    {% if cta_link or secondary_link %}
+        <div class="fundraising-details__links">
+            {% if cta_link %}
+                {% include "patterns/atoms/buttons/button.html" with href=cta_link label=cta_link_text large=True %}
+            {% endif %}
+
+            {% if secondary_link %}
+                <a class="fundraising-details__secondary-link" href="{{ secondary_link }}">{{ secondary_link_text }}</a>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>

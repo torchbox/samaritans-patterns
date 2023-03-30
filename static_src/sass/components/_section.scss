@@ -90,6 +90,23 @@
         }
     }
 
+    &--overlap-large {
+        margin-top: -($gutter * 8);
+        position: relative;
+        z-index: z($z-elements, page);
+
+        @include media-query(tablet-landscape) {
+            margin-top: -$section-overlap-large;
+        }
+    }
+
+    &--overlap-large-desktop-only {
+        @include media-query(tablet-landscape) {
+            position: relative;
+            z-index: z($z-elements, page);
+            margin-top: -($gutter * 8);
+        }
+    }
     &--secondary {
         margin-bottom: $gutter-large;
 
@@ -114,6 +131,10 @@
         @include page(top-right, bottom-right, $width: medium);
     }
 
+    &--information-page-marathon-theme {
+        @include page(top-right, bottom-right, $width: full);
+    }
+
     &--story-page {
         @include page(top-right, bottom-right, $width: full);
     }
@@ -124,6 +145,16 @@
 
     &--information-page-with-hero-image {
         @include page(top-left, bottom-right, $width: medium);
+
+        &#{$root}--overlap {
+            @include media-query(tablet-landscape) {
+                margin-top: -($section-overlap--hero-with-image - $gutter-xxl);
+            }
+        }
+    }
+
+    &--information-page-with-hero-image-marathon-theme {
+        @include page(top-left, bottom-right, $width: full);
 
         &#{$root}--overlap {
             @include media-query(tablet-landscape) {
@@ -277,6 +308,16 @@
         @include section--after-page;
         background-color: $amethyst;
         color: $white;
+    }
+
+    &--page-end-cta-teal {
+        @include section--after-page($padding-vertical: 170px, $padding: small);
+        background-color: $teal;
+        color: $white;
+
+        @include media-query(tablet-landscape) {
+            padding-bottom: 130px;
+        }
     }
 
     &--landing-page {

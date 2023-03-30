@@ -1,31 +1,44 @@
 .horizontal-card {
     $root: &;
 
-    @mixin card-corner($color, $position-1: top, $position-2: left) {
+    @mixin card-corner(
+        $color,
+        $position-1: top,
+        $position-2: left,
+        $height: 50%
+    ) {
+        @include corner(
+            $color,
+            $position-1,
+            $position-2,
+            $width: 200px,
+            $height: $height,
+            $offset: 10px
+        );
+
+        &::before {
+            z-index: auto;
+        }
+
+        #{$root}__connectors {
+            @include connectors($color, $position-1, $position-2, medium);
+        }
+    }
+
+    @mixin card-corner-tablet-portrait(
+        $color,
+        $position-1: top,
+        $position-2: left
+    ) {
         @include media-query(tablet-portrait) {
-            @include corner(
-                $color,
-                $position-1,
-                $position-2,
-                $width: 200px,
-                $height: 50%,
-                $offset: 10px
-            );
-
-            &::before {
-                z-index: auto;
-            }
-
-            #{$root}__connectors {
-                @include connectors($color, $position-1, $position-2, medium);
-            }
+            @include card-corner($color, $position-1, $position-2);
         }
     }
 
     position: relative;
 
     &--homepage-support {
-        @include card-corner($lime);
+        @include card-corner-tablet-portrait($lime);
         margin-top: $gutter-xxl;
 
         @include media-query(tablet-landscape) {
@@ -34,7 +47,7 @@
     }
 
     &--homepage-volunteer {
-        @include card-corner($amethyst, bottom, right);
+        @include card-corner-tablet-portrait($amethyst, bottom, right);
         margin-top: $gutter-x-large;
         margin-bottom: $gutter-x-large;
 
@@ -43,10 +56,51 @@
         }
     }
 
+    &--homepage-highlight {
+        @include card-corner($off-white, bottom, right, 20%);
+        margin-top: $gutter-x-large;
+        margin-bottom: $gutter-x-large;
+
+        @include media-query(tablet-landscape) {
+            margin-bottom: 0;
+        }
+    }
+
+    &--marathon {
+        @include media-query(tablet-landscape) {
+            margin-left: -$gutter-xxl;
+            margin-right: -$gutter-xxl;
+        }
+
+        #{$root}__container {
+            @include media-query(tablet-landscape) {
+                padding: $gutter-xxl 100px;
+            }
+        }
+    }
+
+    &--with-corner {
+        @include card-corner($white, bottom, right, 20%);
+    }
+
+    &--with-corner-mobile-only {
+        @include card-corner($white, bottom, right, 20%);
+
+        @include media-query(tablet-portrait) {
+            &::before {
+                display: none;
+            }
+        }
+    }
+
     &__inner {
         @include media-query(tablet-portrait) {
             display: flex;
             justify-content: stretch;
+
+            &--reverse {
+                flex-direction: row-reverse;
+            }
         }
 
         #{$root}--homepage-support & {
@@ -93,6 +147,15 @@
             @include media-query(tablet-landscape) {
                 padding: 40px;
             }
+        }
+
+        &--yellow {
+            background-color: $sunflower;
+        }
+
+        &--teal {
+            background-color: $teal;
+            color: $white;
         }
     }
 
