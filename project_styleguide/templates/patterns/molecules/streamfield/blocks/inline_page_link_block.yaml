@@ -1,0 +1,11 @@
+context:
+  value:
+    link_text: See all FAQs
+    page:
+      title: FAQs
+
+tags:
+  pageurl:
+    value:
+      page:
+        raw: '#'

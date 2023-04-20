@@ -1,0 +1,5 @@
+{% load wagtailcore_tags %}
+
+<div class="streamfield">
+    <a href="{% pageurl value.page %}">{% firstof value.link_text value.page.title %}</a>
+</div>
