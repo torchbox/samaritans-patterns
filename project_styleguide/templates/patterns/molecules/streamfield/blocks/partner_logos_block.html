@@ -1,0 +1,9 @@
+{% load wagtailimages_tags %}
+
+<ul class="streamfield partner-logos">
+    {% for logo in value.logos %}
+        <li class="partner-logos__logo-container">
+            {% image logo height-70 class="partner-logos__logo" %}
+        </li>
+    {% endfor %}
+</ul>

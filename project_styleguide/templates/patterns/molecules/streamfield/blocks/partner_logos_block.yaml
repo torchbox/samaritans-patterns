@@ -1,0 +1,12 @@
+context:
+  value: 
+    logos:
+      - 1
+      - 2
+      - 3
+
+tags:
+  image:
+    logo height-50 class="partner-logos__logo":
+      raw: |
+        <img src="http://placekitten.com/365/210" width="365" height="210" alt="Some alt" class="card__image">

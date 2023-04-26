@@ -1,0 +1,20 @@
+.partner-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    grid-gap: $gutter;
+
+    @include media-query(tablet-landscape) {
+        grid-gap: $gutter-large;
+    }
+
+    &__logo-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__logo {
+        height: 70px;
+        width: auto;
+    }
+}
