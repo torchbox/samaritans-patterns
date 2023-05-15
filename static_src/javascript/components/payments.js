@@ -1,6 +1,7 @@
 // pca is a window var - tell eslint it's a global so it doesn't complain it is undefined
 /* global pca */
 import DonateValidation from './donate-validation';
+import { MONTHLY, SINGLE } from './shared/constants';
 
 const braintree = require('braintree-web');
 
@@ -94,6 +95,80 @@ function setupPayment() {
 
     function clearFieldError(container) {
         container.classList.remove('braintree-hosted-fields-invalid');
+    }
+
+    // Send action to GA4.
+    function pushDataLayer(paymentMethod) {
+        function getField(selector) {
+            return paymentForm.querySelector(selector);
+        }
+
+        const amount = getField('#id_amount').value;
+        const campaignName = getField('#id_campaign_name').value || 'DONATE';
+        const frequency = getField('#id_frequency').value;
+        const isGiftAid = getField('#id_gift_aid')?.checked || false;
+        const isInMemory = getField('#id_in_memory')?.checked || false;
+        const isOrganisationBehalf = getField('#id_is_corporate')?.checked || false;
+
+        // This element only exists if the donation is for a fundraising.
+        const isFundraising = getField('#id_payment_origin_choice') || false;
+
+        let itemId;
+        let itemCategory = null;
+        let itemName = 'Donation';
+        if (frequency === MONTHLY) {
+            itemCategory = 'Regular';
+            itemId = 'DONATION_REGULAR';
+        } else if (frequency === SINGLE) {
+            if (isFundraising) {
+                itemCategory = 'Fundraising';
+                itemId = 'FUNDRAISING';
+                itemName = "Fundraising";
+            } else {
+                itemCategory = 'Single';
+                itemId = 'DONATION_SINGLE';
+            }
+        }
+
+        let itemCategory2 = 'General';
+        if (isInMemory) {
+            itemCategory2 = 'In memory';
+        } else if (isOrganisationBehalf) {
+            itemCategory2 = 'Organisation';
+        }
+
+        // If the event has already been sent to GA4 once,
+        // do not send another event.
+        window.dataLayer = window.dataLayer || [];
+        if (window.dataLayer.find((e) => e.event === 'add_payment_info')) {
+            return;
+        }
+
+        window.dataLayer.push({
+            event: 'add_payment_info',
+            ecommerce: {
+                items: [
+                    {
+                        item_brand: campaignName,
+                        item_category: itemCategory,
+                        item_category2: itemCategory2,
+                        item_id: itemId,
+                        item_name: itemName,
+                        item_variant: isGiftAid
+                            ? 'Gift Aid Yes'
+                            : 'Gift Aid No',
+                        // Display price with 2 decimal places.
+                        price: parseFloat(amount).toFixed(2),
+                        quantity: '1',
+                    },
+                ],
+            },
+            // Additional data
+            donation_type: itemCategory2,
+            frequency: frequency,
+            gift_aid: isGiftAid,
+            payment_type: paymentMethod,
+        });
     }
 
     function initCard() {
@@ -330,6 +405,9 @@ function setupPayment() {
                                         // This runs every time the button is clicked even if
                                         // it is disabled.
                                         onClick: () => {
+                                            // Send selected payment method to GA4.
+                                            pushDataLayer('PayPal');
+
                                             donateValidation.checkValidity();
                                         },
                                     },
@@ -470,10 +548,14 @@ function setupPayment() {
                                         buttonType: 'plain',
                                         buttonSizeMode: 'fill',
                                         onClick: () => {
+                                            // Send selected payment method to GA4.
+                                            pushDataLayer('Google Pay');
+
                                             if (
                                                 donateValidation.checkValidity()
                                             ) {
                                                 clearAllErrorMessages();
+
                                                 const currentForm =
                                                     getFormValues();
                                                 const paymentDataRequest =
@@ -651,8 +733,12 @@ function setupPayment() {
                                     );
                                 applePayButtons.forEach((button) => {
                                     button.addEventListener('click', () => {
+                                        // Send selected payment method to GA4.
+                                        pushDataLayer('Apple Pay');
+
                                         if (donateValidation.checkValidity()) {
                                             clearAllErrorMessages();
+
                                             const currentForm = getFormValues();
                                             const paymentRequest =
                                                 applePayInstance.createPaymentRequest(

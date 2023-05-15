@@ -23,10 +23,12 @@
 
         {% include "patterns/molecules/payments/braintree-payment-widgets.html" with is_event_payment=True %}
         {{ personal_details|json_script:"payments__personal-details" }}
+        {{ event_details|json_script:"payments__event-details" }}
     </div>
 {% endblock %}
 
 {% block extra_js %}
+    {{ tag_manager_events|json_script:"tag_manager_events" }}
     <script src="{% static 'js/payments_events.js' %}"></script>
     <script src="https://www.paypalobjects.com/api/checkout.js" data-version-4></script>
     <script src="https://pay.google.com/gp/p/js/pay.js"></script>

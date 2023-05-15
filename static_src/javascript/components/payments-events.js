@@ -77,6 +77,46 @@ function setupPayment() {
         container.classList.remove('braintree-hosted-fields-invalid');
     }
 
+    // Send action to GA4.
+    function pushDataLayer(paymentMethod) {
+        const personalDetails = JSON.parse(
+            document.querySelector('#payments__personal-details').innerHTML,
+        );
+        const eventDetails = JSON.parse(
+            document.querySelector('#payments__event-details').innerHTML,
+        );
+        const amount = personalDetails.amount;
+        const eventId = eventDetails.event_id;
+        const eventName = eventDetails.name;
+
+        // If the event has already been sent to GA4 once,
+        // do not send another event.
+        window.dataLayer = window.dataLayer || [];
+        if (window.dataLayer.find((e) => e.event === 'add_payment_info')) {
+            return;
+        }
+
+        window.dataLayer.push({
+            event: 'add_payment_info',
+            ecommerce: {
+                items: [
+                    {
+                        item_brand: `${eventName}_${eventId}`,
+                        item_category: 'Event Registration',
+                        item_id: `EVENT_REGISTRATION_${eventId}`,
+                        item_name: 'Event Registration',
+                        // Display price with 2 decimal places.
+                        price: parseFloat(amount).toFixed(2),
+                        quantity: '1',
+                    },
+                ],
+            },
+            // Additional data
+            donation_type: 'General',
+            payment_type: paymentMethod,
+        });
+    }
+
     function initCard() {
         let hf;
         let threeDS;
@@ -228,6 +268,9 @@ function setupPayment() {
                                         },
 
                                         payment: function () {
+                                            // Send selected payment method to GA4.
+                                            pushDataLayer('PayPal');
+
                                             return payPalCheckoutInstance.createPayment(
                                                 {
                                                     flow: 'checkout',
@@ -406,6 +449,9 @@ function setupPayment() {
                                         buttonSizeMode: 'fill',
                                         onClick: () => {
                                             clearAllErrorMessages();
+
+                                            // Send selected payment method to GA4.
+                                            pushDataLayer('Google Pay');
 
                                             const paymentDataRequest =
                                                 googlePaymentInstance.createPaymentDataRequest(
@@ -595,6 +641,9 @@ function setupPayment() {
                                         'click',
                                         function () {
                                             clearAllErrorMessages();
+
+                                            // Send selected payment method to GA4.
+                                            pushDataLayer('Apple Pay');
 
                                             var paymentRequest =
                                                 applePayInstance.createPaymentRequest(

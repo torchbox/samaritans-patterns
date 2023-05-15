@@ -100,6 +100,7 @@ class DonateAmountSlider {
         const iconValues = this.config.iconValues;
         let text = this.config.text;
         const textValues = this.config.textValues;
+        const donationFrequency = this.config.frequency;
 
         // There are two #id_amount's in the DOM. Selecting by the name is more reliable
         const pips = donateSlider.querySelectorAll('.noUi-value');
@@ -156,6 +157,9 @@ class DonateAmountSlider {
 
         const node = amount;
 
+        // When changing the value in the 'other amount' field,
+        // - notify GA4 of the new value,
+        // - select the corresponding price point on the slider if applicable.
         node.addEventListener('keyup', function (e) {
             const num = Number(e.target.value);
             if (pipValues.includes(num)) {
