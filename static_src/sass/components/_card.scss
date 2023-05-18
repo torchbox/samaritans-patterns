@@ -275,7 +275,6 @@
 
     &--activity,
     &--information {
-        @include card-corner($lime);
         max-width: 416px;
 
         #{$root} {
@@ -304,6 +303,24 @@
                 margin-bottom: $gutter-xxl;
                 max-width: 530px;
             }
+        }
+    }
+
+    &--information {
+        @include card-corner($lime);
+    }
+
+    &--activity {
+        @include card-corner($emerald);
+
+        #{$root} {
+            &__container {
+                background-color: rgba($white, 0.9);
+            }
+        }
+
+        .hero--activity-landing-page-with-logo & {
+            margin-top: $gutter-xxl;
         }
     }
 

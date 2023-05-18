@@ -58,8 +58,20 @@
         padding-right: $gutter-small * 2;
     }
 
+    &--padding {
+        .hero--activity-landing-page-with-logo & {
+            @include media-query(tablet-portrait) {
+                padding-right: 0;
+            }
+            @include media-query(tablet-landscape) {
+                padding-left: 0;
+            }
+        }
+    }
+
     &--activity-landing {
         width: 100%;
+        position: relative;
 
         @include media-query(tablet-portrait) {
             max-width: $site-width;

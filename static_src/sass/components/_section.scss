@@ -107,6 +107,7 @@
             margin-top: -($gutter * 8);
         }
     }
+
     &--secondary {
         margin-bottom: $gutter-large;
 
@@ -433,27 +434,21 @@
     }
 
     &--activity-landing {
-        @include media-query(tablet-portrait) {
-            margin-bottom: 60px;
-        }
-
-        @include media-query(tablet-landscape) {
-            margin-bottom: 120px;
-        }
-
-        @include page(bottom-left, $width: full);
+        @include page(top-right, $width: full);
+        padding: $gutter;
     }
 
     // Overrides for activity landing tabccordion
     &--activity-landing-tabs {
-        margin-top: 50px;
+        @include page(bottom-left, $width: full);
+
         margin-bottom: 50px;
-        padding: $gutter $gutter 75px;
+        padding: $gutter-xxl $gutter 75px;
 
         @include media-query(tablet-landscape) {
             margin-top: 0;
             margin-bottom: 150px;
-            padding: $gutter;
+            padding: $gutter-xxl $gutter $gutter;
         }
 
         .heading-block {
@@ -526,5 +521,11 @@
             bottom: -60px;
             left: -60px;
         }
+    }
+
+    &--overlap-x-large {
+        margin-top: -$section-overlap-x-large;
+        position: relative;
+        z-index: z($z-elements, page);
     }
 }

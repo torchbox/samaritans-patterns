@@ -1,0 +1,41 @@
+context:
+  page:
+    hero_image: False
+    title: Your ways to get involved
+    intro: Thanks for supporting Samaritans. Here are opportunities that match your criteria for getting involved.
+    get_ancestors:
+      - title: fake
+      - title: fake
+      - title: Category
+      - title: Subcategory
+  activities:
+    - title: Dawn Walk
+      listing_image: fake
+      listing_summary: Go solo or get together with others to walk 5k or 10k while the sun rises to raise funds and help Samaritans be there when it matters most.
+      activity_types:
+        all:
+          - { 2+ hours, zebra-crossing }
+          - { Alone or with others, people }
+          - { Walk, bullets }
+          - { Anywhere, globe }
+          - { !!timestamp '2022-12-13', diary }
+    - title: Share your thoughts
+      listing_image: fake
+      listing_summary: Take surveys and participate in research to help us make better decisions. Telling us what you think helps us be better at what we do and means we can be there for more people.
+      activity_types:
+        all:
+          - { 15-minute modules, zebra-crossing }
+          - { Alone, people }
+          - { Short course, bullets }
+          - { Remote, globe }
+          - { !!timestamp '2022-12-13', diary }
+    - title: Learn how to be a better listener
+      listing_image: fake
+      listing_summary: Take this short course to help you improve your listening skills and become a better listener.
+      activity_types:
+        all:
+          - { 30 minutes, zebra-crossing }
+          - { Alone, people }
+          - { Survey, bullets }
+          - { Remote, globe }
+          - { !!timestamp '2022-12-13', diary }

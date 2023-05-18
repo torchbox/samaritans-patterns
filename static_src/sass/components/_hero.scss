@@ -494,7 +494,7 @@
 
     &--activity-landing-page {
         @include pattern($white, visible, 0.2);
-        background-color: $ink;
+        background-color: $off-white;
         padding-bottom: 30px;
         overflow: hidden;
 
@@ -516,6 +516,74 @@
             top: 280px;
             z-index: z($z-elements, pattern);
             right: -200px;
+
+            @include media-query(tablet-portrait) {
+                display: block;
+            }
+        }
+    }
+
+
+    &--activity-landing-page-with-logo {
+        @include pattern($white, visible, 0.2);
+        background-color: $off-white;
+        overflow: hidden;
+        padding: 30px 0 0;
+
+        @include media-query(mob-landscape) {
+            background-color: $meadow;
+            padding: 30px 0px;
+        }
+
+        #{$root}__background {
+            background-color: $meadow;
+            height: 400px;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+
+            @include media-query(mob-landscape) {
+                display: none;
+            }
+        }
+
+        #{$root}__image {
+            &--mobile {
+                display: block;
+                align-self: center;
+                justify-self: center;
+                grid-row: 1;
+                padding: 0 20px;
+
+                @include media-query(mob-landscape) {
+                    grid-column: 2;
+                }
+            }
+
+            &--desktop {
+                display: none;
+            }
+
+            @include media-query(tablet-portrait) {
+                &--desktop {
+                    display: block;
+                    align-self: center;
+                    justify-self: center;
+                }
+
+                &--mobile {
+                    display: none;
+                }
+            }
+        }
+
+        .pattern {
+            display: none;
+            max-width: 580px;
+            top: 480px;
+            right: -100px;
+            z-index: z($z-elements, pattern);
 
             @include media-query(tablet-portrait) {
                 display: block;
@@ -599,3 +667,4 @@
         }
     }
 }
+

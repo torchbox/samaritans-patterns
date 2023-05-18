@@ -1,0 +1,14 @@
+context:
+  value:
+    get_subtitle: Declutter your home by spending a few mindful minutes clearing out clothes and other pre-loved items.
+    get_title: Donate your pre loved items
+
+tags:
+  image:
+    value.get_image fill-365x210 as image:
+      target_var: image
+      raw:
+        url: https://via.placeholder.com/365x210
+  pageurl:
+    value.page:
+      raw: '#'

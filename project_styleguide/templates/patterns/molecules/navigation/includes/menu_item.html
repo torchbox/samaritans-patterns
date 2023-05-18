@@ -1,7 +1,7 @@
-{% load wagtailcore_tags %}{% pageurl page as item_url %}
+{% load wagtailcore_tags %}
 <a
 class="{% if classes %}{{ classes }}{% else %}nav__link{% endif %}"
-href="{{ item_url }}"
+href="{% pageurl page %}"
 {% if is_menuitem != False %}role="menuitem"{% endif %}
 {% if has_children %} aria-haspopup="true" {% endif %}
 >

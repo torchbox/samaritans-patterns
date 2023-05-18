@@ -346,6 +346,12 @@
             margin-top: 0;
         }
     }
+
+    .activity-landing__hero-cta & {
+        &__icon {
+            transform: rotate(90deg);
+        }
+    }
 }
 
 .button-menu-toggle {

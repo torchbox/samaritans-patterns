@@ -5,35 +5,65 @@
 
 {% block content %}
     {# Hero #}
-    <div class="hero hero--landing-page hero--activity-landing-page">
-        {% image page.hero_image fill-1900x1250 jpegquality-40 as hero_image %}
-        <div class="donate-landing-hero__image--desktop" style="background-image: url({{ hero_image.url }});"></div>
-        {% image page.hero_image fill-600x700 jpegquality-40 as hero_image_mobile %}
-        <div class="donate-landing-hero__image--mobile">
-            <img src="{{ hero_image_mobile.url}}" alt="{{ hero_image_mobile.alt }}" />
+    {% if page.partner_company_logo %}
+        <div class="hero hero--landing-page hero--activity-landing-page-with-logo">
+            <div class="hero__background"></div>
+            <section class="wrapper wrapper--activity-landing">
+                <div class="grid grid--2col">
+                    <div class="hero__inner wrapper wrapper--large wrapper--padding">
+                        <div class="card card--activity">
+                            <span class="card__connectors"></span>
+                            <div class="card__container">
+                                {% include "patterns/molecules/navigation/breadcrumbs.html" %}
+                                <h1 class="card__title card__title--activity" id="main-content">{{ page.heading_title|richtext }}</h1>
+                                <p class="card__description">{{ page.heading_introduction }}</p>
+                                {% if page.ways_to_get_involved_title and page.ways_to_get_involved %}
+                                {% include "patterns/atoms/buttons/button.html" with href="#ways-to-get-involved" label="Find your activity" large=True classes="activity-landing__hero-cta" %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero__image--desktop">
+                        {% image page.partner_company_logo fill-480x250 %}
+                    </div>
+                    <div class="hero__image--mobile">
+                        {% image page.partner_company_logo fill-250x130 %}
+                    </div>
+                    {% include "patterns/atoms/svg/patterns/pattern-diamonds.html" with classes="pattern" %}
+                </div>
+            </section>
         </div>
-        <div class="hero__inner wrapper wrapper--large wrapper--padding">
-            <div class="card card--activity">
-                <span class="card__connectors"></span>
-                <div class="card__container">
-                    {% include "patterns/molecules/navigation/breadcrumbs.html" %}
-                    <h1 class="card__title card__title--activity" id="main-content">{{ page.heading_title|richtext }}</h1>
-                    <p class="card__description">{{ page.heading_introduction }}</p>
-                    {% if activity_index_page_url %}
-                    {% include "patterns/atoms/buttons/button.html" with href=activity_index_page_url label="View all activities" large=True %}
-                    {% endif %}
+    {% else %}
+        <div class="hero hero--landing-page hero--activity-landing-page">
+            {% image page.hero_image fill-1900x1250 jpegquality-40 as hero_image %}
+            <div class="donate-landing-hero__image--desktop" style="background-image: url({{ hero_image.url }});"></div>
+            {% image page.hero_image fill-600x700 jpegquality-40 as hero_image_mobile %}
+            <div class="donate-landing-hero__image--mobile">
+                <img src="{{ hero_image_mobile.url}}" alt="{{ hero_image_mobile.alt }}" />
+            </div>
+            <div class="hero__inner wrapper wrapper--large wrapper--padding">
+                <div class="card card--activity">
+                    <span class="card__connectors"></span>
+                    <div class="card__container">
+                        {% include "patterns/molecules/navigation/breadcrumbs.html" %}
+                        <h1 class="card__title card__title--activity" id="main-content">{{ page.heading_title|richtext }}</h1>
+                        <p class="card__description">{{ page.heading_introduction }}</p>
+                        {% if activity_index_page_url %}
+                        {% include "patterns/atoms/buttons/button.html" with href=activity_index_page_url label="View all activities" large=True %}
+                        {% endif %}
+                    </div>
                 </div>
             </div>
+            {% include "patterns/atoms/svg/patterns/pattern-diamonds.html" with classes="pattern" %}
         </div>
-        {% include "patterns/atoms/svg/patterns/pattern-diamonds.html" with classes="pattern" %}
-    </div>
+    {% endif %}
 
     {# Support us section #}
     <div class="activity-landing">
         <section class="wrapper wrapper--activity-landing">
-            <div class="section section--overlap section--activity-landing">
+            <div class="grid grid--2col">
                 <div class="activity-landing__padded-container">
-                    <h2 class="activity-landing__heading">{{ page.support_us_title }}</h2>
+                    <h2 class="activity-landing__heading--align-start">{{ page.support_us_title }}</h2>
                     <ul class="activity-landing__icon-list">
                         {% for block in page.support_us_items %}
                             <li class="activity-landing__icon-list-item">
@@ -48,44 +78,113 @@
                             </li>
                         {% endfor %}
                     </ul>
-                    <span class="activity-landing__connectors"></span>
                 </div>
-                {% include "patterns/atoms/corners/corners.html" with size="page" %}
-            </div>
+                {% if page.personalised_activity_finder_title and page.personalised_activity_finder_description %}
+                <div class="card-new card-new--personalised-finder">
+                    <span class="card-new__corner"></span>
+                    <div class="card-new__inner">
+                        <div class="card-new__container">
+                            <h3 class="card-new__title">{{ page.personalised_activity_finder_title }}</h3>
+                            <div class="card-new__richtext">{{ page.personalised_activity_finder_description|richtext }}</div>
 
-            {# Promoted activities section #}
-            <h2 class="activity-landing__heading activity-landing__heading--white activity-landing__heading--extra-margin">{{ page.activity_promotion_title }}</h2>
-            <div class="grid grid--3col grid--wide-gap">
-                {% for block in page.promoted_activities %}
-                    {% include_block block %}
-                {% endfor %}
-            </div>
-            <div class="activity-landing__button-wrapper">
-                {% if activity_index_page_url %}
-                    {% include "patterns/atoms/buttons/button.html" with href=activity_index_page_url label="View all activities" large=True %}
+                            {% if page.personalised_activity_finder_link_text and page.personalised_activity_finder_link_url %}
+                            <a class="button button-large button--alt" href="{{ page.personalised_activity_finder_link_url }}">
+                                <div class="button__shadow"></div>
+                                <div class="button__inner">
+                                    {{ page.personalised_activity_finder_link_text }}
+                                    {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="icon button__icon" %}
+                                </div>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <span class="card-new__connectors"></span>
+                    <span class="card-new__connectors--extra"></span>
+                </div>
                 {% endif %}
-                <a class="activity-landing__personalised-finder" href="{{ page.get_activity_promotion_secondary_link_url }}">{{ page.activity_promotion_secondary_link_text }}</a>
             </div>
         </section>
     </div>
 
-    <section class="wrapper wrapper--large wrapper--padding">
-        <div class="section section--activity-landing section--overlap section--activity-landing-tabs">
-            {# Streamfield body #}
-            {% if page.body %}
-                {% include_block page.body %}
-            {% endif %}
+    {# Ways to get involved section #}
+    {% if page.ways_to_get_involved_title and page.ways_to_get_involved %}
+        <div class="activity-landing activity-landing--get-involved" id="ways-to-get-involved">
+            <section class="wrapper wrapper--activity-landing">
+                <h2 class="activity-landing__heading activity-landing__heading--white activity-landing__heading--margin">
+                    {{ page.ways_to_get_involved_title }}
+                </h2>
+                <div class="grid grid--2col">
+                    {% for block in page.ways_to_get_involved %}
+                        {% with block.value as activity_finder %}
+                            <div class="card-new card-new--activity-panel">
+                                <span class="card-new__corner"></span>
+                                <div class="card-new__inner">
+                                    <div class="card-new__container">
+                                        <h3 class="card-new__title">{{ activity_finder.title }}</h3>
+                                        <div class="card-new__richtext">{{ activity_finder.text|richtext }}</div>
 
-            <div class="icon-cta">
-                {% render_icon page.story_quote_icon "icon-cta__svg" %}
-                <div class="icon-cta__content">
-                    <p class="icon-cta__heading">{{ page.story_quote_heading }}</p>
-                    <a class="icon-cta__link" href="{% pageurl page.story_quote_link_page %}">{{ page.story_quote_link_text }}</a>
+                                        <a class="button button-large" href="{% pageurl activity_finder.page %}">
+                                            <div class="button__shadow"></div>
+                                            <div class="button__inner">
+                                                {% firstof activity_finder.link_text activity_finder.page.title %}
+                                                {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="icon button__icon" %}
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <span class="card-new__connectors"></span>
+                                <span class="card-new__connectors--extra"></span>
+                            </div>
+                        {% endwith %}
+                    {% endfor %}
                 </div>
-            </div>
-
-            <span class="activity-landing__connectors-tabs"></span>
-            {% include "patterns/atoms/corners/corners.html" with size="page" %}
+            </section>
         </div>
-    </section>
+    {% endif %}
+
+    {# Promoted activities section #}
+    <div class="activity-landing activity-landing--promoted-activities">
+        <section class="wrapper wrapper--large wrapper--padding">
+            {# Only overlay the section if the Ways to Get Involved section is displayed. #}
+            <div class="section section--activity-landing{% if page.ways_to_get_involved_title and page.ways_to_get_involved %} section--overlap-x-large{% endif %}">
+                <h2 class="activity-landing__heading activity-landing__heading--margin">
+                    {{ page.activity_promotion_title }}
+                </h2>
+                <div class="grid grid--3col">
+                    {% for block in page.promoted_activities %}
+                        {% include_block block %}
+                    {% endfor %}
+                </div>
+                <div class="activity-landing__button-wrapper">
+                    {% if root_activity_index_page_url %}
+                        {% include "patterns/atoms/buttons/button.html" with href=root_activity_index_page_url label="View all activities" large=True %}
+                    {% endif %}
+                    <a class="activity-landing__personalised-finder" href="{{ page.get_activity_promotion_secondary_link_url }}">{{ page.activity_promotion_secondary_link_text }}</a>
+                </div>
+                <span class="activity-landing__connectors"></span>
+                {% include "patterns/atoms/corners/corners.html" with size="page" %}
+            </div>
+        </section>
+    </div>
+
+    {# Impact section #}
+    <div class="activity-landing activity-landing--impact">
+        <section class="wrapper wrapper--large wrapper--padding">
+            <div class="section section--activity-landing-tabs">
+                {# Streamfield body #}
+                {% if page.body %}
+                    {% include_block page.body %}
+                {% endif %}
+
+                <div class="icon-cta">
+                    {% render_icon page.story_quote_icon "icon-cta__svg" %}
+                    <div class="icon-cta__content">
+                        <p class="icon-cta__heading">{{ page.story_quote_heading }}</p>
+                        <a class="icon-cta__link" href="{% pageurl page.story_quote_link_page %}">{{ page.story_quote_link_text }}</a>
+                    </div>
+                </div>
+                {% include "patterns/atoms/corners/corners.html" with size="page" %}
+            </div>
+        </section>
+    </div>
 {% endblock %}

@@ -1,0 +1,4 @@
+tags:
+  include_block:
+    block:
+      template_name: patterns/molecules/streamfield/blocks/quote_with_link_block.html

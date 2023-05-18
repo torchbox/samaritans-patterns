@@ -1,25 +1,68 @@
 context:
   page:
-    heading_title: <p>Make a difference in as <b>little as 10 minutes</b>.</p>
-    heading_introduction: Take action now to help Samaritans make change that saves lives.
-    heading_anchor_link_text: Find an activity
+    # Hero
+    heading_title: <p>Activities to support Samaritans or improve your wellbeing</p>
+    heading_introduction: Help Samaritans save lives by championing, volunteering or fundraising for us. Or improve your own wellbeing with one of our suggested activities.
     hero_image: fake
-    activity_finder_title: Samaritans answer a call for help every 10 seconds.
-    activity_finder_introduction: However you choose to get involved, you're helping us make sure there's always someone there to listen when people need it most. You can help in lots of different ways. From raising awareness and learning new skills to organising a fundraiser or challenging yourself with a sporting event, every action you take makes a difference.
-    activity_finder_form_title: Find the best activity for you
-    activity_finder_form_introduction: Let's narrow it down...
 
-    activity_finder_links:
+    # Support us
+    support_us_title: Support Samaritans in a way that suits you...
+    support_us_items:
       - value:
-          title: Not sure what you want to do?
-          text: <p>There are so many activities you can choose to take part in, no matter your circumstance. Answer this <b>1-minute quiz</b> to find the right action for you.</p>
-          link_text: Take the Activity Finder quiz
-          link_url: '#'
+          icon: icon-color-time
+          text: Make a difference in just 10 minutes
       - value:
-          title: Browse all activities
-          text: <p>We are constantly coming up with ways to encourage participation. View all of the ways you can help our cause.</p>
-          link_text: Show all opportunities
-          link_url: '#'
+          icon: icon-color-people
+          text: Take part with others or alone
+      - value:
+          icon: icon-color-bullets
+          text: Choose from activities happening across the UK
+      - value:
+          icon: icon-color-calendar
+          text: Flexible dates and times
+      - value:
+          icon: icon-color-globe
+          text: Organise your own challenge
+    personalised_activity_finder_title: Try out our personalised activity finder
+    personalised_activity_finder_description: <p>There are so many activities you can choose to take part in, no matter your circumstance. Answer this <b>1-minute quiz</b> to find the right action for you.</p>
+    personalised_activity_finder_link_text: Find your activity
+    personalised_activity_finder_link_url: '#'
+
+    # Ways to get involved
+    ways_to_get_involved_title: Ways to get involved
+    ways_to_get_involved:
+      - value:
+          title: Help Samaritans change lives
+          text: '<p>There are plenty of ways to show your support for Samaritans, including volunteering or fundraising for us, or supporting our campaigns. Many can be completed in your lunch break!</p><ul><li>Champion changes in government policy by writing to your MP</li><li>Share our campaigns and help us reach more people in need</li><li>Organise a personal fundraising challenge or team up with friends and family</li><li>Sign up to a national event and join thousands of others helping to save lives</li></ul>'
+          page: fake
+          link_text: Browse activities to support Samaritans
+      - value:
+          title: Boost your wellbeing or support others
+          text: '<p>If you are struggling with your own mental health, or know someone who is, we have lots of exercises, techniques and resources to try. Some only take 10 minutes! And remember, our lovely listening volunteers are only ever a phone call away. Call free any time on 116 123.</p><ul><li>Learn to better support others</li><li>Some exercises will only take 10 minutes… perfect for a lunch break!</li><li>Take part at home or in the office, by yourself or with colleagues</li></ul>'
+          page: fake
+          link_text: Browse activities to boost your wellbeing
+
+    # Promoted activities
+    activity_promotion_title: Activities you might be interested in
+    promoted_activities:
+      - fake
+      - fake
+      - fake
+      - fake
+      - fake
+      - fake
+    activity_promotion_secondary_link_text: Try our personalised activity finder
+    get_activity_promotion_secondary_link_url: '#'
+
+    # Impact story
+    body: fake
+    story_quote_icon: icon-color-heart
+    story_quote_heading: Get involved today
+    story_quote_link_text: View all activities
+
+    # Partner company details
+    partner_company_logo: fake
+  root_activity_index_page_url: '#'
 
 tags:
   image:
@@ -31,3 +74,34 @@ tags:
       target_var: hero_image_mobile
       raw:
         url: https://via.placeholder.com/600x700
+    page.partner_company_logo fill-480x250:
+      raw: |
+        <img src="https://via.placeholder.com/480x250" alt="Some alt">
+    page.partner_company_logo fill-250x130:
+      raw: |
+        <img src="https://via.placeholder.com/250x130" alt="Some alt">
+  pageurl:
+    page.story_quote_link_page:
+      raw: '#'
+    # From breadcrumbs.yaml (required for the page to load)
+    ancestor_page:
+      raw: '#'
+  include_block:
+    page.body:
+      template_name: patterns/_pattern_library_only/streamfield/activity_landing_page_body.html
+    block:
+      template_name: patterns/molecules/streamfield/blocks/promoted_activity_block.html
+    # From footer.yaml (required for the page to load)
+    cta:
+      template_name: patterns/molecules/navigation/blocks/footer_additional_cta_block.html
+  # From header.yaml
+  primarynav:
+    '':
+      template_name: patterns/molecules/navigation/primarynav.html
+  secondarynav:
+    '':
+      template_name: patterns/molecules/navigation/secondarynav.html
+  # From footer.yaml
+  footernav:
+    '':
+      template_name: patterns/molecules/navigation/footernav.html

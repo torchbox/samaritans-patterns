@@ -1,0 +1,83 @@
+{% extends "patterns/templates/index_page/listing_template_website.html" %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block body_class %}template-activity-index-page{% endblock %}
+
+{% block hero %}
+    {% include "patterns/molecules/hero/hero.html" with hero_color="emerald" pattern="diamond" hero_short=True hero_title_id="main-content" hero_intro=page.introduction %}
+{% endblock %}
+
+{% block wrapper_classes %}wrapper--activity-index{% endblock %}
+
+{% block section_classes %}section--activity-index{% endblock %}
+
+{% block listing_page_pattern %}{% endblock %}
+
+{% block filters_intro %}
+    Browse opportunities by:
+{% endblock %}
+
+{% block filters_bar %}
+    <div class="filters filters--activities">
+        <form method="GET" class="filters__form">
+            <div class="filters__row filters__row--top">
+                {% include "patterns/molecules/filters/filter.html" with title="Time available" name="activity_duration" options=duration_filters select_id="time-filter" label_text="Select a time" icon="stopwatch" %}
+                {% include "patterns/molecules/filters/filter.html" with title="Who are you taking part with?" name="activity_who_with" options=who_with_filters select_id="who-with-filter" label_text="Who are you taking part with?" icon="people" %}
+            </div>
+
+            <div class="filters__row filters__row--bottom">
+                {% include "patterns/molecules/filters/filter.html" with title="Activity type" name="activity_type" options=type_filters select_id="activity-type-filter" label_text="Select an activity type" icon="trainers" %}
+                {% include "patterns/molecules/filters/filter.html" with title="Where" name="activity_location" options=location_filters select_id="location-filter" label_text="Select a location" icon="globe" %}
+                {% include "patterns/molecules/filters/filter.html" with title="When" name="activity_date" options=date_filters select_id="date-range-filter" label_text="Select a date range" icon="calendar" %}
+                <div class="filters__filter-wrapper">
+                    {% include "patterns/atoms/buttons/button--button.html" with label="Filter" classes="button--filter" %}
+                </div>
+            </div>
+
+        </form>
+    </div>
+{% endblock %}
+
+{% block under_filters %}
+    <p class="filters-reset">
+        <a href="{{ page.url }}" class="filters-reset__link">Reset filters</a>
+    </p>
+{% endblock %}
+
+{% block listings %}
+    {% if activities %}
+        {% include "patterns/organisms/listing-list/listing-list.html" with listings=activities %}
+        {% if page.email_subscription_form %}
+            If none of these activities spark your interest, sign up to hear when new activities become available.
+            <div class="wrapper">
+                <div class="wrapper wrapper--small">
+                    <div class="section section--main section--no-hero mailchimp-form">
+                        {% if page.email_subscription_heading %}
+                            <h2 class="heading-secondary">{{ page.email_subscription_heading }}</h2>
+                        {% endif %}
+                        {{ page.email_subscription_form.embed_code|safe }}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% else %}
+        There are no activities that match your criteria. You can update the filters and search
+        again{% if page.email_subscription_form %}, or sign up to hear when new activities become available.
+            <div class="wrapper">
+                <div class="wrapper wrapper--small">
+                    <div class="section section--main section--no-hero mailchimp-form">
+                        {% if page.email_subscription_heading %}
+                            <h2 class="heading-secondary">{{ page.email_subscription_heading }}</h2>
+                        {% endif %}
+                        {{ page.email_subscription_form.embed_code|safe }}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+{% endblock listings %}
+
+{% block extra_connectors %}
+    <div class="section__extra-connectors section__extra-connectors--left" aria-hidden="true"></div>
+    <div class="section__extra-connectors section__extra-connectors--right" aria-hidden="true"></div>
+{% endblock %}
