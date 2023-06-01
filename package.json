@@ -80,7 +80,6 @@
         "react-modal": "^3.11.1",
         "react-modal-hook": "^2.0.0",
         "sass": "^1.52.1",
-        "smooth-scroll": "^15.0.0",
         "url-polyfill": "^1.1.12",
         "vue": "^3.2.36"
     }

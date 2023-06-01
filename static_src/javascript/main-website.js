@@ -25,7 +25,6 @@ import GiftAid from './components/gift-aid';
 import Reveal from './components/reveal';
 import Considerations from './components/considerations';
 import './components/browser-polyfills';
-import './components/smooth-scroll';
 import './components/branch-finder';
 import './components/volunteering-branch-finder';
 import initiMobileNumberAutocomplete from './components/mobile-number-autocomplete';

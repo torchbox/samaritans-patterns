@@ -18,6 +18,11 @@ html {
     height: 100%;
     overflow-x: hidden; // Safari doesn't respect `overflow-x: hidden` on `body` unless it's also on `html`
     overflow-y: inherit;
+    scroll-behavior: smooth;
+
+    @media (prefers-reduced-motion: reduce) {
+        scroll-behavior: auto;
+    }
 }
 
 body {
@@ -68,6 +73,15 @@ body {
         height: auto;
         overflow-x: initial; // fallback for browsers that don't support clip
         overflow-x: clip;
+    }
+
+    // Reset overflow-x to enable smooth scrolling on the following templates
+    &.template-event-page,
+    &.template-donate-landing-page,
+    &.template-activity-landing-page,
+    &.template-marathon-landing-page,
+    &.template-fundraising-partner-page {
+        overflow-x: initial;
     }
 }
 
