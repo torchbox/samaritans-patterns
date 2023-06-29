@@ -28,7 +28,7 @@
             <div class="donate-bar">
                 <div class="donate-bar__top">
                     <div class="donate-bar__info">
-                        {% render_icon "icon-color-coins" "donate-bar__icon" %}
+                        {% render_icon "icon-color-coins-2" "donate-bar__icon" %}
                         <p id="donate__heading--single" {% if not payment_frequency == 'single' %}hidden{% endif %}>{% trans "You're making a single donation of" %}</p>
                         <p id="donate__heading--monthly" {% if not payment_frequency == 'monthly' %}hidden{% endif %}>{% trans "You're making a monthly donation of" %}</p>
                         <p id="donate__heading--currency" class="donate__amount-display">{% if is_euro %}€{% else %}£{% endif %}<span id="donate__amount__display">{{ form.amount.value|floatformat:"2"|intcomma }}</span></p>

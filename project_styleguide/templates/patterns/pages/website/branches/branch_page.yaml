@@ -33,7 +33,7 @@ context:
     introduction: test introduction
     volunteer_link: https://www.example.com
     donate_link: https://www.example.com
-    donate_button_icon: icon-color-coins
+    donate_button_icon: icon-color-coins-2
     registered_charity_details: Registered charity details
     get_ancestors:
       - title: fake

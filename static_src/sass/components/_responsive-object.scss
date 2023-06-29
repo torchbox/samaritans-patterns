@@ -12,4 +12,20 @@
         width: 100%;
         height: 100%;
     }
+
+    &.no-border {
+        iframe {
+            border-width: 0;
+        }
+    }
+
+    &.iframe-fixed-height {
+        height: 2200px;
+        @include media-query(tablet-portrait) {
+            height: 2040px;
+        }
+    }
+    &.overflow-hidden {
+        overflow: hidden;
+    }
 }

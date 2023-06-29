@@ -17,12 +17,19 @@
                     {% include "patterns/molecules/cards/card-with-image.html"  with card=related_page.value nation_related_page=True %}
                 {% endfor %}
             </div>
-
             {% if page.donate_link %}
                 <hr class="hr hr--dashed">
                 <div class="nation__call-to-donate">
                     <h2>Donate to Samaritans {{ country_name }}</h2>
                     {% include "patterns/atoms/buttons/button.html" with href=page.donate_link label="Donate" large=True classes="button--plain" %}
+                </div>
+            {% endif %}
+            
+            {% if page.donate_snippet %}
+                <hr class="hr hr--dashed">
+                <div class="nation__call-to-donate">
+                    <h2>Donate to Samaritans {{ country_name }}</h2>
+                    {% include "patterns/atoms/iframe/donate_iframe.html" with form_id=page.donate_snippet.form_id %}
                 </div>
             {% endif %}
 

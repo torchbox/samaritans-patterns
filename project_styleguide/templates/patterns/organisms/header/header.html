@@ -19,7 +19,7 @@
             </div>
 
             {% if show_links %}
-                {% cache 900 secondarynav LANGUAGE_CODE page.pk %}
+                {% cache 900 secondarynav LANGUAGE_CODE currency donate_page redirect_donate_page page.pk %}
                 {% secondarynav %}
                 {% endcache %}
             {% endif %}
@@ -46,7 +46,7 @@
             {% endcache %}
 
             <div class="nav nav--secondary-mobile">
-                {% cache 900 secondarynav LANGUAGE_CODE page.pk %}
+                {% cache 900 secondarynav LANGUAGE_CODE currency donate_page redirect_donate_page page.pk %}
                 {% secondarynav %}
                 {% endcache %}
             </div>

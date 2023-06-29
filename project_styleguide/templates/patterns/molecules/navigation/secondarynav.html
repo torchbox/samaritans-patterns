@@ -1,11 +1,19 @@
 {% load wagtailcore_tags %}
 <nav class="nav nav--cta" role="navigation" aria-label="Secondary">
     <ul class="nav nav--secondary" role="menu">
-        {% if donate_page %}
         <li class="nav__item" role="none">
-            {% include "patterns/molecules/navigation/includes/menu_item--icon.html" with page=donate_page title=donate_page.title icon="icon-color-coins" %}
+            {% if redirect_donate_page %}
+                {% include "patterns/molecules/navigation/includes/menu_item--icon.html" with page=redirect_donate_page title=donate_page.title icon="icon-color-coins-2" %}
+            {% elif donate_page %}
+                {% if currency %}
+                    {% with qs="?currency="|add:currency %}
+                        {% include "patterns/molecules/navigation/includes/menu_item--icon.html" with page=donate_page title=donate_page.title icon="icon-color-coins-2" qs=qs %}
+                    {% endwith %}
+                {% else %}
+                    {% include "patterns/molecules/navigation/includes/menu_item--icon.html" with page=donate_page title=donate_page.title icon="icon-color-coins-2" %}
+                {% endif %}
+            {% endif %}
         </li>
-        {% endif %}
         {% for item in secondarynav %}
             <li class="nav__item" role="none">
                 {% include "patterns/molecules/navigation/includes/menu_item--icon.html" with page=item.value.page title=item.value.title icon=item.value.icon %}
