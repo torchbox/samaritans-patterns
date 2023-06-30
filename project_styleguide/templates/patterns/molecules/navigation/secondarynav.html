@@ -3,14 +3,14 @@
     <ul class="nav nav--secondary" role="menu">
         <li class="nav__item" role="none">
             {% if redirect_donate_page %}
-                {% include "patterns/molecules/navigation/includes/menu_item--icon.html" with page=redirect_donate_page title=donate_page.title icon="icon-color-coins-2" %}
+                {% include "patterns/molecules/navigation/includes/menu_item--icon.html" with page=redirect_donate_page title=donate_page.title icon="icon-color-piggy-bank-blank" %}
             {% elif donate_page %}
                 {% if currency %}
                     {% with qs="?currency="|add:currency %}
-                        {% include "patterns/molecules/navigation/includes/menu_item--icon.html" with page=donate_page title=donate_page.title icon="icon-color-coins-2" qs=qs %}
+                        {% include "patterns/molecules/navigation/includes/menu_item--icon.html" with page=donate_page title=donate_page.title icon="icon-color-piggy-bank-blank" qs=qs %}
                     {% endwith %}
                 {% else %}
-                    {% include "patterns/molecules/navigation/includes/menu_item--icon.html" with page=donate_page title=donate_page.title icon="icon-color-coins-2" %}
+                    {% include "patterns/molecules/navigation/includes/menu_item--icon.html" with page=donate_page title=donate_page.title icon="icon-color-piggy-bank-blank" %}
                 {% endif %}
             {% endif %}
         </li>
@@ -21,3 +21,4 @@
         {% endfor %}
     </ul>
 </nav>
+
