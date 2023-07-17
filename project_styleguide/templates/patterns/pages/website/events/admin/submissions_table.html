@@ -12,7 +12,7 @@
         </tr>
         <tr>
             <th><input type="checkbox" id="select-all" /></th>
-            <th></th>
+            <th>Actions</th>
             {% for heading in data_headings %}
                 <th id="{{ heading.name }}" class="{% if heading.order %}ordered {{ heading.order }}{% endif %}">
                   {% if heading.order %}<a href="?order_by={% if heading.order == 'ascending' %}-{% endif %}{{ heading.name }}">{{ heading.label }}</a>{% else %}{{ heading.label }}{% endif %}
@@ -27,11 +27,13 @@
                     <input type="checkbox" name="selected-submissions" class="select-submission" value="{{ row.model_id }}" />
                 </td>
                 <td>
-                    <a href="{% url 'events_manage_submission' row.model_id %}">
-                        <span>
-                            <span class="icon icon-edit " aria-hidden="true"></span>
-                            <span class="visuallyhidden">Edit</span>
+                    <a href="{% url 'events_manage_submission' row.model_id %}" class="button button-small bicolor button--icon">
+                        <span class="icon-wrapper">
+                            <svg class="icon icon-edit icon" aria-hidden="true">
+                                <use href="#icon-edit"></use>
+                            </svg>
                         </span>
+                        Edit
                     </a>
                 </td>
                 {% for cell in row.fields %}
