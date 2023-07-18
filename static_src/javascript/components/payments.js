@@ -207,7 +207,8 @@ function setupPayment() {
             submitButton.removeAttribute('disabled');
         }
 
-        submitButton.addEventListener('click', function () {
+        submitButton.addEventListener('click', function (event) {
+            event.preventDefault();
             clearAllErrorMessages();
 
             submitButton.dataset.originalText =
