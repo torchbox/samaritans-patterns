@@ -15,7 +15,7 @@
 
             <h1 id="main-content">{{ page.title }}</h1>
 
-            {% include 'patterns/molecules/meta-bar/meta-bar.html' with value=page modifier="activity" show_activity_date=True external_apply_button=True %}
+            {% include 'patterns/molecules/meta-bar/meta-bar.html' with value=page modifier="activity" show_activity_date=True external_apply_button=page.apply_now_link_url %}
 
             {% if page.introduction %}
                 <p class="intro intro--margin-small">{{ page.introduction }}</p>
