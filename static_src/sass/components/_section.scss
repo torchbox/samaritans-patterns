@@ -238,7 +238,7 @@
         }
     }
 
-    &--donate-marketing {
+    &--donate-marketing, &--consent-edi {
         background-color: $ink;
         color: $white;
         padding: $gutter;
