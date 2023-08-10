@@ -20,9 +20,9 @@
     }
 
     &.iframe-fixed-height {
-        height: 2200px;
+        height: 3060px;
         @include media-query(tablet-portrait) {
-            height: 2040px;
+            height: 2920px;
         }
     }
     &.overflow-hidden {
