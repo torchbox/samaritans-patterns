@@ -1,7 +1,7 @@
 <li class="progress-indicator__step {% if step == current_step %}progress-indicator__step--active{% endif %}" aria-label="Step {{ step }}">
     <div class="progress-indicator__blob" aria-hidden="true">
         {% if step < current_step %}
-            {% include "patterns/atoms/svg/icons/icon-tick.html" %}
+            {% include "patterns/atoms/svg/icons/icon-check.html" %}
         {% else %}
             {{ step }}
         {% endif %}
