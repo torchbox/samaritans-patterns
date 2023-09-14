@@ -44,7 +44,6 @@ import Totaliser from './components/totaliser/totaliser';
 import CharacterCountdown from './components/character-countdown';
 import { toggleLeaderboard } from './components/leaderboard';
 import FormFieldExpand from './components/form-field-expand';
-import TermsAndConditions from './components/terms-and-conditions';
 import ChapterBar from './components/chapter-bar';
 import DonateButtons from './components/donate-buttons';
 
@@ -226,12 +225,6 @@ document.addEventListener('DOMContentLoaded', function () {
         FormFieldExpand.selector(),
     )) {
         new FormFieldExpand(formFieldExpand);
-    }
-
-    for (const tcTcs of document.querySelectorAll(
-        TermsAndConditions.selector(),
-    )) {
-        new TermsAndConditions(tcTcs);
     }
 
     toggleLeaderboard(document.querySelector('[data-leaderboard-toggle]'));

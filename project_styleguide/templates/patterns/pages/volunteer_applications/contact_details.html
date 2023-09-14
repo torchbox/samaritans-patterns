@@ -103,27 +103,12 @@
 
                     <h2>{% trans "Terms and Conditions" %}</h2>
 
-                    <div class="form__callout-wrapper form__callout-wrapper--clear">
-                        {# id matches up with aria-describedby attributed on the checkbox - see forms.py #}
-                        <div class="form__callout" id="tcs-and-cs-explanation">
-                            {% blocktranslate asvar legal_name_heading %}
-                                Reading our terms and conditions
-                            {% endblocktranslate %}
-                            {% blocktranslate asvar legal_name_explanation %}
-                                As a volunteer with us you will get access to
-                                systems and information that are sensitive and
-                                confidential. To protect you we need you to
-                                read and acknowledge our terms and conditions.
-                                <br><br>
-                                The link will open in a new tab. The checkbox
-                                to confirm you have read them will become
-                                active once you have opened them.
-                            {% endblocktranslate %}
-                            {% include "patterns/molecules/callout-form/callout-form.html" with heading=legal_name_heading content=legal_name_explanation|safe %}
-                        </div>
+                    {# We are sure that this will exist as it is required. We're also sure that it will have the `body` field as it needs to be an information page. #}
+                    {% for block in terms_and_conditions_page.body %}
+                        {{ block|externalise_links }}
+                    {% endfor %}
 
-                        {% render_form_field form.terms_and_conditions className="js-terms" %}
-                    </div>
+                    {% render_form_field form.terms_and_conditions %}
 
                     <h2>{% trans 'How we&apos;ll use your details' %}</h2>
                     <p>
