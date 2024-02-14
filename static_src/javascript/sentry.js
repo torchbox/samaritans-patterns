@@ -44,6 +44,9 @@ if (document.getElementById('sentry_vars')) {
             'ComboSearch is not defined',
             'http://loading.retry.widdit.com/',
             'atomicFindClose',
+            // Instagram browser error
+            // https://developers.facebook.com/community/threads/320013549791141/
+            "Can't find variable: _AutofillCallbackHandler",
             // Facebook borked
             'fb_xd_fragment',
             // ISP "optimizing" proxy - `Cache-Control: no-transform` seems to reduce this. (thanks @acdha)
@@ -62,6 +65,11 @@ if (document.getElementById('sentry_vars')) {
             'TypeError: Failed to fetch',
             'TypeError: NetworkError when attempting to fetch resource.',
             'TypeError: Cancelled',
+            // OneTrust error
+            "TypeError ?(scripttemplates/6.32)",
+            // Common third-party errors
+            "TypeError: null is not an object (evaluating 'this.selector.appendChild')",
+            "TypeError: undefined is not an object (evaluating 'r.DomainData')",
         ],
         denyUrls: [
             // Facebook flakiness

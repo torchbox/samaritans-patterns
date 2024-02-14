@@ -14,8 +14,12 @@ class Tabccordion {
         // <nav> containing the tab links
         this.tabs = this.node.querySelector('.js-tabccordion-nav');
 
-        // the tab links
-        this.tabLinks = Array.from(this.tabs.querySelectorAll('a'));
+        // the tab links. Tabcccordion doesn't always have nav.
+        if (this.tabs) {
+            this.tabLinks = Array.from(this.tabs.querySelectorAll('a'));
+        } else {
+            this.tabLinks = [];
+        }
 
         // the tab content panels
         this.tabPanels = Array.from(
