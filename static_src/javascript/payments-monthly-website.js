@@ -12,7 +12,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
             form.setAttribute('action', window.monthlyDonationUrls.gocardless);
             form.removeAttribute('data-token');
-
         });
     });
 

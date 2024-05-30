@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <!--
+      manifest.json provides metadata used when your web app is added to the
+      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+    -->
+    <link rel="manifest" href="/webchat/manifest.json" crossorigin="use-credentials">
+
+    <link rel="shortcut icon" href="/webchat/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/webchat/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/webchat/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/webchat/favicon-16x16.png">
+    <link rel="mask-icon" href="/webchat/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="{% static "css/webchat.css" %}">
+
+    <title>Samaritans | Webchat</title>
+  </head>
+  <body>
+    <noscript>
+      <style>
+        body {
+          font-family: sans-serif;
+          background-color: #e8e8e8;
+        }
+
+        .no-js {
+          background-color: white;
+          padding: 2.5rem;
+          max-width: 720px;
+          margin: 4rem auto;
+        }
+
+        h1 {
+          margin: 0 0 2rem;
+          color: #115e67;
+        }
+
+        p {
+          margin: 0;
+        }
+
+        a {
+          font-weight: bold;
+          color: #00a589;
+        }
+      </style>
+      <div class="no-js">
+        <h1>You need to enable JavaScript to run this app.</h1>
+        <p>Please <a href="https://www.whatismybrowser.com/guides/how-to-enable-javascript/auto">click here</a> to find out how to enable it.</p>
+      </div>
+    </noscript>
+    <div id="root" class="is-tall"></div>
+
+    {{ webchat_config|json_script:"webchat-config" }}
+
+    <script src="{% static "js/webchat.js" %}"></script>
+    <script src="/webchat/lexwebui/{{ page.queue }}/lex-web-ui-loader.js"></script>
+  </body>
+</html>

@@ -3,7 +3,8 @@
 
     &--get-involved {
         background-color: $ink;
-        padding: $gutter-x-large 0 calc(#{$section-overlap-x-large} + #{$gutter-large});
+        padding: $gutter-x-large 0
+            calc(#{$section-overlap-x-large} + #{$gutter-large});
 
         @include media-query(tablet-landscape) {
             padding: 85px 0 calc(#{$section-overlap-x-large} + 140px);

@@ -2,16 +2,17 @@ import client from 'braintree-web/client';
 import { create as paypalCreate } from 'braintree-web/paypal-checkout';
 
 function setupPaymentMonthly() {
-    if (!document.querySelector('.donate__braintree-form') || document.querySelector('.paypal-button')) {
+    if (
+        !document.querySelector('.donate__braintree-form') ||
+        document.querySelector('.paypal-button')
+    ) {
         // We're not on the monthly payment page.
         // or the paypal button has already been setup.
         return;
     }
 
     var paymentForm = document.querySelector('.donate__braintree-form'),
-        nonceInput = document.getElementById(
-            'id_payment_method_nonce',
-        ),
+        nonceInput = document.getElementById('id_payment_method_nonce'),
         token = paymentForm.getAttribute('data-token'),
         loadingErrorMsg =
             'There was an error loading this payment option. Please reload the page or try again later.';

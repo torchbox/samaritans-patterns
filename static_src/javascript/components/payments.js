@@ -108,7 +108,8 @@ function setupPayment() {
         const frequency = getField('#id_frequency').value;
         const isGiftAid = getField('#id_gift_aid')?.checked || false;
         const isInMemory = getField('#id_in_memory')?.checked || false;
-        const isOrganisationBehalf = getField('#id_is_corporate')?.checked || false;
+        const isOrganisationBehalf =
+            getField('#id_is_corporate')?.checked || false;
 
         // This element only exists if the donation is for a fundraising.
         const isFundraising = getField('#id_payment_origin_choice') || false;
@@ -123,7 +124,7 @@ function setupPayment() {
             if (isFundraising) {
                 itemCategory = 'Fundraising';
                 itemId = 'FUNDRAISING';
-                itemName = "Fundraising";
+                itemName = 'Fundraising';
             } else {
                 itemCategory = 'Single';
                 itemId = 'DONATION_SINGLE';

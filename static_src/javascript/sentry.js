@@ -66,7 +66,7 @@ if (document.getElementById('sentry_vars')) {
             'TypeError: NetworkError when attempting to fetch resource.',
             'TypeError: Cancelled',
             // OneTrust error
-            "TypeError ?(scripttemplates/6.32)",
+            'TypeError ?(scripttemplates/6.32)',
             // Common third-party errors
             "TypeError: null is not an object (evaluating 'this.selector.appendChild')",
             "TypeError: undefined is not an object (evaluating 'r.DomainData')",

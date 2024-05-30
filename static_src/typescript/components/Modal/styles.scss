@@ -1,0 +1,71 @@
+.modal {
+    padding: 1rem;
+
+    &__overlay {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        background-color: rgba(43, 43, 43, 0.75);
+        z-index: 5;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    &__content {
+        background-color: white;
+        overflow: auto;
+        outline: none;
+        padding: 20px;
+        height: auto;
+        z-index: 6;
+        margin-top: 5rem;
+        max-width: 90%;
+
+        @media (min-width: 480px) {
+            max-width: 500px;
+        }
+    }
+
+    &__heading {
+        text-align: center;
+
+        @media (min-width: 480px) {
+            margin-bottom: 1.5rem;
+        }
+    }
+
+    &__buttons {
+        @media (min-width: 480px) {
+            display: flex;
+            justify-content: center;
+
+            button {
+                margin-bottom: 0;
+
+                &:first-child {
+                    margin-right: 1rem;
+                }
+            }
+        }
+    }
+}
+
+// Lib overrides
+.ReactModal__Overlay,
+.ReactModal__Content {
+    opacity: 0;
+}
+
+.ReactModal__Overlay--after-open,
+.ReactModal__Content--after-open {
+    opacity: 1;
+    transition: opacity 200ms;
+}
+
+.ReactModal__Overlay--before-close,
+.ReactModal__Content--before-close {
+    opacity: 0;
+}

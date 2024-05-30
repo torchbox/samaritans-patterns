@@ -1,0 +1,16 @@
+<svg viewbox="0 0 28 28" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-labelledby="volunteer-avatar-title" role="img">
+    <title id="volunteer-avatar-title">Volunteer</title>
+    <defs>
+        <circle id="a" cx="14" cy="14" r="14"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <mask id="b" fill="#fff">
+            <use xlink:href="#a"/>
+        </mask>
+        <use fill="#f4f7f8" xlink:href="#a"/>
+        <g mask="url(#b)">
+            <path className="silhouette" d="M13.987 16.987a6.084 6.084 0 0 0 6.085-6.086 6.084 6.084 0 0 0-6.085-6.085A6.084 6.084 0 0 0 7.9 10.9a6.084 6.084 0 0 0 6.086 6.086zm0 3.043c-4.062 0-12.171 2.038-12.171 6.085v3.043h24.342v-3.043c0-4.047-8.11-6.085-12.171-6.085z" fill-rule="nonzero"/>
+            <path d="M-5-2h37v37H-5z"/>
+        </g>
+    </g>
+</svg>

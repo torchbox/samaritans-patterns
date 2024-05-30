@@ -1,0 +1,16 @@
+<svg width="28" height="29" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-labelledby="volunteer-avatar-title" role="img">
+    <title id="volunteer-avatar-title">Volunteer</title>
+    <defs>
+        <circle id="a" cx="14" cy="14" r="14"/>
+    </defs>
+    <g transform="translate(0 .5)" fill="none" fill-rule="evenodd">
+        <mask id="b" fill="#fff">
+            <use xlink:href="#a"/>
+        </mask>
+        <use fill="#f4f7f8" xlink:href="#a"/>
+        <g mask="url(#b)">
+            <path d="M14 16.897c3.334 0 6.034-2.7 6.034-6.035 0-3.334-2.7-6.034-6.034-6.034a6.033 6.033 0 0 0-6.034 6.034c0 3.334 2.7 6.035 6.034 6.035zm0 3.017c-4.028 0-12.069 2.021-12.069 6.034v3.018h24.138v-3.018c0-4.013-8.041-6.034-12.069-6.034z" fill="#00a589" fill-rule="nonzero"/>
+            <path d="M-4.828-1.931h36.69v36.69h-36.69z"/>
+        </g>
+    </g>
+</svg>

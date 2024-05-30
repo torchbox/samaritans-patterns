@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 .resources {
     &__title {
         @include font-size(m);
@@ -53,7 +55,7 @@
         &--title {
             @include font-size(xs);
             font-weight: $weight--bold;
-            margin-bottom: $gutter / 2;
+            margin-bottom: math.div($gutter, 2);
 
             @include media-query(tablet-landscape) {
                 font-size: 20px;

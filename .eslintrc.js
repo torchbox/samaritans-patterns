@@ -1,5 +1,7 @@
 module.exports = {
-    // See https://github.com/torchbox/eslint-config-torchbox for rules.
+    root: true,
     extends: 'torchbox/typescript',
-    parser: '@babel/eslint-parser',
+    rules: {
+        'react/prop-types': 'off',
+    },
 };

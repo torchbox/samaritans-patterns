@@ -1,16 +1,15 @@
 const path = require('path');
-const autoprefixer = require('autoprefixer');
-const cssnano = require('cssnano');
 const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { VueLoaderPlugin } = require('vue-loader');
-const postcssCustomProperties = require('postcss-custom-properties');
 const sass = require('sass');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const StylelintPlugin = require('stylelint-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
 const SentryWebpackPlugin = require('@sentry/webpack-plugin');
-const webpack = require('webpack');
+const { IgnorePlugin } = require('webpack');
+const { GenerateSW } = require('workbox-webpack-plugin');
+
 const projectRoot = 'samaritans';
 
 const options = {
@@ -29,13 +28,37 @@ const options = {
             './static_src/javascript/chat-utils.js',
         ],
         'admin': './static_src/javascript/admin.js',
+        'webchat': './static_src/typescript/webchat.tsx',
+    },
+    resolve: {
+        extensions: ['.ts', '.tsx', '.js'],
+        // Keep alias in sync with tsconfig.json
+        alias: {
+            components: path.resolve(
+                __dirname,
+                'static_src/typescript/components',
+            ),
+            styles: path.resolve(
+                __dirname,
+                'static_src/typescript/styles',
+            ),
+            utils: path.resolve(
+                __dirname,
+                'static_src/typescript/utils',
+            ),
+            assets: path.resolve(
+                __dirname,
+                'static_src/typescript/webchat-assets',
+            ),
+        },
     },
     output: {
-        path: path.resolve('./static_compiled/'),
+        path: path.resolve(`./${projectRoot}/static_compiled/`),
+        // based on entry name, e.g. main.js
         filename: 'js/[name].js', // based on entry name, e.g. main.js
     },
     plugins: [
-        new webpack.IgnorePlugin({
+        new IgnorePlugin({
             resourceRegExp: /^\.\/locale$/,
             contextRegExp: /moment$/,
         }),
@@ -51,6 +74,14 @@ const options = {
                         ignore: ['cssBackgrounds/*'],
                     },
                 },
+                {
+                    // Copy webchat-assets
+                    from: 'typescript/webchat-assets',
+                    context: path.resolve(`./${projectRoot}/static_src/`),
+                    to: path.resolve(
+                        `./${projectRoot}/static_compiled/webchat-assets`,
+                    ),
+                },
             ],
         }),
         new MiniCssExtractPlugin({
@@ -65,11 +96,20 @@ const options = {
             failOnError: false,
             lintDirtyModulesOnly: true,
             emitWarning: true,
-            extensions: ['scss', 'vue'],
+            extensions: ['scss'],
+        }),
+        new GenerateSW({
+            exclude: [/.*/], // Do not precache anything
+            runtimeCaching: [
+                {
+                    urlPattern: /static\/webchat-assets/,
+                    handler: 'StaleWhileRevalidate',
+                },
+            ],
+            swDest: 'webchat-sw.js',
         }),
         //  Automatically remove all unused webpack assets on rebuild
         new CleanWebpackPlugin(),
-        new VueLoaderPlugin(),
     ],
     module: {
         rules: [
@@ -78,20 +118,12 @@ const options = {
                 exclude: /node_modules/,
                 use: {
                     loader: 'ts-loader',
-                    options: { appendTsSuffixTo: [/\.vue$/] },
+                    options: { compilerOptions: { noEmit: false } },
                 },
             },
             {
-                // this will apply to both plain `.scss` files
-                // AND `<style lang="scss">` blocks in `.vue` files
                 test: /\.(scss|css)$/,
                 use: [
-                    {
-                        loader: 'vue-style-loader',
-                        options: {
-                            sourceMap: true,
-                        },
-                    },
                     {
                         loader: MiniCssExtractPlugin.loader,
                         options: {
@@ -109,12 +141,11 @@ const options = {
                         options: {
                             sourceMap: true,
                             postcssOptions: {
-                                plugins: () => [
-                                    autoprefixer(),
-                                    postcssCustomProperties(),
-                                    cssnano({
-                                        preset: 'default',
-                                    }),
+                                plugins: [
+                                    'tailwindcss',
+                                    'autoprefixer',
+                                    'postcss-custom-properties',
+                                    ['cssnano', { preset: 'default' }],
                                 ],
                             },
                         },
@@ -133,18 +164,25 @@ const options = {
             },
             {
                 // sync font files referenced by the css to the fonts directory
-                // the publicPath matches the path from the compiled css to the font file
                 // only looks in the fonts folder so pngs in the images folder won't get put in the fonts folder
                 test: /\.(woff|woff2)$/,
                 include: /fonts/,
-                use: {
-                    loader: 'file-loader',
-                    options: {
-                        name: '[name].[ext]',
-                        outputPath: 'fonts/',
-                        publicPath: '../fonts',
-                    },
+                type: 'asset/resource',
+                generator: {
+                    filename: 'fonts/[name][ext]',
                 },
+            },
+            {
+                test: /\.svg$/,
+                use: [
+                    {
+                        loader: '@svgr/webpack',
+                        options: {
+                            exportType: 'named',
+                        },
+                    },
+                ],
+                issuer: /\.(js|jsx|ts|tsx)$/,
             },
             {
                 // Handles CSS background images in the cssBackgrounds folder
@@ -152,26 +190,21 @@ const options = {
                 // the publicPath matches the path from the compiled css to the cssBackgrounds file
                 test: /\.(svg|jpg|png)$/,
                 include: path.resolve(`./${projectRoot}/static_src/images/`),
-                use: {
-                    loader: 'url-loader',
-                    options: {
-                        fallback: 'file-loader',
-                        name: '[name].[ext]',
-                        outputPath: 'images/cssBackgrounds/',
-                        publicPath: '../images/cssBackgrounds/',
-                        limit: 1024,
+                type: 'asset',
+                parser: {
+                    dataUrlCondition: {
+                        maxSize: 1024,
                     },
                 },
-            },
-            {
-                test: /\.vue$/,
-                loader: 'vue-loader',
+                generator: {
+                    filename: 'images/cssBackgrounds/[name][ext]',
+                },
             },
         ],
     },
     // externals are loaded via base.html and not included in the webpack bundle.
     externals: {
-        //gettext: 'gettext',
+        // gettext: 'gettext',
     },
 };
 
@@ -236,29 +269,43 @@ const webpackConfig = (environment, argv) => {
 
         // See https://webpack.js.org/configuration/dev-server/.
         options.devServer = {
-            // See https://webpack.js.org/configuration/dev-server/#devserverdevmiddleware
-            devMiddleware: {
-                publicPath: '/static/',
-                index: true,
-                // Write compiled files to disk. This makes live-reload work on both port 3000 and 8000.
-                writeToDisk: true,
-            },
-            client: {
-                overlay: {
-                    errors: true,
-                },
-            },
-            host: '0.0.0.0',
-            port: 3000,
+            // Enable gzip compression for everything served.
             compress: true,
-            hot: true,
-            static: path.resolve(__dirname, 'static_compiled'),
+            static: false,
+            host: '0.0.0.0',
+            // When set to 'auto' this option always allows localhost, host, and client.webSocketURL.hostname
+            allowedHosts: 'auto',
+            port: 3000,
             proxy: {
                 context: () => true,
                 target: 'http://localhost:8000',
             },
+            client: {
+                // Shows a full-screen overlay in the browser when there are compiler errors.
+                overlay: true,
+                logging: 'error',
+            },
+            devMiddleware: {
+                index: true,
+                publicPath: '/static/',
+                writeToDisk: true,
+                stats,
+            },
+            setupMiddlewares: (middlewares, devServer) => {
+                // Add a header to the dev server to allow the webchat
+                // service worker to be registered from the root of the dev
+                // server
+                devServer.app.use((req, res, next) => {
+                    if (req.url.endsWith('/webchat-sw.js')) {
+                        res.setHeader('Service-Worker-Allowed', '/');
+                    }
+                    next();
+                });
+                return middlewares;
+            },
         };
     }
+
     return options;
 };
 

@@ -1,0 +1,18 @@
+/* Regular */
+@font-face {
+    font-family: 'Varah';
+    src: url('./../fonts/varah-regular.woff2') format('woff2'),
+        url('./../fonts/varah-regular.woff') format('woff');
+    font-weight: 400;
+    font-display: fallback;
+}
+
+/* Bold */
+@font-face {
+    font-family: 'Varah';
+    src: url('./../fonts/varah-bold.woff2') format('woff2'),
+        url('./../fonts/varah-bold.woff') format('woff');
+    font-style: bold;
+    font-weight: 700;
+    font-display: fallback;
+}
