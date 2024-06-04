@@ -1,4 +1,6 @@
-document.addEventListener('DOMContentLoaded', function () {
+import { MetricsAPIClient } from 'utils/queue-status';
+
+document.addEventListener('DOMContentLoaded', () => {
     const hiddenClass = 'card-new--hidden';
     const hideListeningCTA = (element) =>
         element && element.classList.add(hiddenClass);
@@ -18,6 +20,24 @@ document.addEventListener('DOMContentLoaded', function () {
                 el.style.display = '';
             });
 
+    // Amazon Connect API config
+    // Find the first script tag that starts with 'webchat_queue_config_'
+    // and assume that all other CTAs on the page use the same configuration.
+    // NB: webchat_queue_config is only present on the page if the chat platform
+    // is Amazon Connect.
+    const webchatQueueConfigScript = document.querySelector(
+        '[id^="webchat_queue_config_"]',
+    );
+    const webchatQueueConfig = webchatQueueConfigScript
+        ? JSON.parse(webchatQueueConfigScript.textContent)
+        : null;
+
+    // If the queue config is not present, assume the chat platform is IFS.
+    const chatPlatform = webchatQueueConfig?.chat_platform
+        ? webchatQueueConfig.chat_platform
+        : 'ifs';
+
+    // Legacy IFS API URL
     const rawApiUrl = JSON.parse(
         document.getElementById('webchat_api_url').textContent,
     );
@@ -60,8 +80,12 @@ document.addEventListener('DOMContentLoaded', function () {
         if (smallChatCTA || !chatCTA) return;
 
         // promote the 3rd place small cta to a large one
-        smallCTA && hideListeningCTA(smallCTA);
-        largeCTA && showListeningCTA(largeCTA);
+        if (smallCTA) {
+            hideListeningCTA(smallCTA);
+        }
+        if (largeCTA) {
+            showListeningCTA(largeCTA);
+        }
     };
 
     const getChatUnavailableCtas = () =>
@@ -78,18 +102,18 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     const hideOtherCTAs = () => {
-        for (var cta of otherCtas) {
+        otherCtas.forEach((cta) => {
             cta.classList.add('hidden');
-        }
+        });
     };
 
     const showOtherCTAs = () => {
-        for (var cta of otherCtas) {
+        otherCtas.forEach((cta) => {
             cta.classList.add('active');
-        }
+        });
     };
 
-    if (!apiUrl) {
+    if (!apiUrl && chatPlatform === 'ifs') {
         hideCustomChatElements();
         // Bail if we don't have an API URL. Make sure the element is removed
         hideListeningCTA(chatCTA);
@@ -98,68 +122,100 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
     }
 
-    var xhr = new window.XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === window.XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                const data = JSON.parse(xhr.responseText);
+    if (
+        chatPlatform === 'amazon_connect' &&
+        (!webchatQueueConfig.ac_metrics_id ||
+            !webchatQueueConfig.ac_metrics_endpoint ||
+            !webchatQueueConfig.ac_metrics_api_key)
+    ) {
+        hideCustomChatElements();
+        // Bail if we don't have complete configuration.
+        hideListeningCTA(chatCTA);
+        promoteCTA();
+        hideOtherCTAs();
+        return;
+    }
 
-                if (data['active']) {
-                    showCustomChatElements();
+    const statusCallback = (data) => {
+        if (data.active) {
+            showCustomChatElements();
 
-                    hideChatUnavailableCtas();
-                    // Ensure the small is visible and the large is hidden
-                    largeCTA && hideListeningCTA(largeCTA);
-                    smallCTA && showListeningCTA(smallCTA);
-
-                    let waitMinutes = data['wait_time'] / 60;
-                    let status = 'Estimated wait time: ';
-                    if (waitMinutes <= 10) {
-                        status += 'up to 10 minutes';
-                    } else {
-                        let baseTime = Math.ceil(waitMinutes / 5) * 5;
-                        status += `${baseTime - 5} - ${baseTime + 5} minutes`;
-                    }
-
-                    showOtherCTAs();
-                    for (var cta of otherCtas) {
-                        for (var waitTimeNode of cta.querySelectorAll(
-                            '[data-chat-wait-time]',
-                        )) {
-                            waitTimeNode.innerText = status;
-                        }
-
-                        if (cta.tagName === 'A') {
-                            let href = cta.getAttribute('data-href');
-                            if (href) {
-                                cta.setAttribute('href', href);
-                            }
-                        }
-                        for (var chevron of cta.querySelectorAll(
-                            '.listening-cta__chevron',
-                        )) {
-                            chevron.style.display = 'inline-block';
-                        }
-
-                        // Add hrefs to all links, populating from data-href attributes
-                        for (var anchor of cta.querySelectorAll('a')) {
-                            let href = anchor.getAttribute('data-href');
-                            if (href) {
-                                anchor.setAttribute('href', href);
-                            }
-                        }
-                    }
-                } else {
-                    showChatUnavailableCtas();
-                    hideCustomChatElements();
-                    chatCTA && hideListeningCTA(chatCTA);
-                    // hideOtherCTAs();
-                    promoteCTA();
-                }
+            hideChatUnavailableCtas();
+            // Ensure the small is visible and the large is hidden
+            if (largeCTA) {
+                hideListeningCTA(largeCTA);
             }
+            if (smallCTA) {
+                showListeningCTA(smallCTA);
+            }
+
+            const waitMinutes = data.wait_time / 60;
+            let status = 'Estimated wait time: ';
+            if (waitMinutes <= 10) {
+                status += 'up to 10 minutes';
+            } else {
+                const baseTime = Math.ceil(waitMinutes / 5) * 5;
+                status += `${baseTime - 5} - ${baseTime + 5} minutes`;
+            }
+
+            // Update wait time text for all CTAs
+            document.querySelectorAll('[data-chat-wait-time]').forEach((el) => {
+                el.innerText = status;
+            });
+
+            showOtherCTAs();
+            otherCtas.forEach((cta) => {
+                if (cta.tagName === 'A') {
+                    const href = cta.getAttribute('data-href');
+                    if (href) {
+                        cta.setAttribute('href', href);
+                    }
+                }
+                cta.querySelectorAll('.listening-cta__chevron').forEach(
+                    (chevron) => {
+                        chevron.style.display = 'inline-block';
+                    },
+                );
+
+                // Add hrefs to all links, populating from data-href attributes
+                cta.querySelectorAll('a').forEach((anchor) => {
+                    const href = anchor.getAttribute('data-href');
+                    if (href) {
+                        anchor.setAttribute('href', href);
+                    }
+                });
+            });
+        } else {
+            showChatUnavailableCtas();
+            hideCustomChatElements();
+            if (chatCTA) {
+                hideListeningCTA(chatCTA);
+            }
+            promoteCTA();
         }
     };
-    xhr.open('GET', apiUrl.href);
-    xhr.timeout = 2000;
-    xhr.send();
+
+    if (chatPlatform === 'ifs') {
+        fetch(apiUrl.href)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('API request failed');
+                }
+                return response.json();
+            })
+            .then(statusCallback);
+    } else if (chatPlatform === 'amazon_connect') {
+        const metricsApiClient = new MetricsAPIClient(
+            webchatQueueConfig.ac_metrics_id,
+            webchatQueueConfig.ac_metrics_endpoint,
+            webchatQueueConfig.ac_metrics_api_key,
+        );
+
+        metricsApiClient.getQueueStatus().then((queueState) => {
+            statusCallback({
+                active: queueState.is_open,
+                wait_time: queueState.avg_queue_answer_time,
+            });
+        });
+    }
 });

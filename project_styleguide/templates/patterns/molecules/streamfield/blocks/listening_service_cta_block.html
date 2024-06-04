@@ -37,3 +37,7 @@
 </div>
 
 {% endif %}
+
+{% if value.chat_platform == 'amazon_connect' %}
+    {{ webchat_queue_config|json_script:webchat_queue_config_id }}
+{% endif %}
