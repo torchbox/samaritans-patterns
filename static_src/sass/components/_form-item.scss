@@ -418,4 +418,11 @@
             height: 40px;
         }
     }
+
+    // Avoids the callout covering the top of error message text for PhoneNumberFields
+    &--only_uk_and_roi_phone_number_form_field, &--uk_and_roi_phone_number_widget {
+        .errorlist {
+            margin-top: 10px;
+        }
+    }
 }
