@@ -120,6 +120,16 @@ const GlobalStyle = createGlobalStyle`
         }
     }
 
+    .errorList {
+        margin: 0 0 20px;
+        list-style: none;
+    }
+
+    .errorList li {
+        margin-bottom: 0;
+        font-size: 1.1rem;
+    }
+
     /* Utilities */
     .is-tall {
         height: 100%;

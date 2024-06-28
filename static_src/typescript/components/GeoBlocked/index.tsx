@@ -6,15 +6,16 @@ import LinkButton from 'components/LinkButton';
 const GeoBlocked = () => (
     <PurpleRoomCoverPanel>
         <h1 hidden>Geo-blocked</h1>
-        <h2>
-            Unfortunately this service isn't available outside of the United
-            Kingdom
-        </h2>
+        <h2>Service Not Available Outside UK</h2>
+        <p>
+            We’re sorry, but this service is only available within the United
+            Kingdom.
+        </p>
         <LinkButton href="https://www.befrienders.org/">
-            Find a service in your country
+            Find a service near you
         </LinkButton>
         <LinkButton href="https://www.samaritans.org/">
-            Go to Samaritans.org
+            Visit Samaritans.org
         </LinkButton>
     </PurpleRoomCoverPanel>
 );

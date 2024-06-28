@@ -30,24 +30,25 @@ export const ServiceUnavailablePanel = () => {
             <FullPageCoverPanel>
                 <StyledServiceUnavailablePanel>
                     <h1 hidden>Service unavailable</h1>
-                    <h2>
-                        Unfortunately, the web chat service isn’t available
-                        right now.
-                    </h2>
+                    <h2>Web Chat Service Unavailable</h2>
                     <p>
-                        At the moment, we’re not able to provide consistent
-                        opening hours for the web chat service. That’s because
-                        we’re running the web chat as a pilot, meaning it’s
-                        still small scale and its opening times will change.
+                        We’re sorry, our web chat service isn’t available right
+                        now.
                     </p>
                     <p>
-                        We know this might be frustrating. We hope you bear with
-                        us. When we’re confident and ready, we’ll expand the web
-                        chat opening hours and availability.
+                        As we’re currently running the web chat as a pilot, we
+                        can’t provide consistent opening hours yet. This means
+                        availability may change.
                     </p>
                     <p>
-                        Until then you can call us for free, any time, day or
-                        night, on{' '}
+                        {' '}
+                        We understand this might be frustrating, and we
+                        appreciate your patience. Once we’re ready, we’ll expand
+                        the web chat’s hours and availability.
+                    </p>
+                    <p>
+                        In the meantime, you can call us for free, anytime, day
+                        or night, on{' '}
                         <a
                             aria-label="Samaritans phone number 116 123"
                             href="tel:116123"

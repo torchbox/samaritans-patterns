@@ -9,25 +9,31 @@ import { RootState } from '../../store';
 const NetworkDisconnected = () => {
     const { screen } = useSelector((state: RootState) => state.webchat);
 
+    // These three messages are the same, but are likely be changed soon
+    // so I've left the logic there for now
     let errorMessage =
-        "We can't reach you. Unfortunately, this means you have been disconnected.";
+        'We’re sorry, we can’t reach you. Unfortunately, this means you have been disconnected.';
 
     if (screen === 'chat') {
         errorMessage =
-            "We can't reach you. Unfortunately, this means your chat session has been interrupted.";
+            'We’re sorry, we can’t reach you. Unfortunately, this means you have been disconnected.';
     } else if (screen === 'waiting') {
         errorMessage =
-            "We can't reach you. Unfortunately, this means you're not in the waiting room anymore.";
+            'We’re sorry, we can’t reach you. Unfortunately, this means you have been disconnected.';
     }
 
     return (
         <WhiteRoomCoverPanel>
             <WarningIcon />
-            <h2>{errorMessage}</h2>
-            <p>
-                This might have happened because you’ve lost signal or are
-                having problems with your WiFi connection.
-            </p>
+            <h1 hidden>Connection lost</h1>
+            <h2>Connection lost</h2>
+            <h3>{errorMessage}</h3>
+            <p>This might have happened because:</p>
+            <ul className="errorList">
+                <li>&bull; You may have lost signal</li>
+                <li>or</li>
+                <li>&bull; You may have problems with your Wi-Fi connection</li>
+            </ul>
             <Button
                 action={() => {
                     document.location.reload();
@@ -36,15 +42,13 @@ const NetworkDisconnected = () => {
                 Rejoin waiting room
             </Button>
             <p>
-                <b>
-                    You can call us for free, any time, day or night, on{' '}
-                    <a
-                        aria-label="Samaritans phone number 116 123"
-                        href="tel:116123"
-                    >
-                        116 123
-                    </a>
-                </b>
+                You can call us for free, anytime, day or night, on{' '}
+                <a
+                    aria-label="Samaritans phone number 116 123"
+                    href="tel:116123"
+                >
+                    116 123
+                </a>
             </p>
         </WhiteRoomCoverPanel>
     );

@@ -8,13 +8,26 @@ const ServerErrorPanel = () => (
     <PurpleRoomCoverPanel>
         <WarningIcon />
         <>
-            <h2>We’re experiencing a problem with this service</h2>
+            <h2>Service Unavailable</h2>
             <p>
-                We understand this is frustrating for you and we’re doing
-                everything we can to fix the problem.
+                We’re currently experiencing issues with our online chat
+                service. We understand this is frustrating and we’re working
+                hard to resolve it.
             </p>
+            <br />
+
+            <h3 className="mb-0">What You Can Do</h3>
+            <ul className="errorList">
+                <li>1. Ensure you’re not using any pop-up blockers.</li>
+                <li>
+                    2. Check that your browser and operating system are up to
+                    date.
+                </li>
+                <li>3. Try accessing the service from a different device.</li>
+            </ul>
+
             <h3>
-                You can call us free any time, from any phone on{' '}
+                You can also call us for free anytime from any phone on{' '}
                 <a
                     aria-label="Samaritans phone number 116 123"
                     href="tel:116123"
