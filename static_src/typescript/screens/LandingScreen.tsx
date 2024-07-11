@@ -98,9 +98,12 @@ const LandingScreen = () => {
                         labelComponent={Label}
                         id="fingerprinting-consent"
                         ariaLabel="I agree to the use of Browser Fingerprinting"
+                        ariaRequired
                     >
                         I agree to the use of Browser Fingerprinting
-                        <span className="asterisk">*</span>
+                        <span className="asterisk" aria-hidden="true">
+                            *
+                        </span>
                     </Checkbox>
                     {joinClicked && !fpConsent && (
                         <Small error>

@@ -18,10 +18,6 @@ const HorizontalWaitTimePanel = () => {
         <Panel>
             <ClockIcon paused={false} large />
             <Content>
-                <span
-                    aria-live="polite"
-                    aria-label={`There is currently a ${time} wait time.`}
-                />
                 <p>Estimated time remaining</p>
                 <WaitTime>{time}</WaitTime>
             </Content>

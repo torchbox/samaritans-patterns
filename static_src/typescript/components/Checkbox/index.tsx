@@ -9,32 +9,36 @@ type Props = {
     children?: ReactNode;
     id: string;
     ariaLabel: string;
-} & typeof defaultProps;
-
-const defaultProps = {
-    labelComponent: 'label' as
+    ariaRequired?: boolean;
+    labelComponent?:
         | string
         | ComponentClass<{
               'checked': boolean;
               'htmlFor': string;
               'aria-label': string;
-          }>,
+          }>;
 };
 
 const Checkbox = ({
     checked,
     onChange,
     children,
-    labelComponent,
     id,
     ariaLabel,
+    ariaRequired = false,
+    labelComponent = 'label',
 }: Props) =>
     React.createElement(
         labelComponent,
         { checked, 'htmlFor': id, 'aria-label': ariaLabel },
         <>
             <CheckboxContainer>
-                <HiddenCheckbox checked={checked} onChange={onChange} id={id} />
+                <HiddenCheckbox
+                    checked={checked}
+                    onChange={onChange}
+                    id={id}
+                    aria-required={ariaRequired}
+                />
                 <StyledCheckbox checked={checked} onChange={onChange}>
                     <TickIcon aria-hidden="true" />
                 </StyledCheckbox>
@@ -42,7 +46,5 @@ const Checkbox = ({
             {children}
         </>,
     );
-
-Checkbox.defaultProps = defaultProps;
 
 export default Checkbox;

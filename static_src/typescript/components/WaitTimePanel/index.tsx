@@ -19,12 +19,6 @@ const WaitTimePanel = ({ waitTime, children, paused, beforeTime }: Props) => (
     <>
         <ClockIcon paused={paused} large />
         <div>
-            <span
-                aria-live="polite"
-                aria-label={`There is currently a ${timeDisplay(
-                    waitTime,
-                )} wait time.`}
-            />
             {beforeTime && <Copy>{beforeTime}</Copy>}
             <StyledWaitTime>{timeDisplay(waitTime)}</StyledWaitTime>
             {children}

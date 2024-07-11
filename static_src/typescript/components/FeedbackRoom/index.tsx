@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import useTitle from 'react-use/lib/useTitle';
 
 import TertiaryButton from 'components/TertiaryButton';
 import Tiler, { Tile } from 'components/Tiler';
@@ -21,6 +22,8 @@ import {
 import { endSession } from '../../slices/webchatSlice';
 
 const FeedbackRoom = () => {
+    useTitle('Your conversation has ended | Webchat');
+
     const dispatch = useDispatch<AppDispatch>();
     const amazonConnectContactId = useSelector(
         (state: RootState) => state.webchat.amazonConnectContactId,

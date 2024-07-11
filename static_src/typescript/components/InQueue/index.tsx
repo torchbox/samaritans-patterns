@@ -14,12 +14,15 @@ import BannerNotifications from 'components/BannerNotifications';
 import HorizontalWaitTimePanel from 'components/HorizontalWaitTimePanel';
 import ClockIcon from 'components/ClockIcon';
 import { useNotifications } from 'utils/hooks';
+import useTitle from 'react-use/lib/useTitle';
 
 export type Props = {
     goToChat: () => void;
 };
 
 export const InQueue = ({ goToChat }: Props) => {
+    useTitle("You're waiting for a Samaritan | Webchat");
+
     const browserPermission = Push.Permission.get();
 
     const [isPushNotificationEnabled, updateNotifications] = useNotifications();

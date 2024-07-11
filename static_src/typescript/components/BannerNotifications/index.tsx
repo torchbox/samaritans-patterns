@@ -53,12 +53,11 @@ const BannerNotifications = () => {
                             <b>{notifications ? 'enabled' : 'disabled'}</b>
                         </Heading>
                         <ToggleContainer>
-                            <p>Please use the toggle to change this:</p>
                             <label>
+                                <p>Send me a push notification</p>
                                 <Toggle
                                     onChange={handlePermission}
                                     checked={notifications}
-                                    aria-label="Send me a push notification"
                                 />
                             </label>
                         </ToggleContainer>
@@ -72,13 +71,9 @@ const BannerNotifications = () => {
                     <b>{audio ? 'enabled' : 'disabled'}</b>
                 </Heading>
                 <ToggleContainer>
-                    <p>Please use the toggle to change this:</p>
                     <label>
-                        <Toggle
-                            onChange={handleAudio}
-                            checked={audio}
-                            aria-label="Play an audio alert"
-                        />
+                        <p>Play an audio alert</p>
+                        <Toggle onChange={handleAudio} checked={audio} />
                     </label>
                 </ToggleContainer>
             </Block>

@@ -2,13 +2,21 @@ import styled from 'styled-components';
 import device from 'styles/device';
 
 const ToggleContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    > P {
+    p {
         margin-bottom: 0;
         margin-right: 1rem;
+    }
+
+    > label {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    @media ${device.tabletLandscape} {
+        > label {
+            justify-content: center;
+        }
     }
 `;
 

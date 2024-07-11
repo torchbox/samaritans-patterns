@@ -10,6 +10,7 @@ const BannerDropdown = ({ title, children }) => {
             <BannerButton
                 isVisible={isVisible}
                 onClick={() => setVisibility(!isVisible)}
+                aria-expanded={isVisible}
             >
                 {title}
             </BannerButton>

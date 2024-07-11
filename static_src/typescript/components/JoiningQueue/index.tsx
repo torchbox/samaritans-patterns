@@ -2,15 +2,18 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import Spinner from 'components/Spinner';
 
+import useTitle from 'react-use/lib/useTitle';
 import StyledJoiningQueue from './styled';
 
 const JoiningQueue = () => {
+    useTitle('Entering the waiting room... | Webchat');
+
     // Wait for 10 seconds before showing more information
     const [seconds, setSeconds] = useState(10);
 
     const tick = useCallback(() => {
         if (seconds > 0) {
-            setSeconds((seconds) => seconds - 1);
+            setSeconds((s) => s - 1);
         }
     }, [seconds]);
 

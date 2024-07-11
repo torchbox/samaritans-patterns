@@ -1,5 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 import { useSpring, animated } from 'react-spring';
+import useTitle from 'react-use/lib/useTitle';
 
 import Button from 'components/Button';
 
@@ -13,6 +14,8 @@ export type Props = {
 };
 
 const ReadyScreen = ({ joinAction }: Props) => {
+    useTitle('A Samaritan is ready to listen | Webchat');
+
     const [isPushNotificationEnabled, , isAudioNotificationEnabled] =
         useNotifications();
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import useTitle from 'react-use/lib/useTitle';
 
 import Banner from 'components/Banner';
 import ExitModal from 'components/ExitModal';
@@ -15,6 +16,8 @@ const confirmLiveChatEnd = () => {
 };
 
 const ChatScreen = () => {
+    useTitle('Chat | Webchat');
+
     const dispatch = useDispatch();
     const { isConfirmExitVisible } = useSelector(
         (state: RootState) => state.webchat,
