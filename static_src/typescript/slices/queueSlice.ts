@@ -9,6 +9,7 @@ export type QueueState = {
     agentsOnline: number | null;
     agentsAvailable: number | null;
     isOpen: boolean | null;
+    isAtQueueLimit: boolean | null;
     averageQueueAnswerTime: number | null;
     averageQueueAnswerTimePeriod: 'Hour' | 'Day' | 'Week' | null;
 };
@@ -19,6 +20,7 @@ const initialState: QueueState = {
     agentsOnline: null,
     agentsAvailable: null,
     isOpen: null,
+    isAtQueueLimit: null,
     averageQueueAnswerTime: null,
     averageQueueAnswerTimePeriod: null,
 };
@@ -46,12 +48,15 @@ export const queueSlice = createSlice({
             state.agentsOnline = action.payload.agents_online;
             state.agentsAvailable = action.payload.agents_available;
             state.isOpen = action.payload.is_open;
+            state.isAtQueueLimit = action.payload.is_at_queue_limit;
             state.averageQueueAnswerTime = action.payload.avg_queue_answer_time;
             state.averageQueueAnswerTimePeriod =
                 action.payload.avg_queue_answer_time_period;
         });
         builder.addCase(refreshQueueStatus.rejected, (state) => {
             if (state.lastUpdated === null) {
+                // If this is the first time we're fetching the queue status and it fails,
+                // assume the queue is closed.
                 state.lastUpdated = Date.now();
                 state.isOpen = false;
             }

@@ -67,8 +67,9 @@ const WaitingScreen = () => {
     useEffect(() => {
         dispatch(refreshQueueStatus())
             .unwrap()
-            .then(({ is_open, agents_staffed }) => {
-                const queueAvailable = is_open && agents_staffed > 0;
+            .then(({ is_open, is_at_queue_limit, agents_staffed }) => {
+                const queueAvailable =
+                    is_open && agents_staffed > 0 && !is_at_queue_limit;
 
                 if (!queueAvailable) {
                     dispatch(setScreen('landing'));

@@ -39,11 +39,14 @@ const App = () => {
     );
 
     // The queue is available if it is open and there are agents staffed.
-    const { isOpen, agentsStaffed } = useSelector(
+    const { isOpen, isAtQueueLimit, agentsStaffed } = useSelector(
         (state: RootState) => state.queue,
     );
     const isQueueAvailable =
-        isOpen && agentsStaffed !== null && agentsStaffed > 0;
+        isOpen &&
+        agentsStaffed !== null &&
+        agentsStaffed > 0 &&
+        !isAtQueueLimit;
 
     /**
      * Loading the LexWebUi

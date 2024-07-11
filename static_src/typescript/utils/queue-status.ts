@@ -5,6 +5,7 @@ export type QueueStatusResponse = {
     agents_online: number;
     agents_available: number;
     is_open: boolean;
+    is_at_queue_limit: boolean;
     avg_queue_answer_time: number;
     avg_queue_answer_time_period: 'Hour' | 'Day' | 'Week';
 };
