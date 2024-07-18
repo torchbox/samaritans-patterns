@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useTitle from 'react-use/lib/useTitle';
 
 import Banner from 'components/Banner';
 import ExitModal from 'components/ExitModal';
 import { useDispatch, useSelector } from 'react-redux';
+import { dataLayerPush } from 'utils/dataLayer';
 import type { RootState } from '../store';
 import { setIsConfirmExitVisible } from '../slices/webchatSlice';
 
@@ -22,6 +23,13 @@ const ChatScreen = () => {
     const { isConfirmExitVisible } = useSelector(
         (state: RootState) => state.webchat,
     );
+
+    useEffect(() => {
+        dataLayerPush({
+            event: 'chat',
+            chat_msg: 'chat_initiation',
+        });
+    }, []);
 
     return (
         <>

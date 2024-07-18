@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import LinkButton from 'components/LinkButton';
 
 import { useIsMobile } from 'utils/hooks';
 import SafeguardingBanner from 'components/SafeguardingBanner';
+import { dataLayerPush } from 'utils/dataLayer';
 import config from '../../config';
 
 import {
@@ -14,6 +15,13 @@ import {
 
 export const ServiceUnavailablePanel = () => {
     const isMobile = useIsMobile();
+
+    useEffect(() => {
+        dataLayerPush({
+            event: 'chatError',
+            errorMessage: 'service_unavailable',
+        });
+    }, []);
 
     return (
         <>

@@ -95,6 +95,11 @@ const lexWebUiEventHandler = (event: MessageEvent<LexWebUiEvent>) => {
 
     if (message.event === 'volunteerJoined') {
         store.dispatch(setVolunteerJoined(true));
+
+        window.dataLayer.push({
+            event: 'chat',
+            chat_msg: 'volunteer_has_connected',
+        });
     }
 
     if (message.event === 'createLiveChatSession') {
@@ -109,6 +114,27 @@ const lexWebUiEventHandler = (event: MessageEvent<LexWebUiEvent>) => {
 
     if (message.event === 'requestLiveChatEnd') {
         store.dispatch(setIsConfirmExitVisible(true));
+    }
+
+    if (message.event === 'volunteerLeft') {
+        window.dataLayer.push({
+            event: 'chat',
+            chat_msg: 'chat_volunteer_exit',
+        });
+    }
+
+    if (message.event === 'callerLeft') {
+        window.dataLayer.push({
+            event: 'chat',
+            chat_msg: 'chat_user_exit',
+        });
+    }
+
+    if (message.event === 'chatEnded') {
+        window.dataLayer.push({
+            event: 'chat',
+            chat_msg: 'chat_disconnected',
+        });
     }
 
     if (['volunteerLeft', 'callerLeft', 'chatEnded'].includes(message.event)) {

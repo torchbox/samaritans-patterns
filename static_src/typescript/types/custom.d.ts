@@ -29,4 +29,5 @@ declare module 'react-dock' {
 
 interface Window {
     ChatBotUiLoader: any;
+    dataLayer: Record<string, any>[];
 }

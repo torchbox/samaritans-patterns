@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { ReactComponent as WarningIcon } from 'assets/svgs/warning.svg';
 import WhiteRoomCoverPanel from 'components/RoomCoverPanels/White';
 import Button from 'components/Button';
 import { useSelector } from 'react-redux';
+import { dataLayerPush } from 'utils/dataLayer';
 import { RootState } from '../../store';
 
 const NetworkDisconnected = () => {
     const { screen } = useSelector((state: RootState) => state.webchat);
+
+    useEffect(() => {
+        dataLayerPush({
+            event: 'chatError',
+            errorMessage: 'network_disconnected',
+        });
+    }, []);
 
     // These three messages are the same, but are likely be changed soon
     // so I've left the logic there for now
