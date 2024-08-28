@@ -14,13 +14,13 @@ class="listening-cta listening-cta--primary listening-cta--link"
                 {% render_icon page.icon "listening-cta__icon" %}
             {% endif %}
             <div class="listening-cta__text">
-                <h2 class="listening-cta__heading">
+                <div class="listening-cta__heading">
                     {% if 'ireland' in LANGUAGE_CODE %}
                         {{ value.ireland_email_address }}
                     {% else %}
                         {{ value.email_address }}
                     {% endif %}
-                </h2>
+                </div>
                 <p>
                     {% trans "Response time:" %}
                     {{ value.response_time }}

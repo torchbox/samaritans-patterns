@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import PurpleRoomCoverPanel from 'components/RoomCoverPanels/Purple';
 import { ReactComponent as WarningIcon } from 'assets/svgs/warning.svg';
 import { dataLayerPush } from 'utils/dataLayer';
+import ScreenReaderAnnounce from 'components/ScreenReaderAnnounce';
 
 type Props = {
     moreInfo?: boolean;
@@ -20,6 +21,7 @@ const NetworkIssue = ({ moreInfo }: Props) => {
         <PurpleRoomCoverPanel>
             <WarningIcon />
             <h2>Connection Issue</h2>
+            <ScreenReaderAnnounce text="Connection issue" />
             <p>
                 <strong>
                     Some messages from our volunteer may not have reached you,

@@ -73,8 +73,8 @@
         "wrangler": "^3.1.2"
     },
     "dependencies": {
-        "@fingerprintjs/fingerprintjs": "^4.2.2",
-        "@fingerprintjs/fingerprintjs-pro": "^3.9.3",
+        "@fingerprintjs/fingerprintjs": "^4.4.3",
+        "@fingerprintjs/fingerprintjs-pro": "^3.10.1",
         "@glidejs/glide": "^3.2.3",
         "@reduxjs/toolkit": "^2.2.2",
         "@sentry/browser": "^7.110.1",

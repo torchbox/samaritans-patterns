@@ -27,6 +27,7 @@ type TileHeadingProps = {
 };
 
 export const TileHeading = styled.h2<TileHeadingProps>`
+    font-size: 1.5rem;
     font-weight: ${(props) =>
         props.bold ? props.theme.fonts.bold : props.theme.fonts.normal};
 `;

@@ -15,6 +15,7 @@ const StyledInfoPanel = styled.div<StyledInfoPanelProps>`
             ? props.theme.colors.white
             : props.theme.colors.body};
 
+    h2,
     h3 {
         display: flex;
         align-items: center;

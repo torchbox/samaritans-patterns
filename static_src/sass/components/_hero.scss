@@ -156,8 +156,21 @@
     }
 
     &__subtitle {
+        @include heading-text;
+
+        @include font-size(m);
+
+        @include media-query(tablet-portrait) {
+            @include font-size(l);
+        }
+
+        @include media-query(tablet-landscape) {
+            @include font-size(xl);
+        }
+
         color: $white;
         max-width: $wrapper--medium - (2 * $gutter-xxl);
+        margin: 0 0 20px;
     }
 
     // image sizing and positioning.

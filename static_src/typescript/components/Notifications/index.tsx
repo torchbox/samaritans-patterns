@@ -6,6 +6,8 @@ import { ReactComponent as BellIcon } from 'assets/svgs/bell.svg';
 import TestSound from 'components/TestSound';
 import { useNotifications, useWindowSize } from 'utils/hooks';
 
+import ScreenReaderAnnounce from 'components/ScreenReaderAnnounce';
+import { Heading2 } from 'components/Text';
 import NotificationPanel, { Intro, Label, Small, Copy } from './styled';
 
 const Notifications = () => {
@@ -14,8 +16,12 @@ const Notifications = () => {
 
     const browserPermission = Push.Permission.get();
 
-    const [notifications, updateNotifications, audio, updateAudio] =
-        useNotifications();
+    const {
+        isPushNotificationEnabled,
+        updateNotifications,
+        isAudioNotificationEnabled,
+        updateAudio,
+    } = useNotifications();
 
     const handleNotifications = (
         event: React.ChangeEvent<HTMLInputElement>,
@@ -30,7 +36,8 @@ const Notifications = () => {
     return (
         <NotificationPanel>
             <BellIcon aria-hidden="true" />
-            <h2>You're waiting for a Samaritan</h2>
+            <Heading2 as="h1">You're waiting for a Samaritan</Heading2>
+            <ScreenReaderAnnounce text="You're waiting for a Samaritan" />
             <Intro>
                 We can alert you when a Samaritan is available. You can change
                 these settings at any time by clicking on 'notification
@@ -47,7 +54,7 @@ const Notifications = () => {
             ) : (
                 <>
                     <Checkbox
-                        checked={notifications}
+                        checked={isPushNotificationEnabled}
                         onChange={handleNotifications}
                         labelComponent={Label}
                         id="push-notification"
@@ -60,19 +67,20 @@ const Notifications = () => {
                         ready". It will never show what your messages say or
                         what a volunteer writes you.
                     </Small>
-                    {notifications && browserPermission !== 'granted' && (
-                        <Copy>
-                            <b>
-                                Please click 'Allow' when prompted by your
-                                browser.
-                            </b>
-                        </Copy>
-                    )}
+                    {isPushNotificationEnabled &&
+                        browserPermission !== 'granted' && (
+                            <Copy>
+                                <b>
+                                    Please click 'Allow' when prompted by your
+                                    browser.
+                                </b>
+                            </Copy>
+                        )}
                 </>
             )}
 
             <Checkbox
-                checked={audio}
+                checked={isAudioNotificationEnabled}
                 onChange={handleAudio}
                 labelComponent={Label}
                 id="audio-notification"

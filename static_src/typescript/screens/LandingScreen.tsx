@@ -105,12 +105,14 @@ const LandingScreen = () => {
                             *
                         </span>
                     </Checkbox>
-                    {joinClicked && !fpConsent && (
-                        <Small error>
-                            You must agree to the use of Browser Fingerprinting
-                            to use this service.
-                        </Small>
-                    )}
+                    <div aria-live="polite">
+                        {joinClicked && !fpConsent && (
+                            <Small error>
+                                You must agree to the use of Browser
+                                Fingerprinting to use this service.
+                            </Small>
+                        )}
+                    </div>
                     <Small>
                         If you do not consent to Browser Fingerprinting, you can
                         still access our services for free by phone on{' '}

@@ -12,7 +12,7 @@ const NotificationPanel = styled.div`
     }
 
     > img,
-    h2 {
+    h1 {
         margin-bottom: 1rem;
     }
 `;

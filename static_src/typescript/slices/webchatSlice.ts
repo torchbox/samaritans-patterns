@@ -6,14 +6,17 @@ export type WebchatState = {
     lexWebUiStatus: 'unloaded' | 'loading' | 'loaded' | 'error';
     volunteerJoined: boolean;
     isConfirmExitVisible: boolean;
+    chatEnded: boolean;
     sessionEnded: boolean;
     failedToReconnect: boolean;
     failedToEstablish: boolean;
+    succeededToReconnect: boolean;
     amazonConnectContactId?: string;
     amazonConnectParticipantId?: string;
     amazonConnectParticipantToken?: string;
     isPushNotificationEnabled: boolean;
     isAudioNotificationEnabled: boolean;
+    notificationSent: boolean;
 };
 
 const initialState: WebchatState = {
@@ -21,11 +24,14 @@ const initialState: WebchatState = {
     lexWebUiStatus: 'unloaded',
     volunteerJoined: false,
     isConfirmExitVisible: false,
+    chatEnded: false,
     sessionEnded: false,
     failedToReconnect: false,
     failedToEstablish: false,
+    succeededToReconnect: false,
     isPushNotificationEnabled: false,
     isAudioNotificationEnabled: false,
+    notificationSent: false,
 };
 
 type AmazonConnectSession = {
@@ -74,6 +80,9 @@ export const webchatSlice = createSlice({
         ) => {
             state.isAudioNotificationEnabled = action.payload;
         },
+        endChat: (state) => {
+            state.chatEnded = true;
+        },
         endSession: (state) => {
             state.sessionEnded = true;
         },
@@ -82,6 +91,12 @@ export const webchatSlice = createSlice({
         },
         setFailedToEstablish: (state, action: PayloadAction<boolean>) => {
             state.failedToEstablish = action.payload;
+        },
+        setNotificationSent: (state, action: PayloadAction<boolean>) => {
+            state.notificationSent = action.payload;
+        },
+        setSucceededToReconnect: (state, action: PayloadAction<boolean>) => {
+            state.succeededToReconnect = action.payload;
         },
     },
 });
@@ -94,9 +109,12 @@ export const {
     setAmazonConnectSession,
     setIsPushNotificationEnabled,
     setIsAudioNotificationEnabled,
+    endChat,
     endSession,
     setFailedToReconnect,
     setFailedToEstablish,
+    setNotificationSent,
+    setSucceededToReconnect,
 } = webchatSlice.actions;
 
 export default webchatSlice.reducer;

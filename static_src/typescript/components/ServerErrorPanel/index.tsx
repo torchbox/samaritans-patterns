@@ -4,6 +4,7 @@ import PurpleRoomCoverPanel from 'components/RoomCoverPanels/Purple';
 import LinkButton from 'components/LinkButton';
 import { ReactComponent as WarningIcon } from 'assets/svgs/warning.svg';
 import { dataLayerPush } from 'utils/dataLayer';
+import ScreenReaderAnnounce from 'components/ScreenReaderAnnounce';
 
 const ServerErrorPanel = () => {
     useEffect(() => {
@@ -18,6 +19,7 @@ const ServerErrorPanel = () => {
             <WarningIcon />
             <>
                 <h2>Service Unavailable</h2>
+                <ScreenReaderAnnounce text="Service Unavailable" />
                 <p>
                     We’re currently experiencing issues with our online chat
                     service. We understand this is frustrating and we’re working

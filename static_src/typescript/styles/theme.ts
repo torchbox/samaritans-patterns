@@ -14,6 +14,7 @@ const theme: DefaultTheme = {
 
         // Supporting palette
         orange: '#f5a623',
+        darkOrange: '#eb6c34',
         yellow: '#fecb4e',
         midBlue: '#009bc8',
         lightPurple: '#6e2b62',

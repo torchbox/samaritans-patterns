@@ -17,20 +17,30 @@ import config from './config';
 
 import { store } from './store';
 import {
+    endChat,
     setAmazonConnectSession,
     setFailedToEstablish,
     setFailedToReconnect,
     setIsConfirmExitVisible,
     setScreen,
+    setSucceededToReconnect,
     setVolunteerJoined,
 } from './slices/webchatSlice';
 import { refreshQueueStatus } from './slices/queueSlice';
 import { ping } from './slices/networkSlice';
+import { dataLayerPush } from 'utils/dataLayer';
 
 /**
  * Render the Webchat app
  */
 const render = (Component: React.ComponentType) => {
+    // Create a container for screen reader announcements
+    // Used by ScreenReaderAnnounce component
+    const screenReaderAnnouncementsContainer = document.createElement('div');
+    screenReaderAnnouncementsContainer.id = 'screen_reader_announcements';
+    screenReaderAnnouncementsContainer.setAttribute('aria-live', 'polite');
+    document.body.appendChild(screenReaderAnnouncementsContainer);
+
     ReactDOM.render(
         <ThemeProvider theme={theme}>
             <Provider store={store}>
@@ -63,7 +73,8 @@ type BaseLexWebUiEvent = {
         | 'chatEnded'
         | 'requestLiveChatEnd'
         | 'chatFailedToReconnect'
-        | 'chatFailedToEstablish';
+        | 'chatFailedToEstablish'
+        | 'chatSucceededToReconnect';
 };
 
 type ChatStartedEvent = {
@@ -96,7 +107,7 @@ const lexWebUiEventHandler = (event: MessageEvent<LexWebUiEvent>) => {
     if (message.event === 'volunteerJoined') {
         store.dispatch(setVolunteerJoined(true));
 
-        window.dataLayer.push({
+        dataLayerPush({
             event: 'chat',
             chat_msg: 'volunteer_has_connected',
         });
@@ -117,32 +128,49 @@ const lexWebUiEventHandler = (event: MessageEvent<LexWebUiEvent>) => {
     }
 
     if (message.event === 'volunteerLeft') {
-        window.dataLayer.push({
+        dataLayerPush({
             event: 'chat',
             chat_msg: 'chat_volunteer_exit',
         });
     }
 
     if (message.event === 'callerLeft') {
-        window.dataLayer.push({
+        dataLayerPush({
             event: 'chat',
             chat_msg: 'chat_user_exit',
         });
     }
 
     if (message.event === 'chatEnded') {
-        window.dataLayer.push({
+        dataLayerPush({
             event: 'chat',
             chat_msg: 'chat_disconnected',
         });
     }
 
     if (['volunteerLeft', 'callerLeft', 'chatEnded'].includes(message.event)) {
-        store.dispatch(setScreen('feedback'));
+        store.dispatch(endChat());
     }
 
     if (message.event === 'chatFailedToReconnect') {
         store.dispatch(setFailedToReconnect(true));
+        dataLayerPush({
+            event: 'chatError',
+            errorMessage: 'chat_reconnect_failed',
+        });
+    }
+
+    if (message.event === 'chatSucceededToReconnect') {
+        store.dispatch(setSucceededToReconnect(true));
+
+        // When the chat is successfully reconnected, we can assume the
+        // volunteer has joined
+        store.dispatch(setVolunteerJoined(true));
+
+        dataLayerPush({
+            event: 'chat',
+            chat_msg: 'chat_reconnect_success',
+        });
     }
 
     if (message.event === 'chatFailedToEstablish') {
@@ -155,14 +183,28 @@ window.addEventListener('message', lexWebUiEventHandler);
 /**
  * Poll queue status from Amazon Connect Metrics API
  *
- * This triggers the refreshQueueStatus async thunk, waits for it to resolve, then
- * waits for 30 seconds before repeating endlessly.
+ * This triggers the refreshQueueStatus async thunk, waits for it to resolve,
+ * then waits for 30 seconds before repeating endlessly.
+ *
+ * If the queue is not available, stop polling.
  */
 const pollQueueStatus = async () => {
+    let continuePolling = true;
+
     // eslint-disable-next-line no-constant-condition
-    while (true) {
+    while (continuePolling) {
         // eslint-disable-next-line no-await-in-loop
-        await store.dispatch(refreshQueueStatus());
+        const { is_open, is_at_queue_limit, agents_staffed } = await store
+            .dispatch(refreshQueueStatus())
+            .unwrap();
+
+        const queueAvailable =
+            is_open && agents_staffed > 0 && !is_at_queue_limit;
+
+        if (!queueAvailable) {
+            continuePolling = false;
+        }
+
         // eslint-disable-next-line no-await-in-loop
         await new Promise((resolve) => {
             setTimeout(resolve, 30_000);

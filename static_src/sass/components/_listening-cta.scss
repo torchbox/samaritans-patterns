@@ -124,6 +124,8 @@
     }
 
     &__heading {
+        @include heading-text;
+
         @include font-size(s);
 
         @include media-query(mob-landscape) {

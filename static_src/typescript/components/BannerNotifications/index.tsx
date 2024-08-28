@@ -12,8 +12,12 @@ const BannerNotifications = () => {
         Push.Permission.get(),
     );
 
-    const [notifications, updateNotifications, audio, updateAudio] =
-        useNotifications();
+    const {
+        isPushNotificationEnabled,
+        updateNotifications,
+        isAudioNotificationEnabled,
+        updateAudio,
+    } = useNotifications();
 
     const handlePermission = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (browserPermission === DEFAULT) {
@@ -50,14 +54,18 @@ const BannerNotifications = () => {
                     <>
                         <Heading>
                             Notifications are{' '}
-                            <b>{notifications ? 'enabled' : 'disabled'}</b>
+                            <b>
+                                {isPushNotificationEnabled
+                                    ? 'enabled'
+                                    : 'disabled'}
+                            </b>
                         </Heading>
                         <ToggleContainer>
                             <label>
                                 <p>Send me a push notification</p>
                                 <Toggle
                                     onChange={handlePermission}
-                                    checked={notifications}
+                                    checked={isPushNotificationEnabled}
                                 />
                             </label>
                         </ToggleContainer>
@@ -68,12 +76,15 @@ const BannerNotifications = () => {
             <Block>
                 <Heading>
                     Audio Notifications are{' '}
-                    <b>{audio ? 'enabled' : 'disabled'}</b>
+                    <b>{isAudioNotificationEnabled ? 'enabled' : 'disabled'}</b>
                 </Heading>
                 <ToggleContainer>
                     <label>
                         <p>Play an audio alert</p>
-                        <Toggle onChange={handleAudio} checked={audio} />
+                        <Toggle
+                            onChange={handleAudio}
+                            checked={isAudioNotificationEnabled}
+                        />
                     </label>
                 </ToggleContainer>
             </Block>

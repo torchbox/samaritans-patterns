@@ -9,6 +9,7 @@ import Banner from 'components/Banner';
 
 import { useIsMobile } from 'utils/hooks';
 import { useDispatch, useSelector } from 'react-redux';
+import { dataLayerPush } from 'utils/dataLayer';
 import config from '../config';
 
 import type { AppDispatch, RootState } from '../store';
@@ -71,7 +72,25 @@ const WaitingScreen = () => {
                 const queueAvailable =
                     is_open && agents_staffed > 0 && !is_at_queue_limit;
 
+                // Send GA events for queue status
                 if (!queueAvailable) {
+                    if (!is_open) {
+                        dataLayerPush({
+                            event: 'chatError',
+                            errorMessage: 'queue_closed_on_join',
+                        });
+                    } else if (agents_staffed === 0) {
+                        dataLayerPush({
+                            event: 'chatError',
+                            errorMessage: 'queue_not_staffed_on_join',
+                        });
+                    } else if (is_at_queue_limit) {
+                        dataLayerPush({
+                            event: 'chatError',
+                            errorMessage: 'queue_full_on_join',
+                        });
+                    }
+
                     dispatch(setScreen('landing'));
                 } else {
                     setQueueStatusChecked(true);

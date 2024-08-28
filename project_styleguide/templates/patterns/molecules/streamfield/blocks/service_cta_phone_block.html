@@ -10,7 +10,7 @@
                 {% render_icon page.icon "listening-cta__icon" %}
             {% endif %}
             <div class="listening-cta__text">
-                <h2 class="listening-cta__heading">Call {{ value.phone_number }}</h2>
+                <div class="listening-cta__heading">Call {{ value.phone_number }}</div>
                 {% if value.wait_time %}
                 <p>
                     {% trans "Wait time:" %}

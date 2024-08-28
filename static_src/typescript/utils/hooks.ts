@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeContext } from 'styled-components';
 import { useNetworkState } from 'react-use';
@@ -6,7 +6,9 @@ import type { RootState } from '../store';
 import {
     setIsAudioNotificationEnabled,
     setIsPushNotificationEnabled,
+    setNotificationSent,
 } from '../slices/webchatSlice';
+import { audioNotification, chatNotification } from '../notifications';
 
 const getSize = () => ({
     innerHeight: window.innerHeight,
@@ -54,13 +56,19 @@ export const useIsMobile = () => {
     return windowSize.innerWidth < siteWidth;
 };
 
-export const useNotifications = (): [
-    boolean,
-    (value: boolean) => void,
-    boolean,
-    (value: boolean) => void,
-] => {
+export const useNotifications = (): {
+    isPushNotificationEnabled: boolean;
+    updateNotifications: (value: boolean) => void;
+    isAudioNotificationEnabled: boolean;
+    updateAudio: (value: boolean) => void;
+    notify: () => void;
+    notificationSent: boolean;
+} => {
     const dispatch = useDispatch();
+
+    const { notificationSent } = useSelector(
+        (state: RootState) => state.webchat,
+    );
 
     const isPushNotificationEnabled = useSelector(
         (state: RootState) => state.webchat.isPushNotificationEnabled,
@@ -76,12 +84,25 @@ export const useNotifications = (): [
         dispatch(setIsAudioNotificationEnabled(value));
     };
 
-    return [
+    const notify = useCallback(() => {
+        if (isPushNotificationEnabled) {
+            chatNotification();
+        }
+        if (isAudioNotificationEnabled) {
+            audioNotification.play();
+        }
+
+        dispatch(setNotificationSent(true));
+    }, [dispatch, isAudioNotificationEnabled, isPushNotificationEnabled]);
+
+    return {
         isPushNotificationEnabled,
         updateNotifications,
         isAudioNotificationEnabled,
         updateAudio,
-    ];
+        notify,
+        notificationSent,
+    };
 };
 
 /**

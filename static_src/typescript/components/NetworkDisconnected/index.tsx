@@ -5,6 +5,7 @@ import WhiteRoomCoverPanel from 'components/RoomCoverPanels/White';
 import Button from 'components/Button';
 import { useSelector } from 'react-redux';
 import { dataLayerPush } from 'utils/dataLayer';
+import ScreenReaderAnnounce from 'components/ScreenReaderAnnounce';
 import { RootState } from '../../store';
 
 const NetworkDisconnected = () => {
@@ -34,6 +35,7 @@ const NetworkDisconnected = () => {
         <WhiteRoomCoverPanel>
             <WarningIcon />
             <h1 hidden>Connection lost</h1>
+            <ScreenReaderAnnounce text="Connection lost" />
             <h2>Connection lost</h2>
             <h3>{errorMessage}</h3>
             <p>This might have happened because:</p>

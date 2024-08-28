@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import LinkButton from 'components/LinkButton';
 
 import { useIsMobile } from 'utils/hooks';
 import SafeguardingBanner from 'components/SafeguardingBanner';
-import { dataLayerPush } from 'utils/dataLayer';
+import ScreenReaderAnnounce from 'components/ScreenReaderAnnounce';
 import config from '../../config';
 
 import {
@@ -15,13 +15,6 @@ import {
 
 export const ServiceUnavailablePanel = () => {
     const isMobile = useIsMobile();
-
-    useEffect(() => {
-        dataLayerPush({
-            event: 'chatError',
-            errorMessage: 'service_unavailable',
-        });
-    }, []);
 
     return (
         <>
@@ -39,6 +32,7 @@ export const ServiceUnavailablePanel = () => {
                 <StyledServiceUnavailablePanel>
                     <h1 hidden>Service unavailable</h1>
                     <h2>Web Chat Service Unavailable</h2>
+                    <ScreenReaderAnnounce text="Web Chat Service Unavailable" />
                     <p>
                         We’re sorry, our web chat service isn’t available right
                         now.

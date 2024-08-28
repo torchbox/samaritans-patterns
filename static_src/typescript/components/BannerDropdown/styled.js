@@ -46,6 +46,7 @@ export const DropdownPanel = styled.div`
     text-align: center;
     color: ${(props) => props.theme.colors.primary};
     padding: 2.5rem 3.5rem;
+    display: ${(props) => (props.isVisible ? 'block' : 'none')};
 
     @media ${device.tabletPortrait} {
         min-width: 500px;
@@ -53,6 +54,12 @@ export const DropdownPanel = styled.div`
 
     p {
         font-size: 1.1rem;
+    }
+
+    div {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
     }
 `;
 

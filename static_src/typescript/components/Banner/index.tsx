@@ -58,7 +58,7 @@ const Banner = ({ showNotifications }: Props) => {
                             Whatever you're going through, call us free any
                             time, from any phone&hellip;
                         </p>
-                        <h2>Call us now 116 123</h2>
+                        <div>Call us now 116 123</div>
                         <LinkButton
                             aria-label="A link to more ways of contacting a Samaritan"
                             href="https://www.samaritans.org/how-we-can-help/contact-samaritan/"

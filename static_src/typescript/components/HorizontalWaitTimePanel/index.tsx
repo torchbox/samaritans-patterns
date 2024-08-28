@@ -16,7 +16,7 @@ const HorizontalWaitTimePanel = () => {
 
     return (
         <Panel>
-            <ClockIcon paused={false} large />
+            <ClockIcon paused large />
             <Content>
                 <p>Estimated time remaining</p>
                 <WaitTime>{time}</WaitTime>

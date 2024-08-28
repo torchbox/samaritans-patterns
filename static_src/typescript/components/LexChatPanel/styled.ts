@@ -46,4 +46,67 @@ const StyledLexChatPanel = styled.div<Props>`
     }
 `;
 
+type HeaderProps = {
+    status?: string;
+};
+
+export const ChatRoomHeader = styled.header<HeaderProps>`
+    display: flex;
+    position: relative;
+    z-index: 1;
+    background-color: ${({ status, theme }) =>
+        (status === 'Not Started' && `${theme.colors.darkBlue}`) ||
+        (status === 'Offline' && `${theme.colors.lightPurple}`) ||
+        `${theme.colors.primary}`};
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.6rem;
+    transition: background-color 0.2s ease;
+    min-height: 55px;
+
+    @media ${device.mobLandscape} {
+        padding: 1rem;
+        min-height: 65px;
+    }
+`;
+
+export const ChatRoomStatus = styled.div`
+    display: flex;
+    flex: 1;
+    margin-right: 0.5rem;
+    margin-left: 2.8rem;
+
+    @media ${device.mobLandscape} {
+        margin-right: 1rem;
+        margin-left: 3.5rem;
+    }
+
+    @media ${device.tabletLandscape} {
+        margin-left: 0;
+    }
+`;
+
+type ChatRoomStatusTextProps = {
+    variant?: 'default' | 'orange';
+};
+
+export const ChatRoomExitButton = styled.button<ChatRoomStatusTextProps>`
+    font-size: ${(props) => props.theme.fonts.xs};
+    appearance: none;
+    background-color: ${(props) =>
+        props.variant === 'orange'
+            ? props.theme.colors.darkOrange
+            : props.theme.colors.white};
+    border: none;
+    color: ${(props) =>
+        props.variant === 'orange'
+            ? props.theme.colors.white
+            : props.theme.colors.primary};
+    border-radius: 4px;
+    font-weight: ${(props) => props.theme.fonts.bold};
+    padding: 0.3rem 0.55rem;
+`;
+
+ChatRoomExitButton.displayName = 'ChatRoomExitButton';
+
 export default StyledLexChatPanel;

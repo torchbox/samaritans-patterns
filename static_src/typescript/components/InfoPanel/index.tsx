@@ -1,16 +1,18 @@
 import React, { ReactNode } from 'react';
 
+import { Heading3 } from 'components/Text';
 import StyledInfoPanel, { Variants } from './styled';
 
 type Props = {
     heading: ReactNode;
     children: ReactNode;
     variant?: Variants;
+    headingAs?: React.ElementType;
 };
 
-const InfoPanel = ({ heading, children, variant }: Props) => (
+const InfoPanel = ({ heading, children, variant, headingAs }: Props) => (
     <StyledInfoPanel variant={variant}>
-        <h3>{heading}</h3>
+        <Heading3 as={headingAs}>{heading}</Heading3>
         {children}
     </StyledInfoPanel>
 );
@@ -24,6 +26,7 @@ export const IconInfoPanel = ({
     heading,
     children,
     variant,
+    headingAs,
 }: IconInfoPanelProps) => (
     <InfoPanel
         heading={
@@ -32,6 +35,7 @@ export const IconInfoPanel = ({
                 {heading}
             </>
         }
+        headingAs={headingAs}
         variant={variant}
     >
         {children}

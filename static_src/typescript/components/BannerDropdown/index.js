@@ -11,12 +11,13 @@ const BannerDropdown = ({ title, children }) => {
                 isVisible={isVisible}
                 onClick={() => setVisibility(!isVisible)}
                 aria-expanded={isVisible}
+                aria-controls="other_ways_to_talk_panel"
             >
                 {title}
             </BannerButton>
-            {isVisible && (
-                <DropdownPanel role="dialog">{children}</DropdownPanel>
-            )}
+            <DropdownPanel isVisible={isVisible} id="other_ways_to_talk_panel">
+                {children}
+            </DropdownPanel>
         </StyledBannerDropdown>
     );
 };

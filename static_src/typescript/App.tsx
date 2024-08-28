@@ -11,6 +11,7 @@ import NetworkIssue from 'components/NetworkIssue';
 import NetworkDisconnected from 'components/NetworkDisconnected';
 import Banner from 'components/Banner';
 import ServerErrorPanel from 'components/ServerErrorPanel';
+import { dataLayerPush } from 'utils/dataLayer';
 import ChatScreen from './screens/ChatScreen';
 import WaitingScreen from './screens/WaitingScreen';
 import LandingScreen from './screens/LandingScreen';
@@ -28,6 +29,7 @@ const App = () => {
         amazonConnectParticipantId,
         amazonConnectParticipantToken,
         screen,
+        chatEnded,
         sessionEnded,
         lexWebUiStatus,
         failedToReconnect,
@@ -47,6 +49,32 @@ const App = () => {
         agentsStaffed !== null &&
         agentsStaffed > 0 &&
         !isAtQueueLimit;
+
+    /**
+     * Send GA event if the queue is not available
+     * */
+    useEffect(() => {
+        // Explicitly check isQueueAvailable as `false` because `null` means the
+        // queue status is still unknown.
+        if (isQueueAvailable === false) {
+            if (!isOpen) {
+                dataLayerPush({
+                    event: 'chatError',
+                    errorMessage: 'queue_closed_on_load',
+                });
+            } else if (agentsStaffed === 0) {
+                dataLayerPush({
+                    event: 'chatError',
+                    errorMessage: 'queue_not_staffed_on_load',
+                });
+            } else if (isAtQueueLimit) {
+                dataLayerPush({
+                    event: 'chatError',
+                    errorMessage: 'queue_full_on_load',
+                });
+            }
+        }
+    }, [agentsStaffed, isAtQueueLimit, isOpen, isQueueAvailable]);
 
     /**
      * Loading the LexWebUi
@@ -210,12 +238,11 @@ const App = () => {
     ]);
 
     // This effect clears the last ping of the chat and the session details from
-    // local storage when the user leaves the chat screen or if the user is
-    // disconnected so that the chat does not reconnect when the user refreshes
-    // the page.
+    // local storage when the chat ends or if the user is disconnected so that
+    // the chat does not reconnect when the user refreshes the page.
     useEffect(() => {
         if (
-            screen === 'feedback' ||
+            chatEnded ||
             networkStatus === 'disconnected' ||
             failedToReconnect
         ) {
@@ -232,6 +259,7 @@ const App = () => {
         setSessionParticipantId,
         setSessionParticipantToken,
         failedToReconnect,
+        chatEnded,
     ]);
 
     // This effect attempts to reconnect the chat if the chat was active less
@@ -261,6 +289,12 @@ const App = () => {
 
                 // Go to chat screen
                 dispatch(setScreen('chat'));
+
+                // Log reconnect attempt to GA
+                dataLayerPush({
+                    event: 'chat',
+                    chat_msg: 'chat_reconnect_attempt',
+                });
             }
         }
     }, [

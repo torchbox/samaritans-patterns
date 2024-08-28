@@ -12,6 +12,8 @@ import TileHeader, {
     TileProgressBar,
     TileContent,
 } from 'components/Tiler/styled';
+import ScreenReaderAnnounce from 'components/ScreenReaderAnnounce';
+import { Heading3 } from 'components/Text';
 import StyledFeedbackRoom from './styled';
 import type { AppDispatch, RootState } from '../../store';
 import {
@@ -22,7 +24,7 @@ import {
 import { endSession } from '../../slices/webchatSlice';
 
 const FeedbackRoom = () => {
-    useTitle('Your conversation has ended | Webchat');
+    useTitle('Thank you for being part of our pilot | Webchat');
 
     const dispatch = useDispatch<AppDispatch>();
     const amazonConnectContactId = useSelector(
@@ -31,7 +33,6 @@ const FeedbackRoom = () => {
     const { preFeedbackScore, postFeedbackScore } = useSelector(
         (state: RootState) => state.feedback,
     );
-
     const onFeedback = async () => {
         // It technically shouldn't be possible for these to be null
         // as the user should have to select a value before continuing
@@ -64,7 +65,6 @@ const FeedbackRoom = () => {
 
     return (
         <StyledFeedbackRoom>
-            <h1 hidden>Feedback room</h1>
             <Tiler>
                 <Tile
                     name="thank-you"
@@ -72,12 +72,15 @@ const FeedbackRoom = () => {
                     content={
                         <>
                             <TileHeader>
-                                <h3>Your conversation has ended</h3>
+                                <Heading3 as="p">
+                                    Your conversation has ended
+                                </Heading3>
                             </TileHeader>
                             <TileContent>
-                                <TileHeading bold>
+                                <TileHeading bold as="h1">
                                     Thank you for being a part of our pilot
                                 </TileHeading>
+                                <ScreenReaderAnnounce text="Thank you for being part of our pilot." />
                                 <p>We hope it helped you in some way</p>
                                 <TileCopy>
                                     Would you be able to give us some feedback

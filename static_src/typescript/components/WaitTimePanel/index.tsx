@@ -4,20 +4,30 @@ import { timeDisplay } from '../../utils/wait-time';
 
 import ClockIcon from '../ClockIcon';
 import StyledWaitTime, { Copy } from './styled';
+import ScreenReaderAnnounce from '../ScreenReaderAnnounce';
 
 type Props = {
     waitTime: number | null;
     children?: ReactNode;
     beforeTime?: ReactNode;
-} & typeof defaultProps;
-
-const defaultProps = {
-    paused: false,
+    paused?: boolean;
 };
 
-const WaitTimePanel = ({ waitTime, children, paused, beforeTime }: Props) => (
+const WaitTimePanel = ({
+    waitTime,
+    children,
+    paused = false,
+    beforeTime,
+}: Props) => (
     <>
         <ClockIcon paused={paused} large />
+
+        <ScreenReaderAnnounce
+            text={`The current estimated wait time is ${timeDisplay(
+                waitTime,
+            )}.`}
+        />
+
         <div>
             {beforeTime && <Copy>{beforeTime}</Copy>}
             <StyledWaitTime>{timeDisplay(waitTime)}</StyledWaitTime>
@@ -25,6 +35,5 @@ const WaitTimePanel = ({ waitTime, children, paused, beforeTime }: Props) => (
         </div>
     </>
 );
-WaitTimePanel.defaultProps = defaultProps;
 
 export default WaitTimePanel;

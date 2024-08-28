@@ -15,6 +15,8 @@ import HorizontalWaitTimePanel from 'components/HorizontalWaitTimePanel';
 import ClockIcon from 'components/ClockIcon';
 import { useNotifications } from 'utils/hooks';
 import useTitle from 'react-use/lib/useTitle';
+import ScreenReaderAnnounce from 'components/ScreenReaderAnnounce';
+import { Heading2 } from 'components/Text';
 
 export type Props = {
     goToChat: () => void;
@@ -25,7 +27,8 @@ export const InQueue = ({ goToChat }: Props) => {
 
     const browserPermission = Push.Permission.get();
 
-    const [isPushNotificationEnabled, updateNotifications] = useNotifications();
+    const { isPushNotificationEnabled, updateNotifications } =
+        useNotifications();
 
     const handleNotifications = (onClick: () => void) => {
         if (isPushNotificationEnabled) {
@@ -81,7 +84,10 @@ export const InQueue = ({ goToChat }: Props) => {
                         nextButtonText="Write your first message"
                         content={
                             <>
-                                <h2>Getting the most from your web chat</h2>
+                                <Heading2 as="h1">
+                                    Getting the most from your web chat
+                                </Heading2>
+                                <ScreenReaderAnnounce text="Getting the most from your web chat" />
                                 <InfoPanel heading="This space is for you">
                                     <p>
                                         You can write however feels natural and
@@ -113,6 +119,7 @@ export const InQueue = ({ goToChat }: Props) => {
                     icon={<ClockIcon paused />}
                     heading="When your wait time is up..."
                     variant="light"
+                    headingAs="h3"
                 >
                     <p>
                         A trained volunteer will be there to have a one-to-one
@@ -124,6 +131,7 @@ export const InQueue = ({ goToChat }: Props) => {
                 <InfoPanel
                     heading="If you can't wait this long..."
                     variant="light"
+                    headingAs="h3"
                 >
                     <p>
                         Calling us on <a href="tel:116123">116 123</a> is

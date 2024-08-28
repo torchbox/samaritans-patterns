@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import Spinner from 'components/Spinner';
 
 import useTitle from 'react-use/lib/useTitle';
+import ScreenReaderAnnounce from 'components/ScreenReaderAnnounce';
 import StyledJoiningQueue from './styled';
 
 const JoiningQueue = () => {
@@ -27,24 +28,27 @@ const JoiningQueue = () => {
             <div>
                 <Spinner />
                 <h3>Entering the waiting room...</h3>
-                {seconds <= 0 && (
-                    <>
-                        <h4>
-                            We are still trying to connect you, but it&apos;s
-                            taking longer than expected.
-                        </h4>
-                        <p>
-                            You can call us free any time, from any phone on{' '}
-                            <a
-                                aria-label="Samaritans phone number 116 123"
-                                href="tel:116123"
-                            >
-                                116 123
-                            </a>
-                            .
-                        </p>
-                    </>
-                )}
+                <ScreenReaderAnnounce text="Entering the waiting room..." />
+                <div aria-live="polite">
+                    {seconds <= 0 && (
+                        <>
+                            <h4>
+                                We are still trying to connect you, but
+                                it&apos;s taking longer than expected.
+                            </h4>
+                            <p>
+                                You can call us free any time, from any phone on{' '}
+                                <a
+                                    aria-label="Samaritans phone number 116 123"
+                                    href="tel:116123"
+                                >
+                                    116 123
+                                </a>
+                                .
+                            </p>
+                        </>
+                    )}
+                </div>
             </div>
         </StyledJoiningQueue>
     );
