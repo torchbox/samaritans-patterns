@@ -14,7 +14,7 @@ context:
     support_image: fake
     support_headline: Support headline
     support_description: Support description text goes here
-    support_us_links:
+    get_nation_specific_support_us_links:
       all:
         - link: '#'
           link_text: Link text
@@ -54,9 +54,9 @@ context:
             title: Card Title
             publication_date: !!timestamp '2018-12-13'
 
-    more_info_headline: More info headline
-    more_info_description: More info description
-    more_info_pages:
+    get_nation_specific_more_info_headline: More info headline
+    get_nation_specific_more_info_description: More info description
+    get_nation_specific_more_info_pages:
       get_object_list:
         - more_info_pages:
             specific:
@@ -78,7 +78,7 @@ context:
       url: '#'
     cta_link_text: Link text
 
-    support_donation_page:
+    get_nation_specific_support_donation_page:
       allow_monthly_donation: true
       allow_one_off_donation: true
       donate_button_text: Donate now

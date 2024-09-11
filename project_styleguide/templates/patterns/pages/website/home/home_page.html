@@ -1,5 +1,5 @@
 {% extends "patterns/base_page.html" %}
-{% load wagtailcore_tags wagtailimages_tags icon_tags donate_tags static to_euro %}
+{% load wagtailcore_tags locale_tags wagtailimages_tags icon_tags donate_tags static to_euro %}
 
 {% block meta_tags %}
     {{ block.super }}
@@ -60,7 +60,7 @@
     <section class="section section--page-padding homepage-donate-slider" data-hero-donate-landing>
         <div class="wrapper wrapper--large wrapper--padding-page">
             <div class="homepage-donate-slider__wrapper">
-                <div class="wrapper wrapper--small {% if page.support_donation_page %}homepage-donate-slider__heading{% endif %}">
+                <div class="wrapper wrapper--small {% if donate_page %}homepage-donate-slider__heading{% endif %}">
                     <h2 class="heading-secondary heading-secondary--large">
                         {{ page.secondary_headline }}
                     </h2>
@@ -68,10 +68,10 @@
                         {{ page.secondary_description }}
                     </p>
                 </div>
-                {% if page.support_donation_page %}
+                {% if donate_page %}
                     <div class="homepage-donate-slider__inner">
                         {% image page.support_image fill-1100x600 as support_image %}
-                        {% if page.support_donation_page.hero_video %}
+                        {% if donate_page.hero_video %}
                             <div class="homepage-donate-slider__poster" style="background-image: url({{ support_image.url }});" data-video-modal>
                                 <a href="#" class="homepage-donate-slider__open-video" aria-haspopup="true" aria-label="Open the video" data-modal-open>
                                     {% include "patterns/atoms/svg/icons/icon-play-circle.html" with classes="homepage-donate-slider__open-video-icon" %}
@@ -91,7 +91,7 @@
                                                 height="270"
                                                 class="lazyframe"
                                                 data-vendor="youtube"
-                                                data-src="{{ page.support_donation_page.hero_video }}"
+                                                data-src="{{ donate_page.hero_video }}"
                                                 gesture="media"
                                                 allow="encrypted-media"
                                                 allowfullscreen
@@ -105,7 +105,7 @@
                         {% endif %}
 
                         <div class="homepage-donate-slider__container">
-                            {% include "patterns/organisms/donate/homepage_donation_widget.html" with donate_page=page.support_donation_page %}
+                            {% include "patterns/organisms/donate/homepage_donation_widget.html" with donate_page=donate_page %}
                         </div>
                     </div>
                     <span class="homepage-donate-slider__connectors"></span>
@@ -114,18 +114,18 @@
         </div>
     </section>
 
-    {% if page.highlight_call_to_action %}
+    {% if page.get_nation_specific_highlight_call_to_action %}
     <section class="section section--page-padding">
         <div class="wrapper wrapper--large">
-            {% include_block page.highlight_call_to_action %}
+            {% include_block page.get_nation_specific_highlight_call_to_action %}
         </div>
     </section>
     {% endif %}
 
     <section class="section section--page-padding">
-        {% if page.story_highlight %}
+        {% if page.get_nation_specific_story_highlight %}
             <div class="wrapper wrapper--large">
-                {% include_block page.story_highlight %}
+                {% include_block page.get_nation_specific_story_highlight %}
             </div>
         {% endif %}
         <div class="wrapper wrapper--small">
@@ -141,7 +141,7 @@
 
         <div class="wrapper wrapper--large">
             <div class="grid grid--3col">
-                {% for support_us_link in page.support_us_links.all %}
+                {% for support_us_link in page.get_nation_specific_support_us_links.all %}
                     {% include "patterns/molecules/cards/related-card.html" with value=support_us_link.link.specific title_override=support_us_link.link_text body_override=support_us_link.summary classes="card-new--dark" %}
                 {% endfor %}
             </div>
@@ -193,7 +193,7 @@
 
 
                     <ul class="grid grid--homepage-support nav--homepage-support">
-                        {% for support_link in page.support_us_links.all %}
+                        {% for support_link in page.get_nation_specific_support_us_links.all %}
                             <li class="nav__item nav__heading nav__heading--homepage-support" role="presentation">
                                 {% include "patterns/molecules/navigation/includes/menu_item.html" with page=support_link.link title=support_link.link_text description=support_link.summary classes="nav__link nav__link--description" is_menuitem=False %}
                             </li>
@@ -208,8 +208,8 @@
 
         {% include "patterns/molecules/mission-statement/mission-statement.html" with heading=page.secondary_headline description=page.secondary_description classes="section--mission-statement is-hidden" %}
 
-        {% if nation_pages|length %}
-            <div class="wrapper wrapper--large wrapper--padding-for-page">
+        {% if available_languages|length %}
+            <div class="wrapper wrapper--large">
                 <div class="wrapper wrapper--website-homepage">
                     <section>
                         <div class="news-cards news-cards--homepage">
@@ -225,9 +225,10 @@
                                     </h2>
                                 </div>
                                 <div>
-                                    {% for nation in nation_pages %}
-                                        <a class="nav__link nav__link--description nav__link--nations" href="{{ nation.url }}">
-                                            {{ nation.get_country_display }}
+                                    {% get_path_for_locale as redirect_url %}
+                                    {% for language in available_languages %}
+                                        <a class="nav__link nav__link--description nav__link--nations" href="{% url 'set_locale' language.0 %}?next={{ redirect_url|urlencode }}">
+                                            {{ language.1 }}
                                             <svg id="icon--chevron" class="chevron-link__chevron nav__icon nav__icon--chevron" aria-hidden="true" viewBox="0 0 43.1 62.7" fill="currentColor"><use xlink:href="#icon-chevron"></use></svg>
                                         </a>
                                     {% endfor %}
@@ -312,12 +313,12 @@
             <div class="grid grid--3col grid--no-margin">
                 <div class="grid__double-width">
 
-                    <h2 class="heading-secondary heading-secondary--large">{{ page.more_info_headline }}</h2>
-                    <p class="website-homepage__text">{{ page.more_info_description }}</p>
+                    <h2 class="heading-secondary heading-secondary--large">{{ page.get_nation_specific_more_info_headline }}</h2>
+                    <p class="website-homepage__text">{{ page.get_nation_specific_more_info_description }}</p>
 
-                    {% if page.more_info_pages %}
+                    {% if page.get_nation_specific_more_info_pages %}
                         <div class="grid grid--2col grid--no-margin">
-                            {% for card in page.more_info_pages.get_object_list %}
+                            {% for card in page.get_nation_specific_more_info_pages.get_object_list %}
                                 {% include "patterns/molecules/cards/related-card.html" with value=card.more_info_pages.specific classes="card-new--dark" %}
                             {% endfor %}
                         </div>
@@ -351,30 +352,29 @@
 {% block extra_js %}
     {# donate js needed for the toggle between monthly and single #}
     <script src="{% static 'js/donate.js' %}"></script>
-    {% with page.support_donation_page as donate_page %}
-        {# Note that single_slider_values, single_button_values, monthly_slider_values and monthly_button_values are passed into the home page context from the donate page #}
-        {% if donate_page.show_donate_slider %}
-            {% if single_slider_values and donate_page.allow_one_off_donation %}
-                {{ single_slider_values|json_script:"single_slider_values" }}
-            {% endif %}
-            {% if monthly_slider_values and donate_page.allow_monthly_donation %}
-                {{ monthly_slider_values|json_script:"monthly_slider_values" }}
-            {% endif %}
+    {# Note that single_slider_values, single_button_values, monthly_slider_values and monthly_button_values are passed into the home page context from the donate page #}
+    {% if donate_page.show_donate_slider %}
+        {% if single_slider_values and donate_page.allow_one_off_donation %}
+            {{ single_slider_values|json_script:"single_slider_values" }}
         {% endif %}
-        {% if donate_page.show_donate_buttons %}
-            {% if single_button_values and donate_page.allow_one_off_donation %}
-                {{ single_button_values|json_script:"single_button_values" }}
-            {% endif %}
-            {% if monthly_button_values and donate_page.allow_monthly_donation %}
-                {{ monthly_button_values|json_script:"monthly_button_values" }}
-            {% endif %}
+        {% if monthly_slider_values and donate_page.allow_monthly_donation %}
+            {{ monthly_slider_values|json_script:"monthly_slider_values" }}
         {% endif %}
-    {% endwith %}
+    {% endif %}
+    {% if donate_page.show_donate_buttons %}
+        {% if single_button_values and donate_page.allow_one_off_donation %}
+            {{ single_button_values|json_script:"single_button_values" }}
+        {% endif %}
+        {% if monthly_button_values and donate_page.allow_monthly_donation %}
+            {{ monthly_button_values|json_script:"monthly_button_values" }}
+        {% endif %}
+    {% endif %}
+
 
     <script type="text/javascript">
         donateConfig = {
-            'monthlyGiving': '{{ page.support_donation_page.allow_monthly_donation }}',
-            'singleGiving' : '{{ page.support_donation_page.allow_one_off_donation }}',
+            'monthlyGiving': '{{ donate_page.allow_monthly_donation }}',
+            'singleGiving' : '{{ donate_page.allow_one_off_donation }}',
             'monthlyAmount': '{{ monthly_suggested_amount }}',
             'singleAmount': '{{ single_suggested_amount }}',
             'isEuro' : '{{ is_euro }}'

@@ -46,6 +46,7 @@ import { toggleLeaderboard } from './components/leaderboard';
 import FormFieldExpand from './components/form-field-expand';
 import ChapterBar from './components/chapter-bar';
 import DonateButtons from './components/donate-buttons';
+import NationSelector from './components/nation-selector';
 
 import '../sass/main.scss';
 
@@ -122,6 +123,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     for (const gallery of document.querySelectorAll(Gallery.selector())) {
         new Gallery(gallery);
+    }
+
+    for (const nationSelector of document.querySelectorAll(
+        NationSelector.selector(),
+    )) {
+        new NationSelector(nationSelector);
     }
 
     for (const gdprField of document.querySelectorAll(GdprFields.selector())) {

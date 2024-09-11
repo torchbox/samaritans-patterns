@@ -1,5 +1,5 @@
 {% if card.url %}
-    <a class="card card--with-image {% if corner_color %}card--{{ corner_color }}{% endif %}" href="{{ card.url }}">
+    <a class="card card--with-image {% if corner_color %}card--{{ corner_color }}{% endif %}" href="{{ card.url }}{% if card.query_parameters %}?{{ card.query_parameters }}{% endif %}">
 {% else %}
     <div class="card card--with-image {% if corner_color %}card--{{ corner_color }}{% endif %}">
 {% endif %}

@@ -20,7 +20,12 @@
 
 {# Monthly #}
 {% if donate_page.allow_monthly_donation %}
-    <form method="get" action="{% url 'donate:redirect' %}" id="donate_form--monthly" {% if donate_page.default_to_single %}hidden{% endif %} class="js-donate-usage">
+    <form method="get" action="{{ donate_form_action_url }}" id="donate_form--monthly" {% if donate_page.default_to_single %}hidden{% endif %} class="js-donate-usage">
+        {# Show currency chooser if more than one currency is available #}
+        {% if donate_page.get_available_currencies|length == 2 %}
+            {% include "patterns/pages/donate/partials/donate_currency_selector.html" with currency=currency %}
+        {% endif %}
+
         {# Show slider if an editor has enabled it #}
         {% if donate_page.show_donate_slider %}
             {# Show slider usage slot if an editor has enabled the slider #}
@@ -54,7 +59,7 @@
                             <label for="{{ monthly_form.amount.id_for_label }}">{{ monthly_form.amount.label }}</label>
                             <div class="form-item__wrapper--euro">
                                 {{ monthly_form.amount.errors }}
-                                <input type="number" id="id_amount" name="amount" value="{{ monthly_form.amount.value|to_euro:current_site }}" min="0.01" step="0.01" required="" max="{{ donation_max_amount|to_euro:current_site }}">
+                                <input type="number" id="id_amount" name="amount" value="{{ monthly_form.amount.value }}" min="0.01" step="0.01" required="" max="{{ donation_max_amount }}">
                             </div>
                         </div>
                     </div>
@@ -80,7 +85,12 @@
 
 {# One off #}
 {% if donate_page.allow_one_off_donation %}
-    <form method="get" action="{% url 'donate:redirect' %}" id="donate_form--single" {% if donate_page.default_to_monthly %}hidden{% endif %} class="js-donate-usage">
+    <form method="get" action="{{ donate_form_action_url }}" id="donate_form--single" {% if donate_page.default_to_monthly %}hidden{% endif %} class="js-donate-usage">
+        {# Show currency chooser if more than one currency is available #}
+        {% if donate_page.get_available_currencies|length == 2 %}
+            {% include "patterns/pages/donate/partials/donate_currency_selector.html" with currency=currency %}
+        {% endif %}
+
         {# Show slider if an editor has enabled it #}
         {% if donate_page.show_donate_slider %}
             {# Show slider usage slot if an editor has enabled the slider #}
@@ -115,7 +125,7 @@
                             <label for="{{ one_off_form.amount.id_for_label }}">{{ one_off_form.amount.label }}</label>
                             <div class="form-item__wrapper--euro">
                                 {{ one_off_form.amount.errors }}
-                                <input type="number" id="id_amount" name="amount" value="{{ one_off_form.amount.value|to_euro:current_site }}" min="0.01" step="0.01" required="" max="{{ donation_max_amount|to_euro:current_site }}">
+                                <input type="number" id="id_amount" name="amount" value="{{ one_off_form.amount.value }}" min="0.01" step="0.01" required="" max="{{ donation_max_amount }}">
                             </div>
                         </div>
                     </div>

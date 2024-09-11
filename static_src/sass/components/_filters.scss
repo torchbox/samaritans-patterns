@@ -8,6 +8,12 @@
         padding-bottom: $gutter-large;
     }
 
+    &--rounded {
+        border-bottom: 0;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
     &--activities {
         margin-bottom: 10px;
 
@@ -67,6 +73,11 @@
         margin-bottom: $gutter-small;
         flex-basis: 100%;
 
+        #{$root}--rounded & {
+            width: 100%;
+            margin-bottom: 0;
+        }
+
         @include media-query(mob-landscape) {
             width: calc(50% - (0.5 * #{$gutter}));
             flex-basis: auto;
@@ -107,6 +118,14 @@
             display: none;
         }
         // sass-lint:enddisable
+
+        #{$root}--rounded & {
+            border-left: 0;
+            border-radius: 0 5px 5px 0;
+            padding-left: 5px;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
     }
 
     &__select-icon-wrapper {
@@ -132,5 +151,14 @@
         border-left: 1px solid $grey-light;
         border-bottom: 1px solid $grey-light;
         padding: 7px;
+
+        #{$root}--rounded & {
+            background-color: $color--white;
+            border-radius: 5px 0 0 5px;
+        }
+
+        &--small {
+            height: 39px;
+        }
     }
 }

@@ -1,0 +1,21 @@
+.donate-currency-selector {
+    display: flex;
+    flex-direction: row;
+    margin: 6px 0 21px;
+
+    &__anchor {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        &:not(:last-child) {
+            margin-right: 32px;
+        }
+    }
+
+    &__label {
+        margin-left: 12px;
+        font-weight: 700;
+        color: $ink;
+    }
+}

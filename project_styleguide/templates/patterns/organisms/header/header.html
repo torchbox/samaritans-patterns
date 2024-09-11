@@ -1,7 +1,10 @@
-{% load cache i18n wagtailcore_tags navigation_tags icon_tags %}
+{% load i18n wagtailcore_tags navigation_tags icon_tags %}
 {% get_current_language as LANGUAGE_CODE %}
 <header>
     {% include "patterns/molecules/skip-link/skip-link.html" %}
+
+    {% include "patterns/molecules/nation-selector/nation-selector.html" %}
+
     <div class="header header--website">
         <div class="header__inner wrapper wrapper--large wrapper--padding-for-page">
 
@@ -19,9 +22,7 @@
             </div>
 
             {% if show_links %}
-                {% cache 900 secondarynav LANGUAGE_CODE currency donate_page redirect_donate_page page.pk %}
                 {% secondarynav %}
-                {% endcache %}
             {% endif %}
         </div>
     </div>
@@ -41,14 +42,10 @@
                 </button>
             </div>
 
-            {% cache 900 primarynav LANGUAGE_CODE %}
             {% primarynav %}
-            {% endcache %}
 
             <div class="nav nav--secondary-mobile">
-                {% cache 900 secondarynav LANGUAGE_CODE currency donate_page redirect_donate_page page.pk %}
                 {% secondarynav %}
-                {% endcache %}
             </div>
 
             <form action="{% url 'search' %}" class="search search--website-header">

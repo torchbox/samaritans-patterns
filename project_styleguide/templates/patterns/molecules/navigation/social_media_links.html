@@ -1,0 +1,37 @@
+<ul class="footer-links__list footer-links__list--social">
+    {% if links.instagram_handle %}
+        <li class="footer-links__item">
+            <a href="https://www.instagram.com/{{ links.instagram_handle }}/" class="footer-links__link" aria-label="instagram">
+                {% include "patterns/atoms/svg/icons/icon-social-instagram.html" with classes="icon icon--footer-social icon--footer-social-instagram" %}
+            </a>
+        </li>
+    {% endif %}
+    {% if links.linkedin_handle %}
+        <li class="footer-links__item">
+            <a href="https://www.linkedin.com/company/{{ links.linkedin_handle }}" class="footer-links__link" aria-label="linkedin">
+                {% include "patterns/atoms/svg/icons/icon-social-linkedin.html" with classes="icon icon--footer-social icon--footer-social-linkedin" %}
+            </a>
+        </li>
+    {% endif %}
+    {% if links.facebook_handle %}
+        <li class="footer-links__item">
+            <a href="https://www.facebook.com/{{ links.facebook_handle }}/" class="footer-links__link" aria-label="facebook">
+                {% include "patterns/atoms/svg/icons/icon-social-facebook.html" with classes="icon icon--footer-social icon--footer-social-facebook" %}
+            </a>
+        </li>
+    {% endif %}
+    {% if links.twitter_handle %}
+        <li class="footer-links__item">
+            <a href="https://twitter.com/{{ links.twitter_handle }}" class="footer-links__link" aria-label="twitter">
+                {% include "patterns/atoms/svg/icons/icon-social-twitter.html" with classes="icon icon--footer-social icon--footer-social-twitter" %}
+            </a>
+        </li>
+    {% endif %}
+    {% if links.youtube_handle %}
+        <li class="footer-links__item">
+            <a href="https://www.youtube.com/user/{{ links.youtube_handle }}" class="footer-links__link" aria-label="youtube">
+                {% include "patterns/atoms/svg/icons/icon-social-youtube.html" with classes="icon icon--footer-social icon--footer-social-youtube" %}
+            </a>
+        </li>
+    {% endif %}
+</ul>

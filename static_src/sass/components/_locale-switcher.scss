@@ -32,6 +32,7 @@
         top: 0;
         height: auto;
         z-index: z($z-elements, footer-dropdown);
+        border-radius: 5px;
     }
 
     &__item {
@@ -39,19 +40,25 @@
 
         &--active {
             @include dropdown-wrapper($root);
-            display: block;
+            display: flex;
             order: -1;
             position: relative;
         }
 
         #{$root} .is-toggle-active & {
             // sass-lint:disable-line force-element-nesting
-            display: block;
+            display: flex;
 
             &--active {
                 border-bottom: 1px solid $grey-light;
             }
         }
+    }
+
+    &__globe-icon {
+        width: 49px;
+        height: 49px;
+        padding: 7px;
     }
 
     &__link {
@@ -70,6 +77,10 @@
                 background-color: $white;
                 color: inherit;
             }
+        }
+
+        #{$root}__item--active & {
+            padding-left: 5px;
         }
     }
 

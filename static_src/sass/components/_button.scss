@@ -67,6 +67,11 @@
         margin-top: $gutter-large;
     }
 
+    &--plain {
+        padding-left: 0;
+        padding-bottom: 0;
+    }
+
     &--filter {
         width: 100%;
 
@@ -123,6 +128,11 @@
             padding-left: $padding;
         }
 
+        #{$root}--plain-with-icon & {
+            padding-top: 3.5px;
+            padding-bottom: 3.5px;
+        }
+
         #{$root}--filter & {
             width: 100%;
             height: 46px;
@@ -147,6 +157,10 @@
 
         #{$root}--plain & {
             display: none;
+        }
+
+        #{$root}--plain-with-icon & {
+            display: block;
         }
     }
 

@@ -6,8 +6,8 @@
             {% locale_switcher %}
         </div>
 
-        {% get_current_language as LANGUAGE_CODE %}
-        {% cache 900 footer LANGUAGE_CODE %}
+        {% get_current_nation as NATION %}
+        {% cache 900 footer NATION %}
             <div class="footer__nav-container">
 
                 <section>
@@ -21,33 +21,7 @@
                 </section>
 
                 <nav class="footer-links footer-links--website" role="navigation" aria-label="Quaternary">
-                    <ul class="footer-links__list footer-links__list--social">
-                        <li class="footer-links__item">
-                            <a href="https://www.instagram.com/samaritanscharity/" class="footer-links__link" aria-label="instagram">
-                                {% include "patterns/atoms/svg/icons/icon-social-instagram.html" with classes="icon icon--footer-social icon--footer-social-instagram" %}
-                            </a>
-                        </li>
-                        <li class="footer-links__item">
-                            <a href="https://www.linkedin.com/company/samaritans" class="footer-links__link" aria-label="linkedin">
-                                {% include "patterns/atoms/svg/icons/icon-social-linkedin.html" with classes="icon icon--footer-social icon--footer-social-linkedin" %}
-                            </a>
-                        </li>
-                        <li class="footer-links__item">
-                            <a href="https://www.facebook.com/samaritanscharity/" class="footer-links__link" aria-label="facebook">
-                                {% include "patterns/atoms/svg/icons/icon-social-facebook.html" with classes="icon icon--footer-social icon--footer-social-facebook" %}
-                            </a>
-                        </li>
-                        <li class="footer-links__item">
-                            <a href="https://twitter.com/samaritans" class="footer-links__link" aria-label="twitter">
-                                {% include "patterns/atoms/svg/icons/icon-social-twitter.html" with classes="icon icon--footer-social icon--footer-social-twitter" %}
-                            </a>
-                        </li>
-                        <li class="footer-links__item">
-                            <a href="https://www.youtube.com/user/samaritans " class="footer-links__link" aria-label="youtube">
-                                {% include "patterns/atoms/svg/icons/icon-social-youtube.html" with classes="icon icon--footer-social icon--footer-social-youtube" %}
-                            </a>
-                        </li>
-                    </ul>
+                    {% social_media_links %}
                     {% footerlinks %}
                 </nav>
             </div>

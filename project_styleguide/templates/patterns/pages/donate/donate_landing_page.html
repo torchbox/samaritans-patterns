@@ -1,5 +1,5 @@
 {% extends "patterns/base_page.html" %}
-{% load donate_tags form_tags i18n icon_tags static wagtailcore_tags wagtailimages_tags to_euro %}
+{% load donate_tags form_tags i18n icon_tags static wagtailcore_tags wagtailimages_tags to_euro querystring_modify %}
 {% wagtail_site as current_site %}
 
 {% block content %}
@@ -75,7 +75,12 @@
                         {% endif %}
 
                         {% if page.allow_monthly_donation %}
-                            <form method="get" action="{% url 'donate:redirect' %}" id="donate_form--monthly" {% if page.default_to_single %}hidden{% endif %} class="js-donate-usage">
+                            <form method="get" action="{{ form_action_url }}" id="donate_form--monthly" {% if page.default_to_single %}hidden{% endif %} class="js-donate-usage">
+                                {# Show currency chooser if more than one currency is available #}
+                                {% if page.get_available_currencies|length == 2 %}
+                                    {% include "patterns/pages/donate/partials/donate_currency_selector.html" with currency=currency %}
+                                {% endif %}
+
                                 {# Show slider if an editor has enabled it #}
                                 {% if page.show_donate_slider %}
                                     {% include "patterns/pages/donate/partials/donate_widget_slider.html" with suggested_amount=monthly_suggested_amount frequency="monthly" %}
@@ -93,7 +98,7 @@
                                                 <label for="{{ monthly_form.amount.id_for_label }}">{{ monthly_form.amount.label }}</label>
                                                 <div class="form-item__wrapper--euro">
                                                     {{ monthly_form.amount.errors }}
-                                                    <input type="number" id="id_amount" name="amount" value="{{ monthly_form.amount.value|to_euro:current_site }}" min="0.01" max="{{ donation_max_amount|to_euro:current_site }}" step="0.01" required="">
+                                                    <input type="number" id="id_amount" name="amount" value="{{ monthly_form.amount.value }}" min="0.01" max="{{ donation_max_amount }}" step="0.01" required="">
                                                 </div>
                                             </div>
                                         </div>
@@ -110,7 +115,7 @@
                                                 <label for="{{ monthly_form.amount.id_for_label }}">{{ monthly_form.amount.label }}</label>
                                                 <div class="form-item__wrapper--euro donate-landing-hero__form-input--monthly">
                                                     {{ monthly_form.amount.errors }}
-                                                    <input type="number" id="id_amount" name="amount" value="{{ monthly_form.amount.value|to_euro:current_site }}" min="0.01" max="{{ donation_max_amount|to_euro:current_site }}" step="0.01" required="">
+                                                    <input type="number" id="id_amount" name="amount" value="{{ monthly_form.amount.value }}" min="0.01" max="{{ donation_max_amount }}" step="0.01" required="">
                                                 </div>
                                             </div>
                                         </div>
@@ -133,6 +138,9 @@
                             {% render_form_field monthly_form.campaign_id %}
                             {% render_form_field monthly_form.campaign_name %}
                             {% render_form_field monthly_form.frequency %}
+                            {% if monthly_form.type %}
+                                {% render_form_field monthly_form.type %}
+                            {% endif %}
                             {% render_form_field monthly_form.campaign_name %}
                             {% render_form_field monthly_form.currency %}
 
@@ -152,7 +160,12 @@
                         {% endif %}
 
                         {% if page.allow_one_off_donation %}
-                            <form method="get" action="{% url 'donate:redirect' %}" id="donate_form--single" {% if page.default_to_monthly %}hidden{% endif %} class="js-donate-usage">
+                            <form method="get" action="{{ form_action_url }}" id="donate_form--single" {% if page.default_to_monthly %}hidden{% endif %} class="js-donate-usage">
+                                {# Show currency chooser if more than one currency is available #}
+                                {% if page.get_available_currencies|length == 2 %}
+                                    {% include "patterns/pages/donate/partials/donate_currency_selector.html" with currency=currency %}
+                                {% endif %}
+
                                 {# Show one-off slider #}
                                 {% if page.show_donate_slider %}
                                     {% include "patterns/pages/donate/partials/donate_widget_slider.html" with suggested_amount=single_suggested_amount frequency="single" %}
@@ -171,7 +184,7 @@
                                                 <label for="{{ one_off_form.amount.id_for_label }}">{{ one_off_form.amount.label }}</label>
                                                 <div class="form-item__wrapper--euro">
                                                     {{ one_off_form.amount.errors }}
-                                                    <input type="number" id="id_amount" name="amount" value="{{ one_off_form.amount.value|to_euro:current_site }}" min="0.01" max="{{ donation_max_amount|to_euro:current_site }}" step="0.01" required="">
+                                                    <input type="number" id="id_amount" name="amount" value="{{ one_off_form.amount.value }}" min="0.01" max="{{ donation_max_amount }}" step="0.01" required="">
                                                 </div>
                                             </div>
                                         </div>
@@ -188,7 +201,7 @@
                                                 <label for="{{ one_off_form.amount.id_for_label }}">{{ one_off_form.amount.label }}</label>
                                                 <div class="form-item__wrapper--euro">
                                                     {{ one_off_form.amount.errors }}
-                                                    <input type="number" id="id_amount" name="amount" value="{{ one_off_form.amount.value|to_euro:current_site }}" min="0.01" max="{{ donation_max_amount|to_euro:current_site }}" step="0.01" required="">
+                                                    <input type="number" id="id_amount" name="amount" value="{{ one_off_form.amount.value }}" min="0.01" max="{{ donation_max_amount }}" step="0.01" required="">
                                                 </div>
                                             </div>
                                         </div>
@@ -218,6 +231,9 @@
                                 {% render_form_field one_off_form.campaign_id %}
                                 {% render_form_field one_off_form.campaign_name %}
                                 {% render_form_field one_off_form.frequency %}
+                                {% if one_off_form.type %}
+                                    {% render_form_field one_off_form.type %}
+                                {% endif %}
                                 {% render_form_field one_off_form.currency %}
                                 <div class="js-donate-button-wrapper">
                                     {% include "patterns/atoms/buttons/button--button.html" with label="Donate Now" large=True classes="button--secondary donate-landing-hero__donate-button" %}
@@ -367,8 +383,8 @@
         };
         {% if page.totaliser %}
             window.totaliserConfig = {
-                'targetValue': '{% if is_euro %}{{ page.totaliser.target_amount|floatformat|to_euro:current_site }}{% else %}{{ page.totaliser.target_amount|floatformat }}{% endif %}',
-                'raisedValue': '{% if is_euro %}{{ page.totaliser.total_amount|floatformat|to_euro:current_site }}{% else %}{{ page.totaliser.total_amount|floatformat }}{% endif %}',
+                'targetValue': '{% if is_euro %}{{ page.totaliser.target_amount|floatformat }}{% else %}{{ page.totaliser.target_amount|floatformat }}{% endif %}',
+                'raisedValue': '{% if is_euro %}{{ page.totaliser.total_amount|floatformat }}{% else %}{{ page.totaliser.total_amount|floatformat }}{% endif %}',
             };
         {% endif %}
     </script>

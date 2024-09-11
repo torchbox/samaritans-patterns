@@ -1,28 +1,48 @@
 {% load i18n locale_tags %}
-<div class="locale-switcher js-toggle-parent">
-<div class="locale-switcher__wrapper js-toggle-target">
-    <ul class="locale-switcher__dropdown">
-        {% for slug, choice in choices.items %}
-            {% if choice.is_active %}
-                <li class="locale-switcher__item locale-switcher__item--active">
-                    <button class="locale-switcher__link js-toggle-handle">
-                        {{ choice.name_local }}
-                        <div class="locale-switcher__icon-wrapper">
-                            {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="locale-switcher__icon" aria_hide="true" %}
-                        </div>
-                    </button>
-                </li>
-            {% else %}
-                <li class="locale-switcher__item">
-                    {% get_path_for_locale as redirect_url %}
-                    <a href="{% url 'set_locale' slug %}?next={{ redirect_url|urlencode }}" class="locale-switcher__link">
-                        {{ choice.name_local }}
-                    </a>
-                </li>
-            {% endif %}
-        {% endfor %}
-    </ul>
-</div>
+{% if used_in_top_navigation %}
+    {# This is used in `nation-selector.html` above the header.` #}
+    <div class="filters filters--rounded" data-nation-switcher>
+        <div class="filters__filter-wrapper">
+            {% include "patterns/atoms/svg/colour-icons/icon-color-globe.html" with title="globe" classes="filters__icon filters__icon--small" aria_hide=True %}
+            <select name="locale" class="filters__select">
+                <option value="">{{ default_region }}</option>
+                {% for slug, choice in choices.items %}
+                    <option value="{% url 'set_locale' slug %}?next={{ redirect_url|urlencode }}">{{ choice.name_local }}</option>
+                {% endfor %}
+            </select>
+            <div class="filters__select-icon-wrapper">
+                {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="filters__select-icon" aria_hide="true" %}
+            </div>
+        </div>
+    </div>
+{% else %}
+    {# This is the locale switcher in the footer. #}
+    <div class="locale-switcher js-toggle-parent">
+        <div class="locale-switcher__wrapper js-toggle-target">
+            <ul class="locale-switcher__dropdown">
+                {% for slug, choice in choices.items %}
+                    {% if choice.is_active %}
+                        <li class="locale-switcher__item locale-switcher__item--active">
+                            {% include "patterns/atoms/svg/colour-icons/icon-color-globe.html" with title="globe" classes="locale-switcher__globe-icon" aria_hide=True %}
+                            <button class="locale-switcher__link js-toggle-handle">
+                                {{ choice.name_local }}
+                                <div class="locale-switcher__icon-wrapper">
+                                    {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="locale-switcher__icon" aria_hide="true" %}
+                                </div>
+                            </button>
+                        </li>
+                    {% else %}
+                        <li class="locale-switcher__item">
+                            {% get_path_for_locale as redirect_url %}
+                            <a href="{% url 'set_locale' slug %}?next={{ redirect_url|urlencode }}" class="locale-switcher__link" data-set-locale-link>
+                                {{ choice.name_local }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
 
-<p class="locale-switcher__message">{% trans "Some of the content you’re seeing is based on the country you’re browsing from." %}</p>
-</div>
+        <p class="locale-switcher__message">{% trans "Some of the content you’re seeing is based on the country you’re browsing from." %}</p>
+    </div>
+{% endif %}

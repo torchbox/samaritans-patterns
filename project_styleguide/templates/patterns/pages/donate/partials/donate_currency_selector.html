@@ -1,0 +1,27 @@
+{% load querystring_modify %}
+Currency
+<div class="donate-currency-selector">
+    <a class="donate-currency-selector__anchor" href="{% querystring_modify currency="GBP" %}">
+        <svg class="donate-currency-selector__radio-button" width="42" height="42">
+            {% if currency == "GBP" %}
+                <use xlink:href="#radio-selected" />
+            {% else %}
+                <use xlink:href="#radio-unselected" />
+            {% endif %}
+        </svg>
+
+        <span class="donate-currency-selector__label">£ GBP</span>
+    </a>
+
+    <a class="donate-currency-selector__anchor" href="{% querystring_modify currency="EUR" %}">
+        <svg class="donate-currency-selector__radio-button" width="42" height="42">
+            {% if currency == "EUR" %}
+                <use xlink:href="#radio-selected" />
+            {% else %}
+                <use xlink:href="#radio-unselected" />
+            {% endif %}
+        </svg>
+
+        <span class="donate-currency-selector__label">€ EUR</span>
+    </a>
+</div>

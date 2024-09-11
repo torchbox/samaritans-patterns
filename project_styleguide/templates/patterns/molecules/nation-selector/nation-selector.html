@@ -1,0 +1,36 @@
+{% load locale_tags %}
+
+<div class="section nation-selector nation-selector--hidden" data-nation-selector>
+    <div class="wrapper wrapper--large wrapper--padding-for-page nation-selector__container">
+        <div class="nation-selector__text-container"> 
+            <p class="nation-selector__text nation-selector__text--mobile">See content specific to your location:</p>
+            <p class="nation-selector__text nation-selector__text--desktop">Choose another country to see content specific to your location.</p>
+
+            <button class="nation-selector__cross-icon nation-selector__cross-icon--mobile" aria-label="close" data-close-nation-selector>
+                <svg id="cross" viewBox="0 0 20 21">
+                    <path fill="#009BC8" d="M2.12 0 19.8 17.68l-2.12 2.12L0 2.12z"/><path fill="#009BC8" d="M.12 18 17.8.32l2.12 2.12L2.24 20.12z"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="nation-selector__form">
+            {% locale_switcher used_in_top_navigation=True %}
+            <a href="" class="button button--plain button--plain-with-icon" data-continue-link>
+                <div class="button__inner nation-selector__button-text">
+                    <span class="nation-selector__button-text--desktop">Continue</span>
+                    <span class="nation-selector__button-text--mobile">Go</span>
+
+                    <svg id="icon--chevron" width="40px" height="40px" class="icon icon--medium button__icon nation-selector__button-icon" viewBox="0 0 43.1 62.7" fill="currentColor">
+                        <use xlink:href="#icon-chevron"></use>
+                    </svg>
+                </div>
+            </a>
+        </div>
+
+        <button class="nation-selector__cross-icon nation-selector__cross-icon--desktop" aria-label="close" data-close-nation-selector>
+            <svg id="cross" viewBox="0 0 20 21">
+                <path fill="#009BC8" d="M2.12 0 19.8 17.68l-2.12 2.12L0 2.12z"/><path fill="#009BC8" d="M.12 18 17.8.32l2.12 2.12L2.24 20.12z"/>
+            </svg>
+        </button>
+    </div>
+</div>
