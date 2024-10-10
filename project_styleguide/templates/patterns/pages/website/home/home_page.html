@@ -62,15 +62,15 @@
             <div class="homepage-donate-slider__wrapper">
                 <div class="wrapper wrapper--small {% if donate_page %}homepage-donate-slider__heading{% endif %}">
                     <h2 class="heading-secondary heading-secondary--large">
-                        {{ page.secondary_headline }}
+                        {{ page.get_nation_specific_secondary_headline }}
                     </h2>
                     <p class="website-homepage__text website-homepage__text--top-section">
-                        {{ page.secondary_description }}
+                        {{ page.get_nation_specific_secondary_description }}
                     </p>
                 </div>
                 {% if donate_page %}
                     <div class="homepage-donate-slider__inner">
-                        {% image page.support_image fill-1100x600 as support_image %}
+                        {% image page.get_nation_specific_support_image fill-1100x600 as support_image %}
                         {% if donate_page.hero_video %}
                             <div class="homepage-donate-slider__poster" style="background-image: url({{ support_image.url }});" data-video-modal>
                                 <a href="#" class="homepage-donate-slider__open-video" aria-haspopup="true" aria-label="Open the video" data-modal-open>
