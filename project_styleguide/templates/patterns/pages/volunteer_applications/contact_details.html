@@ -41,17 +41,7 @@
                     </div>
                     <div class="form__callout-wrapper">
                         <div class="form__callout">
-                            {% blocktranslate asvar legal_name_heading %}
-                                Why we need your legal name
-                            {% endblocktranslate %}
-                            {% blocktranslate asvar legal_name_explanation %}
-                                To safeguard our volunteers and callers we
-                                have to keep accurate records of who our
-                                volunteers are, and we use legal names for
-                                criminal record checks, where they are
-                                required.
-                            {% endblocktranslate %}
-                            {% include "patterns/molecules/callout-form/callout-form.html" with heading=legal_name_heading content=legal_name_explanation %}
+                            {% include "patterns/molecules/callout-form/callout-form.html" with heading=view.legal_name_heading content=view.legal_name_explanation %}
                         </div>
                     </div>
 
@@ -73,19 +63,7 @@
                     <h2>{% trans 'Date of birth' %}</h2>
                     <div class="form__callout-wrapper">
                         <div class="form__callout">
-                            {% blocktranslate asvar dob_heading %}
-                                Why we need your date of birth
-                            {% endblocktranslate %}
-                            {% blocktranslate asvar dob_explanation %}
-                                Samaritans Central Office and your branch may
-                                use your date of birth to confirm your identity
-                                and to process your criminal record check (if
-                                needed for your role). Your date of birth
-                                should match official documents like your
-                                passport or driving licence and may be
-                                verified against these.
-                            {% endblocktranslate %}
-                            {% include "patterns/molecules/callout-form/callout-form.html" with heading=dob_heading content=dob_explanation %}
+                            {% include "patterns/molecules/callout-form/callout-form.html" with heading=view.dob_heading content=view.dob_explanation %}
                         </div>
                     </div>
                     {% render_form_field form.date_of_birth %}
@@ -104,7 +82,7 @@
                     <h2>{% trans "Terms and Conditions" %}</h2>
 
                     {# We are sure that this will exist as it is required. We're also sure that it will have the `body` field as it needs to be an information page. #}
-                    {% for block in terms_and_conditions_page.body %}
+                    {% for block in view.terms_and_conditions_page.body %}
                         {{ block|externalise_links }}
                     {% endfor %}
 
