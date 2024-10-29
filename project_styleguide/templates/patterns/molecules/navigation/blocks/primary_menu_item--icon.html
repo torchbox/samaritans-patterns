@@ -1,0 +1,8 @@
+{% load navigation_tags %}
+
+{% if value.link_type == 'donation' %}
+    {% get_default_donation_page as donation_page %}
+    {% include "patterns/molecules/navigation/includes/menu_item--icon.html" with page=donation_page title=value.title icon=value.icon %}
+{% else %}
+    {% include "patterns/molecules/navigation/includes/menu_item--icon.html" with page=value.page title=value.title icon=value.icon %}
+{% endif %}

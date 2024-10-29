@@ -1,17 +1,27 @@
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags navigation_tags %}
 
 <div class="nav__dropdown">
     <div class="nav nav--subnav" role="menu">
         <span class="nav__triangle"></span>
         <div class="nav__item nav__heading nav__heading--show-mobile nav__heading--top-level" role="none">
-            {% include "patterns/molecules/navigation/includes/menu_item.html" with page=item.value.link.page title=item.value.link.title has_chevron=True classes="nav__link nav__link--description" %}
+            {% if item.value.link.link_type == 'donation' %}
+                {% get_default_donation_page as donation_page %}
+                {% include "patterns/molecules/navigation/includes/menu_item.html" with page=donation_page title=item.value.link.title has_chevron=True classes="nav__link nav__link--description" %}
+            {% else %}
+                {% include "patterns/molecules/navigation/includes/menu_item.html" with page=item.value.link.page title=item.value.link.title has_chevron=True classes="nav__link nav__link--description" %}
+            {% endif %}
         </div>
 
         {% if item.value.children %}
             <ul class="grid grid--3col grid--subnav-top">
                 {% for child in item.value.children %}
                 <li class="nav__item nav__heading nav__heading--show-mobile" role="none">
-                    {% include "patterns/molecules/navigation/includes/menu_item.html" with page=child.link.page title=child.link.title description=child.description classes="nav__link nav__link--description" has_chevron=True %}
+                    {% if child.link.link_type == 'donation' %}
+                        {% get_default_donation_page as donation_page %}
+                        {% include "patterns/molecules/navigation/includes/menu_item.html" with page=donation_page title=child.link.title description=child.description classes="nav__link nav__link--description" has_chevron=True %}
+                    {% else %}
+                        {% include "patterns/molecules/navigation/includes/menu_item.html" with page=child.link.page title=child.link.title description=child.description classes="nav__link nav__link--description" has_chevron=True %}
+                    {% endif %}
                 </li>
                 {% endfor %}
             </ul>
@@ -22,7 +32,12 @@
                 <ul class="grid grid--2col grid--subnav-bottom">
                     {% for child in item.value.icon_links %}
                         <li class="nav__item nav__heading nav__heading--show-mobile" role="none">
-                            {% include "patterns/molecules/navigation/includes/menu_item--icon.html" with page=child.page title=child.title summary=child.summary icon=child.icon classes="nav__link nav__link--large-icon" %}
+                            {% if child.link_type == 'donation' %}
+                                {% get_default_donation_page as donation_page %}
+                                {% include "patterns/molecules/navigation/includes/menu_item--icon.html" with page=donation_page title=child.title summary=child.summary icon=child.icon classes="nav__link nav__link--large-icon" %}
+                            {% else %}
+                                {% include "patterns/molecules/navigation/includes/menu_item--icon.html" with page=child.page title=child.title summary=child.summary icon=child.icon classes="nav__link nav__link--large-icon" %}
+                            {% endif %}
                         </li>
                     {% endfor %}
                 </ul>
