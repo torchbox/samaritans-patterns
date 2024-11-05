@@ -21,6 +21,10 @@ function setupPayment() {
         document.getElementById('payments__braintree-settings').textContent,
     );
 
+    const ipAddress = 
+        document.querySelector('[data-browser-ip-address]')
+        .getAttribute('data-browser-ip-address');
+
     function getFormValues() {
         const form = new FormData(paymentForm);
 
@@ -241,6 +245,9 @@ function setupPayment() {
                             postalCode: currentForm.post_code,
                             countryCodeAlpha2: currentForm.country,
                         },
+                        // These extra fields are now required for 3D secure authentication according to Braintree.
+                        collectDeviceData: true,
+                        additionalInformation: { ipAddress },
                     });
                 })
                 .then((payload) => {
@@ -457,6 +464,9 @@ function setupPayment() {
                     postalCode: currentForm.post_code,
                     countryCodeAlpha2: currentForm.country,
                 },
+                // These extra fields are now required for 3D secure authentication according to Braintree.
+                collectDeviceData: true,
+                additionalInformation: { ipAddress },
             };
         }
 

@@ -1,0 +1,58 @@
+{% load wagtailimages_tags static %}
+
+<section class="streamfield donate-widget" id="donate-widget" data-hero-donate-landing>
+    {# Title #}
+    <h2 class="donate-widget__title">
+        {% firstof value.title donate_page.title %}
+    </h2>
+
+    <div class="donate-widget__widget">
+        {# Image #}
+        <div class="donate-widget__image-container">
+            {% if not value.image %}
+                {% image donate_page.desktop_hero_image fill-1100x600 jpegquality-40 as desktop_hero_image %}
+                {% image donate_page.mobile_hero_image fill-768x500 jpegquality-40 as mobile_hero_image %}
+                <img class="donate-widget__image donate-widget__image--desktop" src="{{ desktop_hero_image.url }}" alt="{{ desktop_image.alt }}" width="{{ desktop_image.width }}" height="{{ desktop_image.height }}" />
+                <img class="donate-widget__image donate-widget__image--mobile" src="{{ mobile_hero_image.url }}" alt="{{ mobile_hero_image.alt }}" width="{{ mobile_hero_image.width }}" height="{{ mobile_hero_image.height }}" />
+            {% else %}
+                {% image value.image fill-1100x600 jpegquality-40 as block_image %}
+                <img class="donate-widget__image" src="{{ block_image.url }}" alt="{{ block_image.alt }}" width="{{ block_image.width }}" height="{{ block_image.height }}" />
+            {% endif %}
+            
+            {% include "patterns/atoms/svg/patterns/pattern-arrow.html" with classes="pattern donate-widget__pattern" %}
+        </div>
+
+        {# Donate widget #}
+        <div class="homepage-donate-slider homepage-donate-slider__container">
+            {% include "patterns/organisms/donate/homepage_donation_widget.html" with donate_page=donate_page %}
+        </div>
+    </div>
+</section>
+
+{# donate.js needed for the toggle between monthly and single #}
+<script src="{% static 'js/donate.js' %}"></script>
+{% if donate_page.show_donate_slider %}
+    {% if single_slider_values and donate_page.allow_one_off_donation %}
+        {{ single_slider_values|json_script:"single_slider_values" }}
+    {% endif %}
+    {% if monthly_slider_values and donate_page.allow_monthly_donation %}
+        {{ monthly_slider_values|json_script:"monthly_slider_values" }}
+    {% endif %}
+{% endif %}
+{% if donate_page.show_donate_buttons %}
+    {% if single_button_values and donate_page.allow_one_off_donation %}
+        {{ single_button_values|json_script:"single_button_values" }}
+    {% endif %}
+    {% if monthly_button_values and donate_page.allow_monthly_donation %}
+        {{ monthly_button_values|json_script:"monthly_button_values" }}
+    {% endif %}
+{% endif %}
+<script type="text/javascript">
+    donateConfig = {
+        'monthlyGiving': '{{ donate_page.allow_monthly_donation }}',
+        'singleGiving' : '{{ donate_page.allow_one_off_donation }}',
+        'monthlyAmount': '{{ monthly_suggested_amount }}',
+        'singleAmount': '{{ single_suggested_amount }}',
+        'isEuro' : '{{ is_euro }}'
+    };
+</script>

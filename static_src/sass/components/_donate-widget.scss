@@ -1,0 +1,86 @@
+.donate-widget {
+    background-color: $kodama-white;
+    padding: 30px;
+
+    & .homepage-donate-slider {
+        background-color: $kodama-white;
+        margin-top: 0;
+    }
+
+    @include media-query(desktop) {
+        margin-left: -$gutter-xxl;
+        margin-right: -$gutter-xxl;
+    }
+
+    &__title {
+        @include font-size(m);
+        font-weight: $weight--bold;
+
+        @include media-query(desktop) {
+            font-size: 38px;
+            max-width: 830px;
+        }
+    }
+
+    &__widget {
+        display: flex;
+        flex-direction: column;
+        margin-top: $gutter-large;
+
+        @include media-query(desktop) {
+            flex-direction: row-reverse;
+            justify-content: space-between;
+            margin-top: 45px;
+        }
+    }
+
+    &__image-container {
+        @include pattern($lime, visible, 1);
+        position: relative;
+
+        @include media-query(desktop) {
+            margin-right: $gutter;
+        }
+
+        .pattern {
+            position: absolute;
+            z-index: 5;
+            right: -20px;
+            top: -18px;
+            max-width: 200px;
+
+            @include media-query(desktop) {
+                max-width: 300px;
+                right: -30px;
+                top: -25px;
+            }
+        }
+    }
+
+    &__image {
+        position: relative;
+        left: 0;
+        z-index: 10;
+        height: 200px;
+        width: 100%;
+        object-fit: cover;
+
+        @include media-query(desktop) {
+            height: 300px;
+        }
+
+        &--mobile {
+            @include media-query(desktop) {
+                display: none;
+            }
+        }
+
+        &--desktop {
+            display: none;
+
+            @include media-query(desktop) {
+                display: block;
+            }
+        }
+    }
+}

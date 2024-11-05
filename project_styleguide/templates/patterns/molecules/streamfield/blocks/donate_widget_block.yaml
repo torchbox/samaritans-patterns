@@ -1,0 +1,71 @@
+context:
+  value:
+    title: You can help Samaritans reach more contextual text here
+  donate_page:
+    show_donate_buttons: True
+    allow_monthly_donation: true
+    allow_one_off_donation: true
+    suggested_one_off_donation: 5
+    suggested_monthly_donation: 50
+  monthly_button_values:
+    - amount: '10.00'
+      text: <p><b>£10</b> could help train and support Samaritans&#x27; volunteers, making sure people are not left to struggle alone this year</p>
+    - amount: '20.00'
+      text: <p><b>£20</b> could help train and support Samaritans&#x27; volunteers, making sure people are not left to struggle alone this year</p>
+    - amount: '30.00'
+      text: <p><b>£30</b> could help train and support Samaritans&#x27; volunteers, making sure people are not left to struggle alone this year</p>
+  single_button_values:
+    - amount: '10.00'
+      text: <p><b>£10</b> could help train and support Samaritans&#x27; volunteers, making sure people are not left to struggle alone this year</p>
+    - amount: '20.00'
+      text: <p><b>£20</b> could help train and support Samaritans&#x27; volunteers, making sure people are not left to struggle alone this year</p>
+    - amount: '40.00'
+      text: <p><b>£40</b> could help train and support Samaritans&#x27; volunteers, making sure people are not left to struggle alone this year</p>
+    - amount: '50.00'
+      text: <p><b>£50</b> could help train and support Samaritans&#x27; volunteers, making sure people are not left to struggle alone this year</p>
+
+tags:
+  image:
+    donate_page.desktop_hero_image fill-1100x600 jpegquality-40 as desktop_hero_image:
+      target_var: desktop_hero_image
+      raw:
+        url: https://via.placeholder.com/1900x1250
+    donate_page.mobile_hero_image fill-768x500 jpegquality-40 as mobile_hero_image:
+      target_var: mobile_hero_image
+      raw:
+        url: https://via.placeholder.com/1900x1250
+  render_form_field:
+    monthly_form.campaign_id:
+      raw: ''
+    monthly_form.frequency:
+      raw: ''
+    monthly_form.amount:
+      raw: |
+        <div class="form-item form-item--decimal_field form-item--number_input">
+        <label for="id_amount" class=" form-item__label required">
+        Amount <span class="form-item__required">*</span>
+        </label>
+        <div class="form-item__wrapper">
+            <input type="number" name="amount" value="5" min="0.01" step="0.01" required="" id="id_amount">
+        </div>
+        </div>
+    monthly_form.currency:
+      raw: ''
+    one_off_form.campaign_id:
+      raw: ''
+    one_off_form.campaign_name:
+      raw: ''
+    one_off_form.frequency:
+      raw: ''
+    one_off_form.currency:
+      raw: ''
+    one_off_form.amount:
+      raw: |
+        <div class="form-item form-item--decimal_field form-item--number_input">
+        <label for="id_amount" class=" form-item__label required">
+        Amount <span class="form-item__required">*</span>
+        </label>
+        <div class="form-item__wrapper">
+            <input type="number" name="amount" value="5" min="0.01" step="0.01" required="" id="id_amount">
+        </div>
+        </div>
