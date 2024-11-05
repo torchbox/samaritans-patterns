@@ -2,8 +2,10 @@
 
 <ul class="footer-links__list footer-links__list--default" role="menu">
     {% for link in footerlinks %}
+        {% if link.value.page %}
         <li class="footer-links__item" role="none">
             {% include_block link with classes="footer-links__link" %}
         </li>
+        {% endif %}
     {% endfor %}
 </ul>

@@ -7,7 +7,7 @@
             {% if item.value.link.link_type == 'donation' %}
                 {% get_default_donation_page as donation_page %}
                 {% include "patterns/molecules/navigation/includes/menu_item.html" with page=donation_page title=item.value.link.title has_chevron=True classes="nav__link nav__link--description" %}
-            {% else %}
+            {% elif item.value.link.page %}
                 {% include "patterns/molecules/navigation/includes/menu_item.html" with page=item.value.link.page title=item.value.link.title has_chevron=True classes="nav__link nav__link--description" %}
             {% endif %}
         </div>
@@ -19,7 +19,7 @@
                     {% if child.link.link_type == 'donation' %}
                         {% get_default_donation_page as donation_page %}
                         {% include "patterns/molecules/navigation/includes/menu_item.html" with page=donation_page title=child.link.title description=child.description classes="nav__link nav__link--description" has_chevron=True %}
-                    {% else %}
+                    {% elif child.link.page %}
                         {% include "patterns/molecules/navigation/includes/menu_item.html" with page=child.link.page title=child.link.title description=child.description classes="nav__link nav__link--description" has_chevron=True %}
                     {% endif %}
                 </li>

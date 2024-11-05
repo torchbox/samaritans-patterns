@@ -11,9 +11,11 @@
     </h2>
     <ul class="footer-nav__list" role="menu">
         {% for item in value.links %}
-            <li class="footer-nav__item" role="none">
-                {% include_block item with chevron_before=True classes="footer-nav__link" %}
-            </li>
+            {% if item.page %}
+                <li class="footer-nav__item" role="none">
+                    {% include_block item with chevron_before=True classes="footer-nav__link" %}
+                </li>
+            {% endif %}
         {% endfor %}
     </ul>
 </div>

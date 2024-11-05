@@ -7,7 +7,7 @@
         {% if item.value.link.link_type == 'donation' %}
             {% get_default_donation_page as donate_page %}
             {% include "patterns/molecules/navigation/includes/menu_item.html" with page=donate_page title=item.value.link.title has_chevron=True classes="nav__link nav__link--description" %}
-        {% else %}
+        {% elif item.value.link.page %}
             {% include "patterns/molecules/navigation/includes/menu_item.html" with page=item.value.link.page title=item.value.link.title has_chevron=True classes="nav__link nav__link--description" %}
         {% endif %}
     </div>
@@ -17,7 +17,7 @@
                 {% if title_link.link_type == 'donate' %}
                     {% get_default_donation_page as donate_page %}
                     <a class="nav__link" href="{% pageurl donate_page %}">{% firstof title_link.title donate_page.title %}</a>
-                {% else %}
+                {% elif title_link.page %}
                     <a class="nav__link" href="{% pageurl title_link.page %}">{% firstof title_link.title title_link.page.title %}</a>
                 {% endif %}
             {% endwith %}
@@ -40,7 +40,7 @@
                 {% if title_link.link_type == 'donation' %}
                     {% get_default_donation_page as donation_page %}
                     <a class="nav__link" href="{% pageurl donation_page %}">{% firstof title_link.title donation_page.title %}</a>
-                {% else %}
+                {% elif title_link.page %}
                     <a class="nav__link" href="{% pageurl title_link.page %}">{% firstof title_link.title title_link.page.title %}</a>
                 {% endif %}
             {% endwith %}
@@ -51,7 +51,7 @@
                     {% if link.link_type == 'donation' %}
                         {% get_default_donation_page as donate_page %}
                         {% include "patterns/molecules/navigation/includes/menu_item.html" with page=donate_page title=link.title classes="nav__link nav__link--with-chevron" %}
-                    {% else %}
+                    {% elif link.page %}
                         {% include "patterns/molecules/navigation/includes/menu_item.html" with page=link.page title=link.title classes="nav__link nav__link--with-chevron" %}
                     {% endif %}
                 </li>
@@ -63,7 +63,7 @@
                 {% if title_link.link_type == 'donation' %}
                     {% get_default_donation_page as donate_page %}
                     <a class="nav__link" href="{% pageurl donation_page %}">{% firstof title_link.title donation_page.title %}</a>
-                {% else %}
+                {% elif title_link.page %}
                     <a class="nav__link" href="{% pageurl title_link.page %}">{% firstof title_link.title title_link.page.title %}</a>
                 {% endif %}
             {% endwith %}
@@ -74,7 +74,7 @@
                     {% if link.link_type == 'donation' %}
                         {% get_default_donation_page as donate_page %}
                         {% include "patterns/molecules/navigation/includes/menu_item.html" with page=donate_page title=link.title classes="nav__link nav__link--with-chevron" %}
-                    {% else %}
+                    {% elif link.page %}
                         {% include "patterns/molecules/navigation/includes/menu_item.html" with page=link.page title=link.title classes="nav__link nav__link--with-chevron" %}
                     {% endif%}
                 </li>
@@ -89,7 +89,7 @@
                     {% if link.link_type == 'donation' %}
                         {% get_default_donation_page as donate_page %}
                         {% include "patterns/molecules/navigation/includes/menu_item.html" with page=donate_page title=link.title classes="nav__link nav__link--extra" %}
-                    {% else %}
+                    {% elif link.page %}
                         {% include "patterns/molecules/navigation/includes/menu_item.html" with page=link.page title=link.title classes="nav__link nav__link--extra" %}
                     {% endif %}
                 </li>

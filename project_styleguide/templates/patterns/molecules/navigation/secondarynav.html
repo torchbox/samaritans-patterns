@@ -15,9 +15,11 @@
             {% endif %}
         </li>
         {% for item in secondarynav %}
-            <li class="nav__item" role="none">
-                {% include "patterns/molecules/navigation/includes/menu_item--icon.html" with page=item.value.page title=item.value.title icon=item.value.icon %}
-            </li>
+            {% if item.value.page %}
+                <li class="nav__item" role="none">
+                    {% include "patterns/molecules/navigation/includes/menu_item--icon.html" with page=item.value.page title=item.value.title icon=item.value.icon %}
+                </li>
+            {% endif %}
         {% endfor %}
     </ul>
 </nav>
