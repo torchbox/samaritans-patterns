@@ -18,6 +18,9 @@ class DonateValidation {
         // Conset wrapper and consent reasons
         this.consentWrapper = this.node.querySelector('[data-contact-prefs]');
         this.learnMorePref = this.node.querySelector('[data-learn-more-pref]');
+        this.volunteerPref = this.node.querySelector(
+            '[data-give-my-time-pref]',
+        );
 
         // Contact methods wrapper and contact methods
         this.contactMethodsWrapper = this.node.querySelector(
@@ -90,19 +93,24 @@ class DonateValidation {
         // Check if the contact methods are initially hidden or not and set aria-expanded accordingly
         if (this.contactMethodsWrapper.hasAttribute('hidden')) {
             this.learnMorePref.setAttribute('aria-expanded', 'false');
+            this.volunteerPref.setAttribute('aria-expanded', 'false');
         } else {
             this.learnMorePref.setAttribute('aria-expanded', 'true');
+            this.volunteerPref.setAttribute('aria-expanded', 'true');
         }
     }
 
     bindEvents() {
+        this.volunteerPref.addEventListener('change', () => {
+            this.checkContactMethods();
+        });
         this.learnMorePref.addEventListener('change', () => {
             this.checkContactMethods();
         });
     }
 
     checkContactMethods() {
-        if (this.learnMorePref.checked) {
+        if (this.volunteerPref.checked || this.learnMorePref.checked) {
             this.showContactMethods();
         } else {
             this.hideContactMethods();
@@ -112,11 +120,13 @@ class DonateValidation {
     showContactMethods() {
         this.contactMethodsWrapper.removeAttribute('hidden');
         this.learnMorePref.setAttribute('aria-expanded', 'true');
+        this.volunteerPref.setAttribute('aria-expanded', 'true');
     }
 
     hideContactMethods() {
         this.contactMethodsWrapper.setAttribute('hidden', 'hidden');
         this.learnMorePref.setAttribute('aria-expanded', 'false');
+        this.volunteerPref.setAttribute('aria-expanded', 'false');
         // deselect contact methods and hide mobile number
         this.phonePrefs.checked = false;
         this.smsPrefs.checked = false;
@@ -186,6 +196,7 @@ class DonateValidation {
                 (this.phonePrefs.checked ||
                     this.emailPrefs.checked ||
                     this.smsPrefs.checked) &&
+                !this.volunteerPref.checked &&
                 !this.learnMorePref.checked
             ) {
                 // Apply error and styling if we have not already done so
@@ -220,7 +231,7 @@ class DonateValidation {
         // This checks if we have a contact reason, but no contact method
         const checkConctactReasonButNoMethod = () => {
             if (
-                this.learnMorePref.checked &&
+                (this.volunteerPref.checked || this.learnMorePref.checked) &&
                 !this.emailPrefs.checked &&
                 !this.smsPrefs.checked &&
                 !this.phonePrefs.checked

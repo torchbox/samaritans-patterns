@@ -29,12 +29,13 @@
         {% endif %}
         <div>
             {% render_form_field form.prefs_fun_vw %}
+            {% render_form_field form.prefs_volunteering %}
         </div>
     </div>
 
     <div
         class="form-item-wrapper form-item-wrapper--radio-select-inline{% if form.contact_methods_error %} form-item__wrapper--error{% endif %}" data-contact-methods-wrapper
-        {% if form.contact_methods_error or form.prefs_fun_vw.value %}
+        {% if form.contact_methods_error or form.prefs_fun_vw.value or form.prefs_volunteering.value %}
         {% else %}
             hidden
         {% endif %}
