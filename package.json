@@ -83,7 +83,7 @@
         "@sentry/tracing": "^7.2.0",
         "@sentry/webpack-plugin": "^1.18.9",
         "awesomplete": "^1.1.4",
-        "braintree-web": "^3.109.0",
+        "braintree-web": "~3.92.1",
         "canvas-confetti": "^1.4.0",
         "focus-trap": "^6.7.2",
         "lazyframe": "^2.2.7",

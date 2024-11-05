@@ -18,9 +18,6 @@ function setupPayment() {
     const personalDetails = JSON.parse(
         document.getElementById('payments__personal-details').textContent,
     );
-    const ipAddress = 
-        document.querySelector('[data-browser-ip-address]')
-        .getAttribute('data-browser-ip-address');
 
     function getPaymentMethodLabel(payment_method) {
         let payment_method_label;
@@ -188,9 +185,6 @@ function setupPayment() {
                             postalCode: personalDetails.post_code,
                             countryCodeAlpha2: personalDetails.country,
                         },
-                        // These extra fields are now required for 3D secure authentication according to Braintree.
-                        collectDeviceData: true,
-                        additionalInformation: { ipAddress },
                     });
                 })
                 .then(function (payload) {
@@ -361,9 +355,6 @@ function setupPayment() {
                     postalCode: personalDetails.post_code,
                     countryCodeAlpha2: personalDetails.country,
                 },
-                // These extra fields are now required for 3D secure authentication according to Braintree.
-                collectDeviceData: true,
-                additionalInformation: { ipAddress },
             };
         }
 
