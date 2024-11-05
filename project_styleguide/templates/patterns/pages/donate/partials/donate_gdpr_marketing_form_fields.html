@@ -5,11 +5,21 @@
         <span class="donate__step" id="stay-in-touch-step-number">
             {% if is_pay_in %}{% trans "2" %}{% else %}{% trans "3" %}{% endif %}
         </span>
-        {% trans "Stay in touch" %}
+        {% if consent_statements.title %}
+            {{ consent_statements.title }}
+        {% else %}
+            {% trans "Stay in touch" %}
+        {% endif %}
     </h2>
 
     <div class="donate__marketing-intro">
-        <p class="donate__marketing-meta">{% trans "We'd like to keep in touch about our vital work." %}</p>
+        <p class="donate__marketing-meta">
+            {% if consent_statements.introduction %}
+                {{ consent_statements.introduction }}
+            {% else %}
+                {% trans "We'd like to keep in touch about our vital work." %}
+            {% endif %}
+        </p>
     </div>
 
 
@@ -19,13 +29,12 @@
         {% endif %}
         <div>
             {% render_form_field form.prefs_fun_vw %}
-            {% render_form_field form.prefs_volunteering %}
         </div>
     </div>
 
     <div
         class="form-item-wrapper form-item-wrapper--radio-select-inline{% if form.contact_methods_error %} form-item__wrapper--error{% endif %}" data-contact-methods-wrapper
-        {% if form.contact_methods_error or form.prefs_fun_vw.value or form.prefs_volunteering.value %}
+        {% if form.contact_methods_error or form.prefs_fun_vw.value %}
         {% else %}
             hidden
         {% endif %}
@@ -47,9 +56,13 @@
     </div>
 
     <small class="donate__marketing-meta donate__marketing-meta--small donate__marketing-meta--light-bg">
-        <p>For information on how to change your contact preferences, or about how Samaritans handles and protects your personal information, please see our <a href="{% slugurl 'privacy-statement' %}">privacy statement</a>.</p>
+        {% if consent_statements.additional_information %}
+            {{ consent_statements.additional_information|richtext }}
+        {% else %}
+            <p>For information on how to change your contact preferences, or about how Samaritans handles and protects your personal information, please see our <a href="{% slugurl 'privacy-statement' %}">privacy statement</a>.</p>
 
-        <p><a href="/support-us/donating-faqs/">Donating to Samaritans - FAQs</a></p>
+            <p><a href="/support-us/donating-faqs/">Donating to Samaritans - FAQs</a></p>
+        {% endif %}
     </small>
 
 </section>
