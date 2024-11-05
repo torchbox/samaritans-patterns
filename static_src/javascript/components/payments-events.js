@@ -604,7 +604,7 @@ function setupPayment() {
                     console.error(clientErr);
                     return;
                 }
-                braintree.pplePay.create(
+                braintree.applePay.create(
                     {
                         client: clientInstance,
                     },
@@ -639,7 +639,9 @@ function setupPayment() {
                                 applePayButtons.forEach((button) => {
                                     button.addEventListener(
                                         'click',
-                                        function () {
+                                        function (e) {
+                                            e.preventDefault();
+
                                             clearAllErrorMessages();
 
                                             // Send selected payment method to GA4.
@@ -744,6 +746,19 @@ function setupPayment() {
 
                                             session.begin();
                                         },
+                                    );
+                                });
+                            }
+                            else {
+                                // hide apple pay elements if user doesn't have a card set up
+                                Array.from(
+                                    document.querySelectorAll(
+                                        '.js-apple-pay-button, .js-apple-pay-tab',
+                                    ),
+                                ).forEach((applePayElement) => {
+                                    applePayElement.toggleAttribute(
+                                        'hidden',
+                                        true,
                                     );
                                 });
                             }

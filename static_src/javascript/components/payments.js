@@ -711,12 +711,9 @@ function setupPayment() {
                             return;
                         }
 
-                        const promise =
-                            window.ApplePaySession.canMakePaymentsWithActiveCard(
-                                applePayInstance.merchantIdentifier,
-                            );
-                        promise.then((canMakePaymentsWithActiveCard) => {
-                            // console.log("canMakePaymentsWithActiveCard", canMakePaymentsWithActiveCard);
+                        window.ApplePaySession.canMakePaymentsWithActiveCard(
+                            applePayInstance.merchantIdentifier,
+                        ).then((canMakePaymentsWithActiveCard) => {
                             if (canMakePaymentsWithActiveCard) {
                                 Array.from(
                                     document.getElementsByClassName(
@@ -734,13 +731,13 @@ function setupPayment() {
                                         '.js-apple-pay-button',
                                     );
                                 applePayButtons.forEach((button) => {
-                                    button.addEventListener('click', () => {
-                                        // Send selected payment method to GA4.
+                                    button.addEventListener('click', (e) => {
+                                        e.preventDefault();
+					// Send selected payment method to GA4.
                                         pushDataLayer('Apple Pay');
 
                                         if (donateValidation.checkValidity()) {
                                             clearAllErrorMessages();
-
                                             const currentForm = getFormValues();
                                             const paymentRequest =
                                                 applePayInstance.createPaymentRequest(
@@ -763,74 +760,75 @@ function setupPayment() {
                                                     paymentRequest,
                                                 );
 
-                                            session.onvalidatemerchant =
-                                                function (event) {
-                                                    // console.log("session.onvalidatemerchant() - start");
-                                                    applePayInstance.performValidation(
-                                                        {
-                                                            validationURL:
-                                                                event.validationURL,
-                                                            displayName:
-                                                                'Samaritans',
-                                                        },
-                                                        (
-                                                            validationErr,
-                                                            validationData,
-                                                        ) => {
-                                                            if (validationErr) {
-                                                                console.error(
-                                                                    validationErr,
-                                                                );
-                                                                session.abort();
-                                                                return;
-                                                            }
-                                                            session.completeMerchantValidation(
-                                                                validationData,
+                                            session.onvalidatemerchant = (
+                                                event,
+                                            ) => {
+                                                // console.log("session.onvalidatemerchant() - start");
+                                                applePayInstance.performValidation(
+                                                    {
+                                                        validationURL:
+                                                            event.validationURL,
+                                                        displayName:
+                                                            'Samaritans',
+                                                    },
+                                                    (
+                                                        validationErr,
+                                                        merchantSession,
+                                                    ) => {
+                                                        if (validationErr) {
+                                                            console.error(
+                                                                validationErr,
                                                             );
-                                                        },
-                                                    );
-                                                    // console.log("session.onvalidatemerchant() - done");
-                                                };
+                                                            session.abort();
+                                                            return;
+                                                        }
+                                                        session.completeMerchantValidation(
+                                                            merchantSession,
+                                                        );
+                                                    },
+                                                );
+                                                // console.log("session.onvalidatemerchant() - done");
+                                            };
 
-                                            session.onpaymentauthorized =
-                                                function (event) {
-                                                    // console.log("session.onpaymentauthorized() - start");
-                                                    applePayInstance.tokenize(
-                                                        {
-                                                            token: event.payment
-                                                                .token,
-                                                        },
-                                                        (
-                                                            tokenizeErr,
-                                                            payload,
-                                                        ) => {
-                                                            if (tokenizeErr) {
-                                                                showPaymentErrorMsg(
-                                                                    'applepay',
-                                                                );
-                                                                session.completePayment(
-                                                                    window
-                                                                        .ApplePaySession
-                                                                        .STATUS_FAILURE,
-                                                                );
-                                                                return;
-                                                            }
+                                            session.onpaymentauthorized = (
+                                                event,
+                                            ) => {
+                                                // console.log("session.onpaymentauthorized() - start");
+                                                applePayInstance.tokenize(
+                                                    {
+                                                        token: event.payment
+                                                            .token,
+                                                    },
+                                                    (tokenizeErr, payload) => {
+                                                        if (tokenizeErr) {
+                                                            showPaymentErrorMsg(
+                                                                'applepay',
+                                                            );
                                                             session.completePayment(
                                                                 window
                                                                     .ApplePaySession
-                                                                    .STATUS_SUCCESS,
+                                                                    .STATUS_FAILURE,
                                                             );
-                                                            nonceInput.value =
-                                                                payload.nonce;
-                                                            paymentModeInput.value =
-                                                                'applepay';
-                                                            paymentForm.submit();
-                                                        },
-                                                    );
-                                                    // console.log("session.onpaymentauthorized() - done");
-                                                };
+                                                            return;
+                                                        }
+                                                        session.completePayment(
+                                                            window
+                                                                .ApplePaySession
+                                                                .STATUS_SUCCESS,
+                                                        );
 
-                                            session.oncancel = function () {
+                                                        nonceInput.value =
+                                                            payload.nonce;
+                                                        paymentModeInput.value =
+                                                            'applepay';
+                                                        
+                                                        paymentForm.submit();
+                                                    },
+                                                );
+                                                // console.log("session.onpaymentauthorized() - done");
+                                            };
+
+                                            session.oncancel = () => {
                                                 // console.log("session.oncancel() - start");
                                                 showErrorMessage(
                                                     'applepay',
@@ -844,6 +842,19 @@ function setupPayment() {
                                     });
                                 });
                             }
+                            else {
+                                // hide apple pay elements if user doesn't have a card set up
+                                Array.from(
+                                    document.querySelectorAll(
+                                        '.js-apple-pay-button, .js-apple-pay-tab',
+                                    ),
+                                ).forEach((applePayElement) => {
+                                    applePayElement.toggleAttribute(
+                                        'hidden',
+                                        true,
+                                    );
+                                });
+                            }
                         });
                     },
                 );
@@ -855,6 +866,7 @@ function setupPayment() {
     initCard();
     initPayPal();
     initGooglePay();
+    initApplePay();
     window.addEventListener('resize', initGooglePay, false);
 }
 
