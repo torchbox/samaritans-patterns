@@ -1,5 +1,5 @@
 Hello,
 
-A new event registration submission has been received for the form "{{ form_page.title }}".
+A new event registration submission has been received for the form "{{ form_page.title|safe }}".
 
 You can view all submissions for this form here: {{ base_url }}{{ submissions_url }}

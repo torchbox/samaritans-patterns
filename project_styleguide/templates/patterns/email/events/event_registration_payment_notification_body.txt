@@ -1,0 +1,5 @@
+Hello,
+
+A new event payment has been made through the form "{{ form_page.title|safe }}".
+
+You can view all submissions for this form here: {{ base_url }}{{ submissions_url }}

@@ -69,12 +69,12 @@
                 <div class="form-item__wrapper payments__braintree-hosted-field" id="expiration-date"></div>
             </div>
 
-            <button id="payments__payment-submit" value="{% trans "Make my donation" %}"
+            <button id="payments__payment-submit" value="{{ payment_submit_button_text|default:"Make my donation" }}"
                 class="button button--large button--secondary"
                 type="submit">
                 <div class="button__shadow"></div>
                 <div class="button__inner">
-                    {% trans "Make my donation" %}
+                    {{ payment_submit_button_text|default:"Make my donation" }}
                     {% include "patterns/atoms/svg/icons/icon-chevron.html" with classes="icon button__icon" %}
                 </div>
             </button>
