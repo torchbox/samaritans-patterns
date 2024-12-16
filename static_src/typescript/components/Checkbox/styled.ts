@@ -16,7 +16,7 @@ export const StyledCheckbox = styled.div<StyledCheckboxProps>`
         ${(props) =>
             props.checked
                 ? props.theme.colors.secondary
-                : props.theme.colors.grey};
+                : props.theme.colors.midGrey};
     border-radius: 3px;
     transition: background-color
         ${(props) => props.theme.transitions.quickTransition};

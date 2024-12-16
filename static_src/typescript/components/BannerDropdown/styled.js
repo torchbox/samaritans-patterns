@@ -23,7 +23,9 @@ export const BannerButton = styled.button`
 
     &:focus {
         outline: 2px solid ${(props) => props.theme.colors.secondary};
-        outline-offset: -2px;
+        outline-offset: -4px;
+        box-shadow: inset 2px 2px 0 2px ${(props) => props.theme.colors.white},
+            inset -2px -2px 0 2px ${(props) => props.theme.colors.white};
     }
 
     svg {
@@ -59,7 +61,6 @@ export const DropdownPanel = styled.div`
     div {
         font-size: 1.5rem;
         font-weight: 600;
-        margin-bottom: 1rem;
     }
 `;
 

@@ -32,7 +32,7 @@ export const Copy = styled.p`
     font-size: ${(props) => props.theme.fonts.m};
 `;
 
-export const WaitTime = styled.h2`
+export const WaitTime = styled.div`
     color: ${(props) => props.theme.colors.white};
     margin: 0;
     font-weight: ${(props) => props.theme.fonts.bold};
