@@ -21,8 +21,8 @@ function setupPayment() {
         document.getElementById('payments__braintree-settings').textContent,
     );
 
-    const ipAddress = 
-        document.querySelector('[data-browser-ip-address]')
+    const ipAddress = document
+        .querySelector('[data-browser-ip-address]')
         .getAttribute('data-browser-ip-address');
 
     function getFormValues() {
@@ -743,7 +743,7 @@ function setupPayment() {
                                 applePayButtons.forEach((button) => {
                                     button.addEventListener('click', (e) => {
                                         e.preventDefault();
-					// Send selected payment method to GA4.
+                                        // Send selected payment method to GA4.
                                         pushDataLayer('Apple Pay');
 
                                         if (donateValidation.checkValidity()) {
@@ -831,7 +831,7 @@ function setupPayment() {
                                                             payload.nonce;
                                                         paymentModeInput.value =
                                                             'applepay';
-                                                        
+
                                                         paymentForm.submit();
                                                     },
                                                 );
@@ -851,8 +851,7 @@ function setupPayment() {
                                         }
                                     });
                                 });
-                            }
-                            else {
+                            } else {
                                 // hide apple pay elements if user doesn't have a card set up
                                 Array.from(
                                     document.querySelectorAll(

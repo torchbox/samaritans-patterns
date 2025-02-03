@@ -1,5 +1,8 @@
 function homepageDonateToggle() {
-    if (!document.getElementById('homepage') && !document.getElementById('donate-widget')) {
+    if (
+        !document.getElementById('homepage') &&
+        !document.getElementById('donate-widget')
+    ) {
         // We're not on the home page.
         return;
     }

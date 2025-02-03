@@ -18,8 +18,8 @@ function setupPayment() {
     const personalDetails = JSON.parse(
         document.getElementById('payments__personal-details').textContent,
     );
-    const ipAddress = 
-        document.querySelector('[data-browser-ip-address]')
+    const ipAddress = document
+        .querySelector('[data-browser-ip-address]')
         .getAttribute('data-browser-ip-address');
 
     function getPaymentMethodLabel(payment_method) {
@@ -757,8 +757,7 @@ function setupPayment() {
                                         },
                                     );
                                 });
-                            }
-                            else {
+                            } else {
                                 // hide apple pay elements if user doesn't have a card set up
                                 Array.from(
                                     document.querySelectorAll(
