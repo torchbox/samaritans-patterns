@@ -59,7 +59,7 @@
         <div class="donate__options">
             {% if allow_monthly_donation and not payment_frequency == 'monthly' %}
                 <p class="donate__frequency">
-                    <a id="donate__change-frequency" href="#" class="donate__frequency-link">{% trans "Switch to a monthly donation" %}</a>
+                    <a id="donate__change-frequency" href="{{ switch_monthly_url }}" class="donate__frequency-link">{% trans "Switch to a monthly donation" %}</a>
                 </p>
             {% endif %}
         </div>

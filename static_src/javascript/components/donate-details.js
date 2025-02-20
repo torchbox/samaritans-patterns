@@ -95,11 +95,11 @@ const donateDetails = () => {
 
     const convertCurrency = (symbol, value) => {
         if (symbol === currencyEurSymbol) {
-            return (
-                value * donateAmountCurrency.dataset.conversionRate
-            ).toFixed(2);
+            return (value * donateAmountCurrency.value.conversionRate).toFixed(
+                2,
+            );
         }
-        return (value / donateAmountCurrency.dataset.conversionRate).toFixed(2);
+        return (value / donateAmountCurrency.value.conversionRate).toFixed(2);
     };
 
     // Amount/frequency update bar - only applicable for donations rather than pay-ins
@@ -131,10 +131,7 @@ const donateDetails = () => {
                 currentCurrency = currencyEurSymbol;
             }
 
-            currencySymbol.innerHTML = `${currentCurrency}
-                <span id="donate__amount__display">
-                ${newAmount}
-                </span>`;
+            currencySymbol.innerHTML = `${currentCurrency}<span id="donate__amount__display">${newAmount}</span>`;
 
             amountInput.value = newAmount;
             toggleDonateAmountEditor();
@@ -154,35 +151,6 @@ const donateDetails = () => {
             if (event.keyCode === 13) {
                 saveAmountButton.click();
             }
-        });
-    }
-
-    // Change to monthly if allowed. Switching from monthly back to single isn't supported.
-    if (changeFrequencyButton) {
-        changeFrequencyButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            // Frequency
-            singlePaymentHeading.toggleAttribute('hidden', true);
-            monthlyPaymentHeading.toggleAttribute('hidden', false);
-            singlePaymentMethods.toggleAttribute('hidden', true);
-
-            // Currency
-            if (currencyToggleEUR.checked) {
-                monthlyPaymentMethodsEur.toggleAttribute('hidden', false);
-            } else {
-                monthlyPaymentMethodsGbp.toggleAttribute('hidden', false);
-            }
-            // Remove branch selection
-            // It's not available on monthly
-            if (branchDonationGroup) {
-                branchDonationGroup.remove();
-            }
-
-            frequencyInput.value = 'monthly';
-            changeFrequencyButton.toggleAttribute('hidden', true);
-            document
-                .getElementById('donate__personal-details-wrapper')
-                .querySelector('h1').innerHTML = 'Your monthly donation';
         });
     }
 
@@ -239,7 +207,6 @@ const donateDetails = () => {
         if (isAmountHidden) {
             let newAmount = parseFloat(changeAmountInput.value).toFixed(2);
             let donateAmountInner;
-
             if (
                 currencyToggleEUR.checked &&
                 buttonClickedFlag !== currencyEurSymbol
