@@ -70,6 +70,11 @@
 
                     <h2>{% trans 'Contact details' %}</h2>
                     {% render_form_field form.contact_number %}
+                    <div class="form__callout-wrapper">
+                        <div class="form__callout">
+                            {% include "patterns/molecules/callout-form/callout-form.html" with heading=view.email_heading content=view.email_explanation %}
+                        </div>
+                    </div>
                     {% render_form_field form.email_address %}
 
                     <h2>{% trans 'Your address' %}</h2>
