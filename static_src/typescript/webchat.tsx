@@ -10,6 +10,8 @@ import 'react-toggle/style.css';
 import { LexWebUiProvider } from 'utils/lex-web-ui';
 import { Provider } from 'react-redux';
 import { Workbox } from 'workbox-window';
+import HeartBeatPoller from 'components/HeartBeatPoller';
+import { dataLayerPush } from 'utils/dataLayer';
 import App from './App';
 import SentryBoundary from './components/SentryBoundary';
 import './index.css';
@@ -22,13 +24,11 @@ import {
     setFailedToEstablish,
     setFailedToReconnect,
     setIsConfirmExitVisible,
-    setScreen,
     setSucceededToReconnect,
     setVolunteerJoined,
 } from './slices/webchatSlice';
 import { refreshQueueStatus } from './slices/queueSlice';
 import { ping } from './slices/networkSlice';
-import { dataLayerPush } from 'utils/dataLayer';
 
 /**
  * Render the Webchat app
@@ -48,6 +48,7 @@ const render = (Component: React.ComponentType) => {
                     queueName={config.queueName}
                     baseUrl={config.lexWebUiBaseUrl}
                 >
+                    <HeartBeatPoller />
                     <GlobalStyle />
                     <SentryBoundary>
                         <Component />

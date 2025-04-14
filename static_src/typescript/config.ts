@@ -23,6 +23,8 @@ type Props = {
     metricsApiKey: string;
     feedbackEndpoint: string;
     feedbackApiKey: string;
+    heartbeatEndpoint: string;
+    heartbeatApiKey: string;
     assets: Assets;
     banner?: Banner;
 };
@@ -41,6 +43,8 @@ class Configuration {
         public metricsApiKey: string,
         public feedbackEndpoint: string,
         public feedbackApiKey: string,
+        public heartbeatEndpoint: string,
+        public heartbeatApiKey: string,
         public assets: Assets,
         public banner?: Banner,
     ) {}
@@ -62,6 +66,8 @@ class Configuration {
             obj.metricsApiKey,
             obj.feedbackEndpoint,
             obj.feedbackApiKey,
+            obj.heartbeatEndpoint,
+            obj.heartbeatApiKey,
             obj.assets,
             obj.banner,
         );
@@ -95,6 +101,8 @@ class Configuration {
             metricsApiKey: parsedData.metrics_api_key || '',
             feedbackEndpoint: parsedData.feedback_endpoint || '',
             feedbackApiKey: parsedData.feedback_api_key || '',
+            heartbeatEndpoint: parsedData.heartbeat_endpoint || '',
+            heartbeatApiKey: parsedData.heartbeat_api_key || '',
             assets: {
                 appIcon: parsedData.assets?.app_icon || '',
                 audioNotification: parsedData.assets?.audio_notification || '',

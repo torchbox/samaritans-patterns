@@ -52,13 +52,24 @@ const LandingScreen = () => {
             )}
             <Room>
                 <MainPanel>
-                    <h1>Chat with us online</h1>
+                    <h1>
+                        If you are under 19 you can get support from Childline.
+                    </h1>
                     <p>
-                        Sometimes typing is easier than talking. Our trained
-                        volunteers will read your messages and respond in real
-                        time, helping you work through what&apos;s on your mind.
-                        They won&apos;t judge or tell you what to do, and you
-                        don&apos;t have to be suicidal to reach out.
+                        Childline is a free 24-hour counselling service for
+                        children and young people up to 19 years old. You can
+                        call, talk to a counsellor online, send an email or post
+                        on the message boards.
+                    </p>
+
+                    <p>
+                        <a
+                            href="https://www.childline.org.uk/get-support"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Get support
+                        </a>
                     </p>
 
                     <h2>Enter the waiting room when you are ready</h2>
